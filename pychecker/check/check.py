@@ -36,7 +36,7 @@ def check_pkgver(pkg, ver, cache_path=config.CACHE_DIR, save_files=False):
     if not os.path.exists(path):
         source_url = get_source_url(pkg, ver)
         if not source_url:
-            print("Source code resources not found, "
+            print(f"{pkg}-{ver}: Source code resources not found, "
                   "skip checking Use Incompatible Features & Check Compatibility Locally")
             return results
         _, zip_path = download_extract_source(source_url, path)
@@ -44,7 +44,7 @@ def check_pkgver(pkg, ver, cache_path=config.CACHE_DIR, save_files=False):
         path = path1 if os.path.exists(path1) else path2
     setup_path = os.path.join(path, "setup.py")
     if not os.path.exists(setup_path):
-        print("setup.py not found, "
+        print(f"{pkg}-{ver}: setup.py not found, "
               "skip checking Use Incompatible Features & Check Compatibility Locally")
         return results
 
@@ -54,7 +54,7 @@ def check_pkgver(pkg, ver, cache_path=config.CACHE_DIR, save_files=False):
     # check FEATURE for source code
     custom_modules = find_custom_modules(path)
     if not custom_modules:
-        print("Source code of the package not found, skip checking Use Incompatible Features")
+        print(f"{pkg}-{ver}: Source code of the package not found, skip checking Use Incompatible Features")
         return results
     results[0] = detect_incomp_feature_usage(setup_path, no_wheel_pyvers, custom_modules)
 
