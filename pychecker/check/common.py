@@ -5,6 +5,7 @@ from typed_ast import ast27
 from collections import deque
 from urllib import request
 from compare_string_version import compareVersion
+from pychecker import config
 
 
 def ast_parse(code):
@@ -147,6 +148,41 @@ def analysis(path, func, **kwargs):
             targets.append(new_path)
         is_setup = False
     return False
+
+
+def analysis_fix(path, func, **kwargs):
+    # path: path of "setup.py"
+    # if the file<path> satisfies some attributes<func>, return True immediately
+    # else visit its imported local files, and check the attributes
+    root = os.path.dirname(path)
+    local_tops = parse_custom_modules(root)
+    targets = deque([path])
+    is_setup = True
+    visited = set()
+    incomp = False
+    comp_py_versions = {x for x in config.PY_VERSIONS}
+    while targets:
+        kwargs |= {"is_setup": is_setup}  # is_setup = True only at the first time (parse setup.py)
+        path = targets.popleft()
+        visited.add(path)
+        file = open(path)
+        code = "".join(file.readlines())
+        file.close()
+        result, comp_info = func(path, **kwargs)  # analyze current file
+        incomp = incomp or result  # if result == True, then incomp = True
+        comp_py_versions = comp_py_versions.intersection(comp_info)
+        # analyze imported local modules
+        imported_local_modules = parse_local_import(code, local_tops, is_setup)
+        imported_local_modules = parse_relative_import(imported_local_modules, path, root)
+        # find local modules' files, add then to visit queue
+        new_paths = parse_local_path(imported_local_modules, root)
+        for new_path in new_paths:
+            if new_path in visited:
+                continue
+            targets.append(new_path)
+        is_setup = False
+    return incomp, comp_py_versions
+
 
 
 def parse_func_params(body, this_ast, func_name, analysis_func, candidates):

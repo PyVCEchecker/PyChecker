@@ -18,20 +18,19 @@ logging.basicConfig(filename=os.path.join(config.LOG_DIR, log_name),
 
 
 class Detection:
-    def __init__(self):
+    def __init__(self, projects=500):
         self.root = IN_THE_FIELD_ROOT
-        self.data = self.read_data()
+        self.data = self.read_data(projects)
 
-    def read_data(self):
+    def read_data(self, projects=500):
         data_path = os.path.join(self.root, "data.json")
         data = read_object_from_file(data_path)
-        if not data:
-            data = self.prepare_data(data_path)
+        if not data or len(data) < projects:
+            data = self.prepare_data(data_path, projects)
         return data
 
-    def prepare_data(self, path):
+    def prepare_data(self, path, projects):
         data = dict()  # key: pkg#ver, val: comp_expr
-        pkg_count = 500  # 500 pkgs in the field
         pkg_dict = read_object_from_file(os.path.join(self.root, "packages_10000.json"))
         pkgver_dict = read_object_from_file(os.path.join(self.root, "package_versions.json"))
         pkgs = list(pkg_dict.keys())[3010:]  # pkgs in the field
@@ -48,7 +47,7 @@ class Detection:
             key = f"{pkg}#{latest}"
             data[key] = comp_expr
             count += 1
-            if count >= pkg_count:
+            if count >= projects:
                 break
         write_object_to_file(path, data)
         return data
@@ -72,5 +71,5 @@ class Detection:
 
 
 if __name__ == '__main__':
-    detection = Detection()
-    detection.detect()
+    detection = Detection(1000)
+    detection.detect(500)
