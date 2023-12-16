@@ -1,0 +1,300 @@
+﻿number,package,version,incompatible python version,root cause,error occurring time
+1,docker-compose,1.29.2,3.5,3,Dependency-choosing
+2,django-allauth,0.45.0,2.7,3,Dependency-choosing
+3,django-model-utils,4.2.0,2.7,3,Dependency-choosing
+4,kubernetes,18.20.0,3.5,3,Dependency-choosing
+5,moto,2.2.8,3.5,3,Dependency-choosing
+6,uvicorn,0.15.0,2.7,2,TPP build
+7,buildbot,3.4.0,2.7,1,TPP build
+8,conda,4.3.16,3.10,2,TPP build
+9,discord,1.7.3,2.7,2,TPP build
+10,flower,1.0.0,2.7,3,Dependency-choosing
+11,googletrans,3.0.0,2.7,3,Dependency-choosing
+12,mkdocs-material,7.3.0,2.7,3,Dependency-choosing
+13,moviepy,1.0.3,3.5,3,Dependency-choosing
+14,adafruit-circuitpython-busdevice,5.1.0,2.7,3,Dependency-choosing
+15,django-celery-beat,2.2.0,2.7,3,Dependency-choosing
+16,django-classy-tags,2.0.0,2.7,3,Dependency-choosing
+17,django-extra-views,0.14.0,2.7,3,Dependency-choosing
+18,django-filer,2.0.2,2.7,3,Dependency-choosing
+19,django-oauth-toolkit,1.5.0,2.7,3,Dependency-choosing
+20,django-rq,2.4.0,2.7,3,Dependency-choosing
+21,jpype1,1.3.0,2.7,2,TPP build
+22,lightgbm,3.3.0,2.7,2,TPP build
+23,pyscss,1.3.0,3.7,2,TPP build
+24,python-chess,1.999,2.7,3,Dependency-choosing
+25,zappa,0.54.0,2.7,1,TPP build
+26,aiomysql,0.0.21,2.7,1,TPP build
+27,blosc,1.10.2,2.7,1,TPP build
+28,djangocms-text-ckeditor,4.0.0,2.7,3,Dependency-choosing
+29,django-contrib-comments,2.1.0,2.7,3,Dependency-choosing
+30,django-modeltranslation,0.17,2.7,3,Dependency-choosing
+31,django-oscar,3.1,2.7,3,Dependency-choosing
+32,django-rosetta,0.9.5,2.7,3,Dependency-choosing
+33,django-sekizai,2.0.0,2.7,3,Dependency-choosing
+34,django-simple-captcha,0.5.13,2.7,3,Dependency-choosing
+35,fastai,2.5.2,3.10,3,Dependency-choosing
+36,markovify,0.9.0,2.7,2,TPP build
+37,neo4j-driver,4.3.0,2.7,2,TPP build
+38,newspaper3k,0.2.8,2.7,1,TPP build
+39,pysqlite,2.8.3,3.7,1,TPP build
+40,python-social-auth,0.3.6,2.7,3,Dependency-choosing
+41,shopifyapi,9.0.0,2.7,3,Dependency-choosing
+42,sklearn-pandas,2.2.0,2.7,3,Dependency-choosing
+43,sleekxmpp,1.3.3,3.10,2,TPP build
+44,aiogram,2.15,2.7,2,TPP build
+45,aiohttp-swagger,1.0.15,2.7,3,Dependency-choosing
+46,asyncio-nats-client,0.11.4,2.7,2,TPP build
+47,breathe,4.31.0,2.7,2,TPP build
+48,cvxpy,1.1.7,3.5,3,Dependency-choosing
+49,cx-oracle,8.2.1,2.7,1,TPP build
+50,django-angular,2.3,2.7,3,Dependency-choosing
+51,django-ordered-model,3.4.1,2.7,2,TPP build
+52,django-otp,1.1.1,2.7,3,Dependency-choosing
+53,django-pagedown,2.2.0,2.7,3,Dependency-choosing
+54,django-polymorphic,3.0.0,2.7,3,Dependency-choosing
+55,fn,0.4.3,3.10,2,TPP build
+56,gitdb2,4.0.2,2.7,3,Dependency-choosing
+57,horizon,20.1.0,2.7,3,Dependency-choosing
+58,inject,4.3.1,2.7,2,TPP build
+59,moto-ext,2.2.3.2,3.5,3,Dependency-choosing
+60,neo4j,4.3.0,2.7,2,TPP build
+61,pylint-django,2.4.4,2.7,3,Dependency-choosing
+62,pyserial-asyncio,0.6,2.7,1,TPP build
+63,vaex-core,4.5.1,2.7,3,Dependency-choosing
+64,adafruit-circuitpython-neopixel,6.2.0,2.7,3,Dependency-choosing
+65,aiohttp_cors,0.7.0,2.7,2,TPP build
+66,beautifulsoup,3.2.2,3.7,2,TPP build
+67,canvasapi,2.2.0,2.7,2,TPP build
+68,dash-bootstrap-components,1.0.0,2.7,3,Dependency-choosing
+69,datasets,1.14.0,2.7,2,TPP build
+70,django-cachalot,2.4.3,2.7,3,Dependency-choosing
+71,django-celery-results,2.2.0,2.7,3,Dependency-choosing
+72,djangocms-attributes-field,2.0.0,2.7,3,Dependency-choosing
+73,django-q,1.3.4,2.7,3,Dependency-choosing
+74,django-two-factor-auth,1.13,2.7,3,Dependency-choosing
+75,dopamine-rl,4.0.0,2.7,2,TPP build
+76,edx-drf-extensions,8.0.0,2.7,3,Dependency-choosing
+77,graphenelib,1.5.1,2.7,3,Dependency-choosing
+78,imbalanced-learn,0.8.0,2.7,3,Dependency-choosing
+79,jsonrpcserver,5.0.0,2.7,2,TPP build
+80,libusb1,2.0.1,2.7,2,TPP build
+81,mimesis,4.1.2,2.7,2,TPP build
+82,ofxstatement,0.8.0,2.7,2,TPP build
+83,opbeat,3.6.1,3.7,2,TPP build
+84,python-lambda,11.8.0,2.7,2,TPP build
+85,pytrends,4.7.3,2.7,3,Dependency-choosing
+86,seqeval,1.2.2,2.7,3,Dependency-choosing
+87,shap,0.40.0,2.7,3,Dependency-choosing
+88,tensorlayer,2.2.3,2.7,3,Dependency-choosing
+89,tpot,0.11.6.post3,2.7,3,Dependency-choosing
+90,trufflehog,2.2.1,2.7,3,Dependency-choosing
+91,tsfresh,0.18.0,3.5,3,Dependency-choosing
+92,wfdb,3.4.1,2.7,3,Dependency-choosing
+93,xpinyin,0.7.4,2.7,2,TPP build
+94,adafruit-circuitpython-esp32spi,3.5.3,2.7,3,Dependency-choosing
+95,adafruit-circuitpython-framebuf,1.4.3,2.7,3,Dependency-choosing
+96,adafruit-circuitpython-motor,3.3.0,2.7,3,Dependency-choosing
+97,adafruit-circuitpython-pca9685,3.3.2,2.7,3,Dependency-choosing
+98,allennlp,2.7.0,3.10,3,Dependency-choosing
+99,alpha-vantage,2.3.1,2.7,1,TPP build
+100,amcrest,1.9.3,2.7,3,Dependency-choosing
+101,autokeras,1.0.12,2.7,2,TPP build
+102,awslimitchecker,12.0.0,2.7,3,Dependency-choosing
+103,beanstalkc,0.4.0,3.7,2,TPP build
+104,buildozer,1.2.0,2.7,1,TPP build
+105,credstash,1.17.1,2.7,3,Dependency-choosing
+106,dask-jobqueue,0.7.2,3.5,3,Dependency-choosing
+107,dask-ml,2021.10.17,3.6,3,Dependency-choosing
+108,datadog-checks-dev,15.1.0,3.5,3,Dependency-choosing
+109,datashader,0.13.0,2.7,3,Dependency-choosing
+110,dedupe,2.0.6,2.7,3,Dependency-choosing
+111,django-categories,1.8,2.7,3,Dependency-choosing
+112,django-celery-email,3.0.0,2.7,3,Dependency-choosing
+113,django-cms,3.9.0,2.7,3,Dependency-choosing
+114,djangocms-link,3.0.0,2.7,3,Dependency-choosing
+115,django-debug-toolbar-request-history,0.1.3,2.7,3,Dependency-choosing
+116,django-hijack,3.1.1,2.7,2,TPP build
+117,django-markup,1.5,2.7,3,Dependency-choosing
+118,django-organizations,2.0.0,2.7,3,Dependency-choosing
+119,django-post-office,3.5.2,2.7,3,Dependency-choosing
+120,django-user-sessions,1.7.1,2.7,3,Dependency-choosing
+121,dm-sonnet,2.0.0,2.7,2,TPP build
+122,eth-keys,0.3.3,2.7,3,Dependency-choosing
+123,flask-mongoengine,1.0.0,2.7,2,TPP build
+124,flask-themes2,1.0.0,2.7,3,Dependency-choosing
+125,futu-api,5.9.2108,2.7,2+A232,TPP build
+126,goatools,1.1.5,2.7,2,TPP build
+127,grpc-google-cloud-speech-v1beta1,1.0.1,2.7,3,Dependency-choosing
+128,hydra-core,1.1.1,2.7,2,TPP build
+129,ibm-watson,5.3.0,2.7,2,TPP build
+130,icontract,2.5.0,2.7,2,TPP build
+131,indic-transliteration,2.3.2,3.5,3,Dependency-choosing
+132,invenio-accounts,1.4.2,2.7,3,Dependency-choosing
+133,invenio-files-rest,1.3.0,2.7,3,Dependency-choosing
+134,invenio-records,1.6.0,2.7,3,Dependency-choosing
+135,lesspass,10.0.2,2.7,2,TPP build
+136,litecli,1.6.0,2.7,3,Dependency-choosing
+137,mlxtend,0.19.0,2.7,3,Dependency-choosing
+138,mmcv,1.3.0,2.7,2,TPP build
+139,opennmt-tf,2.22.0,3.10,3,Dependency-choosing
+140,pinax-blog,8.0.1,2.7,3,Dependency-choosing
+141,pinax-eventlog,5.1.0,2.7,3,Dependency-choosing
+142,pinax-notifications,6.0.0,2.7,3,Dependency-choosing
+143,pinax-webanalytics,5.0.0,2.7,3,Dependency-choosing
+144,pygtrie,2.4.1,2.7,2,TPP build
+145,pyisbn,1.3.1,2.7,2,TPP build
+146,pyjnius,1.4.0,2.7,2,TPP build
+147,pyldavis,3.3.0,2.7,3,Dependency-choosing
+148,rest-social-auth,6.0.1,2.7,3,Dependency-choosing
+149,rise,5.7.1,2.7,3,Dependency-choosing
+150,sanic-cors,1.0.0,2.7,3,TPP build
+151,sphinxcontrib-blockdiag,2.0.0,2.7,3,Dependency-choosing
+152,textdistance,4.2.0,2.7,1,TPP build
+153,twarc,2.8.0,3.5,3,Dependency-choosing
+154,umap-learn,0.5.0,2.7,3,Dependency-choosing
+155,vaex-arrow,0.5.1,2.7,3,Dependency-choosing
+156,zigpy,0.38.0,2.7,2,TPP build
+157,adafruit-circuitpython-ble,8.1.0,2.7,3,Dependency-choosing
+158,aioimaplib,0.9.0,2.7,1,TPP build
+159,aioprocessing,2.0.0,2.7,2,TPP build
+160,aldryn-bootstrap3,1.3.0,2.7,3,Dependency-choosing
+161,aldryn-forms,6.2.1,2.7,3,Dependency-choosing
+162,alibi,0.6.1,3.10,3,Dependency-choosing
+163,batman-package,2.4.7,3.7,2,TPP build
+164,tabulate,0.8.7,3.10,2,TPP runing
+165,tinydb,4.5.2,3.5,2,TPP runing
+166,django-appconf,1.0.4,2.7,2,TPP runing
+167,moto,2.2.8,2.7,2,TPP runing
+168,pysimplegui,4.51.7,2.7,2,TPP runing
+169,aiodns,3.0.0,2.7,2,TPP runing
+170,luigi,3.0.0,2.7,2,TPP runing
+171,pyotp,2.6.0,2.7,2,TPP runing
+172,pytelegrambotapi,4.1.0,2.7,2,TPP runing
+173,pytesseract,0.3.7,2.7,2,TPP runing
+174,zeroconf,0.36.7,2.7,2,TPP runing
+175,dataset,1.5.0,3.5,2,TPP runing
+176,django-countries,7.2,2.7,2,TPP runing
+177,ftfy,6.0,3.5,2,TPP runing
+178,lektor,3.2.0,2.7,2,TPP runing
+179,lightgbm,3.3.0,3.5,2,TPP runing
+180,netmiko,3.4.0,2.7,2,TPP runing
+181,portalocker,2.3.0,2.7,2,TPP runing
+182,pyecharts,1.9.0,3.5,2,TPP runing
+183,python-docx,0.8.10,3.10,2,TPP runing
+184,tinydb-serialization,2.1.0,3.5,2,TPP runing
+185,attrdict,2.0.1,3.10,2,TPP runing
+186,chalice,1.26.1,2.7,2,TPP runing
+187,comtypes,1.1.7,3.10,2,TPP runing
+188,django-ajax-selects,2.1.0,2.7,2,TPP runing
+189,klein,21.8.0,3.5,2,TPP runing
+190,patsy,0.5.1,3.10,2,TPP runing
+191,pep257,0.7.0,3.10,2,TPP runing
+192,pychromecast,9.3.1,2.7,2,TPP runing
+193,pygal,2.4.0,3.10,2,TPP runing
+194,pytest-splinter,3.3.0,2.7,2,TPP runing
+195,pyvirtualdisplay,2.2,2.7,2,TPP runing
+196,tensorboardx,2.4,2.7,2,TPP runing
+197,xblock,1.5.1,2.7,2,TPP runing
+198,bayesian-optimization,1.2.0,2.7,2,TPP runing
+199,breathe,4.31.0,3.5,2,TPP runing
+200,detect-secrets,1.1.0,2.7,2,TPP runing
+201,django-imagekit,4.0.2,2.7,2,TPP runing
+202,dynaconf,3.1.2,2.7,2,TPP runing
+203,inject,4.3.1,3.5,2,TPP runing
+204,kafka,1.3.5,3.10,2,TPP runing
+205,moto-ext,2.2.3.2,2.7,2,TPP runing
+206,pyroute2,0.6.1,2.7,2,TPP runing
+207,python-bugzilla,3.1.0,2.7,2,TPP runing
+208,scikit-optimize,0.9.0,2.7,2,TPP runing
+209,soco,0.24.0,3.5,2,TPP runing
+210,adafruit-circuitpython-neopixel,6.2.0,3.6,2,TPP runing
+211,aioamqp,0.14.0,2.7,2,TPP runing
+212,aiocache,0.11.1,2.7,2,TPP runing
+213,aiofile,3.7.1,3.5,2,TPP runing
+214,allure-python-commons,2.9.43,2.7,2,TPP runing
+215,banal,1.0.1,2.7,2,TPP runing
+216,bqplot,0.12.19,2.7,2,TPP runing
+217,cachier,1.5.0,3.5,2,TPP runing
+218,canvasapi,2.2.0,3.5,2,TPP runing
+219,conllu,4.4,2.7,2,TPP runing
+220,einops,0.3.0,2.7,2,TPP runing
+221,everett,2.0.1,2.7,2,TPP runing
+222,face-alignment,1.3.0,3.5,2,TPP runing
+223,facebook-wda,1.4.0,2.7,2,TPP runing
+224,gin-config,0.4.0,2.7,2,TPP runing
+225,ib-insync,0.9.64,3.6,2,TPP runing
+226,injector,0.18.4,2.7,2,TPP runing
+227,jsonrpcserver,5.0.0,3.5,2,TPP runing
+228,lenses,1.1.0,3.5,2,TPP runing
+229,marathon,0.13.0,2.7,2,TPP runing
+230,normality,2.2.2,2.7,2,TPP runing
+231,parsy,1.3.0,2.7,2,TPP runing
+232,pyfcm,1.5.0,2.7,2,TPP runing
+233,pypika,0.48.0,2.7,2,TPP runing
+234,pypugjs,5.9.8,3.10,2,TPP runing
+235,python-jwt,3.3.0,2.7,2,TPP runing
+236,pyxel,1.4.3,3.10,2,TPP runing
+237,rarfile,4.0,2.7,2,TPP runing
+238,robotframework-appiumlibrary,1.6,3.5,2,TPP runing
+239,schematics,2.1.0,3.10,2,TPP runing
+240,scrapinghub,2.3.1,3.10,2,TPP runing
+241,synapseclient,2.4.0,3.10,2,TPP runing
+242,tpot,0.11.6.post3,3.5,2,TPP runing
+243,uiautomator2,2.16.7,3.6,2,TPP runing
+244,ulid-py,1.1.0,2.7,2,TPP runing
+245,warrant,0.6.1,3.10,2,TPP runing
+246,xpinyin,0.7.4,3.5,2,TPP runing
+247,anyconfig,0.12.0,2.7,2,TPP runing
+248,beem,0.24.20,3.5,2,TPP runing
+249,bioservices,1.8.0,2.7,2,TPP runing
+250,cs50,7.0.2,2.7,2,TPP runing
+251,dataflows,0.3.2,3.5,2,TPP runing
+252,dedupe,2.0.6,3.5,2,TPP runing
+253,django-photologue,3.14,2.7,2,TPP runing
+254,edx-opaque-keys,2.2.0,2.7,2,TPP runing
+255,fastjsonschema,2.15.1,2.7,2,TPP runing
+256,flask-jwt,0.3.2,3.10,2,TPP runing
+257,flask-mongoengine,1.0.0,3.5,2,TPP runing
+258,fontawesome-free,5.15.1,3.5,2,TPP runing
+259,futu-api,5.9.2108,3.5,2,TPP runing
+260,invenio-db,1.0.8,2.7,2,TPP runing
+261,ipyvolume,0.5.2,2.7,2,TPP runing
+262,jsonrpcclient,4.0.0,2.7,2,TPP runing
+263,knack,0.8.2,2.7,2,TPP runing
+264,locationsharinglib,4.1.1,2.7,2,TPP runing
+265,manimlib,0.2.0,3.5,2,TPP runing
+266,masonite,3.0.11,3.5,2,TPP runing
+267,nlp,0.4.0,2.7,2,TPP runing
+268,odo,0.5.0,3.10,2,TPP runing
+269,pims,0.5,3.10,2,TPP runing
+270,pulumi,3.16.0,2.7,2,TPP runing
+271,pyads,3.3.0,2.7,2,TPP runing
+272,py-flags,1.1.4,2.7,2,TPP runing
+273,pyicloud,0.10.2,3.10,2,TPP runing
+274,pyisbn,1.3.1,3.5,2,TPP runing
+275,pyjade,4.0.0,3.10,2,TPP runing
+276,pypuppetdb,2.5.0,2.7,2,TPP runing
+277,pysimplegui-exemaker,1.3.0,3.5,2,TPP runing
+278,pysimpleguiqt,0.35.0,2.7,2,TPP runing
+279,python3-indy,1.16.0,2.7,2,TPP runing
+280,python-hcl2,3.0.0,3.9,2,TPP runing
+281,subliminal,2.1.0,2.7,2,TPP runing
+282,tapioca-wrapper,2.0.1,3.10,2,TPP runing
+283,tinydb-smartcache,2.0.0,3.5,2,TPP runing
+284,toapi,2.1.2,2.7,2,TPP runing
+285,toolkity,1.9.5,2.7,2,TPP runing
+286,uiautomation,2.0.8,3.8,2,TPP runing
+287,wakatime,13.1.0,3.10,2,TPP runing
+288,adafruit-circuitpython-ble,8.1.0,3.6,2,TPP runing
+289,aiohue,2.6.2,3.6,2,TPP runing
+290,aioimaplib,0.9.0,3.5,2,TPP runing
+291,ansible-runner,2.0.2,2.7,2,TPP runing
+292,antlr4-python3-runtime,4.9,2.7,2,TPP runing
+293,django-solo,1.2.0,2.7,2,TPP build
+294,fbprophet,0.7.1,3.7,2,TPP build
+295,airsim ,1.6.0,3.7,2,TPP build
+296,django-rest-framework-social-oauth2,1.1.0,2.7,2,TPP build
+297,img2pdf,0.4.0,2.7,2,TPP build
+298,pkuseg,0.0.25,3.10,2,TPP build
+299,pmdarima,1.8.0,3.10,3,Dependency-choosing

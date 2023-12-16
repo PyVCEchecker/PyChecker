@@ -1,0 +1,213 @@
+package,version,incompatible python version,root cause,error occurring time,res_2
+docker-compose,1.29.2,3.5,3,Dependency-choosing,"reason2,3"
+django-allauth,0.45.0,2.7,3,Dependency-choosing,"reason2,3"
+django-model-utils,4.2.0,2.7,3,Dependency-choosing,"reason2,3"
+moto,2.2.8,3.5,3,Dependency-choosing,reason2
+moto,2.2.8,2.7,2,TPP runing,reason2
+uvicorn,0.15.0,2.7,2,TPP build,"reason2,3"
+conda,4.3.16,3.1,2,TPP build,"reason1,2"
+discord,1.7.3,2.7,2,TPP build,"reason2,3"
+googletrans,3.0.0,2.7,3,Dependency-choosing,"reason2,3"
+mkdocs-material,7.3.0,2.7,3,Dependency-choosing,"reason2,3"
+adafruit-circuitpython-busdevice,5.1.0,2.7,3,Dependency-choosing,reason3
+django-celery-beat,2.2.0,2.7,3,Dependency-choosing,"reason1,,3"
+django-extra-views,0.14.0,2.7,3,Dependency-choosing,reason3
+django-oauth-toolkit,1.5.0,2.7,3,Dependency-choosing,reason2
+django-rq,2.4.0,2.7,3,Dependency-choosing,reason3
+jpype1,1.3.0,2.7,2,TPP build,"reason1,2"
+lightgbm,3.3.0,2.7,2,TPP build,reason2
+lightgbm,3.3.0,3.5,2,TPP runing,reason2
+pyscss,1.3.0,3.7,2,TPP build,reason2
+python-chess,1.999,2.7,3,Dependency-choosing,reason3
+zappa,0.54.0,2.7,1,TPP build,"reason1,2,3"
+aiomysql,0.0.21,2.7,1,TPP build,reason2
+blosc,1.10.2,2.7,1,TPP build,reason1
+django-contrib-comments,2.1.0,2.7,3,Dependency-choosing,reason2
+django-modeltranslation,0.17,2.7,3,Dependency-choosing,reason3
+fastai,2.5.2,3.1,3,Dependency-choosing,reason3
+markovify,0.9.0,2.7,2,TPP build,reason2
+neo4j-driver,4.3.0,2.7,2,TPP build,reason2
+newspaper3k,0.2.8,2.7,1,TPP build,"reason1,2"
+pysqlite,2.8.3,3.7,1,TPP build,"reason1,2"
+python-social-auth,0.3.6,2.7,3,Dependency-choosing,reason1
+shopifyapi,9.0.0,2.7,3,Dependency-choosing,reason3
+sklearn-pandas,2.2.0,2.7,3,Dependency-choosing,"reason2,3"
+sleekxmpp,1.3.3,3.1,2,TPP build,reason2
+aiogram,2.15,2.7,2,TPP build,"reason1,2,3"
+asyncio-nats-client,0.11.4,2.7,2,TPP build,reason2
+breathe,4.31.0,2.7,2,TPP build,"reason1,2,3"
+breathe,4.31.0,3.5,2,TPP runing,"reason1,2,3"
+cx-oracle,8.2.1,2.7,1,TPP build,reason1
+django-angular,2.3,2.7,3,Dependency-choosing,reason3
+django-ordered-model,3.4.1,2.7,2,TPP build,reason2
+django-otp,1.1.1,2.7,3,Dependency-choosing,reason3
+django-pagedown,2.2.0,2.7,3,Dependency-choosing,reason3
+fn,0.4.3,3.1,2,TPP build,reason2
+gitdb2,4.0.2,2.7,3,Dependency-choosing,reason3
+inject,4.3.1,2.7,2,TPP build,reason2
+inject,4.3.1,3.5,2,TPP runing,reason2
+neo4j,4.3.0,2.7,2,TPP build,reason2
+pylint-django,2.4.4,2.7,3,Dependency-choosing,reason3
+pyserial-asyncio,0.6,2.7,1,TPP build,"reason1,2"
+adafruit-circuitpython-neopixel,6.2.0,2.7,3,Dependency-choosing,reason3
+adafruit-circuitpython-neopixel,6.2.0,3.6,2,TPP runing,reason3
+aiohttp_cors,0.7.0,2.7,2,TPP build,"reason1,2"
+cachier,1.5.0,3.5,2,TPP runing,reason2
+canvasapi,2.2.0,2.7,2,TPP build,reason2
+canvasapi,2.2.0,3.5,2,TPP runing,reason2
+dash-bootstrap-components,1.0.0,2.7,3,Dependency-choosing,"reason2,3"
+datasets,1.14.0,2.7,2,TPP build,"reason2,3"
+django-cachalot,2.4.3,2.7,3,Dependency-choosing,"reason2,3"
+django-celery-results,2.2.0,2.7,3,Dependency-choosing,"reason1,,3"
+django-q,1.3.4,2.7,3,Dependency-choosing,"reason2,3"
+django-two-factor-auth,1.13,2.7,3,Dependency-choosing,reason3
+dopamine-rl,4.0.0,2.7,2,TPP build,"reason2,3"
+edx-drf-extensions,8.0.0,2.7,3,Dependency-choosing,reason3
+graphenelib,1.5.1,2.7,3,Dependency-choosing,"reason2,3"
+jsonrpcserver,5.0.0,2.7,2,TPP build,reason2
+jsonrpcserver,5.0.0,3.5,2,TPP runing,reason2
+libusb1,2.0.1,2.7,2,TPP build,reason2
+ofxstatement,0.8.0,2.7,2,TPP build,reason2
+opbeat,3.6.1,3.7,2,TPP build,"reason1,2"
+python-lambda,11.8.0,2.7,2,TPP build,reason2
+pytrends,4.7.3,2.7,3,Dependency-choosing,"reason2,3"
+seqeval,1.2.2,2.7,3,Dependency-choosing,"reason2,3"
+shap,0.40.0,2.7,3,Dependency-choosing,reason2
+tensorlayer,2.2.3,2.7,3,Dependency-choosing,"reason2,3"
+tpot,0.11.6.post3,2.7,3,Dependency-choosing,"reason2,3"
+tpot,0.11.6.post3,3.5,2,TPP runing,"reason2,3"
+wfdb,3.4.1,2.7,3,Dependency-choosing,reason3
+xpinyin,0.7.4,2.7,2,TPP build,reason2
+xpinyin,0.7.4,3.5,2,TPP runing,reason2
+adafruit-circuitpython-esp32spi,3.5.3,2.7,3,Dependency-choosing,reason3
+adafruit-circuitpython-framebuf,1.4.3,2.7,3,Dependency-choosing,reason3
+adafruit-circuitpython-motor,3.3.0,2.7,3,Dependency-choosing,reason3
+adafruit-circuitpython-pca9685,3.3.2,2.7,3,Dependency-choosing,reason3
+alpha-vantage,2.3.1,2.7,1,TPP build,reason2
+amcrest,1.9.3,2.7,3,Dependency-choosing,reason2
+autokeras,1.0.12,2.7,2,TPP build,reason2
+buildozer,1.2.0,2.7,1,TPP build,reason2
+dask-jobqueue,0.7.2,3.5,3,Dependency-choosing,reason3
+dask-ml,2021.10.17,3.6,3,Dependency-choosing,reason3
+datadog-checks-dev,15.1.0,3.5,3,Dependency-choosing,reason2
+dataflows,0.3.2,3.5,2,TPP runing,reason2
+dedupe,2.0.6,2.7,3,Dependency-choosing,reason2
+dedupe,2.0.6,3.5,2,TPP runing,reason2
+django-categories,1.8,2.7,3,Dependency-choosing,reason3
+django-celery-email,3.0.0,2.7,3,Dependency-choosing,reason3
+django-debug-toolbar-request-history,0.1.3,2.7,3,Dependency-choosing,"reason2,3"
+django-hijack,3.1.1,2.7,2,TPP build,"reason2,3"
+django-markup,1.5,2.7,3,Dependency-choosing,reason3
+django-organizations,2.0.0,2.7,3,Dependency-choosing,"reason2,3"
+django-post-office,3.5.2,2.7,3,Dependency-choosing,reason3
+django-user-sessions,1.7.1,2.7,3,Dependency-choosing,reason3
+eth-keys,0.3.3,2.7,3,Dependency-choosing,"reason2,3"
+flask-mongoengine,1.0.0,2.7,2,TPP build,"reason2,3"
+flask-mongoengine,1.0.0,3.5,2,TPP runing,"reason2,3"
+flask-themes2,1.0.0,2.7,3,Dependency-choosing,reason3
+futu-api,5.9.2108,2.7,2,TPP build,"reason1,2"
+futu-api,5.9.2108,3.5,2,TPP runing,"reason1,2"
+hydra-core,1.1.1,2.7,2,TPP build,"reason2,3"
+ibm-watson,5.3.0,2.7,2,TPP build,"reason2,3"
+icontract,2.5.0,2.7,2,TPP build,reason2
+indic-transliteration,2.3.2,3.5,3,Dependency-choosing,"reason2,3"
+invenio-files-rest,1.3.0,2.7,3,Dependency-choosing,reason3
+invenio-records,1.6.0,2.7,3,Dependency-choosing,reason2
+lesspass,10.0.2,2.7,2,TPP build,reason2
+litecli,1.6.0,2.7,3,Dependency-choosing,reason3
+mlxtend,0.19.0,2.7,3,Dependency-choosing,reason2
+mmcv,1.3.0,2.7,2,TPP build,reason2
+opennmt-tf,2.22.0,3.1,3,Dependency-choosing,reason3
+pinax-blog,8.0.1,2.7,3,Dependency-choosing,reason3
+pinax-eventlog,5.1.0,2.7,3,Dependency-choosing,"reason2,3"
+pinax-notifications,6.0.0,2.7,3,Dependency-choosing,"reason2,3"
+pinax-webanalytics,5.0.0,2.7,3,Dependency-choosing,reason3
+pyisbn,1.3.1,2.7,2,TPP build,reason2
+pyisbn,1.3.1,3.5,2,TPP runing,reason2
+sanic-cors,1.0.0,2.7,3,TPP build,"reason2,3"
+textdistance,4.2.0,2.7,1,TPP build,reason2
+twarc,2.8.0,3.5,3,Dependency-choosing,"reason2,3"
+umap-learn,0.5.0,2.7,3,Dependency-choosing,"reason2,3"
+vaex-arrow,0.5.1,2.7,3,Dependency-choosing,"reason2,3"
+zigpy,0.38.0,2.7,2,TPP build,"reason2,3"
+adafruit-circuitpython-ble,8.1.0,2.7,3,Dependency-choosing,reason3
+adafruit-circuitpython-ble,8.1.0,3.6,2,TPP runing,reason3
+aiohue,2.6.2,3.6,2,TPP runing,reason2
+aioimaplib,0.9.0,2.7,1,TPP build,reason2
+aioimaplib,0.9.0,3.5,2,TPP runing,reason2
+aioprocessing,2.0.0,2.7,2,TPP build,reason2
+aldryn-forms,6.2.1,2.7,3,Dependency-choosing,"reason2,3"
+tabulate,0.8.7,3.1,2,TPP runing,reason2
+pysimplegui,4.51.7,2.7,2,TPP runing,reason2
+aiodns,3.0.0,2.7,2,TPP runing,reason2
+luigi,3.0.0,2.7,2,TPP runing,reason2
+pyotp,2.6.0,2.7,2,TPP runing,reason2
+pytelegrambotapi,4.1.0,2.7,2,TPP runing,reason2
+pytesseract,0.3.7,2.7,2,TPP runing,reason2
+zeroconf,0.36.7,2.7,2,TPP runing,reason2
+django-countries,7.2,2.7,2,TPP runing,reason2
+netmiko,3.4.0,2.7,2,TPP runing,reason2
+portalocker,2.3.0,2.7,2,TPP runing,reason2
+pyecharts,1.9.0,3.5,2,TPP runing,reason2
+attrdict,2.0.1,3.1,2,TPP runing,reason2
+chalice,1.26.1,2.7,2,TPP runing,reason2
+comtypes,1.1.7,3.1,2,TPP runing,reason2
+django-ajax-selects,2.1.0,2.7,2,TPP runing,reason2
+klein,21.8.0,3.5,2,TPP runing,reason2
+patsy,0.5.1,3.1,2,TPP runing,reason2
+pychromecast,9.3.1,2.7,2,TPP runing,reason2
+pygal,2.4.0,3.1,2,TPP runing,reason2
+pyvirtualdisplay,2.2,2.7,2,TPP runing,reason2
+tensorboardx,2.4,2.7,2,TPP runing,reason2
+xblock,1.5.1,2.7,2,TPP runing,reason2
+detect-secrets,1.1.0,2.7,2,TPP runing,reason2
+dynaconf,3.1.2,2.7,2,TPP runing,reason2
+kafka,1.3.5,3.1,2,TPP runing,reason2
+python-bugzilla,3.1.0,2.7,2,TPP runing,reason2
+scikit-optimize,0.9.0,2.7,2,TPP runing,reason2
+aioamqp,0.14.0,2.7,2,TPP runing,reason2
+aiocache,0.11.1,2.7,2,TPP runing,reason2
+allure-python-commons,2.9.43,2.7,2,TPP runing,reason2
+banal,1.0.1,2.7,2,TPP runing,reason2
+bqplot,0.12.19,2.7,2,TPP runing,reason2
+conllu,4.4,2.7,2,TPP runing,reason2
+einops,0.3.0,2.7,2,TPP runing,reason2
+everett,2.0.1,2.7,2,TPP runing,reason2
+face-alignment,1.3.0,3.5,2,TPP runing,reason2
+facebook-wda,1.4.0,2.7,2,TPP runing,reason2
+gin-config,0.4.0,2.7,2,TPP runing,reason2
+injector,0.18.4,2.7,2,TPP runing,reason2
+lenses,1.1.0,3.5,2,TPP runing,reason2
+marathon,0.13.0,2.7,2,TPP runing,reason2
+normality,2.2.2,2.7,2,TPP runing,reason2
+pyfcm,1.5.0,2.7,2,TPP runing,reason2
+pypika,0.48.0,2.7,2,TPP runing,reason2
+pypugjs,5.9.8,3.1,2,TPP runing,reason2
+python-jwt,3.3.0,2.7,2,TPP runing,reason2
+schematics,2.1.0,3.1,2,TPP runing,reason2
+scrapinghub,2.3.1,3.1,2,TPP runing,reason2
+ulid-py,1.1.0,2.7,2,TPP runing,reason2
+anyconfig,0.12.0,2.7,2,TPP runing,reason2
+beem,0.24.20,3.5,2,TPP runing,reason2
+bioservices,1.8.0,2.7,2,TPP runing,reason2
+cs50,7.0.2,2.7,2,TPP runing,reason2
+edx-opaque-keys,2.2.0,2.7,2,TPP runing,reason2
+jsonrpcclient,4.0.0,2.7,2,TPP runing,reason2
+knack,0.8.2,2.7,2,TPP runing,reason2
+locationsharinglib,4.1.1,2.7,2,TPP runing,reason2
+masonite,3.0.11,3.5,2,TPP runing,reason2
+nlp,0.4.0,2.7,2,TPP runing,reason2
+odo,0.5.0,3.1,2,TPP runing,reason2
+pims,0.5,3.1,2,TPP runing,reason2
+pulumi,3.16.0,2.7,2,TPP runing,reason2
+pyads,3.3.0,2.7,2,TPP runing,reason2
+pyicloud,0.10.2,3.1,2,TPP runing,reason2
+pyjade,4.0.0,3.1,2,TPP runing,reason2
+pypuppetdb,2.5.0,2.7,2,TPP runing,reason2
+python3-indy,1.16.0,2.7,2,TPP runing,reason2
+subliminal,2.1.0,2.7,2,TPP runing,reason2
+tapioca-wrapper,2.0.1,3.1,2,TPP runing,reason2
+toolkity,1.9.5,2.7,2,TPP runing,reason2
+uiautomation,2.0.8,3.8,2,TPP runing,"reason2,3"
+ansible-runner,2.0.2,2.7,2,TPP runing,reason2
+antlr4-python3-runtime,4.9,2.7,2,TPP runing,reason2

@@ -1,0 +1,227 @@
+{
+  "New_Type_union_Operator": {
+    "name": "function_ret_annotation",
+    "desc": "A new type union operator was introduced which enables the syntax X | Y",
+    "regex": "def \\S*\\(.*\\)\\s*->.*\\|.*",
+    "pyver": [
+      "3.10"
+    ]
+  },
+  "xrange_function":{
+    "name": "xrange_function",
+    "desc": "has function xrange",
+    "regex": "xrange\\(.*\\)",
+    "pyver": [
+      "2.7"
+    ]
+  },
+  "nonlocal_keyword":{
+    "name": "nonlocal_keyword",
+    "desc": "has keyword nonlocal",
+    "regex": "nonlocal \\S*",
+    "pyver": [
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "async_keyword":{
+    "name": "async_keyword",
+    "desc": "has keyword async",
+    "regex": "async def \\S*\\(.*\\)",
+    "pyver": [
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "await_keyword":{
+    "name": "await_keyword",
+    "desc": "has keyword await",
+    "regex": "await \\S*",
+    "pyver": [
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "math/cmath.isclose function":{
+    "name": "math/cmath.isclose function",
+    "desc": "has function math.isclose, cmath.isclose",
+    "regex": "(math|cmath).isclose\\(.*\\)",
+    "pyver": [
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "os.scandir function":{
+    "name": "os.scandir function",
+    "desc": "has function os.scandir",
+    "regex": "os.scandir\\(.*\\)",
+    "pyver": [
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "function_param_annotation":{
+    "name": "function_param_annotation",
+    "desc": "use : to annotate function param's type",
+    "regex": "def \\S*\\([^\\(\\)]:[^\\(\\)]\\)",
+    "pyver": [
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "function_ret_annotation":{
+    "name": "function_ret_annotation",
+    "desc": "use -> to annotate function ret's type",
+    "regex": "def \\S*\\(.*\\)\\s*->.*",
+    "pyver": [
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "f_string":{
+    "name": "f_string",
+    "desc": "sting prefixed with f",
+    "regex": "f\\\".*{.+}.*\\\"",
+    "pyver": [
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "var_annotation":{
+    "name": "var_annotation",
+    "desc": "sting prefixed with f",
+    "regex": "f\\\".*{.+}.*\\\"",
+    "pyver": [
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "__init_subclass__classmethod":{
+    "name": "__init_subclass__classmethod",
+    "desc": "has __init_subclass__ classmethod",
+    "regex": "def __init_subclass__\\(.*\\)",
+    "pyver": [
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "__set_name__classmethod":{
+    "name": "__set_name__classmethod",
+    "desc": "has __set_name__ classmethod",
+    "regex": "def __set_name__\\(.*\\)",
+    "pyver": [
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9"
+    ]
+  },
+  "Postponed_Annotations":{
+    "name": "Postponed_Annotations",
+    "desc": "Postponed Evaluation of Annotations",
+    "regex": "from __future__ import annotations",
+    "pyver": [
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "ns_time_function":{
+    "name": "ns_time_function",
+    "desc": "has ns resolution function in time module",
+    "regex": "time\\.\\S*_ns",
+    "pyver": [
+      "3.7",
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+
+  "positional_only_param":{
+    "name": "positional_only_param",
+    "desc": "use / to annotate positional only param",
+    "regex": "def \\S*\\(.*, ?/.*\\)",
+    "pyver": [
+      "3.8",
+      "3.9",
+      "3.10"
+    ]
+  },
+  "removeprefix/suffix_method":{
+    "name": "removeprefix/suffix_method",
+    "desc": "has str.removeprefix, str.removesuffix method",
+    "regex": "\\.remove(prefix|suffix)\\(.*\\)",
+    "pyver": [
+      "3.9",
+      "3.10"
+    ]
+  },
+  "except,":{
+    "name": "except,",
+    "desc": "use , to alias exception",
+    "regex": "except[\\s]+([\\w]+),[\\s]*([\\w]+):",
+    "pyver": [
+      "2.7"
+    ]
+  },
+  "Structural_Pattern_Matching": {
+    "name": "Structural_Pattern_Matching",
+    "desc": "a new Structural Pattern",
+    "regex":"^\\s*match\\s+\\w+:$",
+    "pyver": [
+      "3.10"
+    ]
+  },
+  "collections.abc": {
+    "name": "collections.abc",
+    "desc": "these modules need imported by collections.abc in python 3.10",
+    "regex": "from collections import.*?(Container|Hashable|Sized|Callable|Iterable|Collection|Iterator|Reversible|Generator|Sequence|MutableSequence|ByteString|Set|MutableSet|Mapping|MutableMapping|MappingView|ItemsViewKeysView|ValuesView|Awaitable|Coroutine|AsyncIterable|AsyncIterator|AsyncGenerator).*?",
+    "pyver": [
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9"
+    ]
+  }
+
+}
