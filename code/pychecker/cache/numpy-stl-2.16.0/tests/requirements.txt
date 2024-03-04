@@ -1,0 +1,17 @@
+cov-core
+coverage
+docutils
+execnet
+numpy
+cython
+pep8
+py
+pyflakes
+pytest
+pytest-cache
+pytest-cov
+pytest-flake8
+python-utils
+Sphinx
+flake8
+wheel

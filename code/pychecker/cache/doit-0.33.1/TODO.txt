@@ -1,0 +1,30 @@
+
+see
+
+https://github.com/pydoit/doit/issues
+
+0.X
+----------
+
+. setup/task  single process/all procces
+. better terminal output (#5)
+
+wishlist
+----------
+
+. tools - profile
+. tools - code coverage
+
+. color output on the terminal
+. option dont save successful results
+. forget a dependency, not a task
+. task name alias
+. action to be executed on when ctrl-c is hit on auto mode
+
+
+
+big refactorings
+------------------
+
+. Task into TaskDep + Task
+

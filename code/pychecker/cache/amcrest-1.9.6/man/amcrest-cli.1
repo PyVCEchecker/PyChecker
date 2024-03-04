@@ -1,0 +1,400 @@
+.TH man 1 "23 Oct, 2016" "1.0" "amcrest-cli man page"
+.SH NAME
+amcrest-cli \- A tool to manage Amcrest camera
+.SH SYNOPSIS
+amcrest-cli [-H HOSTNAME -u USERNAME -p PASSWORD] [--camera <camera>] [options]
+.SH DESCRIPTION
+\fBamcrest-cli\fP is a command line tool to manage Amcrest camera.
+.P
+By default it reads the default ~/.config/amcrest.conf configuration file.
+If the file does not exist, it requires the use of -H HOSTNAME -u USERNAME -p PASSWORD options.
+.P
+The current format for ~/.config/amcrest.conf is:
+.PP
+.RS
+[mycamera1]
+.br
+hostname: mycamera1.example.com
+.br
+username: admin
+.br
+password: 1234567
+.br
+port: 80
+.P
+[mycamera2]
+.br
+hostname: mycamera2.example.com
+.br
+username: admin
+.br
+password: 7654321
+.br
+port: 80
+.RE
+.P
+Note that when having more than one camera defined, it will be required to use the option \fB--camera\fP.
+.PP
+.RS
+$ amcrest-cli --camera mycamera2 --save ~/Desktop/mycamera2_snapshot.jpg
+.RE
+.P
+The password will be prompted to the user if not found in the configuration file.
+.PP
+.SH OPTIONS
+.TP
+.B -h, --help
+Displays a list of options.
+.TP
+.B --current-time
+Get current time from camera.
+.TP
+.B --snapshot
+Get snapshot, use one of the following options:
+.br
+0 - regular snapshot
+.br
+1 - motion detection snapshot
+.br
+2 - alarm snapshot
+.TP
+.B --save
+.br
+save output as file for operations like:
+.br
+--snapshot
+.br
+--audio-stream-capture
+.br
+--config-backup
+.TP
+.B --motion-detection-status
+Returns if the motion detection is enabled or disabled
+.TP
+.B --motion-detection
+Enable or Disable motion detection, use true or false
+.TP
+.B --general-config
+Get general config
+.TP
+.B --network-config
+Get network config
+.TP
+.B --telnet-config
+Show or set telnet service, use true or false
+.TP
+.B --scan-wlan-devices <SSID>
+Scan wlan devices
+.TP
+.B --wlan-config <PARAM=value>
+Show/Set wlan config
+.TP
+.B --version-http-api
+Get version of HTTP API
+.TP
+.B --network-interfaces
+Get network interfaces
+.TP
+.B --vendor-information
+Get vendor information
+.TP
+.B --onvif-information
+Get Onvif information
+.TP
+.B --software-information
+Get software information
+.TP
+.B --system-information
+Get system information
+.TP
+.B --serial-number
+Get serial number
+.TP
+.B --machine-name
+Get machine name
+.TP
+.B --device-class
+Get device class
+.TP
+.B --device-type
+Get device type
+.TP
+.B --config-backup
+Download all settings of a device
+.TP
+.B --hardware-version
+Get hardware version
+.TP
+.B --scan-devices
+.br
+Scan amcrest cameras in the subnet provided. Masks support: /16, /24, /25, /27, /28, /29, /30, /31
+.br
+If mask not provide, will be used /24.
+.TP
+.B --info-user <username>
+Get information about the username
+.TP
+.B --info-all-users
+Get information about all usernames
+.TP
+.B --info-all-active-users
+Get information about all active users
+.TP
+.B --info-group <group>
+Get information about group
+.TP
+.B --info-all-groups
+Get information about all groups
+.TP
+.B --add-user <username> <password> <group> [sharable] [reserved] [memo]
+username - username for user
+.br
+password - password for user
+.br
+group - string the range is "admin" and "user". In different group,
+        the user has different authorities.
+.br
+sharable - bool, true means allow multi-point login
+.br
+reserved - bool, true means this user can't be deleted
+.br
+memo - memo to user
+.br
+.TP
+.B --modify-password <username> <new password> <old password>
+Modify user password
+.TP
+.B --modify-user <username> <attribute> <new value>
+Modify user attribute
+.br
+Possible attributes: group, sharable, reserved, memo
+.TP
+.B --delete-user <username>
+Delete user
+.TP
+.B --shutdown
+Shutdown the camera (it's like reboot now)
+.TP
+.B --reboot [delay]
+Reboot the camera
+.TP
+.B --mjpg-stream [ChannelNo] [TypeNo]
+Capture mjpg stream
+.TP
+.B --video-blind-detect-config
+Get video blind detect config
+.TP
+.B --video-loss-detect-config
+Get video loss detect config
+.TP
+.B --event-handler-config <configname>
+Get event handler configname
+.TP
+.B --alarm-config
+get alarm config
+.TP
+.B --alarm-out-config
+get alarm out config
+.TP
+.B --alarm-states-output-channels
+alarm states output channels
+.TP
+.B --alarm-states-input-channels
+alarm states input channels
+.TP
+.B --alarm-input-channels
+alarm input channels
+.TP
+.B --alarm-output-channels
+alarm output channels
+.TP
+.B --event-login-failure
+event login failure
+.TP
+.B --event-storage-not-exist
+event storage not exist
+.TP
+.B --event-management
+event management
+.TP
+.B --event-storage-access-failure
+event storage access failure
+.TP
+.B --event-storage-low-space
+event storage low space
+.TP
+.B --event-net-abort
+event net abort
+.TP
+.B --event-ip-conflict
+event ip conflict
+.TP
+.B --event-channels-happened <channel>
+channel params: VideoMotion, VideoLoss, VideoBlind, Alarmlocal
+.TP
+.B --audio-input-channels-numbers
+audio input channels numbers
+.TP
+.B --audio-output-channels-numbers
+audio output channels numbers
+.TP
+.B --record-mode
+show/set record mode (0 Automatically record, 1 Manually Record, 0 Stop Record)
+.TP
+.B --record-capability
+show record capability
+.TP
+.B --record-config
+show record config
+.TP
+.B --play-wav
+play a wav file in the camera microphone
+.TP
+.B --audio-send-stream
+play audio into the camera microphone, user must specify httptype, channel, file and codec  
+.TP
+.B --factory-create
+create a media file finder
+.TP
+.B --media-global-config
+media global config
+.TP
+.B --video-max-extra-stream
+max extra stream
+.TP
+.B --video-color-config
+color config
+.TP
+.B --encode-capability
+encode capability
+.TP
+.B --encode-config-capability
+encode config capability
+.TP
+.B --encode-media
+encode media
+.TP
+.B --encode-region-interested
+encode region interested
+.TP
+.B --ptz-presets-list
+show  all PTZ preset regions
+.TP
+.B --ptz-goto-preset
+move camera to a PTZ preset region
+.TP
+.B --video-channel-title
+channel title
+.TP
+.B --video-input-channels-device-supported
+input channels device supported
+.TP
+.B --video-output-channels-device-supported
+output channels device supported
+.TP
+.B --video-max-remote-input-channels
+max remote input channels
+.TP
+.B --video-in-options
+video in options
+.TP
+.B --video-out-options
+video out options
+.TP
+.B --video-input-capability
+video input capability
+.TP
+.B --video-coordinates-current-window <channel>
+set coordinates current window
+.TP
+.B --video-standard [PAL or NTSC]
+view/set video standard <PAL or NTSC>
+.SH EXAMPLES
+.TP
+.B Get general config
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --general-config
+.TP
+.B Grab snapshot and save in /tmp/self.jpeg
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --snapshot --save /tmp/self.jpeg
+.TP
+.B Check if motion detection is enable or disable
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --motion-detection
+.TP
+.B Enable motion detection
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --motion-detection true
+.TP
+.B Disable motion detection
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --motion-detection false
+.TP
+.B Get network config
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --network-config
+.TP
+.B Get network interfaces
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --network-interfaces
+.TP
+.B Get current time
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --current-time
+.TP
+.B Set current time
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --current-time "2016-10-28 13-48-00"
+.TP
+.B Scan Amcrest devices
+$ amcrest-cli -H 192.168.1.10 --scan-devices 192.168.0.1/24
+.TP
+.B Get version of HTTP API
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --version-http-api
+.TP
+.B Get device type
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --device-type
+.TP
+.B Show telnet service settings
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --telnet-config
+.TP
+.B Disable telnet service
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --telnet-config false
+.TP
+.B Get software information
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --software-information
+.TP
+.B Capture audio stream with httptype as singlepart, channel as 1 and 10 sec as timer
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --audio-stream-capture singlepart 1 10 --save /home/user/myaudio.aac
+.TP
+.B Capture mjpeg with 20 sec as timer
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --mjpg-stream 20 --save /home/user/myfile.mjpg
+.TP
+.B Show UPnP status
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --upnp-status
+.TP
+.B Show UPnP config
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --upnp-config
+.TP
+.B Setting UPnP config
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --upnp-config UPnP.Enable=true
+.br
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --upnp-config "UPnP.Enable=true&UPnP.MapTable[0].Protocol=UDP"
+.TP
+.B NTP Examples
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --ntp-config NTP.Address=pool.ntp.org
+.br
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --ntp-config NTP.Enable=true
+.TP
+.B Move camera to a preset region on channel 0 preset 1
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --ptz-goto-preset 0 1
+.br
+$ amcrest-cli --camera mycamera1 --ptz-goto-preset 0 1
+.TP
+.B Play wav file
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --play-wav /path/file.wav
+.br
+.TP
+.B Play audio stream
+$ amcrest-cli -H 192.168.1.10 -u admin -p password --audio-send-stream singlepart 1 /path/file.wav G.711A
+.br
+
+.SH BUGS
+Report bugs to <https://github.com/tchellomello/python-amcrest/issues>
+.SH "SEE ALSO"
+.BR amcrest-cli (1)
+.SH COPYRIGHT
+Copyright 2016
+License GPLv2: GNU GPL Version 2 <http://gnu.org/licenses/gpl.html>.

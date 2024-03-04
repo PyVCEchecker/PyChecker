@@ -1,0 +1,56 @@
+Metadata-Version: 1.1
+Name: pygerrit2
+Version: 2.0.14
+Summary: Client library for interacting with Gerrit's REST API
+Home-page: https://github.com/dpursehouse/pygerrit2
+Author: David Pursehouse
+Author-email: david.pursehouse@gmail.com
+License: The MIT License
+Description: Pygerrit2 - Client library for interacting with Gerrit Code Review's REST API
+        =============================================================================
+        
+        .. image:: https://img.shields.io/pypi/v/pygerrit2.svg
+        
+        .. image:: https://img.shields.io/pypi/l/pygerrit2.svg
+        
+        .. image:: https://travis-ci.org/dpursehouse/pygerrit2.svg?branch=master
+        
+        .. image:: https://api.dependabot.com/badges/status?host=github&repo=dpursehouse/pygerrit2
+        
+        .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+        
+        Pygerrit2 provides a simple interface for clients to interact with
+        `Gerrit Code Review`_ via the REST API.
+        
+        Copyright and License
+        ---------------------
+        
+        Copyright 2011 Sony Ericsson Mobile Communications. All rights reserved.
+        
+        Copyright 2012 Sony Mobile Communications. All rights reserved.
+        
+        Copyright 2016 David Pursehouse. All rights reserved.
+        
+        Licensed under The MIT License.  Please refer to the `LICENSE`_ file for full
+        license details.
+        
+        .. _`Gerrit Code Review`: https://gerritcodereview.com/
+        .. _LICENSE: https://github.com/dpursehouse/pygerrit2/blob/master/LICENSE
+        
+        
+Keywords: gerrit rest http api client
+Platform: POSIX, Unix, MacOS
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Operating System :: MacOS
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

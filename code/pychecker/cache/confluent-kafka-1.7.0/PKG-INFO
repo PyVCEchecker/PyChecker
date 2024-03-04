@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: confluent-kafka
+Version: 1.7.0
+Summary: Confluent's Python client for Apache Kafka
+Home-page: https://github.com/confluentinc/confluent-kafka-python
+Author: Confluent Inc
+Author-email: support@confluent.io
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: protobuf
+Provides-Extra: doc
+Provides-Extra: avro
+Provides-Extra: dev
+Provides-Extra: json
+Provides-Extra: schema-registry

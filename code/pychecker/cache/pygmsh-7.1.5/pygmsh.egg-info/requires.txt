@@ -1,0 +1,5 @@
+meshio<5,>=4.3.2
+numpy>=1.9
+
+[:python_version < "3.8"]
+importlib_metadata

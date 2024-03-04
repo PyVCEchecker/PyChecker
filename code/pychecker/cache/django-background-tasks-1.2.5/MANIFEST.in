@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+include AUTHORS.txt
+include requirements.txt
+include classifiers
+recursive-include tests *

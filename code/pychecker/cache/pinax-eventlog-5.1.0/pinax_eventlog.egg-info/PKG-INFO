@@ -1,0 +1,66 @@
+Metadata-Version: 1.1
+Name: pinax-eventlog
+Version: 5.1.0
+Summary: an event logger for Django projects
+Home-page: http://github.com/pinax/pinax-eventlog/
+Author: Pinax Team
+Author-email: team@pinaxproject.com
+License: MIT
+Description: 
+        .. image:: http://pinaxproject.com/pinax-design/patches/pinax-eventlog.svg
+            :target: https://pypi.python.org/pypi/pinax-eventlog/
+        
+        ==============
+        Pinax EventLog
+        ==============
+        
+        .. image:: https://img.shields.io/pypi/v/pinax-eventlog.svg
+            :target: https://pypi.python.org/pypi/pinax-eventlog/
+        
+        
+        .. image:: https://img.shields.io/circleci/project/github/pinax/pinax-eventlog.svg
+            :target: https://circleci.com/gh/pinax/pinax-eventlog
+        .. image:: https://img.shields.io/codecov/c/github/pinax/pinax-eventlog.svg
+            :target: https://codecov.io/gh/pinax/pinax-eventlog
+        .. image:: https://img.shields.io/github/contributors/pinax/pinax-eventlog.svg
+            :target: https://github.com/pinax/pinax-eventlog/graphs/contributors
+        .. image:: https://img.shields.io/github/issues-pr/pinax/pinax-eventlog.svg
+            :target: https://github.com/pinax/pinax-eventlog/pulls
+        .. image:: https://img.shields.io/github/issues-pr-closed/pinax/pinax-eventlog.svg
+            :target: https://github.com/pinax/pinax-eventlog/pulls?q=is%3Apr+is%3Aclosed
+        
+        
+        .. image:: http://slack.pinaxproject.com/badge.svg
+            :target: http://slack.pinaxproject.com/
+        .. image:: https://img.shields.io/badge/license-MIT-blue.svg
+            :target: https://opensource.org/licenses/MIT/
+        
+        
+        `pinax-eventlog` provides an easy and clean interface for logging diagnostic
+        as well as business intelligence data about activity that occurs in your site.
+        
+        Supported Django and Python Versions
+        ------------------------------------
+        
+        +-----------------+-----+-----+-----+
+        | Django / Python | 3.6 | 3.7 | 3.8 |
+        +=================+=====+=====+=====+
+        |  2.2            |  *  |  *  |  *  |
+        |  3.0            |  *  |  *  |  *  |
+        |  3.1            |  *  |  *  |  *  |
+        +-----------------+-----+-----+-----+
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 3.1
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

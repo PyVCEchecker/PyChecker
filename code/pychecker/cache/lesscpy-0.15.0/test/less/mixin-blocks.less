@@ -1,0 +1,132 @@
+/*
+	Mixins
+*/
+.mixin {
+	direction: rtl;
+}
+#mixin {
+	unicode-bidi: embed;
+}
+.bible-quote {
+	.mixin;
+	#mixin;
+}
+/*
+	Nested
+*/
+.nested_mixin_1 {
+	letter-spacing: -1px;
+	#mixin {
+		white-space: pre;
+	}
+}
+.nested {
+	.nested_mixin_1;
+}
+#nested_mixin_1 {
+	color: red;
+	.mixin {
+		color: yellow;
+	}
+}
+pre {
+	#nested_mixin_1;
+}
+div.nest {
+	a {
+		&:hover, &:focus {
+			.deep p {
+				widows: 3;
+			}
+		}
+	}
+}
+.nest_deep {
+	div.nest;
+}
+/*
+	
+*/
+.mixout { 
+	border-color: orange; 
+}
+.borders { 
+	border-style: dashed; 
+}
+#namespace {
+  	.borders {
+    	border-style: dotted;
+  	}
+  	.biohazard {
+    	content: "death";
+    	.man {
+      		color: transparent;
+    	}
+  	}
+}
+#theme {
+  	> .mixin {
+    	background-color: grey;
+  	}
+}
+#container {
+  	color: black;
+  	.mixout;
+  	#theme > .mixin;
+}
+#header {
+  	.milk {
+    	color: white;
+    	#theme > .mixin;
+  	}
+  	#cookie {
+    	.chips {
+      		#namespace .borders;
+      		.calories {
+        		#container;
+      		}
+    	}
+    	.borders;
+  	}
+}
+.secure-zone { 
+	#namespace .biohazard .man; 
+}
+//
+// Direct access
+//
+.outer {
+	.inner {
+		padding: 3px;
+	}
+
+}
+.tx {
+	.outer .inner;
+	// Same
+	.outer > .inner;
+}
+//
+// Fallbacks
+//
+.clear {
+	padding: -100px;
+	&:before {
+		display: table;
+    	content: "";
+	}
+}
+.fallback {
+	margin: 2px;
+	.clear();
+}
+#fallback {
+	.bam() {
+		.row {
+			margin: 2px;
+			.clear();
+		}
+	}
+}
+#fallback > .bam();
+

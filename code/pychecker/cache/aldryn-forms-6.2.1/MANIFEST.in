@@ -1,0 +1,7 @@
+include LICENSE.txt
+include README.rst
+recursive-include aldryn_forms/locale *
+recursive-include aldryn_forms/static *
+recursive-include aldryn_forms/templates *
+recursive-include aldryn_forms/contrib/email_notifications/static *
+recursive-exclude * *.py[co]

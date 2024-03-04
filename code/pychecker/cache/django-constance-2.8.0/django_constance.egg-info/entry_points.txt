@@ -1,0 +1,3 @@
+[pytest11]
+pytest-django-constance = constance.test.pytest
+

@@ -1,0 +1,8 @@
+Django>=1.7
+Pillow>=2.0.0
+django-mptt>=0.7.1
+pytz>=2014.10
+six
+
+[tests]
+coverage

@@ -1,0 +1,4 @@
+odoorpc
+=======
+
+.. automodule:: odoorpc

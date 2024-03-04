@@ -1,0 +1,7 @@
+README
+pigpio.py
+setup.py
+pigpio.egg-info/PKG-INFO
+pigpio.egg-info/SOURCES.txt
+pigpio.egg-info/dependency_links.txt
+pigpio.egg-info/top_level.txt

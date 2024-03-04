@@ -1,0 +1,6 @@
+[pytest11]
+testmon = testmon.pytest_testmon
+
+[tox]
+testmon = testmon.tox_testmon
+

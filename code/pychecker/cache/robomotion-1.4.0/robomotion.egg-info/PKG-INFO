@@ -1,0 +1,15 @@
+Metadata-Version: 1.2
+Name: robomotion
+Version: 1.4.0
+Summary: UNKNOWN
+Home-page: https://robomotion.io/
+Author: Robomotion IO
+Author-email: support@robomotion.io
+License: UNKNOWN
+Project-URL: Bug Reports, https://github.com/robomotionio/python-lib/issues
+Project-URL: Dev Docs, https://docs.robomotion.io/
+Project-URL: Slack, https://slack.robomotion.io
+Project-URL: Forum, https://forum.robomotion.io/
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.6

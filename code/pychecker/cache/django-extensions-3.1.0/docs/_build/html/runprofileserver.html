@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RunProfileServer &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RunServerPlus" href="runserver_plus.html" />
+    <link rel="prev" title="print_settings" href="print_settings.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="runserver_plus.html" title="RunServerPlus"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="print_settings.html" title="print_settings"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RunProfileServer</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="runprofileserver">
+<h1>RunProfileServer<a class="headerlink" href="#runprofileserver" title="Permalink to this headline">¶</a></h1>
+<p><em>We recommend that before you start profiling any language or
+framework you learn enough about it so that you feel comfortable with digging
+into its internals.</em></p>
+<p><em>Without sufficient knowledge it will not only be (very)
+hard but you’re likely to make wrong assumptions (and fixes). As a rule of thumb,
+clean, well written code will help you a lot more than overzealous
+micro-optimizations will.</em></p>
+<p><em>This document is work in progress. If you feel you can help with
+better/clearer or additional information about profiling Django please leave a
+comment.</em></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><em>runprofileserver</em> starts Django’s runserver command with hotshot/profiling
+tools enabled. It will save .prof files containing the profiling information
+into the –prof-path directory. Note that for each request made one profile
+data file is saved.</p>
+<p>By default the profile-data-files are saved in /tmp use the –prof-path option
+to specify your own target directory. Saving the data in a meaningful directory
+structure helps to keep your profile data organized and keeps /tmp uncluttered.
+(Yes this probably malfunctions systems such as Windows where /tmp does not exist)</p>
+<p>To define profile filenames use –prof-file option. Default format
+is “{path}.{duration:06d}ms.{time}” (Python
+<a class="reference external" href="http://docs.python.org/3/library/string.html#formatspec">Format Specification</a>
+is used).</p>
+<p>Examples:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“{time}-{path}-{duration}ms” - to order profile-data-files by request time</p></li>
+<li><p>“{duration:06d}ms.{path}.{time}” - to order by request duration</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="profiler-choice">
+<h2>Profiler choice<a class="headerlink" href="#profiler-choice" title="Permalink to this headline">¶</a></h2>
+<p><em>runprofileserver</em> supports two profilers: <em>hotshot</em> and <em>cProfile</em>. Both come
+with the standard Python library but <em>cProfile</em> is more recent and may not be
+available on all systems. For this reason, <em>hotshot</em> is the default profiler.</p>
+<p>However, <em>hotshot</em> <a class="reference external" href="https://docs.python.org/2/library/profile.html#introduction-to-the-profilers">is not maintained anymore</a>
+and using <em>cProfile</em> is usually the recommended way.
+If it is available on your system, you can use it with the option <code class="docutils literal notranslate"><span class="pre">--use-cprofile</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir /tmp/my-profile-data
+$ ./manage.py runprofileserver --use-cprofile --prof-path=/tmp/my-profile-data
+</pre></div>
+</div>
+<p>If you used the default profiler but are not able to open the profiling results
+with the <code class="docutils literal notranslate"><span class="pre">pstats</span></code> module or with your profiling GUI of choice because of an
+error “<em>ValueError: bad marshal data (unknown type code)</em>”, try using <em>cProfile</em>
+instead.</p>
+</div>
+<div class="section" id="kcachegrind">
+<h2>KCacheGrind<a class="headerlink" href="#kcachegrind" title="Permalink to this headline">¶</a></h2>
+<p>Recent versions of <em>runprofileserver</em> have an option to save the profile data
+into a KCacheGrind compatible format. So you can use the excellent KCacheGrind
+tool for analyzing the profile data.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir /tmp/my-profile-data
+$ ./manage.py runprofileserver --kcachegrind --prof-path=/tmp/my-profile-data
+Validating models...
+0 errors found
+
+Django version X.Y.Z, using settings &#39;complete_project.settings&#39;
+Development server is running at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[13/Nov/2008 06:29:38] &quot;GET / HTTP/1.1&quot; 200 41107
+[13/Nov/2008 06:29:39] &quot;GET /site_media/base.css?743 HTTP/1.1&quot; 200 17227
+[13/Nov/2008 06:29:39] &quot;GET /site_media/logo.png HTTP/1.1&quot; 200 3474
+[13/Nov/2008 06:29:39] &quot;GET /site_media/jquery.js HTTP/1.1&quot; 200 31033
+[13/Nov/2008 06:29:39] &quot;GET /site_media/heading.png HTTP/1.1&quot; 200 247
+[13/Nov/2008 06:29:39] &quot;GET /site_media/base.js HTTP/1.1&quot; 200 751
+&lt;ctrl-c&gt;
+$ kcachegrind /tmp/my-profile-data/root.12574391.592.prof
+</pre></div>
+</div>
+<p>Here is a screenshot of how the above commands might look in KCacheGrind:</p>
+<blockquote>
+<div><p><a class="reference external" href="http://trbs.net/media/misc/django-runprofileserver-kcachegrind-full.jpg">http://trbs.net/media/misc/django-runprofileserver-kcachegrind-full.jpg</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://code.djangoproject.com/wiki/ProfilingDjango">http://code.djangoproject.com/wiki/ProfilingDjango</a></p></li>
+<li><p><a class="reference external" href="http://www.rkblog.rk.edu.pl/w/p/django-profiling-hotshot-and-kcachegrind/">http://www.rkblog.rk.edu.pl/w/p/django-profiling-hotshot-and-kcachegrind/</a></p></li>
+<li><p><a class="reference external" href="http://code.djangoproject.com/browser/django/trunk/django/bin/profiling/gather_profile_stats.py">http://code.djangoproject.com/browser/django/trunk/django/bin/profiling/gather_profile_stats.py</a></p></li>
+<li><p><a class="reference external" href="http://www.oluyede.org/blog/2007/03/07/profiling-django/">http://www.oluyede.org/blog/2007/03/07/profiling-django/</a></p></li>
+<li><p><a class="reference external" href="http://simonwillison.net/2008/May/22/debugging/">http://simonwillison.net/2008/May/22/debugging/</a></p></li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">RunProfileServer</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#profiler-choice">Profiler choice</a></li>
+<li><a class="reference internal" href="#kcachegrind">KCacheGrind</a></li>
+<li><a class="reference internal" href="#links">Links</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="print_settings.html"
+                        title="previous chapter">print_settings</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="runserver_plus.html"
+                        title="next chapter">RunServerPlus</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/runprofileserver.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="runserver_plus.html" title="RunServerPlus"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="print_settings.html" title="print_settings"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RunProfileServer</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

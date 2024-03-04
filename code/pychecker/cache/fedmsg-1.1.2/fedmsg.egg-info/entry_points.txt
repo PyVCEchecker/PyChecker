@@ -1,0 +1,27 @@
+[console_scripts]
+fedmsg-announce = fedmsg.commands.announce:announce [commands]
+fedmsg-check = fedmsg.commands.check:check [commands]
+fedmsg-collectd = fedmsg.commands.collectd:collectd [commands]
+fedmsg-dg-replay = fedmsg.commands.replay:replay [commands]
+fedmsg-gateway = fedmsg.commands.gateway:gateway [consumers]
+fedmsg-hub = fedmsg.commands.hub:hub [consumers]
+fedmsg-irc = fedmsg.commands.ircbot:ircbot [consumers]
+fedmsg-logger = fedmsg.commands.logger:logger [commands]
+fedmsg-relay = fedmsg.commands.relay:relay [consumers]
+fedmsg-signing-relay = fedmsg.commands.relay:signing_relay [consumers]
+fedmsg-tail = fedmsg.commands.tail:tail [commands]
+fedmsg-trigger = fedmsg.commands.trigger:trigger [commands]
+
+[fedmsg.meta]
+announce = fedmsg.meta.announce:AnnounceProcessor
+logger = fedmsg.meta.logger:LoggerProcessor
+
+[moksha.consumer]
+fedmsg-dummy = fedmsg.consumers.dummy:DummyConsumer [consumers]
+fedmsg-gateway = fedmsg.consumers.gateway:GatewayConsumer [consumers]
+fedmsg-ircbot = fedmsg.consumers.ircbot:IRCBotConsumer [consumers]
+fedmsg-relay = fedmsg.consumers.relay:RelayConsumer [consumers]
+
+[moksha.producer]
+
+

@@ -1,0 +1,40 @@
+marshmallow<4.0,>=3.13.0
+typing-inspect>=0.7.1
+
+[:python_version == "3.6"]
+dataclasses
+types-dataclasses
+
+[dev]
+marshmallow-enum
+typeguard
+pre-commit~=1.18
+sphinx
+pytest>=5.4
+
+[dev:implementation_name != "pypy"]
+pytest-mypy-plugins>=1.2.0
+
+[dev:python_version < "3.8"]
+typing-extensions~=3.7.2
+
+[docs]
+sphinx
+
+[enum]
+marshmallow-enum
+
+[lint]
+pre-commit~=1.18
+
+[tests]
+pytest>=5.4
+
+[tests:implementation_name != "pypy"]
+pytest-mypy-plugins>=1.2.0
+
+[tests:python_version < "3.8"]
+typing-extensions~=3.7.2
+
+[union]
+typeguard

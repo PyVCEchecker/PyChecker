@@ -1,0 +1,10 @@
+absl-py==0.9.0
+grr-response-core==3.4.2post4
+PyInstaller==3.6
+libfsntfs-python==20200506
+chipsec==1.5.1
+xattr==0.9.7
+
+[:sys_platform=="win32"]
+WMI==1.5.1
+pywin32==228

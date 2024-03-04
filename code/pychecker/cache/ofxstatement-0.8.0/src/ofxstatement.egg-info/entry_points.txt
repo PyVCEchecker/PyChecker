@@ -1,0 +1,3 @@
+[console_scripts]
+ofxstatement = ofxstatement.tool:run
+

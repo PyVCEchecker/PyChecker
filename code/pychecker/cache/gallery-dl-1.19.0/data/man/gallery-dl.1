@@ -1,0 +1,225 @@
+.TH "GALLERY-DL" "1" "2021-10-01" "1.19.0" "gallery-dl Manual"
+.\" disable hyphenation
+.nh
+
+.SH NAME
+gallery-dl \- download image-galleries and -collections
+
+.SH SYNOPSIS
+.B gallery-dl
+[OPTION]... URL...
+
+.SH DESCRIPTION
+.B gallery-dl
+is a command-line program to download image-galleries and -collections
+from several image hosting sites. It is a cross-platform tool
+with many configuration options and powerful filenaming capabilities.
+
+.SH OPTIONS
+.TP
+.B "\-h, \-\-help" 
+Print this help message and exit
+.TP
+.B "\-\-version" 
+Print program version and exit
+.TP
+.B "\-d, \-\-dest" \f[I]DEST\f[]
+Destination directory
+.TP
+.B "\-i, \-\-input\-file" \f[I]FILE\f[]
+Download URLs found in FILE ('-' for stdin). More than one --input-file can be specified
+.TP
+.B "\-\-cookies" \f[I]FILE\f[]
+File to load additional cookies from
+.TP
+.B "\-\-proxy" \f[I]URL\f[]
+Use the specified proxy
+.TP
+.B "\-\-clear\-cache" \f[I]MODULE\f[]
+Delete cached login sessions, cookies, etc. for MODULE (ALL to delete everything)
+.TP
+.B "\-q, \-\-quiet" 
+Activate quiet mode
+.TP
+.B "\-v, \-\-verbose" 
+Print various debugging information
+.TP
+.B "\-g, \-\-get\-urls" 
+Print URLs instead of downloading
+.TP
+.B "\-G, \-\-resolve\-urls" 
+Print URLs instead of downloading; resolve intermediary URLs
+.TP
+.B "\-j, \-\-dump\-json" 
+Print JSON information
+.TP
+.B "\-s, \-\-simulate" 
+Simulate data extraction; do not download anything
+.TP
+.B "\-E, \-\-extractor\-info" 
+Print extractor defaults and settings
+.TP
+.B "\-K, \-\-list\-keywords" 
+Print a list of available keywords and example values for the given URLs
+.TP
+.B "\-\-list\-modules" 
+Print a list of available extractor modules
+.TP
+.B "\-\-list\-extractors" 
+Print a list of extractor classes with description, (sub)category and example URL
+.TP
+.B "\-\-write\-log" \f[I]FILE\f[]
+Write logging output to FILE
+.TP
+.B "\-\-write\-unsupported" \f[I]FILE\f[]
+Write URLs, which get emitted by other extractors but cannot be handled, to FILE
+.TP
+.B "\-\-write\-pages" 
+Write downloaded intermediary pages to files in the current directory to debug problems
+.TP
+.B "\-r, \-\-limit\-rate" \f[I]RATE\f[]
+Maximum download rate (e.g. 500k or 2.5M)
+.TP
+.B "\-R, \-\-retries" \f[I]N\f[]
+Maximum number of retries for failed HTTP requests or -1 for infinite retries (default: 4)
+.TP
+.B "\-\-http\-timeout" \f[I]SECONDS\f[]
+Timeout for HTTP connections (default: 30.0)
+.TP
+.B "\-\-sleep" \f[I]SECONDS\f[]
+Number of seconds to sleep before each download
+.TP
+.B "\-\-filesize\-min" \f[I]SIZE\f[]
+Do not download files smaller than SIZE (e.g. 500k or 2.5M)
+.TP
+.B "\-\-filesize\-max" \f[I]SIZE\f[]
+Do not download files larger than SIZE (e.g. 500k or 2.5M)
+.TP
+.B "\-\-no\-part" 
+Do not use .part files
+.TP
+.B "\-\-no\-skip" 
+Do not skip downloads; overwrite existing files
+.TP
+.B "\-\-no\-mtime" 
+Do not set file modification times according to Last-Modified HTTP response headers
+.TP
+.B "\-\-no\-download" 
+Do not download any files
+.TP
+.B "\-\-no\-check\-certificate" 
+Disable HTTPS certificate validation
+.TP
+.B "\-c, \-\-config" \f[I]FILE\f[]
+Additional configuration files
+.TP
+.B "\-o, \-\-option" \f[I]OPT\f[]
+Additional '<key>=<value>' option values
+.TP
+.B "\-\-ignore\-config" 
+Do not read the default configuration files
+.TP
+.B "\-u, \-\-username" \f[I]USER\f[]
+Username to login with
+.TP
+.B "\-p, \-\-password" \f[I]PASS\f[]
+Password belonging to the given username
+.TP
+.B "\-\-netrc" 
+Enable .netrc authentication data
+.TP
+.B "\-\-download\-archive" \f[I]FILE\f[]
+Record all downloaded files in the archive file and skip downloading any file already in it
+.TP
+.B "\-A, \-\-abort" \f[I]N\f[]
+Stop current extractor run after N consecutive file downloads were skipped
+.TP
+.B "\-T, \-\-terminate" \f[I]N\f[]
+Stop current and parent extractor runs after N consecutive file downloads were skipped
+.TP
+.B "\-\-range" \f[I]RANGE\f[]
+Index-range(s) specifying which images to download. For example '5-10' or '1,3-5,10-'
+.TP
+.B "\-\-chapter\-range" \f[I]RANGE\f[]
+Like '--range', but applies to manga-chapters and other delegated URLs
+.TP
+.B "\-\-filter" \f[I]EXPR\f[]
+Python expression controlling which images to download. Files for which the expression evaluates to False are ignored. Available keys are the filename-specific ones listed by '-K'. Example: --filter "image_width >= 1000 and rating in ('s', 'q')"
+.TP
+.B "\-\-chapter\-filter" \f[I]EXPR\f[]
+Like '--filter', but applies to manga-chapters and other delegated URLs
+.TP
+.B "\-\-zip" 
+Store downloaded files in a ZIP archive
+.TP
+.B "\-\-ugoira\-conv" 
+Convert Pixiv Ugoira to WebM (requires FFmpeg)
+.TP
+.B "\-\-ugoira\-conv\-lossless" 
+Convert Pixiv Ugoira to WebM in VP9 lossless mode
+.TP
+.B "\-\-write\-metadata" 
+Write metadata to separate JSON files
+.TP
+.B "\-\-write\-infojson" 
+Write gallery metadata to a info.json file
+.TP
+.B "\-\-write\-tags" 
+Write image tags to separate text files
+.TP
+.B "\-\-mtime\-from\-date" 
+Set file modification times according to 'date' metadata
+.TP
+.B "\-\-exec" \f[I]CMD\f[]
+Execute CMD for each downloaded file. Example: --exec 'convert {} {}.png && rm {}'
+.TP
+.B "\-\-exec\-after" \f[I]CMD\f[]
+Execute CMD after all files were downloaded successfully. Example: --exec-after 'cd {} && convert * ../doc.pdf'
+.TP
+.B "\-P, \-\-postprocessor" \f[I]NAME\f[]
+Activate the specified post processor
+
+.SH EXAMPLES
+.TP
+gallery-dl \f[I]URL\f[]
+Download images from \f[I]URL\f[].
+.TP
+gallery-dl -g -u <username> -p <password> \f[I]URL\f[]
+Print direct URLs from a site that requires authentication.
+.TP
+gallery-dl --filter 'type == "ugoira"' --range '2-4' \f[I]URL\f[]
+Apply filter and range expressions. This will only download
+the second, third, and fourth file where its type value is equal to "ugoira".
+.TP
+gallery-dl r:\f[I]URL\f[]
+Scan \f[I]URL\f[] for other URLs and invoke \f[B]gallery-dl\f[] on them.
+.TP
+gallery-dl oauth:\f[I]SITE\-NAME\f[]
+Gain OAuth authentication tokens for
+.IR deviantart ,
+.IR flickr ,
+.IR reddit ,
+.IR smugmug ", and"
+.IR tumblr .
+
+.SH FILES
+.TP
+.I /etc/gallery-dl.conf
+The system wide configuration file.
+.TP
+.I ~/.config/gallery-dl/config.json
+Per user configuration file.
+.TP
+.I ~/.gallery-dl.conf
+Alternate per user configuration file.
+
+.SH BUGS
+https://github.com/mikf/gallery-dl/issues
+
+.SH AUTHORS
+Mike Fährmann <mike_faehrmann@web.de>
+.br
+and https://github.com/mikf/gallery-dl/graphs/contributors
+
+.SH "SEE ALSO"
+.BR gallery-dl.conf (5)

@@ -1,0 +1,4 @@
+grpcio>=1.27.1
+protobuf>=3.6.1
+six>=1.12.0
+tenacity>=6.1.0

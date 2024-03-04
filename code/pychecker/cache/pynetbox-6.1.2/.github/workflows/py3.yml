@@ -1,0 +1,32 @@
+name: Py3 Test
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.6, 3.8]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dev requirements
+        run: pip install -r requirements-dev.txt .
+
+      - name: Run Linter
+        run: black --diff --check pynetbox tests
+          
+      - name: Run Tests
+        run: pytest

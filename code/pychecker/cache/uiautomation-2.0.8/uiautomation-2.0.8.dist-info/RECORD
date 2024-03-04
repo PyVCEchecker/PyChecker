@@ -1,0 +1,11 @@
+uiautomation/__init__.py,sha256=CGK0nDGraSGVTlMmV34QSpoIyq9U16vxS0lXeGLwoaM,101
+uiautomation/uiautomation.py,sha256=wSXobg_4XmWoYKzDHOMGN6YhU94aM-Dt1jascnvutYw,363856
+uiautomation/version.py,sha256=PbzztH5WoUucxFyD8jfiRiC_F3owJobc9EBacPwjpGo,18
+uiautomation/bin/UIAutomationClient_VC140_X64.dll,sha256=EXL4bNlgkmGZzT5iaj9HvMa73Qz8TPqZGvBgA0vTbsM,93184
+uiautomation/bin/UIAutomationClient_VC140_X86.dll,sha256=fkisM50nDN7imlWQ3UpiChmaRLNAVE-mY_usM_gtIWQ,76800
+uiautomation-2.0.8.data/scripts/automation.py,sha256=Qw6k2FMuDb0qarKs0E-I4zbda73wnTkcb69NyOW4CvA,4676
+uiautomation-2.0.8.dist-info/LICENSE,sha256=fDYXKwn6sXZyAjK-hThMsdXMZO5A3Q9Q0zW6BKo9cfs,11537
+uiautomation-2.0.8.dist-info/METADATA,sha256=90MZUqnVnMCGQcFh3yTa9ZwOIQEZ1Eot5kt7MT0MSfo,694
+uiautomation-2.0.8.dist-info/WHEEL,sha256=gxPaqcqKPLUXaSAKwmfHO7_iAOlVvmp33DewnUluBB8,116
+uiautomation-2.0.8.dist-info/top_level.txt,sha256=XAA4nCZEKrHlEduVpO-0h_Zbp45jT9A0-T-392SBn24,13
+uiautomation-2.0.8.dist-info/RECORD,,

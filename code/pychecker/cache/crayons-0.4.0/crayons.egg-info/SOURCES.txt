@@ -1,0 +1,10 @@
+LICENSE
+README.rst
+crayons.py
+setup.cfg
+setup.py
+crayons.egg-info/PKG-INFO
+crayons.egg-info/SOURCES.txt
+crayons.egg-info/dependency_links.txt
+crayons.egg-info/requires.txt
+crayons.egg-info/top_level.txt

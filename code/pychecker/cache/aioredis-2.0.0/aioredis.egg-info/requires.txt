@@ -1,0 +1,7 @@
+async-timeout
+typing-extensions
+
+[hiredis]
+
+[hiredis:implementation_name == "cpython"]
+hiredis>=1.0

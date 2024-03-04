@@ -1,0 +1,11 @@
+platformdirs>=2.2.0
+astroid<2.9,>=2.8.0
+isort<6,>=4.2.5
+mccabe<0.7,>=0.6
+toml>=0.7.1
+
+[:python_version < "3.10"]
+typing-extensions>=3.10.0
+
+[:sys_platform == "win32"]
+colorama

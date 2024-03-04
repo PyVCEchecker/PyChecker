@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+setup.py
+dacite/__init__.py
+dacite/config.py
+dacite/core.py
+dacite/data.py
+dacite/dataclasses.py
+dacite/exceptions.py
+dacite/py.typed
+dacite/types.py
+dacite.egg-info/PKG-INFO
+dacite.egg-info/SOURCES.txt
+dacite.egg-info/dependency_links.txt
+dacite.egg-info/requires.txt
+dacite.egg-info/top_level.txt

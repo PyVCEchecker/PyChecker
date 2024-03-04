@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+django_extra_fields.egg-info/PKG-INFO
+django_extra_fields.egg-info/SOURCES.txt
+django_extra_fields.egg-info/dependency_links.txt
+django_extra_fields.egg-info/requires.txt
+django_extra_fields.egg-info/top_level.txt
+drf_extra_fields/__init__.py
+drf_extra_fields/compat.py
+drf_extra_fields/fields.py
+drf_extra_fields/geo_fields.py
+drf_extra_fields/relations.py
+drf_extra_fields/runtests/__init__.py
+drf_extra_fields/runtests/settings.py

@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: aws-cdk.cdk
+Version: 0.36.1
+Summary: Deprecated: this module ha been renamed to @aws-cdk/core
+Home-page: https://github.com/awslabs/aws-cdk
+Author: Amazon Web Services
+License: UNKNOWN
+Project-URL: Source, https://github.com/awslabs/aws-cdk.git
+Description: # Renamed to @aws-cdk/core
+        
+        <!--BEGIN STABILITY BANNER-->
+        
+        ---
+        
+        ![Stability: Deprecated](https://img.shields.io/badge/stability-Deprecated-critical.svg?style=for-the-badge)
+        
+        > This API may emit warnings. Backward compatibility is not guaranteed.
+        
+        ---
+        <!--END STABILITY BANNER-->
+        
+        
+        This module has been renamed to @aws-cdk/core
+        
+        
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

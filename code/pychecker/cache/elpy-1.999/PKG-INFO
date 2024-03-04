@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: elpy
+Version: 1.999
+Summary: Tombstone package for elpy to not break accidental dependencies
+Home-page: UNKNOWN
+Author: Josiah Boning
+Author-email: jboning@gmail.com
+License: UNKNOWN
+Description: # Elpy Tombstone
+        
+        This is an empty package. See discussion at
+        https://github.com/jorgenschaefer/elpy/issues/1583
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown

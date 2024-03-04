@@ -1,0 +1,12 @@
+CHANGELOG.rst
+LICENSE
+MANIFEST.in
+README.rst
+dj_email_url.py
+setup.cfg
+setup.py
+dj_email_url.egg-info/PKG-INFO
+dj_email_url.egg-info/SOURCES.txt
+dj_email_url.egg-info/dependency_links.txt
+dj_email_url.egg-info/not-zip-safe
+dj_email_url.egg-info/top_level.txt

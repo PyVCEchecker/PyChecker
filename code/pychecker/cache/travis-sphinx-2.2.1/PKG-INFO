@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: travis-sphinx
+Version: 2.2.1
+Summary: Manages building sphinx documentation and deploying documentation to gh-pages via travis
+Home-page: https://github.com/syntaf/travis-sphinx
+Author: Grant Mercer
+Author-email: gmercer015@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/Syntaf/travis-sphinx/archive/master.zip
+Description-Content-Type: UNKNOWN
+Description: UNKNOWN
+Keywords: documentation,travis,python,deploy
+Platform: UNKNOWN
+Classifier: Topic :: Software Development :: Documentation
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6

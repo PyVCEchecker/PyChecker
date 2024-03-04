@@ -1,0 +1,2 @@
+azure-cli-core
+azure-mgmt-monitor==0.5.2

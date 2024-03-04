@@ -1,0 +1,285 @@
+CHANGES
+=======
+
+1.9.2
+-----
+
+* Add release note for urlquote fix
+* Simple tests to ensure character encoding works
+* Use requests to quote URLs
+* Remove circleci badge from README
+
+1.9.1
+-----
+
+* Restore py.typed file to enable types
+
+1.9.0
+-----
+
+* Change tag pattern
+* Url Quote the path provided to the mocker
+* Use github action to push a release to PyPI (#163)
+* Release note for type hints
+* Add [PEP 484](https://www.python.org/dev/peps/pep-0484/) type hints
+* Mocker.copy: Use correct type when copying mocker
+* Run unit tests for pull requests as well
+* Add support for Python up to 3.9
+* Use Github Actions
+* Make is\_bound\_method private
+* Add release note for fixed bug
+* Correctly handle an explicit zero byte read
+* Add missing string delimiter in example
+* fix: is\_bound\_method by six
+* fix: \`session\` and \`real\_http\` cannot be used at the same time
+
+1.8.0
+-----
+
+* Remove requests 2.3 compatibility code
+* Add release notes for reset function
+* Add release note for session scoped mock
+* Allow passing session as postiional argument
+* Create bound method instead of a wrapper
+* Added reset\_mock to \_RequestHistoryTracker and Adapter (#139)
+* doc on session Mockers
+* doc on nesting Mockers
+* fix README.rst typo
+* suggest Mocker for users unfamiliar with adapters
+* update examples to mount adapter on 'mock://'
+* fix global/session mock interactions and real\_http
+* Added installation instructions
+* Add release note for nested mocking
+* fix redirects (#105) and mock nesting (#116)
+* Mark IOReader object closed when using a stream
+* Add the default response reason if not set
+* Don't check that proxies are set in test
+* Add StackOverflow tag to README
+* Mention pytest fixture on the README
+* Add background information to pytest doc
+* docs: update examples to match Read the Docs
+* Expose real\_http as a public property
+* fix py27 error
+* easier session scoped mock
+
+1.7.0
+-----
+
+* Keep blank values query string values on request history
+* Add release notes for requests version pin
+* Keep blank values (#106)
+* Pin requests version to <3
+* Add known issue for cookies in Sessions
+* logger added to adapter.py (#93)
+
+1.6.0
+-----
+
+* Fix PEP8 failure in test\_adapter
+* Respect user provided content encoding type
+* Update minimum requests version to 2.3
+* Added support for purl
+* Add testing for Python 3.7 & PyPy3
+* Drop \_matcher from request pickled state
+* Clarify the pytest configuration documentation
+* Update mocker.rst
+
+1.5.2
+-----
+
+* Fix discovery of pytest version and default
+* Add a docstring to the pytest fixture
+* Include release note for py.test
+
+1.5.1
+-----
+
+* Collapse CircleCI configuration
+* Support older pytest versions
+* Record value of stream parameter in request history
+* Some additional gitignores
+* Include reno in circleci publish job
+* Prefer readthedocs.io instead of readthedocs.org for doc links
+
+1.5.0
+-----
+
+* Add release note describe repository migration
+* Add pytest plugin
+* Include release-notes in documentation
+* Another attempt at circleci tags
+* Only try and push to pypi on a tag
+* Update all pypi.python.org URLs to pypi.org
+* Add pypi upload configuration to circleci
+* Move tests outside of package to top level directory
+* Remove zuul.yaml as we're not using zuul anymore
+* Add CircleCI badge to README
+* Remove links to launchpad bug reporting
+* Remove .gitreview
+* Unpin sphinx dependency
+* Add circleci testing configuration
+* Use set literals throughout project
+* Prefer https:// links over http:// in docs and comments
+* Fix last\_request examples
+* Fix spelling mistakes
+* Move Zuul jobs in-tree
+
+1.4.0
+-----
+
+* allow an adapter to be passed to a Mocker object
+* Rename [wheel] section to [bdist\_wheel] as the former is legacy
+* Include license file in the generated wheel package
+* Add testing for newer Python versions 3.5 and 3.6
+* Return a separate copy for each call to decorator
+* Add string representation to \_RequestObjectProxy
+
+1.3.0
+-----
+
+* Add a releasenote for additional\_matcher
+* Add documentation for the exception response
+* Fix occurences of \`adatper\`
+* Type check the empty string when creating repsonse
+* Allow arbirtrary matcher to be add to match
+
+1.2.0
+-----
+
+* Allow for nested mocking
+* Use create\_response for fake http response in tests
+* Add hostname and port properties to request
+* Move request code and tests into their own files
+* Add called\_once to Mocker
+* Fix docs building
+* Fix exception message when creating a response
+
+1.1.0
+-----
+
+* Add a called\_once property to adapter
+* Enable case sensitive matching
+* Provide fixture extras for pip
+* Allow doing real\_http per mock via the mocker
+* Return b'' when reading closed response
+* Remove discover from test-requirements
+* Fixture documentation error
+
+1.0.0
+-----
+
+* Add tox environment to run against master requests
+* Change dev status classifier to stable
+* Doc fixups
+* Expose cert and proxies as attributes of the last request
+* Add timeout and allow\_retries to RequestProxy
+* Add trove support for py34 and remove py33
+* Fix py34 DB issue and remove py33/py26
+* Remove pypip.in badge from readme
+
+0.7.0
+-----
+
+* Support Cookies
+* Expose Fake objects in compat
+* Update .gitreview for new namespace
+* Change ignore-errors to ignore\_errors
+
+0.6.0
+-----
+
+* Update docs
+* Allow to decorate class with mock
+* Use weakref to hold matcher
+* Include matcher in request history
+* Add called and call\_count to mocker
+* Update README to use newer syntax
+* Allow specifying an exception to raise
+* Update novaclient and keystoneclient git repo
+* Add pbr to all tox environments
+* Add docs environment to tox.ini
+* Work toward Python 3.4 support and testing
+* Run tip tests against requests master as well
+* Add link to find bug tracker
+
+0.5.1
+-----
+
+* Convert headers to bytes testing request\_headers
+* Don't use requests.Response object directly
+* Allow interpreting a sent request as text and json
+* Create a tox env for requests v1.2.3
+* Add get\_all to compatibility function
+* Lowercase scheme in regexp test
+* Don't use session.prepare\_request
+
+0.5.0
+-----
+
+* Remove old \_Context object
+* Correctly set adapter to response.connection
+* Add keystoneclient and novaclient tests to tox
+* Remove some github specific jobs
+* Make compatible with requests 1.2
+* Requires requests >= 2.3
+* Added stackforge gitreview
+* Fix tests running for zuul
+* Make a public create\_response function
+* Change query string tests
+* Add wrapper around Request object
+* Add a mock() function
+* Export symbols for HTTP methods
+* Standardize request history tracking
+* Allow querying if a mock was called
+* Add period to error message
+* Http Methods handling to look more like requests
+
+0.4.0
+-----
+
+* Autodeploy wheel format
+* Deploy from all branches
+* Always add request to history
+* Fixture should depend on MockerCore
+
+0.3.0
+-----
+
+* Allow custom matchers
+* Test matcher by \_\_call\_\_
+* Update travis file
+
+0.2.0
+-----
+
+* Remove invalid link from readme
+* Remove Overview section of fixtures
+* Doctest fixups
+* fixup README
+* Add request\_headers matching
+* Create the Mocker
+* Fixup doc function link
+* Remove wheel from dependencies
+* Add regexp url matching
+* Add the ANY wildcard
+
+0.1.0
+-----
+
+* Set classifier to Alpha
+* Setup pypi releasing process
+* Split docs for better RTFD viewing
+* Requirements file for RTFD dependencies
+* Set some metadata options
+* A documentation effort
+* Change callback format
+* Fixes in the course of using library in practice
+* Add PBR files to .gitignore
+* Enable coverage testing
+* Discover package for py2.6 tests
+* Fixup and start travis build
+* Convert tests to testr, add flake8 tox command
+* More reorganizing
+* Rework ideas
+* Added a simple README file
+* Initial commit

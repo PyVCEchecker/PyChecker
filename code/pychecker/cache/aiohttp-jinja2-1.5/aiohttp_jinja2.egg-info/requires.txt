@@ -1,0 +1,5 @@
+aiohttp>=3.6.3
+jinja2>=3.0.0
+
+[:python_version < "3.8"]
+typing_extensions>=3.7.4

@@ -1,0 +1,8 @@
+README.md
+setup.py
+argali/__init__.py
+argali/descriptive_statistics.py
+argali.egg-info/PKG-INFO
+argali.egg-info/SOURCES.txt
+argali.egg-info/dependency_links.txt
+argali.egg-info/top_level.txt

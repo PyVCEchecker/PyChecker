@@ -1,0 +1,6 @@
+[run]
+branch = True
+source = jsonpath_rw_ext
+
+[report]
+ignore-errors = True

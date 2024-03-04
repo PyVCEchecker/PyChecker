@@ -1,0 +1,11 @@
+six
+cryptography>=1.5
+
+[:platform_system == "FreeBSD"]
+uhid-freebsd>=1.2.1
+
+[:python_version < "3.4"]
+enum34
+
+[pcsc]
+pyscard

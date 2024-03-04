@@ -1,0 +1,16 @@
+Pint==0.9
+
+[docs]
+releases<2,>=1.6.3
+Sphinx<3,>=2.4
+sphinx_rtd_theme<1,>=0.4.3
+semantic-version==2.6.0
+six<2,>=1.15.0
+
+[test]
+coverage<5,>=4.5
+pre-commit<3,>=2.4
+pylint==2.5.2
+pytest<6,>=5.4
+pytest-cov!=2.8.1,>=2
+tox<4,>=3.15

@@ -1,0 +1,9 @@
+lxml<5,>=4.2.1
+eight<2,>=0.4.2
+cryptography>=2.1.4
+pyOpenSSL<21,>=17.5.0
+certifi>=2018.1.18
+
+[:python_version == "2.7"]
+enum34<2,>=1.1.6
+ipaddress<2,>=1.0.17

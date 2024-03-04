@@ -1,0 +1,10 @@
+
+[:python_version < "3.5"]
+typing
+
+[tests]
+dill
+coverage
+coveralls
+mock
+nose

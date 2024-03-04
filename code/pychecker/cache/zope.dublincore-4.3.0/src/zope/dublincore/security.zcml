@@ -1,0 +1,17 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <include package="zope.security" file="meta.zcml" />
+
+  <class class=".annotatableadapter.ZDCAnnotatableAdapter">
+    <require
+        permission="zope.dublincore.view"
+        interface=".interfaces.IZopeDublinCore"
+        />
+    <require
+        permission="zope.dublincore.change"
+        interface=".interfaces.IWritableGeneralDublinCore"
+        set_schema=".interfaces.IZopeDublinCore"
+        />
+  </class>
+
+</configure>

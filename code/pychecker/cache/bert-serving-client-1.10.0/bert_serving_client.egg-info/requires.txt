@@ -1,0 +1,2 @@
+numpy
+pyzmq>=17.1.0

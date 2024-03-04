@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_pinpointemail.egg-info/PKG-INFO
+src/aws_cdk.aws_pinpointemail.egg-info/SOURCES.txt
+src/aws_cdk.aws_pinpointemail.egg-info/dependency_links.txt
+src/aws_cdk.aws_pinpointemail.egg-info/requires.txt
+src/aws_cdk.aws_pinpointemail.egg-info/top_level.txt
+src/aws_cdk/aws_pinpointemail/__init__.py
+src/aws_cdk/aws_pinpointemail/py.typed
+src/aws_cdk/aws_pinpointemail/_jsii/__init__.py
+src/aws_cdk/aws_pinpointemail/_jsii/aws-pinpointemail@1.129.0.jsii.tgz

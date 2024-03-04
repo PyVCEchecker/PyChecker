@@ -1,0 +1,19 @@
+################################################################################
+# This requirements file has been automatically generated from `Pipfile` with
+# `pipenv-to-requirements`
+#
+#
+# This has been done to maintain backward compatibility with tools and services
+# that do not support `Pipfile` yet.
+#
+# Do NOT edit it directly, use `pipenv install [-d]` to modify `Pipfile` and
+# `Pipfile.lock` and then regenerate `requirements*.txt`.
+################################################################################
+
+boto3>=1.4.4
+click==6.6
+docutils
+jmespath==0.10.0
+pyaml==15.8.2
+python-dateutil==2.5.3
+pyyaml==5.1

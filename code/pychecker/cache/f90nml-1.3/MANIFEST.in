@@ -1,0 +1,9 @@
+recursive-include tests *.nml *.txt *.py
+recursive-include docs/source *
+include docs/Makefile
+include AUTHORS
+include CHANGELOG
+include LICENSE
+include MANIFEST.in
+include NOTICE
+include README.rst

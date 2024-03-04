@@ -1,0 +1,14 @@
+Metadata-Version: 1.2
+Name: GeoFuns
+Version: 1.1.8
+Summary: A package for geo tools used to map card score
+Home-page: https://github.com/harryritchie/Landkarte
+Author: Harry Ritchie
+Author-email: harry.ritchie@prea.eu
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6

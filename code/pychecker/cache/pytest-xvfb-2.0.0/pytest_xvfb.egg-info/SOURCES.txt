@@ -1,0 +1,14 @@
+CHANGELOG.rst
+MANIFEST.in
+README.rst
+pytest_xvfb.py
+setup.py
+pytest_xvfb.egg-info/PKG-INFO
+pytest_xvfb.egg-info/SOURCES.txt
+pytest_xvfb.egg-info/dependency_links.txt
+pytest_xvfb.egg-info/entry_points.txt
+pytest_xvfb.egg-info/requires.txt
+pytest_xvfb.egg-info/top_level.txt
+tests/conftest.py
+tests/test_xvfb.py
+tests/test_xvfb_windows.py

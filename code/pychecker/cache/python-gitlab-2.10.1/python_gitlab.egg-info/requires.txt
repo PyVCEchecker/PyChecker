@@ -1,0 +1,8 @@
+requests>=2.25.0
+requests-toolbelt>=0.9.1
+
+[autocompletion]
+argcomplete<2,>=1.10.0
+
+[yaml]
+PyYaml>=5.2

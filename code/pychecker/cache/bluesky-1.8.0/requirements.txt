@@ -1,0 +1,12 @@
+cycler
+event-model>=1.14.0
+historydict
+msgpack
+msgpack-numpy
+numpy
+super_state_machine
+toolz
+tqdm>=4.44
+typing-extensions;python_version<'3.8'
+dataclasses;python_version<'3.7'
+zict

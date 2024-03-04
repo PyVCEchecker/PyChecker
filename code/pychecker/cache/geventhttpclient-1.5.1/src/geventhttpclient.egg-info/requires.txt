@@ -1,0 +1,4 @@
+gevent>=0.13
+certifi
+six
+brotli

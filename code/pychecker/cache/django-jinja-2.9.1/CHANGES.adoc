@@ -1,0 +1,362 @@
+Changelog
+=========
+
+Version 2.9.1
+-------------
+
+_Released September 4th, 2021_
+
+- Complete config example in the docs now reflects actual project defaults (#286).
+- `get_template` no longer calls `template_name.endswith` twice under the default setup.
+- Rewrite usage and template matching config sections in the docs, to fully explain behavior.
+
+
+Version 2.9.0
+-------------
+
+_Released July 2nd, 2021_
+
+- Jinja2 policies now settable via `TEMPLATES[n]['OPTIONS']['policies']` (#285).
+- `makemessages` now respects the `ext.i18n.trimmed` policy,
+   will automatically trim jinja `{% trans %}` blocks when generating `.po` files.
+
+
+Version 2.8.0
+-------------
+
+_Released May 24th, 2021_
+
+- Upgrade to jinja2 3.0, dropping support for 2.11 and below (#279).
+- Dropped Python 3.5 support.
+
+
+Version 2.7.1
+-------------
+
+_Released April 16th, 2021_
+
+- Fixed `makemessages` command, which in 2.7.0 could not detect `{% trans %}` tags in Django templates (#272).
+- Fixed `{% cache %}` tag to allow a timeout of `None` (to cache forever), which Django's tag added in 2.0 (#274).
+- Fixed README not displaying in project description at PyPI (#276).
+- Added Django 3.2 support.
+
+
+Version 2.7.0
+-------------
+
+_Released August 20th, 2020_
+
+- Fixed loading template names with backslashes on Windows (#249).
+- Added Django's `json_script` filter for Django 2.1 and higher.
+- Fixed docs site stylesheet.
+- Added Django 3.1 support.
+- Removed Django 1.11 support.
+- Added Python 3.9 (rc1) to test suite.
+- Clarified "not recommended" usage of context processors with django-jinja in the docs.
+
+
+Version 2.6.0
+-------------
+
+_Released February 1st, 2020_
+
+- Documented compatibility changes made in version 2.5.0.
+- Cut new release to reflect this in package metadata.
+
+
+Version 2.5.0
+-------------
+
+- Fix compatibility issues with Django 3.0, minimum version now 1.11.
+- Dropped support for Python 2.7, 3.4, adding support through 3.8.
+
+
+Version 2.4.2
+-------------
+
+- Added `Template.stream` method to use with StreamingHttpResponse.
+
+
+Version 2.4.1
+-------------
+
+- Minor improvements on `makemessages`.
+
+
+Version 2.4.0
+-------------
+
+- Revert the 2.3.1 change because importing jinja templates from
+  django is not intended feature and that change breaks the django
+  template object signature.
+
+
+Version 2.3.1
+-------------
+
+- Add minor fixes allowing creating templatetags that can load jinja2
+  templates into django templates (refer to issues #94 and #201 for
+  more information).
+
+
+Version 2.3.0
+-------------
+
+- Fix compatibility issues with django 1.11
+
+
+Version 2.2.2
+-------------
+
+- Fix many warnings for django 2.0
+
+
+Version 2.2.1
+-------------
+
+- Fix compatibility issues with django 1.9.
+
+
+Version 2.2.0
+-------------
+
+- Remove `removetags` filter (making compatible with django 1.10).
+
+
+Version 2.1.3
+-------------
+
+- Fix support passing in django template contexts.
+- Fix template name matching on tests.
+
+
+Version 2.1.2
+-------------
+
+- Fix compatibility issues with django 1.8
+- Fix unicode decode error on cache tag.
+
+
+Version 2.1.1
+-------------
+
+- Improve makemessages command.
+
+
+Version 2.1.0
+-------------
+
+- Fix support for django debug toolbar 1.4
+- Improve syntax error reporting.
+- Improve debug instrumentation.
+
+
+Version 2.0.0
+-------------
+
+- Remove django < 1.8 compatibility.
+- Major code refactor for make it now more simpler.
+
+
+Version 1.4.2
+-------------
+
+- Minor fix on extensions.
+
+
+Version 1.4.1
+-------------
+
+- Add missing import on setup.py of views.
+
+
+Version 1.4.0
+-------------
+
+- Add generic views helpers (thanks to @sbutler).
+- Minor fixes on imports.
+- Add helper for set the "undefined" parameter in a easy way.
+- Add a simple way to add extensions from apps.
+- Fixed bug related to csrf_token.
+
+
+Version 1.3.3
+-------------
+
+- Fix django 1.8 compatibilities.
+- Fix documentation issues.
+- Remove obsolete code.
+
+
+Version 1.3.2
+-------------
+
+- Do not load django < 1.7 setup related settings for django 1.8 backend.
+- Fix django-debug-toolbar compatibility.
+
+
+Version 1.3.1
+-------------
+
+- Fix bug related to doble inclusion of DEFAULT_EXTENSIONS.
+- Remove the extra django filters extension and document the change.
+
+
+Version 1.3.0
+-------------
+
+- Now all builtin filters, and global functions are implemented
+  using jinja2 extensions.
+- Breaking change: JINJA2_FILTERS_REPLACE_FROM_DJANGO is removed
+
+
+Version 1.2.1
+-------------
+
+- Improved JINJA2_LOADER handling for django <= 1.7
+- Add documentation entry for JINJA2_LOADER.
+
+
+Version 1.2.0
+-------------
+
+- Allow set custom module as translation engine. (by @toshka)
+
+
+Version 1.1.1
+-------------
+
+- Fix typos on function names.
+- Honor Django's `setting_changed` signal to reinitialize the Jinja2 environment.
+
+Thanks to @akx
+
+
+
+Version 1.1.0
+-------------
+
+- Code base refactored.
+- Add django 1.8 support.
+- Remove `fix_ampersands` filter.
+- Fix linebreaksbr autoescape bug.
+- Start using `jinja2.DebugUndefined` when settings.DEBUG is True.
+
+
+Version 1.0.5
+-------------
+
+- Fix template loaders order.
+- Convert documentation to asciidoctor.
+- Move changelog to separated file.
+
+
+Version 1.0.4
+-------------
+
+- Add render_with decorator as replacement for django inclusion_tag.
+- Reorder how builtin functions/filters are setted making easy overwrite them.
+
+Version 1.0.3
+-------------
+
+- Add timezone template filters and template global functions: localtime, tz and timezone.
+
+Version 1.0.2
+-------------
+
+- Fix bug with application loading with django < 1.7
+
+Version 1.0.1
+-------------
+
+- Fix bug introduced in previous version on `easy_thumbnails` contrib app.
+
+Version 1.0.0
+-------------
+
+- Major code cleanup.
+- Full django 1.7+ support
+- Add JINJA2_CONSTANTS settings.
+
+Version 0.25
+------------
+
+- Enable newstyle gettext by default.
+- Add settings for easy disable newstyle gettext.
+
+
+Version 0.24
+------------
+
+- Fix django 1.7 warnings on run tests.
+- Add all rest methods to error views (403, 404, 500).
+
+Version 0.23
+------------
+
+- Add settings JINJA2_FILTERS_REPLACE_FROM_DJANGO
+- Add settings JINJA2_MUTE_URLRESOLVE_EXCEPTIONS
+- Improvements on cache tag.
+- Other bugfixes.
+
+
+Version 0.22
+------------
+
+- Change template order selection.
+- New contrib: subdomains
+- New contrib: dajax-ice
+- Documentation fixes.
+- Minor improvements.
+
+Version 0.21
+------------
+
+- Remove obsolete __version__ variable from __init__.py file.
+- Add bytecode cache with django cache framework support.
+
+Version 0.20
+------------
+
+- Introduce backward incompatible change: all contrib apps
+  are renamed (prepened _ on each module name) for avoid
+  name conflicts with the original package.
+
+Version 0.19
+------------
+
+- Bugfixes related to autoescape.
+
+Version 0.18
+------------
+
+- Test singnal when stream template method is used.
+
+Version 0.17
+------------
+
+- Add 4xx/500 django special views.
+
+Version 0.16
+------------
+
+- Remove distribute dependency.
+
+Version 0.15
+------------
+
+- Put autoescape ON by default.
+- Add easy_thumbnails contrib app
+- Add django humanize contrib app
+
+Version 0.14
+------------
+
+- Add jinja2 extensions loading by default
+
+Version 0.13
+------------
+
+- New intercept method by regex is added.
+- Documentation improvements.

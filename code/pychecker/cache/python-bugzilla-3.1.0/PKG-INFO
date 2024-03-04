@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: python-bugzilla
+Version: 3.1.0
+Summary: Library and command line tool for interacting with Bugzilla
+Home-page: https://github.com/python-bugzilla/python-bugzilla
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: GPLv2
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9

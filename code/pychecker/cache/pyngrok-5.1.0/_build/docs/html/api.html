@@ -1,0 +1,951 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Documentation &#8212; pyngrok 5.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Integration Examples" href="integrations.html" />
+    <link rel="prev" title="pyngrok - a Python wrapper for ngrok" href="index.html" />
+    
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+
+    <meta name="description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:title" content="pyngrok - A Python wrapper for ngrok">
+    <meta name="twitter:card"
+          value="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API.">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="pyngrok - A Python wrapper for ngrok"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://pyngrok.readthedocs.io/en/latest/api.html"/>
+    <meta property="og:image" content="https://pyngrok.readthedocs.io/en/latest/_images/logo.png"/>
+    <meta property="og:description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <meta name="yandex-verification" content="ac8f18b56add6591"/>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43184722-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-43184722-4');
+    </script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="api-documentation">
+<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This part of the documentation covers the interfaces used to develop with <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code>.</p>
+<div class="section" id="module-pyngrok.ngrok">
+<span id="main-ngrok-interface"></span><h2>Main <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> Interface<a class="headerlink" href="#module-pyngrok.ngrok" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngrok.ngrok.NgrokTunnel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">NgrokTunnel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#NgrokTunnel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.NgrokTunnel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>An object containing information about a <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> tunnel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – The original tunnel data.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the tunnel.</p></li>
+<li><p><strong>proto</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The protocol of the tunnel.</p></li>
+<li><p><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The tunnel URI, a relative path that can be used to make requests to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> web interface.</p></li>
+<li><p><strong>public_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The public <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> URL.</p></li>
+<li><p><strong>config</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – The config for the tunnel.</p></li>
+<li><p><strong>metrics</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – Metrics for <a class="reference external" href="https://ngrok.com/docs#list-tunnels">the tunnel</a>.</p></li>
+<li><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a>) – The <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+<li><p><strong>api_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The API URL for the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> web interface.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngrok.ngrok.NgrokTunnel.refresh_metrics">
+<span class="sig-name descname"><span class="pre">refresh_metrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#NgrokTunnel.refresh_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.NgrokTunnel.refresh_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the latest metrics for the tunnel and update the <code class="docutils literal notranslate"><span class="pre">metrics</span></code> variable.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.api_request">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">api_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GET'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#api_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.api_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invoke an API request to the given URL, returning JSON data from the response.</p>
+<p>One use for this method is making requests to <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> tunnels:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="n">public_url</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">api_request</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/some-route&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">public_url</span><span class="p">),</span>
+                             <span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Another is making requests to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> API itself:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="n">api_url</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">get_ngrok_process</span><span class="p">()</span><span class="o">.</span><span class="n">api_url</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">api_request</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/api/requests/http&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">api_url</span><span class="p">),</span>
+                             <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tunnel_name&quot;</span><span class="p">:</span> <span class="s2">&quot;foo&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The request URL.</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – The HTTP method.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – The request body.</p></li>
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – The URL parameters.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><em>optional</em>) – The request timeout, in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response from the request.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.connect">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establish a new <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> tunnel for the given protocol to the given port, returning an object representing
+the connected tunnel.</p>
+<p>If a <a class="reference external" href="https://ngrok.com/docs#tunnel-definitions">tunnel definition in ngrok’s config file</a> matches the given
+<code class="docutils literal notranslate"><span class="pre">name</span></code>, it will be loaded and used to start the tunnel. When <code class="docutils literal notranslate"><span class="pre">name</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code> and a “pyngrok-default” tunnel
+definition exists in <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>’s config, it will be loaded and use. Any <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> passed as <code class="docutils literal notranslate"><span class="pre">options</span></code> will
+override properties from the loaded tunnel definition.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not installed at <a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>, calling this method
+will first download and install <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not running, calling this method will first start a process with
+<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ngrok</span></code>’s default behavior for <code class="docutils literal notranslate"><span class="pre">http</span></code> when no additional properties are passed is to open <em>two</em> tunnels,
+one <code class="docutils literal notranslate"><span class="pre">http</span></code> and one <code class="docutils literal notranslate"><span class="pre">https</span></code>. This method will return a reference to the <code class="docutils literal notranslate"><span class="pre">http</span></code> tunnel in this case. If
+only a single tunnel is needed, pass <code class="docutils literal notranslate"><span class="pre">bind_tls=True</span></code> and a reference to the <code class="docutils literal notranslate"><span class="pre">https</span></code> tunnel will be returned.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – The local port to which the tunnel will forward traffic, or a
+<a class="reference external" href="https://ngrok.com/docs#http-file-urls">local directory or network address</a>, defaults to “80”.</p></li>
+<li><p><strong>proto</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – A valid <a class="reference external" href="https://ngrok.com/docs#tunnel-definitions">tunnel protocol</a>, defaults to “http”.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – A friendly name for the tunnel, or the name of a <a class="reference external" href="https://ngrok.com/docs#tunnel-definitions">ngrok tunnel definition</a>
+to be used.</p></li>
+<li><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p></li>
+<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – Remaining <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> are passed as <a class="reference external" href="https://ngrok.com/docs#tunnel-definitions">configuration for the ngrok
+tunnel</a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> tunnel.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyngrok.ngrok.NgrokTunnel" title="pyngrok.ngrok.NgrokTunnel">NgrokTunnel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.disconnect">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">public_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnect the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> tunnel for the given URL, if open.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>public_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The public URL of the tunnel to disconnect.</p></li>
+<li><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.get_ngrok_process">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">get_ngrok_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#get_ngrok_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.get_ngrok_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process for the given config’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not installed at <a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>, calling this method
+will first download and install <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not running, calling this method will first start a process with
+<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>.</p>
+<p>Use <a class="reference internal" href="#pyngrok.process.is_process_running" title="pyngrok.process.is_process_running"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_process_running</span></code></a> to check if a process is running without also implicitly
+installing and starting it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyngrok.process.NgrokProcess" title="pyngrok.process.NgrokProcess">NgrokProcess</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.get_tunnels">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">get_tunnels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#get_tunnels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.get_tunnels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of active <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> tunnels for the given config’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not installed at <a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>, calling this method
+will first download and install <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not running, calling this method will first start a process with
+<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The active <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> tunnels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a>[<a class="reference internal" href="#pyngrok.ngrok.NgrokTunnel" title="pyngrok.ngrok.NgrokTunnel">NgrokTunnel</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.get_version">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a tuple with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> and <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> versions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of <code class="docutils literal notranslate"><span class="pre">(ngrok_version,</span> <span class="pre">pyngrok_version)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.install_ngrok">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">install_ngrok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#install_ngrok"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.install_ngrok" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download, install, and initialize <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> for the given config. If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> and its default
+config is already installed, calling this method will do nothing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.kill">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">kill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#kill"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.kill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> processes, if running, for the given config’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>. This method will not
+block, it will just issue a kill request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.main">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entry point for the package’s <code class="docutils literal notranslate"><span class="pre">console_scripts</span></code>. This initializes a call from the command
+line and invokes <a class="reference internal" href="#pyngrok.ngrok.run" title="pyngrok.ngrok.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run</span></code></a>.</p>
+<p>This method is meant for interacting with <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> from the command line and is not necessarily
+compatible with non-blocking API methods. For that, use <a class="reference internal" href="#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a>’s interface methods (like
+<a class="reference internal" href="#pyngrok.ngrok.connect" title="pyngrok.ngrok.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect</span></code></a>), or use <a class="reference internal" href="#pyngrok.process.get_process" title="pyngrok.process.get_process"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_process</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.run">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is installed at the default path, then call <a class="reference internal" href="#pyngrok.process.run_process" title="pyngrok.process.run_process"><code class="xref py py-func docutils literal notranslate"><span class="pre">run_process</span></code></a>.</p>
+<p>This method is meant for interacting with <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> from the command line and is not necessarily
+compatible with non-blocking API methods. For that, use <a class="reference internal" href="#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a>’s interface methods (like
+<a class="reference internal" href="#pyngrok.ngrok.connect" title="pyngrok.ngrok.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect</span></code></a>), or use <a class="reference internal" href="#pyngrok.process.get_process" title="pyngrok.process.get_process"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_process</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – Arguments to be passed to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process.</p></li>
+<li><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.set_auth_token">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">set_auth_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#set_auth_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.set_auth_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> auth token in the config file, enabling authenticated features (for instance,
+more concurrent tunnels, custom subdomains, etc.).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not installed at <a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>, calling this method
+will first download and install <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The auth token to set.</p></li>
+<li><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.ngrok.update">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.ngrok.</span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/ngrok.html#update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.ngrok.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> for the given config’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>, if an update is available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a><em>, </em><em>optional</em>) – A <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary,
+overriding <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The result from the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> update.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyngrok.process">
+<span id="process-management"></span><h2>Process Management<a class="headerlink" href="#module-pyngrok.process" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngrok.process.NgrokLog">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">NgrokLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#NgrokLog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.NgrokLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>An object containing a parsed log from the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The raw, unparsed log line.</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The log’s ISO 8601 timestamp.</p></li>
+<li><p><strong>lvl</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The log’s level.</p></li>
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The log’s message.</p></li>
+<li><p><strong>err</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The log’s error, if applicable.</p></li>
+<li><p><strong>addr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The URL, if <code class="docutils literal notranslate"><span class="pre">obj</span></code> is “web”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngrok.process.NgrokProcess">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">NgrokProcess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#NgrokProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.NgrokProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>An object containing information about the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>proc</strong> (<a class="reference external" href="https://docs.python.org/3/library/subprocess.html#subprocess.Popen" title="(in Python v3.9)"><em>subprocess.Popen</em></a>) – The child process that is running <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+<li><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a>) – The <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use with <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+<li><p><strong>api_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The API URL for the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> web interface.</p></li>
+<li><p><strong>logs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>[</em><a class="reference internal" href="#pyngrok.process.NgrokLog" title="pyngrok.process.NgrokLog"><em>NgrokLog</em></a><em>]</em>) – A list of the most recent logs from <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>, limited in size to <code class="docutils literal notranslate"><span class="pre">max_logs</span></code>.</p></li>
+<li><p><strong>startup_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> startup fails, this will be the log of the failure.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngrok.process.NgrokProcess._log_line">
+<span class="sig-name descname"><span class="pre">_log_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#NgrokProcess._log_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.NgrokProcess._log_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse, log, and emit (if <code class="docutils literal notranslate"><span class="pre">log_event_callback</span></code> in <a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a> is registered) the
+given log line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The line to be processed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyngrok.process.NgrokLog" title="pyngrok.process.NgrokLog">NgrokLog</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngrok.process.NgrokProcess._log_startup_line">
+<span class="sig-name descname"><span class="pre">_log_startup_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#NgrokProcess._log_startup_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.NgrokProcess._log_startup_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the given startup log line and use it to manage the startup state
+of the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The line to be parsed and logged.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed log.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyngrok.process.NgrokLog" title="pyngrok.process.NgrokLog">NgrokLog</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngrok.process.NgrokProcess.healthy">
+<span class="sig-name descname"><span class="pre">healthy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#NgrokProcess.healthy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.NgrokProcess.healthy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process has finished starting up and is in a running, healthy state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process is started, running, and healthy.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngrok.process.NgrokProcess.start_monitor_thread">
+<span class="sig-name descname"><span class="pre">start_monitor_thread</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#NgrokProcess.start_monitor_thread"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.NgrokProcess.start_monitor_thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a thread that will monitor the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process and its logs until it completes.</p>
+<p>If a monitor thread is already running, nothing will be done.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngrok.process.NgrokProcess.stop_monitor_thread">
+<span class="sig-name descname"><span class="pre">stop_monitor_thread</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#NgrokProcess.stop_monitor_thread"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.NgrokProcess.stop_monitor_thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the monitor thread to stop monitoring the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process after the next log event. This will not
+necessarily terminate the thread immediately, as the thread may currently be idle, rather it sets a flag
+on the thread telling it to terminate the next time it wakes up.</p>
+<p>This has no impact on the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process itself, only <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code>’s monitor of the process and
+its logs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.process._start_process">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">_start_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#_start_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process._start_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process with no tunnels. This will start the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> web interface, against
+which HTTP requests can be made to create, interact with, and destroy tunnels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a>) – The <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyngrok.process.NgrokProcess" title="pyngrok.process.NgrokProcess">NgrokProcess</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.process._validate_path">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">_validate_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngrok_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#_validate_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process._validate_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate the given path exists, is a <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary, and is ready to be started, otherwise raise a
+relevant exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ngrok_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.process.capture_run_process">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">capture_run_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngrok_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#capture_run_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.capture_run_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a blocking <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process with the binary at the given path and the passed args. When the process
+returns, so will this method, and the captured output from the process along with it.</p>
+<p>This method is meant for invoking <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> directly (for instance, from the command line) and is not
+necessarily compatible with non-blocking API methods. For that, use <a class="reference internal" href="#pyngrok.process.get_process" title="pyngrok.process.get_process"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_process</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngrok_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p></li>
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – The args to pass to <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output from the process.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.process.get_process">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">get_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#get_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.get_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process for the given config’s <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not running, calling this method will first start a process with
+<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a>) – The <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyngrok.process.NgrokProcess" title="pyngrok.process.NgrokProcess">NgrokProcess</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.process.is_process_running">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">is_process_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngrok_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#is_process_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.is_process_running" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process is currently running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ngrok_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is running from the given path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.process.kill_process">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">kill_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngrok_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#kill_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.kill_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> processes, if running, for the given path. This method will not block, it will just
+issue a kill request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ngrok_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.process.run_process">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">run_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngrok_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#run_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.run_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a blocking <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process with the binary at the given path and the passed args.</p>
+<p>This method is meant for invoking <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> directly (for instance, from the command line) and is not
+necessarily compatible with non-blocking API methods. For that, use <a class="reference internal" href="#pyngrok.process.get_process" title="pyngrok.process.get_process"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_process</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngrok_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p></li>
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – The args to pass to <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.process.set_auth_token">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.process.</span></span><span class="sig-name descname"><span class="pre">set_auth_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/process.html#set_auth_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.process.set_auth_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> auth token in the config file, enabling authenticated features (for instance,
+more concurrent tunnels, custom subdomains, etc.).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a>) – The <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> configuration to use when interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p></li>
+<li><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The auth token to set.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyngrok.conf">
+<span id="configuration"></span><h2>Configuration<a class="headerlink" href="#module-pyngrok.conf" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngrok.conf.PyngrokConfig">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.conf.</span></span><span class="sig-name descname"><span class="pre">PyngrokConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngrok_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth_token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monitor_thread</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_event_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startup_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_new_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/conf.html#PyngrokConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.conf.PyngrokConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>An object containing <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code>’s configuration for interacting with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary. All values are
+optional when it is instantiated, and default values will be used for parameters not passed.</p>
+<p>Use <a class="reference internal" href="#pyngrok.conf.get_default" title="pyngrok.conf.get_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default</span></code></a> and <a class="reference internal" href="#pyngrok.conf.set_default" title="pyngrok.conf.set_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_default</span></code></a> to interact with the default
+<code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code>, or pass another instance of this object as the <code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code> keyword arg to most
+methods in the <a class="reference internal" href="#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a> module to override the default.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">ngrok</span>
+
+<span class="c1"># Here we update the entire default config</span>
+<span class="n">pyngrok_config</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">PyngrokConfig</span><span class="p">(</span><span class="n">ngrok_path</span><span class="o">=</span><span class="s2">&quot;/usr/local/bin/ngrok&quot;</span><span class="p">)</span>
+<span class="n">conf</span><span class="o">.</span><span class="n">set_default</span><span class="p">(</span><span class="n">pyngrok_config</span><span class="p">)</span>
+
+<span class="c1"># Here we update just one variable in the default config</span>
+<span class="n">conf</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">ngrok_path</span> <span class="o">=</span> <span class="s2">&quot;/usr/local/bin/ngrok&quot;</span>
+
+<span class="c1"># Here we leave the default config as-is and pass an override</span>
+<span class="n">pyngrok_config</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">PyngrokConfig</span><span class="p">(</span><span class="n">ngrok_path</span><span class="o">=</span><span class="s2">&quot;/usr/local/bin/ngrok&quot;</span><span class="p">)</span>
+<span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">pyngrok_config</span><span class="o">=</span><span class="n">pyngrok_config</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngrok_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary, defaults to the value in
+<a class="reference external" href="index.html#config-file">conf.DEFAULT_NGROK_PATH</a></p></li>
+<li><p><strong>config_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> config, defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> manages it.</p></li>
+<li><p><strong>auth_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – An authtoken to pass to commands (overrides what is in the config).</p></li>
+<li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The region in which <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> should start.</p></li>
+<li><p><strong>monitor_thread</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> should continue to be monitored (for logs, etc.) after startup
+is complete.</p></li>
+<li><p><strong>log_event_callback</strong> (<em>types.FunctionType</em>) – A callback that will be invoked each time <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> emits a log. <code class="docutils literal notranslate"><span class="pre">monitor_thread</span></code>
+must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> or the function will stop being called after <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> finishes starting.</p></li>
+<li><p><strong>startup_timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The max number of seconds to wait for <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> to start before timing out.</p></li>
+<li><p><strong>max_logs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The max number of logs to store in <a class="reference internal" href="#pyngrok.process.NgrokProcess" title="pyngrok.process.NgrokProcess"><code class="xref py py-class docutils literal notranslate"><span class="pre">NgrokProcess</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">logs</span></code> variable.</p></li>
+<li><p><strong>request_timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The max timeout when making requests to <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>’s API.</p></li>
+<li><p><strong>start_new_session</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Passed to <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#subprocess.Popen" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">subprocess.Popen</span></code></a> when launching <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>. (Python 3 and POSIX only)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.conf.get_default">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.conf.</span></span><span class="sig-name descname"><span class="pre">get_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/conf.html#get_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.conf.get_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default config to be used with methods in the <a class="reference internal" href="#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a> module. To override the
+default individually, the <code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code> keyword arg can also be passed to most of these methods,
+or set a new default config with <a class="reference internal" href="#pyngrok.conf.set_default" title="pyngrok.conf.set_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_default</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The default <code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig">PyngrokConfig</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.conf.set_default">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.conf.</span></span><span class="sig-name descname"><span class="pre">set_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyngrok_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/conf.html#set_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.conf.set_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a new default config to be used with methods in the <a class="reference internal" href="#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a> module. To override the
+default individually, the <code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code> keyword arg can also be passed to most of these methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pyngrok_config</strong> (<a class="reference internal" href="#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><em>PyngrokConfig</em></a>) – The new <code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code> to be used by default.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyngrok.installer">
+<span id="ngrok-installer"></span><h2><code class="docutils literal notranslate"><span class="pre">ngrok</span></code> Installer<a class="headerlink" href="#module-pyngrok.installer" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.installer._download_file">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.installer.</span></span><span class="sig-name descname"><span class="pre">_download_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/installer.html#_download_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.installer._download_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a file to a temporary path and emit a status to stdout (if possible) as the download progresses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The URL to download.</p></li>
+<li><p><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – The retry attempt index, if download fails.</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – Remaining <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> will be passed to <a class="reference external" href="https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">urllib.request.urlopen</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The path to the downloaded temporary file.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.installer._install_ngrok_zip">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.installer.</span></span><span class="sig-name descname"><span class="pre">_install_ngrok_zip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngrok_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zip_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/installer.html#_install_ngrok_zip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.installer._install_ngrok_zip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> zip file to the given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngrok_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path where <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> will be installed.</p></li>
+<li><p><strong>zip_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> zip file to be extracted.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.installer.get_ngrok_bin">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.installer.</span></span><span class="sig-name descname"><span class="pre">get_ngrok_bin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/installer.html#get_ngrok_bin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.installer.get_ngrok_bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> executable for the current system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> executable.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.installer.get_ngrok_config">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.installer.</span></span><span class="sig-name descname"><span class="pre">get_ngrok_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/installer.html#get_ngrok_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.installer.get_ngrok_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> config from the given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> config path to read.</p></li>
+<li><p><strong>use_cache</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Use the cached version of the config (if populated).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> config.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.installer.install_default_config">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.installer.</span></span><span class="sig-name descname"><span class="pre">install_default_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/installer.html#install_default_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.installer.install_default_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install the given data to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> config. If a config is not already present for the given path, create one.
+Before saving new data to the default config, validate that they are compatible with <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to where the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> config should be installed.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary of things to add to the default config.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.installer.install_ngrok">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.installer.</span></span><span class="sig-name descname"><span class="pre">install_ngrok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngrok_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/installer.html#install_ngrok"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.installer.install_ngrok" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download and install the latest <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> for the current system, overwriting any existing contents
+at the given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngrok_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The path to where the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary will be downloaded.</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – Remaining <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> will be passed to <a class="reference internal" href="#pyngrok.installer._download_file" title="pyngrok.installer._download_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">_download_file</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyngrok.installer.validate_config">
+<span class="sig-prename descclassname"><span class="pre">pyngrok.installer.</span></span><span class="sig-name descname"><span class="pre">validate_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/installer.html#validate_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.installer.validate_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate that the given dict of config items are valid for <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> and <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – A dictionary of things to be validated as config items.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyngrok.exception">
+<span id="exceptions"></span><h2>Exceptions<a class="headerlink" href="#module-pyngrok.exception" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyngrok.exception.PyngrokError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.exception.</span></span><span class="sig-name descname"><span class="pre">PyngrokError</span></span><a class="reference internal" href="_modules/pyngrok/exception.html#PyngrokError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.exception.PyngrokError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Raised when a general <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> error has occurred.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyngrok.exception.PyngrokNgrokError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.exception.</span></span><span class="sig-name descname"><span class="pre">PyngrokNgrokError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngrok_logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngrok_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/exception.html#PyngrokNgrokError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.exception.PyngrokNgrokError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyngrok.exception.PyngrokError" title="pyngrok.exception.PyngrokError"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyngrok.exception.PyngrokError</span></code></a></p>
+<p>Raised when an error occurs interacting directly with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – A description of the error being thrown.</p></li>
+<li><p><strong>ngrok_logs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>[</em><a class="reference internal" href="#pyngrok.process.NgrokLog" title="pyngrok.process.NgrokLog"><em>NgrokLog</em></a><em>]</em>) – The <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> logs, which may be useful for debugging the error.</p></li>
+<li><p><strong>ngrok_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The error that caused the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process to fail.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyngrok.exception.PyngrokNgrokHTTPError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.exception.</span></span><span class="sig-name descname"><span class="pre">PyngrokNgrokHTTPError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/exception.html#PyngrokNgrokHTTPError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.exception.PyngrokNgrokHTTPError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyngrok.exception.PyngrokNgrokError" title="pyngrok.exception.PyngrokNgrokError"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyngrok.exception.PyngrokNgrokError</span></code></a></p>
+<p>Raised when an error occurs making a request to the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> web interface. The <code class="docutils literal notranslate"><span class="pre">body</span></code>
+contains the error response received from <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – A description of the error being thrown.</p></li>
+<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The request URL that failed.</p></li>
+<li><p><strong>status_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The response status code from <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The response message from <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+<li><p><strong>headers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – The request headers sent to <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+<li><p><strong>body</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The response body from <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyngrok.exception.PyngrokNgrokInstallError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.exception.</span></span><span class="sig-name descname"><span class="pre">PyngrokNgrokInstallError</span></span><a class="reference internal" href="_modules/pyngrok/exception.html#PyngrokNgrokInstallError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.exception.PyngrokNgrokInstallError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyngrok.exception.PyngrokError" title="pyngrok.exception.PyngrokError"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyngrok.exception.PyngrokError</span></code></a></p>
+<p>Raised when an error has occurred while downloading and installing the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyngrok.exception.PyngrokNgrokURLError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.exception.</span></span><span class="sig-name descname"><span class="pre">PyngrokNgrokURLError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyngrok/exception.html#PyngrokNgrokURLError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.exception.PyngrokNgrokURLError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyngrok.exception.PyngrokNgrokError" title="pyngrok.exception.PyngrokNgrokError"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyngrok.exception.PyngrokNgrokError</span></code></a></p>
+<p>Raised when an error occurs when trying to initiate an API request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – A description of the error being thrown.</p></li>
+<li><p><strong>reason</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The reason for the URL error.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyngrok.exception.PyngrokSecurityError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">pyngrok.exception.</span></span><span class="sig-name descname"><span class="pre">PyngrokSecurityError</span></span><a class="reference internal" href="_modules/pyngrok/exception.html#PyngrokSecurityError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyngrok.exception.PyngrokSecurityError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyngrok.exception.PyngrokError" title="pyngrok.exception.PyngrokError"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyngrok.exception.PyngrokError</span></code></a></p>
+<p>Raised when a <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> security error has occurred.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Getting Around</h3>
+<ul>
+    <li><a class="reference internal" href="index.html">Basic Usage</a>
+        <ul>
+            <li><a class="reference internal" href="index.html#installation">Installation</a>
+            </li>
+            <li><a class="reference internal" href="index.html#open-a-tunnel">Open a
+                Tunnel</a></li>
+            <li><a class="reference internal"
+                   href="index.html#configuration">Configuration</a></li>
+            <li><a class="reference internal" href="index.html#event-logs">Event Logs</a></li>
+            <li><a class="reference internal" href="index.html#command-line-usage">Command
+                Line Usage</a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="reference internal" href="index.html#dive-deeper">Dive Deeper</a>
+        <ul>
+            <li><a class="reference internal" href="#">API Documentation</a></li>
+            <li><a class="reference internal" href="integrations.html">Integration Examples</a></li>
+            <li><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/blob/main/CHANGELOG.md">Changelog</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/issues">Issues</a></li>
+            <li><a class="reference internal" href="index.html#contributing">Contributing</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Documentation</a><ul>
+<li><a class="reference internal" href="#module-pyngrok.ngrok">Main <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> Interface</a></li>
+<li><a class="reference internal" href="#module-pyngrok.process">Process Management</a></li>
+<li><a class="reference internal" href="#module-pyngrok.conf">Configuration</a></li>
+<li><a class="reference internal" href="#module-pyngrok.installer"><code class="docutils literal notranslate"><span class="pre">ngrok</span></code> Installer</a></li>
+<li><a class="reference internal" href="#module-pyngrok.exception">Exceptions</a></li>
+</ul>
+</li>
+</ul>
+<h3>Useful Links</h3>
+<ul>
+    <li><a href="https://ngrok.com/docs"><code class="code docutils literal notranslate"><span class="pre">ngrok</span></code>
+        Documentation</a></li>
+    <li><a href="https://github.com/alexdlaird/pyngrok"><code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code> on GitHub</a></li>
+    <li><a href="https://pypi.org/project/pyngrok/"><code class="code docutils literal notranslate"><span class="pre">pyngrok</span></code>
+        on PyPI</a></li>
+    <li><a href="https://www.paypal.me/alexdlaird">Sponsor <code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code></a></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    
+    <div class="footer">
+      &copy;2020, Alex Laird.
+      
+    </div>
+
+    
+    <a href="https://github.com/alexdlaird/pyngrok" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <div class="footer">This page uses <a href="https://analytics.google.com/">
+        Google Analytics</a> to collect statistics. You can disable it by blocking
+        the JavaScript coming from www.google-analytics.com.
+        <script type="text/javascript">
+            (function () {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ?
+                    'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.setAttribute('async', 'true');
+                document.documentElement.firstChild.appendChild(ga);
+            })();
+        </script>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,3 @@
+[console_scripts]
+openapi-generator = openapi_generator_cli:run
+

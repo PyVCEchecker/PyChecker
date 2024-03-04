@@ -1,0 +1,17 @@
+CHANGELOG.txt
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+airflow/providers/apache/pinot/__init__.py
+airflow/providers/apache/pinot/hooks/__init__.py
+airflow/providers/apache/pinot/hooks/pinot.py
+apache_airflow_backport_providers_apache_pinot.egg-info/PKG-INFO
+apache_airflow_backport_providers_apache_pinot.egg-info/SOURCES.txt
+apache_airflow_backport_providers_apache_pinot.egg-info/dependency_links.txt
+apache_airflow_backport_providers_apache_pinot.egg-info/not-zip-safe
+apache_airflow_backport_providers_apache_pinot.egg-info/requires.txt
+apache_airflow_backport_providers_apache_pinot.egg-info/top_level.txt

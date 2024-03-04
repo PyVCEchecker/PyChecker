@@ -1,0 +1,6 @@
+include README.rst
+include setup.py
+include sqlitedict.py
+include Makefile
+include LICENSE.md
+recursive-include tests *

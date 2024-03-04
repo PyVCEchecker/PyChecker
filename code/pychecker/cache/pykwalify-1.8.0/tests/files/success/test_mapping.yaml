@@ -1,0 +1,349 @@
+---
+name: mapping1
+desc: Most basic mapping validation
+data:
+  foo: bar
+schema:
+  type: map
+  mapping:
+    foo:
+      type: str
+---
+name: mapping2
+desc: Complex mapping that test several subtypes for each key
+#
+schema:
+  type: map
+  required: true
+  mapping:
+    name:
+      type: str
+      required: true
+    email:
+      type: str
+      # This pattern value was modified from /@/ to .+@.+ to make it copmatible with python
+      pattern: .+@.+
+      required: True
+    age:
+      type: int
+    blood:
+      type: str
+      enum:
+        - A
+        - B
+        - O
+        - AB
+    birth:
+      type: date
+data:
+  name: foo
+  email: foo@mail.com
+  age: 20
+  blood: AB
+  birth: 1985-01-01
+---
+name: mapping3
+desc: Test that mapping works inside a sequence
+data:
+  - foo: True
+schema:
+  type: seq
+  sequence:
+    - type: map
+      mapping:
+        foo:
+          type: bool
+---
+name: mapping4
+desc: Test that map inside seq inside map works
+data:
+  company: Kuwata lab.
+  email: webmaster@kuwata-lab.com
+  employees:
+    - code: 101
+      name: foo
+      email: foo@kuwata-lab.com
+    - code: 102
+      name: bar
+      email: bar@kuwata-lab.com
+schema:
+  type: map
+  mapping:
+    company:
+      type: str
+      required: True
+    email:
+      type: str
+    employees:
+      type: seq
+      sequence:
+        - type: map
+          mapping:
+            code:
+              type: int
+              required: True
+            name:
+              type: str
+              required: True
+            email:
+              type: str
+---
+name: mapping5
+desc: test allowempty option to mapping
+data:
+  datasources:
+    test1: test1.py
+    test2: test2.py
+schema:
+  type: map
+  mapping:
+    datasources:
+      type: map
+      allowempty: True
+      mapping:
+        test1:
+          type: str
+---
+name: mapping6
+desc: Test that regex keys works
+data:
+  mic:
+    - input
+    - foo
+  mock:
+    - True
+    - False
+schema:
+  type: map
+  matching-rule: "any"
+  mapping:
+    re;(mi.+):
+      type: seq
+      sequence:
+        - type: str
+    regex;(mo.+):
+      type: seq
+      sequence:
+        - type: bool
+---
+name: mapping7
+desc: Test that mapping name works
+data:
+  datasources: test1.py
+schema:
+  type: map
+  mapping:
+    datasources:
+      type: str
+---
+name: mapping8
+desc: Test that map shortcut works
+data:
+  datasources: test1.py
+schema:
+  type: map
+  map:
+    datasources:
+      type: str
+---
+name: mapping9
+desc: Test that you do not have to specify type map
+data:
+  streams: foobar
+schema:
+  mapping:
+    streams:
+      type: str
+---
+name: mapping10
+desc: Test that you do not have to specify type map when map exists in schema
+data:
+  streams: foobar
+schema:
+  map:
+    streams:
+      type: str
+---
+name: mapping11
+desc: Test keyword regex default matching-rule any
+data:
+  foobar1: 1
+  foobar2: 2
+  bar2: 3
+schema:
+  type: map
+  mapping:
+    regex;([1-2]$):
+      type: int
+    regex;(^foobar):
+      type: int
+---
+name: mapping12
+desc: Test keyword regex declared matching-rule any
+data:
+  foobar1: 1
+  foobar2: 2
+  bar2: 3
+schema:
+  type: map
+  matching-rule: 'any'
+  mapping:
+    regex;([1-2]$):
+      type: int
+    regex;(^foobar):
+      type: int
+---
+name: mapping13
+desc: Test keyword regex declared matching-rule all
+data:
+  foobar1: 1
+  foobar2: 2
+  foobar3: 3
+schema:
+  type: map
+  matching-rule: 'all'
+  mapping:
+    regex;([1-3]$):
+      type: int
+    regex;(^foobar):
+      type: int
+---
+name: mapping14
+desc: Test mixed keyword regex and normal keyword
+data:
+  standard:
+    FRIST-800-53
+  AU-1:
+    family: AU
+    name: Audit and Accountability Policy and Procedures
+schema:
+  type: map
+  mapping:
+    regex;([A-Z]-):
+      type: map
+      mapping:
+        name:
+          type: str
+        family:
+          type: str
+          required: True
+    standard:
+      type: str
+---
+name: mapping-default-1
+desc: Test that default mapping keyword works out of the box in a good case
+data:
+  OWNERSHIP:
+    - code: 1
+      key: BLM-BURNS
+      alias: BLM-BURNS
+  WHT: foo
+schema:
+  type: map
+  mapping:
+    WHT:
+      type: str
+    =:
+      type: seq
+      required: true
+      sequence:
+        - type: map
+          mapping:
+            'code':
+              type: int
+              required: true
+              unique: true
+            'key':
+              type: str
+              required: true
+            'alias':
+              type: str
+              required: true
+---
+name: mapping-default-2
+desc: default value of map with number type and no other key matching
+#
+schema:
+  type: map
+  mapping:
+    =:
+      type: number
+      range: 
+        min: -10
+        max: 10
+#
+data:
+  value1: 0
+  value2: 10
+  value3: -10
+---
+name: mapping17
+desc: Test that allowempty works without specifying mapping keyword when used inside a sequence block
+data:
+  rally:
+    plugins:
+      - netcreate-boot: rally/rally-plugins/netcreate-boot 
+schema:
+  type: map
+  mapping:
+    rally:
+      type: map
+      allowempty: True
+      mapping:
+        plugins:
+          type: seq
+          sequence:
+            - type: map
+              allowempty: True
+---
+name: mapping18
+desc: Test that regexes can be 'required'
+data:
+  person1: Jack
+  person2: Fred
+schema:
+  type: map
+  mapping:
+    regex;(person[1-9]):
+      required: True
+---
+name: mapping19
+desc: Test regex mapping with integer keys
+data:
+  test:
+    1: test
+    2: test2
+schema:
+  type: map
+  mapping:
+    test:
+      type: map
+      mapping:
+        regex;(.+):
+          type: str
+---
+name: mapping 20
+desc: Test mapping with integer keys
+data:
+  test:
+    0: test
+schema:
+  type: map
+  mapping:
+    test:
+      type: map
+      mapping:
+        0:
+          type: str
+---
+name: mapping21
+desc: Test that 'required' integer regex keys are supported.
+data:
+  1234: Albert
+  1235: Tom
+schema:
+  type: map
+  mapping:
+    regex;([0-9]+):
+      required: True
+      type: str

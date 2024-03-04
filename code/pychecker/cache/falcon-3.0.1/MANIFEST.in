@@ -1,0 +1,12 @@
+recursive-include falcon *.pyx
+recursive-include tests *.py
+recursive-include docs *.rst
+include .coveragerc
+include tox.ini
+include README.rst
+include LICENSE
+include docs/conf.py docs/Makefile
+exclude pyproject.toml
+graft docs/_static
+graft docs/_templates
+graft tools

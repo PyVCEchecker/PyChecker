@@ -1,0 +1,25 @@
+requests>=2.0
+urllib3>=1.25.10
+six
+
+[:python_version < "3.3"]
+mock
+
+[:python_version < "3.4"]
+cookies
+
+[tests]
+coverage<6.0.0,>=3.7.1
+pytest-cov
+pytest-localserver
+flake8
+types-mock
+types-requests
+types-six
+
+[tests:python_version < "3.5"]
+pytest<5.0,>=4.6
+
+[tests:python_version >= "3.5"]
+pytest>=4.6
+mypy

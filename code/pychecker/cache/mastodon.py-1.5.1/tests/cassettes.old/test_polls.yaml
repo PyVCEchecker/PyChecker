@@ -1,0 +1,180 @@
+interactions:
+- request:
+    body: '{"poll": {"hide_totals": false, "multiple": true, "expires_in": 300, "options":
+      ["four twenty", "sixty-nine"]}, "status": "nice"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN_2]
+      Connection: [keep-alive]
+      Content-Length: ['129']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.18.4]
+    method: POST
+    uri: http://localhost:3000/api/v1/statuses
+  response:
+    body: {string: '{"id":"102951424701409020","created_at":"2019-10-12T21:01:13.216Z","in_reply_to_id":null,"in_reply_to_account_id":null,"sensitive":false,"spoiler_text":"","visibility":"public","language":"en","uri":"http://localhost/users/admin/statuses/102951424701409020","url":"http://localhost/@admin/102951424701409020","replies_count":0,"reblogs_count":0,"favourites_count":0,"favourited":false,"reblogged":false,"muted":false,"pinned":false,"content":"\u003cp\u003enice\u003c/p\u003e","reblog":null,"application":{"name":"Mastodon.py
+        test suite","website":null},"account":{"id":"1","username":"admin","acct":"admin","display_name":"","locked":false,"bot":false,"created_at":"2019-06-22T12:42:50.096Z","note":"\u003cp\u003e\u003c/p\u003e","url":"http://localhost/@admin","avatar":"http://localhost/avatars/original/missing.png","avatar_static":"http://localhost/avatars/original/missing.png","header":"http://localhost/headers/original/missing.png","header_static":"http://localhost/headers/original/missing.png","followers_count":2,"following_count":1,"statuses_count":31,"last_status_at":"2019-10-12T21:01:13.231Z","emojis":[],"fields":[]},"media_attachments":[],"mentions":[],"tags":[],"emojis":[],"card":null,"poll":{"id":"23","expires_at":"2019-10-12T21:06:13.207Z","expired":false,"multiple":true,"votes_count":0,"voters_count":0,"voted":true,"own_votes":[],"options":[{"title":"four
+        twenty","votes_count":0},{"title":"sixty-nine","votes_count":0}],"emojis":[]}}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [9d9757b9-eb05-439e-ad50-0fe339177a39]
+      X-Runtime: ['0.147985']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['1458']
+    status: {code: 200, message: OK}
+- request:
+    body: choices%5B%5D=1
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      Content-Length: ['15']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.18.4]
+    method: POST
+    uri: http://localhost:3000/api/v1/polls/23/votes
+  response:
+    body: {string: '{"id":"23","expires_at":"2019-10-12T21:06:13.207Z","expired":false,"multiple":true,"votes_count":1,"voters_count":1,"voted":true,"own_votes":[1],"options":[{"title":"four
+        twenty","votes_count":0},{"title":"sixty-nine","votes_count":1}],"emojis":[]}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [ed243a3f-93d1-4487-8ff2-f2900dae0956]
+      X-Runtime: ['0.116489']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['248']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/polls/23
+  response:
+    body: {string: '{"id":"23","expires_at":"2019-10-12T21:06:13.207Z","expired":false,"multiple":true,"votes_count":1,"voters_count":1,"voted":true,"own_votes":[1],"options":[{"title":"four
+        twenty","votes_count":0},{"title":"sixty-nine","votes_count":1}],"emojis":[]}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [c26b34f4-3222-4a9f-a043-133cf0abc1e1]
+      X-Runtime: ['0.026743']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['248']
+    status: {code: 200, message: OK}
+- request:
+    body: choices%5B%5D=0
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      Content-Length: ['15']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.18.4]
+    method: POST
+    uri: http://localhost:3000/api/v1/polls/23/votes
+  response:
+    body: {string: '{"id":"23","expires_at":"2019-10-12T21:06:13.207Z","expired":false,"multiple":true,"votes_count":2,"voters_count":1,"voted":true,"own_votes":[1,0],"options":[{"title":"four
+        twenty","votes_count":1},{"title":"sixty-nine","votes_count":1}],"emojis":[]}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [e1eaf442-23bb-4580-b0db-5d0542373e6d]
+      X-Runtime: ['0.047685']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['250']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/polls/23
+  response:
+    body: {string: '{"id":"23","expires_at":"2019-10-12T21:06:13.207Z","expired":false,"multiple":true,"votes_count":2,"voters_count":1,"voted":true,"own_votes":[1,0],"options":[{"title":"four
+        twenty","votes_count":1},{"title":"sixty-nine","votes_count":1}],"emojis":[]}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [c9f34bc7-c7e5-4e19-bbbf-dfadc361a351]
+      X-Runtime: ['0.031274']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['250']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN_2]
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.18.4]
+    method: DELETE
+    uri: http://localhost:3000/api/v1/statuses/102951424701409020
+  response:
+    body: {string: '{"id":"102951424701409020","created_at":"2019-10-12T21:01:13.216Z","in_reply_to_id":null,"in_reply_to_account_id":null,"sensitive":false,"spoiler_text":"","visibility":"public","language":"en","uri":"http://localhost/users/admin/statuses/102951424701409020","url":"http://localhost/@admin/102951424701409020","replies_count":0,"reblogs_count":0,"favourites_count":0,"favourited":false,"reblogged":false,"muted":false,"pinned":false,"text":"nice","reblog":null,"application":{"name":"Mastodon.py
+        test suite","website":null},"account":{"id":"1","username":"admin","acct":"admin","display_name":"","locked":false,"bot":false,"created_at":"2019-06-22T12:42:50.096Z","note":"\u003cp\u003e\u003c/p\u003e","url":"http://localhost/@admin","avatar":"http://localhost/avatars/original/missing.png","avatar_static":"http://localhost/avatars/original/missing.png","header":"http://localhost/headers/original/missing.png","header_static":"http://localhost/headers/original/missing.png","followers_count":2,"following_count":1,"statuses_count":31,"last_status_at":"2019-10-12T21:01:13.231Z","emojis":[],"fields":[]},"media_attachments":[],"mentions":[],"tags":[],"emojis":[],"card":null,"poll":{"id":"23","expires_at":"2019-10-12T21:06:13.207Z","expired":false,"multiple":true,"votes_count":2,"voters_count":1,"voted":true,"own_votes":[],"options":[{"title":"four
+        twenty","votes_count":1},{"title":"sixty-nine","votes_count":1}],"emojis":[]}}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [a0c10505-5052-4680-a352-86db6770f983]
+      X-Runtime: ['0.155550']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['1428']
+    status: {code: 200, message: OK}
+version: 1

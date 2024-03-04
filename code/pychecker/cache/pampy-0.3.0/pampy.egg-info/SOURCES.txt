@@ -1,0 +1,16 @@
+README.md
+setup.py
+pampy/__init__.py
+pampy/helpers.py
+pampy/pampy.py
+pampy.egg-info/PKG-INFO
+pampy.egg-info/SOURCES.txt
+pampy.egg-info/dependency_links.txt
+pampy.egg-info/top_level.txt
+tests/__init__.py
+tests/test_basic.py
+tests/test_dataclass.py
+tests/test_dict.py
+tests/test_elaborate.py
+tests/test_iterable.py
+tests/test_typing.py

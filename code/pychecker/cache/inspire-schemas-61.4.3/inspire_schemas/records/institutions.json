@@ -1,0 +1,861 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+        },
+        "ICN": {
+            "description": ":MARC: ``110__t``\n\nHEP affiliation unique identifier following the general pattern\n``institution name, city, department``. This was called the \"new ICN\"\non legacy.\n\n.. note::\n\n    This is a list in case the ICN needs to be updated because of a\n    mistake in its assignment.  The current one is the first\n    element of the list.",
+            "items": {
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "List of affiliation identifiers",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "_bucket": {
+            "description": "Used by `invenio-records-files` to store information about the\nbucket attached to this record.\n\n.. note::\n\n    This field is maintained by `invenio-records-files` and should\n    not be edited manually.",
+            "minLength": 1,
+            "type": "string"
+        },
+        "_collections": {
+            "items": {
+                "enum": [
+                    "Institutions"
+                ],
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "Collections to which this record belongs",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "_private_notes": {
+            "description": ":MARC: ``595``, ``667``\n\nThese notes are only visible to privileged users, not regular\nusers.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of private notes",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "addresses": {
+            "description": ":MARC: ``371`` (secondary addresses contain an ``x`` subfield)\n\nThe primary address is the first in the list, the secondary\naddresses, if present, come next. This might happen for instance\nfor institutions distributed on several campuses.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "cities": {
+                        "description": "Sometimes conferences and institutes are officially located in a\nlittle-known place, but their location is widely known as being in\na major neighboring city.  In this way, we can store information\nabout both the technically correct but little-known place and the\nwell-known but technically incorrect place.\n\nThe cities should be ordered from most specific to least specific.\n\n:example: ``[\"Batavia\", \"Chicago\"]``",
+                        "items": {
+                            "description": ":example: ``Geneva``",
+                            "minLength": 1,
+                            "title": "A city",
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "title": "List of cities",
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "country_code": {
+                        "enum": [
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BA",
+                            "BB",
+                            "WF",
+                            "JT",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "WK",
+                            "BI",
+                            "BJ",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "WS",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "JE",
+                            "BY",
+                            "BZ",
+                            "RU",
+                            "RW",
+                            "RS",
+                            "TL",
+                            "BL",
+                            "TM",
+                            "TJ",
+                            "RO",
+                            "RH",
+                            "TK",
+                            "GW",
+                            "GU",
+                            "GT",
+                            "GS",
+                            "GR",
+                            "GQ",
+                            "GP",
+                            "BH",
+                            "GY",
+                            "GG",
+                            "GF",
+                            "GE",
+                            "GD",
+                            "GB",
+                            "GA",
+                            "SV",
+                            "GN",
+                            "GM",
+                            "GL",
+                            "GI",
+                            "GH",
+                            "OM",
+                            "TN",
+                            "JM",
+                            "JO",
+                            "HR",
+                            "HV",
+                            "HT",
+                            "HU",
+                            "HK",
+                            "HN",
+                            "SU",
+                            "HM",
+                            "VD",
+                            "VE",
+                            "PR",
+                            "PS",
+                            "PW",
+                            "PT",
+                            "PU",
+                            "PZ",
+                            "PY",
+                            "PC",
+                            "PA",
+                            "PF",
+                            "PG",
+                            "PE",
+                            "PK",
+                            "PH",
+                            "PN",
+                            "PL",
+                            "PM",
+                            "ZM",
+                            "EH",
+                            "EE",
+                            "EG",
+                            "ZA",
+                            "EC",
+                            "IT",
+                            "VN",
+                            "SB",
+                            "ET",
+                            "SO",
+                            "ZW",
+                            "SA",
+                            "ZR",
+                            "ER",
+                            "ME",
+                            "MD",
+                            "MG",
+                            "MF",
+                            "IQ",
+                            "MC",
+                            "UZ",
+                            "MM",
+                            "ML",
+                            "MO",
+                            "MN",
+                            "MI",
+                            "MH",
+                            "MK",
+                            "MU",
+                            "MT",
+                            "MW",
+                            "MV",
+                            "MQ",
+                            "MP",
+                            "MS",
+                            "MR",
+                            "IM",
+                            "UG",
+                            "TZ",
+                            "MY",
+                            "MX",
+                            "IL",
+                            "FQ",
+                            "FR",
+                            "IO",
+                            "FX",
+                            "SH",
+                            "JP",
+                            "RE",
+                            "SJ",
+                            "FI",
+                            "FJ",
+                            "FK",
+                            "MA",
+                            "FM",
+                            "FO",
+                            "NH",
+                            "NI",
+                            "NL",
+                            "NO",
+                            "NA",
+                            "VU",
+                            "NC",
+                            "NE",
+                            "NF",
+                            "NG",
+                            "NZ",
+                            "ES",
+                            "NP",
+                            "NQ",
+                            "NR",
+                            "NT",
+                            "NU",
+                            "CK",
+                            "CI",
+                            "CH",
+                            "CO",
+                            "CN",
+                            "CM",
+                            "CL",
+                            "CC",
+                            "CA",
+                            "CG",
+                            "CF",
+                            "CD",
+                            "CZ",
+                            "CY",
+                            "CX",
+                            "CS",
+                            "CR",
+                            "CW",
+                            "CV",
+                            "CU",
+                            "CT",
+                            "SZ",
+                            "SY",
+                            "SX",
+                            "KG",
+                            "KE",
+                            "SS",
+                            "SR",
+                            "KI",
+                            "KH",
+                            "KN",
+                            "KM",
+                            "ST",
+                            "SK",
+                            "KR",
+                            "SI",
+                            "KP",
+                            "KW",
+                            "SN",
+                            "SM",
+                            "SL",
+                            "SC",
+                            "KZ",
+                            "KY",
+                            "SG",
+                            "SE",
+                            "SD",
+                            "DO",
+                            "DM",
+                            "DJ",
+                            "DK",
+                            "VG",
+                            "DD",
+                            "DE",
+                            "YE",
+                            "YD",
+                            "DZ",
+                            "US",
+                            "DY",
+                            "UY",
+                            "YU",
+                            "YT",
+                            "UM",
+                            "LB",
+                            "LC",
+                            "LA",
+                            "TV",
+                            "TW",
+                            "TT",
+                            "TR",
+                            "LK",
+                            "TP",
+                            "LI",
+                            "LV",
+                            "TO",
+                            "LT",
+                            "LU",
+                            "LR",
+                            "LS",
+                            "TH",
+                            "TF",
+                            "TG",
+                            "TD",
+                            "TC",
+                            "LY",
+                            "VA",
+                            "VC",
+                            "AE",
+                            "AD",
+                            "AG",
+                            "AF",
+                            "AI",
+                            "VI",
+                            "IS",
+                            "IR",
+                            "AM",
+                            "AL",
+                            "AO",
+                            "AN",
+                            "AQ",
+                            "AS",
+                            "AR",
+                            "AU",
+                            "AT",
+                            "AW",
+                            "IN",
+                            "AX",
+                            "AZ",
+                            "IE",
+                            "ID",
+                            "UA",
+                            "QA",
+                            "MZ"
+                        ],
+                        "maxLength": 2,
+                        "minLength": 2,
+                        "title": "ISO 3166-1 or 3166-3 alpha 2 country code",
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "description": ":example: 50.7736",
+                        "title": "Latitude of the location",
+                        "type": "number"
+                    },
+                    "longitude": {
+                        "description": ":example: 6.07532",
+                        "title": "Longitude of the location",
+                        "type": "number"
+                    },
+                    "place_name": {
+                        "description": "Name of the specific place where this is located.\n\n- For a Conference record, this could be an institution or a hotel\n  hosting the conference.\n\n  :MARC: ``270__b``\n  :example: ``Dan Panorama hotel``\n\n- For an Institution record representing an independent institute\n  and not a department, this could be a university where it is\n  located.\n\n  :MARC: Not present.\n  :example: ``U. Libre Brussels``",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "postal_address": {
+                        "description": "Full postal address in the original language, with\none element for every line, but excluding the country.\n\n:example: ``[\"Notkestra\u00dfe 85\", \"22607 Hamburg\"]``\n\n.. note::\n\n    This is used for Institution records, but not for Conferences.",
+                        "items": {
+                            "minLength": 1,
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "type": "array",
+                        "uniqueItems": false
+                    },
+                    "postal_code": {
+                        "description": ":example: 1050",
+                        "minLength": 1,
+                        "title": "Postal code of the location",
+                        "type": "string"
+                    },
+                    "state": {
+                        "description": "For American states, standard 2-letter codes are used.\n\n:example: TX",
+                        "minLength": 1,
+                        "title": "State or province of the location",
+                        "type": "string"
+                    }
+                },
+                "title": "Location associated to the record",
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of addresses",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "control_number": {
+            "description": ":MARC: ``001``\n\nRead-only field. Also called ``record ID`` or ``recid``.",
+            "title": "ID of current record",
+            "type": "integer"
+        },
+        "core": {
+            "description": ":MARC: ``980:CORE`` corresponds to ``true``.",
+            "title": "Whether this institution is CORE",
+            "type": "boolean"
+        },
+        "deleted": {
+            "description": ":MARC: ``980__a/c:deleted``",
+            "title": "Whether this record has been deleted",
+            "type": "boolean"
+        },
+        "deleted_records": {
+            "description": ":MARC: ``981__a``\n\nList of records that were deleted because they were replaced by\nthis one. This typically happens when merging two records: one of\nthem gets enriched with the information of the other one, which is\nthen superfluous and gets deleted.\n\nFor the opposite concept, see :ref:`new_record`.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "$ref": {
+                        "description": "institutions record",
+                        "format": "uri",
+                        "minLength": 1,
+                        "pattern": ".*/api/institutions/\\d+$",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$ref"
+                ],
+                "title": "Reference to institution record",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "external_system_identifiers": {
+            "description": ":MARC: ``035``, ``970``\n\nList of identifiers of this institution on external systems.",
+            "items": {
+                "anyOf": [
+                    {
+                        "additionalProperties": false,
+                        "properties": {
+                            "schema": {
+                                "description": ":MARC: ``035__9:GRID``",
+                                "enum": [
+                                    "GRID"
+                                ],
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": ":MARC: ``035__a``",
+                                "minLength": 1,
+                                "pattern": "^grid\\.\\d+\\.\\w+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "schema",
+                            "value"
+                        ],
+                        "title": "GRID identifier",
+                        "type": "object"
+                    },
+                    {
+                        "additionalProperties": false,
+                        "properties": {
+                            "schema": {
+                                "description": ":MARC: ``035__9:HAL``",
+                                "enum": [
+                                    "HAL"
+                                ],
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": ":MARC: ``035__a``",
+                                "minLength": 1,
+                                "pattern": "^\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "schema",
+                            "value"
+                        ],
+                        "title": "HAL identifier",
+                        "type": "object"
+                    },
+                    {
+                        "additionalProperties": false,
+                        "properties": {
+                            "schema": {
+                                "description": ":MARC: ``035__9:ROR``",
+                                "enum": [
+                                    "ROR"
+                                ],
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": ":MARC: ``035__a``",
+                                "minLength": 1,
+                                "pattern": "^https://ror\\.org/0\\w{6}\\d{2}$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "schema",
+                            "value"
+                        ],
+                        "title": "ROR identifier",
+                        "type": "object"
+                    },
+                    {
+                        "additionalProperties": false,
+                        "properties": {
+                            "schema": {
+                                "enum": [
+                                    "SPIRES"
+                                ],
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": ":MARC: ``970__a``",
+                                "minLength": 1,
+                                "pattern": "^INST-\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "schema",
+                            "value"
+                        ],
+                        "title": "SPIRES identifier",
+                        "type": "object"
+                    }
+                ]
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "extra_words": {
+            "description": ":MARC: ``410__g``\n\nContains extra words that might be used when searching for this\nrecord, but that are not contained in the other visible metadata.",
+            "items": {
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "Extra words",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "historical_data": {
+            "description": ":MARC: ``6781_a``",
+            "items": {
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "Historical information about institution",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "inactive": {
+            "description": ":MARC: ``980:DEAD`` corresponds to ``true``\n\nWhether this institution is not active any more, and hence authors\nof recent articles cannot have it as an affiliation.",
+            "type": "boolean"
+        },
+        "inspire_categories": {
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``65017`` with ``2:INSPIRE``\n\nThe Inspire category (also called field category) classifies the subject\nthis record is related to.  This classification schema is similar to the\narXiv one (see `elements/arxiv_categories.json`) and there is a way to map\nfrom arXiv categories to Inspire categories.",
+                "properties": {
+                    "source": {
+                        "enum": [
+                            "arxiv",
+                            "curator",
+                            "cds",
+                            "magpie",
+                            "user"
+                        ],
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "term": {
+                        "enum": [
+                            "Accelerators",
+                            "Astrophysics",
+                            "Computing",
+                            "Data Analysis and Statistics",
+                            "Experiment-HEP",
+                            "Experiment-Nucl",
+                            "General Physics",
+                            "Gravitation and Cosmology",
+                            "Instrumentation",
+                            "Lattice",
+                            "Math and Math Physics",
+                            "Other",
+                            "Phenomenology-HEP",
+                            "Theory-HEP",
+                            "Theory-Nucl"
+                        ],
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "term"
+                ],
+                "title": "Inspire category",
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of Inspire categories",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "institution_hierarchy": {
+            "description": ":MARC: ``110__a/b``\n\nThis record can represent a department, or a group within a\ndepartment, as opposed to a complete institution. To represent that\nfact, this field contains the names and acronyms of the specific\ninstitution that this record represents, followed by its parents,\nfrom most specific to least specific.\n\n:example:\n   .. code-block:: json\n\n       [\n           {\n               \"name\": \"Stanford Synchrotron Radiation Lightsource\",\n               \"acronym\": \"SSRL\"\n           },\n           {\n               \"name\": \"SLAC National Accelerator Laboratory\",\n               \"acronym\": \"SLAC\"\n           }\n       ]",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "acronym": {
+                        "description": ":MARC: in parenthesis at the end of ``110_a/b``",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": ":MARC: value in ``110_a/b``, excluding final parenthesis",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "institution_type": {
+            "description": ":MARC: ``372__a``",
+            "items": {
+                "enum": [
+                    "University",
+                    "Research Center",
+                    "Company",
+                    "Other"
+                ],
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "legacy_ICN": {
+            "description": ":MARC: ``110__u``\n\nThis was called simply \"ICN\" on legacy.",
+            "minLength": 1,
+            "type": "string"
+        },
+        "legacy_creation_date": {
+            "description": ":MARC: ``961__x``\n\nOnly present if the record already existed on legacy Inspire.",
+            "format": "date",
+            "minLength": 1,
+            "title": "Date of record creation on legacy",
+            "type": "string"
+        },
+        "legacy_version": {
+            "description": ":MARC: ``005``\n\nUsed to indicate the version of the record on legacy.",
+            "minLength": 1,
+            "title": "Last record update",
+            "type": "string"
+        },
+        "name_variants": {
+            "description": ":MARC: ``410__a``\n\nVariants of the institution name. This is used when alternative\nnames are in common use, possibly in English when the official name\nis not.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "new_record": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "institutions record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/institutions/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to institution record",
+            "type": "object"
+        },
+        "public_notes": {
+            "description": ":MARC: ``680``\n\nAny notes about the document that do not fit into another field.\nFor arXiv eprints, also contains the contents of the comment field\non arXiv.\n\n.. note::\n\n    These notes are publicly visible. For notes not shown to\n    regular users, see :ref:`_private_notes`.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of public notes",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "related_records": {
+            "description": ":MARC: ``510``",
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``78002``, ``78502``, ``78708```and ``510`` (depending on type of\n    record and :ref:`related_record.json#/properties/relation`)",
+                "properties": {
+                    "curated_relation": {
+                        "type": "boolean"
+                    },
+                    "record": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "$ref": {
+                                "description": "URL to the referenced resource",
+                                "format": "uri",
+                                "minLength": 1,
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "$ref"
+                        ],
+                        "title": "Reference to another record",
+                        "type": "object"
+                    },
+                    "relation": {
+                        "description": "The possible values are:\n\n``predecessor``\n    :MARC: ``510__w:a`` (for Institutions and Experiments),\n        ``530__w:a`` (for Journals) or the field comes from\n        ``78002`` (for Literature).\n\n    The related record is a predecessor of the current one, i.e.\n    the current record supersedes the related one.\n\n    - For a Literature record, this is typically the case if the\n      related record is a preliminary note and this record is the\n      final version.\n    - For a Journal record, this happens when the journal has\n      changed name: the related record has the previous name and\n      this one the new name.\n    - For an Institution record, this means that the related record\n      represents an institution that does no longer exist and has\n      become the one represented by this record.\n    - For a Project record, this happens when the related record is\n      a project that finished and was superseded by the one in this\n      record (e.g. two successive runs of an experiment).\n\n``successor``\n    :MARC: ``510__w:b`` (for Institutions and Experiments),\n        ``530__w:b`` (for Journals) or the field comes from\n        ``78502`` (for Literature).\n\n    The related record is a successor of the current one, i.e.\n    the current record is superseded by the related one.\n\n    - For a Literature record, this is typically the case if the\n      current record is a preliminary note and the related record is the\n      final version.\n    - For a Journal record, this happens when the journal has\n      changed name: the current record has the previous name and\n      the related one the new name.\n    - For an Institution record, this means that the current record\n      represents an institution that does no longer exist and has\n      become the one represented by the related record.\n    - For a Project record, this happens when the current record is\n      a project that finished and was superseded by the related\n      record (e.g. two successive runs of an experiment).\n\n``parent``\n    :MARC: ``510__w:t`` (for an Institution record)\n\n    The related record is the parent of the current one, i.e. the\n    current record is a child of the related one.\n\n    - For an Institution record, this means that the related record\n      represents a parent institution (e.g. a university if this\n      record is a department).\n\n``commented``\n    :MARC: ``78708i:commented`` (for a Literature record)\n\n    The related record has been commented by the current one, i.e.\n    the current record is a comment on the related one.\n\n    .. note::\n\n       This only makes sense for a Literature record.\n\n\nIf none of the relations apply, a free textual relation can be\nprovided in :ref:`relation_freetext`.\n\n.. note::\n\n    Only one directional links are currently allowed for technical\n    reasons, but this should change in the future when Inspire can\n    handle atomic updates of the two directions. For example,\n    ``78502`` is currently discarded.",
+                        "enum": [
+                            "predecessor",
+                            "successor",
+                            "parent",
+                            "commented"
+                        ],
+                        "minLength": 1,
+                        "title": "Relation of the linked record to this one",
+                        "type": "string"
+                    },
+                    "relation_freetext": {
+                        "description": ":MARC: ``510__i`` (for Institutions and Experiments), ``530__i``\n    (for Journals) or ``78708i`` (for Literature).\n\nIf none of the standard relations in :ref:`relation` fit, a textual\nrelation can alternatively be provided here.",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "record"
+                ],
+                "title": "Decorated link to a related record",
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of related records",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "self": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "institutions record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/institutions/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to institution record",
+            "type": "object"
+        },
+        "urls": {
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``8564``",
+                "properties": {
+                    "description": {
+                        "description": ":MARC: ``8654__y``",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": ":MARC: ``8564_u``",
+                        "format": "uri",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "URL of related document",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        }
+    },
+    "required": [
+        "_collections"
+    ],
+    "title": "A record representing an Institution",
+    "type": "object"
+}

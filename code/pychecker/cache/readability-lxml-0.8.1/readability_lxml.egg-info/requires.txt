@@ -1,0 +1,6 @@
+chardet
+lxml
+cssselect
+
+[test]
+timeout_decorator

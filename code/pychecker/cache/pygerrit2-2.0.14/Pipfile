@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+e1839a8 = {path = ".",editable = true}
+
+[dev-packages]
+black = {version = "==20.8b1", markers = "python_version >= '3.6.0'"}
+pbr = "*"
+pydocstyle = "*"
+flake8 = "*"
+importlib_metadata = {version = "==2.0.0", markers = "python_version < '3.8.0'"}
+pyflakes = "*"
+pytest = "*"
+testcontainers = "*"
+mock = "*"
+e1839a8 = {path = ".",editable = true}
+
+[pipenv]
+allow_prereleases = true

@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+readme.rst
+setup.py
+dict2xml/__init__.py
+dict2xml/logic.py
+dict2xml.egg-info/PKG-INFO
+dict2xml.egg-info/SOURCES.txt
+dict2xml.egg-info/dependency_links.txt
+dict2xml.egg-info/requires.txt
+dict2xml.egg-info/top_level.txt

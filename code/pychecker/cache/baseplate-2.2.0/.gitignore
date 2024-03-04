@@ -1,0 +1,12 @@
+*.pyc
+*.pyo
+__pycache__
+
+.coverage
+.tox
+
+baseplate.egg-info
+build/
+dist/
+.eggs/
+.mypy_cache/

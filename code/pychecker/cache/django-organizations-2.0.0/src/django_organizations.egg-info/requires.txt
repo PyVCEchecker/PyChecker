@@ -1,0 +1,5 @@
+six
+Django>=2.2.0
+
+[:python_version < "3.6"]
+typing

@@ -1,0 +1,7 @@
+[run]
+omit =
+    WDL/__main__.py
+    WDL/CLI.py
+    WDL/runtime/backend/cli_subprocess.py
+    WDL/runtime/backend/singularity.py
+relative_files = True

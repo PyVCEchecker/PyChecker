@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: kaggle
+Version: 1.5.10
+Summary: Kaggle API
+Home-page: https://github.com/Kaggle/kaggle-api
+Author: Kaggle
+Author-email: support@kaggle.com
+License: Apache 2.0
+Description: Official API for https://www.kaggle.com, accessible using a command line tool implemented in Python. Beta release - Kaggle reserves the right to modify the API functionality currently offered.
+Keywords: Kaggle,API
+Platform: UNKNOWN

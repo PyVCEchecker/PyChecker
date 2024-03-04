@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_pinpoint.egg-info/PKG-INFO
+src/aws_cdk.aws_pinpoint.egg-info/SOURCES.txt
+src/aws_cdk.aws_pinpoint.egg-info/dependency_links.txt
+src/aws_cdk.aws_pinpoint.egg-info/requires.txt
+src/aws_cdk.aws_pinpoint.egg-info/top_level.txt
+src/aws_cdk/aws_pinpoint/__init__.py
+src/aws_cdk/aws_pinpoint/py.typed
+src/aws_cdk/aws_pinpoint/_jsii/__init__.py
+src/aws_cdk/aws_pinpoint/_jsii/aws-pinpoint@1.129.0.jsii.tgz

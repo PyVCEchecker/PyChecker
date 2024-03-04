@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: piprot
+Version: 0.9.11
+Summary: How rotten are your requirements?
+Home-page: http://github.com/sesh/piprot
+Author: Brenton Cleeland
+Author-email: brenton@brntn.me
+License: MIT License
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Topic :: Utilities
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6

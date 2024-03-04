@@ -1,0 +1,643 @@
+4.1.0 (2021-08-15)
+------------------
+ - Remove last dependency on `six` (#1250)
+ - Use `platformdirs` instead of the `appsdirs` dependency (#1244)
+ - Pass digest method when signing timestamp node(#1201)
+ - Fix settings context manager when an exception is raised (#1193)
+ - Don't render decimals using scientific notation (#1191)
+ - Remove dependency on `defusedxml` (deprecated) (#1179)
+ - Improve handling of str values for Duration (#1165)
+
+
+4.0.0 (2020-10-12)
+------------------
+ - Drop support for Python 2.7, 3.3, 3.4 and 3.5
+ - Remove both the aiohttp and the tornado transport class from Zeep. These
+   can be moved to their own Python package if anyone is interested.
+ - Add `zeep.transports.AsyncTransport` which is based on `httpx`. Note that
+   loading wsdl files is still a sync process but operations can be executed via
+   async.
+ - Start adding more typehints to the package
+
+
+3.4.0 (2019-06-05)
+------------------
+ - Allow passing xsd.Nil to sequences (#959, smilingDima)
+ - Add support for passing custom digest and signature methods during WSSE
+   signing (#957, Florian Apolloner)
+ - Fix path resolving during XSD imports (#962, adambogocz)
+
+
+3.3.1 (2019-03-10)
+------------------
+ - Fix issue with empty xsd:import statements on Python 2.7 (#930)
+
+
+3.3.0 (2019-03-08)
+------------------
+ - Extend the force_https flag to also force loading xsd files from https when
+   a http url is encountered from a https domain
+ - Fix handling recursive xsd imports when the url's are enforced from http to
+   https.
+ - Fix reference attribute when using the Binary Security Token (#873, tpazderka)
+ - Add support for the WSAM namespace (#890, David Adam)
+
+
+3.2.0 (2018-12-17)
+------------------
+ - Fix abstract message check for NoneType before attempting to access parts
+ - Improve support for 'Chameleon' XSD schemas (#879, #888)
+ - Fix resolving qualified references (#879)
+ - Fix issue with duplicate soap:body tags when multiple parts used (#879)
+ - Fix Choice with unbound Any element (#871)
+ - Add xsd_ignore_sequence_order flag (#880)
+ - Add support for timestamp token in WSS headers (#817)
+ - Accept strings for xsd.DateTime (#886)
+
+
+3.1.0 (2018-07-28)
+------------------
+ - Fix SSL issue on with `TornadoAsyncTransport` (#792)
+ - Fix passing strict keyword in XML loader (#787)
+ - Update documentation
+
+
+3.0.0 (2018-06-16)
+------------------
+This is a major release, and contains a number of backwards incompatible
+changes to the API.
+
+ - Refactor the settings logic in Zeep. All settings are now configured using
+   the zeep.settings.Settings() class.
+ - Allow control of defusedxml settings via zeep.Settings (see #567, #391)
+ - Add ability to set specific http headers for each call (#758)
+ - Skip the xsd:annotation element in the all:element (#737)
+ - Add Settings.force_https as option so that it can be disabled (#605)
+ - Strip spaces from QName's when parsing xsd's (#719)
+ - Fix DateTime parsing when only a date is returned (#672)
+ - Fix handling of nested optional any elements (#556)
+ - Check if part exists before trying to delete it (#659)
+
+
+2.5.0 (2018-01-06)
+------------------
+ - Fix AnyType value rendering by guessing the xsd type for the value (#552)
+ - Fix AnySimpleType.xmlvalue() not implemented exception (#644)
+ - Add __dir__ method to value objects returned by Zeep
+ - Don't require content for 201 and 202 status codes (#613)
+ - Fix wheel package by cleaning the build directory correctly (#634)
+ - Handle Nil values on complexType with SimpleContent elements (#604)
+ - Add Client.namespaces method to list all namespaces available
+ - Improve support for auto-completion (#537)
+
+
+2.4.0 (2017-08-26)
+------------------
+ - Add support for tornado async transport via gen.coroutine (#530, Kateryna Burda)
+ - Check if soap:address is defined in the service port instead of raising an
+   exception (#527)
+ - Update packaging (stop using find_packages()) (#529)
+ - Properly handle None values when rendering complex types (#526)
+ - Fix generating signature for empty wsdl messages (#542)
+ - Support passing strings to xsd:Time objects (#540)
+
+
+2.3.0 (2017-08-06)
+------------------
+ - The XML send to the server is no longer using ``pretty_print=True`` (#484)
+ - Refactor of the multiref support to fix issues with child elements (#489)
+ - Add workaround to support negative durations (#486)
+ - Fix creating XML documents for operations without aguments (#479)
+ - Fix xsd:extension on xsd:group elements (#523)
+
+
+2.2.0 (2017-06-19)
+------------------
+ - Automatically import the soap-encoding schema if it is required (#473)
+ - Add support for XOP messages (this is a rewrite of #325 by vashek)
+
+
+2.1.1 (2017-06-11)
+------------------
+ - Fix previous release, it contained an incorrect dependency (Mock 2.1.) due
+   to bumpversion :-(
+
+
+2.1.0 (2017-06-11)
+------------------
+ - Fix recursion error while creating the signature for a global element when
+   it references itself (via ref attribute).
+ - Update Client.create_message() to apply plugins and wsse (#465)
+ - Fix handling unknown xsi types when parsing elements using xsd:anyType (#455)
+
+
+2.0.0 (2017-05-22)
+------------------
+
+This is a major release, and contains a number of backwards incompatible
+changes to the API.
+
+ - Default values of optional elements are not set by default anymore (#423)
+ - Refactor the implementation of wsdl:arrayType too make the API more
+   pythonic (backwards incompatible).
+ - The call signature for Client.create_message() was changed. It now requires
+   the service argument:
+
+     ``Client.create_message(service, operation_name, *args, **kwargs)``
+
+ - Choice elements now only work with keyword arguments and raise an exception
+   if positional arguments are passed (#439)
+ - Implement initial multiref support for SOAP RPC (#326). This was done using
+   really good real-world tests from vstoykov (thanks!)
+ - Fix exception on empty SOAP response (#442)
+ - Fix XSD default values for boolean types (Bartek Wójcicki, #386)
+
+
+1.6.0 (2017-04-27)
+------------------
+ - Implement ValueObject.__json__ for json serialization (#258)
+ - Improve handling of unexpected elements for soap:header (#378)
+ - Accept unexpected elements in complexTypes when strict is False
+ - Fix elementFormDefault/attributeFormDefault for xsd:includes (#426)
+
+
+1.5.0 (2017-04-22)
+------------------
+ - Fix issue where values of indicators (sequence/choice/all) would
+   write to the same internal dict. (#425)
+ - Set default XML parse mode to strict as was intended (#332)
+ - Add support for pickling value objects (#417)
+ - Add explicit Nil value via ``zeep.xsd.Nil`` (#424)
+ - Add xml_huge_tree kwarg to the Client() to enable lxml's huge_tree mode,
+   this is disabled by default (#332)
+ - Add support to pass base-types to type extensions (#416)
+ - Handle wsdl errors more gracefully by disabling the invalid operations
+   instead of raising an exception (#407, #387)
+
+
+1.4.1 (2017-04-01)
+------------------
+ - The previous release (1.4.0) contained an incorrect dependency due to
+   bumpversion moving all 1.3.0 versions to 1.4.0. This fixes it.
+
+
+1.4.0 (2017-04-01)
+------------------
+ - Hardcode the xml prefix to the xml namespace as defined in the specs (#367)
+ - Fix parsing of unbound sequences within xsd choices (#380)
+ - Use logger.debug() for debug related logging (#369)
+ - Add the ``Client.raw_response`` option to let zeep return the raw
+   transport response (requests.Response) instead of trying to parse it.
+ - Handle minOccurs/maxOccurs properlhy for xsd:Group elements. This also
+   fixes a bug in the xsd:Choice handling for multiple elements (#374, #410)
+ - Fix raising XMLSyntaxError when loading invalid XML (Antanas Sinica, #396)
+
+
+1.3.0 (2017-03-14)
+------------------
+ - Add support for nested xsd:choice elements (#370)
+ - Fix unresolved elements for xsd:extension, this was a regression introduced
+   in 1.2.0 (#377)
+
+
+1.2.0 (2017-03-12)
+------------------
+ - Add flag to disable strict mode in the Client. This allows zeep to better
+   work with non standard compliant SOAP Servers. See the documentation for
+   usage and potential downsides.
+ - Minor refactor of resolving of elements for improved performance
+ - Support the SOAP 1.2 'http://www.w3.org/2003/05/soap/bindings/HTTP/'
+   transport uri (#355)
+ - Fallback to matching wsdl lookups to matching when the target namespace is
+   empty (#356)
+ - Improve the handling of xsd:includes, the default namespace of the parent
+   schema is now also used during resolving of the included schema. (#360)
+ - Properly propagate the global flag for complex types when an xsd:restriction
+   is used (#360)
+ - Filter out duplicate types and elements when dump the wsdl schema (#360)
+ - Add ``zeep.CachingClient()`` which enables the SqliteCache by default
+
+
+1.1.0 (2017-02-18)
+------------------
+ - Fix an attribute error when an complexType used xsd:anyType as base
+   restriction (#352)
+ - Update asyncio transport to return requests.Response objects (#335)
+
+
+1.0.0 (2017-01-31)
+------------------
+ - Use cgi.parse_header() to extract media_type for multipart/related checks
+   (#327)
+ - Don't ignore nil elements, instead return None when parsing xml (#328)
+ - Fix regression when using WSA with an older lxml version (#197)
+
+
+0.27.0 (2017-01-28)
+-------------------
+ - Add support for SOAP attachments (multipart responses). (Dave Wapstra, #302)
+ - Update xsd:anyType to return the xml elements when no type is given via the
+   xsi:type attribute (#284)
+ - Fix parsing Any elements when a restriction is used (soap-enc:array) (#322)
+
+
+0.26.0 (2017-01-26)
+-------------------
+This release again introduces some backwords incompatibilties. The next release
+will hopefully be 1.0 which will introduce semver.
+
+ - **backwards-incompatible**: The Transport class now accepts a
+   ``requests.Session()`` object instead of ``http_auth`` and ``verify``. This
+   allows for more flexibility.
+ - **backwards-incompatible**: Zeep no longer sets a default cache backend.
+   Please see http://docs.python-zeep.org/en/master/transport.html#caching for
+   information about how to configure a cache.
+ - Add ``zeep.xsd.SkipValue`` which instructs the serialize to ignore the
+   element.
+ - Support duplicate target namespaces in the wsdl definition (#320)
+ - Fix resolving element/types for xsd schema's with duplicate tns (#319)
+
+
+0.25.0 (2017-01-23)
+-------------------
+ - **Important:** Add basic validation against the xsd. It currently will only
+   validate the minOccurs/maxOccurs but this will be extended in the future.
+ - Add support for duplicate namespace definitions. Previously imports for
+   namespaces which were already imported were ignored. It will now search
+   through all matching schemas with the tns to find a specific object (#204)
+ - Fix xsd:extension for sequence -> choice. (#257)
+ - Improve serializing attributes when the values were passed as a dict (#125)
+
+
+0.24.0 (2016-12-16)
+-------------------
+ - Don't fail the parsing of responses if an xsi:type references an non-existing
+   type. Instead log a message (#273)
+ - Fix serializing etree.Element instances in the helpers.serialize function
+   (#255)
+ - Fix infinite loop during parsing of xsd.Sequence where max_occurs is
+   unbounded (#256)
+ - Make the xsd.Element name kwarg required
+ - Improve handling of the xsd:anyType element when passed instances of
+   complexType's (#252)
+ - Silently ignore unsupported binding transports instead of an hard error
+   (#277)
+ - Support microseconds for xsd.dateTime and xsd.Time (#280)
+ - Don't mutate passed values to the zeep operations (#280)
+
+
+0.23.0 (2016-11-24)
+-------------------
+ - Add Client.set_default_soapheaders() to set soapheaders which are to be used
+   on all operations done via the client object.
+ - Add basic support for asyncio using aiohttp. Many thanks to chrisimcevoy
+   for the initial implementation! Please see
+   https://github.com/mvantellingen/python-zeep/pull/207 and
+   https://github.com/mvantellingen/python-zeep/pull/251 for more information
+ - Fix recursion error when generating the call signature (jaceksnet, #264)
+
+
+0.22.1 (2016-11-22)
+-------------------
+ - Fix reversed() error (jaceksnet) (#260)
+ - Better error message when unexpected xml elements are encountered in
+   sequences.
+
+
+0.22.0 (2016-11-13)
+-------------------
+ - Force the soap:address / http:address to HTTPS when the wsdl is loaded from
+   a https url (#228)
+ - Improvements to the xsd:union handling. The matching base class is now used
+   for serializing/deserializing the values. If there is no matching base class
+   then the raw value is returned. (#195)
+ - Fix handling of xsd:any with maxOccurs > 1 in xsd:choice elements (#253)
+ - Add workaround for schema's importing the xsd from
+   http://www.w3.org/XML/1998/namespace (#220)
+ - Add new Client.type_factory(namespace) method which returns a factory to
+   simplify creation of types.
+
+
+
+0.21.0 (2016-11-02)
+-------------------
+ - Don't error on empty xml namespaces declarations in inline schema's (#186)
+ - Wrap importing of sqlite3 in try..except for Google App Engine (#243)
+ - Don't use pkg_resources to determine the zeep version, use __version__
+   instead (#243).
+ - Fix SOAP arrays by wrapping children in the appropriate element
+   (joeribekker, #236)
+ - Add ``operation_timeout`` kwarg to the Transport class to set timeouts for
+   operations. The default is still no timeout (#140)
+ - Introduce client.options context manager to temporarily override various
+   options (only timeout for now) (#140)
+ - Wrap the parsing of xml values in a try..except block and log an error
+   instead of throwing an exception (#137)
+ - Fix xsd:choice xml rendering with nested choice/sequence structure (#221)
+ - Correctly resolve header elements of which the message part defines the
+   type instead of element. (#199)
+
+
+0.20.0 (2016-10-24)
+-------------------
+ - Major performance improvements / lower memory usage. Zeep now no longer
+   copies data and alters it in place but instead uses a set to keep track of
+   modified data.
+ - Fix parsing empty soap response (#223)
+ - Major refactor of the xsd:extension / xsd:restriction implementation.
+ - Better support for xsd:anyType, by re-using the xsd.AnyObject (#229)
+ - Deserialize SOAP response without message elements correctly (#237)
+
+
+0.19.0 (2016-10-18)
+-------------------
+ - **backwards-incompatible**: If the WSDL defines that the endpoint returns
+   soap:header elements and/or multple soap:body messages then the return
+   signature of the operation is changed. You can now explcitly access the
+   body and header elements.
+ - Fix parsing HTTP bindings when there are no message elements (#185)
+ - Fix deserializing RPC responses (#219
+ - Add support for SOAP 1.2 Fault subcodes (#210, vashek)
+ - Don't alter the _soapheaders elements during rendering, instead create a
+   deepcopy first. (#188)
+ - Add the SOAPAction to the Content-Type header in SOAP 1.2 bindings (#211)
+ - Fix issue when mixing elements and any elements in a choice type (#192)
+ - Improving parsing of results for union types (#192)
+ - Make ws-addressing work with lxml < 3.5 (#209)
+ - Fix recursion error when xsi:type='anyType' is given. (#198)
+
+
+0.18.1 (2016-09-23)
+-------------------
+ - PyPi release error
+
+
+0.18.0 (2016-09-23)
+-------------------
+ - Fix parsing Any elements by using the namespace map of the response node
+   instead of the namespace map of the wsdl. (#184, #164)
+ - Improve handling of nested choice elements (choice>sequence>choice)
+
+
+0.17.0 (2016-09-12)
+-------------------
+ - Add support for xsd:notation (#183)
+ - Add improvements to resolving phase so that all objects are resolved.
+ - Improve implementation of xsd.attributeGroup and xsd.UniqueType
+ - Create a deepcopy of the args and kwargs passed to objects so that the
+   original are unmodified.
+ - Improve handling of wsdl:arrayType
+
+
+0.16.0 (2016-09-06)
+-------------------
+ - Fix error when rendering choice elements with have sequences as children,
+   see #150
+ - Re-use credentials passed to python -mzeep <wsdl> (#130)
+ - Workaround invalid usage of qualified vs non-qualified element tags in the
+   response handling (#176)
+ - Fix regression when importing xsd:schema's via wsdl:import statements (#179)
+
+
+0.15.0 (2016-09-04)
+-------------------
+ - All wsdl documents and xsd schemas are now globally available for eachother.
+   While this is not correct according to the (messy) soap specifications, it
+   does make zeep more compatible with all the invalid wsdl documents out
+   there. (#159)
+ - Implement support for attributeGroup (#160)
+ - Add experimental support for ws-addressing (#92)
+ - Fix handling of Mime messages with no parts (#168)
+ - Workaround an issue where soap servers don't qualify references (#170)
+ - Correctly process attributes which are passed as a dictionary. (#125)
+ - Add support for plugins, see documentation for examples.
+ - Fix helpers.serialize_object for lists of objects (#123).
+ - Add HistoryPlugin which ofers last_sent and last_received properties (#93).
+
+
+0.14.0 (2016-08-03)
+-------------------
+ - Global attributes are now always correctly handled as qualified. (#129)
+ - Fix parsing xml data containing simpleContent types (#136).
+ - Set xsi:nil attribute when serializing objects to xml (#141)
+ - Fix rendering choice elements when the element is mixed with other elements
+   in a sequence (#150)
+ - Fix maximum recursion error for recursive xsd:include elements
+ - Make wsdl:import statements transitive. (#149)
+ - Merge xsd:schema's which are spread around imported wsdl objects. (#146)
+ - Don't raise exception when no value is given for AnyAttribute (#152)
+
+
+0.13.0 (2016-07-17)
+-------------------
+ - Use warnings.warn() for duplicate target namespaces instead of raising an
+   exception. This better matches with what lxml does.
+ - **backwards-incompatible**: The ``persistent`` kwarg is removed from the
+   SqliteCache.__init__() call. Use the new InMemoryCache() instead when you
+   don't want to persist data. This was required to make the SqliteCache
+   backend thread-safe since we now open/close the db when writing/reading
+   from it (with an additional lock).
+ - Fix zeep.helpers.serialize_object() for nested objects (#123)
+ - Remove fallback between soap 1.1 and soap 1.2 namespaces during the parsing
+   of the wsdl. This should not be required.
+
+
+0.12.0 (2016-07-09)
+-------------------
+ - **backwards-incompatible**: Choice elements are now unwrapped if
+   maxOccurs=1. This results in easier operation definitions when choices are
+   used.
+ - **backwards-incompatible**: The _soapheader kwarg is renamed to _soapheaders
+   and now requires a nested dictionary with the header name as key or a list
+   of values (value object or lxml.etree.Element object). Please see the
+   call signature of the function using ``python -mzeep <wsdl>``.
+ - Support the element ref's to xsd:schema elements.
+ - Improve the signature() output of element and type definitions
+ - Accept lxml.etree.Element objects as value for Any elements.
+ - And various other fixes
+
+
+0.11.0 (2016-07-03)
+-------------------
+ - **backwards-incompatible**: The kwarg name for Any and Choice elements are
+   renamed to generic ``_value_N`` names.
+ - **backwards-incompatible**: Client.set_address() is replaced with the
+   Client.create_service() call
+ - Auto-load the http://schemas.xmlsoap.org/soap/encoding/ schema if it is
+   referenced but not imported. Too many XSD's assume that the schema is always
+   available.
+ - Major refactoring of the XSD handling to correctly support nested
+   xsd:sequence elements.
+ - Add ``logger.debug()`` calls around Transport.post() to allow capturing the
+   content send/received from the server
+ - Add proper support for default values on attributes and elements.
+
+
+0.10.0 (2016-06-22)
+-------------------
+ - Make global elements / types truly global by refactoring the Schema
+   parsing. Previously the lookups where non-transitive, but this should only
+   be the case during parsing of the xml schema.
+ - Properly unwrap XML responses in soap.DocumentMessage when a choice is the
+   root element. (#80)
+ - Update exceptions structure, all zeep exceptions are now using
+   zeep.exceptions.Error() as base class.
+
+
+0.9.1 (2016-06-17)
+------------------
+ - Quote the SOAPAction header value (Derek Harland)
+ - Undo fallback for SOAPAction if it is empty (#83)
+
+
+0.9.0 (2016-06-14)
+------------------
+ - Use the appdirs module to retrieve the OS cache path. Note that this results
+   in an other default cache path then previous releases! See
+   https://github.com/ActiveState/appdirs for more information.
+ - Fix regression when initializing soap objects with invalid kwargs.
+ - Update wsse.UsernameToken to set encoding type on nonce (Antonio Cuni)
+ - Remove assert statement in soap error handling (Eric Waller)
+ - Add '--no-verify' to the command line interface. (#63)
+ - Correctly xsi:type attributes on unbounded elements. (nicholjy) (#68)
+ - Re-implement xsd:list handling
+ - Refactor logic to open files from filesystem.
+ - Refactor the xsd:choice implementation (serializing/deserializing)
+ - Implement parsing of xsd:any elements.
+
+
+0.8.1 (2016-06-08)
+------------------
+ - Use the operation name for the xml element which wraps the parameters in
+   for soap RPC messages (#60)
+
+
+0.8.0 (2016-06-07)
+------------------
+ - Add ability to override the soap endpoint via `Client.set_address()`
+ - Fix parsing ComplexTypes which have no child elements (#50)
+ - Handle xsi:type attributes on anyType's correctly when deserializing
+   responses (#17)
+ - Fix xsd:restriction on xsd:simpleType's when the base type wasn't defined
+   yet. (#59)
+ - Add xml declaration to the generate xml strings (#60)
+ - Fix xsd:import statements without schemaLocation (#58)
+
+
+0.7.1 (2016-06-01)
+------------------
+ - Fix regression with handling wsdl:import statements for messages (#47)
+
+
+0.7.0 (2016-05-31)
+------------------
+ - Add support HTTP authentication (mcordes). This adds a new attribute to the
+   Transport client() which passes the http_auth value to requests. (#31)
+ - Fix issue where setting cache=None to Transport class didn't disable
+   caching.
+ - Refactor handling of wsdl:imports, don't merge definitions but instead
+   lookup values in child definitions. (#40)
+ - Remove unused namespace declarations from the generated SOAP messages.
+ - Update requirement of six>=1.0.0 to six>=1.9.0 (#39)
+ - Fix handling of xsd:choice, xsd:group and xsd:attribute (#30)
+ - Improve error messages
+ - Fix generating soap messages when sub types are used via xsd extensions (#36)
+ - Improve handling of custom soap headers (#33)
+
+
+0.6.0 (2016-05-21)
+------------------
+ - Add missing `name` attributes to xsd.QName and xsd.NOTATION (#15)
+ - Various fixes related to the Choice element
+ - Support xsd:include
+ - Experimental support for HTTP bindings
+ - Removed `Client.get_port()`, use `Client.bind()`.
+
+
+0.5.0 (2015-05-08)
+------------------
+ - Handle attributes during parsing of the response values>
+ - Don't create empty soap objects when the root element is empty.
+ - Implement support for WSSE usernameToken profile including
+   passwordText/passwordDigest.
+ - Improve XSD date/time related builtins.
+ - Various minor XSD handling fixes
+ - Use the correct soap-envelope XML namespace for the Soap 1.2 binding
+ - Use `application/soap+xml` as content-type in the Soap 1.2 binding
+ - **backwards incompatible**: Make cache part of the transport object
+   instead of the client.  This changes the call signature of the Client()
+   class.  (Marek Wywiał)
+ - Add the `verify` kwarg to the Transport object to disable ssl certificate
+   verification. (Marek Wywiał)
+
+
+0.4.0 (2016-04-17)
+------------------
+ - Add defusedxml module for XML security issues
+ - Add support for choice elements
+ - Fix documentation example for complex types (Falk Schuetzenmeister)
+
+
+0.3.0 (2016-04-10)
+------------------
+ - Correctly handle recursion in WSDL and XSD files
+ - Add support for the XSD Any element
+ - Allow usage of shorthand prefixes when creating elements and types
+ - And more various improvements
+
+
+0.2.5 (2016-04-05)
+------------------
+ - Temporarily disable the HTTP binding support until it works properly
+ - Fix an issue with parsing SOAP responses with optional elements
+
+
+0.2.4 (2016-04-03)
+------------------
+ - Improve xsd.DateTime, xsd.Date and xsd.Time implementations by using the
+   isodate module.
+ - Implement xsd.Duration
+
+
+0.2.3 (2016-04-03)
+------------------
+ - Fix xsd.DateTime, xsd.Date and xsd.Time implementations
+ - Handle NIL values correctly for simpletypes
+
+
+0.2.2 (2016-04-03)
+------------------
+ - Fix issue with initializing value objects (ListElements)
+ - Add new `zeep.helpers.serialize_object()` method
+ - Rename type attribute on value objects to `_xsd_type` to remove potential
+   attribute conflicts
+
+
+0.2.1 (2016-04-03)
+------------------
+ - Support minOccurs 0 (optional elements)
+ - Automatically convert python datastructures to zeep objects for requests.
+ - Set default values for new zeep objects to None / [] (Element, ListElement)
+ - Add `Client.get_element()` to create custom objects
+
+
+0.2.0 (2016-04-03)
+------------------
+ - Proper support for XSD element and attribute forms (qualified/unqualified)
+ - Improved XSD handling
+ - Separate bindings for Soap 1.1 and Soap 1.2
+ - And again various other fixes
+
+
+0.1.1 (2016-03-20)
+------------------
+ - Various fixes to make the HttpBinding not throw errors during parsing
+ - More built-in xsd types
+ - Add support for `python -mzeep <wsdl>`
+ - Various other fixes
+
+
+0.1.0 (2016-03-20)
+------------------
+
+Preview / Proof-of-concept release. Probably not suitable for production use :)

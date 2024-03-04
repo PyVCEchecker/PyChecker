@@ -1,0 +1,8 @@
+-r requirements_min.txt
+Jinja2
+PyYAML
+jmespath
+jsonschema
+ruamel.yaml
+simplejson
+toml

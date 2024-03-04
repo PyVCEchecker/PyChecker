@@ -1,0 +1,16 @@
+jsonschema<4
+oslash<1
+
+[examples]
+aiohttp
+aiozmq
+flask
+flask-socketio
+gmqtt
+pyzmq
+tornado
+websockets
+werkzeug
+
+[tox]
+tox

@@ -1,0 +1,3 @@
+[numba_extensions]
+init = sparse._numba_extension:_init_extension
+

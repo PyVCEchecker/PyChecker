@@ -1,0 +1,31 @@
+---
+
+extra_includes:
+- frc/smartdashboard/Sendable.h
+- pybind11/functional.h
+
+classes:
+  LiveWindow:
+    shared_ptr: true
+    nodelete: true
+    methods:
+      # CppHeaderParser bug
+      function<void:
+        ignore: true
+      GetInstance:
+        return_value_policy: reference
+      EnableTelemetry:
+        keepalive:
+        - [1, 2]
+      DisableTelemetry:
+        keepalive:
+        - [1, 2]
+      DisableAllTelemetry:
+      IsEnabled:
+      SetEnabled:
+      UpdateValues:
+
+inline_code:
+  cls_LiveWindow
+    .def_readwrite("enabled", &LiveWindow::enabled)
+    .def_readwrite("disabled", &LiveWindow::disabled);

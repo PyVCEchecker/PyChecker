@@ -1,0 +1,79 @@
+#: testapp/templates/i18n_test.html:1
+#, python-format
+msgid ""
+"\n"
+"Foo %(bar)s\n"
+msgstr ""
+
+#: testapp/templates/i18n_test.html:6 testapp/templates/i18n_test.jinja:6
+msgid "Year"
+msgstr ""
+
+#: testapp/templates/i18n_test.html:9 testapp/templates/i18n_test.jinja:8
+#, python-format
+msgid "1 Hello %(user)s!"
+msgstr ""
+
+#: testapp/templates/i18n_test.html:11 testapp/templates/i18n_test.jinja:10
+#, python-format
+msgid "2 Hello %(user)s!"
+msgstr ""
+
+#: testapp/templates/i18n_test.html:14 testapp/templates/i18n_test.jinja:13
+#, python-format
+msgid ""
+"\n"
+"3 This is %(book_title)s by %(author)s\n"
+msgstr ""
+
+#: testapp/templates/i18n_test.html:20
+#, python-format
+msgid ""
+"\n"
+"4 There is %(count)s %(name)s object.\n"
+msgid_plural ""
+"\n"
+"4 There are %(count)s %(name)s objects.\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: testapp/templates/i18n_test.html:27 testapp/templates/i18n_test.jinja:26
+msgid "5 Hello World!"
+msgstr ""
+
+#: testapp/templates/i18n_test.html:33
+#, python-format
+msgid ""
+"\n"
+"  #%(invoice_count)s invoice\n"
+msgid_plural ""
+"\n"
+"  #%(invoice_count)s invoices\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: testapp/templates/i18n_test.html:41 testapp/templates/i18n_test.jinja:40
+#, python-format
+msgid "#%(trimmed_invoice_count)s trimmed invoice"
+msgid_plural "#%(trimmed_invoice_count)s trimmed invoices"
+msgstr[0] ""
+msgstr[1] ""
+
+#: testapp/templates/i18n_test.jinja:1
+#, python-format
+msgid "Foo %(bar)s"
+msgstr ""
+
+#: testapp/templates/i18n_test.jinja:19
+#, python-format
+msgid "4 There is %(count)s %(name)s object."
+msgid_plural "4 There are %(count)s %(name)s objects."
+msgstr[0] ""
+msgstr[1] ""
+
+#: testapp/templates/i18n_test.jinja:32
+#, python-format
+msgid "#%(invoice_count)s invoice"
+msgid_plural "#%(invoice_count)s invoices"
+msgstr[0] ""
+msgstr[1] ""

@@ -1,0 +1,44 @@
+# django-hijack Dutch translation.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-14 11:27+0100\n"
+"PO-Revision-Date: 2021-03-14 11:35+0100\n"
+"Last-Translator: Johannes Maron <info@johanneshoppe.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: contrib/admin/admin.py:35
+msgid "hijack user"
+msgstr "gebruiker kapen"
+
+#: contrib/admin/templates/hijack/contrib/admin/button.html:8
+msgid "hijack"
+msgstr "kaping"
+
+#: contrib/admin/templates/hijack/contrib/admin/button.html:11
+#, python-format
+msgid "Hijack %(username)s"
+msgstr "Kapen %(username)s"
+
+#: templates/hijack/notification.html:7
+#, python-format
+msgid "You are currently working on behalf of <em>%(user)s</em>."
+msgstr "U werkt nu namens <em>%(user)s</em>."
+
+#: templates/hijack/notification.html:15
+msgid "hide"
+msgstr "verbergen"
+
+#: templates/hijack/notification.html:18
+msgid "release"
+msgstr "vrijgeven"

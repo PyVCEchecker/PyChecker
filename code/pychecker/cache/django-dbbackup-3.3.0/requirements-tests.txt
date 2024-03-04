@@ -1,0 +1,9 @@
+pep8
+flake8
+pylint
+coverage
+python-gnupg
+django-storages
+pytz
+testfixtures
+mock

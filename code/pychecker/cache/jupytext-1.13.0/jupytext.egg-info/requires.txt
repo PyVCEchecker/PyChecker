@@ -1,0 +1,13 @@
+nbformat
+pyyaml
+toml
+markdown-it-py~=1.0
+mdit_py_plugins
+
+[myst]
+
+[rst2md]
+sphinx-gallery~=0.7.0
+
+[toml]
+toml

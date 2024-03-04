@@ -1,0 +1,8 @@
+ipywidgets>=7.5
+numpy
+traittypes
+traitlets
+Pillow
+ipywebrtc
+requests
+pythreejs>=1.0.0

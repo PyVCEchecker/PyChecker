@@ -1,0 +1,132 @@
+name: Tests
+
+on:
+  pull_request: {}
+  push: {}
+  schedule:
+    - cron: '5 1 * * *'  # every day at 01:05
+
+env:
+  DVC_TEST: "true"
+  HOMEBREW_NO_AUTO_UPDATE: 1
+  SHELL: /bin/bash
+
+jobs:
+  lint:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cancel Previous Runs
+      uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}
+    - uses: actions/checkout@v2.3.5
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2.2.2
+      with:
+        python-version: 3.8
+    - name: Install requirements
+      run: |
+        pip install wheel
+        pip install ".[all,tests,terraform]" pre-commit
+    - name: install temporary dependencies
+      run: |
+        pip install git+https://github.com/isidentical/gdrivefs@service-account
+        pip install git+https://github.com/isidentical/pydata-google-auth@service-account
+    - name: Check README
+      run: python setup.py checkdocs
+    - uses: pre-commit/action@v2.0.3
+  tests:
+    timeout-minutes: 45
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, windows-latest, macos-latest]
+        pyv: ["3.7", "3.8", "3.9", "3.10"]
+        exclude:
+          # no wheels for pygit2 yet
+          - os: windows-latest
+            pyv: "3.10"
+    steps:
+    - uses: actions/checkout@v2.3.5
+      with:
+        fetch-depth: 0
+    - name: Set up Python
+      uses: actions/setup-python@v2.2.2
+      with:
+        python-version: ${{ matrix.pyv }}
+    - name: get pip cache dir
+      id: pip-cache-dir
+      run: |
+        echo "::set-output name=dir::$(pip cache dir)"
+    - name: set pip cache
+      id: pip-cache
+      uses: actions/cache@v2.1.6
+      with:
+        path: ${{ steps.pip-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-pip-${{ hashFiles('setup.cfg') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: install
+      if: steps.cache.pip-cache-dir.cache-hit != 'true'
+      run: |
+        pip install --upgrade pip setuptools wheel
+        pip install -e ".[all,tests,terraform]"
+    - name: install temporary dependencies
+      run: |
+        pip install git+https://github.com/isidentical/gdrivefs@service-account
+        pip install git+https://github.com/isidentical/pydata-google-auth@service-account
+    - name: setup git
+      run: |
+        git config --global user.email "dvctester@example.com"
+        git config --global user.name "DVC Tester"
+    - name: setup gs creds
+      shell: bash
+      env:
+        GS_CREDS_JSON: ${{ secrets.GS_CREDS_JSON }}
+      if: env.GS_CREDS_JSON != ''
+      run: |
+        mkdir -p scripts/ci
+        echo "$GS_CREDS_JSON" > scripts/ci/gcp-creds.json
+    - name: disable gdrive tests
+      if: >-
+        github.event_name != 'schedule' &&
+        (matrix.pyv != '3.8' || matrix.os != 'ubuntu-18.04')
+      run: |
+        echo "extra_test_args=--disable-gdrive" >> $GITHUB_ENV
+    - name: run tests
+      timeout-minutes: 40
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID}}
+        OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET}}
+        OSS_ENDPOINT: ${{ secrets.OSS_ENDPOINT}}
+      run: >-
+        python -m tests -n=4
+        --cov-report=xml --cov-report=term
+        --enable-ssh ${{ env.extra_test_args }}
+    - name: upload coverage report
+      uses: codecov/codecov-action@v2.1.0
+      with:
+        file: ./coverage.xml
+        fail_ci_if_error: false
+  notify:
+    if: github.ref == 'refs/heads/master' && failure()
+    needs:
+      - lint
+      - tests
+    runs-on: ubuntu-latest
+    steps:
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2.2.0
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_MESSAGE: 'CI Failed on master :boom:'
+        SLACK_TITLE: CI Status
+        SLACK_USERNAME: DVC-CI

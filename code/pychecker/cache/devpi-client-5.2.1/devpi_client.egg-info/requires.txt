@@ -1,0 +1,6 @@
+tox>=3.1.0
+devpi_common<4,>=3.6.0
+pkginfo>=1.4.2
+check-manifest>=0.28
+pluggy<1.0,>=0.6.0
+py>=1.4.31

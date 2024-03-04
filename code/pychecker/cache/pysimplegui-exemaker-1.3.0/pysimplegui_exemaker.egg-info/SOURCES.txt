@@ -1,0 +1,8 @@
+setup.py
+pysimplegui-exemaker/__init__.py
+pysimplegui-exemaker/pysimplegui-exemaker.py
+pysimplegui_exemaker.egg-info/PKG-INFO
+pysimplegui_exemaker.egg-info/SOURCES.txt
+pysimplegui_exemaker.egg-info/dependency_links.txt
+pysimplegui_exemaker.egg-info/requires.txt
+pysimplegui_exemaker.egg-info/top_level.txt

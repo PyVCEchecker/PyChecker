@@ -1,0 +1,10 @@
+pyroute2.core
+pyroute2.nslink
+pyroute2.nftables
+pyroute2.ethtool
+pyroute2.ipset
+pyroute2.ipdb
+pyroute2.ndb
+
+[:platform_system == "Windows"]
+win_inet_pton

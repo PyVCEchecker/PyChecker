@@ -1,0 +1,14 @@
+setuptools
+six>=1.4.0
+
+[Flup]
+flup
+
+[Paste]
+
+[hotshot]
+
+[openid]
+python-openid
+
+[subprocess]

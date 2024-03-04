@@ -1,0 +1,46 @@
+1.1 (2015-02-10)
+----------------
+* Fix unicode NameError on Python 3. (Appeared only on OSes with unicode
+  paths.)(Thanks to Hanlle Nicolas, Aaron Lelevier, Dmitry Dygalo.)
+* Fix test on MacOSX: temp dir contains symlink. (wrightmx)
+* Fix ``walk`` error in arg ``top_down``. (Gabriel Reyla == sesas)
+* Fix ``isdir()`` issue on Windows. (Gabriel Reyla)
+* Fix ``needs_update`` with string argument. (#15)
+* Change license to MIT. It's at least as free as the Python license but
+  doesn't contain irrelevant Python-specific language.
+
+1.0 (2013-04-05)
+------------------
+* Migrate repository to Git and Github. (https://github.com/mikeorr/Unipath)
+* Supports Python 2.6, 2.7, 3.2, and 3.3.  No longer suppots Python 2.5 or older.
+* Python 3 compatibility. (Ricardo Duarte)
+* Convert tests to py.test. (Ricardo Duarte)
+* Delete old PEP 335 reference documentation. To recover, check out Git rev
+  7575cdf, directory "doc/reference".
+* Undocument ``Path.copy_tree()``. It was never implemented.
+* Fix Path.remove and Path.rmtree for symlinks. (Joel Rosdahl)
+
+0.2.1 (released 2008-05-19 by MSO)
+----------------------------------
+* Delete spurious references to deleted ``unipath.platform`` package.
+
+0.2.0 (released 2008-05-??)
+---------------------------
+* Rename Path to AbstractPath, and FSPath to Path.  FSPath remains as an
+  alias for backward compatibility.
+* Allow integers in constructor.
+* Path.mkdir() checks whether the directory exists first.
+* Test suite now uses nose instead of unittest.
+* "+" operator returns concatenated path rather than string.
+* Bugfix in Path.rel_path_to().
+* Thanks to Roman <mereandor@gmail.com> for patches and suggestions.
+* Delete Path.symlink(); use Path.write_link() instead -- note that the 
+  arg is the desination rather than the source!
+* Path.make_relative_link_to() is a shortcut for
+  ``self.write_link(self.rel_path_to(dst))``.
+* Delete the ``platform`` package.  See the tests if you need non-native
+  path syntax.`
+
+0.1.0 (released 2007-01-28 by MSO)
+----------------------------------
+* Initial release.

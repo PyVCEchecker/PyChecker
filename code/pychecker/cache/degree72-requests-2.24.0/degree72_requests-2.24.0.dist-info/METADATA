@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: degree72-requests
+Version: 2.24.0
+Summary: Python HTTP for Humans.
+Home-page: https://requests.readthedocs.io
+Author: Kenneth Reitz, Will
+Author-email: me@kennethreitz.org
+License: Apache 2.0
+Project-URL: Documentation, https://requests.readthedocs.io
+Project-URL: Source, https://github.com/psf/requests
+Requires-Dist: chardet (<4,>=3.0.2)
+Requires-Dist: idna (<3,>=2.5)
+Requires-Dist: urllib3 (!=1.25.0,!=1.25.1,<1.26,>=1.21.1)
+Requires-Dist: certifi (>=2017.4.17)
+Provides-Extra: security
+Requires-Dist: pyOpenSSL (>=0.14) ; extra == 'security'
+Requires-Dist: cryptography (>=1.3.4) ; extra == 'security'
+Provides-Extra: socks
+Requires-Dist: PySocks (!=1.5.7,>=1.5.6) ; extra == 'socks'
+Requires-Dist: win-inet-pton ; (sys_platform == "win32" and python_version == "2.7") and extra == 'socks'
+
+# Requests
+
+

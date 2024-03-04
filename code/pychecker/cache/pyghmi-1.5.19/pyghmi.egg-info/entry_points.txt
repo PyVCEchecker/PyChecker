@@ -1,0 +1,6 @@
+[console_scripts]
+fakebmc = pyghmi.cmd.fakebmc:main
+pyghmicons = pyghmi.cmd.pyghmicons:main
+pyghmiutil = pyghmi.cmd.pyghmiutil:main
+virshbmc = pyghmi.cmd.virshbmc:main
+

@@ -1,0 +1,3 @@
+Sphinx
+docutils
+sphinx-django-command

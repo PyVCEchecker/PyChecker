@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[tool.black]
+line-length = 100
+exclude = '''
+/(
+      \.eggs
+    | \.git
+    | \.mypy_cache
+    | \.tox
+    | \.pytype
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+)/
+| docs/conf.py
+'''
+
+[tool.isort]
+known_third_party = [
+    'allpairspy',
+    'path',
+    'pytest',
+    'readmemaker',
+    'sphinx_rtd_theme',
+]
+include_trailing_comma = true
+line_length = 100
+lines_after_imports = 2
+multi_line_output = 3
+skip_glob = [
+    '*/.eggs/*',
+    '*/.pytype/*',
+    '*/.tox/*',
+]
+
+[tool.coverage.run]
+source = ['pathvalidate']
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+precision = 1
+exclude_lines = [
+    'except ImportError',
+    'raise NotImplementedError',
+    'pass',
+    'ABCmeta',
+    'abstractmethod',
+    'abstractproperty',
+    'abstractclassmethod',
+    'warnings.warn',
+]
+
+[tool.mypy]
+ignore_missing_imports = true
+python_version = 3.6
+
+pretty = true
+show_error_codes = true
+show_error_context = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = [
+    "test",
+]
+
+md_report = true
+md_report_verbose = 0
+md_report_color = "auto"
+
+discord_verbose = 1

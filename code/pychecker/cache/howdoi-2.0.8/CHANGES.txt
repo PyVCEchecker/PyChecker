@@ -1,0 +1,148 @@
+2.0.8
+------
+-  Fix issue for answers that have no code in the answer but code in the comments
+-  Add range checks for -n and -p flags
+-  Moved from Travis to Github Actions
+-  Dropped Python 2.7 support
+
+2.0.7
+------
+-  Update for new Google CSS style
+
+2.0.6
+------
+-  Fix issue where `-a` would not return a proper response due to updated CSS on StackOverflow
+
+2.0.5
+------
+-  New logo and colors!
+
+2.0.4
+------
+-  Cachelib rollback to support Python 2.7
+-  Better error message when Google is being blocked (for example in China)
+
+2.0.3
+------
+-  Bring back Python 2.7 support (for now)
+
+2.0.2
+------
+-  Fixed keep support for stashing and viewing answers
+
+2.0.1
+------
+-  Added JSON output with the -j flag (great for consuming howdoi results for use in other apps)
+-  Added stashing ability for saving useful answer for later (based on https://github.com/OrkoHunter/keep)
+-  Added caching for tests to prevent being rate limited by Google while developing
+-  Added easier method for calling howdoi when imported (howdoi.howdoi)
+
+1.2.1
+------
+-  Fix dependency issue
+
+1.2.0
+------
+-  Massive speed improvements of startup, answer fetching, and caching
+-  Command line flags for alternate search engines
+-  Remove duplicate answers
+
+1.1.14
+------
+-  Links displayed with markdown syntax
+-  Improved performance and caching (again)
+
+1.1.13
+------
+-  Improved performance and caching
+-  More friendly answer display
+-  Added support for Python 3.6
+-  Removed support for Python 2.6
+
+1.1.12
+------
+-  Add additional search engine support
+
+1.1.11
+------
+-  Fix issue with UTF-8 encoding
+
+1.1.10
+------
+-  Include the link in output when asking for >1 answer
+-  Compatibility with linuxbrew
+
+1.1.9
+------
+-  Fix issue with upload to PyPI
+
+1.1.8
+------
+-  Fix colorization when HOWDOI_COLORIZE env variable is enabled
+-  Fix certificate validation when SSL disabled
+
+1.1.7
+------
+-  Add Localization support with HOWDOI_LOCALIZATION env variable (Currently only pt-br and en)
+
+1.1.6
+------
+-  Updates for Python3
+-  Updates for caching
+
+1.1.5
+------
+-  Updates for Python3
+-  Fix issues with cache
+-  Allow disabling SSL when accessing Google
+
+1.1.4
+------
+-  Added caching
+
+1.1.3
+------
+-  Added fix to handle change in Google search page HTML
+-  Updated Travis CI tests
+
+1.1.2
+------
+-  Compatibility fixes for Python3.2
+-  Travis CI tests now being run for Python 2.6, 2.7, 3.2, and 3.3
+
+1.1.1
+------
+-  Added message when question has no answer
+
+1.1
+------
+-  Added multiple answers with -n/--num-answers flag
+-  Added colorized output with -c/--color flag
+-  Added answer link to the bottom of questions with -a/--all flag
+-  Unit tests now managed through Travis CI
+
+1.0
+------
+-  Added support for Python3
+-  Switched to the requests library instead of urllib2
+-  Project status changed to Production/Stable
+-  Added troubleshooting steps to the README
+
+0.2
+------
+-  Added sane flags
+-  Now using ``/usr/bin/env python`` instead of ``/usr/bin/python``
+-  Updated README for brew installation instructions
+
+0.1.2
+------
+-  Added Windows executable
+-  Updated README for pip installation instructions
+
+0.1.1
+------
+-  Added to PyPI
+
+0.1
+------
+-  We're doing it live!

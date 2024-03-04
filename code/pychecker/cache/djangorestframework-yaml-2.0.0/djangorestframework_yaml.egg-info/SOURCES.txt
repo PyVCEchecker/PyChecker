@@ -1,0 +1,14 @@
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+djangorestframework_yaml.egg-info/PKG-INFO
+djangorestframework_yaml.egg-info/SOURCES.txt
+djangorestframework_yaml.egg-info/dependency_links.txt
+djangorestframework_yaml.egg-info/requires.txt
+djangorestframework_yaml.egg-info/top_level.txt
+rest_framework_yaml/__init__.py
+rest_framework_yaml/compat.py
+rest_framework_yaml/encoders.py
+rest_framework_yaml/parsers.py
+rest_framework_yaml/renderers.py

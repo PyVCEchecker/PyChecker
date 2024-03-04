@@ -1,0 +1,6 @@
+-r requirements-base.txt
+pyenchant
+django-filebrowser-no-grappelli
+Pillow
+Selenium
+coverage

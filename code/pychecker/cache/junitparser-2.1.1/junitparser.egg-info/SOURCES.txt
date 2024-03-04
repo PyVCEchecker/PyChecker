@@ -1,0 +1,15 @@
+LICENSE
+README.rst
+setup.cfg
+setup.py
+junitparser/__init__.py
+junitparser/__main__.py
+junitparser/cli.py
+junitparser/junitparser.py
+junitparser.egg-info/PKG-INFO
+junitparser.egg-info/SOURCES.txt
+junitparser.egg-info/dependency_links.txt
+junitparser.egg-info/entry_points.txt
+junitparser.egg-info/not-zip-safe
+junitparser.egg-info/requires.txt
+junitparser.egg-info/top_level.txt

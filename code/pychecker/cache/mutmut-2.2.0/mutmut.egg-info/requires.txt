@@ -1,0 +1,15 @@
+glob2
+parso
+click
+pony
+junit-xml==1.8
+
+[coverage]
+coverage
+
+[patch]
+whatthepatch==0.0.6
+
+[pytest]
+pytest
+pytest-cov

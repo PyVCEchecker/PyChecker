@@ -1,0 +1,4 @@
+python-dateutil
+ordered-set
+lxml
+weakrefmethod>=1.0.3

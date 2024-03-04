@@ -1,0 +1,253 @@
+Version 4.0.0
+=============
+- doc: uppdate README
+- core: add support for CAA queries
+- core: add support for getaddrinfo()
+- doc: update README
+- core: add ability to use the system installed c-ares
+- misc: set version to 4.0.0
+- test: remove TTL tests
+- core: update c-ares and use a submodule
+- core: drop bundled c-ares version
+- misc: drop tasks.py
+
+Version 3.2.0
+=============
+- misc: add Python 3.9 classifier
+- core: drop py3.5 from CI and documentation
+- ci: run tests in Python 3.9
+- ci: fix SDK path in appveyor
+- ci: fix VS linker in appveyor
+- ci: update python installer script in appveyor
+- misc: add compiled windows dll to gitignore
+- test: skip SOA non-ascii test due to changes in remote host
+- test: fix broken chunked TXT test due to changes in remote host
+- test: skip ANY test due to problems with mac
+- ci: add action to release wheels to PyPi
+- ci: drop AppVeyor
+- ci: don't fail fast
+- ci: stop testing on Travis
+- test: add generic way to check for a CI
+- test: relax check
+- test: try to avoid spurious CI failures
+- ci: test all platforms on GH actions
+- ci: build wheels on GH Actions
+- build: fix build error on macOS
+- ci: explicitly set Python versions to build wheels for
+- ci: update cibuildwheel
+- ci: re-add IDNA test
+
+Version 3.1.1
+=============
+- ffi: new style callbacks
+
+Version 3.1.0
+=============
+- misc: add Python 3.8 classifier
+- (origin/master, origin/HEAD) build: use Travis to build Python Wheels
+- ci: use GH Actions to test on macOS
+- ci: run tests in Python 3.8 too
+- test: remove no longer valid test
+- test: remove empty test
+- errno: return str from errno.strerror
+- core: fix crash when processing .onion queries
+- test: fix test_query_txt_multiple_chunked
+- doc: fix path of _version.py file
+- core: fix support for ARES_OPT_LOOKUPS option
+- build: add cygwin support
+- core: fix struct in6_addr alignment
+- misc: simplify non-ascii txt test example
+- core: fix long TXT record with non-ascii bytes
+- build: remove extra add_include_dir line on linux
+- build: fix testing manylinux wheels
+
+Version 3.0.0
+=============
+(changes since version 2.x)
+ - core: drop C backend in favor of CFFI
+ - core: drop Python < 3.5 support
+ - core: use None instead of -1 for default values
+ - core: add support for ANY queries
+ - core: automagically encode query names with IDNA
+ - core: add support for ares_search
+
+Version 3.0.0b5
+===============
+ - core: add support for ares_search
+
+Version 3.0.0b4
+===============
+ - core: give better errors descriptions for AresError
+ - test: add IDNA test using the query() API
+ - cffi: simplify destroying ares channel
+
+Version 3.0.0b3
+===============
+ - core: reorganize package
+ - core: automagically encode query names with IDNA
+
+Version 3.0.0b2
+===============
+ - errno: fix errorcode dictionary
+
+Version 3.0.0b1
+===============
+ - core: add support for ANY queries
+ - cffi: fix memory leak
+
+Version 3.0.0b0
+===============
+ - core: drop C backend
+ - core: drop Python < 3.5 support
+ - core: use None instead of -1 for default values
+ - core: set TTL to -1 when we cannot parse it
+
+Version 2.4.0
+=============
+ - misc: fix building wheels for unavailable Python versions
+ - test: skip getaddrinfo6 test on Travis
+ - doc: add FreeBSD building instructions
+ - build: fix MinGW build
+ - ci, misc: add support for CPython 3.7
+ - ci: run on latest PyPy versions on TravisCI
+ - examples: extra examples
+ - ci: fix AppVeyor build
+ - test: fix TXT test
+ - core: fix repr for PTR results
+
+Version 2.3.0
+=============
+ - core: fix CPython implementation TTL parsing issue
+ - core: add ability to make queries using the command line
+ - core: fix parsing TXT records with invalid UTF-8 chars
+ - deps: removed unneeded c-ares files
+ - core: update bundled c-ares to 1.13.0
+ - ci: fix PyPy in Travis
+
+Version 2.2.0
+=============
+ - test: fix CNAME test
+ - core: parse TTL in PTR replies
+ - core: parse PTR aliases
+ - doc: fix installation instructions in README
+ - doc: fix Channel.set_local_ip documentation
+ - core: accept local_ip and local_dev as kwargs
+ - ci, misc: add support for CPython 3.6
+ - ci: only run CI on master
+ - ci: disable some Travis notifications
+ - build: add scripts to build manylinux wheels
+
+Version 2.1.1
+=============
+ - cffi: fix setting nameserver in Channel.__init__
+ - doc: update Sphinx configuration so the docs can be built
+ - core: backport fix for CVE-2016-5180
+ - cffi: fix structure definition
+ - ci: use PyPy 5.4.1 when testing on Travis
+
+Version 2.1.0
+=============
+ - core: fix parsing chunked TXT records
+
+Version 2.0.1
+=============
+ - core: fix importing from errno submodule
+
+Version 2.0.0
+=============
+ - doc: fix rst syntax in README
+ - sample: fix correctly setting events mask
+ - setup.py: mark as executable and add shebang
+ - tests.py: assertions moved out of cb so C code cannot discard
+ - tests.py: test reverse_address on IPv6 also
+ - tests.py: ensure all query results have proper and bound type
+ - pycares.c: register result struct-sequences in pycares namespace
+ - ci: run tests with PyPy as well
+ - ci: run tests on CPython 3.5 on Travis
+ - test: moved test file to tests/tests.py
+ - test: add Python 3.5 to tox.ini
+ - ci: use PyPy 5 in Travis CI
+ - build: refactor building bundled c-ares
+ - ci: add Python 3.5 to AppVeyor
+ - core: reorganize package
+ - core: add CFFI core implementation
+ - cffi: fix OSX support
+ - cffi: fixup FreeBSD support
+ - doc: MinGW support got axed
+ - doc: update supported Python versions
+ - core: update bundled c-ares to 9642b57
+
+Version 1.0.0
+=============
+ - build: fix build on Windows with Python
+ - channel: return TTL information
+ - channel:don't unnecessarily create a list for CNAME results
+ - core: use inet_pton instead of inet_addr
+ - channel: simplify PTR response handling
+ - channel: make al queries return namedtuple-like objects
+ - build: use setuptools
+ - ci: add appveyor integration
+ - build: enable verbose output when building c-ares
+ - build: fix 64-bit build on Windows
+ - build: drop support for older Python versions
+ - doc: update documentation
+
+Version 0.7.0
+=============
+ - setup: Fix decoding in non-UTF-8 environments
+ - build: updated Travis build process
+ - Add rotate option
+ - Update documentation
+
+Version 0.6.3
+=============
+ - Fix crash if ares_timeout returns NULL
+ - Fix initializing channel with float timeouts < 1
+
+Version 0.6.2
+=============
+ - Fix crash due to a refcount bug
+
+Version 0.6.1
+=============
+ - Raise ValueError if query type is not valid
+ - Re-enabled CNAME test
+ - Fixed importing from errno submodule in Python 3
+
+Version 0.6.0
+=============
+ - Added asyncio integration example
+ - Added event loop integration documantation
+ - Mention Python 3.4 support
+ - Fixed setup_cares.py to properly work with Python 3
+ - Fix build on BSD systems
+
+Version 0.5.0
+=============
+ - Updated to c-ares 1.10.0
+
+Version 0.4.0
+=============
+ - Added support for compiling with Microsoft Visual Studio
+ - Added socket_send_buffer_size, socket_receive_buffer_size,
+   lookups and domains init options
+ - Unified set_local_ip* functions
+
+Version 0.3.0
+=============
+ - Simplified gethostbyaddr interface
+ - Added reverse_address method
+ - Added PTR query support
+ - Fixed pyuv resolver example
+
+Version 0.2.0
+=============
+ - Fixed checking port number boundaries
+ - Refactored unicode support
+ - Encode given hostnames with idna encoding
+   for gethostbyname and query
+
+Version 0.1.0
+=============
+ - Initial release
+

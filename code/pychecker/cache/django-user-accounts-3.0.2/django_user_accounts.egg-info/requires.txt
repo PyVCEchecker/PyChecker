@@ -1,0 +1,7 @@
+Django>=1.11
+django-appconf>=1.0.1
+pytz>=2015.6
+
+[pytest]
+pytest
+pytest-django

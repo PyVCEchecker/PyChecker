@@ -1,0 +1,9 @@
+docopt<0.7.0,>=0.6.0
+jsonpatch>=0.4
+requests<3.0.0,>=2.9.1
+schema>=0.4.0
+six<2.0.0,>=1.13.0
+tqdm>=4.0.0
+
+[:python_version < "3.4"]
+backports.csv<1.07

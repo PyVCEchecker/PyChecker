@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of Flask-CeleryExt
+# Copyright (C) 2015, 2016, 2017 CERN.
+#
+# Flask-CeleryExt is free software; you can redistribute it and/or modify it
+# under the terms of the Revised BSD License; see LICENSE file for more
+# details.
+
+include .lgtm
+include LICENSE
+include MAINTAINERS *.rst
+include .coveragerc .editorconfig run-tests.sh pytest.ini
+include docs/*.rst docs/*.py docs/Makefile docs/requirements.txt
+include tests/*.py
+recursive-include docs/_themes *.py *.css *.css_t *.conf *.html README
+recursive-include docs/_templates *.html
+
+# added by check_manifest.py
+include *.rst
+include *.txt
+include *.yml
+include Dockerfile

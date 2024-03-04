@@ -1,0 +1,25 @@
+Metadata-Version: 1.1
+Name: pyghmi
+Version: 1.5.19
+Summary: Python General Hardware Management Initiative (IPMI and others)
+Home-page: http://github.com/openstack/pyghmi/
+Author: Jarrod Johnson
+Author-email: jjohnson2@lenovo.com
+License: Apache License, Version 2.0
+Description: This is a pure python implementation of IPMI protocol.
+        
+        pyghmicons and pyghmiutil are example scripts to show how one may incorporate
+        this library into python code
+        
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7

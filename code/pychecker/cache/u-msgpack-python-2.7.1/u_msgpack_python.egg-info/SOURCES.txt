@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+test_umsgpack.py
+umsgpack.py
+u_msgpack_python.egg-info/PKG-INFO
+u_msgpack_python.egg-info/SOURCES.txt
+u_msgpack_python.egg-info/dependency_links.txt
+u_msgpack_python.egg-info/top_level.txt

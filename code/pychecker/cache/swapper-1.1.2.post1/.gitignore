@@ -1,0 +1,9 @@
+*.pyc
+*.egg-info
+*.egg
+*.sw?
+build
+dist
+README.rst
+/.eggs/
+/.tox/

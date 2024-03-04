@@ -1,0 +1,13 @@
+<link href='https://fonts.googleapis.com/css?family=Oxygen:300,400,700' rel='stylesheet'>
+
+{% if prerelease %}
+<script>
+$(document).ready(function() {
+    $('div.body').prepend('<div id="dev-warning">Warning: This is the documentation for a pre-release version of Falcon.</div>')
+});
+</script>
+{% endif %}
+
+<div id="logo">
+    <a href="{{ pathto(master_doc) }}"><img src="{{ pathto('_static/img/logo.svg', 1) }}" width="163" height="163" alt="Falcon Web Framework Logo"/></a>
+</div>

@@ -1,0 +1,3 @@
+[console_scripts]
+oj = onlinejudge_command.main:main
+

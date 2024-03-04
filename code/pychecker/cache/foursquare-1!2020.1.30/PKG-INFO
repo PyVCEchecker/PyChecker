@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: foursquare
+Version: 1!2020.1.30
+Summary: easy-as-pie foursquare API client
+Home-page: http://github.com/mLewisLogic/foursquare
+Author: Mike Lewis
+Author-email: mlewis.mail@gmail.com
+License: MIT License
+Download-URL: http://github.com/mLewisLogic/foursquare/tarball/master
+Description: An advanced, but easy to use foursquare API client that handles OAuth, automatic retries, and other niceties.
+        
+        For usage, see: http://github.com/mLewisLogic/foursquare
+        
+Keywords: foursquare api
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: License :: OSI Approved :: MIT License

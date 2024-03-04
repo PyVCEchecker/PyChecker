@@ -1,0 +1,204 @@
+CHANGES
+=======
+
+1.4.0
+-----
+
+* add new api for press\_duration
+* use self write AttrDict class to replace attrdict lib
+* update readme
+
+1.3.4
+-----
+
+* remove noisy log
+
+1.3.3
+-----
+
+* support tidevice
+
+1.3.2
+-----
+
+* limit debug log length
+
+1.3.1
+-----
+
+* add more debug info
+
+1.3.0
+-----
+
+* change wait() default return None when element not found, previous raise Error
+
+1.2.7
+-----
+
+* fix again
+
+1.2.6
+-----
+
+* fix loop call
+
+1.2.5
+-----
+
+* wait wda ready before tins xctest
+
+1.2.4
+-----
+
+* update get scale logic
+
+1.2.3
+-----
+
+* add try\_first in register\_callback, optimize usage of USBClient
+* python2 is no logger support, remove from traivs.yml
+
+1.2.2
+-----
+
+* add python 3.7 and 3.8 to travis.yml
+* retry for stale element error
+* add d.alert.click\_exists
+
+1.2.1
+-----
+
+* Add en button name for alert monitor
+* add timeout in http request
+
+1.2.0
+-----
+
+* fix first call windows\_size has to start com.apple.Preferences bug, add wda\_bundle\_id argument
+
+1.1.10
+------
+
+* fix nameMatches, update tests
+* fix info get error
+* fix window size request twice error
+
+1.1.9
+-----
+
+* merge WDAUnknownError
+* support handle possibly crashed error
+
+1.1.8
+-----
+
+* add retry to app\_current
+
+1.1.7
+-----
+
+* add depth to 4
+* support tins when wda is not ready
+
+1.1.6
+-----
+
+* add \_fast\_swipe
+* add 无线局域网与蜂窝网络 to watch\_and\_click
+
+1.1.5
+-----
+
+* hotfix window\_size return (0,0) error
+
+1.1.4
+-----
+
+* fix wait\_device and fix-session-id both occur error
+* add open watch button
+
+1.1.3
+-----
+
+* change http timeout to 180s and wait device to 180s
+* add watch\_and\_click usage
+* hotfix for inside platform
+
+1.1.2
+-----
+
+* fix spell
+* fix check isatty bug
+
+1.1.1
+-----
+
+* only tmq and not local device use /mds/touchAndHold
+
+1.1.0
+-----
+
+* add d.alert.watch\_and\_click support
+* add watch and click support
+
+1.0.12
+------
+
+* change touch to mds touch for test
+
+1.0.11
+------
+
+* wait for wda recover when 502 bad gateway
+
+1.0.10
+------
+
+* add Selector.click
+
+1.0.9
+-----
+
+* change wait\_debug timeout from 30s to 120s, add element.info
+
+1.0.8
+-----
+
+* hot fix, i do not know why
+
+1.0.7
+-----
+
+* change tmq check time
+
+1.0.6
+-----
+
+* add appium\_settings, fix invalid\_session\_id not handle old wda
+* slow find elements
+
+1.0.5
+-----
+
+* fix missing delete bug
+
+1.0.4
+-----
+
+* fix selector getattr recursive error
+
+1.0.3
+-----
+
+* show error message
+
+1.0.2
+-----
+
+* add alert check before send\_keys, for tmq platform
+
+1.0.1
+-----
+
+* fix element operation error

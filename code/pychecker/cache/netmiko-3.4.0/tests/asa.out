@@ -1,0 +1,127 @@
+Type help or '?' for a list of available commands.
+twb-dc-fw1> login
+Username: login
+Password: ************
+%Login failed
+ERROR: Invalid username
+Username: admin
+Password: ************
+twb-dc-fw1# terminal pager 0
+twb-dc-fw1# 
+twb-dc-fw1# configure terminal
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# terminal width 511
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# end
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# show version
+
+Cisco Adaptive Security Appliance Software Version 9.5(2) 
+Device Manager Version 7.5(2)
+
+Compiled on Sat 28-Nov-15 00:16 PST by builders
+System image file is "disk0:/asa952-lfbff-k8.SPA"
+Config file at boot was "startup-config"
+
+twb-dc-fw1 up 1 year 118 days
+
+Hardware:   ASA5506, 4096 MB RAM, CPU Atom C2000 series 1250 MHz, 1 CPU (4 cores)
+Internal ATA Compact Flash, 8192MB
+BIOS Flash M25P64 @ 0xfed01000, 16384KB
+
+Encryption hardware device : Cisco ASA Crypto on-board accelerator (revision 0x1)
+                             Number of accelerators: 1
+
+ 1: Ext: GigabitEthernet1/1  : address is 0062.ec29.70fc, irq 255
+ 2: Ext: GigabitEthernet1/2  : address is 0062.ec29.70fd, irq 255
+ 3: Ext: GigabitEthernet1/3  : address is 0062.ec29.70fe, irq 255
+ 4: Ext: GigabitEthernet1/4  : address is 0062.ec29.70ff, irq 255
+ 5: Ext: GigabitEthernet1/5  : address is 0062.ec29.7100, irq 255
+ 6: Ext: GigabitEthernet1/6  : address is 0062.ec29.7101, irq 255
+ 7: Ext: GigabitEthernet1/7  : address is 0062.ec29.7102, irq 255
+ 8: Ext: GigabitEthernet1/8  : address is 0062.ec29.7103, irq 255
+ 9: Int: Internal-Data1/1    : address is 0062.ec29.70fb, irq 255
+10: Int: Internal-Data1/2    : address is 0000.0001.0002, irq 0
+11: Int: Internal-Control1/1 : address is 0000.0001.0001, irq 0
+12: Int: Internal-Data1/3    : address is 0000.0001.0003, irq 0
+13: Ext: Management1/1       : address is 0062.ec29.70fb, irq 0
+
+Licensed features for this platform:
+Maximum Physical Interfaces       : Unlimited      perpetual
+Maximum VLANs                     : 5              perpetual
+Inside Hosts                      : Unlimited      perpetual
+Failover                          : Disabled       perpetual
+Encryption-DES                    : Enabled        perpetual
+Encryption-3DES-AES               : Enabled        perpetual
+Carrier                           : Disabled       perpetual
+AnyConnect Premium Peers          : 2              perpetual
+AnyConnect Essentials             : Disabled       perpetual
+Other VPN Peers                   : 10             perpetual
+Total VPN Peers                   : 12             perpetual
+AnyConnect for Mobile             : Disabled       perpetual
+AnyConnect for Cisco VPN Phone    : Disabled       perpetual
+Advanced Endpoint Assessment      : Disabled       perpetual
+Shared License                    : Disabled       perpetual
+Total UC Proxy Sessions           : 2              perpetual
+Botnet Traffic Filter             : Disabled       perpetual
+Cluster                           : Disabled       perpetual
+
+This platform has a Base license.
+
+Serial Number: JAD20190034
+Running Permanent Activation Key: 0x303efb44 0x74718d1c 0xcc339db4 0xa088349c 0x861606ab 
+Configuration register is 0x1
+Image type                : Release
+Key Version               : A
+Configuration last modified by admin at 11:20:46.104 PST Mon Feb 1 2021
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# configure terminal
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# end
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# configure terminal
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# logging buffered notifications
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# end
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# show run | inc logging buffer
+logging buffer-size 500000
+logging buffered notifications
+twb-dc-fw1# 
+twb-dc-fw1# configure terminal
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# logging buffered notifications
+twb-dc-fw1(config)# no logging console
+twb-dc-fw1(config)# logging buffered warnings
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# end
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# show run | inc logging buffer
+logging buffer-size 500000
+logging buffered warnings
+twb-dc-fw1# 
+twb-dc-fw1# configure terminal
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# logging buffered notifications
+twb-dc-fw1(config)# no logging console
+twb-dc-fw1(config)# logging buffered warnings
+twb-dc-fw1(config)# 
+twb-dc-fw1(config)# end
+twb-dc-fw1# 
+twb-dc-fw1# 
+twb-dc-fw1# show run | inc logging buffer
+logging buffer-size 500000
+logging buffered warnings
+twb-dc-fw1# 
+twb-dc-fw1# exit

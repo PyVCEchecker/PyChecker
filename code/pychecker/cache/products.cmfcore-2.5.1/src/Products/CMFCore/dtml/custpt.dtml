@@ -1,0 +1,71 @@
+<dtml-var manage_page_header>
+
+<dtml-var manage_tabs>
+
+<main class="container-fluid">
+
+  <form action="manage_doCustomize" method="post"
+        class="zmi-dtml zmi-edit">
+
+    <div class="form-group row">
+      <label for="source_file" class="form-label col-sm-3 col-md-2">
+        Source file
+      </label>
+      <div class="col-sm-9 col-md-10">
+        &dtml-getObjectFSPath;
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="last_modified" class="form-label col-sm-3 col-md-2">
+        Last modified
+      </label>
+      <div class="col-sm-9 col-md-10">
+        <dtml-var "getModTime().ISO()">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="folder_path" class="form-label col-sm-3 col-md-2">
+        Customize
+      </label>
+      <div class="col-sm-9 col-md-10">
+        <select name="folder_path">
+          <dtml-in expr="listCustFolderPaths('DTML Method')">
+            <option value="&dtml-sequence-key;">&dtml-sequence-item;</option>
+          </dtml-in>
+        </select>
+        <input class="btn btn-primary" type="submit" name="submit"
+               value=" Customize " />
+        <br/>
+        <small>
+          Select a destination folder and press the button
+          to make a copy of this method that can be customized.
+        </small>
+      </div>
+    </div>
+
+  </form>
+
+  <br/>
+
+  <div class="form-group">
+    <textarea id="content" data-contenttype="html"
+              data-readonly="True"
+              class="form-control zmi-code col-sm-12"
+              name="template:text" wrap="off"
+              rows="20"><dtml-var read html_quote></textarea>
+  </div>
+
+  <script>
+    $(function() {
+      editor.setOptions({
+          'readOnly': true,
+          'maxLines': 999,
+      });
+    });
+  </script>
+
+</main>
+
+<dtml-var manage_page_footer>

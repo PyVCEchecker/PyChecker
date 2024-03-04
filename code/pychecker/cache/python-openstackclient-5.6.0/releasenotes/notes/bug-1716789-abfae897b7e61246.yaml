@@ -1,0 +1,10 @@
+---
+fixes:
+  - |
+    Change the default value of ``--protocol`` option to ``any`` in
+    ``security group rule create`` command when using the Neutron v2 API.
+    [Bug `1716789 <https://bugs.launchpad.net/bugs/1716789>`_]
+upgrade:
+  - |
+    Commands that assumed the default value of ``--protocol`` to be ``tcp``
+    now must include ``--protocol tcp`` explicitly in Network commands.

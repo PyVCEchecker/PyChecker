@@ -1,0 +1,132 @@
+[tool.black]
+line-length = 100
+
+[tool.poetry]
+name = "isort"
+version = "5.9.3"
+description = "A Python utility / library to sort Python imports."
+authors = ["Timothy Crosley <timothy.crosley@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/pycqa/isort"
+homepage = "https://pycqa.github.io/isort/"
+documentation = "https://pycqa.github.io/isort/"
+keywords = ["Refactor", "Lint", "Imports", "Sort", "Clean"]
+classifiers = [
+    "Development Status :: 6 - Mature",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+]
+urls = { Changelog = "https://github.com/pycqa/isort/blob/main/CHANGELOG.md" }
+packages = [
+    { include = "isort" },
+]
+include = [
+    { path = "tests", format = "sdist" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6.1,<4.0"
+pipreqs = {version = "*", optional = true}
+requirementslib = {version = "*", optional = true}
+pip-api = {version = "*", optional = true}
+colorama = {version = "^0.4.3", optional = true}
+setuptools = {version = "*", optional = true}
+
+[tool.poetry.extras]
+pipfile_deprecated_finder = ["pipreqs", "requirementslib", "pip-shims<=0.3.4"]
+requirements_deprecated_finder = ["pipreqs", "pip-api"]
+colors = ["colorama"]
+plugins = ["setuptools"]
+
+[tool.poetry.dev-dependencies]
+vulture = "^1.0"
+bandit = "^1.6"
+safety = "^1.8"
+flake8-bugbear = "^19.8"
+black = {version = "^20.08b1", allow-prereleases = true}
+mypy = "^0.902"
+ipython = "^7.7"
+pytest = "^6.0"
+pytest-cov = "^2.7"
+pytest-mock = "^1.10"
+pep8-naming = "^0.8.2"
+hypothesis-auto = { version = "^1.0.0" }
+hypothesmith = "^0.1.3"
+examples = { version = "^1.0.0" }
+cruft = { version = "^2.2" }
+portray = { version = "^1.6.0" }
+pipfile = "^0.0.2"
+requirementslib = "^1.5"
+pipreqs = "^0.4.9"
+pip_api = "^0.0.12"
+numpy = "^1.16.0"
+pylama = "^7.7"
+pip = "^21.1.1"
+pip-shims = "^0.5.2"
+smmap2 = "^3.0.1"
+gitdb2 = "^4.0.2"
+httpx = "^0.13.3"
+example_shared_isort_profile = "^0.0.1"
+example_isort_formatting_plugin = "^0.0.2"
+example_isort_sorting_plugin = "^0.0.2"
+flake8 = "^3.8.4"
+hypothesis = "^6.10.1"
+libcst = "^0.3.18"
+mypy-extensions = "^0.4.3"
+py = "^1.10.0"
+toml = "^0.10.2"
+pytest-benchmark = "^3.4.1"
+types-pkg-resources = "^0.1.2"
+pre-commit = "^2.13.0"
+types-colorama = "^0.4.2"
+types-toml = "^0.1.3"
+
+[tool.poetry.scripts]
+isort = "isort.main:main"
+isort-identify-imports = "isort.main:identify_imports_main"
+
+[tool.poetry.plugins."distutils.commands"]
+isort = "isort.setuptools_commands:ISortCommand"
+
+[tool.poetry.plugins."pylama.linter"]
+isort = "isort.pylama_isort:Linter"
+
+[tool.portray.mkdocs]
+edit_uri = "https://github.com/pycqa/isort/edit/main/"
+extra_css = ["art/stylesheets/extra.css"]
+
+[tool.portray.mkdocs.theme]
+name = "material"
+favicon = "art/logo.png"
+logo = "art/logo.png"
+palette = {scheme = "isort"}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+python_version = 3.6
+strict = true
+follow_imports = "silent"
+exclude = "isort/_vendored|tests/unit/example_projects|tests/unit/example_crlf_file.py"
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+allow_untyped_defs = true
+allow_incomplete_defs = true
+allow_untyped_calls = true

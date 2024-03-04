@@ -1,0 +1,3 @@
+[console_scripts]
+monasca = monascaclient.shell:main
+

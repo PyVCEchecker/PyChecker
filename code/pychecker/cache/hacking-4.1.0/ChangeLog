@@ -1,0 +1,899 @@
+CHANGES
+=======
+
+4.1.0
+-----
+
+* Allow hacking to be used as a pre-commit hook
+* Enable py39 testing with hacking
+* Add useful project links to metadata
+* Drop lower bound testing
+* Changed minversion in tox to 3.18.0
+* Updating lower-constarints job as non voting
+* Add H216 to flag use of third party mock
+* Add separate releasenotes page per version
+
+4.0.0
+-----
+
+* Catch .format() use in log string interpoliation check
+* Handle formatting of args in string interpolation check
+* Move the most common hacking rules from other projects
+* Fix H903 hacking\_no\_cr
+* Fix H904 hacking\_delayed\_string\_interpolation
+
+3.2.0
+-----
+
+* migrate testing to ubuntu focal
+* drop mock from lower-constraints and requirements
+* Add in-tree upper-constraints for py35 job
+* Revert "Remove py35 job"
+* Switch to newer openstackdocstheme and reno versions
+* Add PDF documentation build
+* Remove py35 job
+
+3.1.0
+-----
+
+* Enable flake8 3.8.\*
+
+3.0.1
+-----
+
+* Cap flake8 < 3.8.0
+* Switch testing to Victoria testing runtime
+* [ussuri][goal] Update contributor documentation
+* Remove usage of six
+* Small cleanups
+* Document new way of registering local plugins
+* Stop building universal wheels
+
+3.0.0
+-----
+
+* Remove pypy jobs
+* [ussuri][goal] Drop python 2.7 support and testing
+* Disable old-style-class check by default
+
+2.0.0
+-----
+
+* Bump flake8 version to something modern
+* Address flake8 3.x violations
+* General cleanups
+* Clean up "is" conditionals
+* Fix deprecated escape chars in strings
+* Add Python 3 Train unit tests
+* Dropping the py35 testing
+* OpenDev Migration Patch
+* Fix python 3.6 escape char warnings in strings
+* Replace openstack.org git:// URLs with https://
+* Don't quote {posargs} in tox.ini
+* Fix coverage job
+* Fix 'ref' format errors in README file
+* Change openstack-dev to openstack-discuss
+* Add support for detecting SPDX license headers
+* Use templates for cover and lower-constraints
+* add python 3.6 unit test job
+* switch documentation job to new PTI
+* import zuul job settings from project-config
+* Switch to stestr
+* fix tox python3 overrides
+
+1.1.0
+-----
+
+* Import integration test
+* Release notes for 1.1.0
+* uncap eventlet
+* add lower-constraints job
+* Updated from global requirements
+* Drop py34 target in tox.ini
+* Updated from global requirements
+* Transition to flake8 2.6.x
+* Avoid tox\_install.sh for constraints support
+* Remove setting of version/release from releasenotes
+* autospec check: Allow 'wraps' to be an alternative to autospec
+* Updated from global requirements
+* Fix broken releasenotes
+
+1.0.0
+-----
+
+* Release notes for 0.14.0
+* Fix python 3.6 escape char warnings in strings
+* Add tests to show '# noqa' works with mock.patch check
+* Update the doc URL in the documents
+* rearrange existing documentation to fit the new standard layout
+* Switch from oslosphinx to openstackdocstheme
+* Turn on warning-is-error in doc build
+* Add a check to enforce use of 'autospec' in mock.patch
+* Add py3.5 support in setup.cfg
+* Disambiguate the hacking rules for third party imports
+* Updated from global requirements
+* Add explicit support for py35
+* Remove support for py33/py26
+* Fix broken link
+* Remove discover from test-requirements
+* Add Constraints support
+* Updated from global requirements
+* Revert "local-check-factory CLI option"
+
+0.13.0
+------
+
+* local-check-factory CLI option
+* Add a check to make sure the right assert\* method is used
+
+0.12.0
+------
+
+* Enable release notes translation
+* Updated from global requirements
+* Updated from global requirements
+* Fix issues detected by pycodestyle
+* Add documentation about off-by-default options
+* Add optional H203 to check that assertIs(Not)None is used
+* Updated from global requirements
+* Add a check for delayed string interpolation
+* Fix releasenote building
+* Clean up check signatures
+* Fix Google Python Style Guide link
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Fix H703 test
+* Updated from global requirements
+* Updated from global requirements
+* Add reno and release notes tracking
+
+0.11.0
+------
+
+* Updated from global requirements
+* Update the assertRaises example to be more modern
+* Updated from global requirements
+* Run all flake8 checks
+* Updated from global requirements
+* Updated from global requirements
+* Update flake8 requirement for 0.11.0
+* Updated from global requirements
+* Avoid git clone in integration test
+* Remove oslo-incubator section in HACKING.rst
+* Do not call "rm -rf" on arbitrary user input
+* Update setup.cfg
+* Put py34 first in the env order of tox
+* Minor text cleanup
+* Deprecated tox -downloadcache option removed
+* Updated from global requirements
+* Add support for PEP257
+* Update docs for i18n exception
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Add editor files to .gitignore
+* Take advantage of RST formatting for links
+* Revise adding additional checks section of README
+* Add example to versioning section of README
+* Expand origin section of README
+* Document the reasoning behind general hacking rules
+* Expand depends documentation in readme
+* Fix a typo
+* Add support for flake8 off\_by\_default for optional checks
+* Updated from global requirements
+* whitelist bash in integration test
+* Drop py33 as a target
+* Don't shallow clone from file:// in integration test
+* Updated from global requirements
+* Updated from global requirements
+* Change integration test to use  git.o.o
+* tests: allow to run the same test for different code
+* Updated from global requirements
+* Fix string formatting in example
+* Updated from global requirements
+* Updated from global requirements
+
+0.10.1
+------
+
+* Updated from global requirements
+* Fix H238 to allow parent classes to be returned by a function
+* H105: also check for Authors and authors
+
+0.10.0
+------
+
+* Add docstring to is\_import\_exception
+* Remove complex import rules
+* Remove Git commit message checks
+* Add eventlet to test-requirements
+* Workflow documentation is now in infra-manual
+* Allow import redirections
+* Fixing broken while loop in imports.py
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Add H237 to HACKING.rst
+* Don't change log level as import side effect
+* Include example of multiple imports using from syntax
+* Updated from global requirements
+* Updated from global requirements
+* Pin mccabe to prevent it from breaking hacking
+* Updated from global requirements
+* Updated from global requirements
+* Add hacking check H105: don't use author tags
+* Add a check for old style class declarations
+* Updated from global requirements
+* Update H501 to check for self.\_\_dict\_\_
+* Updated from global requirements
+* Stop using intersphinx
+* Updated from global requirements
+* Work toward Python 3.4 support and testing
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Relax H305 and H307 checks
+* Fix import check interaction with namespace modules
+* remove H904
+* Updated from global requirements
+* remove H402
+* remove H803, it's mostly an old flamewar
+* add hacking preamble
+* Updated from global requirements
+* Updated from global requirements
+* Mark hacking as being a universal wheel
+
+0.9.2
+-----
+
+* Fixed warning H302 when used with six.moves
+
+0.9.1
+-----
+
+* Fix a typo in HACKING.rst
+* Make import checks properly detect blank lines and comments
+* Clarify where the "following template" is
+
+0.9.0
+-----
+
+* Update localization checks to understand separate catalogs
+* Update examples for i18n
+* Updated from global requirements
+* update Commit Message guidelines
+* Drop 'not in' and 'is not' tests from HACKING.rst
+* Add Installation section to the readme
+* Include rule numbers in HACKING.rst
+* Add link to readme at bottom of docs.openstack.org/developer/hacking/
+* Update pointer to HACKING.rst in the readme
+* Updated from global requirements
+* Consider sys.real\_prefix for \_get\_import\_type
+* Add TestCase assertion methods for testing checks
+* Speed up hacking\_import\_alphabetical
+* Speed up hacking\_has\_correct\_license
+* Fix py33, make sure skip\_on\_py3 is part of every check
+* Add noqa everywhere that it is easy to do so
+* Remove H901,H902 since it is a duplicate of H714,H713
+* Move other checks into their own file
+* Cleanup hacking doc generation
+* Move git checks into their own file
+* Move localization checks into their own file
+* Move docstring/list checks into their own file
+* Keep setup.cfg flake8.extensions in numerical order
+* Move docstring checks into their own file
+* Move import checks into their own file
+* Compile python 2-> regular expressions
+* Move python 2->3 checks into their own module
+* Speed up license checks
+* Only compile regex for hacking\_except\_format once
+* Move except checks into their own module
+* Move comment checks into their own module
+* Make test\_doctest use entry points
+* Fix typo: backsplash=>backslash
+* Updated from global requirements
+* Import Guideline Exception for gettextutils
+* Use pep8's noqa argument
+* Move hacking to pep8 1.5.6
+* Minor README.rst tweaks
+* Updated from global requirements
+* Add posargs to tox -epep8
+* Make hacking pass pep8 1.5.x
+* Bump pep8, pyflakes and flake8 versions
+* Disable logging correctly
+* Make H202 check honor pep8 #noqa comment
+* Make hacking Python 3 compatible
+* Updated from global requirements
+* Updated from global requirements
+* Switch over to oslosphinx
+* HACKING.rst: Fix odd indentation in an example code
+* Remove tox locale overrides
+* Updated from global requirements
+* Clarify H403 message
+* More portable way to detect modules for H302
+* Fix python 3 incompatibility in \_get\_import\_type
+* Trigger warnings for raw and unicode docstrings
+* Enhance H233 rule
+* Add check for removed modules in Python 3
+* Add Python3 deprecated assert\* to HACKING.rst
+* Turn Python3 section into a list
+* Re-Add section on assertRaises(Exception
+* Cleanup HACKING.rst
+* Move hacking guide to root directory
+* Fix typo in package summary
+* Add H904: don't wrap lines using a backslash
+* checking for metaclass to be Python 3.x compatible
+* Remove unnecessary headers
+* Add -U to pip install command in tox.ini
+* Fix typos of comment in module core
+* Updated from global requirements
+* Add a check for file with only comments
+* Enforce grouping like imports together
+* Add noqa support for H201 (bare except)
+* Enforce import grouping
+* Clean up how test env variables are parsed
+* Fix the escape character
+* Remove vim modeline sample
+* Add a check for newline after docstring summary
+
+0.8.0
+-----
+
+* Updated from global requirements
+* Continue reserving H6xx namespace for calling methods
+* Fix import grouping
+* Add assertNotEquals check to H602
+* Sync requirements with OS requirements
+* Allow APL text to start on the first text column
+* Add noqa support for H231 and H233
+* Revert "Adds ability to ignore hacking validations with noqa"
+* Move the hacking guidelines to sphinx docs
+* Replace OpenStack LLC with OpenStack Foundation
+* Update tox to use develop and custom pip command
+* Add check for deprecated method assert\_
+* hacking should conform with OS requirements
+* Redirect stderr for git rev-parse
+* Use the name for this attribute that exists on Python3
+* Add pypy on tox envlist
+* Adds ability to ignore hacking validations with noqa
+* Update requirements
+* Improve H202 to cover more cases
+* Add check for deprecated method assertEquals
+* Reword H404 description to match check
+
+0.7.0
+-----
+
+* Synced with global requirements
+* Fix typo in HACKING.rst
+* python3: Fix tracebacks while running testsuites
+* Import exceptions list is now configurable
+* python3: Fix unicode and gettext
+* python3: Fix python3 tox installation
+* Extract configs-related code to the configs helper
+* Update I18N code style
+* Make H202 work again
+* Don't crash on tests when git is not installed
+
+0.6.0
+-----
+
+* Make H103 Invalid Apache throw error on correct line
+* Make H232 message mention its py3 related
+* Add information about the Google style guide
+* Avoid crash when git commit title cannot be found
+* Add no locals() for string formatting test
+* Fix typo in HACKING.rst compatility=>compatibility
+* Add H233 check for usages of the print operator
+* Add H232 check for octal number literals
+* Determine git workdir properly
+* Reserver a H23x range for Python 3.x compat checks
+* Add documentation for Apache License check
+* Strip leading/trailing whitespace from reference License
+* Add note about checks have community support
+* Ignore import lines with noqa
+* Add check for end of title line of commit messages
+* Include HACKING.rst in MANIFEST.in
+* Split H102 into 2 checks and enable them
+* Actually tie pbr versions in setup\_requires
+
+0.5.5
+-----
+
+* update HACKING.rst to be OpenStack Style Commandments
+* Add local-check test
+* Enable all checks during integration test
+* Add H203: Check for Python 3.x compatible except
+* Add integration test option to tox
+* python3: Introduce py33 to tox.ini
+* Add H402 doctest and other doc cleanups
+* Update H3xx doctests
+* Add doctests to H201, H202 and fix False Positive in H202
+* Expand H101 docstring tests
+* Fix tests to redirect stdout
+* Style-fixes to hacking/core.py
+* Disable H102 until ready to add new checks
+* add check that python files have Apache 2.0 license stanza
+* Remove trailing whitespace in setup.cfg
+* Add proper README for how to develop on hacking
+* Rename README to HACKING
+* Pin the versions of pep8/pyflakes here
+* Remove an extra word from the H901 error message
+* Cleanup some docstrings
+* Fix yield bug for GlobalCheck
+* Improve unit test output
+* Add .mailmap file
+* Stop referencing nova HACKING guide
+
+0.5.4
+-----
+
+* Update indentation in setup.cfg
+* Implement a proxy checker class
+* Add back in git commit message checking
+* Remove H307 no db in virt
+* Add gettext install
+* Fix homepage location
+
+0.5.2
+-----
+
+* Moved hacking to core
+* Clean up flakes warnings
+
+0.5.1
+-----
+
+* Add tests
+* Fix requirements distribution
+
+0.5.0
+-----
+
+* Make hacking a flake8 plugin
+* Switch to flake8 for pep8 testing
+* Switch to final 1.1.0 oslo.config release
+* websockify 0.4 is busted
+* Pin SQLAlchemy to 0.7.x
+* Update to Quantum Client 2.2.0
+* Update tox.ini to support RHEL 6.x
+* Switch to oslo.config
+* docs should indicate proper git commit limit
+* Fixes oslo-config update for deprecated\_group
+* Regenerate nova.conf.sample
+* Prevent hacking.py from crashing on unexpected import exception
+* Bump python-quantumclient version to 2.1.2
+* Update OpenStack LLC to Foundation
+* Improve hackings docstring detection
+* Unpin PasteDeploy dependency version
+* Unpin routes dependency version
+* Unpin suds dependency version
+* Unpin Cheetah dependency version
+* Fix hacking.py to handle 'cannot import x'
+* Fix hacking.py to handle parenthesise in from import as
+* Remove function redefinitions
+* Sync latest install\_venv\_common.py
+* Fix broken logging imports
+* Fix hacking test to handle namespace packages
+* Use oslo-config-2013.1b4
+* Fix hacking tests on osx
+* Harmonize PEP8 checking between tox and run\_tests.sh
+* Fix script argument parsing
+* Module import style checking changes
+* Add "is not" test to hacking.py
+* Update tools/regression\_tester
+* support reloctable venv roots in testing framework
+* Add regression testing tool
+* Sync latest install\_venv\_common from oslo
+* replace ssh-keygen -m with a python equivalent
+* Added Postgres CI opportunistic test case
+* Fix import for install\_venv.py
+* Add 'not in' test to tools/hacking.py
+* import tools/flakes from oslo
+* Make sure there are no unused import
+* Use install\_venv\_common.py from oslo
+* Fix hacking N302 import only modules
+* Make failures in the periodic tests more detailed
+* Add version constraint for coverage
+* xenapi: Add cleanup\_sm\_locks script
+* Add version constraint for cinder
+* Cleanup of extract\_opts.py
+* Unpin testtools
+* Sync latest cfg from oslo-incubator
+* Avoid testtools 0.9.25
+* Go back to the original branch after pylint check
+* Fix multi line docstring tests in hacking.py
+* don't allow crs in the code
+* Pull NovaWebSocketProxy class out of nova-novncproxy binary
+* Use testrepository setuptools support
+* Revert "Use testr setuptools commands."
+* enable hacking.py self tests
+* Use testr setuptools commands
+* Try out a new nova.conf.sample format
+* Regenerate nova.conf.sample
+* fix N402 on tools/
+* Fix lintstack check for multi-patch reviews
+* fix N401 errors, stop ignoring all N4\* errors
+* Upgrade WebOb to 1.2.3
+* Make WebOb version specification more flexible
+* Import cfg module in extract\_opts.py
+* Replace fixtures.DetailStream with fixtures.StringStream
+* Use testr to run nova unittests
+* Move zombie\_instance\_updated\_at\_window option
+* Port to argparse based cfg
+* Correctly init XenAPIDriver in vm\_vdi\_cleaner.py
+* i18n raise Exception messages
+* Unpin lxml requirements
+* Update tools/flakes to work with pydoc
+* Fix pep8 exclude logic for 1.3.3
+* Add pyflakes option to tox
+* Allow newer boto library versions
+* Add generic customization hooks via decorator
+* Pin pep8 to 1.3.3
+* Use CONF.import\_opt() for nova.config opts
+* Remove nova.config.CONF
+* Add keystoneclient to pip-requires
+* Remove nova.flags
+* Unpin amqplib and kombu requirements
+* Isolate tests from the environment variable http\_proxy
+* Ban db import from nova/virt
+* Switch from FLAGS to CONF in misc modules
+* Remove flags.DECLARE
+* Move parse\_args to nova.config
+* move python-cinderclient to pip-requires
+* Force earlier version of sqlalchemy
+* Remove extra print line in hacking.py
+* Use testtools as the base testcase class
+* Change hacking.py N306 to use logical\_lines
+* Fix hacking.py naivete regarding lines that look like imports
+* Change install\_venv to use setup.py develop
+* Fixes syntax error in nova.tools.esx.guest\_tools.py
+* Proxy floating IP calls to quantum
+* Remove dependency on python-ldap for tests
+* Update tools hacking for pep8 1.2 and beyond
+* Revert "Add full test environment."
+* Loosen anyjson dependency to avoid clash with ceilometer
+* Bump the version of SQLAlchemy in pip-requires
+* Replaced default hostname function from gethostname to getfqdn
+* Move fakeldap.py from auth dir to tests
+* Added script to find unused config options
+* Add flag cinder\_endpoint\_template to volume.cinder
+* More specific lxml versions in tools/pip-requires
+* Set install\_requires in setup.py
+* Nail the pip requirement at 1.1
+* Update requires to glanceclient >=0.5.0
+* Add lintstack error checker based on pylint
+* Include CommonConfigOpts options in sample config
+* Ensure log formats are quoted in sample conf
+* Don't include hostname and IP in generated sample conf
+* Allow generate\_sample.sh to be run from toplevel dir
+* Fix hacking.py git checks to propagate errors
+* Add nosehtmloutput as a test dependency
+* Cleanup pip dependencies
+* Make missing imports flag in hacking settable
+* update python-quantumclient dependency to >=2.0
+* Rewrite image code to use python-glanceclient
+* Add a 50 char git title limit test to hacking
+* Drop AES functions and pycrypto dependency
+* Improve external lock implementation
+* Require eventlet >= 0.9.17
+* Fix broken pep8 exclude processing
+* XenAPI: Add script to destroy cached images
+* Replace subprocess.check\_output with Popen
+* Xen: Add race-condition troubleshooting script
+* Add git commit message validation to hacking.py
+* Fixes XenAPI driver import in vm\_vdi\_cleaner
+* Fix venv wrapper to clean \*.pyc
+* modify hacking.py to not choke on the def of \_()
+* Correct typo in tools/hacking.py l18n -> i18n
+* Implement nova network API for quantum API 2.0
+* Switch to common logging
+* Use setuptools-git plugin for MANIFEST
+* Align run\_tests.py pep8 with tox
+* Switch to using new config parsing for vm\_vdi\_cleaner.py
+* Fix several PEP-8 issues
+* Add full test environment
+* Remove unknown shutdown kwarg in call to vmops.\_destroy
+* Refactor vm\_vdi\_cleaner.py connection use
+* add nova-manage bash completion script
+* Replaces functions in utils.py with openstack/common/timeutils.py
+* Finalize tox config
+* Removing double quotes from sample config file
+* Backslash continuation removal (Nova folsom-2)
+* Sample config file tool updates
+* Use cfg's new global CONF object
+* Grammar fixes
+* Cleanup tools/hacking using flake8
+* Update pep8 dependency to v1.1
+* Nail pep8 dependencies to 1.0.1
+* Make validate\_compacted\_migration into general diff tool
+* Remove unused tools/rfc.sh
+* Remove wsgiref from requirements
+* Add migration compaction validation tool
+* Modify vm\_vdi\_cleaner to handle \`-orig\`
+* Remove old flagfile support
+* Trivial spelling fix
+* Imports to human alphabetical order
+* Enable InnoDB checking
+* Use instance\_get\_by\_uuid since we're looking up a UUID
+* Use nova\_uuid attribute instead of trying to parse out name\_label
+* Number of missing imports should always be shown
+* Improved tools/hacking.py
+* nova.virt.xenapi\_conn -> nova.virt.xenapi.connection
+* xenapi\_conn -> xenapi.connection
+* Remove python-novaclient dependency from nova
+* Improved localization testing
+* Remove nova Direct API
+* bug 968452
+* HACKING fixes, sqlalchemy fix
+* Remove nova.rpc.impl\_carrot
+* Updated docstrings in /tools as per HACKING
+* Remove tools/nova-debug
+* Add VDI chain cleanup script
+* Hack to fixup absolute pybasedir in nova.conf.sample
+* Require a more recent version of glance
+* HACKING fixes, all but sqlalchemy
+* Remove trailing whitespaces in regular file
+* Cleans up the create\_conf tool
+* Add  assertRaises check to tools/hacking.py as N202
+* Clean stale lockfiles on service startup : fixes bug 785955
+* Nova options tool enhancements
+* Support tox-based unittests
+* nova.conf sample tool
+* Support non-UTC timestamps in changes-since filter
+* Get rid of distutils.extra
+* Require newer versions of SA and SA-Migrate
+* Remove ajaxterm from Nova
+* Excise M2Crypto!
+* Boto 2.2.x failes. Capping pip-requires at 2.1.1
+* Add HACKING compliance testing to run\_test.sh
+* Cleanup Imports to match HACKING guidelines
+* greenlet version inconsistency
+* Tell users what is about to be installed via sudo
+* PEP8 remove direct type comparisons
+* Install a good version of pip in the venv
+* Rename .nova-venv to .venv
+* revert using git for novaclient
+* Relax novaclient and remove redis dependency
+* Relax dependency on boto 1.9b and nova-adminclient
+* Add ability to see deleted and active records
+* Use system M2Crypto package on Oneiric, bug 892271
+* Separate metadata api into its own service
+* install\_venv: apply eventlet patch correctly with python 2.7 (#890461)
+* Workaround for eventlet bug with unit tests in RHEL6.1
+* Apply M2Crypto fix for all Fedora-based distributions
+* Optional --no-site-packages in venv
+* venv: update distribute as well as pip
+* Remove nova dependency on vconfig on Linux
+* Upgrade pip in the venv when we build it
+* Utility script that makes enforcing PEP8 within git's pre-commit hook as easy as possible
+* Further changes to the cleaner
+* Reference orphaned\_instance instead of instance
+* Continue to the next iteration of the loop if an instance is not found
+* Add support for header version parameter to specify API version
+* Adds a script that can automatically delete orphaned VDIs. Also had to move some flags around to avoid circular imports
+* Added ==1.0.4 version specifier to kombu in pip-requires to ensure tests pass in a clean venv
+* install\_venv: pip install M2Crypto doesn't work on Fedora
+* install\_venv: add support for distro specific code
+* install\_venv: remove versioned M2Crypto dependency
+* install\_venv: don't use --no-site-packages with virtualenv
+* install\_venv: pass the --upgrade argument to pip install
+* install\_venv: refactor out pip\_install helper
+* Use latest version of SQLAlchemy
+* use git config's review.username for rfc.sh
+* Don't use GitPython for authors check
+* Fix rfc.sh's check for the project
+* Add rfc.sh to help with gerrit workflow
+* cleaned up
+* Multi-NIC support for vmwareapi virt driver in nova. Does injection of Multi-NIC information to instances with Operating system flavors Ubuntu, Windows and RHEL. vmwareapi virt driver now relies on calls to network manager instead of nova db calls for network configuration information of instance. Re-oranized VMWareVlanBridgeDriver and added session parmeter to methods to use existing session. Also removed session creation code as session comes as argument. Added check for flat\_inject flag before attempting an inject operation
+* Multi-NIC support for vmwareapi virt driver in nova. Does injection of Multi-NIC information to instances with Operating system flavors Ubuntu, Windows and RHEL. vmwareapi virt driver now relies on calls to network manager instead of nova db calls for network configuration information of instance. Ensure if port group is properly associated with vlan\_interface specified in case of VLAN networking for instances. Re-oranized VMWareVlanBridgeDriver and added session parmeter to methods to use existing session. Also removed session creation code as session comes as argument. Added check for flat\_inject flag before attempting an inject operation. Removed stale code from vmwareapi stubs. Also updated some comments to be more meaningful. Did pep8 and pylint checks. Tried to improve pylint score for newly added lines of code
+* Adding feedparser to pip-requires
+* add kombu to pip-requires and contrib/nova.sh
+* merged with volume\_types. no code refactoring yet
+* Merged with trunk
+* Added Test Code, doc string, and fixed pip-requiresw
+* Added monkey patching notification code function w
+* Merged with trunk
+* merged with nova-1411
+* Resolve conflicts and fixed broken unit testcases
+* merged with 1382
+* Moves image creation from POST /images to POST /servers/<id>/action
+* removing compute monitor
+* bumping novaclient version
+* Merged with trunk and fixed broken unit test cases
+* merged with 1320
+* some file attrib changes
+* - Fixed the conflift in vmops.py
+* VSA: first cut. merged with 1279
+* Changed broken perms
+* Updates some of the extra scripts in contrib and tools to current versions
+* merged trunk
+* This branch adds additional capability to the hosts API extension. The new options allow an admin to reboot or shutdown a host. I also added code to hide this extension if the --allow-admin-api is False, as regular users should have no access to host API calls
+* uses 2.6.0 novaclient (OS API 1.1 support)
+* Removed duplicate xattr from pip-requires
+* Merged trunk
+* Fixed several typos
+* Fixing lxml version requirement
+* Added xml schema validation for extensions resources. Added corresponding xml schemas. Added lxml dep, which is needed for doing xml schema validation
+* merged trunk
+* merged trunk
+* merged trunk
+* merged trunk
+* python-novaclient 2.5.8 is required
+* trunk merge with migration renumbering
+* trunk merge
+* merged trunk, fixed the floating\_ip fixed\_ip exception stupidity
+* updated pip-requires for novaclient
+* pip requires
+* moved migration again & trunk merge
+* Re-worked some of the WSGI and WSGIService code to make launching WSGI services easier, less error prone, and more testable. Added tests for WSGI server, new WSGI loader, and modified integration tests where needed
+* Adds support for "extra specs", additional capability requirements associated with instance types
+* Added floating IP support in OS API
+* trunk merge, getting fierce.
+* Merged trunk
+* - Modified NOTE in vm\_util.py - Changed gettext line to nova default in guest\_tool.py
+* missed the bin line
+* make nova-debug work with new style instances
+* remove extra stuff from clean vlans
+* Upstream merge
+* Renamed \_inst\_type\_query\_to\_dict -> \_dict\_with\_extra\_specs
+* trunk merged. conflicts resolved
+* Fixed the default arguments to None instead of an empty list
+* Fixing PEP8 compliance issues
+* trunk merge
+* trunk merge and migration bump
+* pip-requires
+* Stop trying to set a body for HTTP methods that do not allow it. It renders the unit tests useless (since they're testing a situation that can never arise) and webob 1.0.8 fails if you do this
+* Bump WebOb requirement to 1.0.8 in pip-requires
+* Cleanup and addition of tests for WSGI server
+* Fix for lp:796834
+* merged trunk
+* floating\_ips extension is loading to api now
+* pip novaclient bump
+* fixed up some little project\_id things with new novaclient
+* tests working after merge-3 update
+* merged koelkers tests branch
+* tweaks
+* Dropped requirement for IPy
+* merge with trey
+* Fixed pip-requires double requirement
+* added nova\_adminclient to tools/pip-requires
+* merged trunk
+* Added paramiko to tools/pip-requires
+* fix pep8 issues
+* pep8 fixes
+* now pip-requires mox version 0.5.3
+* Fixed all pep8 errors in tools/install\_venv.py. All tests pass
+* fixed pep8 spacing issue
+* merge from trunk and update .mailmap file
+* Added GitPython to [install\_dir]/tools/pip-requires
+* Added Python packages needed for coverage reports to virtualenv packages
+* got rid of extra whitespace
+* Update tools/pip-requires and tools/install\_venv.py for python2.7 support (works in ubuntu 11.04)
+* Remove zope.interface from the requires file since it is not used anywhere
+* remove zope.interface requires
+* use 'is not None' instead of '!= None'
+* Add a patch for python eventlet, when using install\_venv.py (see FAQ # 1485)
+* Removed adminclient.py and added reference to the new nova-adminclient project in tools/pip-requires
+* Add euca2ools import
+* Make euca-get-ajax-console work with Euca2ools 1.3
+* Removed adminclient and referred to pypi nova\_adminclient module
+* The VNC Proxy is an OpenStack component that allows users of Nova to access their instances through a websocket enabled browser (like Google Chrome)
+* Removed iso8601 dep from pip-requires
+* Added MUCH more flexiable iso8601 parser dep for added stability
+* merge trunk
+* incorporate feedback from termie
+* Implementation of blueprint hypervisor-vmware-vsphere-support.  (Link to blueprint: https://blueprints.launchpad.net/nova/+spec/hypervisor-vmware-vsphere-support)
+* Enable flat manager support for ipv6
+* disable-msg -> disable
+* \* Updated document vmware\_readme.rst to mention VLAN networking \* Corrected docstrings as per pep0257 recommentations. \* Stream-lined the comments. \* Updated code with locals() where ever applicable. \* VIM : It stands for VMware Virtual Infrastructure Methodology. We have used the terminology from VMware.  we have added a question in FAQ inside vmware\_readme.rst in doc/source \* New fake db: vmwareapi fake module uses a different set of fields and hence the structures required are different. Ex: bridge : 'xenbr0' does not hold good for VMware environment and bridge : 'vmnic0' is used instead. Also return values varies, hence went for implementing separate fake db. \* Now using eventlet library instead and removed io\_utils.py from branch. \* Now using glance.client.Client instead of homegrown code to talk to Glance server to handle images. \* Corrected all mis-spelled function names and corresponding calls. Yeah, an auto-complete side-effect!
+* Reverted unmodified files
+* fixed conflicts after merging with trunk with 787
+* Introduces the ZoneManager to the Scheduler which polls the child zones and caches their availability and capabilities
+* Moved guest\_tool.py from etc/esx directory to tools/esx directory
+* \* Updated readme file with installation of suds-0.4 through easy\_install. \* Removed pass functions \* Fixed pep8 errors \* Few bug fixes and other commits
+* trunk merge, pip-requires and novatools to novaclient changes
+* initial commit of vnc support
+* replaced ConnectionFailed with Exception in tools/euca-get-ajax-console was not working for me with euca2tools 1.2 (version 2007-10-10, release 31337)
+* pip requires novatools
+* fixes doc build and setup.py fail in virtualenv
+* merge from upstream and fix small issues
+* Implement support for streaming images from Glance when using the XenAPI virtualization backend, as per the bexar-xenapi-support-for-glance blueprint
+* This removes the need for the custom udev rule for iscsi devices.  It instead attaches the device based on /dev/disk/by-path/ which should make the setup of nova-volume a little easier
+* merge from upstream
+* Merged with trunk revno 565
+* Added netaddr for pip-requires
+* add support for database migration
+* Merged with trunk
+* merge trunk, fix conflict
+* use by-path instead of custom udev script
+* Now tries to install virtualenv via easy\_install if not present
+* Add glance to pip-requires, as we're now using the Glance client code from Nova
+* consolidate boto\_extensions.py and euca-get-ajax-console, fix bugs from previous trunk merge
+* merge trunk
+* add timeout constant, set to 5 minutes
+* merge trunk
+* merged trunk, resolved trivial conflict
+* merged trunk, resolved conflict
+* better bin name, and pep8
+* add license
+* move euca-get-ajax-console up one directory
+* merge trunk
+* rewrite proxy to not use twisted
+* working connection security
+* connecting ajax proxy to rabbit to allow token based security
+* remove a debugging line
+* merging in trunk
+* prototype works with kvm.  now moving call from api to compute
+* Use paste.deploy for running the api server
+*   Make nova work even when user has LANG or LC\_ALL configured
+* Added Twisted version dependency into pip-requires
+* add bzr to the dev dependencies
+* merged Justin Santa Barbara's raw-disk-image back into the latest trunk
+* Adds nova-debug to tools directory, for debugging of instances that lose networking
+* basics to get proxied ajaxterm working with virsh
+* renamed target\_id to iscsi\_target
+* nova-debug, relaunch an instance with a serial console
+* Duplicate the two trivial escaping functions remaining from tornado's code and remove the dependency
+* ISCSI Volume support
+* merge lp:nova
+* fix typo in boto line of pip-requires
+* reverted python-boto version in pip-requires to 1.9b1.\
+* Merged with trunk, fixed broken stuff
+* Cleans up the unit tests that are meant to be run with nosetests
+* improved commenting
+* reorganize iptables clear and make sure use\_nova\_chains is a boolean
+* disable output drop for the moment because it is too restrictive
+* allow mgmt ip access to api
+* flush the nova chains
+* add a reset command
+* improved the shell script for iptables
+* put setup\_iptables in the right dir
+* renamed ipchains to iptables
+* merged fix-iptables
+* Support querying version list, per the RS API spec.  Fixes bug 613117
+* A small fix to the install\_venv program to allow us to run it on the tarmac box as part of the tarmac build
+* add in a few comments
+* s/\t/    /g, and add some comments
+* add security and session timeout to ajaxterm
+* initial commit of ajaxterm
+* Added iptables host initial configuration
+* Support querying version list
+* New version of eventlet handles Twisted & eventlet running at the same time
+* add sqlalchemy to pip requires
+* Fix a pep8 violation
+* A few small changes to install\_venv to let venv builds work on the tarmac box
+* Merged with trunk
+* Fix to better reflect (my believed intent) as to the meaning of error\_ok (ignore stderr vs accept failure)
+* Merged with trunk
+* pep8 typo
+* Changed our minds: keep pylint equal to Ubuntu Lucid version, and use disable-msg throughout
+* Fix pep8 violation
+* See description of change... what's the difference between that message and this message again?
+* Simpler installation, and, can run install\_venv from anywhere instead of just from checkout root
+* Make WSGI routing support routing to WSGI apps or to controller+action
+* updated virtualenv to add eventlet, which is now a requirement
+* Changes the run\_tests.sh and /tools/install\_venv.py scripts to be more user-friendly and not depend on PIP while not in the virtual environment
+* work on a router that works with wsgi and non-wsgi routing
+* Oops, we need eventlet as well
+* Quick fix on location of printouts when trying to install virtualenv
+* Changes the run\_tests.sh and /tools/install\_venv.py scripts to be more user-friendly and not depend on PIP while not in the virtual environment.  Running run\_tests.sh should not just work out of the box on all systems supporting easy\_install..
+* 2 changes in doing PEP8 & Pylint cleaning:  \* adding pep8 and pylint to the PIP requirements files for Tools  \* light cleaning work (mostly formatting) on nova/endpoints/cloud.py
+* Run correctly even if called while in tools/ directory, as 'python install\_venv.py'
+* Greater compliance with pep8/pylint style checks
+* adding pep8 and pylint for regular cleanup tasks
+* Added Cheetah to pip-requires
+* Added exit code checking to process.py (twisted process utils).  A bit of class refactoring to make it work & cleaner. Also added some more instructive messages to install\_venv.py, because otherwise people that don't know what they're doing will install the wrong pip... i.e. I did :-)
+* resolving conflict w/ merge, cleaning up virtenv setups
+* Fixes to the virtualenv installer
+* Move virtualenv installation out of the makefile
+* Adds a Makefile to fill dependencies for testing
+* update copyrights
+* Removed trailing whitespace from header
+* Updated licenses
+* Removed trailing whitespace from header
+* Updated licenses
+* tools to clean vlans and run our old install script

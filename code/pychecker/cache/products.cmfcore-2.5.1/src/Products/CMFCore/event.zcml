@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <subscriber
+      for=".interfaces.ICachingPolicyManager
+           zope.interface.interfaces.IObjectEvent"
+      handler=".CachingPolicyManager.handleCachingPolicyManagerEvent"
+      />
+
+  <subscriber
+      for=".interfaces.ICookieCrumbler
+           zope.interface.interfaces.IObjectEvent"
+      handler=".CookieCrumbler.handleCookieCrumblerEvent"
+      />
+
+  <subscriber
+      for=".interfaces.IContentish
+           zope.interface.interfaces.IObjectEvent"
+      handler=".CMFCatalogAware.handleContentishEvent"
+      />
+
+  <subscriber
+      for=".interfaces.IDynamicType
+           zope.lifecycleevent.interfaces.IObjectCopiedEvent"
+      handler=".CMFCatalogAware.handleDynamicTypeCopiedEvent"
+      />
+
+  <subscriber
+      for=".interfaces.IOpaqueItemManager
+           zope.interface.interfaces.IObjectEvent"
+      handler=".CMFCatalogAware.dispatchToOpaqueItems"
+      />
+
+  <subscriber
+      for=".interfaces.ICallableOpaqueItemEvents
+           zope.interface.interfaces.IObjectEvent"
+      handler=".CMFCatalogAware.handleOpaqueItemEvent"
+      />
+
+</configure>

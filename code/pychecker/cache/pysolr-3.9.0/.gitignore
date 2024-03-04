@@ -1,0 +1,4 @@
+.tox
+solr*.tgz
+solr-app
+solr

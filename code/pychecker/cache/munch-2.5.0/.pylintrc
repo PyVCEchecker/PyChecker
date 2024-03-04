@@ -1,0 +1,8 @@
+[MESSAGES CONTROL]
+disable=invalid-name,missing-docstring,too-few-public-methods,no-else-return
+
+[REPORTS]
+reports=no
+
+[FORMAT]
+max-line-length=120

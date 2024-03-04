@@ -1,0 +1,5 @@
+oauthlib>=3.0.0
+requests>=2.0.0
+
+[rsa]
+oauthlib[signedtoken]>=3.0.0

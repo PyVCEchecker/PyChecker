@@ -1,0 +1,6 @@
+pytest>=2.8
+six
+jupyter_client
+nbformat
+ipykernel
+coverage

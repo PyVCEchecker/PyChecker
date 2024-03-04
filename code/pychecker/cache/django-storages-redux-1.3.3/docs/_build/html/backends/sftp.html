@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SFTP &mdash; django-storages 1.6.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.6.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-storages 1.6.2 documentation" href="../index.html" />
+    <link rel="prev" title="Google Cloud Storage" href="gcloud.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gcloud.html" title="Google Cloud Storage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sftp">
+<h1>SFTP<a class="headerlink" href="#sftp" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">SFTP_STORAGE_HOST</span></tt></dt>
+<dd>The hostname where you want the files to be saved.</dd>
+<dt><tt class="docutils literal"><span class="pre">SFTP_STORAGE_ROOT</span></tt></dt>
+<dd>The root directory on the remote host into which files should be placed.
+Should work the same way that <tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt> works for local files. Must
+include a trailing slash.</dd>
+<dt><tt class="docutils literal"><span class="pre">SFTP_STORAGE_PARAMS</span></tt> (optional)</dt>
+<dd>A dictionary containing connection parameters to be passed as keyword
+arguments to <tt class="docutils literal"><span class="pre">paramiko.SSHClient().connect()</span></tt> (do not include hostname here).
+See <a class="reference external" href="http://docs.paramiko.org/en/latest/api/client.html#paramiko.client.SSHClient.connect">paramiko SSHClient.connect() documentation</a> for details</dd>
+<dt><tt class="docutils literal"><span class="pre">SFTP_STORAGE_INTERACTIVE</span></tt> (optional)</dt>
+<dd><p class="first">A boolean indicating whether to prompt for a password if the connection cannot
+be made using keys, and there is not already a password in
+<tt class="docutils literal"><span class="pre">SFTP_STORAGE_PARAMS</span></tt>. You can set this to <tt class="docutils literal"><span class="pre">True</span></tt> to enable interactive
+login when running <tt class="docutils literal"><span class="pre">manage.py</span> <span class="pre">collectstatic</span></tt>, for example.</p>
+<div class="last admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">DO NOT set SFTP_STORAGE_INTERACTIVE to True if you are using this storage
+for files being uploaded to your site by users, because you&#8217;ll have no way
+to enter the password when they submit the form..</p>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">SFTP_STORAGE_FILE_MODE</span></tt> (optional)</dt>
+<dd>A bitmask for setting permissions on newly-created files. See
+<a class="reference external" href="http://docs.python.org/library/os.html#os.chmod">Python os.chmod documentation</a> for acceptable values.</dd>
+<dt><tt class="docutils literal"><span class="pre">SFTP_STORAGE_DIR_MODE</span></tt> (optional)</dt>
+<dd><p class="first">A bitmask for setting permissions on newly-created directories. See
+<a class="reference external" href="http://docs.python.org/library/os.html#os.chmod">Python os.chmod documentation</a> for acceptable values.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Hint: if you start the mode number with a 0 you can express it in octal
+just like you would when doing &#8220;chmod 775 myfile&#8221; from bash.</p>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">SFTP_STORAGE_UID</span></tt> (optional)</dt>
+<dd>UID of the account that should be set as owner of the files on the remote
+host. You may have to be root to set this.</dd>
+<dt><tt class="docutils literal"><span class="pre">SFTP_STORAGE_GID</span></tt> (optional)</dt>
+<dd>GID of the group that should be set on the files on the remote host. You have
+to be a member of the group to set this.</dd>
+<dt><tt class="docutils literal"><span class="pre">SFTP_KNOWN_HOST_FILE</span></tt> (optional)</dt>
+<dd>Absolute path of know host file, if it isn&#8217;t set <tt class="docutils literal"><span class="pre">&quot;~/.ssh/known_hosts&quot;</span></tt> will be used.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SFTP</a><ul>
+<li><a class="reference internal" href="#settings">Settings</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gcloud.html"
+                        title="previous chapter">Google Cloud Storage</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/backends/sftp.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gcloud.html" title="Google Cloud Storage"
+             >previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2017, David Larlet, et. al..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+Metadata-Version: 1.1
+Name: eventsourcing
+Version: 9.1.0
+Summary: Event sourcing in Python
+Home-page: https://github.com/johnbywater/eventsourcing
+Author: John Bywater
+Author-email: john.bywater@appropriatesoftware.net
+License: BSD-3-Clause
+Description: 
+        A library for event sourcing in Python.
+        
+        `Package documentation is now available <http://eventsourcing.readthedocs.io/>`_.
+        
+        `Please raise issues on GitHub <https://github.com/johnbywater/eventsourcing/issues>`_.
+        
+Keywords: event sourcing,event store,domain driven design,domain-driven design,ddd,cqrs,cqs
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

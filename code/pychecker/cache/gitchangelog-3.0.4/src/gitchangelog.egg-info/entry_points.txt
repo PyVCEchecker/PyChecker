@@ -1,0 +1,3 @@
+[console_scripts]
+gitchangelog = gitchangelog.gitchangelog:main
+

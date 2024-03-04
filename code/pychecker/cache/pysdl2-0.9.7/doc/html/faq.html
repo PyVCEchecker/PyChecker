@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>PySDL2 FAQ &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Release News" href="news.html" />
+    <link rel="prev" title="Window routines to manage on-screen windows" href="modules/sdl2ext_window.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="news.html" title="Release News"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modules/sdl2ext_window.html" title="Window routines to manage on-screen windows"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PySDL2 0.9.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pysdl2-faq">
+<span id="faq"></span><h1>PySDL2 FAQ<a class="headerlink" href="#pysdl2-faq" title="Permalink to this headline">¶</a></h1>
+<p>This is a list of Frequently Asked Questions about PySDL2. If you think,
+something is missing, please suggest it!</p>
+<div class="section" id="on-importing">
+<h2>On importing…<a class="headerlink" href="#on-importing" title="Permalink to this headline">¶</a></h2>
+<p>… my script fails and complains that a SDL2 library could not be found!</p>
+<blockquote>
+<div><p>Do you have the libraries properly installed? If on macOS or Windows,
+try running <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pysdl2-dll</span></code> and opening a fresh terminal
+to fix the problem. If on Linux or similar, did you follow the operating
+system’s way of installing or registering libraries? If you placed the
+libraries in some folder, make sure that the <code class="docutils literal notranslate"><span class="pre">PYSDL2_DLL_PATH</span></code>
+environment variable points to the correct location.</p>
+</div></blockquote>
+<p>… my script fails complaining that the <em>found</em> SDL2 library can’t be used!</p>
+<blockquote>
+<div><p>Do you use a 64-bit operating system? Please make sure, that the Python
+interpreter <em>and</em> that the SDL2 libraries are either 64-bit ones <em>or</em>
+32-bit ones. A 32-bit Python interpreter can’t deal with a 64-bit library
+and vice versa.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using">
+<h2>Using…<a class="headerlink" href="#using" title="Permalink to this headline">¶</a></h2>
+<p>… the sdl2 API is weird. Why do you use the SDL_ prefix all the time?</p>
+<blockquote>
+<div><p>The low-level APIs for SDL2, SDL2_mixer, SDL2_ttf, … shall represent a
+clean wrapping around the original C API calls. Thus, if you have to search
+for documentation or want to make a Python to C conversion (or C to Python),
+most of the code cleanly maps to the original API naming and layout and you
+do not have to think about whether you had to use SDL_ or TTF_ or whatever
+as prefix or suffix.</p>
+</div></blockquote>
+<p>… the sdl2 API is does not comply to PEP-8. Please make it PEP-8 compatible.</p>
+<blockquote>
+<div><p>Most of the API is PEP-8 compatible. The low-level bindings to SDL2 and
+related libraries however use the exact naming (including capital letters)
+as the functions or structures, they map to. See the previous entry for
+the reason of that.</p>
+</div></blockquote>
+</div>
+<div class="section" id="how-do-i">
+<h2>How do I…<a class="headerlink" href="#how-do-i" title="Permalink to this headline">¶</a></h2>
+<p>… save my surfaces as image files?</p>
+<blockquote>
+<div><p>You can use <code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_SaveBMP()</span></code> to save them as bitmap files. Other
+formats are currently unsupported, but might be added to
+the <a class="reference internal" href="modules/sdl2ext.html#module-sdl2.ext" title="sdl2.ext: Python extensions for SDL2"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.ext</span></code></a> package in the future.</p>
+</div></blockquote>
+</div>
+<div class="section" id="font-handling">
+<h2>Font handling…<a class="headerlink" href="#font-handling" title="Permalink to this headline">¶</a></h2>
+<p>… is too hard. Why can’t it work the same way as pygame does?</p>
+<blockquote>
+<div><p>The <a class="reference internal" href="modules/sdl2_sdlttf.html#module-sdl2.sdlttf" title="sdl2.sdlttf: SDL2_ttf library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.sdlttf</span></code></a> API does not know about platform-specific font
+locations and is unable to resolve font paths based on e.g. the font name
+or typeface. It’s not its job and PySDL2 likewise does not provide such
+functionality. If you need improved font detection support, you might want
+to take a look at the sysfont module of the python-utils project, which can
+be found at <a class="reference external" href="https://bitbucket.org/marcusva/python-utils/">https://bitbucket.org/marcusva/python-utils/</a>. That said, it’s
+usually a bad idea for a projects to rely on system fonts that may not be
+available on every computer: finding a free-use font you like and bundling
+it with your code is much safer.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PySDL2 FAQ</a><ul>
+<li><a class="reference internal" href="#on-importing">On importing…</a></li>
+<li><a class="reference internal" href="#using">Using…</a></li>
+<li><a class="reference internal" href="#how-do-i">How do I…</a></li>
+<li><a class="reference internal" href="#font-handling">Font handling…</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modules/sdl2ext_window.html"
+                        title="previous chapter">Window routines to manage on-screen windows</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="news.html"
+                        title="next chapter">Release News</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/faq.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="news.html" title="Release News"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modules/sdl2ext_window.html" title="Window routines to manage on-screen windows"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PySDL2 0.9.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

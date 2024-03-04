@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: jaraco.itertools
+Version: 6.0.1
+Summary: jaraco.itertools
+Home-page: https://github.com/jaraco/jaraco.itertools
+Author: Jason R. Coombs
+Author-email: jaraco@jaraco.com
+License: UNKNOWN
+Description: .. image:: https://img.shields.io/pypi/v/jaraco.itertools.svg
+           :target: `PyPI link`_
+        
+        .. image:: https://img.shields.io/pypi/pyversions/jaraco.itertools.svg
+           :target: `PyPI link`_
+        
+        .. _PyPI link: https://pypi.org/project/jaraco.itertools
+        
+        .. image:: https://github.com/jaraco/jaraco.itertools/workflows/tests/badge.svg
+           :target: https://github.com/jaraco/jaraco.itertools/actions?query=workflow%3A%22tests%22
+           :alt: tests
+        
+        .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+           :target: https://github.com/psf/black
+           :alt: Code style: Black
+        
+        .. image:: https://readthedocs.org/projects/jaracoitertools/badge/?version=latest
+           :target: https://jaracoitertools.readthedocs.io/en/latest/?badge=latest
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Python: >=3.6
+Provides-Extra: testing
+Provides-Extra: docs

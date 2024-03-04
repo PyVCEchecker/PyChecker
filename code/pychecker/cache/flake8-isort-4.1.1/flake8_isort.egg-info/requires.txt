@@ -1,0 +1,6 @@
+flake8<5,>=3.2.1
+isort<6,>=4.3.5
+testfixtures<7,>=6.8.0
+
+[test]
+pytest-cov

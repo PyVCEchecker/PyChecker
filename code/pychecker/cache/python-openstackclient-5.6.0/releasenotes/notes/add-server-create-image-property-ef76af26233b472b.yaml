@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Add  ``--image-property`` option to ``server create`` command.
+    This parameter will filter a image which properties that are matching.

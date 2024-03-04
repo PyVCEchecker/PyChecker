@@ -1,0 +1,11 @@
+PyYAML
+requests
+
+[crypto]
+cryptography
+
+[formatting]
+jq
+
+[websockets]
+websocket-client==0.57.0

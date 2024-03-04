@@ -1,0 +1,32 @@
+---
+test: abc
+this-is : a hyphen test
+    leading~space	: is okay 
+ And: some, cvs, data, which, you, must, parse, yourself
+empty   :
+and some: >
+ long value
+ that goes multiline
+another: example
+alist:
+  - a
+  - b
+  - c
+adict:
+  key: foo
+  a nested list:
+    - one
+    - two
+    - >
+      Even multiline strings are allowed
+      in nested structured data
+      if linebreaks and indent are respected !
+    -
+      subkey: and another dict in a list
+    - but one-liners remains: simple strings
+---
+# The real text
+
+This should be parsed as before
+
+This should not be included in the metadata: test

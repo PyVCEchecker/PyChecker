@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: androguard
+Version: 3.3.5
+Summary: Androguard is a full python tool to play with Android files.
+Home-page: https://github.com/androguard/androguard
+License: Apache Licence, Version 2.0
+Download-URL: https://github.com/androguard/androguard/releases
+Description: Androguard is a tool and python library to interact with Android Files.
+            
+            Usually they come in the form of Android Packages (APK) or Dalvik Executeable (DEX) files.
+            Androguard has tools to read Android's binary format for XML files (AXML) and is also suited with a decompiler for DEX.
+            
+            Androguard might not only be used as a tool for reverse engineering single applications, but features a lot of functions
+            for automated analysis. It provides a pure python framework to build your own analysis tools.
+            
+            If you encounter bugs while using androguard, please feel free to report them in our bugtracker_.
+            
+            .. _bugtracker: https://github.com/androguard/androguard/issues
+            
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development
+Classifier: Topic :: Utilities
+Provides-Extra: GUI
+Provides-Extra: docs
+Provides-Extra: magic
+Provides-Extra: tests

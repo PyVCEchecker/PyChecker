@@ -1,0 +1,54 @@
+
+/* It seems old version Qt can't parse the following code
+ * stop: 0 palette(window), stop: 1 palette(base),
+ * we hardcode the color here.
+ */
+TopPanel {
+    background-color: qlineargradient(
+        x1: 0, y1: 0, x2: 0, y2: 1,
+        stop: 0 #323232, stop: 1 #1e1e1e
+    );
+}
+
+Separator {
+    background-color: #444;
+}
+
+TextButton {
+    border: 1px solid #444;
+}
+
+TextButton:pressed {
+    background-color: #3e3e3e;
+}
+
+#pp_btn, #video_pp_btn {
+    border-image: url(icons:play_dark.png);
+}
+#pp_btn:checked, #video_pp_btn:checked {
+    border-image: url(icons:pause_dark.png);
+}
+#previous_btn {
+    border-image: url(icons:last_dark.png);
+}
+#next_btn {
+    border-image: url(icons:next_dark.png);
+}
+#playlist_btn {
+    border-image: url(icons:cur_playlist_dark.png);
+}
+#volume_btn {
+    border-image: url(icons:volume_dark.png);
+}
+#like_btn {
+    border-image: url(icons:like_dark.png);
+}
+#like_btn:checked {
+    border-image: url(icons:like_checked_dark.png);
+}
+#download_btn {
+    border-image: url(icons:download_dark.png);
+}
+#download_btn:checked {
+    border-image: url(icons:already_downloaded_dark.png);
+}

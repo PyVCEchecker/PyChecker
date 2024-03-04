@@ -1,0 +1,10 @@
+README.rst
+_testinfra_renamed.py
+setup.cfg
+setup.py
+testinfra.egg-info/PKG-INFO
+testinfra.egg-info/SOURCES.txt
+testinfra.egg-info/dependency_links.txt
+testinfra.egg-info/entry_points.txt
+testinfra.egg-info/requires.txt
+testinfra.egg-info/top_level.txt

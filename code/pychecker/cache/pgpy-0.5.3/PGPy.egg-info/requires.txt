@@ -1,0 +1,7 @@
+cryptography>=2.6
+pyasn1
+six>=1.9.0
+
+[:python_version < "3.4"]
+singledispatch
+enum34

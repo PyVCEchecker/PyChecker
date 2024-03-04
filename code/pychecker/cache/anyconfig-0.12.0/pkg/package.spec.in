@@ -1,0 +1,97 @@
+%global pkgname anyconfig
+
+%global desc \
+Python library provides common APIs to load and dump configuration files in\
+various formats such like JSON, YAML and XML with some useful features such as\
+contents merge, templates, query, schema validation and generation support.
+
+%bcond_with optionals
+%bcond_with tests
+%bcond_with doc
+%bcond_with extras
+
+Name:           python-%{pkgname}
+Version:        @VERSION@
+Release:        @RELEASE@
+Summary:        Python library to load and dump configuration files in various formats
+License:        MIT
+URL:            https://github.com/ssato/python-anyconfig
+Source0:        %{url}/archive/RELEASE_%{version}.tar.gz
+BuildArch:      noarch
+
+%if %{with doc}
+BuildRequires:  make
+BuildRequires:  python3-docutils
+BuildRequires:  python3-sphinx
+%endif
+BuildRequires:  python3-toml
+BuildRequires:  python3-yaml
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
+
+%description    %{desc}
+
+%package -n python3-%{pkgname}
+Summary:        %{summary}
+Requires:       python3-PyYAML
+Requires:       python3-setuptools
+%if %{with extras}
+Requires:       python3-jinja2
+Requires:       python3-jsonschema
+Requires:       python3-ruamel-yaml
+%endif
+%if %{with optionals}
+Requires:       python3-configobj
+Requires:       python3-toml
+%endif
+%{?python_provide:%python_provide python3-%{pkgname}}
+
+%description -n python3-%{pkgname} %{desc}
+
+%if %{with doc}
+%package        doc
+Summary:        Documentation for %{name}
+
+%description    doc
+HTML documentation for %{name}.
+%endif
+
+%prep
+%autosetup -n %{pkgname}-%{version}
+
+%build
+%py3_build
+
+%if %{with doc}
+make -C docs/ html
+rm -f docs/build/html/.buildinfo
+rm -frv docs/build/html/_sources
+%endif
+
+%install
+%py3_install
+
+%if %{with tests}
+%check
+tox -e py$(python -c "import sys; sys.stdout.write(sys.version[:3].replace('.', ''))")
+%endif
+
+%files -n python3-%{pkgname}
+%doc README.rst NEWS AUTHORS.txt
+%license LICENSE.MIT
+%{python3_sitelib}/*
+%{_bindir}/anyconfig*
+%{_mandir}/*/anyconfig*.*.gz
+
+%if %{with doc}
+%files doc
+%doc README.rst NEWS AUTHORS.txt
+%doc docs/build/html
+%endif
+
+%changelog
+* Tue Feb 13 2018 Satoru SATOH <ssato@redhat.com> - 0.9.4-1
+- move most changelog entries to NEWS to keep RPM SPEC simple
+
+* Fri Jun 29 2012 Satoru SATOH <ssato@redhat.com> - 0.0.1-1
+- Initial packaging

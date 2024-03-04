@@ -1,0 +1,54 @@
+Metadata-Version: 1.1
+Name: Flask-Security
+Version: 3.0.0
+Summary: Simple security for Flask apps.
+Home-page: https://github.com/mattupstate/flask-security
+Author: Matt Wright
+Author-email: matt@nobien.net
+License: MIT
+Description: Flask-Security
+        ===================
+        
+        .. image:: https://img.shields.io/travis/mattupstate/flask-security.svg
+            :target: https://travis-ci.org/mattupstate/flask-security
+        
+        .. image:: https://img.shields.io/coveralls/mattupstate/flask-security.svg
+            :target: https://coveralls.io/r/mattupstate/flask-security
+        
+        .. image:: https://img.shields.io/github/tag/mattupstate/flask-security.svg
+            :target: https://github.com/mattupstate/flask-security/releases
+        
+        .. image:: https://img.shields.io/pypi/dm/flask-security.svg
+            :target: https://pypi.python.org/pypi/flask-security
+            :alt: Downloads
+        
+        .. image:: https://img.shields.io/github/license/mattupstate/flask-security.svg
+            :target: https://github.com/mattupstate/flask-security/blob/master/LICENSE
+            :alt: License
+        
+        It quickly adds security features to your Flask application.
+        
+        Resources
+        ---------
+        
+        - `Documentation <https://flask-security.readthedocs.io/>`_
+        - `Issue Tracker <https://github.com/mattupstate/flask-security/issues>`_
+        - `Code <https://github.com/mattupstate/flask-security/>`_
+        
+Keywords: flask security
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Development Status :: 4 - Beta

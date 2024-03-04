@@ -1,0 +1,13 @@
+about-5.2.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+about-5.2.dist-info/LICENSE.txt,sha256=-ftONGgZBmkzoC3NvCWiHiUmtfwpYFnVs0oK260_Jz0,1084
+about-5.2.dist-info/METADATA,sha256=pU3V3TT1gXMLAfSI8iv9sVKq9bTIUSndWciPl5ylyjc,2185
+about-5.2.dist-info/RECORD,,
+about-5.2.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+about-5.2.dist-info/WHEEL,sha256=OqRkF0eY5GHssMorFjlbTIq072vpHpF60fIQA6lS9xA,92
+about-5.2.dist-info/pbr.json,sha256=eIxuqHpDy5fJLBpdyXXAOfU9wPpidF-vtCRwvRj69Ck,46
+about-5.2.dist-info/top_level.txt,sha256=ZQWwaKYRzKzx9hidU5WcURlmfpZloohY85gT1ysDOmE,6
+about/Trove-classifiers.txt,sha256=ujAWK79-aNJoep5dwMRw06xBZTam34VZ-OlAObE9_0M,25209
+about/__init__.py,sha256=bl4Kimke8_PXOVXJcuG0R0i2YwjTzcJMkEv78iFcxMo,5004
+about/__pycache__/__init__.cpython-39.pyc,,
+about/__pycache__/about.cpython-39.pyc,,
+about/about.py,sha256=hpIOmsmuQV_Cnj0wkNoijv_uC0tuxqAVxm_DlhGK6BA,464

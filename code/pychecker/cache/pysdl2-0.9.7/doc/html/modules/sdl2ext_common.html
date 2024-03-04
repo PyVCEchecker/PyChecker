@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Initialization routines &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="sdl2.ext.compat - Python compatibility helpers" href="sdl2ext_compat.html" />
+    <link rel="prev" title="sdl2.ext.colorpalettes - predefined sets of colors" href="sdl2ext_colorpalettes.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_compat.html" title="sdl2.ext.compat - Python compatibility helpers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_colorpalettes.html" title="sdl2.ext.colorpalettes - predefined sets of colors"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" accesskey="U">sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="initialization-routines">
+<h1>Initialization routines<a class="headerlink" href="#initialization-routines" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="#sdl2.ext.init" title="sdl2.ext.init"><code class="xref py py-func docutils literal notranslate"><span class="pre">init()</span></code></a> simply calls <code class="xref py py-func docutils literal notranslate"><span class="pre">SDL_Init()</span></code> to initialize only the video
+subsystem. If the call fails, <a class="reference internal" href="#sdl2.ext.SDLError" title="sdl2.ext.SDLError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SDLError</span></code></a> is raised. See
+<a class="reference internal" href="../tutorial/pygamers.html#pygamers-pygame"><span class="std std-ref">pygame</span></a> for a comparison between this function and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pygame.init()</span></code>.</p>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="sdl2.ext.SDLError">
+<em class="property">exception </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">SDLError</code><span class="sig-paren">(</span><em class="sig-param">msg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.SDLError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An SDL2 specific <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code> class. if no <em>msg</em> is provided,
+the message will be set to the value of <code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.error.SDL_GetError()</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.init">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialises the underlying SDL2 video subsystem. Raises a
+<a class="reference internal" href="#sdl2.ext.SDLError" title="sdl2.ext.SDLError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SDLError</span></code></a>, if the SDL2 video subsystem could not be
+initialised.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.quit">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">quit</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.quit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Quits the underlying SDL2 video subysystem. If no other SDL2
+subsystems are active, this will also call <a class="reference internal" href="#sdl2.ext.quit" title="sdl2.ext.quit"><code class="xref py py-func docutils literal notranslate"><span class="pre">quit()</span></code></a>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlttf.TTF_Quit()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlimage.IMG_Quit()</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.get_events">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">get_events</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; [SDL_Event, SDL_Event, ...]<a class="headerlink" href="#sdl2.ext.get_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all SDL events that are currently on the event queue.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.TestEventProcessor">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">TestEventProcessor</code><a class="headerlink" href="#sdl2.ext.TestEventProcessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple event processor for testing purposes.</p>
+<dl class="method">
+<dt id="sdl2.ext.TestEventProcessor.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">window : Window</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.TestEventProcessor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts an event loop without actually processing any event. The method
+will run endlessly until a <code class="docutils literal notranslate"><span class="pre">SDL_QUIT</span></code> event occurs.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Initialization routines</a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdl2ext_colorpalettes.html"
+                        title="previous chapter">sdl2.ext.colorpalettes - predefined sets of colors</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdl2ext_compat.html"
+                        title="next chapter">sdl2.ext.compat - Python compatibility helpers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/sdl2ext_common.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_compat.html" title="sdl2.ext.compat - Python compatibility helpers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_colorpalettes.html" title="sdl2.ext.colorpalettes - predefined sets of colors"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" >sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

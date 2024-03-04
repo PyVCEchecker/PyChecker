@@ -1,0 +1,8 @@
+
+[:python_version < "3.8"]
+typing_extensions
+
+[tests]
+pytest
+pytest-asyncio
+mypy>=0.800

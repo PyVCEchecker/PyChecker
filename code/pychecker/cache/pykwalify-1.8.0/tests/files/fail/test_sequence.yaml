@@ -1,0 +1,71 @@
+---
+name: fail-sequence-1
+desc: 
+data:
+  - 1
+  - 2
+  - 3
+  - True
+  - False
+schema:
+  type: seq
+  sequence:
+    - type: str
+errors:
+  - "Value '1' is not of type 'str'. Path: '/0'"
+  - "Value '2' is not of type 'str'. Path: '/1'"
+  - "Value '3' is not of type 'str'. Path: '/2'"
+  - "Value 'True' is not of type 'str'. Path: '/3'"
+  - "Value 'False' is not of type 'str'. Path: '/4'"
+---
+name: fail-sequence-2
+desc: 
+data:
+  - True
+  - False
+  - 1
+schema:
+  type: seq
+  sequence:
+    - type: bool
+errors:
+  - "Value '1' is not of type 'bool'. Path: '/2'"
+---
+name: fail-sequence-3
+desc: sequence test
+schema:
+  type: seq
+  required: true
+  sequence:
+    - type: str
+      required: true
+data:
+  - foo
+  - bar
+  -
+  - baz
+  - 100
+errors:
+  - "Value '100' is not of type 'str'. Path: '/4'"
+  - "required.novalue : '/2'"
+  ## Kwalify errors
+  # - "Value 'None' is not of type 'str'. Path: '/2'"
+  # :required_novalue   : (line 3)[/2] value required but none.
+  # :type_unmatch       : (line 5)[/4] '100': not a string.
+---
+name: fail-sequence-4
+desc: Test that very deep nested sequences fail when schema expected sequence but value was something else
+schema:
+  type: seq
+  sequence:
+    - type: seq
+      sequence:
+        - type: seq
+          sequence:
+            - type: seq
+              sequence:
+                - type: str
+data:
+  - - - 1
+errors:
+  - "Value '1' is not a list. Value path: '/0/0/0'"

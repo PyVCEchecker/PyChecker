@@ -1,0 +1,17 @@
+{
+    "additionalProperties": false,
+    "properties": {
+        "$ref": {
+            "description": "data record",
+            "format": "uri",
+            "minLength": 1,
+            "pattern": ".*/api/data/\\d+$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "$ref"
+    ],
+    "title": "Reference to data record",
+    "type": "object"
+}

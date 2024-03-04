@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>print_settings &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RunProfileServer" href="runprofileserver.html" />
+    <link rel="prev" title="merge_model_instances" href="merge_model_instances.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="runprofileserver.html" title="RunProfileServer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="merge_model_instances.html" title="merge_model_instances"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">print_settings</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="print-settings">
+<h1>print_settings<a class="headerlink" href="#print-settings" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Django management command similar to <code class="docutils literal notranslate"><span class="pre">diffsettings</span></code> but shows <em>selected</em> active Django settings or <em>all</em> if no args passed.</p>
+</dd>
+</dl>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Django comes with a <code class="docutils literal notranslate"><span class="pre">diffsettings</span></code> command that shows how your project’s
+settings differ from the Django defaults.  Sometimes it is useful to just see
+the settings that are in effect for your project. This is particularly
+true if you have a more complex system for settings than just a single
+<code class="file docutils literal notranslate"><span class="pre">settings.py</span></code> file. For example, you might have settings files that
+import other settings file, such as dev, test, and production settings files
+that source a base settings file.</p>
+<p>This command also supports dumping the data in a few different formats.</p>
+</div>
+<div class="section" id="more-info">
+<h2>More Info<a class="headerlink" href="#more-info" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to run it is with no arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py print_settings
+</pre></div>
+</div>
+<p>Some variations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py print_settings --format=json
+$ python manage.py print_settings --format=yaml    # Requires PyYAML
+$ python manage.py print_settings --format=pprint
+$ python manage.py print_settings --format=text
+$ python manage.py print_settings --format=value
+</pre></div>
+</div>
+<p>Show just selected settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py print_settings DEBUG INSTALLED_APPS
+$ python manage.py print_settings DEBUG INSTALLED_APPS --format=pprint
+$ python manage.py print_settings INSTALLED_APPS --format=value
+</pre></div>
+</div>
+<p>For more info, take a look at the built-in help:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py print_settings --help
+Usage: manage.py print_settings [options]
+
+Print the active Django settings.
+
+Options:
+  -v VERBOSITY, --verbosity=VERBOSITY
+                        Verbosity level; 0=minimal output, 1=normal output,
+                        2=verbose output, 3=very verbose output
+  --settings=SETTINGS   The Python path to a settings module, e.g.
+                        &quot;myproject.settings.main&quot;. If this isn&#39;t provided, the
+                        DJANGO_SETTINGS_MODULE environment variable will be
+                        used.
+  --pythonpath=PYTHONPATH
+                        A directory to add to the Python path, e.g.
+                        &quot;/home/djangoprojects/myproject&quot;.
+  --traceback           Print traceback on exception
+  --format=FORMAT       Specifies output format.
+  --indent=INDENT       Specifies indent level for JSON and YAML
+  --version             show program&#39;s version number and exit
+  -h, --help            show this help message and exit
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">print_settings</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#more-info">More Info</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="merge_model_instances.html"
+                        title="previous chapter">merge_model_instances</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="runprofileserver.html"
+                        title="next chapter">RunProfileServer</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/print_settings.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="runprofileserver.html" title="RunProfileServer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="merge_model_instances.html" title="merge_model_instances"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">print_settings</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

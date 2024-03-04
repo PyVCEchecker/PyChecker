@@ -1,0 +1,16 @@
+[run]
+parallel = true
+source =
+    hupper
+    tests
+omit =
+    src/hupper/winapi.py
+
+[paths]
+source =
+    src/hupper
+    */site-packages/hupper
+
+[report]
+show_missing = true
+precision = 2

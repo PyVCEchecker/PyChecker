@@ -1,0 +1,22 @@
+dateutils
+=========
+
+The main purpose of this package is to provide more complex arithmetic
+operations on dates/times. Heavy use is made of the relativedelta type from
+Labix's dateutil library. Much of this package is just a light wrapper on top
+of this with some added features such as range generation and business day
+calculation.
+
+Installation
+------------
+
+You should install dateutils with pip:
+
+    pip install dateutils
+
+Otherwise, you'll have to download the package and run:
+
+    python setup.py install
+
+If you install it this way then you will also have to install all necessary
+dependencies manually.

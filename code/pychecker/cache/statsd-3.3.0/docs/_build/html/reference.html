@@ -1,0 +1,513 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>API Reference &#8212; Python StatsD 3.3.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="UnixSocketStatsClient" href="unix_socket.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="unix_socket.html" title="UnixSocketStatsClient"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Python StatsD 3.3.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-reference">
+<span id="reference-chapter"></span><h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">StatsClient</span></code> provides accessors for all the types of data the <a class="reference external" href="https://github.com/etsy/statsd">statsd</a>
+server supports.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Each public stats API method supports a <code class="docutils literal notranslate"><span class="pre">rate</span></code> parameter, but statsd
+doesn’t always use it the same way. See the <a class="reference internal" href="types.html#types-chapter"><span class="std std-ref">Data Types</span></a> for more
+information.</p>
+</div>
+<dl class="class">
+<dt id="StatsClient">
+<em class="property">class </em><code class="descname">StatsClient</code><span class="sig-paren">(</span><em>host='localhost'</em>, <em>port=8125</em>, <em>prefix=None</em>, <em>maxudpsize=512</em><span class="sig-paren">)</span><a class="headerlink" href="#StatsClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new <code class="docutils literal notranslate"><span class="pre">StatsClient</span></code> instance with the appropriate connection and
+prefix information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>host</strong> (<em>str</em>) – the hostname or IP address of the <a class="reference external" href="https://github.com/etsy/statsd">statsd</a> server</li>
+<li><strong>port</strong> (<em>int</em>) – the port of the statsd server</li>
+<li><strong>prefix</strong> (<em>str</em><em> or </em><em>None</em>) – a prefix to distinguish and group stats from an application
+or environment</li>
+<li><strong>maxudpsize</strong> (<em>int</em>) – the largest safe UDP packet to send. 512 is
+generally considered safe for the public internet, but private networks
+may support larger packet sizes.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="StatsClient.incr">
+<code class="descclassname">StatsClient.</code><code class="descname">incr</code><span class="sig-paren">(</span><em>stat</em>, <em>count=1</em>, <em>rate=1</em><span class="sig-paren">)</span><a class="headerlink" href="#StatsClient.incr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increment a <a class="reference internal" href="types.html#counter-type"><span class="std std-ref">counter</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stat</strong> (<em>str</em>) – the name of the counter to increment</li>
+<li><strong>count</strong> (<em>int</em>) – the amount to increment by. Typically an integer.  May be
+negative, but see also <a class="reference internal" href="#StatsClient.decr" title="StatsClient.decr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decr()</span></code></a>.</li>
+<li><strong>rate</strong> (<em>float</em>) – a sample rate, a float between 0 and 1. Will only send
+data this percentage of the time. The statsd server will take the
+sample rate into account for counters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="StatsClient.decr">
+<code class="descclassname">StatsClient.</code><code class="descname">decr</code><span class="sig-paren">(</span><em>stat</em>, <em>count=1</em>, <em>rate=1</em><span class="sig-paren">)</span><a class="headerlink" href="#StatsClient.decr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrement a <a class="reference internal" href="types.html#counter-type"><span class="std std-ref">counter</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stat</strong> (<em>str</em>) – the name of the counter to increment</li>
+<li><strong>count</strong> (<em>int</em>) – the amount to increment by. Typically an integer.  May be
+negative, but that will have the impact of incrementing the counter but
+see also <a class="reference internal" href="#StatsClient.incr" title="StatsClient.incr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">incr()</span></code></a>.</li>
+<li><strong>rate</strong> (<em>float</em>) – a sample rate, a float between 0 and 1. Will only send
+data this percentage of the time. The statsd server will take the
+sample rate into account for counters</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="StatsClient.gauge">
+<code class="descclassname">StatsClient.</code><code class="descname">gauge</code><span class="sig-paren">(</span><em>stat</em>, <em>value</em>, <em>rate=1</em>, <em>delta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#StatsClient.gauge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a <a class="reference internal" href="types.html#gauge-type"><span class="std std-ref">gauge</span></a> value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stat</strong> (<em>str</em>) – the name of the gauge to set</li>
+<li><strong>value</strong> (<em>int</em><em> or </em><em>float</em>) – the current value of the gauge</li>
+<li><strong>rate</strong> (<em>float</em>) – a sample rate, a float between 0 and 1. Will only send
+data this percentage of the time. The statsd server does <em>not</em> take the
+sample rate into account for gauges. Use with care</li>
+<li><strong>delta</strong> (<em>bool</em>) – whether or not to consider this a delta value or an
+absolute value. See the <a class="reference internal" href="types.html#gauge-type"><span class="std std-ref">gauge</span></a> type for more detail</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Gauges were added to the statsd server in version 0.1.1.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Gauge deltas were added to the statsd server in version 0.6.0.</p>
+</div>
+<dl class="method">
+<dt id="StatsClient.set">
+<code class="descclassname">StatsClient.</code><code class="descname">set</code><span class="sig-paren">(</span><em>stat</em>, <em>value</em>, <em>rate=1</em><span class="sig-paren">)</span><a class="headerlink" href="#StatsClient.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increment a <a class="reference internal" href="types.html#set-type"><span class="std std-ref">set</span></a> value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stat</strong> (<em>str</em>) – the name of the set to update</li>
+<li><strong>value</strong> – the unique value to count</li>
+<li><strong>rate</strong> (<em>float</em>) – a sample rate, a float between 0 and 1. Will only send
+data this percentage of the time. The statsd server does <em>not</em> take the
+sample rate into account for sets. Use with care.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Sets were added to the statsd server in version 0.6.0.</p>
+</div>
+<dl class="method">
+<dt id="StatsClient.timing">
+<code class="descclassname">StatsClient.</code><code class="descname">timing</code><span class="sig-paren">(</span><em>stat</em>, <em>delta</em>, <em>rate=1</em><span class="sig-paren">)</span><a class="headerlink" href="#StatsClient.timing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Record <a class="reference internal" href="types.html#timer-type"><span class="std std-ref">timer</span></a> information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stat</strong> (<em>str</em>) – the name of the timer to use</li>
+<li><strong>delta</strong> (<em>int</em><em> or </em><em>float</em><em> or </em><em>datetime.timedelta</em>) – the number of milliseconds whatever action took.
+<code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code> objects will be converted to
+milliseconds</li>
+<li><strong>rate</strong> (<em>float</em>) – a sample rate, a float between 0 and 1. Will only send
+data this percentage of the time. The statsd server does <em>not</em> take the
+sample rate into account for timers.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="StatsClient.timer">
+<code class="descclassname">StatsClient.</code><code class="descname">timer</code><span class="sig-paren">(</span><em>stat</em>, <em>rate=1</em><span class="sig-paren">)</span><a class="headerlink" href="#StatsClient.timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a <a class="reference internal" href="#Timer" title="Timer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Timer</span></code></a> object that can be used as a context manager or
+decorator to automatically record timing for a block or function call. See
+also the <a class="reference internal" href="timing.html#timing-chapter"><span class="std std-ref">chapter on timing</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stat</strong> (<em>str</em>) – the name of the timer to use</li>
+<li><strong>rate</strong> (<em>float</em>) – a sample rate, a float between 0 and 1. Will only send
+data this percentage of the time. The statsd server does <em>not</em> take the
+sample rate into account for timers.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c1"># or</span>
+
+<span class="nd">@StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="c1"># or (see below for more Timer methods)</span>
+
+<span class="n">timer</span> <span class="o">=</span> <span class="n">StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">timer</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="nd">@timer</span>
+<span class="k">def</span> <span class="nf">bar</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="StatsClient.pipeline">
+<code class="descclassname">StatsClient.</code><code class="descname">pipeline</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#StatsClient.pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="#Pipeline" title="Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a> object for collecting several stats.  Can
+also be used as a context manager.</p>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="n">StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">pipeline</span><span class="p">()</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">send</span><span class="p">()</span>
+
+<span class="c1"># or</span>
+
+<span class="k">with</span> <span class="n">StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">pipeline</span> <span class="k">as</span> <span class="n">pipe</span><span class="p">:</span>
+    <span class="n">pipe</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="Timer">
+<em class="property">class </em><code class="descname">Timer</code><a class="headerlink" href="#Timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="timing.html#timer-object"><span class="std std-ref">Timer objects</span></a> returned by
+<a class="reference internal" href="#StatsClient.timer" title="StatsClient.timer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">StatsClient.timer()</span></code></a>. These should never be instantiated
+directly.</p>
+</dd></dl>
+
+<p><a class="reference internal" href="#Timer" title="Timer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Timer</span></code></a> objects should not be shared between threads (except when
+used as decorators, which is thread-safe) but could be used within another
+context manager or decorator. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">my_context</span><span class="p">():</span>
+    <span class="n">timer</span> <span class="o">=</span> <span class="n">statsd</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;my_context_timer&#39;</span><span class="p">)</span>
+    <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#Timer" title="Timer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Timer</span></code></a> objects may be reused by calling <a class="reference internal" href="#Timer.start" title="Timer.start"><code class="xref py py-meth docutils literal notranslate"><span class="pre">start()</span></code></a> again.</p>
+<dl class="method">
+<dt id="Timer.start">
+<code class="descclassname">Timer.</code><code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Timer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Causes a timer object to start counting. Called automatically when the
+object is used as a decorator or context manager. Returns the timer object
+for simplicity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Timer.stop">
+<code class="descclassname">Timer.</code><code class="descname">stop</code><span class="sig-paren">(</span><em>send=True</em><span class="sig-paren">)</span><a class="headerlink" href="#Timer.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Causes the timer object to stop timing and send the results to <a class="reference external" href="https://github.com/etsy/statsd">statsd</a>.
+Can be called with <code class="docutils literal notranslate"><span class="pre">send=False</span></code> to prevent immediate sending immediately,
+and use <a class="reference internal" href="#Timer.send" title="Timer.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>. Called automatically when the
+object is used as a decorator or context manager. Returns the timer object.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">stop()</span></code> is called before <a class="reference internal" href="#Timer.start" title="Timer.start"><code class="xref py py-meth docutils literal notranslate"><span class="pre">start()</span></code></a>, a
+<code class="docutils literal notranslate"><span class="pre">RuntimeError</span></code> is raised.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>send</strong> (<em>bool</em>) – Whether to automatically send the results</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="Timer.send">
+<code class="descclassname">Timer.</code><code class="descname">send</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Timer.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Causes the timer to send any unsent data. If the data has already been
+sent, or has not yet been recorded, a <code class="docutils literal notranslate"><span class="pre">RuntimeError</span></code> is raised.</p>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">send</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">timer</span><span class="o">.</span><span class="n">send</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See the note abbout <a class="reference internal" href="timing.html#timer-direct-note"><span class="std std-ref">timer objects and pipelines</span></a>.</p>
+</div>
+<dl class="class">
+<dt id="Pipeline">
+<em class="property">class </em><code class="descname">Pipeline</code><a class="headerlink" href="#Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="pipeline.html#pipeline-chapter"><span class="std std-ref">Pipeline</span></a> object that can be used to collect and
+send several stats at once. Useful for reducing network traffic and
+speeding up instrumentation under certain loads. Can be used as a context
+manager.</p>
+<p>Pipeline extends <a class="reference internal" href="#StatsClient" title="StatsClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatsClient</span></code></a> and has all associated methods.</p>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="n">StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">pipeline</span><span class="p">()</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">send</span><span class="p">()</span>
+
+<span class="c1"># or</span>
+
+<span class="k">with</span> <span class="n">StatsClient</span><span class="p">()</span><span class="o">.</span><span class="n">pipeline</span> <span class="k">as</span> <span class="n">pipe</span><span class="p">:</span>
+    <span class="n">pipe</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="Pipeline.send">
+<code class="descclassname">Pipeline.</code><code class="descname">send</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pipeline.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Causes the <a class="reference internal" href="#Pipeline" title="Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a> object to send all batched stats in as few
+packets as possible.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="TCPStatsClient">
+<em class="property">class </em><code class="descname">TCPStatsClient</code><span class="sig-paren">(</span><em>host='localhost'</em>, <em>port=8125</em>, <em>prefix=None</em>, <em>timeout=None</em>, <em>ipv6=False</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPStatsClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new <code class="docutils literal notranslate"><span class="pre">TCPStatsClient</span></code> instance with the appropriate connection
+and prefix information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>host</strong> (<em>str</em>) – the hostname or IP address of the <a class="reference external" href="https://github.com/etsy/statsd">statsd</a> server</li>
+<li><strong>port</strong> (<em>int</em>) – the port of the statsd server</li>
+<li><strong>prefix</strong> (<em>str</em><em> or </em><em>None</em>) – a prefix to distinguish and group stats from an application
+or environment.</li>
+<li><strong>timeout</strong> (<em>float</em>) – socket timeout for any actions on the connection
+socket.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><code class="docutils literal notranslate"><span class="pre">TCPStatsClient</span></code> implements all methods of <a class="reference internal" href="#StatsClient" title="StatsClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatsClient</span></code></a>, including
+<a class="reference internal" href="#StatsClient.pipeline" title="StatsClient.pipeline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pipeline()</span></code></a>, with the difference that it is
+not thread safe and it can raise exceptions on connection errors. Unlike
+<a class="reference internal" href="#StatsClient" title="StatsClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatsClient</span></code></a> it uses a TCP connection to communicate with StatsD.</p>
+<p>In addition to the stats methods, <code class="docutils literal notranslate"><span class="pre">TCPStatsClient</span></code> supports the following
+TCP-specific methods.</p>
+<dl class="method">
+<dt id="TCPStatsClient.close">
+<code class="descclassname">TCPStatsClient.</code><code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TCPStatsClient.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes a connection that’s currently open and deletes it’s socket. If this
+is called on a <a class="reference internal" href="#TCPStatsClient" title="TCPStatsClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCPStatsClient</span></code></a> which currently has no open
+connection it is a non-action.</p>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsd</span> <span class="kn">import</span> <span class="n">TCPStatsClient</span>
+
+<span class="n">statsd</span> <span class="o">=</span> <span class="n">TCPStatsClient</span><span class="p">()</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s1">&#39;some.event&#39;</span><span class="p">)</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="TCPStatsClient.connect">
+<code class="descclassname">TCPStatsClient.</code><code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TCPStatsClient.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a connection to StatsD. If there are errors like connection timed
+out or connection refused, the according exceptions will be raised. It is
+usually not necessary to call this method because sending data to StatsD
+will call <code class="docutils literal notranslate"><span class="pre">connect</span></code> implicitely if the current instance of
+<a class="reference internal" href="#TCPStatsClient" title="TCPStatsClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCPStatsClient</span></code></a> does not already hold an open connection.</p>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsd</span> <span class="kn">import</span> <span class="n">TCPStatsClient</span>
+
+<span class="n">statsd</span> <span class="o">=</span> <span class="n">TCPStatsClient</span><span class="p">()</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s1">&#39;some.event&#39;</span><span class="p">)</span>  <span class="c1"># calls connect() internally</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>  <span class="c1"># creates new connection</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="TCPStatsClient.reconnect">
+<code class="descclassname">TCPStatsClient.</code><code class="descname">reconnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TCPStatsClient.reconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes a currently existing connection and replaces it with a new one.  If
+no connection exists already it will simply create a new one.  Internally
+this does nothing else than calling <a class="reference internal" href="#TCPStatsClient.close" title="TCPStatsClient.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> and <a class="reference internal" href="#TCPStatsClient.connect" title="TCPStatsClient.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect()</span></code></a>.</p>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsd</span> <span class="kn">import</span> <span class="n">TCPStatsClient</span>
+
+<span class="n">statsd</span> <span class="o">=</span> <span class="n">TCPStatsClient</span><span class="p">()</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s1">&#39;some.event&#39;</span><span class="p">)</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">reconnect</span><span class="p">()</span>  <span class="c1"># closes open connection and creates new one</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="UnixSocketStatsClient">
+<em class="property">class </em><code class="descname">UnixSocketStatsClient</code><span class="sig-paren">(</span><em>socket_path</em>, <em>prefix=None</em>, <em>timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#UnixSocketStatsClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>A version of <a class="reference internal" href="#StatsClient" title="StatsClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatsClient</span></code></a> that communicates over Unix sockets.
+It implements all methods of <a class="reference internal" href="#StatsClient" title="StatsClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatsClient</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>socket_path</strong> (<em>str</em>) – the path to the (writeable) Unix socket</li>
+<li><strong>prefix</strong> (<em>str</em><em> or </em><em>None</em>) – a prefix to distinguish and group stats from an application
+or environment</li>
+<li><strong>timeout</strong> (<em>float</em>) – socket timeout for any actions on the connection
+socket.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="unix_socket.html"
+                        title="previous chapter">UnixSocketStatsClient</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contributing.html"
+                        title="next chapter">Contributing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/reference.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="unix_socket.html" title="UnixSocketStatsClient"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Python StatsD 3.3.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015, James Socol.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.7.
+    </div>
+  </body>
+</html>

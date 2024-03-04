@@ -1,0 +1,9 @@
+torch
+numpy
+scipy>=0.17
+scikit-image
+opencv-python
+tqdm
+
+[:python_version < "3.4"]
+enum34

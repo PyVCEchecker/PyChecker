@@ -1,0 +1,58 @@
+v3.3.3, 2014-06-16 -- Initial release (based in `isbntools 3.3.3)`.
+v3.3.4, 2014-06-16 -- Fix small bug with wheel package (based in `isbntools 3.3.3)`.
+v3.3.5, 2014-06-22 -- Fix bug in 'notisbn' (based in `isbntools 3.3.4)`.
+v3.3.6, 2014-06-30 -- Small improvements and optional ShelveCache.
+v3.3.7, 2014-07-07 -- Fix issue #2, better debug logging and expose top exceptions.
+v3.3.8, 2014-07-07 -- Fix wrong logging identifier.
+v3.3.9, 2014-07-13 -- Mark as not valid ISBN-13 in series not allocated yet.
+v3.4.1, 2014-07-16 -- Fix bug #7 and small improvements on the API.
+v3.4.2, 2014-08-13 -- Add `doi2tex` and updated data.
+v3.4.3, 2015-01-13 -- Better LOOSE regex and allow 'x' in canonical.
+v3.4.4, 2015-01-26 -- Helpers sprint and fake_isbn.
+v3.4.5, 2015-02-05 -- Better yield for openl and better log model.
+v3.4.6, 2015-02-05 -- Fix bug #13.
+v3.4.7, 2015-02-11 -- Fix bug #14.
+v3.4.8, 2015-02-25 -- Fix bug #16, add 'desc' and 'cover' features.
+v3.4.9, 2015-02-27 -- Fix issue #17 and bug #18, data range 20150227.
+v3.5.1, 2015-03-10 -- New CoversCache and better unicode printing in Windows.
+v3.5.2, 2015-03-15 -- Fix bug #19, relative paths on coverscache and data range 20150310.
+v3.5.3, 2015-03-26 -- Add throttling for web services, data range 20150325 and 'in memory' keys cache.
+v3.5.4, 2015-04-10 -- Issue #20, fix bugs #21 and #22 and data range 20150401.
+v3.5.5, 2015-04-22 -- Add logging to vias, fix bug #23, and data range 20150422.
+v3.5.6, 2015-06-03 -- Deprecated 'bouth23' and data range 20150603.
+v3.5.7, 2015-11-22 -- Support for py35 and pypy3 and data range 20151118.
+v3.5.8, 2016-03-07 -- Issue #28 (closing down of xISBN service).
+v3.5.9, 2016-06-17 -- Improved data quality (close #39 and #40) and new cover (close issue #42).
+v3.6.1, 2016-06-21 -- Improved data quality (#39 and #40), new cover (#42) and streamlined.
+v3.6.2, 2016-09-06 -- Updated data.
+v3.6.3, 2016-11-09 -- Updated data.
+v3.6.4, 2016-11-12 -- Fix bug #46.
+v3.6.5, 2016-12-08 -- Updated data.
+v3.6.6, 2017-01-05 -- Fix bug #47.
+v3.6.7, 2017-03-11 -- Updated data.
+v3.6.8, 2017-03-31 -- New functions: check_digit10 and check_digit13.
+v3.7.1, 2017-05-24 -- Fix #43 (bump middle version).
+v3.7.2, 2017-06-19 -- Restore xID (improved data quality close #28).
+v3.7.3, 2018-01-08 -- Updated data.
+v3.7.4, 2018-01-08 -- Add support for CSL-JSON format (close #48).
+v3.8.1, 2018-01-24 -- BREAK: stop support for py26, py33 and isbndb.
+v3.8.2, 2018-01-24 -- Fix bug 'in_virtual'.
+v3.8.3, 2018-01-29 -- Add 'wcat' to editions.
+v3.8.4, 2018-03-06 -- Solve issues with non-ASCII searchs in 'from_words'.
+v3.8.5, 2018-06-14 -- NOT RELEASED.
+v3.9.1, 2018-07-02 -- Issue #51 (closing down of xISBN service).
+v3.9.2, 2018-09-28 -- Updated data.
+v3.9.3, 2018-10-05 -- Make it easier to override 'WEBService.data'.
+v3.9.4, 2019-01-18 -- Fix bibjson and updated data.
+v3.9.5, 2019-02-10 -- PR #53 and updated data.
+v3.9.6, 2019-02-24 -- Performance improvements (close #55).
+v3.9.7, 2019-05-06 -- Editions is now cached and consistent return types.
+v3.9.8, 2019-05-06 -- Fix bug #58 on 'editions'.
+v3.9.9, 2019-10-17 -- Better caching, improved security, fix 'catch all exception'.
+v3.9.10, 2019-12-20 -- Fix issues: 61 (close #61) and 62 (close #62).
+v3.9.11, 2019-12-20 -- NOT RELEASED.
+v3.10.0, 2020-03-23 -- Add a 'classify' service (oclc.org).
+v3.10.1, 2020-05-18 -- Add a 'wiki' (wikipedia) provider for metadata and editions.
+v3.10.2, 2020-05-26 -- Fix 'goob' and 'wiki' quirks (issue #64 and #65).
+v3.10.3, 2020-05-27 -- Delete a (quick debug) print statement.
+v3.10.4, 2020-11-17 -- Add 'Isbn' and fix #67.

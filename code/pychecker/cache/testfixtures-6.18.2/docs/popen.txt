@@ -1,0 +1,204 @@
+
+.. currentmodule:: testfixtures.popen
+
+Testing use of the subprocess package
+=====================================
+
+When using the :mod:`subprocess` package there are two approaches to testing:
+
+* Have your tests exercise the real processes being instantiated and used.
+
+* Mock out use of the :mod:`subprocess` package and provide expected output
+  while recording interactions with the package to make sure they are as
+  expected.
+
+While the first of these should be preferred, it means that you need to have all
+the external software available everywhere you wish to run tests. Your tests
+will also need to make sure any dependencies of that software on
+an external environment are met. If that external software takes a long time to
+run, your tests will also take a long time to run.
+
+These challenges can often make the second approach more practical and can
+be the more pragmatic approach when coupled with a mock that accurately
+simulates the behaviour of a subprocess. :class:`~testfixtures.popen.MockPopen`
+is an attempt to provide just such a mock.
+
+.. note:: To use :class:`~testfixtures.popen.MockPopen`, you must have the
+          :mod:`mock` package installed or be using Python 3.3 or later.
+
+.. warning::
+   Previous versions of this mock made use of :attr:`~unittest.mock.Mock.mock_calls`.
+   These are deceptively incapable of recording some information important in the use
+   of this mock, so please switch to making assertions about
+   :attr:`~MockPopen.all_calls` and :attr:`~MockPopenInstance.calls` instead.
+
+Example usage
+-------------
+
+As an example, suppose you have code such as the following that you need to
+test:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :lines: 4-12
+
+Tests that exercise this code using :class:`~testfixtures.popen.MockPopen`
+could be written as follows:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :lines: 16-52
+
+
+Passing input to processes
+--------------------------
+
+If your testing requires passing input to the subprocess, you can do so by
+checking for the input passed to :meth:`~subprocess.Popen.communicate` method
+when you check the calls on the mock as shown in this example:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_communicate_with_input
+   :dedent: 4
+
+.. note:: Accessing ``.stdin`` isn't current supported by this mock.
+
+
+Reading from ``stdout`` and ``stderr``
+--------------------------------------
+
+The :attr:`~MockPopenInstance.stdout` and :attr:`~MockPopenInstance.stderr`
+attributes of the mock returned by
+:class:`~testfixtures.popen.MockPopen` will be file-like objects as with
+the real :class:`~subprocess.Popen` and can be read as shown in this example:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_read_from_stdout_and_stderr
+   :dedent: 4
+
+.. warning::
+
+    While these streams behave a lot like the streams of a real
+    :class:`~subprocess.Popen` object, they do not exhibit the deadlocking
+    behaviour that can occur when the two streams are read as in the example
+    above. Be very careful when reading :attr:`~MockPopenInstance.stdout` and
+    :attr:`~MockPopenInstance.stderr` and
+    consider using :meth:`~subprocess.Popen.communicate` instead.
+
+
+Writing to ``stdin``
+--------------------
+If you set ``stdin=PIPE`` in your call to :class:`~subprocess.Popen` then the
+:attr:`~MockPopenInstance.stdin`
+attribute of the mock returned by :class:`~testfixtures.popen.MockPopen`
+will be a mock and you can then examine the write calls to it as shown
+in this example:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_write_to_stdin
+   :dedent: 4
+
+
+Specifying the return code
+--------------------------
+
+Often code will need to behave differently depending on the return code of the
+launched process. Specifying a simulated response code, along with testing for
+the correct usage of :meth:`~subprocess.Popen.wait`, can be seen in the
+following example:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_wait_and_return_code
+   :dedent: 4
+
+Checking for signal sending
+---------------------------
+
+Calls to :meth:`~MockPopenInstance.send_signal`,
+:meth:`MockPopenInstance.terminate` and :meth:`MockPopenInstance.kill` are all
+recorded by the mock returned by :class:`~testfixtures.popen.MockPopen`
+but otherwise do nothing as shown in the following example, which doesn't
+make sense for a real test of sub-process usage but does show how the mock
+behaves:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_send_signal
+   :dedent: 4
+
+Polling a process
+-----------------
+
+The :meth:`~subprocess.Popen.poll` method is often used as part of a loop
+in order to do other work while waiting for a sub-process to complete.
+The mock returned by :class:`~testfixtures.popen.MockPopen` supports this
+by allowing the :meth:`~MockPopenInstance.poll` method to
+be called a number of times before
+the :attr:`~MockPopenInstance.returncode` is set using the
+``poll_count`` parameter as shown in
+the following example:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_poll_until_result
+   :dedent: 4
+
+Different behaviour on sequential processes
+-------------------------------------------
+
+If your code needs to call the same command but have different behaviour
+on each call, then you can pass a callable behaviour like this:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_multiple_responses
+   :dedent: 4
+
+If you need to keep state across calls, such as accumulating
+:attr:`~MockPopenInstance.stdin` or
+failing for a configurable number of calls, then wrap that behaviour up
+into a class:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: CustomBehaviour
+
+This can then be used like this:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_count_down
+   :dedent: 4
+
+
+Using default behaviour
+-----------------------
+
+If you're testing something that needs to make many calls to many different
+commands that all behave the same, it can be tedious to specify the behaviour
+of each with :class:`~MockPopen.set_command`. For this case, :class:`~MockPopen`
+has the :class:`~MockPopen.set_default` method which can be used to set the
+behaviour of any command that has not been specified with
+:class:`~MockPopen.set_command` as shown in the
+following example:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_default_behaviour
+   :dedent: 4
+
+
+Tracking multiple simultaneous processes
+----------------------------------------
+
+Conversely, if you're testing something that spins up multiple subprocesses
+and manages their simultaneous execution, you will want to explicitly define the
+behaviour of each process using :class:`~MockPopen.set_command` and then make
+assertions about each process using :attr:`~MockPopen.all_calls`.
+
+For example, suppose we wanted to test this function:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: process_in_batches
+
+Then you could test it as follows:
+
+.. literalinclude:: ../testfixtures/tests/test_popen_docs.py
+   :pyobject: TestMyFunc.test_multiple_processes
+   :dedent: 4
+
+Note that the order of all calls is explicitly recorded. If the order of these calls
+is non-deterministic due to your method of process management, you will need to
+do more work and be very careful when testing.

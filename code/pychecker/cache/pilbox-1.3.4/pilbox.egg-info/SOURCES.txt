@@ -1,0 +1,16 @@
+MANIFEST.in
+README.rst
+setup.py
+pilbox/__init__.py
+pilbox/app.py
+pilbox/errors.py
+pilbox/frontalface.xml
+pilbox/image.py
+pilbox/signature.py
+pilbox.egg-info/PKG-INFO
+pilbox.egg-info/SOURCES.txt
+pilbox.egg-info/dependency_links.txt
+pilbox.egg-info/entry_points.txt
+pilbox.egg-info/requires.txt
+pilbox.egg-info/top_level.txt
+pilbox.egg-info/zip-safe

@@ -1,0 +1,11 @@
+Version 1.5
+===========
+
+Allow unicode enum values (sergeyzsg)
+Add support for Marshmallow 3 (svidela)
+
+Version 1.4
+===========
+
+* Deprecate the `{choices}`, `{name}` and `{value}` format keys for custom error messages
+* Allow configure loading and dumping independently

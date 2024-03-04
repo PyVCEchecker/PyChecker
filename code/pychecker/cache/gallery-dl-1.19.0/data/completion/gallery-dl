@@ -1,0 +1,17 @@
+_gallery_dl()
+{
+    local cur prev
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    if [[ "${prev}" =~ ^(-i|--input-file|--cookies|--write-log|--write-unsupported|-c|--config|--config-yaml|--download-archive)$ ]]; then
+        COMPREPLY=( $(compgen -f -- "${cur}") )
+    elif [[ "${prev}" =~ ^(-d|--dest)$ ]]; then
+        COMPREPLY=( $(compgen -d -- "${cur}") )
+    else
+        COMPREPLY=( $(compgen -W "--help --version --dest --input-file --cookies --proxy --clear-cache --quiet --verbose --get-urls --resolve-urls --dump-json --simulate --extractor-info --list-keywords --list-modules --list-extractors --write-log --write-unsupported --write-pages --limit-rate --retries --http-timeout --sleep --filesize-min --filesize-max --no-part --no-skip --no-mtime --no-download --no-check-certificate --config --config-yaml --option --ignore-config --username --password --netrc --download-archive --abort --terminate --range --chapter-range --filter --chapter-filter --zip --ugoira-conv --ugoira-conv-lossless --write-metadata --write-infojson --write-tags --mtime-from-date --exec --exec-after --postprocessor" -- "${cur}") )
+    fi
+}
+
+complete -F _gallery_dl gallery-dl

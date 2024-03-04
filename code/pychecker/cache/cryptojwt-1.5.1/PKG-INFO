@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: cryptojwt
+Version: 1.5.1
+Summary: Python implementation of JWT, JWE, JWS and JWK
+Home-page: https://github.com/IdentityPython/JWTConnect-Python-CryptoJWT
+License: Apache-2.0
+Author: Roland Hedberg
+Author-email: roland@catalogix.se
+Requires-Python: >=3.6,<4.0
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Dist: cryptography (>=3.4.6,<4.0.0)
+Requires-Dist: readerwriterlock (>=1.0.8,<2.0.0)
+Requires-Dist: requests (>=2.25.1,<3.0.0)
+Project-URL: Repository, https://github.com/IdentityPython/JWTConnect-Python-CryptoJWT
+Description-Content-Type: text/markdown
+
+# cryptojwt
+
+![License](https://img.shields.io/badge/license-Apache%202-blue.svg)
+![Python version](https://img.shields.io/badge/python-3.6%20%7C%203.7%7C%203.8%20%7C%203.9-blue.svg)
+
+An implementation of the JSON cryptographic specs JWS, JWE, JWK, and JWA [RFC 7515-7518] and JSON Web Token (JWT) [RFC 7519]
+
+oidcmsg is the 1st layer in the JWTConnect stack (cryptojwt, oidcmsg, oidcservice, oidcrp).
+
+Please read the [Official Documentation](https://cryptojwt.readthedocs.io/en/latest/) for getting usage examples and further informations.
+

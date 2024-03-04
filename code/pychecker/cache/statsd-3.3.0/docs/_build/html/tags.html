@@ -1,0 +1,161 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Unsupported: Tagging Metrics &#8212; Python StatsD 3.3.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">Python StatsD 3.3.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="unsupported-tagging-metrics">
+<span id="tags-chapter"></span><h1>Unsupported: Tagging Metrics<a class="headerlink" href="#unsupported-tagging-metrics" title="Permalink to this headline">¶</a></h1>
+<p>Tagged metrics—such as those used by <a class="reference external" href="https://www.datadoghq.com/">Datadog</a> and <a class="reference external" href="https://github.com/influxdata/telegraf">Telegraf</a>—are
+explicitly outside the scope of this library. <a class="reference external" href="https://pypi.org/project/statsd-tags/">Alternatives</a> exist and
+are recommended. This document lays out the reasons to avoid support for
+tags.</p>
+<div class="section" id="aggregating-and-disaggregating-metrics">
+<h2>Aggregating and Disaggregating Metrics<a class="headerlink" href="#aggregating-and-disaggregating-metrics" title="Permalink to this headline">¶</a></h2>
+<p>Given a simple metric, like a <a class="reference internal" href="types.html#counter-type"><span class="std std-ref">counter</span></a> or
+<a class="reference internal" href="types.html#timer-type"><span class="std std-ref">Timers</span></a>, the very first operation StatsD will perform is an
+aggregation over time. For example, over a 30-second window, calculate
+the total number of events (a counter) or several aggregations like
+average, median, 90th percentile (a timer).</p>
+<p>A very common next step is for users to want to perform additional
+aggregations. For example, if we’re timing a <code class="docutils literal notranslate"><span class="pre">/widgets</span></code> API endpoint
+for both <code class="docutils literal notranslate"><span class="pre">GET</span></code> and <code class="docutils literal notranslate"><span class="pre">POST</span></code> requests, we might want to know the median
+time across both HTTP methods.</p>
+<p><em>Without</em> tags, we must start with the most disaggregated metrics,
+e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">statsd</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;api.widgets.GET&#39;</span><span class="p">,</span> <span class="n">response_time</span><span class="p">)</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;api.widgets.POST&#39;</span><span class="p">,</span> <span class="n">response_time</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can then <em>aggregate</em> these metrics with wildcards (e.g. in
+Graphite):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">weightedAverage</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">widgets</span><span class="o">.*.</span><span class="n">mean</span><span class="p">,</span> <span class="n">api</span><span class="o">.</span><span class="n">widgets</span><span class="o">.*.</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, <em>with</em> tags, we have an alternative approach: to use a single,
+aggregated metric name, and <em>disaggregate</em> via tags, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">statsd</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;api.widgets&#39;</span><span class="p">,</span> <span class="n">response_time</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">})</span>
+<span class="n">statsd</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;api.widgets&#39;</span><span class="p">,</span> <span class="n">response_time</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>By default, queries for the <code class="docutils literal notranslate"><span class="pre">api.widgets</span></code> timer will include all
+requests, but may be filtered to specific subsets with tags (e.g. in
+Datadog):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">mean</span><span class="p">{</span><span class="n">method</span><span class="p">:</span><span class="n">GET</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="naming-metrics">
+<h2>Naming Metrics<a class="headerlink" href="#naming-metrics" title="Permalink to this headline">¶</a></h2>
+<p>The examples above demonstrate that there is a fundamental change in how
+metrics must be named, particularly in the absence of tags, to avoid
+data loss. If tags are not supported, there is no way to disaggregate
+<code class="docutils literal notranslate"><span class="pre">api.widgets</span></code> into its <code class="docutils literal notranslate"><span class="pre">GET</span></code> and <code class="docutils literal notranslate"><span class="pre">POST</span></code> subsets.</p>
+<p>Thus, it is incredibly important that an application be written with
+specific metrics capabilities in mind. If using a metrics system that
+does not support tags, like <a class="reference external" href="https://github.com/etsy/statsd">StatsD</a> or <a class="reference external" href="https://github.com/bitly/statsdaemon">StatsDaemon</a>, metric names must
+be disaggregated by default. If using a system that <em>does</em> support tags,
+like Datadog or Telegraf, metric names may be aggregated by default.</p>
+<p>If an application is expecting tags to work but they are not supported
+by the underlying metrics system, the best case scenario is a loss of
+data resolution. The worst case scenario is a complete loss of data, if
+the metrics system is incapable of correctly parsing the extended metric
+data.</p>
+</div>
+<div class="section" id="explicit-opt-in">
+<h2>Explicit Opt-in<a class="headerlink" href="#explicit-opt-in" title="Permalink to this headline">¶</a></h2>
+<p>Given that the best case scenario for a mismatch of application and
+metrics system is a form of data loss, the choice to use metrics with
+tags must be incredibly explicit.</p>
+<p>Technically, this library is capable of sending metrics to <a class="reference external" href="https://www.datadoghq.com/">Datadog</a> and
+<a class="reference external" href="https://github.com/influxdata/telegraf">Telegraf</a>, as well as <a class="reference external" href="https://github.com/etsy/statsd">StatsD</a>. However, to take advantage of these,
+you’ll need to change your strategy for naming—and tagging—metrics.</p>
+<p>To avoid silently failing, this library forces you to make an explicit
+change to how you send metrics to these systems. At a minimum, you must
+touch every file that has <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">statsd</span></code>, but that’s not really
+enough: you need to touch every metrics call.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Unsupported: Tagging Metrics</a><ul>
+<li><a class="reference internal" href="#aggregating-and-disaggregating-metrics">Aggregating and Disaggregating Metrics</a></li>
+<li><a class="reference internal" href="#naming-metrics">Naming Metrics</a></li>
+<li><a class="reference internal" href="#explicit-opt-in">Explicit Opt-in</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tags.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">Python StatsD 3.3.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015, James Socol.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.7.
+    </div>
+  </body>
+</html>

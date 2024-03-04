@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: python3-indy
+Version: 1.16.0
+Summary: This is the official SDK for Hyperledger Indy (https://www.hyperledger.org/projects), which provides a distributed-ledger-based foundation for self-sovereign identity (https://sovrin.org). The major artifact of the SDK is a c-callable library.
+Home-page: https://github.com/hyperledger/indy-sdk
+Author: Hyperledger Indy Contributors
+Author-email: hyperledger-indy@lists.hyperledger.org
+License: MIT/Apache-2.0
+Description: UNKNOWN
+Platform: UNKNOWN

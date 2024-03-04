@@ -1,0 +1,3 @@
+recursive-include mageserver *.py
+include README.rst
+include LICENSE

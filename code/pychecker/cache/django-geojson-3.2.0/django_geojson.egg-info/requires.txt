@@ -1,0 +1,9 @@
+Django>=2.2
+
+[docs]
+sphinx
+sphinx-autobuild
+
+[field]
+jsonfield
+django-leaflet>=0.12

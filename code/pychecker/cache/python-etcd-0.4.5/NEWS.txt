@@ -1,0 +1,156 @@
+News
+====
+0.4.5
+-----
+*Release date: 3-Mar-2017*
+
+* Remove dnspython2/3 requirement
+* Change property name setter in lock
+* Fixed acl tests
+* Added version/cluster_version properties to client
+* Fixes in lock when used as context manager
+* Fixed improper usage of urllib3 exceptions
+* Minor fixes for error classes
+* In lock return modifiedIndex to watch changes
+* In lock fix context manager exception handling
+* Improvments to the documentation
+* Remove _base_uri only after refresh from cluster
+* Avoid double update of _machines_cache
+
+
+0.4.4
+-----
+*Release date: 10-Jan-2017*
+
+* Fix some tests
+* Use sys,version_info tuple, instead of named tuple
+* Improve & fix documentation
+* Fix python3 specific problem when blocking on contented lock
+* Add refresh key method
+* Add custom lock prefix support
+
+
+0.4.3
+-----
+*Release date: 14-Dec-2015*
+
+* Fix check for parameters in case of connection error
+* Python 3.5 compatibility and general python3 cleanups
+* Added authentication and module for managing ACLs
+* Added srv record-based DNS discovery
+* Fixed (again) logging of cluster id changes
+* Fixed leader lookup
+* Properly retry request on exception
+* Client: clean up open connections when deleting
+
+0.4.2
+-----
+*Release date: 8-Oct-2015*
+
+* Fixed lock documentation
+* Fixed lock sequences due to etcd 2.2 change
+* Better exception management during response processing
+* Fixed logging of cluster ID changes
+* Fixed subtree results
+* Do not check cluster ID if etcd responses don't contain the ID
+* Added a cause to EtcdConnectionFailed
+
+
+0.4.1
+-----
+*Release date: 1-Aug-2015*
+
+* Added client-side leader election
+* Added stats endpoints
+* Added logging
+* Better exception handling
+* Check for cluster ID on each request
+* Added etcd.Client.members and fixed etcd.Client.leader
+* Removed locking and election etcd support
+* Allow the use of etcd proxies with reconnections
+* Implement pop: Remove key from etc and return the corresponding value.
+* Eternal watcher can be now recursive
+* Fix etcd.Client machines
+* Do not send parameters with `None` value to etcd
+* Support ttl=0 in write.
+* Moved pyOpenSSL into test requirements.
+* Always set certificate information so redirects from http to https work.
+
+
+0.3.3
+-----
+*Release date: 12-Apr-2015*
+
+* Forward leaves_only value in get_subtree() recursive calls
+* Fix README prevExists->prevExist
+* Added configurable version_prefix
+* Added support for recursive watch
+* Better error handling support (more detailed exceptions)
+* Fixed some unreliable tests
+
+
+0.3.2
+-----
+
+*Release date: 4-Aug-2014*
+
+* Fixed generated documentation version.
+
+
+0.3.1
+-----
+
+*Release date: 4-Aug-2014*
+
+* Added consisten read option
+* Fixed timeout parameter in read()
+* Added atomic delete parameter support
+* Fixed delete behaviour
+* Added update method that allows atomic updated on results
+* Fixed checks on write()
+* Added leaves generator to EtcdResult and get_subtree for recursive fetch
+* Added etcd_index to EtcdResult
+* Changed ethernal -> eternal
+* Updated urllib3 & pyOpenSSL libraries
+* Several performance fixes
+* Better parsing of etcd_index and raft_index
+* Removed duplicated tests
+* Added several integration and unit tests
+* Use etcd v0.3.0 in travis
+* Execute test using `python setup.py test` and nose
+
+
+0.3.0
+-----
+
+*Release date: 18-Jan-2014*
+
+* API v2 support
+* Python 3.3 compatibility
+
+
+0.2.1
+-----
+
+*Release data: 30-Nov-2013*
+
+* SSL support
+* Added support for subdirectories in results.
+* Improve test
+* Added support for reconnections, allowing death node tolerance.
+
+
+0.2.0
+-----
+
+*Release date: 30-Sep-2013*
+
+* Allow fetching of multiple keys (sub-nodes)
+
+
+0.1
+---
+
+*Release date: 18-Sep-2013*
+
+* Initial release

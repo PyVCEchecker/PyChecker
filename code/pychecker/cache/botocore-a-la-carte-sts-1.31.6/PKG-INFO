@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: botocore-a-la-carte-sts
+Version: 1.31.6
+Summary: sts data for botocore. See the `botocore-a-la-carte` package for more info.
+Home-page: https://github.com/thejcannon/botocore-a-la-carte
+Author: Amazon Web Services
+License: Apache License 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >= 3.7
+License-File: LICENSE.txt
+
+UNKNOWN
+

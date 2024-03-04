@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_apigateway.egg-info/PKG-INFO
+src/aws_cdk.aws_apigateway.egg-info/SOURCES.txt
+src/aws_cdk.aws_apigateway.egg-info/dependency_links.txt
+src/aws_cdk.aws_apigateway.egg-info/requires.txt
+src/aws_cdk.aws_apigateway.egg-info/top_level.txt
+src/aws_cdk/aws_apigateway/__init__.py
+src/aws_cdk/aws_apigateway/py.typed
+src/aws_cdk/aws_apigateway/_jsii/__init__.py
+src/aws_cdk/aws_apigateway/_jsii/aws-apigateway@1.129.0.jsii.tgz

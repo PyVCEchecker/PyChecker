@@ -1,0 +1,6 @@
+[console_scripts]
+udiskie = udiskie.cli:Daemon.main
+udiskie-info = udiskie.cli:Info.main
+udiskie-mount = udiskie.cli:Mount.main
+udiskie-umount = udiskie.cli:Umount.main
+

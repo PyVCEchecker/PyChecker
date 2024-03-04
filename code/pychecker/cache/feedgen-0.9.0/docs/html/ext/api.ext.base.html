@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>feedgen.ext.base &#8212; python-feedgen 0.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/lernfunk.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="feedgen.ext.dc" href="api.ext.dc.html" />
+    <link rel="prev" title="feedgen.util" href="../api.util.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>python-feedgen 0.9.0 documentation</span></a></h1>
+        <h2 class="heading"><span>feedgen.ext.base</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../api.util.html">feedgen.util</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="api.ext.dc.html">feedgen.ext.dc</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content" role="main">
+        
+        
+  <script type=application/javascript src=_static/theme_extras.js></script>
+<div class="apititle"><b>Contents</b></div>
+<div class="apitoc"></div><span class="target" id="module-feedgen.ext.base"></span><div class="section" id="feedgen-ext-base">
+<h1>feedgen.ext.base<a class="headerlink" href="#feedgen-ext-base" title="Permalink to this headline">¶</a></h1>
+<p>Basic FeedGenerator extension which does nothing but provides all necessary
+methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">copyright</dt>
+<dd class="field-odd"><p>2013, Lars Kiesow &lt;<a class="reference external" href="mailto:lkiesow&#37;&#52;&#48;uos&#46;de">lkiesow<span>&#64;</span>uos<span>&#46;</span>de</a>&gt;</p>
+</dd>
+<dt class="field-even">license</dt>
+<dd class="field-even"><p>FreeBSD and LGPL, see license.* for more details.</p>
+</dd>
+</dl>
+<dl class="class">
+<dt id="feedgen.ext.base.BaseEntryExtension">
+<em class="property">class </em><code class="sig-prename descclassname">feedgen.ext.base.</code><code class="sig-name descname">BaseEntryExtension</code><a class="headerlink" href="#feedgen.ext.base.BaseEntryExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic FeedEntry extension.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="feedgen.ext.base.BaseExtension">
+<em class="property">class </em><code class="sig-prename descclassname">feedgen.ext.base.</code><code class="sig-name descname">BaseExtension</code><a class="headerlink" href="#feedgen.ext.base.BaseExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic FeedGenerator extension.</p>
+<dl class="method">
+<dt id="feedgen.ext.base.BaseExtension.extend_atom">
+<code class="sig-name descname">extend_atom</code><span class="sig-paren">(</span><em class="sig-param">feed</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.base.BaseExtension.extend_atom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extend an ATOM feed xml structure containing all previously set
+fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>feed</strong> – The feed xml root element.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The feed root element.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.ext.base.BaseExtension.extend_ns">
+<code class="sig-name descname">extend_ns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.base.BaseExtension.extend_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict that will be used in the namespace map for the feed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.ext.base.BaseExtension.extend_rss">
+<code class="sig-name descname">extend_rss</code><span class="sig-paren">(</span><em class="sig-param">feed</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.base.BaseExtension.extend_rss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extend a RSS feed xml structure containing all previously set fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>feed</strong> – The feed xml root element.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The feed root element.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../api.util.html">feedgen.util</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="api.ext.dc.html">feedgen.ext.dc</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, Lars Kiesow.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

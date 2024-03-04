@@ -1,0 +1,2 @@
+apache-airflow~=1.10
+pyexasol<1.0.0,>=0.5.1

@@ -1,0 +1,14 @@
+six
+
+[sasl]
+pure-sasl==0.5.1
+
+[test]
+six
+mock
+pytest
+pytest-cov
+flake8
+objgraph
+gevent>=1.2
+eventlet>=0.17.1

@@ -1,0 +1,9 @@
+cython==0.29.21
+# cysignals >= 1.7.0  # optional
+
+
+# dev
+nose==1.3.7
+gitpython
+grip
+coveralls

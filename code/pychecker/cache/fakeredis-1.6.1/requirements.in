@@ -1,0 +1,15 @@
+aioredis
+coverage
+flake8
+hypothesis
+lupa
+pytest
+pytest-asyncio
+pytest-cov
+pytest-mock
+redis==3.5.3       # Latest at time of writing
+six
+sortedcontainers
+
+# Not needed directly, but the latest versions don't support Python 3.5
+zipp<2

@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_route53resolver.egg-info/PKG-INFO
+src/aws_cdk.aws_route53resolver.egg-info/SOURCES.txt
+src/aws_cdk.aws_route53resolver.egg-info/dependency_links.txt
+src/aws_cdk.aws_route53resolver.egg-info/requires.txt
+src/aws_cdk.aws_route53resolver.egg-info/top_level.txt
+src/aws_cdk/aws_route53resolver/__init__.py
+src/aws_cdk/aws_route53resolver/py.typed
+src/aws_cdk/aws_route53resolver/_jsii/__init__.py
+src/aws_cdk/aws_route53resolver/_jsii/aws-route53resolver@1.129.0.jsii.tgz

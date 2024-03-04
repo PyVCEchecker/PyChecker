@@ -1,0 +1,20 @@
+[run]
+omit =
+    */test_*.py
+    fsspec/_version.py
+    fsspec/implementations/dvc.py
+    fsspec/implementations/github.py
+    fsspec/implementations/hdfs.py
+source =
+    fsspec
+
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    pragma: no cover
+
+    raise AssertionError
+    raise NotImplementedError
+    pass
+
+ignore_errors = True

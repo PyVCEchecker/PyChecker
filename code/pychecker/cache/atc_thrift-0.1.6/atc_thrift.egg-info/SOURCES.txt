@@ -1,0 +1,13 @@
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+atc_thrift/Atcd.py
+atc_thrift/__init__.py
+atc_thrift/constants.py
+atc_thrift/ttypes.py
+atc_thrift.egg-info/PKG-INFO
+atc_thrift.egg-info/SOURCES.txt
+atc_thrift.egg-info/dependency_links.txt
+atc_thrift.egg-info/requires.txt
+atc_thrift.egg-info/top_level.txt

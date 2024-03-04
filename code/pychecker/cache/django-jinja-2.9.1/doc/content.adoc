@@ -1,0 +1,677 @@
+= django-jinja - jinja2 backend for Django
+Andrey Antukh, <niwi@niwi.be>
+2.9.1
+:toc: left
+:!numbered:
+:source-highlighter: pygments
+:pygments-style: friendly
+:sectlinks:
+
+
+== Introduction
+
+django-jinja is a xref:license[BSD Licensed], simple and non-obstructive jinja2
+backend for Django.
+
+
+=== Rationale
+
+Jinja2 provides certain advantages over the native system of Django, for example,
+explicit calls to callable from templates, has better performance and has a plugin
+system, etc ...
+
+Django comes with a jinja backend, why should I use *django-jinja*?
+
+The Django builtin backend has a very limited set of features if we compare it with
+the django template engine and in my opinion is not very usable because it does not
+integrate well with the rest of django such as its filters, template tags and
+preloading of templatetags, among others.
+
+*django-jinja* comes to the rescue and adds everything missing. This is a brief
+list of differences with django's built-in backend:
+
+- Auto-load templatetags compatible with Jinja2 the same way as Django.
+- Find the templates as usual in `"<appname>/templates"` directory instead
+  of `"<appname>/jinja2"`  directory (you can overwrite this behavior, see below).
+- Django templates can coexist with Jinja2 templates without any problems.
+  It works as middleware, intercepts Jinja templates by file path pattern.
+- Django template filters and tags can mostly be used in Jinja2 templates.
+- I18n subsystem adapted for Jinja2 (makemessages now collects messages from
+  Jinja templates, respects the `ext.i18n.trimmed` policy)
+- jinja2 bytecode cache adapted for using django's cache subsystem.
+- Support for django context processors.
+
+
+[NOTE]
+====
+The usage of context processors is available for compatibility and migrations,
+but creating new context processors is not the recommended way to set global context.
+With *django-jinja*, you can do this by setting global data or global constants. See below,
+in the "Custom filters, globals, constants and tests" section.
+====
+
+
+=== Requirements
+
+- Python >= 3.6
+- Django >= 2.2
+- jinja2 >= 3.0
+
+If you are using older versions of Django or Python, you need an older version of django-jinja:
+
+|===
+|django-jinja |supported python versions |supported django versions
+
+|==1.4.2
+|2.7, 3.3, 3.4
+|1.5, 1.6, 1.7, 1.8
+
+|==2.4.1
+|2.7, 3.4, 3.5
+|1.8, 1.11
+
+|==2.6.0
+|3.5 (not django 3.0), 3.6, 3.7, 3.8
+|1.11, 2.2, 3.0
+
+|>=2.7.0
+|3.5 (django 2.2 only), 3.6, 3.7, 3.8, 3.9
+|2.2, 3.0, 3.1, 3.2
+
+|>=2.8.0
+|3.6, 3.7, 3.8, 3.9
+|2.2, 3.0, 3.1, 3.2
+|===
+
+
+=== Installation
+
+The simplest way to install **django-jinja** is using **pip**:
+
+[source, bash]
+----
+pip install django-jinja
+----
+
+
+== Quick Start
+
+Add it to Django's installed apps list:
+
+[source, python]
+----
+INSTALLED_APPS += ('django_jinja',)
+----
+
+Followed by the basic template engine configuration:
+
+[source, python]
+----
+TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {}
+    },
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {}
+    },
+]
+----
+
+[NOTE]
+====
+If you are using the default value for the app templates directory of the
+django-jinja backend, take care of the template engines order, because the
+django-jinja backend by default uses the same directory for the templates as
+the django template engine. If you put the django engine first every jinja
+template will be found by the django engine.
+====
+
+To read more on the logic of the `DIRS` and `APP_DIRS` settings,
+and how the engines resolve template paths, check out
+link:https://docs.djangoproject.com/en/dev/topics/templates/#support-for-template-engines[Django's section on setting up template engines].
+
+
+== User Guide
+
+=== Using Jinja2 templates in your views
+
+By default, *django-jinja*'s template backend matches files with the extension `.jinja`,
+and (if using the `APP_DIRS` template loader) it crawls the same `templates` folders
+within your apps as the Django Template Language (DTL) engine does.
+
+So, all you have to do to switch your template renderer is to change the file extension of the template.
+Make sure your templates use the right engine's syntax corresponding to their file extensions!
+
+As an example, these class-based views work for both Jinja2 and DTL in a project set up like in xref:_quick_start[Quick Start]:
+
+[source, python]
+----
+"""
+app layout:
+    myapp/
+    ├── __init__.py
+    ├── apps.py
+    ├── templates
+    │   ├── bar.html
+    │   └── foo.jinja
+    └── views.py       <--(you are here)
+"""
+from django.views.generic import TemplateView
+
+class FooView(TemplateView):
+    template_name = 'foo.jinja'  # renders with Jinja2
+
+class BarView(TemplateView):
+    template_name = 'bar.html'  # renders with DTL
+----
+
+[NOTE]
+====
+Jinja2 and DTL templates can't call each other with `{% extends %}` or `{% include %}`.
+If you mix them up, django will raise `django.template.TemplateDoesNotExist` or `TemplateSyntaxError`.
+
+If you use template inheritance in your project to keep every page looking the same,
+you may end up needing to maintain two versions of your commonly used templates, like
+`base.jinja` and `base.html`, that render the same, each using their own template language.
+====
+
+For advice on converting from a DTL to a Jinja2 template,
+see xref:_differences_with_django_template_engine[Differences with Django Template Engine].
+
+
+=== Advanced template pattern matching
+
+If the above default behavior is not to your liking, you can tune it using these `OPTIONS`:
+
+[source, python]
+----
+"OPTIONS": {
+    # django-jinja defaults
+    "match_extension": ".jinja",
+    "match_regex": None,
+    "app_dirname": "templates",
+}
+----
+
+- To match only file paths that end with a certain string, use `match_extension`.
+- To use regular expressions to match or exclude certain paths, use `match_regex`.
+- If both are set, both tests must pass for the backend to try and render the file.
+- If both are disabled with `None`, the backend will try and render *any* file it finds
+  (and preclude any subsequent engines in `TEMPLATES`).
+
+This example matches `.html` files instead of `.jinja` across the entire project,
+but uses a regular expression to exclude matching DTL templates used by the admin interface.
+
+[source, python]
+----
+"OPTIONS": {
+    # Match the template names ending in .html but not the ones in the admin folder.
+    "match_extension": ".html",
+    "match_regex": r"^(?!admin/).*",
+}
+----
+
+As said previously, when using `APP_DIRS`, django-jinja's backend uses the same
+`templates` directory as the django template engine. To change it to use another
+directory in your apps, you can use the `app_dirname` option:
+
+[source, python]
+----
+"OPTIONS": {
+    # Match the templates at <app>/jinja2/*.html`, leaving <app>/templates/ for DTL.
+    "match_extension": ".html",
+    "app_dirname": "jinja2",
+}
+----
+
+
+=== Context processors support
+
+It is a helper to use django's context processors with jinja2 backend
+for django 1.8.
+
+.Example: set up a bunch of context processors:
+[source, python]
+----
+"OPTIONS": {
+    "context_processors": [
+        "django.contrib.auth.context_processors.auth",
+        "django.template.context_processors.debug",
+        "django.template.context_processors.i18n",
+        "django.template.context_processors.media",
+        "django.template.context_processors.static",
+        "django.template.context_processors.tz",
+        "django.contrib.messages.context_processors.messages",
+    ],
+}
+----
+
+As with the django template engine, this is a default list of context processors, and you can skip
+setting them if you do not have your own.
+Furthermore, the purpose of django-jinja's context processor support is to help with migrations,
+but context processors are no longer the recommended way to set global variables and functions.
+For the recommended way, see the next section.
+
+[NOTE]
+====
+Remember that django (1.8.x and 1.9.x) is backward compatible with
+the old template api and this has its own trade-offs. If you find yourself using functions
+like `render_to_string` or `render_to_response` from django, do not forget to pass the
+request parameter in order to make context processors work.
+====
+
+
+=== Custom filters, globals, constants and tests
+
+This is the recommended way to set up additional jinja variables, tests, and filters, in your settings.
+
+[source, python]
+----
+"OPTIONS": {
+    "tests": {
+        "mytest": "path.to.tests.mytestfn",
+    },
+    "filters": {
+        "myfilter": "path.to.filters.myfilterfn",
+    },
+    "constants": {
+        "hello": "hello world",
+    },
+    "globals": {
+        "somefn": "path.to.functions.somefn",
+    }
+}
+----
+
+
+=== Set policies
+
+To set link:https://jinja.palletsprojects.com/en/3.0.x/api/#policies[environment policies] introduced in Jinja2 2.9:
+
+[source, python]
+----
+"OPTIONS": {
+    "policies": {
+        "ext.i18n.trimmed": True,
+    },
+}
+----
+
+
+=== Add additional extensions
+
+django-jinja, by default sets up a great amount of extensions to make your experience
+using jinja in django painless. But if you want to add more extensions, you can do it
+using the `extensions` entry of the backend options:
+
+[source, python]
+----
+from django_jinja.builtins import DEFAULT_EXTENSIONS
+
+"OPTIONS": {
+    "extensions": DEFAULT_EXTENSIONS + [
+        # Your extensions here...
+        "path.to.your.Extension"
+    ]
+}
+
+----
+
+
+=== Gettext Style
+
+Jinja2 implements two styles of gettext. You can read about it here:
+http://jinja.pocoo.org/docs/dev/extensions/#newstyle-gettext.
+
+You can switch to concrete style using the `newstyle_gettext` entry on
+backend options:
+
+[source, python]
+----
+"OPTIONS": {
+    "newstyle_gettext": True,
+}
+----
+
+
+=== Complete example
+
+This is a complete configuration example with django-jinja's defaults:
+
+[source, python]
+----
+TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "match_extension": ".jinja",
+            "match_regex": None,
+            "app_dirname": "templates",
+            # Can be set to "jinja2.Undefined" or any other subclass.
+            "undefined": None,
+            "newstyle_gettext": True,
+            "tests": {
+                # "mytest": "path.to.my.test",
+            },
+            "filters": {
+                # "myfilter": "path.to.my.filter",
+            },
+            "globals": {
+                # "myglobal": "path.to.my.globalfunc",
+            },
+            "constants": {
+                # "foo": "bar",
+            },
+            "policies": {
+                # "ext.i18n.trimmed": True,
+            },
+            "extensions": [
+                "jinja2.ext.do",
+                "jinja2.ext.loopcontrols",
+                "jinja2.ext.i18n",
+                "django_jinja.builtins.extensions.CsrfExtension",
+                "django_jinja.builtins.extensions.CacheExtension",
+                "django_jinja.builtins.extensions.DebugExtension",
+                "django_jinja.builtins.extensions.TimezoneExtension",
+                "django_jinja.builtins.extensions.UrlsExtension",
+                "django_jinja.builtins.extensions.StaticFilesExtension",
+                "django_jinja.builtins.extensions.DjangoFiltersExtension",
+            ],
+            "bytecode_cache": {
+                "name": "default",
+                "backend": "django_jinja.cache.BytecodeCache",
+                "enabled": False,
+            },
+            "autoescape": True,
+            "auto_reload": settings.DEBUG,
+            "translation_engine": "django.utils.translation",
+        }
+    },
+]
+----
+
+
+== Differences with Django Template Engine
+
+=== Url reversing
+
+django-jinja comes with helpers for reverse urls. Instead of using django's approach, it uses
+a simple function called `url`.
+
+.Reverse urls in templates
+[source, html+jinja]
+----
+{{ url('ns:name', pk=obj.pk) }}
+----
+
+This approach is very flexible, because we do not need additional options to set a result
+if executing url in one variable. With jinja2 you can use the set template tag for it:
+
+[source, html+jinja]
+----
+{% set myurl=url("ns:name", pk=obj.pk) %}
+----
+
+=== Static files
+
+Like urls, static files can be resolved with the simple `static` function available globally
+in jinja context:
+
+.Example resolving static files
+[source, html+jinja]
+----
+{{ static("js/lib/foo.js") }}
+----
+
+
+=== i18n support
+
+django-jinja inherits the jinja2 approach for handling translation strings. You can read more about
+it here: http://jinja.pocoo.org/docs/dev/templates/#i18n
+
+[source, html+jinja]
+----
+{{ _('Hello %(name)s', name=user.name) }}
+
+{% trans name=user.name %}
+  Hello {{ name }}
+{% endtrans %}
+----
+
+Additionally, django-jinja extends django's `makemessages` command to make it work
+with jinja2 i18n tags.
+
+If you want more django-like i18n-related tags, you can use extensions from
+https://github.com/MoritzS/jinja2-django-tags.
+
+
+=== Replace jinja filters with django versions
+
+Django and Jinja overlap in a little subset of template filters. To properly handle this, django-jinja
+uses the jinja versions by default. But if you want a django version of them, you should use
+the "django_jinja.builtins.extensions.DjangoExtraFiltersExtension" extension.
+
+The affected filters are: title, upper, lower, urlencode, urlize, wordcount, wordwrap, center
+join, length, random, default, filesizeformat, pprint.
+
+
+=== Registering filters in a "django" way.
+
+django-jinja comes with facilities for loading template filters, globals and tests
+from django applications.
+
+Here an example:
+
+[source, python]
+----
+# <someapp>/templatetags/<anyfile>.py
+# don't forget to create __init__.py in templatetags dir
+
+from django_jinja import library
+import jinja2
+
+@library.test(name="one")
+def is_one(n):
+    """
+    Usage: {% if m is one %}Foo{% endif %}
+    """
+    return n == 1
+
+@library.filter
+def mylower(name):
+    """
+    Usage: {{ 'Hello'|mylower() }}
+    """
+    return name.lower()
+
+@library.filter
+@jinja2.contextfilter
+def replace(context, value, x, y):
+    """
+    Filter with template context. Usage: {{ 'Hello'|replace('H','M') }}
+    """
+    return value.replace(x, y)
+
+
+@library.global_function
+def myecho(data):
+    """
+    Usage: {{ myecho('foo') }}
+    """
+    return data
+
+
+@library.global_function
+@library.render_with("test-render-with.jinja")
+def myrenderwith(*args, **kwargs):
+    """
+    Render result with jinja template. Usage: {{ myrenderwith() }}
+    """
+    return {"name": "Foo"}
+
+
+from .myextensions  import MyExtension
+library.extension(MyExtension)
+----
+
+This only works within a Django app. If you don't have an app for your project, create an app specifically for this purpose and put your templatetags there.
+
+=== Render 4xx/500 pages with jinja
+
+django-jinja also provides a set of views for easy
+render 4xx/500 pages using jinja engine:
+
+[source, python]
+----
+# yourproject/urls.py
+from django_jinja import views
+
+handler400 = views.BadRequest.as_view()
+handler403 = views.PermissionDenied.as_view()
+handler404 = views.PageNotFound.as_view()
+handler500 = views.ServerError.as_view()
+----
+
+
+== Known Issues
+
+- Previously to django 1.8, some way of using i18n related functions are not properly
+  parsed with makemessages.
+
+
+
+== Builtin contrib modules
+
+*django-jinja* comes with some additional contrib modules that adapt a limited set of external
+django apps for easy use from jinja templates. Please note that in order to use any of these
+contrib modules, you'll need to install the relevant dependent packages yourself first.
+
+
+[NOTE]
+====
+In django, creating new tags is simpler than in Jinja2. You should remember that
+in jinja tags are really extensions and have a different purpose than the django template tags.
+
+Thus for many things that the django template system uses tags, django-jinja will provide
+functions with the same functionality.
+====
+
+
+django-pipeline
+~~~~~~~~~~~~~~~
+
+link:https://github.com/cyberdelia/django-pipeline[Pipeline] is an asset packaging
+library for Django (official description).
+
+[WARNING]
+====
+This plugin is deprecated, *django-pipeline* comes with good jinja support and it
+should be used.
+
+You can use the native *django-pipeline* suport for jinja using the
+"pipeline.jinja2.ext.PipelineExtension" extension.
+====
+
+.Activate plugin (settings.py)
+[source, python]
+----
+INSTALLED_APPS += ('django_jinja.contrib._pipeline',)
+----
+
+.Usage
+[source, html+jinja]
+----
+{{ compressed_css("alias") }}
+{{ compressed_js("alias") }}
+----
+
+
+easy-thumbnails
+~~~~~~~~~~~~~~~
+
+Easy Thumbnails is a thumbnail generation library for Django.
+
+.Activate plugin (settings.py)
+[source, python]
+----
+INSTALLED_APPS += ('django_jinja.contrib._easy_thumbnails',)
+----
+
+.Usage
+[source, html+jinja]
+----
+{{ thumbnail(file, size=(400, 400)) }}
+{{ user.avatar|thumbnail_url("alias") }}
+----
+
+django-subdomains
+~~~~~~~~~~~~~~~~~
+
+Subdomain helpers for the Django framework, including subdomain-based URL routing.
+
+.Activate plugin (settings.py)
+[source, python]
+----
+INSTALLED_APPS += ('django_jinja.contrib._subdomains',)
+----
+
+.Usage
+[source, html+jinja]
+----
+{{ url('homepage', subdomain='wildcard') }}
+----
+
+
+humanize
+~~~~~~~~
+
+Django comes with the humanize library that exposes some useful template filters.
+
+.Activate plugin (settings.py)
+[source, python]
+----
+INSTALLED_APPS += ('django_jinja.contrib._humanize',)
+----
+
+link:https://docs.djangoproject.com/en/dev/ref/contrib/humanize/[Complete list of available filters]
+
+
+.[[license]]
+License
+-------
+
+[source,text]
+----
+Copyright (c) 2011-2017 Andre Antukh <niwi@niwi.be>
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. The name of the author may not be used to endorse or promote products
+   derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+----

@@ -1,0 +1,16 @@
+COPYING
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+fluent/__init__.py
+fluent/asynchandler.py
+fluent/asyncsender.py
+fluent/event.py
+fluent/handler.py
+fluent/sender.py
+fluent_logger.egg-info/PKG-INFO
+fluent_logger.egg-info/SOURCES.txt
+fluent_logger.egg-info/dependency_links.txt
+fluent_logger.egg-info/requires.txt
+fluent_logger.egg-info/top_level.txt

@@ -1,0 +1,10 @@
+include *.rst
+include *.txt
+include *.py
+include buildout.cfg
+include tox.ini
+
+graft src
+
+global-exclude *.pyc
+global-exclude *.pyo

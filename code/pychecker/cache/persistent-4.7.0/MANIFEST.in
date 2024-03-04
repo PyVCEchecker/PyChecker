@@ -1,0 +1,25 @@
+prune terryfy
+
+include *.txt
+include *.rst
+include *.sh
+include *.yml
+
+recursive-include docs *
+recursive-include persistent *
+recursive-include .github *.yml
+
+global-exclude *.dll
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.so
+global-exclude coverage.xml
+
+prune docs/_build
+prune persistent/__pycache__
+
+
+include .coveragerc
+include buildout.cfg
+include tox.ini
+include *.py

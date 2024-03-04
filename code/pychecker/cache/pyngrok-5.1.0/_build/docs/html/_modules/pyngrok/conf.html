@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyngrok.conf &#8212; pyngrok 5.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+
+    <meta name="description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:title" content="pyngrok - A Python wrapper for ngrok">
+    <meta name="twitter:card"
+          value="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API.">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="pyngrok - A Python wrapper for ngrok"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://pyngrok.readthedocs.io/en/latest/_modules/pyngrok/conf.html"/>
+    <meta property="og:image" content="https://pyngrok.readthedocs.io/en/latest/_images/logo.png"/>
+    <meta property="og:description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <meta name="yandex-verification" content="ac8f18b56add6591"/>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43184722-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-43184722-4');
+    </script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pyngrok.conf</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">pyngrok.installer</span> <span class="kn">import</span> <span class="n">get_ngrok_bin</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Alex Laird&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2021, Alex Laird&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;5.1.0&quot;</span>
+
+<span class="n">BIN_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;bin&quot;</span><span class="p">))</span>
+<span class="n">DEFAULT_NGROK_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BIN_DIR</span><span class="p">,</span> <span class="n">get_ngrok_bin</span><span class="p">())</span>
+<span class="n">DEFAULT_CONFIG_PATH</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">DEFAULT_NGROK_CONFIG_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">),</span> <span class="s2">&quot;.ngrok2&quot;</span><span class="p">,</span> <span class="s2">&quot;ngrok.yml&quot;</span><span class="p">)</span>
+
+<span class="n">_default_pyngrok_config</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="PyngrokConfig"><a class="viewcode-back" href="../../api.html#pyngrok.conf.PyngrokConfig">[docs]</a><span class="k">class</span> <span class="nc">PyngrokConfig</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An object containing ``pyngrok``&#39;s configuration for interacting with the ``ngrok`` binary. All values are</span>
+<span class="sd">    optional when it is instantiated, and default values will be used for parameters not passed.</span>
+
+<span class="sd">    Use :func:`~pyngrok.conf.get_default` and :func:`~pyngrok.conf.set_default` to interact with the default</span>
+<span class="sd">    ``pyngrok_config``, or pass another instance of this object as the ``pyngrok_config`` keyword arg to most</span>
+<span class="sd">    methods in the :mod:`~pyngrok.ngrok` module to override the default.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        from pyngrok import conf, ngrok</span>
+
+<span class="sd">        # Here we update the entire default config</span>
+<span class="sd">        pyngrok_config = conf.PyngrokConfig(ngrok_path=&quot;/usr/local/bin/ngrok&quot;)</span>
+<span class="sd">        conf.set_default(pyngrok_config)</span>
+
+<span class="sd">        # Here we update just one variable in the default config</span>
+<span class="sd">        conf.get_default().ngrok_path = &quot;/usr/local/bin/ngrok&quot;</span>
+
+<span class="sd">        # Here we leave the default config as-is and pass an override</span>
+<span class="sd">        pyngrok_config = conf.PyngrokConfig(ngrok_path=&quot;/usr/local/bin/ngrok&quot;)</span>
+<span class="sd">        ngrok.connect(pyngrok_config=pyngrok_config)</span>
+
+<span class="sd">    :var ngrok_path: The path to the ``ngrok`` binary, defaults to the value in</span>
+<span class="sd">        `conf.DEFAULT_NGROK_PATH &lt;index.html#config-file&gt;`_</span>
+<span class="sd">    :vartype ngrok_path: str</span>
+<span class="sd">    :var config_path: The path to the ``ngrok`` config, defaults to ``None`` and ``ngrok`` manages it.</span>
+<span class="sd">    :vartype config_path: str</span>
+<span class="sd">    :var auth_token: An authtoken to pass to commands (overrides what is in the config).</span>
+<span class="sd">    :vartype auth_token: str</span>
+<span class="sd">    :var region: The region in which ``ngrok`` should start.</span>
+<span class="sd">    :vartype region: str</span>
+<span class="sd">    :var monitor_thread: Whether ``ngrok`` should continue to be monitored (for logs, etc.) after startup</span>
+<span class="sd">        is complete.</span>
+<span class="sd">    :vartype monitor_thread: bool</span>
+<span class="sd">    :var log_event_callback: A callback that will be invoked each time ``ngrok`` emits a log. ``monitor_thread``</span>
+<span class="sd">        must be set to ``True`` or the function will stop being called after ``ngrok`` finishes starting.</span>
+<span class="sd">    :vartype log_event_callback: types.FunctionType</span>
+<span class="sd">    :var startup_timeout: The max number of seconds to wait for ``ngrok`` to start before timing out.</span>
+<span class="sd">    :vartype startup_timeout: int</span>
+<span class="sd">    :var max_logs: The max number of logs to store in :class:`~pyngrok.process.NgrokProcess`&#39;s ``logs`` variable.</span>
+<span class="sd">    :vartype max_logs: int</span>
+<span class="sd">    :var request_timeout: The max timeout when making requests to ``ngrok``&#39;s API.</span>
+<span class="sd">    :vartype request_timeout: float</span>
+<span class="sd">    :var start_new_session: Passed to :py:class:`subprocess.Popen` when launching ``ngrok``. (Python 3 and POSIX only)</span>
+<span class="sd">    :vartype start_new_session: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">ngrok_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">config_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">auth_token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">region</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">monitor_thread</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">log_event_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">startup_timeout</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                 <span class="n">max_logs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                 <span class="n">request_timeout</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                 <span class="n">start_new_session</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngrok_path</span> <span class="o">=</span> <span class="n">DEFAULT_NGROK_PATH</span> <span class="k">if</span> <span class="n">ngrok_path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">ngrok_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config_path</span> <span class="o">=</span> <span class="n">DEFAULT_CONFIG_PATH</span> <span class="k">if</span> <span class="n">config_path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">config_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_token</span> <span class="o">=</span> <span class="n">auth_token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="n">region</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor_thread</span> <span class="o">=</span> <span class="n">monitor_thread</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_event_callback</span> <span class="o">=</span> <span class="n">log_event_callback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">startup_timeout</span> <span class="o">=</span> <span class="n">startup_timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_logs</span> <span class="o">=</span> <span class="n">max_logs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request_timeout</span> <span class="o">=</span> <span class="n">request_timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_new_session</span> <span class="o">=</span> <span class="n">start_new_session</span></div>
+
+
+<div class="viewcode-block" id="get_default"><a class="viewcode-back" href="../../api.html#pyngrok.conf.get_default">[docs]</a><span class="k">def</span> <span class="nf">get_default</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the default config to be used with methods in the :mod:`~pyngrok.ngrok` module. To override the</span>
+<span class="sd">    default individually, the ``pyngrok_config`` keyword arg can also be passed to most of these methods,</span>
+<span class="sd">    or set a new default config with :func:`~pyngrok.conf.set_default`.</span>
+
+<span class="sd">    :return: The default ``pyngrok_config``.</span>
+<span class="sd">    :rtype: PyngrokConfig</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_default_pyngrok_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">set_default</span><span class="p">(</span><span class="n">PyngrokConfig</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">_default_pyngrok_config</span></div>
+
+
+<div class="viewcode-block" id="set_default"><a class="viewcode-back" href="../../api.html#pyngrok.conf.set_default">[docs]</a><span class="k">def</span> <span class="nf">set_default</span><span class="p">(</span><span class="n">pyngrok_config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set a new default config to be used with methods in the :mod:`~pyngrok.ngrok` module. To override the</span>
+<span class="sd">    default individually, the ``pyngrok_config`` keyword arg can also be passed to most of these methods.</span>
+
+<span class="sd">    :param pyngrok_config: The new ``pyngrok_config`` to be used by default.</span>
+<span class="sd">    :type pyngrok_config: PyngrokConfig</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_default_pyngrok_config</span>
+
+    <span class="n">_default_pyngrok_config</span> <span class="o">=</span> <span class="n">pyngrok_config</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Getting Around</h3>
+<ul>
+    <li><a class="reference internal" href="../../index.html">Basic Usage</a>
+        <ul>
+            <li><a class="reference internal" href="../../index.html#installation">Installation</a>
+            </li>
+            <li><a class="reference internal" href="../../index.html#open-a-tunnel">Open a
+                Tunnel</a></li>
+            <li><a class="reference internal"
+                   href="../../index.html#configuration">Configuration</a></li>
+            <li><a class="reference internal" href="../../index.html#event-logs">Event Logs</a></li>
+            <li><a class="reference internal" href="../../index.html#command-line-usage">Command
+                Line Usage</a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="reference internal" href="../../index.html#dive-deeper">Dive Deeper</a>
+        <ul>
+            <li><a class="reference internal" href="../../api.html">API Documentation</a></li>
+            <li><a class="reference internal" href="../../integrations.html">Integration Examples</a></li>
+            <li><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/blob/main/CHANGELOG.md">Changelog</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/issues">Issues</a></li>
+            <li><a class="reference internal" href="../../index.html#contributing">Contributing</a>
+            </li>
+        </ul>
+    </li>
+</ul><h3>Useful Links</h3>
+<ul>
+    <li><a href="https://ngrok.com/docs"><code class="code docutils literal notranslate"><span class="pre">ngrok</span></code>
+        Documentation</a></li>
+    <li><a href="https://github.com/alexdlaird/pyngrok"><code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code> on GitHub</a></li>
+    <li><a href="https://pypi.org/project/pyngrok/"><code class="code docutils literal notranslate"><span class="pre">pyngrok</span></code>
+        on PyPI</a></li>
+    <li><a href="https://www.paypal.me/alexdlaird">Sponsor <code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code></a></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    
+    <div class="footer">
+      &copy;2020, Alex Laird.
+      
+    </div>
+
+    
+    <a href="https://github.com/alexdlaird/pyngrok" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <div class="footer">This page uses <a href="https://analytics.google.com/">
+        Google Analytics</a> to collect statistics. You can disable it by blocking
+        the JavaScript coming from www.google-analytics.com.
+        <script type="text/javascript">
+            (function () {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ?
+                    'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.setAttribute('async', 'true');
+                document.documentElement.firstChild.appendChild(ga);
+            })();
+        </script>
+    </div>
+
+  </body>
+</html>

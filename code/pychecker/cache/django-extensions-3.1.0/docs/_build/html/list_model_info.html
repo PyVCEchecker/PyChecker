@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list_model_info &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="merge_model_instances" href="merge_model_instances.html" />
+    <link rel="prev" title="Graph models" href="graph_models.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="merge_model_instances.html" title="merge_model_instances"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="graph_models.html" title="Graph models"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">list_model_info</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="list-model-info">
+<h1>list_model_info<a class="headerlink" href="#list-model-info" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Lists out all the fields and methods for models in installed apps.</p>
+</dd>
+</dl>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When working with large projects or when returning to a code base after some time away, it can be challenging to remember all of the
+fields and methods associated with your models. This command makes it easy to see:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>what fields are available</p></li>
+<li><p>how they are referred to in queries</p></li>
+<li><p>each field’s class</p></li>
+<li><p>each field’s representation in the database</p></li>
+<li><p>what methods are available</p></li>
+<li><p>method signatures</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="commandline-arguments">
+<h3>Commandline arguments<a class="headerlink" href="#commandline-arguments" title="Permalink to this headline">¶</a></h3>
+<p>You can configure the output in a number of ways.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Show each field&#39;s class
+$ ./manage.py list_model_info --field-class
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Show each field&#39;s database type representation
+$ ./manage.py list_model_info --db-type
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Show each method&#39;s signature
+$ ./manage.py list_model_info --signature
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Show all model methods, including private methods and django&#39;s default methods
+$ ./manage.py list_model_info --all-methods
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Output only information for a single model, specifying the app and model using dot notation
+$ ./manage.py list_model_info --model users.User
+</pre></div>
+</div>
+<p>You can combine arguments. for instance, to list all methods and show the method signatures for the User model within the users app:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py list_model_info --all --signature --model users.User
+</pre></div>
+</div>
+</div>
+<div class="section" id="settings-configuration">
+<h3>Settings Configuration<a class="headerlink" href="#settings-configuration" title="Permalink to this headline">¶</a></h3>
+<p>You can specify default values in your settings.py to simplify running this command.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Commandline arguments override the following settings, allowing you to change options on the fly.</p>
+</div>
+<p>To show each field’s class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MODEL_INFO_FIELD_CLASS</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>To show each field’s database type representation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MODEL_INFO_DB_TYPE</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>To show each method’s signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MODEL_INFO_SIGNATURE</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>To show all model methods, including private methods and django’s default methods:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MODEL_INFO_ALL_METHODS</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>To output only information for a single model, specify the app and model using dot notation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MODEL_INFO_MODEL</span> <span class="o">=</span> <span class="s1">&#39;users.User&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">list_model_info</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#commandline-arguments">Commandline arguments</a></li>
+<li><a class="reference internal" href="#settings-configuration">Settings Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="graph_models.html"
+                        title="previous chapter">Graph models</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="merge_model_instances.html"
+                        title="next chapter">merge_model_instances</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/list_model_info.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="merge_model_instances.html" title="merge_model_instances"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="graph_models.html" title="Graph models"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">list_model_info</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

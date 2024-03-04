@@ -1,0 +1,4 @@
+ipython_genutils
+jsonschema
+traitlets
+-e git+https://github.com/jupyter/jupyter_core.git#egg=jupyter_core

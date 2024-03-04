@@ -1,0 +1,16 @@
+requests<3,>=2.11.1
+requests_oauthlib<2,>=1.0.0
+
+[async]
+aiohttp<4,>=3.7.3
+oauthlib<4,>=3.1.0
+
+[dev]
+coveralls>=2.1.0
+tox>=3.14.0
+
+[socks]
+requests[socks]<3,>=2.11.1
+
+[test]
+vcrpy>=1.10.3

@@ -1,0 +1,1 @@
+set allow_style Never

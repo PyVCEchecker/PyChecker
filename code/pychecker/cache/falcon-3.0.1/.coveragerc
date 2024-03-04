@@ -1,0 +1,9 @@
+[run]
+branch = True
+source = falcon
+omit = falcon/tests*,falcon/cmd/bench.py,falcon/bench*,falcon/vendor/*
+
+parallel = True
+
+[report]
+show_missing = True

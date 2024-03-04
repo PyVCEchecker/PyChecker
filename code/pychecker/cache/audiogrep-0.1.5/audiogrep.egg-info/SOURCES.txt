@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+audiogrep/
+audiogrep/__init__.py
+audiogrep/audiogrep.py
+audiogrep.egg-info/PKG-INFO
+audiogrep.egg-info/SOURCES.txt
+audiogrep.egg-info/dependency_links.txt
+audiogrep.egg-info/requires.txt
+audiogrep.egg-info/top_level.txt
+bin/audiogrep

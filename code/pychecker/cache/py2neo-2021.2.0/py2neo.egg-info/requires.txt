@@ -1,0 +1,8 @@
+certifi
+interchange~=2021.0.3
+monotonic
+packaging
+pansi>=2020.7.3
+pygments>=2.0.0
+six>=1.15.0
+urllib3

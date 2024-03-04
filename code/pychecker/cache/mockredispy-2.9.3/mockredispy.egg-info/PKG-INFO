@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: mockredispy
+Version: 2.9.3
+Summary: Mock for redis-py
+Home-page: http://www.github.com/locationlabs/mockredis
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: Apache2
+Description: UNKNOWN
+Platform: UNKNOWN

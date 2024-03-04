@@ -1,0 +1,14 @@
+# Python Distribution Package Requirements for pygatt.
+#
+# Source:: https://github.com/ampledata/pygatt
+# Author:: Greg Albrecht <gba@orionlabs.co>
+# Copyright:: Copyright 2015 Orion Labs, Inc.
+# License:: Apache License, Version 2.0
+
+
+flake8==2.1.0
+pylint==1.2.1
+coverage>=3.7.1
+nose>=1.3.6
+mock>=1.1.2
+funcsigs>=0.4

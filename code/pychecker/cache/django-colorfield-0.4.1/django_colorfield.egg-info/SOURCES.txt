@@ -1,0 +1,17 @@
+LICENSE.txt
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+colorfield/__init__.py
+colorfield/fields.py
+colorfield/version.py
+colorfield/widgets.py
+colorfield/static/colorfield/colorfield.js
+colorfield/static/colorfield/jscolor/jscolor.js
+colorfield/static/colorfield/jscolor/jscolor.min.js
+colorfield/templates/colorfield/color.html
+django_colorfield.egg-info/PKG-INFO
+django_colorfield.egg-info/SOURCES.txt
+django_colorfield.egg-info/dependency_links.txt
+django_colorfield.egg-info/top_level.txt

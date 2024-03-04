@@ -1,0 +1,5 @@
+include README.txt
+recursive-include xstatic/pkg/bootstrap *
+
+global-exclude *.pyc
+global-exclude *.pyo

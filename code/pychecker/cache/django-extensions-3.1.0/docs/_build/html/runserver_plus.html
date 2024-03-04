@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RunServerPlus &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="sync_s3" href="sync_s3.html" />
+    <link rel="prev" title="RunProfileServer" href="runprofileserver.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sync_s3.html" title="sync_s3"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="runprofileserver.html" title="RunProfileServer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RunServerPlus</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="runserverplus">
+<h1>RunServerPlus<a class="headerlink" href="#runserverplus" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>RunServerPlus-typical runserver with Werkzeug debugger baked in</p>
+</dd>
+</dl>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This item requires that you have the <cite>Werkzeug WSGI utilities</cite> installed.
+Included with <a class="reference external" href="http://werkzeug.pocoo.org/">Werkzeug</a> is a kick ass debugger that renders nice
+debugging tracebacks and adds an AJAX based debugger (which allows code execution
+in the context of the traceback’s frames).  Additionally it provides a nice
+access view to the source code.</p>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>To get started we just use the <em>runserver_plus</em> command instead of the normal
+<em>runserver</em> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runserver_plus
+
+* Running on http://127.0.0.1:8000/
+* Restarting with reloader...
+
+Validating models...
+0 errors found
+
+Django version X.Y.Z, using settings &#39;screencasts.settings&#39;
+Development server is running at http://127.0.0.1:8000/
+Using the Werkzeug debugger (http://werkzeug.pocoo.org/)
+Quit the server with CONTROL-C.
+</pre></div>
+</div>
+<p>Note: all normal runserver options apply. In other words, if you need to change
+the port number or the host information, you can do so like you would normally.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Instead of the default Django traceback page, the Werkzeug traceback page
+will be shown when an exception occurs.</p>
+<img alt="werkzeug-traceback" src="https://f.cloud.github.com/assets/202559/1261027/2637f826-2c22-11e3-83c6-646acc87808b.png" />
+<p>Along with the typical traceback information we have a couple of options. These
+options appear when hovering over a particular traceback line.  Notice that
+two buttons appear to the right:</p>
+<img alt="werkzeug-options" src="https://f.cloud.github.com/assets/202559/1261035/558ad0ee-2c22-11e3-8ddd-6678d84d77e7.png" />
+<p>The options are:</p>
+<div class="section" id="view-source">
+<h3>View Source<a class="headerlink" href="#view-source" title="Permalink to this headline">¶</a></h3>
+<p>This displays the source underneath the traceback:</p>
+<img alt="werkzeug-source" src="https://f.cloud.github.com/assets/202559/1261036/583c8c42-2c22-11e3-9eb9-5c16b8732512.png" />
+<p>Being able to view the source file is handy because it provides more
+context information around the error.  The actual traceback areas are
+highlighted so they are easy to spot.</p>
+<p>One awkward aspect of the UI is that the page is not scrolled to the bottom.
+At first I thought nothing was happening because of this.</p>
+</div>
+<div class="section" id="interactive-debugging-console">
+<h3>Interactive Debugging Console<a class="headerlink" href="#interactive-debugging-console" title="Permalink to this headline">¶</a></h3>
+<p>Clicking on this button opens up a new pane under the traceback line
+you’re on. This is the money shot:</p>
+<img alt="werkzeug-debugger" src="https://f.cloud.github.com/assets/202559/1261037/5d12eda6-2c22-11e3-802a-2639ff8813fa.png" />
+<p>An ajax based console appears in the pane and you can start debugging.
+Notice in the screenshot above I did a <cite>print environ</cite> to see what was in the
+environment parameter coming into the function.</p>
+<p><em>WARNING</em>: This should <em>never</em> be used in any kind of production environment.
+Not even for a quick problem check.  I cannot emphasize this enough. The
+interactive debugger allows you to evaluate python code right against the
+server.  You’ve been warned.</p>
+</div>
+<div class="section" id="ssl">
+<h3>SSL<a class="headerlink" href="#ssl" title="Permalink to this headline">¶</a></h3>
+<p>runserver_plus also supports SSL, so that you can easily debug bugs that pop up
+when https is used. To use SSL simply provide a file name for certificates;
+a key and certificate file will be automatically generated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runserver_plus --cert-file cert.crt
+Validating models...
+0 errors found
+
+Django version X.Y.Z, using settings &#39;mysite.settings&#39;
+Development server is running at http://127.0.0.1:8000/
+Using the Werkzeug debugger (http://werkzeug.pocoo.org/)
+Quit the server with CONTROL-C.
+ * Running on https://127.0.0.1:8000/
+ * Restarting with reloader
+Validating models...
+0 errors found
+
+Django version X.Y.Z, using settings &#39;mysite.settings&#39;
+Development server is running at http://127.0.0.1:8000/
+Using the Werkzeug debugger (http://werkzeug.pocoo.org/)
+Quit the server with CONTROL-C.
+</pre></div>
+</div>
+<p>After running this command, your web application can be accessed through
+<a class="reference external" href="https://127.0.0.1:8000">https://127.0.0.1:8000</a>.</p>
+<p>You will also find that two files are created in  the current working directory:
+a key file and a certificate file. If you run the above command again, these
+certificate files will be reused so that you do not have to keep accepting the
+self-generated certificates from your browser every time. You can also provide
+a specific file for the certificate to be used if you already have one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runserver_plus --cert-file /tmp/cert.crt
+</pre></div>
+</div>
+<p>Note that you need the OpenSSL library to use SSL, and Werkzeug 0.9 or later
+if you want to reuse existing certificates.</p>
+<p>To install OpenSSL:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install pyOpenSSL
+</pre></div>
+</div>
+</div>
+<div class="section" id="certificates-paths">
+<h3>Certificates paths<a class="headerlink" href="#certificates-paths" title="Permalink to this headline">¶</a></h3>
+<p>You can configure different paths to .crt and .key files.
+At least one of <code class="docutils literal notranslate"><span class="pre">--cert-file</span></code> or <code class="docutils literal notranslate"><span class="pre">--key-file</span></code> must be defined to use SSL.</p>
+<p>You can set path to .crt file using <code class="docutils literal notranslate"><span class="pre">--cert-file</span></code> option or deprecated <code class="docutils literal notranslate"><span class="pre">--cert</span></code> option
+which is currently an alias for <code class="docutils literal notranslate"><span class="pre">--cert-file</span></code>.
+If this option is not set than runserver_plus assumes that,
+this file is in the same directory as file from <code class="docutils literal notranslate"><span class="pre">--key-file</span></code> option.</p>
+<p>You can set path to .key file using <code class="docutils literal notranslate"><span class="pre">--key-file</span></code> option.
+If this option is not set than runserver_plus assumes that,
+this file is in the same directory as file from <code class="docutils literal notranslate"><span class="pre">--cert-file</span></code> option.</p>
+<p>If you want to create new files,
+than you can pass file name without extension.
+Proper files with this name and .crt and .key extensions will be created.</p>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>RUNSERVERPLUS_SERVER_ADDRESS_PORT</cite> setting can be configured to specify
+which address and port the development server should bind to.</p>
+<p>If you find yourself frequently starting the server with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runserver_plus 0.0.0.0:8000
+</pre></div>
+</div>
+<p>You can use settings to automatically default your development to an address/port:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RUNSERVERPLUS_SERVER_ADDRESS_PORT</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0:8000&#39;</span>
+</pre></div>
+</div>
+<p>To ensure Werkzeug can log to the console, you may need to add the following
+to your settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="o">...</span>
+        <span class="s1">&#39;console&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.StreamHandler&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;loggers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="o">...</span>
+        <span class="s1">&#39;werkzeug&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;console&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Other configuration options and their defaults include:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truncate SQL queries to this many characters (None means no truncation)</span>
+<span class="n">RUNSERVER_PLUS_PRINT_SQL_TRUNCATE</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># After how many seconds auto-reload should scan for updates in poller-mode</span>
+<span class="n">RUNSERVERPLUS_POLLER_RELOADER_INTERVAL</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Werkzeug reloader type [auto, watchdog, or stat]</span>
+<span class="n">RUNSERVERPLUS_POLLER_RELOADER_TYPE</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="io-calls-and-cpu-usage">
+<h3>IO Calls and CPU Usage<a class="headerlink" href="#io-calls-and-cpu-usage" title="Permalink to this headline">¶</a></h3>
+<p>As noted in <a class="reference external" href="https://github.com/django-extensions/django-extensions/issues/625">gh625</a> <cite>runserver_plus</cite> can be seen to use a lot of CPU and generate many
+I/O when idle.</p>
+<p>This is due to the way <a class="reference external" href="http://werkzeug.pocoo.org/">Werkzeug</a> has implemented the auto reload capability.
+It supports two ways of doing auto reloading either via <cite>stat polling</cite> or <cite>file system events</cite>.</p>
+<p>The <cite>stat polling</cite> approach is pretty brute force and continously issues <cite>stat</cite> system calls which
+causes the CPU and IO load.</p>
+<p>If possible try to install the <a class="reference external" href="https://pypi.python.org/pypi/watchdog">Watchdog</a> package, this should automatically cause <a class="reference external" href="http://werkzeug.pocoo.org/">Werkzeug</a> to use
+<cite>file system events</cite> whenever possible.</p>
+<p>You can read more about this in <a class="reference external" href="http://werkzeug.pocoo.org/docs/serving/#reloader">Werkzeug documentation</a></p>
+<p>You can also increase the poll interval when using <cite>stat polling</cite> from the default of 1 second. This
+will decrease the CPU load at the expense of file edits taking longer to pick up.</p>
+<p>This can be set two ways, in the django settings file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RUNSERVERPLUS_POLLER_RELOADER_INTERVAL</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>or as a commad line argument:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runserver_plus --reloader-interval 5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="debugger-pin">
+<h2>Debugger PIN<a class="headerlink" href="#debugger-pin" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>The following text about the debugger PIN is taken verbatim from the Werkzeug <a class="reference external" href="http://werkzeug.pocoo.org/docs/debug/#debugger-pin">documentation about its debugger PIN</a>.</p>
+</div></blockquote>
+<p>Starting with Werkzeug 0.11 the debugger is additionally protected by a PIN. This is a security helper to
+make it less likely for the debugger to be exploited in production as it has happened to people to keep the
+debugger active. The PIN based authentication is enabled by default.</p>
+<p>When the debugger comes up, on first usage it will prompt for a PIN that is printed to the command line.
+The PIN is generated in a stable way that is specific to the project. In some situations it might be not possible
+to generate a stable PIN between restarts in which case an explicit PIN can be provided through the environment
+variable WERKZEUG_DEBUG_PIN. This can be set to a number and will become the PIN. This variable can also be set
+to the value off to disable the PIN check entirely.</p>
+<p>The PIN can also be disabled by passing the argument <code class="docutils literal notranslate"><span class="pre">--nopin</span></code> when calling the runserver_plus command.</p>
+<p>If the PIN is entered too many times incorrectly the server needs to be restarted.</p>
+<p><strong>This feature is not supposed to entirely secure the debugger. It’s intended to make it harder for an attacker to
+exploit the debugger. Never enable the debugger in production.</strong></p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">RunServerPlus</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#view-source">View Source</a></li>
+<li><a class="reference internal" href="#interactive-debugging-console">Interactive Debugging Console</a></li>
+<li><a class="reference internal" href="#ssl">SSL</a></li>
+<li><a class="reference internal" href="#certificates-paths">Certificates paths</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#io-calls-and-cpu-usage">IO Calls and CPU Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#debugger-pin">Debugger PIN</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="runprofileserver.html"
+                        title="previous chapter">RunProfileServer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sync_s3.html"
+                        title="next chapter">sync_s3</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/runserver_plus.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sync_s3.html" title="sync_s3"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="runprofileserver.html" title="RunProfileServer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RunServerPlus</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

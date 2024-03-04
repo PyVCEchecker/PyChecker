@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flask_dance.contrib.strava &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/flasky.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">flask_dance.contrib.strava</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for flask_dance.contrib.strava</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">flask_dance.consumer</span> <span class="kn">import</span> <span class="n">OAuth2ConsumerBlueprint</span><span class="p">,</span> <span class="n">OAuth2Session</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">flask.globals</span> <span class="kn">import</span> <span class="n">LocalProxy</span><span class="p">,</span> <span class="n">_lookup_app_object</span>
+
+<span class="kn">from</span> <span class="nn">flask_dance</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">_flask_dance_version</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">_app_ctx_stack</span> <span class="k">as</span> <span class="n">stack</span>
+
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Jimmy Hedman &lt;jimmy.hedman@gmail.com&gt;&quot;</span>
+
+
+<span class="n">DEFAULT_USER_AGENT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Flask-Dance/</span><span class="si">{</span><span class="n">_flask_dance_version</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">StravaOAuth2Session</span><span class="p">(</span><span class="n">OAuth2Session</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fetch_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Pass client_id to session so it could trigger Basic Auth</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span>
+            <span class="n">include_client_id</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+            <span class="n">code</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">),</span>
+            <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="make_strava_blueprint"><a class="viewcode-back" href="../../../providers.html#flask_dance.contrib.strava.make_strava_blueprint">[docs]</a><span class="k">def</span> <span class="nf">make_strava_blueprint</span><span class="p">(</span>
+    <span class="n">client_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">client_secret</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;read&quot;</span><span class="p">,</span>
+    <span class="n">redirect_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">redirect_to</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">login_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">authorized_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">session_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">storage</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">user_agent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">rule_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a blueprint for authenticating with Strava using OAuth 2. This requires</span>
+<span class="sd">    a client ID and client secret from Strava. You should either pass them to</span>
+<span class="sd">    this constructor, or make sure that your Flask application config defines</span>
+<span class="sd">    them, using the variables :envvar:`STRAVA_OAUTH_CLIENT_ID` and</span>
+<span class="sd">    :envvar:`STRAVA_OAUTH_CLIENT_SECRET`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        client_id (str): The client ID for your application on Strava.</span>
+<span class="sd">        client_secret (str): The client secret for your application on Strava</span>
+<span class="sd">        scope (str, optional): space-separated list of scopes for the OAuth token</span>
+<span class="sd">            Defaults to ``identity``</span>
+<span class="sd">        redirect_url (str): the URL to redirect to after the authentication</span>
+<span class="sd">            dance is complete</span>
+<span class="sd">        redirect_to (str): if ``redirect_url`` is not defined, the name of the</span>
+<span class="sd">            view to redirect to after the authentication dance is complete.</span>
+<span class="sd">            The actual URL will be determined by :func:`flask.url_for`</span>
+<span class="sd">        login_url (str, optional): the URL path for the ``login`` view.</span>
+<span class="sd">            Defaults to ``/strava``</span>
+<span class="sd">        authorized_url (str, optional): the URL path for the ``authorized`` view.</span>
+<span class="sd">            Defaults to ``/strava/authorized``.</span>
+<span class="sd">        session_class (class, optional): The class to use for creating a</span>
+<span class="sd">            Requests session. Defaults to</span>
+<span class="sd">            :class:`~flask_dance.contrib.strava.StravaOAuth2Session`.</span>
+<span class="sd">        storage: A token storage class, or an instance of a token storage</span>
+<span class="sd">            class, to use for this blueprint. Defaults to</span>
+<span class="sd">            :class:`~flask_dance.consumer.storage.session.SessionStorage`.</span>
+<span class="sd">        user_agent (str, optional): User agent for the requests to Strava API.</span>
+<span class="sd">            Defaults to ``Flask-Dance/{{version}}``.</span>
+<span class="sd">        rule_kwargs (dict, optional): Additional arguments that should be passed when adding</span>
+<span class="sd">            the login and authorized routes. Defaults to ``None``.</span>
+
+<span class="sd">    :rtype: :class:`~flask_dance.consumer.OAuth2ConsumerBlueprint`</span>
+<span class="sd">    :returns: A :doc:`blueprint &lt;flask:blueprints&gt;` to attach to your Flask app.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">strava_bp</span> <span class="o">=</span> <span class="n">OAuth2ConsumerBlueprint</span><span class="p">(</span>
+        <span class="s2">&quot;strava&quot;</span><span class="p">,</span>
+        <span class="vm">__name__</span><span class="p">,</span>
+        <span class="n">client_id</span><span class="o">=</span><span class="n">client_id</span><span class="p">,</span>
+        <span class="n">client_secret</span><span class="o">=</span><span class="n">client_secret</span><span class="p">,</span>
+        <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span>
+        <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://www.strava.com/api/v3&quot;</span><span class="p">,</span>
+        <span class="n">authorization_url</span><span class="o">=</span><span class="s2">&quot;https://www.strava.com/api/v3/oauth/authorize&quot;</span><span class="p">,</span>
+        <span class="n">token_url</span><span class="o">=</span><span class="s2">&quot;https://www.strava.com/api/v3/oauth/token&quot;</span><span class="p">,</span>
+        <span class="n">auto_refresh_url</span><span class="o">=</span><span class="s2">&quot;https://www.strava.com/api/v3/oauth/token&quot;</span><span class="p">,</span>
+        <span class="n">redirect_url</span><span class="o">=</span><span class="n">redirect_url</span><span class="p">,</span>
+        <span class="n">redirect_to</span><span class="o">=</span><span class="n">redirect_to</span><span class="p">,</span>
+        <span class="n">login_url</span><span class="o">=</span><span class="n">login_url</span><span class="p">,</span>
+        <span class="n">authorized_url</span><span class="o">=</span><span class="n">authorized_url</span><span class="p">,</span>
+        <span class="n">session_class</span><span class="o">=</span><span class="n">session_class</span> <span class="ow">or</span> <span class="n">StravaOAuth2Session</span><span class="p">,</span>
+        <span class="n">storage</span><span class="o">=</span><span class="n">storage</span><span class="p">,</span>
+        <span class="n">rule_kwargs</span><span class="o">=</span><span class="n">rule_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">strava_bp</span><span class="o">.</span><span class="n">from_config</span><span class="p">[</span><span class="s2">&quot;client_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;STRAVA_OAUTH_CLIENT_ID&quot;</span>
+    <span class="n">strava_bp</span><span class="o">.</span><span class="n">from_config</span><span class="p">[</span><span class="s2">&quot;client_secret&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;STRAVA_OAUTH_CLIENT_SECRET&quot;</span>
+
+    <span class="n">strava_bp</span><span class="o">.</span><span class="n">user_agent</span> <span class="o">=</span> <span class="n">user_agent</span>
+
+    <span class="nd">@strava_bp</span><span class="o">.</span><span class="n">before_app_request</span>
+    <span class="k">def</span> <span class="nf">set_applocal_session</span><span class="p">():</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">top</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">strava_oauth</span> <span class="o">=</span> <span class="n">strava_bp</span><span class="o">.</span><span class="n">session</span>
+
+    <span class="k">return</span> <span class="n">strava_bp</span></div>
+
+
+<span class="n">strava</span> <span class="o">=</span> <span class="n">LocalProxy</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">_lookup_app_object</span><span class="p">,</span> <span class="s2">&quot;strava_oauth&quot;</span><span class="p">))</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

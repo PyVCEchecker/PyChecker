@@ -1,0 +1,15 @@
+include .coveragerc
+include LICENSE
+include NEWS.rst
+include towncrier.ini
+include tox.ini
+
+recursive-include src/incremental *.py
+
+prune .travis
+prune tests
+
+exclude examplesetup.py
+prune src/exampleproj
+
+prune src/incremental/newsfragments

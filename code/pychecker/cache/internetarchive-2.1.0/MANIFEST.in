@@ -1,0 +1,2 @@
+include LICENSE AUTHORS.rst HISTORY.rst
+recursive-include tests *.py

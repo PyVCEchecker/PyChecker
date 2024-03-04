@@ -1,0 +1,17 @@
+click<8,>=6
+pyyaml<6,>=3
+
+[dev]
+configparser
+coverage
+flake8
+pandocfilters
+pytest-cov
+pytest
+requests
+
+[pypi]
+docutils
+Pygments
+twine
+wheel

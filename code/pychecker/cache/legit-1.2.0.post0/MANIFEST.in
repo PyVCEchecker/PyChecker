@@ -1,0 +1,2 @@
+include reqs.txt README.rst LICENSE
+recursive-include extra *

@@ -1,0 +1,605 @@
+2021-04-16 version 1.4.0
+* Fix bug where `load_schemas` would not work with top level names (@scottbelden in PR #535)
+* Make `named_schemas` argument part of the public API (@scottbelden in PR #532)
+* Support custom logical types for records in unions (@ksunden in PR #530)
+
+2021-03-31 version 1.3.5
+* `validate` and `validate_many` should not force schema parsing but instead use the ability of `parse_schema` to detect if the schema needs to be parsed (@scottbelden in PR #529)
+* Add support for local-timestamp-micros and local-timestamp-millis (@scottbelden in PR #525)
+
+2021-03-20 version 1.3.4
+* More strictly ensure that fixed type schemas match size during schema resolution and that only the specified number of bytes is written (@scottbelden in PR #524)
+* Preserve precision of double-point floats which are encoded in a union (@spenczar in PR #523)
+
+2021-03-13 version 1.3.3
+* Fix bug where named types were not being resolved correctly (@scottbelden in PR #517)
+* Add fastavro.utils.anonymize_schema, fastavro.utils.generate_one, and fastavro.utils.generate_many to help with generating random data and making it easier for people to submit bugs with proprietary schemas/data (@scottbelden in PR #511)
+
+2021-02-14 version 1.3.2
+* Fix bug where the schema type was not being evaluated correctly when writing a union with the tuple notation (@scottbelden in PR #510)
+
+2021-02-06 version 1.3.1
+* Implement low level skip functions to improve reading a subset of a record (@scottbelden in PR #504)
+* Added to_parsing_canonical_form API
+* Added fingerprint API
+
+2021-01-21 version 1.3.0
+* New load_schema_ordered API that works similar to load_schema but allows the user to specify where all the schema files are rather than needing them all to be in the same directory (@scottbelden in PR #497)
+* When using the json_reader, default values from the schema will be used if the JSON data is missing them (@scottbelden in PR #498)
+
+2021-01-17 version 1.2.4
+* Fix two bugs in load_schema where the sub-schemas were not being injected correctly (@scottbelden in PR #495)
+
+2020-12-24 version 1.2.3
+* Fix bug where fully resolved enums and fixed types were not being handled when fixing schemas (@scottbelden in PR #492)
+
+2020-12-23 version 1.2.2
+* Fix bug where namespaces were not resolved when loading schemas (@scottbelden in PR #491)
+
+2020-12-02 version 1.2.1
+* Fix bug with schema evolution in unions (@scottbelden in PR #487)
+
+2020-11-19 version 1.2.0
+* Change load_schema so that if the initial schema is a single record, the resulting schema will also be a single record (previously it would become a union of records) (@scottbelden in PR #482)
+
+2020-11-16 version 1.1.1
+* Build wheels for ARM64 (@AWSjswinney in PR #475)
+
+2020-10-30 version 1.1.0
+* Dropped support for Python 3.5 and added support Python 3.9 (@scottbelden in PR #474)
+
+2020-08-23 version 1.0.0
+* Dropped support for Python 2 (@scottbelden in PR #449)
+
+2020-08-18 version 0.24.2
+* Support array.array as input for avro array type (@fthyssen in PR #455)
+* Support bytes in the fastavro CLI command (@fthyssen in PR #465)
+
+2020-08-16 version 0.24.1
+* Add extra checks to decimal types to verify that the data will be consistent when roundtrip'ed (@matpuk in PR #461)
+* Fix issues with timestamp-millis and timestamp-micros where certain dates would lose some microseconds when roundtrip'ing the data (@scottbelden in PR #459)
+* Show field names to aid in debugging when there is a type or value error for mismatched data/schema types (@juarezr in PR #454)
+
+2020-07-30 version 0.24.0
+* Remove global cache of parsed schemas. This will break existing code that relied on being able to call parse_schema to manipulate that global cache (@scottbelden in PR #451)
+* Validate the precision for decimal values and throw an exception if the schema precision is less than the value precision (@matpuk in PR 453)
+
+2020-07-11 version 0.23.6
+* Allow iterables for array type fields (@ksunden in PR #441)
+* Do not re-parse union schemas if they have been parsed already (@scottbelden in PR #446)
+* Fix bug in load_schema where it would produce invalid schemas (@scottbelden in PR #447)
+* Do not validate logical types unless they are actually a logical type (@scottbelden in PR #448)
+
+2020-06-22 version 0.23.5
+* Add type hints (@spenczar in PR #438)
+
+2020-05-15 version 0.23.4
+* Add compatibility fix for Python 3.4 (@dacjames in PR #436)
+
+2020-04-29 version 0.23.3
+* Fix performance regression in the writer (@scottbelden in PR #426)
+
+2020-04-18 version 0.23.2
+* Fix bug where JSON reader/writer wouldn't work with named schemas (@gudjonragnar in PR #419)
+
+2020-04-03 version 0.23.1
+* Fix some bugs in the validation where the schema was not being automatically parsed (@scottbelden in PR #417)
+
+2020-03-23 version 0.23.0
+* Add support for xz codec (@scottbelden in PR #412)
+* Fix bug in schema migration from a record to a union (@eino and @scottbelden in PR #411)
+
+2020-03-03 version 0.22.13
+* Fix bug in the JSON reader when using unions inside an array (@scottbelden in PR #400)
+
+2020-02-27 version 0.22.12
+* Add public API at `fastavro.schema.expand_schema` that will expand named types (@scottbelden in PR #340)
+* Add public API at `fastavro.schema.fullname` that will return the fullname of a schema (@scottbelden in PR #397)
+* Retain the doc field in the result of parse_schema (@scottbelden in PR #398)
+
+2020-02-26 version 0.22.11
+* Use pytz for the UTC timezone rather than our own custom one to prevent compatibility issues with pandas (@scottbelden in PR #396)
+
+2020-02-23 version 0.22.10
+* Fix pre-epoch timestamps on Windows Python 3+ (@jmgpeeters in PR #394)
+
+2019-12-20 version 0.22.9
+* Add some documentation about return_record_name
+* Fix bug when using return_record_name for a union that only has the record name (@scottbelden in PR #386)
+* Add support for a codec compression level (@scottbelden in PR #385)
+* Fix bug in JSON parser when a record contains an empty map or array (@scottbelden in PR #384)
+
+2019-12-16 version 0.22.8
+* Add support for lz4 coded (@mcguipat in PR #381)
+
+2019-11-06 version 0.22.7
+* Support Python 3.8 (@scottbelden in PR #373)
+
+2019-11-03 version 0.22.6
+* Add `return_record_name` option to schemaless reader so that it returns the record name along with the record (@bstockton in PR #370)
+* Optimize read - decimal, logical type (@Artimi in PR #371)
+
+2019-09-19 version 0.22.5
+* Fix bug where schema migration was not working correctly for records within an array (@scottbelden in PR #364)
+* Fix issue where cython errors were not be raised correctly (@scottbelden in PR #366)
+
+2019-08-26 version 0.22.4
+* Fixed bugs in decimal serialization and deserialization (@jancespivo in PR #361)
+
+2019-07-12 version 0.22.3
+* Change the way stdout is detected since `buffer` is not a part of the FileIO API (@scottbelden in PR #359)
+* For codec errors, differentiate between codec not supported and coded not installed (@scottbelden in PR #355)
+* Add support for zstandard codec (@scottbelden in PR #356)
+* Add support for bzip2 codec (@scottbelden in PR #357)
+
+2019-06-28 version 0.22.2
+* Fix bug where we could not validate a union with a logical type (@Artimi in PR #349)
+
+2019-06-14 version 0.22.1
+* Fix snappy compression reader (@mattomatic in PR #346)
+
+2019-06-13 version 0.22.0
+* Implement an initial json_reader and json_writer (@scottbelden in PR #343)
+
+2019-05-27 version 0.21.24
+* Allow streaming to sys.stdout.buffer on OSX without raising ValueError (@jquast in PR #342)
+
+2019-05-06 version 0.21.23
+* Accept an ISO Date as a string (@scottbelden in PR #338)
+* Fix failure case involving unions and nulls (@scottbelden in PR #337)
+* The __fastavro_parsed hint should no longer be written to the avro file (@scottbelden in PR #335)
+
+2019-04-27 version 0.21.22
+* CLI tests, bugfix streaming stdin on py3, add --metadata CLI argument (@jquast PR #331)
+
+2019-04-19 version 0.21.21
+* Build 32bit wheels on Windows (@scottbelden in PR #329)
+
+2019-04-03 version 0.21.20
+* Add write_block function to the Writer class (@josephglanville in PR #324)
+* Remove support for Python 3.4 (@scottbelden in PR #326)
+* Only write the hint that we have parsed a schema on the outer most dictionary (@scottbelden in PR #327)
+
+2019-03-02 version 0.21.19
+* Make sure to always read the writer schema in the cython implementation (@scottbelden in PR #317)
+
+2019-02-13 version 0.21.18
+* Make sure True and False do not validate as an int, long, float, or double (@scottbelden in PR #316)
+
+2019-01-21 version 0.21.17
+* Fix validation for UUIDs in unions (@kkirsanov in PR #310)
+* Fix typo in parse_schema docstring (@josteini in PR #308)
+
+2018-12-21 version 0.21.16
+* Change the return type of values when promoted by the reader schema (@scottbelden in PR #307)
+
+2018-12-10 version 0.21.15
+* Deprecate schema attribute on the reader class (@scottbelden in PR #305)
+* Publish wheel for py27mu (@brianmartin in PR #306)
+
+2018-11-17 version 0.21.14
+* Ensure maps do not validate as arrays (@scottbelden in PR #304)
+
+2018-11-11 version 0.21.13
+* Add support for user specified sync_marker values (@scottbelden in PR #301)
+* Add support for specifying default values for enums (@scottbelden in PR #299)
+
+2018-10-31 version 0.21.12
+* Fix a regression to re-enable support for reading from streams (@scottbelden in PR #297)
+
+2018-10-30 version 0.21.11
+* Fix a regression to re-enable support for writing to streams (@jquast in PR #293)
+
+2018-10-24 version 0.21.10
+* Fix an issue where an avro file written out wouldn't be readable (@scottbelden in PR #289)
+
+2018-10-09 version 0.21.9
+* Fix bug where a decimal scale was not defaulting to zero (@scottbelden in PR #283)
+
+2018-09-25 version 0.21.8
+* Add support for appending to an existing avro file (@scottbelden in PR #278)
+* Build python 3.4 wheels on Windows (@scottbelden in PR #279)
+* Improve documentation for reader objects (@scottbelden in PR #277)
+
+2018-09-17 version 0.21.7
+* Change the validator back so that it will accept extra fields when validating union schema (@scottbelden in PR #275)
+
+2018-09-16 version 0.21.6
+* Fix validator picking the wrong union schema (@scottbelden in PR #273)
+* Support ValidationError class unicode on python 2 (@soluwalana in PR #269)
+
+2018-09-04 version 0.21.5
+* Fix namespace issue with embedded records (@scottbelden in PR #266)
+* Check that scale and precision are integers (@scottbelden in PR #267)
+* Add a sanity check that the input to `writer` is not a single record (@scottbelden in PR #260)
+
+2018-07-25 version 0.21.4
+* Build OSX wheels (@scottbelden in PR #255)
+
+2018-07-12 version 0.21.3
+* Check schema equality before calling match_schema (@scottbelden in PR #247)
+* Fix load_schema when the parent schema had multiple child schemas (@lsyarn in PR #249)
+
+2018-07-11 version 0.21.2
+* Fix issue where supplied reader_schema wasn't being parsed (@scottbelden in PR #245)
+
+2018-07-10 version 0.21.1
+* Ensure aliases are a list (@scottbelden in PR #241)
+* Ensure a namespaced name is used when writing with tuples (@scottbelden in PR #240)
+
+2018-07-09 version 0.21.0
+* Remove `acquaint_schema` and replace it with `parse_schema` (@scottbelden in PR #237)
+
+2018-07-03 version 0.20.0
+* Remove `load`, `dump`, `read_data`, and `write_data` from the public API (@scottbelden in PR #233 and #234)
+
+2018-06-29 version 0.19.9
+* Change cython writer to use more cdef functions (@scottbelden in PR #228)
+* Change cython reader to use more cdef functions (@scottbelden in PR #229)
+* Fix incorrect field name when validating arrays and maps (@scottbelden in PR #231)
+* Enforce that all named schemas have a "name" field (@scottbelden in PR #230)
+
+2018-06-26 version 0.19.8
+* Fix a RuntimeError on Python 3.7 (@scottbelden in PR #220)
+* Make it more clear that a MIT license is being used (@scottbelden in PR #223)
+* Fix issue with aliases when there is a new field in the new schema (@scottbelden in PR #226)
+
+2018-06-13 version 0.19.7
+* Implement the block_reader interface (@ryan-williams in PR #208)
+* Add coverage report (@chobeat in PR #216)
+* Add Python 3.7 testing (@scottbelden in PR #213)
+
+2018-05-31 version 0.19.6
+* Fix issue when ValidationErrorData field is None (@rhaarm in PR #212)
+
+2018-05-29 version 0.19.5
+* Fix overzealous validation errors (@ryan-williams in PR #207)
+
+2018-05-22 version 0.19.4
+* Improve error messages from validation (@rhaarm in PR #182 and @scottbelden in PR #202)
+
+2018-05-20 version 0.19.3
+* Improve performance when the reader schema matches the writer schema (@scottbelden in PR #199)
+
+2018-05-18 version 0.19.2
+* Fix reader for large value long types (@scottbelden in PR #198)
+
+2018-05-15 version 0.19.1
+* Allow numpy types for ints, longs, floats, and doubles (@NightFantomJ2 in PR #189)
+* Add developer_requirements.txt file (@scottbelden in PR #190)
+* Allow schema to be a dict-like object (@scottbelden in PR #194)
+
+2018-05-14 version 0.19.0
+* Ensure records have a "name" field (@scottbelden in PR #187)
+
+2018-05-08 version 0.18.2
+* Allow for schema migration in the schemaless reader (@scottbelden in PR #180)
+
+2018-05-02 version 0.18.1
+* Ignore unknown logical types (@rhaarm in PR #181)
+
+2018-04-27 version 0.18.0
+* Make logicalType datetimes be timezone aware (@lsterk in PR #174)
+
+2018-03-30 version 0.17.10
+* Ensure linux wheels are published (@pbabics in PR #170)
+
+2018-03-01 version 0.17.9
+* Ensure strings are not treated as arrays in union validation (@scottbelden in PR #167)
+
+2018-02-12 version 0.17.8
+* Ensure acquaint_schema acquaints to both READERS and WRITERS (@scottbelden in PR #160)
+* Remove ujson (@scottbelden in PR #161)
+* Update README and package classifiers (@barrywhart in PR #158)
+* Remove cython dependency when installing (@barrywhart in PR #157)
+
+2018-02-01 version 0.17.7
+* Resolve issue with doubles on Windows (@scottbelden in PR #156)
+
+2018-02-01 version 0.17.6
+* Improvements to write union using tuple (@Artimi in PR #153)
+
+2018-01-24 version 0.17.5
+* Fix some exceptions when running the main module (@scottbelden in PR #149)
+
+2018-01-22 version 0.17.4
+* Add support for Avro aliases (@regisb in PR #113)
+
+2018-01-19 version 0.17.3
+* Build wheels for Windows (@scottbelden in PR #146)
+
+2018-01-18 version 0.17.2
+* Unpin cython version (@scottbelden in PR #143)
+
+2017-12-27 version 0.17.1
+* Handle records and maps that are OrderedDict rather than dict (@barrywhart in PR #141)
+* Fix command-line tool crashes if data contains date or date/time values (@barrywhart in PR #140)
+
+2017-12-26 version 0.17.0
+* Rename fastavro.writer, other naming cleanup (@barrywhart in PR #137)
+
+2017-12-23 version 0.16.7
+* Speed up timestamp writes (@barrywhart in PR #138)
+* Introduce descriptive ctypedefs for various-sized integer types (@barrywhart in PR #135)
+
+2017-12-13 version 0.16.6
+* Public Cython dump() function should take file object, not bytearray (@barrywhart in PR #133)
+* Fix union schema resolution in writer (@Artimi in PR #129)
+
+2017-12-12 version 0.16.5
+* Expose Writer class (@barrywhart in PR #131)
+
+2017-12-05 version 0.16.4
+* Add Windows testing and fix some Windows-only bugs (@scottbelden in PR #127)
+
+2017-11-28 version 0.16.3
+* Cython-based implementation of reader module (@barrywhart in PR #118)
+
+2017-11-27 version 0.16.2
+* ujson packages usage in case if installed (@lemurchik in PR #104)
+
+2017-11-25 version 0.16.1
+* Rework the reader/writer/schema imports (@scottbelden in PR #117)
+
+2017-11-25 version 0.16.0
+* Improve write performance with customized cython (@barrywhart in PR #114)
+
+2017-10-31 version 0.15.0
+* Remove Python 2.6 support (@scottbelden in PR #110)
+
+2017-10-31 version 0.14.11
+* Added fixed decimal type (@glgnohk in PR #106)
+* Fix validation failure when writing nullable datetime.date (@theianrobertson in PR #109)
+
+2017-09-16 version 0.14.10
+* Fix logicalType date conversion (@kkirsanov in PR #100, @bitzstein issue #96)
+
+2017-09-08 version 0.14.9
+* Added time-millis and time-micros logical types (@kkirsanov in PR #98)
+
+2017-08-28 version 0.14.8
+* Added UUID logical type (@kkirsanov in PR #93)
+
+2017-08-08 version 0.14.7
+* Fix logicalType serialization (@dodysw in PR #92)
+* Update writer.py (@luup2k in PR #91)
+
+2017-08-01 version 0.14.6
+* Fix incorrect verification of datetime logical type (@kkirsanov in PR #89)
+
+2017-07-15 version 0.14.5
+* Fix incorrect matching of logical types (@kkirsanov in PR #86)
+
+2017-06-24 version 0.14.4
+* fix unions with logical types (@kkirsanov in PR #86)
+
+2017-06-24 version 0.14.3
+* fix writing unions of bytes or strings on py3 (@scottbelden in PR #83)
+
+2017-06-08 version 0.14.2
+* Pass through logical type (@kkirsanov in PR #82)
+
+2017-06-07 version 0.14.1
+* Fix bug in decimal (@kkirsanov in PR #80)
+
+2017-06-03 version 0.14.0
+* Support Avro 1.8 logical types (@kkirsanov in PR #79)
+
+2017-04-19 version 0.13.0
+* Added an optional shortcut when outputting a union (@NickG123 in PR #73)
+
+2017-04-19 version 0.12.2
+* write None value for nullable field (@nobo728x in PR #70)
+
+2016-12-08 version 0.12.1
+* `is_avro` supports file objects (ref #66)
+
+2016-12-08 version 0.12.0
+* Added `is_avro`, inspired by #66
+
+2016-11-25 version 0.11.1
+* Fix block_count reset (@DouglasOrr in PR #64)
+
+2016-10-20 version 0.11.0
+* Fix conda build
+* Writer class (@qix in PR #61)
+
+2016-08-01 version 0.10.2
+* Fix to reader schemas with default values of None (@kurtostfeld in PR #59)
+* Add __next__ iterator to reader for Python 3 (@kurtostfeld in PR #59)
+
+2016-07-03 version 0.10.1
+* Fixed regression with circular imports
+
+2016-07-03 version 0.10.0
+* `fastavro.schema.load_schema` utility function (@natb1 in PR #56)
+* `fastavro.__version_info__` tuple allows for better version checking
+
+2016-06-06 version 0.9.11
+* Added `validator` argument to writer.write
+* Added tests from issue #37
+
+2016-06-06 version 0.9.10
+* Raise error on missing values with missing default (#48, #49)
+
+2016-02-13 version 0.9.9
+* Raise EOF on empty input
+* numpy style docs
+
+2016-01-15 version 0.9.8
+* Add some docstrings (issue #45)
+* Don't use mutable default arguments
+
+2015-12-27 version 0.9.7
+* Python 2.6 support (@antonymayi in PR #44)
+* Some code cleanup
+
+2015-10-14 version 0.9.6
+* Support streaming IO (@mjwillson in PR #40)
+
+2015-10-04 version 0.9.5
+* Fix issue with writing block (issue #35)
+
+2015-09-01 version 0.9.4
+* Support schema migration (@scottbelden in PR #31)
+
+2015-09-01 version 0.9.3
+* Speedup (@scottbelden in PR #30)
+* Fix writer.validate on Python 3 (@mjwillson in PR #29)
+
+2015-08-25 version 0.9.2
+* allow extra metadata to be used (@scottbelden in PR #28)
+
+2015-08-21 version 0.9.1
+* Fix encoding of fields with default values (@scottbelden in PR #25)
+* Fix boolean decoding (@scottbelden in PR #26)
+
+2015-08-20 version 0.9.0
+* Handle error types (@scottbelden in PR #20)
+* Fix boolean encoding/decoding (@rodcarroll in PR #22)
+* Support binary encoder (issue #14, @scottbelden in PR #24)
+
+2015-08-18 version 0.8.8
+* handle records with no fields (@scottbelden in PR #19)
+
+2015-08-15 version 0.8.7
+* fix boolean encoding (@scottbelden in PR #18)
+
+2015-08-13 version 0.8.6
+* Allow nested record definitions from arrays and maps (@mtth in PR #16)
+* Fix namespace bug for union references. (@mtth in PR #16)
+* Remove generated .c files from git
+* Testing with Python 3.5rc1
+
+2015-08-03 version 0.8.5
+* Fixed nested schema bug (@dcreager in PR #15)
+* Testing Python 3.5 and pypy3
+* Don't build extension on *any* version of pypy
+
+2015-08-03 version 0.8.4
+* Packing fixes
+* Detect unknown types (@pkoch in PR #11)
+* Fix .decode with no codec (@oliverbestmann in PR #9)
+
+2015-07-14 version 0.8.3
+* Fixed pip install manifest issue (@rouge8 in PR #8)
+
+2015-07-14 version 0.8.2
+* Main repo moved to github
+
+2015-06-02 version 0.8.1
+* Fix float/double (@rodcarool in github #5)
+* Write documentation
+
+2015-05-04 version 0.8.0
+* Write support (Paulo Köch in bitbucket PR #4)
+
+2015-04-28 version 0.7.10
+* Unexpose `write` (ref from bitbucket #2)
+
+2014-08-28 version 0.7.9
+* Expose "load" (github #1)
+
+2013-04-20 version 0.7.8
+* Don't compile extension under pypy > 1.8 (issue #12)
+* pyflakes cleanup
+
+2013-03-27 version 0.7.7
+* Fixed bug when stdout.encoding is None
+
+2013-03-26 version 0.7.6
+* Fixed regression with --schema
+
+2013-03-23 version 0.7.5
+* Fixed regression with Cython and multiple definitions
+
+2013-03-01 version 0.7.4
+* Fixed regression in 2.7 and recursive
+
+2013-02-19 version 0.7.3
+* Fixed bug in Python 3 printing
+
+2012-12-10 version 0.7.2
+* Fixed bug in argument parsing
+
+2012-12-10 version 0.7.1
+* Fixed README (about snappy)
+
+2012-12-10 version 0.7.0
+* Snappy support
+
+2012-10-05 version 0.6.10
+* Handle names in unions (aboSamoor)
+* Handle namespaces (aboSamoor)
+
+2012-10-05 version 0.6.9
+* Fixed handling if named records (issue #5)
+
+2012-07-13 version 0.6.8
+* Added "next" method to reader
+
+2012-04-29 version 0.6.7
+* Support recursive schema (issue #4)
+
+2012-04-28 version 0.6.6
+* Using Cython on six as well
+* fastavro/pyfastavro.py -> fastavro/reader.py
+* Show more info when running tests
+
+2012-04-24 version 0.6.5
+* Better error message when file is not avro file
+* Fixed bug in error message when can't read file
+
+2012-03-16 version 0.6.4
+* Python 2.6 compatible (issue #3, thanks trochee)
+
+2012-03-16 version 0.6.3
+* Faster (using cython: auto_cpdef=True), thanks to Stefan Behnel
+
+2012-03-10 version 0.6.2
+* Simpler iterator
+* Trove categories
+
+2012-03-10 version 0.6.1
+* Python 3 support works
+* Better testing
+
+2012-03-10 version 0.6.0
+* Python 3 support
+
+2012-02-22 version 0.5.0
+* Generate `fastavro` script
+
+2012-01-30 version 0.4.2
+* Compliance with Apache license
+
+2012-01-25 version 0.4.1
+* Several files in command line
+* Output encoding
+* Conditional build of extension (from simplejson)
+
+2012-01-25 version 0.4.0
+* fastavro.reader
+* Include README.rst in sdist package
+
+2012-01-24 version 0.3.2
+* Fixed read_array (issue #2)
+
+2012-01-24 version 0.3.1
+* Fixed read_enum (issue #1)
+
+2012-01-23 version 0.3.0
+* Distribute generate C file (idea by Juan)
+
+2012-01-11 version 0.2.2
+* Long description
+* Get version from fastavro/__init__.py
+
+2012-01-11 version 0.2.1
+* --schema
+
+2012-01-11 version 0.2.0
+* Optionally use Cython (more speedup)
+
+2012-01-05 version 0.1.0
+* Initial release

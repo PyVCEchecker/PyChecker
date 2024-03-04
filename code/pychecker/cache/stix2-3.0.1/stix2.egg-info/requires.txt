@@ -1,0 +1,11 @@
+pytz
+requests
+simplejson
+stix2-patterns>=1.2.0
+
+[semantic]
+haversine
+rapidfuzz
+
+[taxii]
+taxii2-client>=2.3.0

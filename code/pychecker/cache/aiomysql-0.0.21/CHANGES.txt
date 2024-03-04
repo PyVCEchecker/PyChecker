@@ -1,0 +1,217 @@
+Changes
+-------
+
+0.0.21 (2020-11-26)
+^^^^^^^^^^^^^^^^^^^
+
+* Allow to use custom Cursor subclasses #374
+
+* Fill Connection class with actual client version #388
+
+* Fix legacy __aiter__ methods #403
+
+* Fix & update docs #418 #437
+
+* Ignore pyenv's .python-version file #424
+
+* Replace asyncio.streams.IncompleteReadError with asyncio.IncompleteReadError #460 #454
+
+* Add support for SQLAlchemy default parameters #455 #466
+
+* Update dependencies #485
+
+* Support Python 3.7 & 3.8 #493
+
+
+0.0.20 (2018-12-19)
+^^^^^^^^^^^^^^^^^^^
+
+* Fixed connect_timeout #360
+
+* Fixed support for SQLA executemany #324
+
+* Fix the python 3.7 compatibility #357
+
+* Fixed reuse connections when StreamReader has an exception #339
+
+* Fixes warning when inserting binary strings #326
+
+
+0.0.19 (2018-07-12)
+^^^^^^^^^^^^^^^^^^^
+
+* See v0.0.18
+
+
+0.0.18 (2018-07-09)
+^^^^^^^^^^^^^^^^^^^
+
+* Updated to support latest PyMySQL changes.
+
+* aiomysql now sends client connection info.
+
+* MySQL8+ Support including sha256_password and cached_sha2_password authentication plugins.
+
+* Default max packet length sent to the server is no longer 1.
+
+* Fixes issue where cursor.nextset can hang on query sets that raise errors.
+
+
+0.0.17 (2018-07-06)
+^^^^^^^^^^^^^^^^^^^
+
+* Pinned version of PyMySQL
+
+
+0.0.16 (2018-06-03)
+^^^^^^^^^^^^^^^^^^^
+
+* Added ability to execute precompiled sqlalchemy queries #294 (Thanks @vlanse)
+
+
+0.0.15 (2018-05-20)
+^^^^^^^^^^^^^^^^^^^
+
+* Fixed handling of user-defined types for sqlalchemy  #290
+
+* Fix KeyError when server reports unknown collation #289
+
+
+0.0.14 (2018-04-22)
+^^^^^^^^^^^^^^^^^^^
+
+* Fixed SSL connection finalization  #282
+
+
+0.0.13 (2018-04-19)
+^^^^^^^^^^^^^^^^^^^
+
+* Added SSL support #280 (Thanks @terrycain)
+
+* Fixed __all__ in aiomysql/__init__ #270 (Thanks @matianjun1)
+
+* Added docker fixtures #275 (Thanks @terrycain)
+
+
+0.0.12 (2018-01-18)
+^^^^^^^^^^^^^^^^^^^
+
+* Fixed support for SQLAlchemy 1.2.0
+
+* Fixed argument for cursor.execute in sa engine #239 (Thanks @NotSoSuper)
+
+
+0.0.11 (2017-12-06)
+^^^^^^^^^^^^^^^^^^^
+
+* Fixed README formatting on pypi
+
+
+0.0.10 (2017-12-06)
+^^^^^^^^^^^^^^^^^^^
+
+* Updated regular expressions to be compatible with pymysql #167 (Thanks @AlexLisovoy)
+
+* Added connection recycling in the pool #216
+
+
+0.0.9 (2016-09-14)
+^^^^^^^^^^^^^^^^^^
+
+* Fixed AttributeError in  _request_authentication function #104 (Thanks @ttlttl)
+
+* Fixed legacy auth #105
+
+* uvloop added to test suite #106
+
+* Fixed bug with unicode in json field #107 (Thanks @methane)
+
+
+0.0.8 (2016-08-24)
+^^^^^^^^^^^^^^^^^^
+
+* Default min pool size reduced to 1 #80 (Thanks @Drizzt1991)
+
+* Update to PyMySQL 0.7.5 #89
+
+* Fixed connection cancellation in process of executing a query #79 (Thanks @Drizzt1991)
+
+
+0.0.7 (2016-01-27)
+^^^^^^^^^^^^^^^^^^
+
+* Fix for multiple results issue, ported from pymysql #52
+
+* Fixed useless warning with no_delay option #55
+
+* Added async/await support for Engine, SAConnection, Transaction #57
+
+* pool.release returns future so we can wait on it in __aexit__ #60
+
+* Update to PyMySQL 0.6.7
+
+
+0.0.6 (2015-12-11)
+^^^^^^^^^^^^^^^^^^
+
+* Fixed bug with SA rollback (Thanks @khlyestovillarion!)
+
+* Fixed issue with default no_delay option (Thanks @khlyestovillarion!)
+
+
+0.0.5 (2015-10-28)
+^^^^^^^^^^^^^^^^^^
+
+* no_delay option is deprecated and True by default
+
+* Add Cursor.mogrify() method
+
+* Support for "LOAD LOCAL INFILE" query.
+
+* Check connection inside pool, in case of timeout drop it, fixes #25
+
+* Add support of python 3.5 features to pool, connection and cursor
+
+
+0.0.4 (2015-05-23)
+^^^^^^^^^^^^^^^^^^
+
+* Allow to call connection.wait_closed twice.
+
+* Fixed sqlalchemy 1.0.0 support.
+
+* Fix #11: Rename Connection.wait_closed() to .ensure_closed()
+
+* Raise ResourceWarning on non-closed Connection
+
+* Rename Connection.connect to _connect
+
+
+0.0.3 (2015-03-10)
+^^^^^^^^^^^^^^^^^^
+
+* Added support for PyMySQL up to 0.6.6.
+
+* Ported improvements from PyMySQL.
+
+* Added basic documentation.
+
+* Fixed and added more examples.
+
+
+0.0.2 (2015-02-17)
+^^^^^^^^^^^^^^^^^^
+
+* Added MANIFEST.in.
+
+
+0.0.1 (2015-02-17)
+^^^^^^^^^^^^^^^^^^
+
+* Initial release.
+
+* Implemented plain connections: connect, Connection, Cursor.
+
+* Implemented database pools.
+
+* Ported sqlalchemy optional support.

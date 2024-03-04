@@ -1,0 +1,2 @@
+masonite-dot>=0.0.5
+hfilesize==0.1.0

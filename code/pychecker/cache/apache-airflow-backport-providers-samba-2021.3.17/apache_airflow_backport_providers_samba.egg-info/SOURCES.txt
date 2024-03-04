@@ -1,0 +1,17 @@
+CHANGELOG.txt
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+airflow/providers/samba/__init__.py
+airflow/providers/samba/hooks/__init__.py
+airflow/providers/samba/hooks/samba.py
+apache_airflow_backport_providers_samba.egg-info/PKG-INFO
+apache_airflow_backport_providers_samba.egg-info/SOURCES.txt
+apache_airflow_backport_providers_samba.egg-info/dependency_links.txt
+apache_airflow_backport_providers_samba.egg-info/not-zip-safe
+apache_airflow_backport_providers_samba.egg-info/requires.txt
+apache_airflow_backport_providers_samba.egg-info/top_level.txt

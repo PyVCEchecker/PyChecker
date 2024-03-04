@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>sample module &#8212; deprecation 2.0.7 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">deprecation 2.0.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sample-module">
+<h1><code class="docutils literal notranslate"><span class="pre">sample</span></code> module<a class="headerlink" href="#sample-module" title="Permalink to this headline">¶</a></h1>
+<p>The following documents the <code class="docutils literal notranslate"><span class="pre">sample</span></code> module to show what documentation
+looks like when <a class="reference internal" href="index.html#deprecation.deprecated" title="deprecation.deprecated"><code class="xref py py-func docutils literal notranslate"><span class="pre">deprecated()</span></code></a> has modified it.</p>
+<span class="target" id="module-sample"></span><dl class="class">
+<dt id="sample.Tests">
+<em class="property">class </em><code class="sig-prename descclassname">sample.</code><code class="sig-name descname">Tests</code><span class="sig-paren">(</span><em class="sig-param">methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#sample.Tests" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="sample.multiline_bottom">
+<code class="sig-prename descclassname">sample.</code><code class="sig-name descname">multiline_bottom</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sample.multiline_bottom" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns 1.</p>
+<p>Multiline Bottom. Deprecation Note is inserted at the bottom.</p>
+<p>This is also here to show that multiline docstrings work</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>This will be removed in 2.0. Use the <code class="docutils literal notranslate"><span class="pre">multiline_one</span></code> function instead.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sample.multiline_top">
+<code class="sig-prename descclassname">sample.</code><code class="sig-name descname">multiline_top</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sample.multiline_top" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns 1.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>This will be removed in 2.0. Use the <code class="docutils literal notranslate"><span class="pre">multiline_one</span></code> function instead.</p>
+</div>
+<p>Multiline Top. Deprecation Note is inserted above this line. This is done
+via setting <code class="docutils literal notranslate"><span class="pre">deprecation.message_location</span></code> to ‘top’.</p>
+<p>This is also here to show that multiline docstrings work</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sample.one">
+<code class="sig-prename descclassname">sample.</code><code class="sig-name descname">one</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sample.one" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns 1</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sample.uno">
+<code class="sig-prename descclassname">sample.</code><code class="sig-name descname">uno</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sample.uno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Esta función regresa 1</p>
+<p>This is Spanish for ‘This function returns 1’</p>
+<p>This is also here to show that multiline docstrings work</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>This will be removed in 2.0. Use the <code class="docutils literal notranslate"><span class="pre">one</span></code> function instead</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sample.why">
+<code class="sig-prename descclassname">sample.</code><code class="sig-name descname">why</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sample.why" title="Permalink to this definition">¶</a></dt>
+<dd><p>This isn’t necessary</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>This will be removed in 1.5. Why would you ever do this anyway?</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sample.won">
+<code class="sig-prename descclassname">sample.</code><code class="sig-name descname">won</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sample.won" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns 1</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>This will be removed in 2.0. Use the <code class="docutils literal notranslate"><span class="pre">one</span></code> function instead</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sample.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">deprecation 2.0.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Brian Curtin.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

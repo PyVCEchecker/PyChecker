@@ -1,0 +1,11 @@
+Metadata-Version: 1.2
+Name: sklearn-pandas
+Version: 2.2.0
+Summary: Pandas integration with sklearn
+Home-page: https://github.com/scikit-learn-contrib/sklearn-pandas
+Maintainer: Ritesh Agrawal
+Maintainer-email: ragrawal@gmail.com
+License: MIT License
+Description: UNKNOWN
+Keywords: scikit,sklearn,pandas
+Platform: UNKNOWN

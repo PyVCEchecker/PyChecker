@@ -1,0 +1,9 @@
+PyYAML
+wrapt
+six>=1.5
+
+[:python_version == "3.5"]
+yarl<1.4
+
+[:python_version >= "3.6"]
+yarl

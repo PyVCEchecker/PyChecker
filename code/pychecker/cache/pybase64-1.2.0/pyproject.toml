@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[tool.cibuildwheel]
+test-requires = "pytest"
+test-command = "pytest --pyargs pybase64"
+
+[tool.cibuildwheel.linux]
+manylinux-x86_64-image = "manylinux2014"
+manylinux-i686-image = "manylinux2014"
+
+[tool.isort]
+profile = "black"

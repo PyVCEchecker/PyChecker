@@ -1,0 +1,6 @@
+bottle
+requests
+xmltodict
+
+[crypto]
+cryptography

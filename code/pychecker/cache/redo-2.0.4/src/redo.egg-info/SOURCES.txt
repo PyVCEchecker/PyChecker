@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+setup.cfg
+setup.py
+src/redo/__init__.py
+src/redo/cmd.py
+src/redo.egg-info/PKG-INFO
+src/redo.egg-info/SOURCES.txt
+src/redo.egg-info/dependency_links.txt
+src/redo.egg-info/entry_points.txt
+src/redo.egg-info/top_level.txt

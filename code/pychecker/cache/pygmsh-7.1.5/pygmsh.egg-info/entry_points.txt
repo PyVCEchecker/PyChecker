@@ -1,0 +1,3 @@
+[console_scripts]
+pygmsh-optimize = pygmsh._cli:optimize_cli
+

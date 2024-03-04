@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: gkn_bolts_survey
+Version: 1.0.8
+Summary: Print graphs out of tightening measures
+Home-page: https://github.com/pypa/sampleproject
+Author: Giuseppe Olivato
+Author-email: giuseppe.olivato@gknautomotive.com
+License: UNKNOWN
+Description: # GKN bolts survey
+        
+        This scrips post process tightening measures of torque and angles on bolts producing graphs who identifies the yield point.
+        Additional information on the tighteing procedure can be visualized.
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

@@ -1,0 +1,3 @@
+[console_scripts]
+pyannotate = pyannotate_tools.annotations.__main__:main
+

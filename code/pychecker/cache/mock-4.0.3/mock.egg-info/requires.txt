@@ -1,0 +1,12 @@
+
+[build]
+twine
+wheel
+blurb
+
+[docs]
+sphinx
+
+[test]
+pytest<5.4
+pytest-cov

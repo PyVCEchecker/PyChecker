@@ -1,0 +1,24 @@
+Acquisition
+AuthEncoding
+BTrees
+DateTime
+ExtensionClass>=4.2.1
+Persistence>=3.0a3
+RestrictedPython>=5.1
+six
+transaction
+zExceptions
+zope.component
+zope.configuration
+zope.deferredimport
+zope.interface
+zope.publisher
+zope.schema
+zope.security
+zope.testing
+
+[:python_version < "3.3"]
+funcsigs
+
+[test]
+zope.testrunner

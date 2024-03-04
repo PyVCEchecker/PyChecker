@@ -1,0 +1,8 @@
+
+[test]
+allpairspy
+click
+faker
+pytest>=6.0.1
+pytest-discord>=0.0.6
+pytest-md-report>=0.0.12

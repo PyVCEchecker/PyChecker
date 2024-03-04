@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "yaspin"
+version = "2.1.0"
+description = "Yet Another Terminal Spinner"
+license = "MIT"
+authors = ["Pavlo Dmytrenko <mail@pavdmyt.com>"]
+readme = "README.rst"
+homepage = "https://github.com/pavdmyt/yaspin"
+repository = "https://github.com/pavdmyt/yaspin"
+documentation = "https://github.com/pavdmyt/yaspin/blob/master/README.rst"
+keywords = ["spinner", "console", "terminal", "loader", "indicator"]
+include = [
+    { path = "tests", format = "sdist" },
+    { path = "examples", format = "sdist" },
+    { path = "HISTORY.rst", format = "sdist"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Environment :: MacOS X",
+    "Environment :: Other Environment",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Other Audience",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: Implementation",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: User Interfaces",
+    "Topic :: System :: Logging",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Shells",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+]
+
+[tool.poetry.dependencies]
+python = "^3.6.2"
+termcolor = "^1.1.0"
+# dataclasses are included into stdlib only since Python 3.7
+# use backport for Python 3.6
+dataclasses = { version = "^0.8", python = "~3.6" }
+
+[tool.poetry.dev-dependencies]
+black = "^21.5b1"
+twine = "^3.4.1"
+flake8 = "^3.9.2"
+isort = "^5.8.0"
+pytest = "^6.2.4"
+pytest-xdist = "^2.2.1"
+pytest-cov = "^2.12.0"
+pytest-sugar = "^0.9.4"
+pylint = "^2.8.2"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/pavdmyt/yaspin/issues"
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

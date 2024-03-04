@@ -1,0 +1,5 @@
+
+    [console_scripts]
+    sslocal = mageserver.local:main
+    ssserver = mageserver.server:main
+    

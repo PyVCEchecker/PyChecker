@@ -1,0 +1,74 @@
+{% load i18n static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "SQL Explorer" %}{% if query %} - {{ query.title }}{% elif title %} - {{ title }}{% endif %}</title>
+
+    <link rel="stylesheet" href="{% static 'explorer/css/codemirror.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'explorer/css/pivot.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'explorer/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'explorer/css/explorer.css' %}" />
+
+    <script src="{% static 'explorer/js/jquery.min.js' %}"></script>
+    <script src="{% static 'explorer/js/jquery.cookie.min.js' %}"></script>
+
+    <script src="{% static 'explorer/js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript">
+        queryId = "{% firstof query.id 'new' %}";
+        csrfCookieName = "{% firstof csrf_cookie_name 'csrftoken' %}"
+    </script>
+    <script src="{% static 'explorer/js/explorer.js' %}"></script>
+</head>
+
+<body>
+  {% block sql_explorer_content_takeover %}
+    <div id="wrap" class="wrap">
+        {% block sql_explorer_navbar %}
+            <div class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'explorer_index' %}">{% trans "SQL Explorer" %}</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            {% block sql_explorer_navlinks %}{% endblock %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        <div class="container">
+            <div class="starter-template">
+                {% block sql_explorer_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+  {% endblock %}
+    {% block sql_explorer_footer %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="text-muted">
+                        Powered by <a href="https://www.github.com/groveco/django-sql-explorer/">django-sql-explorer</a> from
+                        <a href="https://www.grove.co">Grove Collaborative</a>. Rendered at {% now "SHORT_DATETIME_FORMAT" %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <script src="{% static 'explorer/js/underscore-min.js' %}"></script>
+    <script src="{% static 'explorer/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'explorer/js/list.min.js' %}"></script>
+    <script src="{% static 'explorer/js/codemirror.min.js' %}"></script>
+    <script src="{% static 'explorer/js/sql.min.js' %}"></script>
+    <script src="{% static 'explorer/js/comment.min.js' %}"></script>
+    <script src="{% static 'explorer/js/jquery.floatThead.min.js' %}"></script>
+    <script src="{% static 'explorer/js/pivot.min.js' %}"></script>
+    {% block sql_explorer_scripts %}{% endblock %}
+</body>
+
+</html>

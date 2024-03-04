@@ -1,0 +1,11 @@
+README.md
+setup.cfg
+setup.py
+DictObject/__init__.py
+DictObject.egg-info/PKG-INFO
+DictObject.egg-info/SOURCES.txt
+DictObject.egg-info/dependency_links.txt
+DictObject.egg-info/requires.txt
+DictObject.egg-info/top_level.txt
+DictObject/autosave/__init__.py
+DictObject/autosave/test.py

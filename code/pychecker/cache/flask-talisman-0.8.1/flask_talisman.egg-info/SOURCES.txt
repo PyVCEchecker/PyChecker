@@ -1,0 +1,12 @@
+LICENSE
+README.rst
+setup.cfg
+setup.py
+flask_talisman/__init__.py
+flask_talisman/talisman.py
+flask_talisman/talisman_test.py
+flask_talisman.egg-info/PKG-INFO
+flask_talisman.egg-info/SOURCES.txt
+flask_talisman.egg-info/dependency_links.txt
+flask_talisman.egg-info/requires.txt
+flask_talisman.egg-info/top_level.txt

@@ -1,0 +1,4 @@
+aiohttp>=3
+attrs
+multidict
+yarl

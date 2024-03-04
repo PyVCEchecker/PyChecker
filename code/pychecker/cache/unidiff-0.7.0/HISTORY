@@ -1,0 +1,58 @@
+History
+-------
+
+0.7.0 - 2021-08-16
+------------------
+
+* Fixed issues handling multiple git renames.
+* Renamed files return target filename as PatchedFile.path.
+* Fixed error when first change is a binary file.
+* Added source code type hints.
+
+0.6.0 - 2020-05-07
+----------------
+
+* Updated PatchSet constructor to accept an optional (default to False)
+metadata_only parameter to only keep diff metadata information without
+the diff text data (better performance).
+* Identify and track changed binary files.
+* Added support for git rename syntax.
+
+0.5.5 - 2018-01-03
+------------------
+
+* Updated PatchSet constructor to accept string data.
+* Added support to parse extended patch info.
+
+0.5.4 - 2017-05-26
+------------------
+
+* Added PatchSet.from_string helper.
+* Do not install tests as top-level package.
+
+0.5.3 - 2017-04-10
+------------------
+
+* Re-released 0.5.2 as 0.5.3 because of issues with PyPI.
+
+0.5.2 - 2016-02-02
+------------------
+
+* Added diff line number to Line metadata.
+* Optimizations for large hunks.
+* Fix for git empty new lines.
+* Added (optional) errors parameter to PatchSet.from_filename,
+to specify how to handle encoding errors.
+
+
+0.5.1 - 2015-01-18
+------------------
+
+* Added (optional) encoding parameter to PatchSet.
+* Added support to get any iterable as PatchSet diff argument.
+
+
+0.5 - 2014-12-14
+----------------
+
+* Release on PyPI.

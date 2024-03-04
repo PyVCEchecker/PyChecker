@@ -1,0 +1,2 @@
+apache-airflow~=1.10
+jaydebeapi>=1.1.1

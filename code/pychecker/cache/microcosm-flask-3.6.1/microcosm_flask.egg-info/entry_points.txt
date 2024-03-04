@@ -1,0 +1,30 @@
+[microcosm.factories]
+app = microcosm_flask.factories:configure_flask_app
+audit = microcosm_flask.audit:configure_audit_decorator
+basic_auth = microcosm_flask.basic_auth:configure_basic_auth_decorator
+build_info_convention = microcosm_flask.conventions.build_info:configure_build_info
+build_route_path = microcosm_flask.paths:RoutePathBuilder
+config_convention = microcosm_flask.conventions.config:configure_config
+discovery_convention = microcosm_flask.conventions.discovery:configure_discovery
+error_handlers = microcosm_flask.errors:configure_error_handlers
+flask = microcosm_flask.factories:configure_flask
+health_convention = microcosm_flask.conventions.health:configure_health
+landing_convention = microcosm_flask.conventions.landing:configure_landing
+logging_level_convention = microcosm_flask.conventions.logging_level:configure_logging_level
+memory_profiler = microcosm_flask.memory:MemoryProfiler
+port_forwarding = microcosm_flask.forwarding:configure_port_forwarding
+request_context = microcosm_flask.context:configure_request_context
+route = microcosm_flask.routing:configure_route_decorator
+route_metrics = microcosm_flask.metrics:RouteMetrics
+sentry_logging = microcosm_flask.sentry:configure_sentry
+swagger_convention = microcosm_flask.conventions.swagger:configure_swagger
+uuid = microcosm_flask.converters:configure_uuid
+
+[microcosm_flask.swagger.parameters]
+decorated = microcosm_flask.swagger.parameters.decorated:DecoratedParameterBuilder
+enum = microcosm_flask.swagger.parameters.enum:EnumParameterBuilder
+list = microcosm_flask.swagger.parameters.list:ListParameterBuilder
+nested = microcosm_flask.swagger.parameters.nested:NestedParameterBuilder
+numeric = microcosm_flask.swagger.parameters.numeric:NumericParameterBuilder
+timestamp = microcosm_flask.swagger.parameters.timestamp:TimestampParameterBuilder
+

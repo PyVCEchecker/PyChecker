@@ -1,0 +1,11 @@
+paramiko>=2.7.2
+
+[build_sphinx]
+sphinx
+sphinxcontrib-napoleon
+
+[dev]
+check-manifest
+
+[test]
+tox>=1.8.1

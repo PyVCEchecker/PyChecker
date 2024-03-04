@@ -1,0 +1,55 @@
+Metadata-Version: 2.1
+Name: allensdk
+Version: 2.13.0
+Summary: core libraries for the allensdk.
+Home-page: https://github.com/AllenInstitute/AllenSDK/tree/v2.13.0
+Author: Allen Institute for Brain Science
+Author-email: instituteci@alleninstitute.org
+License: UNKNOWN
+Download-URL: https://github.com/AllenInstitute/AllenSDK/tarball/v2.13.0
+Keywords: neuroscience,bioinformatics,scientific
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: Other/Proprietary License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Requires-Dist: psycopg2-binary (<3.0.0,>=2.7)
+Requires-Dist: hdmf (<2.5.0)
+Requires-Dist: h5py (<3.0.0,>=2.8)
+Requires-Dist: matplotlib (<3.4.3,>=1.4.3)
+Requires-Dist: numpy (<1.19.0,>=1.15.4)
+Requires-Dist: pandas (<=0.25.3,>=0.25.1)
+Requires-Dist: jinja2 (<2.12.0,>=2.7.3)
+Requires-Dist: scipy (<2.0.0,>=1.4.0)
+Requires-Dist: six (<2.0.0,>=1.9.0)
+Requires-Dist: pynrrd (<1.0.0,>=0.2.1)
+Requires-Dist: future (<1.0.0,>=0.14.3)
+Requires-Dist: requests (<3.0.0)
+Requires-Dist: requests-toolbelt (<1.0.0)
+Requires-Dist: simplejson (<4.0.0,>=3.10.0)
+Requires-Dist: scikit-image (<0.17.0,>=0.14.0)
+Requires-Dist: scikit-build (<1.0.0)
+Requires-Dist: statsmodels (<=0.13.0)
+Requires-Dist: simpleitk (<3.0.0,>=2.0.2)
+Requires-Dist: argschema (<4.0.0,>=3.0.1)
+Requires-Dist: glymur (==0.8.19)
+Requires-Dist: xarray (<0.16.0)
+Requires-Dist: pynwb (<2.0.0,>=1.3.2)
+Requires-Dist: tables (<4.0.0,>=3.6.0)
+Requires-Dist: seaborn (<1.0.0)
+Requires-Dist: aiohttp (==3.7.4)
+Requires-Dist: nest-asyncio (==1.2.0)
+Requires-Dist: tqdm (>=4.27)
+Requires-Dist: ndx-events (<=0.2.0)
+Requires-Dist: boto3 (==1.17.21)
+Requires-Dist: semver
+Requires-Dist: cachetools (<5.0.0,>=4.2.1)
+
+UNKNOWN
+
+

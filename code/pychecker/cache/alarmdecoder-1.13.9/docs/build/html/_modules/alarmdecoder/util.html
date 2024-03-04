@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>alarmdecoder.util &mdash; alarmdecoder  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="alarmdecoder  documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">alarmdecoder  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for alarmdecoder.util</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Provides utility classes for the `AlarmDecoder`_ (AD2) devices.</span>
+
+<span class="sd">.. _AlarmDecoder: http://www.alarmdecoder.com</span>
+
+<span class="sd">.. moduleauthor:: Scott Petersen &lt;scott@nutech.com&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="nb">open</span>
+
+
+<div class="viewcode-block" id="NoDeviceError"><a class="viewcode-back" href="../../alarmdecoder.html#alarmdecoder.util.NoDeviceError">[docs]</a><span class="k">class</span> <span class="nc">NoDeviceError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    No devices found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="CommError"><a class="viewcode-back" href="../../alarmdecoder.html#alarmdecoder.util.CommError">[docs]</a><span class="k">class</span> <span class="nc">CommError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    There was an error communicating with the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="TimeoutError"><a class="viewcode-back" href="../../alarmdecoder.html#alarmdecoder.util.TimeoutError">[docs]</a><span class="k">class</span> <span class="nc">TimeoutError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    There was a timeout while trying to communicate with the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="InvalidMessageError"><a class="viewcode-back" href="../../alarmdecoder.html#alarmdecoder.util.InvalidMessageError">[docs]</a><span class="k">class</span> <span class="nc">InvalidMessageError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The format of the panel message was invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="UploadError"><a class="viewcode-back" href="../../alarmdecoder.html#alarmdecoder.util.UploadError">[docs]</a><span class="k">class</span> <span class="nc">UploadError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic firmware upload error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="UploadChecksumError"><a class="viewcode-back" href="../../alarmdecoder.html#alarmdecoder.util.UploadChecksumError">[docs]</a><span class="k">class</span> <span class="nc">UploadChecksumError</span><span class="p">(</span><span class="n">UploadError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The firmware upload failed due to a checksum error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="Firmware"><a class="viewcode-back" href="../../alarmdecoder.html#alarmdecoder.util.Firmware">[docs]</a><span class="k">class</span> <span class="nc">Firmware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents firmware for the `AlarmDecoder`_ devices.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># Constants</span>
+    <span class="n">STAGE_START</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">STAGE_WAITING</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">STAGE_BOOT</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">STAGE_LOAD</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">STAGE_UPLOADING</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">STAGE_DONE</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">STAGE_ERROR</span> <span class="o">=</span> <span class="mi">98</span>
+    <span class="n">STAGE_DEBUG</span> <span class="o">=</span> <span class="mi">99</span>
+
+    <span class="c"># FIXME: Rewrite this monstrosity.</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Firmware.upload"><a class="viewcode-back" href="../../alarmdecoder.html#alarmdecoder.util.Firmware.upload">[docs]</a>    <span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">progress_callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Uploads firmware to an `AlarmDecoder`_ device.</span>
+
+<span class="sd">        :param filename: firmware filename</span>
+<span class="sd">        :type filename: string</span>
+<span class="sd">        :param progress_callback: callback function used to report progress</span>
+<span class="sd">        :type progress_callback: function</span>
+
+<span class="sd">        :raises: :py:class:`~alarmdecoder.util.NoDeviceError`, :py:class:`~alarmdecoder.util.TimeoutError`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">do_upload</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Perform the actual firmware upload to the device.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">upload_file</span><span class="p">:</span>
+                <span class="n">line_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">upload_file</span><span class="p">:</span>
+                    <span class="n">line_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+
+                    <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;:&#39;</span><span class="p">:</span>
+                        <span class="n">dev</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">)</span>
+                        <span class="n">response</span> <span class="o">=</span> <span class="n">dev</span><span class="o">.</span><span class="n">read_line</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">purge_buffer</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                            <span class="n">stage_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_DEBUG</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="s">&quot;line={0} - line={1} response={2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line_cnt</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">response</span><span class="p">));</span>
+
+                        <span class="k">if</span> <span class="s">&#39;!ce&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">UploadChecksumError</span><span class="p">(</span><span class="s">&quot;Checksum error on line &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">line_cnt</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; of &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">);</span>
+
+                        <span class="k">elif</span> <span class="s">&#39;!no&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">UploadError</span><span class="p">(</span><span class="s">&quot;Incorrect data sent to bootloader.&quot;</span><span class="p">)</span>
+
+                        <span class="k">elif</span> <span class="s">&#39;!ok&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+                            <span class="k">break</span>
+
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">progress_callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                                <span class="n">progress_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_UPLOADING</span><span class="p">)</span>
+
+                        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">read_until</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Read characters until a specific pattern is found or the timeout is</span>
+<span class="sd">            hit.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">def</span> <span class="nf">timeout_event</span><span class="p">():</span>
+                <span class="sd">&quot;&quot;&quot;Handles the read timeout event.&quot;&quot;&quot;</span>
+                <span class="n">timeout_event</span><span class="o">.</span><span class="n">reading</span> <span class="o">=</span> <span class="bp">False</span>
+
+            <span class="n">timeout_event</span><span class="o">.</span><span class="n">reading</span> <span class="o">=</span> <span class="bp">True</span>
+
+            <span class="n">timer</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">timeout</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">timeout_event</span><span class="p">)</span>
+                <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+            <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="n">dev</span><span class="o">.</span><span class="n">purge</span><span class="p">()</span>
+
+            <span class="k">while</span> <span class="n">timeout_event</span><span class="o">.</span><span class="n">reading</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">char</span> <span class="o">=</span> <span class="n">dev</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+                    <span class="k">if</span> <span class="n">char</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">char</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">position</span><span class="p">]:</span>
+                            <span class="n">position</span> <span class="o">=</span> <span class="n">position</span> <span class="o">+</span> <span class="mi">1</span>
+                            <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+                                <span class="k">break</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                    <span class="k">pass</span>
+
+            <span class="k">if</span> <span class="n">timer</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">timer</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+                    <span class="n">timer</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">TimeoutError</span><span class="p">(</span><span class="s">&#39;Timeout while waiting for line terminator.&#39;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">stage_callback</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Callback to update progress for the specified stage.&quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">progress_callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">progress_callback</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dev</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoDeviceError</span><span class="p">(</span><span class="s">&#39;No device specified for firmware upload.&#39;</span><span class="p">)</span>
+
+        <span class="n">stage_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_START</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dev</span><span class="o">.</span><span class="n">is_reader_alive</span><span class="p">():</span>
+            <span class="c"># Close the reader thread and wait for it to die, otherwise</span>
+            <span class="c"># it interferes with our reading.</span>
+            <span class="n">dev</span><span class="o">.</span><span class="n">stop_reader</span><span class="p">()</span>
+            <span class="k">while</span> <span class="n">dev</span><span class="o">.</span><span class="n">_read_thread</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+                <span class="n">stage_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_WAITING</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="c"># Reboot the device and wait for the boot loader.</span>
+        <span class="n">retry</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">found_loader</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">while</span> <span class="n">retry</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">stage_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_BOOT</span><span class="p">)</span>
+                <span class="n">dev</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+                <span class="n">read_until</span><span class="p">(</span><span class="s">&#39;!boot&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">15.0</span><span class="p">)</span>
+
+                <span class="c"># Get ourselves into the boot loader and wait for indication</span>
+                <span class="c"># that it&#39;s ready for the firmware upload.</span>
+                <span class="n">stage_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_LOAD</span><span class="p">)</span>
+                <span class="n">dev</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+                <span class="n">read_until</span><span class="p">(</span><span class="s">&#39;!load&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">15.0</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="n">TimeoutError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="n">retry</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">retry</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">found_loader</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="c"># And finally do the upload.</span>
+        <span class="k">if</span> <span class="n">found_loader</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">do_upload</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">UploadError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="n">stage_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_ERROR</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">stage_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_DONE</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stage_callback</span><span class="p">(</span><span class="n">Firmware</span><span class="o">.</span><span class="n">STAGE_ERROR</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="s">&quot;Error entering bootloader.&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">alarmdecoder  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nu Tech Software Solutions, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

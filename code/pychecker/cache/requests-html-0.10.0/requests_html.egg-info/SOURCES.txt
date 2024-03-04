@@ -1,0 +1,8 @@
+README.rst
+requests_html.py
+setup.py
+requests_html.egg-info/PKG-INFO
+requests_html.egg-info/SOURCES.txt
+requests_html.egg-info/dependency_links.txt
+requests_html.egg-info/requires.txt
+requests_html.egg-info/top_level.txt

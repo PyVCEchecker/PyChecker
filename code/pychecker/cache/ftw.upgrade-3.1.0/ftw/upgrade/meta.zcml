@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta">
+
+    <meta:directives namespace="http://namespaces.zope.org/ftw.upgrade">
+
+        <meta:directive
+            name="importProfile"
+            schema=".zcml.IImportProfileUpgradeStep"
+            handler=".zcml.importProfileUpgradeStep"
+            />
+
+        <meta:directive
+            name="directory"
+            schema=".directory.zcml.IUpgradeStepDirectoryDirective"
+            handler=".directory.zcml.upgrade_step_directory_handler"
+            />
+
+    </meta:directives>
+
+</configure>

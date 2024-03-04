@@ -1,0 +1,3 @@
+[console_scripts]
+bluesky-0MQ-proxy = bluesky.commandline.zmq_proxy:main
+

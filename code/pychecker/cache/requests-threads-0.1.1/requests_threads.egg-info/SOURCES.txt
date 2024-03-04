@@ -1,0 +1,8 @@
+README.rst
+requests_threads.py
+setup.py
+requests_threads.egg-info/PKG-INFO
+requests_threads.egg-info/SOURCES.txt
+requests_threads.egg-info/dependency_links.txt
+requests_threads.egg-info/requires.txt
+requests_threads.egg-info/top_level.txt

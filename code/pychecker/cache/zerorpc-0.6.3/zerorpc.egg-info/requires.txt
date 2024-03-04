@@ -1,0 +1,4 @@
+msgpack>=0.5.2
+pyzmq>=13.1.0
+future
+gevent>=1.1

@@ -1,0 +1,30 @@
+Metadata-Version: 1.1
+Name: robotpy-hal-sim
+Version: 2019.2.3
+Summary: WPILib HAL layer for simulations
+Home-page: https://github.com/robotpy/robotpy-wpilib
+Author: Peter Johnson, Dustin Spicuzza
+Author-email: robotpy@googlegroups.com
+License: BSD License
+Description: robotpy-hal-sim
+        ===============
+        
+        This robotpy HAL implementation writes all data to a single dictionary,
+        and is useful for simulation and testing of robot code on a PC.
+        
+        Installation
+        ============
+        
+        Typically, you don't install this directly, but it is installed by pip when
+        installing pyfrc.
+        
+Keywords: frc first robotics hal can
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Scientific/Engineering

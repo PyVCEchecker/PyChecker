@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello World &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Pong Game" href="pong.html" />
+    <link rel="prev" title="Learn to fly - the tutorials" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pong.html" title="The Pong Game"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Learn to fly - the tutorials"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Learn to fly - the tutorials</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hello-world">
+<span id="id1"></span><h1>Hello World<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h1>
+<p>Ahhh, the great tradition of saying “Hello World” in a programming
+language. To whet your appetite, we will do this with a most simple
+application, which will display an image. It is not important to understand
+everything at once, which will be used by the example. Nearly all parts used
+now are explained in later chapters, so do not hesitate, if the one or other
+explanation is missing.</p>
+<div class="section" id="importing">
+<h2>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start with importing some basic modules, which are necessary to
+display a small nice window and to do some basic drawing within that
+window.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">sdl2.ext</span>
+
+<span class="n">RESOURCES</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Resources</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="s2">&quot;resources&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We need some resources from the <code class="docutils literal notranslate"><span class="pre">resources</span></code> folder, so that we have a test
+image around to display on the window later on. In your own applications, it is
+unlikely that you will ever need to import them, but we need them here, so we
+use the <a class="reference internal" href="../modules/sdl2ext_resources.html#sdl2.ext.Resources" title="sdl2.ext.Resources"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.ext.Resources</span></code></a> class to have them available.</p>
+</div>
+<div class="section" id="window-creation-and-image-loading">
+<h2>Window creation and image loading<a class="headerlink" href="#window-creation-and-image-loading" title="Permalink to this headline">¶</a></h2>
+<p>Any graphical application requires access to the screen, mostly in form
+of a window, which basically represents a portion of the screen, the
+application has access to and the application can manipulate. In most cases
+that portion has a border and title bar around it, allowing the user to move
+it around on the screen and reorganise everything in a way to fit his needs.</p>
+<p>Once we have imported all necessary parts, let’s create a window to have
+access to the screen, so we can display the logo and thus represent it
+to the user.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="n">window</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">))</span>
+<span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">factory</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">SpriteFactory</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">SOFTWARE</span><span class="p">)</span>
+<span class="n">sprite</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span><span class="n">RESOURCES</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s2">&quot;hello.bmp&quot;</span><span class="p">))</span>
+
+<span class="n">spriterenderer</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create_sprite_render_system</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="n">spriterenderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">sprite</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>First, we initialise the <a class="reference internal" href="../modules/sdl2ext.html#module-sdl2.ext" title="sdl2.ext: Python extensions for SDL2"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.ext</span></code></a> internals to gain access to the
+screen and to be able to create windows on top of it. Once done with that,
+<a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a> will create the window for us and we
+supply a title to be shown on the window’s border along with its initial size.
+Since <a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a> instances are not shown by default,
+we have to tell the operating system and window manager that there is a new
+window to display by calling <a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window.show" title="sdl2.ext.Window.show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sdl2.ext.Window.show()</span></code></a>.</p>
+<p>Afterwards, we get an image from the resources folder and create a
+<a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Sprite</span></code></a> from it, which can be easily shown later
+on. This is done via a <a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.SpriteFactory" title="sdl2.ext.SpriteFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.SpriteFactory</span></code></a>, since the
+factory allows us to switch between texture-based, hardware-accelerated, and
+software-based sprites easily.</p>
+<p>To display the image, we will use a <a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.SpriteRenderSystem" title="sdl2.ext.SpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.SpriteRenderSystem</span></code></a>,
+which supports the sprite type (texture- or software-based) and can copy the
+image to the window for display. The <a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.SpriteRenderSystem" title="sdl2.ext.SpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.SpriteRenderSystem</span></code></a>
+needs to know, where to copy to, thus we have to supply the window as target
+for copy and display operations.</p>
+<p>All left to do is to initiate the copy process by calling
+<a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.SpriteRenderSystem.render" title="sdl2.ext.SpriteRenderSystem.render"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.SpriteRenderSystem.render()</span></code></a> with the image we
+created earlier.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You will notice that the sprite used above will always be drawn at the
+top-left corner of the <a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a>. You can change
+the position of where to draw it by changing its
+<a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.Sprite.position" title="sdl2.ext.Sprite.position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.ext.Sprite.position</span></code></a> value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># will cause the renderer to draw the sprite 10px to the right and</span>
+<span class="c1"># 20 px to the bottom</span>
+<span class="n">sprite</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span>
+
+<span class="c1"># will cause the renderer to draw the sprite 55px to the right and</span>
+<span class="c1"># 10 px to the bottom</span>
+<span class="n">sprite</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>Experiment with different values to see their effect. Do not forget to do
+this <em>before</em> <code class="docutils literal notranslate"><span class="pre">spriterenderer.render(sprite)</span></code> is called.</p>
+</div>
+</div>
+<div class="section" id="making-the-application-responsive">
+<h2>Making the application responsive<a class="headerlink" href="#making-the-application-responsive" title="Permalink to this headline">¶</a></h2>
+<p>We are nearly done now. We have an image to display, we have a window, where
+the image should be displayed on, so we can execute the written code, not?</p>
+<p>Well, yes, but the only thing that will happen is that we will notice a
+short flickering before the application exits. Maybe we can even see
+the window with the image for a short moment, but that’s not what we
+want, do we?</p>
+<p>To keep the window on the screen and to make it responsive to user
+input, such as closing the window, react upon the mouse cursor or key
+presses, we have to add a so-called event loop. The event loop will deal
+with certain types of actions happening on the window or while the
+window is focused by the user and - as long as the event loop is
+running - will keep the window shown on the screen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">processor</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">TestEventProcessor</span><span class="p">()</span>
+<span class="n">processor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since this is a very first tutorial, we keep things simple here and use a
+dummy class for testing without actually dealing with the event loop magic.
+By calling <a class="reference internal" href="../modules/sdl2ext_common.html#sdl2.ext.TestEventProcessor.run" title="sdl2.ext.TestEventProcessor.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sdl2.ext.TestEventProcessor.run()</span></code></a>, we implicitly start an
+event loop, which takes care of the most important parts for us.</p>
+</div>
+<div class="section" id="and-here-it-ends">
+<h2>And here it ends…<a class="headerlink" href="#and-here-it-ends" title="Permalink to this headline">¶</a></h2>
+<p>The window is shown, the image is shown, great! All left to do is to clean up
+everything, once the application finishes. Luckily the
+<a class="reference internal" href="../modules/sdl2ext_common.html#sdl2.ext.TestEventProcessor" title="sdl2.ext.TestEventProcessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.TestEventProcessor</span></code></a> knows when the window is closed, so
+it will exit from the event loop. Once it exits, we should clean up the
+video internals, we initialised at the beginning. Thus, a final call to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>should be made.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hello World</a><ul>
+<li><a class="reference internal" href="#importing">Importing</a></li>
+<li><a class="reference internal" href="#window-creation-and-image-loading">Window creation and image loading</a></li>
+<li><a class="reference internal" href="#making-the-application-responsive">Making the application responsive</a></li>
+<li><a class="reference internal" href="#and-here-it-ends">And here it ends…</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Learn to fly - the tutorials</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pong.html"
+                        title="next chapter">The Pong Game</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorial/helloworld.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pong.html" title="The Pong Game"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Learn to fly - the tutorials"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Learn to fly - the tutorials</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

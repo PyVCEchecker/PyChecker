@@ -1,0 +1,9 @@
+global-include *.py
+
+include *.txt CHANGELOG.md LICENSE README.md social_core/tests/testkey.pem
+recursive-include social_core/tests *.txt *.json
+
+graft examples
+
+recursive-exclude .tox *
+recursive-exclude social_core *.pyc

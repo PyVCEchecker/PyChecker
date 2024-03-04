@@ -1,0 +1,11 @@
+exclude *.cfg
+exclude *.ini
+exclude .*
+include *.py
+include *.rst
+include *.txt
+include setup.cfg
+graft docs
+graft src
+global-exclude *.pyc
+global-exclude *.pyo

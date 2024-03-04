@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: mackup
+Version: 0.8.29
+Summary: Keep your application settings in sync (OS X/Linux)
+Home-page: https://github.com/lra/mackup
+Author: Laurent Raufaste
+Author-email: analogue@glop.org
+License: GPLv3
+Description: UNKNOWN
+Keywords: configuration config dotfiles sync backup dropbox gdrive box
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Natural Language :: English
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Topic :: Utilities

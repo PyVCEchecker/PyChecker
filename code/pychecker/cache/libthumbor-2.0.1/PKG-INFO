@@ -1,0 +1,57 @@
+Metadata-Version: 2.1
+Name: libthumbor
+Version: 2.0.1
+Summary: libthumbor is the python extension to generate thumbor URLs
+License: MIT
+Keywords: imaging,face,detection,feature,thumbor,thumbnail,imagemagick,pil,opencv
+Author: Bernardo Heynemann
+Author-email: heynemann@gmail.com
+Requires-Python: >=3.6,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Dist: six (>=1.14.0,<2.0.0)
+Description-Content-Type: text/markdown
+
+[![Build Status](https://secure.travis-ci.org/thumbor/libthumbor.png)](http://travis-ci.org/thumbor/libthumbor) [![Coverage Status](https://coveralls.io/repos/github/thumbor/libthumbor/badge.svg?branch=master)](https://coveralls.io/github/thumbor/libthumbor?branch=master)
+
+libthumbor allows easy usage of
+[thumbor](http://github.com/thumbor/thumbor) in Python. Check the docs for django integration.
+
+This version is compliant with the new URL generation schema (thumbor 3.0.0 and up).
+
+## Using it
+
+```python
+from libthumbor import CryptoURL
+
+crypto = CryptoURL(key='my-security-key')
+
+encrypted_url = crypto.generate(
+    width=300,
+    height=200,
+    smart=True,
+    image_url='/path/to/my/image.jpg'
+)
+```
+
+## Docs
+
+Check the wiki for more information on using libthumbor.
+
+## Contributions
+
+### Bernardo Heynemann
+
+* Generic URL encryption
+
+### Rafael Caricio
+
+* Django Generic View and URL
+
+### Fábio Costa
+
+* Django Generic View and URL
+

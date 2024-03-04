@@ -1,0 +1,15 @@
+MANIFEST.in
+README.md
+RELEASE.md
+requirements.txt
+setup.py
+../LICENSE.txt
+feather/__init__.py
+feather/version.py
+feather_format.egg-info/PKG-INFO
+feather_format.egg-info/SOURCES.txt
+feather_format.egg-info/dependency_links.txt
+feather_format.egg-info/requires.txt
+feather_format.egg-info/top_level.txt
+scripts/large_file_test.py
+scripts/win_update_src.cmd

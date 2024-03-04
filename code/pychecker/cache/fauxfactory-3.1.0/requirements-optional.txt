@@ -1,0 +1,24 @@
+# For `make lint`
+flake8
+flake8-docstrings<1.1
+flake8-quotes
+# See: https://gitlab.com/pycqa/flake8-docstrings/issues/19
+pydocstyle<2
+pylint
+
+# For generating documentation.
+sphinx
+
+# For `make package`
+# defined in setup.py
+wheel
+
+# For `make publish`
+twine
+
+# For `make test-coverage`
+codecov
+
+# For `make test{,-*}`
+pytest
+pytest-cov

@@ -1,0 +1,11 @@
+LICENSE
+README.md
+astpretty.py
+setup.cfg
+setup.py
+astpretty.egg-info/PKG-INFO
+astpretty.egg-info/SOURCES.txt
+astpretty.egg-info/dependency_links.txt
+astpretty.egg-info/entry_points.txt
+astpretty.egg-info/requires.txt
+astpretty.egg-info/top_level.txt

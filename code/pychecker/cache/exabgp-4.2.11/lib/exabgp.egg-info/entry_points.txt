@@ -1,0 +1,6 @@
+[console_scripts]
+exabgp = exabgp.application:run_exabgp
+exabgp-cli = exabgp.application:run_cli
+exabgp-healthcheck = exabgp.application:run_healthcheck
+exabgpcli = exabgp.application:run_cli
+

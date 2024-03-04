@@ -1,0 +1,8 @@
+Although pycoin has no dependencies, if you want to hack on it, it's recommended that you to install py.test in your development virtualenv.
+
+$ pip install pytest
+
+To run just a subset of tests for features under development do something like:
+
+$ cd (project_root_dir)
+$ PYTHONPATH=`pwd` py.test tests/scripts_test.py

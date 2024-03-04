@@ -1,0 +1,14 @@
+Metadata-Version: 1.1
+Name: toapi
+Version: 2.1.2
+Summary: Every web site provides APIs.
+Home-page: https://github.com/gaojiuli/toapi
+Author: Jiuli Gao
+Author-email: gaojiuli@gmail.com
+License: Apache 2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.6

@@ -1,0 +1,787 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The png Module &#8212; PyPNG 0.0.19 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PNG: Chunk by Chunk" href="chunk.html" />
+    <link rel="prev" title="PyPNG Code Examples" href="ex.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-png">
+<span id="the-png-module"></span><h1>The png Module<a class="headerlink" href="#module-png" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">png</span></code> module can read and write PNG files.</p>
+<div class="section" id="installation-and-overview">
+<h2>Installation and Overview<a class="headerlink" href="#installation-and-overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pypng</span></code></p>
+<p>For help, type <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">png;</span> <span class="pre">help(png)</span></code> in your python interpreter.</p>
+<p>A good place to start is the <a class="reference internal" href="#png.Reader" title="png.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reader</span></code></a> and <a class="reference internal" href="#png.Writer" title="png.Writer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Writer</span></code></a> classes.</p>
+<p>Coverage of PNG formats is fairly complete;
+all allowable bit depths (1/2/4/8/16/24/32/48/64 bits per pixel) and
+colour combinations are supported:</p>
+<ul class="simple">
+<li>greyscale (1/2/4/8/16 bit);</li>
+<li>RGB, RGBA, LA (greyscale with alpha) with 8/16 bits per channel;</li>
+<li>colour mapped images (1/2/4/8 bit).</li>
+</ul>
+<p>Interlaced images,
+which support a progressive display when downloading,
+are supported for both reading and writing.</p>
+<p>A number of optional chunks can be specified (when writing)
+and understood (when reading): <code class="docutils literal notranslate"><span class="pre">tRNS</span></code>, <code class="docutils literal notranslate"><span class="pre">bKGD</span></code>, <code class="docutils literal notranslate"><span class="pre">gAMA</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sBIT</span></code> chunk can be used to specify precision for
+non-native bit depths.</p>
+<p>Requires Python 3.4 or higher (or Python 2.7).
+Installation is trivial,
+but see the <code class="docutils literal notranslate"><span class="pre">README.txt</span></code> file (with the source distribution) for details.</p>
+<p>Full use of all features will need some reading of the PNG specification
+<a class="reference external" href="http://www.w3.org/TR/2003/REC-PNG-20031110/">http://www.w3.org/TR/2003/REC-PNG-20031110/</a>.</p>
+<p>The package also comes with command line utilities.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">pripamtopng</span></code> converts
+<a class="reference external" href="http://netpbm.sourceforge.net/">Netpbm</a> PAM/PNM files to PNG;</li>
+<li><code class="docutils literal notranslate"><span class="pre">pripngtopam</span></code> converts PNG to file PAM/PNM.</li>
+</ul>
+<p>There are a few more for simple PNG manipulations.</p>
+</div>
+<div class="section" id="spelling-and-terminology">
+<h2>Spelling and Terminology<a class="headerlink" href="#spelling-and-terminology" title="Permalink to this headline">¶</a></h2>
+<p>Generally British English spelling is used in the documentation.
+So that’s “greyscale” and “colour”.
+This not only matches the author’s native language,
+it’s also used by the PNG specification.</p>
+</div>
+<div class="section" id="colour-models">
+<h2>Colour Models<a class="headerlink" href="#colour-models" title="Permalink to this headline">¶</a></h2>
+<p>The major colour models supported by PNG (and hence by PyPNG) are:</p>
+<ul class="simple">
+<li>greyscale;</li>
+<li>greyscale–alpha;</li>
+<li>RGB;</li>
+<li>RGB–alpha.</li>
+</ul>
+<p>Also referred to using the abbreviations: L, LA, RGB, RGBA.
+Each letter codes a single channel:
+<em>L</em> is for Luminance or Luma or Lightness (greyscale images);
+<em>A</em> stands for Alpha, the opacity channel
+(used for transparency effects, but higher values are more opaque,
+so it makes sense to call it opacity);
+<em>R</em>, <em>G</em>, <em>B</em> stand for Red, Green, Blue (colour image).</p>
+</div>
+<div class="section" id="lists-arrays-sequences-and-so-on">
+<h2>Lists, arrays, sequences, and so on<a class="headerlink" href="#lists-arrays-sequences-and-so-on" title="Permalink to this headline">¶</a></h2>
+<p>When getting pixel data out of this module (reading) and
+presenting data to this module (writing) there are
+a number of ways the data could be represented as a Python value.</p>
+<p>The preferred format is a sequence of <em>rows</em>,
+which each row being a sequence of <em>values</em>.
+In this format, the values are in pixel order,
+with all the values from all the pixels in a row
+being concatenated into a single sequence for that row.</p>
+<p>Consider an image that is 3 pixels wide by 2 pixels high, and each pixel
+has RGB components:</p>
+<p>Sequence of rows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">([</span><span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">],</span>
+     <span class="p">[</span><span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Each row appears as its own list,
+but the pixels are flattened so that three values for one pixel
+simply follow the three values for the previous pixel.</p>
+<p>This is the preferred because
+it provides a good compromise between space and convenience.
+PyPNG regards itself as at liberty to replace any sequence type with
+any sufficiently compatible other sequence type;
+in practice each row is an array (<code class="docutils literal notranslate"><span class="pre">bytearray</span></code> or <code class="docutils literal notranslate"><span class="pre">array.array</span></code>).</p>
+<p>To allow streaming the outer list is sometimes
+an iterator rather than an explicit list.</p>
+<p>An alternative format is a single array holding all the values.</p>
+<p>Array of values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span>
+ <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">B</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The entire image is one single giant sequence of colour values.
+Generally an array will be used (to save space), not a list.</p>
+<p>The top row comes first,
+and within each row the pixels are ordered from left-to-right.
+Within a pixel the values appear in the order R-G-B-A
+(or L-A for greyscale–alpha).</p>
+<p>There is another format, which should only be used with caution.
+It is mentioned because it is used internally,
+is close to what lies inside a PNG file itself,
+and has some support from the public API.
+This format is called <em>packed</em>.
+When packed, each row is a sequence of bytes (integers from 0 to 255),
+just as it is before PNG scanline filtering is applied.
+When the bit depth is 8 this is the same as a sequence of rows;
+when the bit depth is less than 8 (1, 2 and 4),
+several pixels are packed into each byte;
+when the bit depth is 16 each pixel value is decomposed into 2 bytes
+(and <cite>packed</cite> is a misnomer).
+This format is used by the <a class="reference internal" href="#png.Writer.write_packed" title="png.Writer.write_packed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Writer.write_packed()</span></code></a> method.
+It isn’t usually a convenient format,
+but may be just right if the source data for
+the PNG image comes from something that uses a similar format
+(for example, 1-bit BMPs, or another PNG file).</p>
+</div>
+<div class="section" id="png-module-classes-and-functions">
+<h2>png module Classes and Functions<a class="headerlink" href="#png-module-classes-and-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="png.Image">
+<em class="property">class </em><code class="descclassname">png.</code><code class="descname">Image</code><span class="sig-paren">(</span><em>rows</em>, <em>info</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Image" title="Permalink to this definition">¶</a></dt>
+<dd><p>A PNG image.  You can create an <a class="reference internal" href="#png.Image" title="png.Image"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a> object from
+an array of pixels by calling <a class="reference internal" href="#png.from_array" title="png.from_array"><code class="xref py py-meth docutils literal notranslate"><span class="pre">png.from_array()</span></code></a>.  It can be
+saved to disk with the <a class="reference internal" href="#png.Image.save" title="png.Image.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a> method.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The constructor is not public.  Please do not call it.</p>
+</div>
+<dl class="method">
+<dt id="png.Image.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Image.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the image to <em>file</em>.  If <em>file</em> looks like an open file
+descriptor then it is used, otherwise it is treated as a
+filename and a fresh file is opened.</p>
+<p>In general, you can only call this method once; after it has
+been called the first time and the PNG image has been saved, the
+source data will have been streamed, and cannot be streamed
+again.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="png.Reader">
+<em class="property">class </em><code class="descclassname">png.</code><code class="descname">Reader</code><span class="sig-paren">(</span><em>_guess=None</em>, <em>filename=None</em>, <em>file=None</em>, <em>bytes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pure Python PNG decoder in pure Python.</p>
+<p>The constructor expects exactly one keyword argument.
+If you supply a positional argument instead,
+it will guess the input type.
+Choose from the following keyword arguments:</p>
+<dl class="docutils">
+<dt>filename</dt>
+<dd>Name of input file (a PNG file).</dd>
+<dt>file</dt>
+<dd>A file-like object (object with a read() method).</dd>
+<dt>bytes</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">bytes</span></code> or <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> with PNG data.</dd>
+</dl>
+<dl class="method">
+<dt id="png.Reader.asDirect">
+<code class="descname">asDirect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.asDirect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the image data as a direct representation of
+an <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span> <span class="pre">*</span> <span class="pre">planes</span></code> array.
+This removes the need for callers to deal with
+palettes and transparency themselves.
+Images with a palette (colour type 3) are converted to RGB or RGBA;
+images with transparency (a <code class="docutils literal notranslate"><span class="pre">tRNS</span></code> chunk) are converted to
+LA or RGBA as appropriate.
+When returned in this format the pixel values represent
+the colour value directly without needing to refer
+to palettes or transparency information.</p>
+<p>Like the <a class="reference internal" href="#png.Reader.read" title="png.Reader.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method this method returns a 4-tuple:</p>
+<p>(<em>width</em>, <em>height</em>, <em>rows</em>, <em>info</em>)</p>
+<p>This method normally returns pixel values with
+the bit depth they have in the source image, but
+when the source PNG has an <code class="docutils literal notranslate"><span class="pre">sBIT</span></code> chunk it is inspected and
+can reduce the bit depth of the result pixels;
+pixel values will be reduced according to the bit depth
+specified in the <code class="docutils literal notranslate"><span class="pre">sBIT</span></code> chunk.
+PNG nerds should note a single result bit depth is
+used for all channels:
+the maximum of the ones specified in the <code class="docutils literal notranslate"><span class="pre">sBIT</span></code> chunk.
+An RGB565 image will be rescaled to 6-bit RGB666.</p>
+<p>The <em>info</em> dictionary that is returned reflects
+the <cite>direct</cite> format and not the original source image.
+For example, an RGB source image with a <code class="docutils literal notranslate"><span class="pre">tRNS</span></code> chunk
+to represent a transparent colour,
+will start with <code class="docutils literal notranslate"><span class="pre">planes=3</span></code> and <code class="docutils literal notranslate"><span class="pre">alpha=False</span></code> for the
+source image,
+but the <em>info</em> dictionary returned by this method
+will have <code class="docutils literal notranslate"><span class="pre">planes=4</span></code> and <code class="docutils literal notranslate"><span class="pre">alpha=True</span></code> because
+an alpha channel is synthesized and added.</p>
+<p><em>rows</em> is a sequence of rows;
+each row being a sequence of values
+(like the <a class="reference internal" href="#png.Reader.read" title="png.Reader.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method).</p>
+<p>All the other aspects of the image data are not changed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.asRGB">
+<code class="descname">asRGB</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.asRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return image as RGB pixels.
+RGB colour images are passed through unchanged;
+greyscales are expanded into RGB triplets
+(there is a small speed overhead for doing this).</p>
+<p>An alpha channel in the source image will raise an exception.</p>
+<p>The return values are as for the <a class="reference internal" href="#png.Reader.read" title="png.Reader.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method except that
+the <em>info</em> reflect the returned pixels, not the source image.
+In particular,
+for this method <code class="docutils literal notranslate"><span class="pre">info['greyscale']</span></code> will be <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.asRGB8">
+<code class="descname">asRGB8</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.asRGB8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the image data as an RGB pixels with 8-bits per sample.
+This is like the <a class="reference internal" href="#png.Reader.asRGB" title="png.Reader.asRGB"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asRGB()</span></code></a> method except that
+this method additionally rescales the values so that
+they are all between 0 and 255 (8-bit).
+In the case where the source image has a bit depth &lt; 8
+the transformation preserves all the information;
+where the source image has bit depth &gt; 8, then
+rescaling to 8-bit values loses precision.
+No dithering is performed.
+Like <a class="reference internal" href="#png.Reader.asRGB" title="png.Reader.asRGB"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asRGB()</span></code></a>,
+an alpha channel in the source image will raise an exception.</p>
+<p>This function returns a 4-tuple:
+(<em>width</em>, <em>height</em>, <em>rows</em>, <em>info</em>).
+<em>width</em>, <em>height</em>, <em>info</em> are as per the <a class="reference internal" href="#png.Reader.read" title="png.Reader.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method.</p>
+<p><em>rows</em> is the pixel data as a sequence of rows.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.asRGBA">
+<code class="descname">asRGBA</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.asRGBA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return image as RGBA pixels.
+Greyscales are expanded into RGB triplets;
+an alpha channel is synthesized if necessary.
+The return values are as for the <a class="reference internal" href="#png.Reader.read" title="png.Reader.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method except that
+the <em>info</em> reflect the returned pixels, not the source image.
+In particular, for this method
+<code class="docutils literal notranslate"><span class="pre">info['greyscale']</span></code> will be <code class="docutils literal notranslate"><span class="pre">False</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">info['alpha']</span></code> will be <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.asRGBA8">
+<code class="descname">asRGBA8</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.asRGBA8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the image data as RGBA pixels with 8-bits per sample.
+This method is similar to <a class="reference internal" href="#png.Reader.asRGB8" title="png.Reader.asRGB8"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asRGB8()</span></code></a> and <a class="reference internal" href="#png.Reader.asRGBA" title="png.Reader.asRGBA"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asRGBA()</span></code></a>:
+The result pixels have an alpha channel, <em>and</em>
+values are rescaled to the range 0 to 255.
+The alpha channel is synthesized if necessary
+(with a small speed penalty).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.chunk">
+<code class="descname">chunk</code><span class="sig-paren">(</span><em>lenient=False</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.chunk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the next PNG chunk from the input file;
+returns a (<em>type</em>, <em>data</em>) tuple.
+<em>type</em> is the chunk’s type as a byte string
+(all PNG chunk types are 4 bytes long).
+<em>data</em> is the chunk’s data content, as a byte string.</p>
+<p>If the optional <cite>lenient</cite> argument evaluates to <cite>True</cite>,
+checksum failures will raise warnings rather than exceptions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.chunks">
+<code class="descname">chunks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.chunks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an iterator that will yield each chunk as a
+(<em>chunktype</em>, <em>content</em>) pair.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.palette">
+<code class="descname">palette</code><span class="sig-paren">(</span><em>alpha='natural'</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.palette" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a palette that is a sequence of 3-tuples or 4-tuples,
+synthesizing it from the <code class="docutils literal notranslate"><span class="pre">PLTE</span></code> and <code class="docutils literal notranslate"><span class="pre">tRNS</span></code> chunks.
+These chunks should have already been processed (for example,
+by calling the <a class="reference internal" href="#png.Reader.preamble" title="png.Reader.preamble"><code class="xref py py-meth docutils literal notranslate"><span class="pre">preamble()</span></code></a> method).
+All the tuples are the same size:
+3-tuples if there is no <code class="docutils literal notranslate"><span class="pre">tRNS</span></code> chunk,
+4-tuples when there is a <code class="docutils literal notranslate"><span class="pre">tRNS</span></code> chunk.</p>
+<p>Assumes that the image is colour type
+3 and therefore a <code class="docutils literal notranslate"><span class="pre">PLTE</span></code> chunk is required.</p>
+<p>If the <cite>alpha</cite> argument is <code class="docutils literal notranslate"><span class="pre">'force'</span></code> then an alpha channel is
+always added, forcing the result to be a sequence of 4-tuples.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.preamble">
+<code class="descname">preamble</code><span class="sig-paren">(</span><em>lenient=False</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.preamble" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the image metadata by reading
+the initial part of the PNG file up to
+the start of the <code class="docutils literal notranslate"><span class="pre">IDAT</span></code> chunk.
+All the chunks that precede the <code class="docutils literal notranslate"><span class="pre">IDAT</span></code> chunk are
+read and either processed for metadata or discarded.</p>
+<p>If the optional <cite>lenient</cite> argument evaluates to <cite>True</cite>,
+checksum failures will raise warnings rather than exceptions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.process_chunk">
+<code class="descname">process_chunk</code><span class="sig-paren">(</span><em>lenient=False</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.process_chunk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the next chunk and its data.
+This only processes the following chunk types:
+<code class="docutils literal notranslate"><span class="pre">IHDR</span></code>, <code class="docutils literal notranslate"><span class="pre">PLTE</span></code>, <code class="docutils literal notranslate"><span class="pre">bKGD</span></code>, <code class="docutils literal notranslate"><span class="pre">tRNS</span></code>, <code class="docutils literal notranslate"><span class="pre">gAMA</span></code>, <code class="docutils literal notranslate"><span class="pre">sBIT</span></code>, <code class="docutils literal notranslate"><span class="pre">pHYs</span></code>.
+All other chunk types are ignored.</p>
+<p>If the optional <cite>lenient</cite> argument evaluates to <cite>True</cite>,
+checksum failures will raise warnings rather than exceptions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>lenient=False</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the PNG file and decode it.
+Returns (<cite>width</cite>, <cite>height</cite>, <cite>rows</cite>, <cite>info</cite>).</p>
+<p>May use excessive memory.</p>
+<p><cite>rows</cite> is a sequence of rows;
+each row is a sequence of values.</p>
+<p>If the optional <cite>lenient</cite> argument evaluates to True,
+checksum failures will raise warnings rather than exceptions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.read_flat">
+<code class="descname">read_flat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.read_flat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a PNG file and decode it into a single array of values.
+Returns (<em>width</em>, <em>height</em>, <em>values</em>, <em>info</em>).</p>
+<p>May use excessive memory.</p>
+<p><cite>values</cite> is a single array.</p>
+<p>The <a class="reference internal" href="#png.Reader.read" title="png.Reader.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method is more stream-friendly than this,
+because it returns a sequence of rows.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.undo_filter">
+<code class="descname">undo_filter</code><span class="sig-paren">(</span><em>filter_type</em>, <em>scanline</em>, <em>previous</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.undo_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undo the filter for a scanline.
+<cite>scanline</cite> is a sequence of bytes that
+does not include the initial filter type byte.
+<cite>previous</cite> is decoded previous scanline
+(for straightlaced images this is the previous pixel row,
+but for interlaced images, it is
+the previous scanline in the reduced image,
+which in general is not the previous pixel row in the final image).
+When there is no previous scanline
+(the first row of a straightlaced image,
+or the first row in one of the passes in an interlaced image),
+then this argument should be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The scanline will have the effects of filtering removed;
+the result will be returned as a fresh sequence of bytes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Reader.validate_signature">
+<code class="descname">validate_signature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#png.Reader.validate_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>If signature (header) has not been read then read and
+validate it; otherwise do nothing.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="png.Writer">
+<em class="property">class </em><code class="descclassname">png.</code><code class="descname">Writer</code><span class="sig-paren">(</span><em>width=None</em>, <em>height=None</em>, <em>size=None</em>, <em>greyscale=&lt;class 'png.Default'&gt;</em>, <em>alpha=False</em>, <em>bitdepth=8</em>, <em>palette=None</em>, <em>transparent=None</em>, <em>background=None</em>, <em>gamma=None</em>, <em>compression=None</em>, <em>interlace=False</em>, <em>planes=None</em>, <em>colormap=None</em>, <em>maxval=None</em>, <em>chunk_limit=1048576</em>, <em>x_pixels_per_unit=None</em>, <em>y_pixels_per_unit=None</em>, <em>unit_is_meter=False</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>PNG encoder in pure Python.</p>
+<p>Create a PNG encoder object.</p>
+<p>Arguments:</p>
+<dl class="docutils">
+<dt>width, height</dt>
+<dd>Image size in pixels, as two separate arguments.</dd>
+<dt>size</dt>
+<dd>Image size (w,h) in pixels, as single argument.</dd>
+<dt>greyscale</dt>
+<dd>Pixels are greyscale, not RGB.</dd>
+<dt>alpha</dt>
+<dd>Input data has alpha channel (RGBA or LA).</dd>
+<dt>bitdepth</dt>
+<dd>Bit depth: from 1 to 16 (for each channel).</dd>
+<dt>palette</dt>
+<dd>Create a palette for a colour mapped image (colour type 3).</dd>
+<dt>transparent</dt>
+<dd>Specify a transparent colour (create a <code class="docutils literal notranslate"><span class="pre">tRNS</span></code> chunk).</dd>
+<dt>background</dt>
+<dd>Specify a default background colour (create a <code class="docutils literal notranslate"><span class="pre">bKGD</span></code> chunk).</dd>
+<dt>gamma</dt>
+<dd>Specify a gamma value (create a <code class="docutils literal notranslate"><span class="pre">gAMA</span></code> chunk).</dd>
+<dt>compression</dt>
+<dd>zlib compression level: 0 (none) to 9 (more compressed);
+default: -1 or None.</dd>
+<dt>interlace</dt>
+<dd>Create an interlaced image.</dd>
+<dt>chunk_limit</dt>
+<dd>Write multiple <code class="docutils literal notranslate"><span class="pre">IDAT</span></code> chunks to save memory.</dd>
+<dt>x_pixels_per_unit</dt>
+<dd>Number of pixels a unit along the x axis (write a
+<cite>pHYs</cite> chunk).</dd>
+<dt>y_pixels_per_unit</dt>
+<dd>Number of pixels a unit along the y axis (write a
+<cite>pHYs</cite> chunk). Along with <cite>x_pixel_unit</cite>, this gives
+the pixel size ratio.</dd>
+<dt>unit_is_meter</dt>
+<dd><cite>True</cite> to indicate that the unit (for the <cite>pHYs</cite>
+chunk) is metre.</dd>
+</dl>
+<p>The image size (in pixels) can be specified either by using the
+<cite>width</cite> and <cite>height</cite> arguments, or with the single <cite>size</cite>
+argument.
+If <cite>size</cite> is used it should be a pair (<em>width</em>, <em>height</em>).</p>
+<p>The <cite>greyscale</cite> argument indicates whether input pixels
+are greyscale (when true), or colour (when false).
+The default is true unless <cite>palette=</cite> is used.</p>
+<p>The <cite>alpha</cite> argument (a boolean) specifies
+whether input pixels have an alpha channel (or not).</p>
+<p><cite>bitdepth</cite> specifies the bit depth of the source pixel values.
+Each channel may have a different bit depth.
+Each source pixel must have values that are
+an integer between 0 and <code class="docutils literal notranslate"><span class="pre">2**bitdepth-1</span></code>, where
+<cite>bitdepth</cite> is the bit depth for the corresponding channel.
+For example, 8-bit images have values between 0 and 255.
+PNG only stores images with bit depths of
+1,2,4,8, or 16 (the same for all channels).
+When <cite>bitdepth</cite> is not one of these values or where
+channels have different bit depths,
+the next highest valid bit depth is selected,
+and an <code class="docutils literal notranslate"><span class="pre">sBIT</span></code> (significant bits) chunk is generated
+that specifies the original precision of the source image.
+In this case the supplied pixel values will be rescaled to
+fit the range of the selected bit depth.</p>
+<p>The PNG file format supports many bit depth / colour model
+combinations, but not all.
+The details are somewhat arcane
+(refer to the PNG specification for full details).
+Briefly:
+Bit depths &lt; 8 (1,2,4) are only allowed with greyscale and
+colour mapped images;
+colour mapped images cannot have bit depth 16.</p>
+<p>For colour mapped images
+(in other words, when the <cite>palette</cite> argument is specified)
+the <cite>bitdepth</cite> argument must match one of
+the valid PNG bit depths: 1, 2, 4, or 8.
+(It is valid to have a PNG image with a palette and
+an <code class="docutils literal notranslate"><span class="pre">sBIT</span></code> chunk, but the meaning is slightly different;
+it would be awkward to use the <cite>bitdepth</cite> argument for this.)</p>
+<p>The <cite>palette</cite> option, when specified,
+causes a colour mapped image to be created:
+the PNG colour type is set to 3;
+<cite>greyscale</cite> must not be true; <cite>alpha</cite> must not be true;
+<cite>transparent</cite> must not be set.
+The bit depth must be 1,2,4, or 8.
+When a colour mapped image is created,
+the pixel values are palette indexes and
+the <cite>bitdepth</cite> argument specifies the size of these indexes
+(not the size of the colour values in the palette).</p>
+<p>The palette argument value should be a sequence of 3- or
+4-tuples.
+3-tuples specify RGB palette entries;
+4-tuples specify RGBA palette entries.
+All the 4-tuples (if present) must come before all the 3-tuples.
+A <code class="docutils literal notranslate"><span class="pre">PLTE</span></code> chunk is created;
+if there are 4-tuples then a <code class="docutils literal notranslate"><span class="pre">tRNS</span></code> chunk is created as well.
+The <code class="docutils literal notranslate"><span class="pre">PLTE</span></code> chunk will contain all the RGB triples in the same
+sequence;
+the <code class="docutils literal notranslate"><span class="pre">tRNS</span></code> chunk will contain the alpha channel for
+all the 4-tuples, in the same sequence.
+Palette entries are always 8-bit.</p>
+<p>If specified, the <cite>transparent</cite> and <cite>background</cite> parameters must be
+a tuple with one element for each channel in the image.
+Either a 3-tuple of integer (RGB) values for a colour image, or
+a 1-tuple of a single integer for a greyscale image.</p>
+<p>If specified, the <cite>gamma</cite> parameter must be a positive number
+(generally, a <cite>float</cite>).
+A <code class="docutils literal notranslate"><span class="pre">gAMA</span></code> chunk will be created.
+Note that this will not change the values of the pixels as
+they appear in the PNG file,
+they are assumed to have already
+been converted appropriately for the gamma specified.</p>
+<p>The <cite>compression</cite> argument specifies the compression level to
+be used by the <code class="docutils literal notranslate"><span class="pre">zlib</span></code> module.
+Values from 1 to 9 (highest) specify compression.
+0 means no compression.
+-1 and <code class="docutils literal notranslate"><span class="pre">None</span></code> both mean that the <code class="docutils literal notranslate"><span class="pre">zlib</span></code> module uses
+the default level of compession (which is generally acceptable).</p>
+<p>If <cite>interlace</cite> is true then an interlaced image is created
+(using PNG’s so far only interace method, <em>Adam7</em>).
+This does not affect how the pixels should be passed in,
+rather it changes how they are arranged into the PNG file.
+On slow connexions interlaced images can be
+partially decoded by the browser to give
+a rough view of the image that is
+successively refined as more image data appears.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Enabling the <cite>interlace</cite> option requires the entire image
+to be processed in working memory.</p>
+</div>
+<p><cite>chunk_limit</cite> is used to limit the amount of memory used whilst
+compressing the image.
+In order to avoid using large amounts of memory,
+multiple <code class="docutils literal notranslate"><span class="pre">IDAT</span></code> chunks may be created.</p>
+<dl class="method">
+<dt id="png.Writer.array_scanlines">
+<code class="descname">array_scanlines</code><span class="sig-paren">(</span><em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Writer.array_scanlines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates rows (each a sequence of values) from
+a single array of values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Writer.array_scanlines_interlace">
+<code class="descname">array_scanlines_interlace</code><span class="sig-paren">(</span><em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Writer.array_scanlines_interlace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator for interlaced scanlines from an array.
+<cite>pixels</cite> is the full source image as a single array of values.
+The generator yields each scanline of the reduced passes in turn,
+each scanline being a sequence of values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Writer.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>outfile</em>, <em>rows</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Writer.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a PNG image to the output file.
+<cite>rows</cite> should be an iterable that yields each row
+(each row is a sequence of values).
+The rows should be the rows of the original image,
+so there should be <code class="docutils literal notranslate"><span class="pre">self.height</span></code> rows of
+<code class="docutils literal notranslate"><span class="pre">self.width</span> <span class="pre">*</span> <span class="pre">self.planes</span></code> values.
+If <cite>interlace</cite> is specified (when creating the instance),
+then an interlaced PNG file will be written.
+Supply the rows in the normal image order;
+the interlacing is carried out internally.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Interlacing requires the entire image to be in working memory.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Writer.write_array">
+<code class="descname">write_array</code><span class="sig-paren">(</span><em>outfile</em>, <em>pixels</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Writer.write_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write an array that holds all the image values
+as a PNG file on the output file.
+See also <a class="reference internal" href="#png.Writer.write" title="png.Writer.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Writer.write_packed">
+<code class="descname">write_packed</code><span class="sig-paren">(</span><em>outfile</em>, <em>rows</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Writer.write_packed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write PNG file to <cite>outfile</cite>.
+<cite>rows</cite> should be an iterator that yields each packed row;
+a packed row being a sequence of packed bytes.</p>
+<p>The rows have a filter byte prefixed and
+are then compressed into one or more IDAT chunks.
+They are not processed any further,
+so if bitdepth is other than 1, 2, 4, 8, 16,
+the pixel values should have been scaled
+before passing them to this method.</p>
+<p>This method does work for interlaced images but it is best avoided.
+For interlaced images, the rows should be
+presented in the order that they appear in the file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="png.Writer.write_passes">
+<code class="descname">write_passes</code><span class="sig-paren">(</span><em>outfile</em>, <em>rows</em><span class="sig-paren">)</span><a class="headerlink" href="#png.Writer.write_passes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a PNG image to the output file.</p>
+<p>Most users are expected to find the <a class="reference internal" href="#png.Writer.write" title="png.Writer.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> or
+<a class="reference internal" href="#png.Writer.write_array" title="png.Writer.write_array"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_array()</span></code></a> method more convenient.</p>
+<p>The rows should be given to this method in the order that
+they appear in the output file.
+For straightlaced images, this is the usual top to bottom ordering.
+For interlaced images the rows should have been interlaced before
+passing them to this function.</p>
+<p><cite>rows</cite> should be an iterable that yields each row
+(each row being a sequence of values).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="png.write_chunks">
+<code class="descclassname">png.</code><code class="descname">write_chunks</code><span class="sig-paren">(</span><em>out</em>, <em>chunks</em><span class="sig-paren">)</span><a class="headerlink" href="#png.write_chunks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a PNG file by writing out the chunks.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="png.from_array">
+<code class="descclassname">png.</code><code class="descname">from_array</code><span class="sig-paren">(</span><em>a</em>, <em>mode=None</em>, <em>info={}</em><span class="sig-paren">)</span><a class="headerlink" href="#png.from_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a PNG <a class="reference internal" href="#png.Image" title="png.Image"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a> object from a 2-dimensional array.
+One application of this function is easy PIL-style saving:
+<code class="docutils literal notranslate"><span class="pre">png.from_array(pixels,</span> <span class="pre">'L').save('foo.png')</span></code>.</p>
+<p>Unless they are specified using the <em>info</em> parameter,
+the PNG’s height and width are taken from the array size.
+The first axis is the height; the second axis is the
+ravelled width and channel index.
+The array is treated is a sequence of rows,
+each row being a sequence of values (<code class="docutils literal notranslate"><span class="pre">width*channels</span></code> in number).
+So an RGB image that is 16 pixels high and 8 wide will
+occupy a 2-dimensional array that is 16x24
+(each row will be 8*3 = 24 sample values).</p>
+<p><em>mode</em> is a string that specifies the image colour format in a
+PIL-style mode.  It can be:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'L'</span></code></dt>
+<dd>greyscale (1 channel)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'LA'</span></code></dt>
+<dd>greyscale with alpha (2 channel)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'RGB'</span></code></dt>
+<dd>colour image (3 channel)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'RGBA'</span></code></dt>
+<dd>colour image with alpha (4 channel)</dd>
+</dl>
+<p>The mode string can also specify the bit depth
+(overriding how this function normally derives the bit depth,
+see below).
+Appending <code class="docutils literal notranslate"><span class="pre">';16'</span></code> to the mode will cause the PNG to be
+16 bits per channel;
+any decimal from 1 to 16 can be used to specify the bit depth.</p>
+<p>When a 2-dimensional array is used <em>mode</em> determines how many
+channels the image has, and so allows the width to be derived from
+the second array dimension.</p>
+<p>The array is expected to be a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array,
+but it can be any suitable Python sequence.
+For example, a list of lists can be used:
+<code class="docutils literal notranslate"><span class="pre">png.from_array([[0,</span> <span class="pre">255,</span> <span class="pre">0],</span> <span class="pre">[255,</span> <span class="pre">0,</span> <span class="pre">255]],</span> <span class="pre">'L')</span></code>.
+The exact rules are: <code class="docutils literal notranslate"><span class="pre">len(a)</span></code> gives the first dimension, height;
+<code class="docutils literal notranslate"><span class="pre">len(a[0])</span></code> gives the second dimension.
+It’s slightly more complicated than that because
+an iterator of rows can be used, and it all still works.
+Using an iterator allows data to be streamed efficiently.</p>
+<p>The bit depth of the PNG is normally taken from
+the array element’s datatype
+(but if <em>mode</em> specifies a bitdepth then that is used instead).
+The array element’s datatype is determined in a way which
+is supposed to work both for <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays and for Python
+<code class="docutils literal notranslate"><span class="pre">array.array</span></code> objects.
+A 1 byte datatype will give a bit depth of 8,
+a 2 byte datatype will give a bit depth of 16.
+If the datatype does not have an implicit size,
+like the above example where it is a plain Python list of lists,
+then a default of 8 is used.</p>
+<p>The <em>info</em> parameter is a dictionary that can
+be used to specify metadata (in the same style as
+the arguments to the <a class="reference internal" href="#png.Writer" title="png.Writer"><code class="xref py py-class docutils literal notranslate"><span class="pre">png.Writer</span></code></a> class).
+For this function the keys that are useful are:</p>
+<dl class="docutils">
+<dt>height</dt>
+<dd>overrides the height derived from the array dimensions and
+allows <em>a</em> to be an iterable.</dd>
+<dt>width</dt>
+<dd>overrides the width derived from the array dimensions.</dd>
+<dt>bitdepth</dt>
+<dd>overrides the bit depth derived from the element datatype
+(but must match <em>mode</em> if that also specifies a bit depth).</dd>
+</dl>
+<p>Generally anything specified in the <em>info</em> dictionary will
+override any implicit choices that this function would otherwise make,
+but must match any explicit ones.
+For example, if the <em>info</em> dictionary has a <code class="docutils literal notranslate"><span class="pre">greyscale</span></code> key then
+this must be true when mode is <code class="docutils literal notranslate"><span class="pre">'L'</span></code> or <code class="docutils literal notranslate"><span class="pre">'LA'</span></code> and
+false when mode is <code class="docutils literal notranslate"><span class="pre">'RGB'</span></code> or <code class="docutils literal notranslate"><span class="pre">'RGBA'</span></code>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PyPNG</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ca.html">Why Use PyPNG?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ex.html">PyPNG Code Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The png Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-and-overview">Installation and Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spelling-and-terminology">Spelling and Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#colour-models">Colour Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lists-arrays-sequences-and-so-on">Lists, arrays, sequences, and so on</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#png-module-classes-and-functions">png module Classes and Functions</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chunk.html">PNG: Chunk by Chunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tr20091230.html">How fast is PyPNG?</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ex.html" title="previous chapter">PyPNG Code Examples</a></li>
+      <li>Next: <a href="chunk.html" title="next chapter">PNG: Chunk by Chunk</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2009, 2010, 2012, 2016, 2018 David Jones.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/png.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

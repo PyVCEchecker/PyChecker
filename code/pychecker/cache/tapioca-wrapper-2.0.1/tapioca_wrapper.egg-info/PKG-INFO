@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: tapioca-wrapper
+Version: 2.0.1
+Summary: Python API client generator
+Home-page: https://github.com/vintasoftware/tapioca-wrapper
+Author: Filipe Ximenes
+Author-email: filipeximenes@gmail.com
+License: MIT
+Description: 
+        Tapioca provides an easy way to make explorable Python API wrappers.
+        APIs wrapped by Tapioca follow a simple interaction pattern that works uniformly so developers don't need to learn how to use a new coding interface/style for each service API.
+        
+        Source code hosted on Github: https://github.com/vintasoftware/tapioca-wrapper
+        
+        Documentation hosted by Readthedocs: http://tapioca-wrapper.readthedocs.io/en/stable/
+        
+Keywords: tapioca,wrapper,api
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8

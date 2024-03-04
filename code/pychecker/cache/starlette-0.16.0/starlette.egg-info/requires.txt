@@ -1,0 +1,17 @@
+anyio<4,>=3.0.0
+
+[:python_version < "3.7"]
+contextlib2>=21.6.0
+
+[:python_version < "3.8"]
+typing_extensions
+
+[full]
+itsdangerous
+jinja2
+python-multipart
+pyyaml
+requests
+
+[full:python_version < "3.10"]
+graphene

@@ -1,0 +1,3 @@
+[console_scripts]
+monkeytype = monkeytype.cli:entry_point_main
+

@@ -1,0 +1,16 @@
+HISTORY.rst
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+setup.cfg
+setup.py
+src/flake8_comprehensions/__init__.py
+src/flake8_comprehensions/py.typed
+src/flake8_comprehensions.egg-info/PKG-INFO
+src/flake8_comprehensions.egg-info/SOURCES.txt
+src/flake8_comprehensions.egg-info/dependency_links.txt
+src/flake8_comprehensions.egg-info/entry_points.txt
+src/flake8_comprehensions.egg-info/not-zip-safe
+src/flake8_comprehensions.egg-info/requires.txt
+src/flake8_comprehensions.egg-info/top_level.txt

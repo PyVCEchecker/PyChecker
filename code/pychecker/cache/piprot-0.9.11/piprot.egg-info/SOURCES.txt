@@ -1,0 +1,16 @@
+LICENCE.txt
+MANIFEST.in
+README.rst
+requirements.txt
+setup.cfg
+setup.py
+piprot/__init__.py
+piprot/piprot.py
+piprot.egg-info/PKG-INFO
+piprot.egg-info/SOURCES.txt
+piprot.egg-info/dependency_links.txt
+piprot.egg-info/entry_points.txt
+piprot.egg-info/requires.txt
+piprot.egg-info/top_level.txt
+piprot/providers/__init__.py
+piprot/providers/github.py

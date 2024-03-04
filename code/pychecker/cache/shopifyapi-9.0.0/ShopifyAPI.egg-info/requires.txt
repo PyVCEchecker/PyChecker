@@ -1,0 +1,4 @@
+pyactiveresource>=2.2.2
+PyJWT >= 2.0.0
+PyYAML
+six

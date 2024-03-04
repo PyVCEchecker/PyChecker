@@ -1,0 +1,13 @@
+MANIFEST.in
+README.txt
+setup.py
+XStatic_Hogan.egg-info/PKG-INFO
+XStatic_Hogan.egg-info/SOURCES.txt
+XStatic_Hogan.egg-info/dependency_links.txt
+XStatic_Hogan.egg-info/namespace_packages.txt
+XStatic_Hogan.egg-info/not-zip-safe
+XStatic_Hogan.egg-info/top_level.txt
+xstatic/__init__.py
+xstatic/pkg/__init__.py
+xstatic/pkg/hogan/__init__.py
+xstatic/pkg/hogan/data/hogan.js

@@ -1,0 +1,4 @@
+pyroute2==0.3.3
+pyotp==1.4.1
+sparts==0.7.1
+atc_thrift

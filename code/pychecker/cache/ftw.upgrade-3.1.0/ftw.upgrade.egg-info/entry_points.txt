@@ -1,0 +1,6 @@
+[console_scripts]
+upgrade = ftw.upgrade.command:main
+
+[z3c.autoinclude.plugin]
+target = plone
+

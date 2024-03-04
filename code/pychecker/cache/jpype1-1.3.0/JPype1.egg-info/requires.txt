@@ -1,0 +1,11 @@
+
+[:python_version < "3.8"]
+typing_extensions
+
+[docs]
+readthedocs-sphinx-ext
+sphinx
+sphinx-rtd-theme
+
+[tests]
+pytest

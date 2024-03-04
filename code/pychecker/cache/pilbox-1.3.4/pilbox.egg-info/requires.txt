@@ -1,0 +1,9 @@
+tornado==5.1.0
+Pillow==5.2.0
+sphinx-me==0.2.1
+
+[Facial Recognition]
+cv
+
+[Proxy]
+pycurl

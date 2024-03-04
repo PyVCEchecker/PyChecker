@@ -1,0 +1,6 @@
+Deprecated>=1.2.6
+
+[:python_version < "3.7"]
+aiocontextvars
+
+[test]

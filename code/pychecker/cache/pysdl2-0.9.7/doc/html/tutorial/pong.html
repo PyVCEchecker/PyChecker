@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Pong Game &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PySDL2 for Pygamers" href="pygamers.html" />
+    <link rel="prev" title="Hello World" href="helloworld.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pygamers.html" title="PySDL2 for Pygamers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="helloworld.html" title="Hello World"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Learn to fly - the tutorials</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-pong-game">
+<span id="pong-tutorial"></span><h1>The Pong Game<a class="headerlink" href="#the-pong-game" title="Permalink to this headline">¶</a></h1>
+<p>The following tutorial will show you some capabilities of the component-based
+approach, PySDL2 features. We will create the basics of a simple Pong game
+implementation here. The basics of creating a event loop, dealing with
+user input, moving images around and creating a rendering function are
+covered in this tutorial.</p>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>We start with creating the window and add a small event loop, so we are able
+to close the window and exit the game.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">sdl2</span>
+<span class="kn">import</span> <span class="nn">sdl2.ext</span>
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span><span class="s2">&quot;The Pong Game&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_QUIT</span><span class="p">:</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">run</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The import statements, video initialisation and window creation were
+discussed previously in the <a class="reference internal" href="helloworld.html#hello-world"><span class="std std-ref">Hello World</span></a> tutorial. We import everything
+from the <a class="reference internal" href="../modules/sdl2.html#module-sdl2" title="sdl2: SDL2 library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2</span></code></a> package here, too, to have all SDL2 functions available.</p>
+<p>Instead of some integrated event processor, a new code fragment is
+introduced, though.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+    <span class="n">events</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_QUIT</span><span class="p">:</span>
+            <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">break</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The while loop above is the main event loop of our application. It deals with
+all kinds of input events that can occur when working with the window, such as
+mouse movements, key strokes, resizing operations and so on. SDL handles a lot
+for us when it comes to events, so all we need to do is to check, if there are
+any events, retrieve each event one by one, and handle it, if necessary. For
+now, we will just handle the <code class="docutils literal notranslate"><span class="pre">sdl2.SDL_QUIT</span></code> event, which is raised when the
+window is about to be closed.</p>
+<p>In any other case we will just refresh the window’s graphics buffer, so
+it is updated and visible on-screen.</p>
+</div>
+<div class="section" id="adding-the-game-world">
+<h2>Adding the game world<a class="headerlink" href="#adding-the-game-world" title="Permalink to this headline">¶</a></h2>
+<p>The window is available and working. Now let’s take care of creating the
+game world, which will manage the player paddles, ball, visible elements
+and everything else. We are going to use an implementation layout loosely
+based on a COP <a class="footnote-reference brackets" href="#f1" id="id1">1</a> pattern, which separates data structures and
+functionality from each other. This allows us to change or enhance functional
+parts easily without having to refactor all classes we are implementing.</p>
+<p>We start with creating the two player paddles and the rendering engine
+that will display them.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+<span class="n">WHITE</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">SoftwareRenderer</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">SoftwareSpriteRenderSystem</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SoftwareRenderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">components</span><span class="p">):</span>
+        <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">surface</span><span class="p">,</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SoftwareRenderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Entity</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">sprite</span><span class="p">,</span> <span class="n">posx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">posy</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sprite</span> <span class="o">=</span> <span class="n">sprite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">posx</span><span class="p">,</span> <span class="n">posy</span>
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="o">...</span>
+
+    <span class="n">world</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">World</span><span class="p">()</span>
+
+    <span class="n">spriterenderer</span> <span class="o">=</span> <span class="n">SoftwareRenderer</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">spriterenderer</span><span class="p">)</span>
+
+    <span class="n">factory</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">SpriteFactory</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">SOFTWARE</span><span class="p">)</span>
+    <span class="n">sp_paddle1</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">from_color</span><span class="p">(</span><span class="n">WHITE</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+    <span class="n">sp_paddle2</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">from_color</span><span class="p">(</span><span class="n">WHITE</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+    <span class="n">player1</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">sp_paddle1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+    <span class="n">player2</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">sp_paddle2</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_QUIT</span><span class="p">:</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+        <span class="n">world</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">run</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The first thing to do is to enhance the
+<a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.SoftwareSpriteRenderSystem" title="sdl2.ext.SoftwareSpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.SoftwareSpriteRenderSystem</span></code></a> so that it will paint
+the whole window screen black on every drawing cycle, before drawing all
+sprites on the window.</p>
+<p>Afterwards, the player paddles will be implemented, based on an
+<a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.Entity" title="sdl2.ext.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Entity</span></code></a> data container. The player paddles are
+simple rectangular sprites that can be positioned anywhere on the
+window.</p>
+<p>In the main program function, we put those things together by creating a
+<a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.World" title="sdl2.ext.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.World</span></code></a>, in which the player paddles and the renderer
+can live and operate.</p>
+<p>Within the main event loop, we allow the world to process all attached
+systems, which causes it to invoke the <code class="docutils literal notranslate"><span class="pre">process()</span></code> methods for all
+<a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.System" title="sdl2.ext.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.System</span></code></a> instances added to it.</p>
+</div>
+<div class="section" id="moving-the-ball">
+<h2>Moving the ball<a class="headerlink" href="#moving-the-ball" title="Permalink to this headline">¶</a></h2>
+<p>We have two static paddles centred vertically on the left and right of
+our window. The next thing to do is to add a ball that can move around
+within the window boundaries.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="k">class</span> <span class="nc">MovementSystem</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Applicator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="n">maxy</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MovementSystem</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">componenttypes</span> <span class="o">=</span> <span class="n">Velocity</span><span class="p">,</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Sprite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minx</span> <span class="o">=</span> <span class="n">minx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">miny</span> <span class="o">=</span> <span class="n">miny</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxx</span> <span class="o">=</span> <span class="n">maxx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxy</span> <span class="o">=</span> <span class="n">maxy</span>
+
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">componentsets</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">sprite</span> <span class="ow">in</span> <span class="n">componentsets</span><span class="p">:</span>
+            <span class="n">swidth</span><span class="p">,</span> <span class="n">sheight</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">.</span><span class="n">size</span>
+            <span class="n">sprite</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">velocity</span><span class="o">.</span><span class="n">vx</span>
+            <span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">velocity</span><span class="o">.</span><span class="n">vy</span>
+
+            <span class="n">sprite</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minx</span><span class="p">,</span> <span class="n">sprite</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">miny</span><span class="p">,</span> <span class="n">sprite</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+            <span class="n">pmaxx</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">swidth</span>
+            <span class="n">pmaxy</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">sheight</span>
+            <span class="k">if</span> <span class="n">pmaxx</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxx</span><span class="p">:</span>
+                <span class="n">sprite</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxx</span> <span class="o">-</span> <span class="n">swidth</span>
+            <span class="k">if</span> <span class="n">pmaxy</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxy</span><span class="p">:</span>
+                <span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxy</span> <span class="o">-</span> <span class="n">sheight</span>
+
+
+<span class="k">class</span> <span class="nc">Velocity</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Velocity</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Entity</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">posx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">posy</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="n">Velocity</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">Ball</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Entity</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">sprite</span><span class="p">,</span> <span class="n">posx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">posy</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sprite</span> <span class="o">=</span> <span class="n">sprite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">posx</span><span class="p">,</span> <span class="n">posy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="n">Velocity</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">sp_ball</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">from_color</span><span class="p">(</span><span class="n">WHITE</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">movement</span> <span class="o">=</span> <span class="n">MovementSystem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+    <span class="n">spriterenderer</span> <span class="o">=</span> <span class="n">SoftwareRenderer</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">movement</span><span class="p">)</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">spriterenderer</span><span class="p">)</span>
+
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+    <span class="n">ball</span> <span class="o">=</span> <span class="n">Ball</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">sp_ball</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">290</span><span class="p">)</span>
+    <span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Two new classes are introduced here, <code class="docutils literal notranslate"><span class="pre">Velocity</span></code> and
+<code class="docutils literal notranslate"><span class="pre">MovementSystem</span></code>. The <code class="docutils literal notranslate"><span class="pre">Velocity</span></code> class is a simple data bag. It
+does not contain any application logic, but consists of the relevant
+information to represent the movement in a certain direction. This
+allows us to mark in-game items as being able to move around.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">MovementSystem</span></code> in turn takes care of moving the in-game items around
+by applying the velocity to their current position. Thus, we can simply enable
+any <code class="docutils literal notranslate"><span class="pre">Player</span></code> instance to be movable or not by adding or removing a
+velocity attribute to them, which is a <code class="docutils literal notranslate"><span class="pre">Velocity</span></code> component instance.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The naming is important here. The EBS implementation as described in
+<a class="reference internal" href="../modules/sdl2ext_ebs.html#ref-ebs"><span class="std std-ref">Working with component-based entities</span></a> requires every in-application or in-game item attribute
+bound to a <a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.Entity" title="sdl2.ext.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Entity</span></code></a> to be the lowercase class name of its
+related component.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Player</span><span class="o">.</span><span class="n">vel</span> <span class="o">=</span> <span class="n">Velocity</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>for example would raise an exception, since the system expects
+<code class="docutils literal notranslate"><span class="pre">Player.vel</span></code> to be an instance of a <code class="docutils literal notranslate"><span class="pre">Vel</span></code> component.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MovementSystem</span></code> is a specialised <a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.System" title="sdl2.ext.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.System</span></code></a>, a
+<a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.Applicator" title="sdl2.ext.Applicator"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Applicator</span></code></a>, which can operate on combined sets of
+data. When the <a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.Applicator.process" title="sdl2.ext.Applicator.process"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sdl2.ext.Applicator.process()</span></code></a> method is
+called, the passed <code class="docutils literal notranslate"><span class="pre">componentsets</span></code> iterable will contain tuples of
+objects that belong to an instance and feature a certain type. The
+<code class="docutils literal notranslate"><span class="pre">MovementSystem</span></code>’s <code class="docutils literal notranslate"><span class="pre">process()</span></code> implementation hence will loop over
+sets of <code class="docutils literal notranslate"><span class="pre">Velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">Sprite</span></code> instances that belong to the same
+<a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.Entity" title="sdl2.ext.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Entity</span></code></a>. Since we have a ball and two players
+currently available, it typically would loop over three tuples, two for
+the individual players and one for the ball.</p>
+<p>The <a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.Applicator" title="sdl2.ext.Applicator"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Applicator</span></code></a> thus enables us to process combined
+data of our in-game items, without creating complex data structures.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only entities that contain <em>all</em> attributes (components) are taken
+into account. If e.g. the <code class="docutils literal notranslate"><span class="pre">Ball</span></code> class would not contain a
+<code class="docutils literal notranslate"><span class="pre">Velocity</span></code> component, it would not be processed by the
+<code class="docutils literal notranslate"><span class="pre">MovementSystem</span></code>.</p>
+</div>
+<p>Why do we use this approach? The <a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Sprite</span></code></a> objects carry a
+position, which defines the location at which they should be rendered, when
+processed by the <code class="docutils literal notranslate"><span class="pre">SoftwareRenderer</span></code>. If they should move around (which is
+a change in the position), we need to apply the velocity to them.</p>
+<p>We also define some more things within the <code class="docutils literal notranslate"><span class="pre">MovementSystem</span></code>, such as a
+simple boundary check, so that the players and ball cannot leave the
+visible window area on moving around.</p>
+</div>
+<div class="section" id="bouncing">
+<h2>Bouncing<a class="headerlink" href="#bouncing" title="Permalink to this headline">¶</a></h2>
+<p>We have a ball that can move around as well as the general game logic
+for moving things around. In contrast to a classic OO approach we do not
+need to implement the movement logic within the <code class="docutils literal notranslate"><span class="pre">Ball</span></code> and <code class="docutils literal notranslate"><span class="pre">Player</span></code>
+class individually, since the basic movement is the same for all (yes,
+you could have solved that with inheriting <code class="docutils literal notranslate"><span class="pre">Ball</span></code> and <code class="docutils literal notranslate"><span class="pre">Player</span></code> from
+a <code class="docutils literal notranslate"><span class="pre">MovableObject</span></code> class in OO).</p>
+<p>The ball now moves and stays within the bounds, but once it hits the
+left side, it will stay there. To make it <em>bouncy</em>, we need to add a
+simple collision system, which causes the ball to change its direction
+on colliding with the walls or the player paddles.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="k">class</span> <span class="nc">CollisionSystem</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Applicator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="n">maxy</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CollisionSystem</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">componenttypes</span> <span class="o">=</span> <span class="n">Velocity</span><span class="p">,</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Sprite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ball</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minx</span> <span class="o">=</span> <span class="n">minx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">miny</span> <span class="o">=</span> <span class="n">miny</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxx</span> <span class="o">=</span> <span class="n">maxx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxy</span> <span class="o">=</span> <span class="n">maxy</span>
+
+    <span class="k">def</span> <span class="nf">_overlap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">pos</span><span class="p">,</span> <span class="n">sprite</span> <span class="o">=</span> <span class="n">item</span>
+        <span class="k">if</span> <span class="n">sprite</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">.</span><span class="n">area</span>
+        <span class="n">bleft</span><span class="p">,</span> <span class="n">btop</span><span class="p">,</span> <span class="n">bright</span><span class="p">,</span> <span class="n">bbottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">area</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">bleft</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">bright</span> <span class="o">&gt;</span> <span class="n">left</span> <span class="ow">and</span>
+                <span class="n">btop</span> <span class="o">&lt;</span> <span class="n">bottom</span> <span class="ow">and</span> <span class="n">bbottom</span> <span class="o">&gt;</span> <span class="n">top</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">componentsets</span><span class="p">):</span>
+        <span class="n">collitems</span> <span class="o">=</span> <span class="p">[</span><span class="n">comp</span> <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">componentsets</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_overlap</span><span class="p">(</span><span class="n">comp</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">collitems</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vx</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vx</span>
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">world</span> <span class="o">=</span> <span class="n">World</span><span class="p">()</span>
+
+    <span class="n">movement</span> <span class="o">=</span> <span class="n">MovementSystem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+    <span class="n">collision</span> <span class="o">=</span> <span class="n">CollisionSystem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+    <span class="n">spriterenderer</span> <span class="o">=</span> <span class="n">SoftwareRenderer</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">movement</span><span class="p">)</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">collision</span><span class="p">)</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">spriterenderer</span><span class="p">)</span>
+
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">collision</span><span class="o">.</span><span class="n">ball</span> <span class="o">=</span> <span class="n">ball</span>
+
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_QUIT</span><span class="p">:</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+        <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">world</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">run</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CollisionSystem</span></code> only needs to take care of the ball and objects
+it collides with, since the ball is the only unpredictable object within our
+game world. The player paddles will only be able to move up and down
+within the visible window area and we already dealt with that within the
+<code class="docutils literal notranslate"><span class="pre">MovementSystem</span></code> code.</p>
+<p>Whenever the ball collides with one of the paddles, its movement
+direction (velocity) should be inverted, so that it <em>bounces</em> back.</p>
+<p>Additionally, we won’t run at the full processor speed anymore in the
+main loop, but instead add a short delay, using the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_Delay()</span></code> function. This reduces the overall load on the
+CPU and makes the game a bit slower.</p>
+</div>
+<div class="section" id="reacting-on-player-input">
+<h2>Reacting on player input<a class="headerlink" href="#reacting-on-player-input" title="Permalink to this headline">¶</a></h2>
+<p>We have a moving ball that bounces from side to side. The next step
+would be to allow moving one of the paddles around, if the player presses a
+key. The SDL event routines allow us to deal with a huge variety of user and
+system events that could occur for our application, but right now we are only
+interested in key strokes for the Up and Down keys to move one of the player
+paddles up or down.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_QUIT</span><span class="p">:</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_KEYDOWN</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">keysym</span><span class="o">.</span><span class="n">sym</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDLK_UP</span><span class="p">:</span>
+                    <span class="n">player1</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+                <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">keysym</span><span class="o">.</span><span class="n">sym</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDLK_DOWN</span><span class="p">:</span>
+                    <span class="n">player1</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_KEYUP</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">keysym</span><span class="o">.</span><span class="n">sym</span> <span class="ow">in</span> <span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">SDLK_UP</span><span class="p">,</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">SDLK_DOWN</span><span class="p">):</span>
+                    <span class="n">player1</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">sdl2</span><span class="o">.</span><span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">world</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">run</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Every event that can occur and that is supported by SDL2 can be identified by a
+static event type code. This allows us to check for a key stroke, mouse button
+press, and so on. First, we have to check for <code class="docutils literal notranslate"><span class="pre">sdl2.SDL_KEYDOWN</span></code> and
+<code class="docutils literal notranslate"><span class="pre">sdl2.SDL_KEYUP</span></code> events, so we can start and stop the paddle movement on
+demand.  Once we identified such events, we need to check, whether the pressed
+or released key is actually the Up or Down key, so that we do not start or stop
+moving the paddle, if the user presses R or G or whatever.</p>
+<p>Whenever the Up or Down key are pressed down, we allow the left player
+paddle to move by changing its velocity information for the vertical
+direction. Likewise, if either of those keys is released, we stop moving
+the paddle.</p>
+</div>
+<div class="section" id="improved-bouncing">
+<h2>Improved bouncing<a class="headerlink" href="#improved-bouncing" title="Permalink to this headline">¶</a></h2>
+<p>We have a moving paddle and we have a ball that bounces from one side to
+another, which makes the game … quite boring. If you played Pong before,
+you know that most variations of it will cause the ball to bounce in a
+certain angle, if it collides with a paddle. Most of those
+implementations achieve this by implementing the paddle collision as if
+the ball collides with a rounded surface. If it collides with the center
+of the paddle, it will bounce back straight, if it hits the paddle near
+the center, it will bounce back with a pointed angle and on the corners
+of the paddle it will bounce back with some angle close to 90 degrees to
+its initial movement direction.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CollisionSystem</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Applicator</span><span class="p">):</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">componentsets</span><span class="p">):</span>
+        <span class="n">collitems</span> <span class="o">=</span> <span class="p">[</span><span class="n">comp</span> <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">componentsets</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_overlap</span><span class="p">(</span><span class="n">comp</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">collitems</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vx</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vx</span>
+
+            <span class="n">sprite</span> <span class="o">=</span> <span class="n">collitems</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">ballcentery</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">halfheight</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">stepsize</span> <span class="o">=</span> <span class="n">halfheight</span> <span class="o">//</span> <span class="mi">10</span>
+            <span class="n">degrees</span> <span class="o">=</span> <span class="mf">0.7</span>
+            <span class="n">paddlecentery</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">halfheight</span>
+            <span class="k">if</span> <span class="n">ballcentery</span> <span class="o">&lt;</span> <span class="n">paddlecentery</span><span class="p">:</span>
+                <span class="n">factor</span> <span class="o">=</span> <span class="p">(</span><span class="n">paddlecentery</span> <span class="o">-</span> <span class="n">ballcentery</span><span class="p">)</span> <span class="o">//</span> <span class="n">stepsize</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">factor</span> <span class="o">*</span> <span class="n">degrees</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">ballcentery</span> <span class="o">&gt;</span> <span class="n">paddlecentery</span><span class="p">:</span>
+                <span class="n">factor</span> <span class="o">=</span> <span class="p">(</span><span class="n">ballcentery</span> <span class="o">-</span> <span class="n">paddlecentery</span><span class="p">)</span> <span class="o">//</span> <span class="n">stepsize</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">factor</span> <span class="o">*</span> <span class="n">degrees</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span>
+</pre></div>
+</div>
+<p>The reworked processing code above simulates a curved paddle by
+creating segmented areas, which cause the ball to be reflected in
+different angles. Instead of doing some complex trigonometry to
+calculate an accurate angle and transform it on a x/y plane, we simply
+check, where the ball collided with the paddle and adjust the vertical
+velocity.</p>
+<p>If the ball now hits a paddle, it can be reflected at different angles,
+hitting the top and bottom window boundaries… and will stay there. If it
+hits the window boundaries, it should be reflected, too, but not with a
+varying angle, but with the exact angle, it hit the boundary with.
+This means that we just need to invert the vertical velocity, once the
+ball hits the top or bottom.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CollisionSystem</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Applicator</span><span class="p">):</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">componentsets</span><span class="p">):</span>
+        <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">miny</span> <span class="ow">or</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxy</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vy</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minx</span> <span class="ow">or</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxx</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vx</span> <span class="o">=</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vx</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-an-enemy">
+<h2>Creating an enemy<a class="headerlink" href="#creating-an-enemy" title="Permalink to this headline">¶</a></h2>
+<p>Now that we can shoot back the ball in different ways, it would be nice
+to have an opponent to play against. We could enhance the main event
+loop to recognise two different keys and manipulate the second paddle’s
+velocity for two people playing against each other. We also could
+create a simple computer-controlled player that tries to hit the ball
+back to us, which sounds more interesting.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TrackingAIController</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Applicator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxy</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TrackingAIController</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">componenttypes</span> <span class="o">=</span> <span class="n">PlayerData</span><span class="p">,</span> <span class="n">Velocity</span><span class="p">,</span> <span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Sprite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">miny</span> <span class="o">=</span> <span class="n">miny</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxy</span> <span class="o">=</span> <span class="n">maxy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ball</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">componentsets</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">pdata</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">sprite</span> <span class="ow">in</span> <span class="n">componentsets</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pdata</span><span class="o">.</span><span class="n">ai</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">centery</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">sprite</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">vx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># ball is moving away from the AI</span>
+                <span class="k">if</span> <span class="n">centery</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxy</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">vel</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mi">3</span>
+                <span class="k">elif</span> <span class="n">centery</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxy</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">vel</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">vel</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bcentery</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="k">if</span> <span class="n">bcentery</span> <span class="o">&lt;</span> <span class="n">centery</span><span class="p">:</span>
+                    <span class="n">vel</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+                <span class="k">elif</span> <span class="n">bcentery</span> <span class="o">&gt;</span> <span class="n">centery</span><span class="p">:</span>
+                    <span class="n">vel</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mi">3</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">vel</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="k">class</span> <span class="nc">PlayerData</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PlayerData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ai</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">sdl2</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">Entity</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">sprite</span><span class="p">,</span> <span class="n">posx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">posy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ai</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sprite</span> <span class="o">=</span> <span class="n">sprite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">posx</span><span class="p">,</span> <span class="n">posy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="n">Velocity</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playerdata</span> <span class="o">=</span> <span class="n">PlayerData</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playerdata</span><span class="o">.</span><span class="n">ai</span> <span class="o">=</span> <span class="n">ai</span>
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">aicontroller</span> <span class="o">=</span> <span class="n">TrackingAIController</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">aicontroller</span><span class="p">)</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">movement</span><span class="p">)</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">collision</span><span class="p">)</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="n">spriterenderer</span><span class="p">)</span>
+
+    <span class="n">player1</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">sp_paddle1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+    <span class="n">player2</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">sp_paddle2</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">aicontroller</span><span class="o">.</span><span class="n">ball</span> <span class="o">=</span> <span class="n">ball</span>
+
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We start by creating a component <code class="docutils literal notranslate"><span class="pre">PlayerData</span></code> that flags a player as
+being AI controlled or not. Afterwards, a <code class="docutils literal notranslate"><span class="pre">TrackingAIController</span></code> is
+implemented, which, depending on the information of the <code class="docutils literal notranslate"><span class="pre">PlayerData</span></code>
+component, will move the specific player paddle around by manipulating
+its velocity information.</p>
+<p>The AI is pretty simple, just following the ball’s vertical movement,
+trying to hit it at its center, if the ball moves into the direction of
+the AI-controlled paddle. As soon as the ball moves away from the
+paddle, the paddle will move back to the vertical center.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Add <code class="docutils literal notranslate"><span class="pre">True</span></code> as last parameter to the first <code class="docutils literal notranslate"><span class="pre">Player()</span></code> constructor to
+see two AIs playing against each other.</p>
+</div>
+</div>
+<div class="section" id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>We created the basics of a Pong game, which can be found in the
+examples folder. However, there are some more things to do, such as</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>resetting the ball to the center with a random vertical velocity, if
+it hits either the left or right window bounds</p></li>
+<li><p>adding the ability to track the points made by either player, if the
+ball hit the left or right side</p></li>
+<li><p>drawing a dashed line in the middle to make the game field look
+nicer</p></li>
+<li><p>displaying the points made by each player</p></li>
+</ul>
+</div></blockquote>
+<p>It is your turn now to implement these features. Go ahead, it is not as
+complex as it sounds.</p>
+<blockquote>
+<div><ul>
+<li><p>you can reset the ball’s position in the <code class="docutils literal notranslate"><span class="pre">CollisionSystem</span></code> code,
+by changing the code for the <code class="docutils literal notranslate"><span class="pre">minx</span></code> and <code class="docutils literal notranslate"><span class="pre">maxx</span></code> test</p></li>
+<li><p>you could enhance the <code class="docutils literal notranslate"><span class="pre">CollisionSystem</span></code> to process <code class="docutils literal notranslate"><span class="pre">PlayerData</span></code>
+components and add the functionality to add points there (or write a
+small processor that keeps track of the ball only and processes only
+the <code class="docutils literal notranslate"><span class="pre">PlayerData</span></code> and <code class="docutils literal notranslate"><span class="pre">video.SoftSprite</span></code> objects of each player for
+adding points). Alternatively, you could use the
+<a class="reference internal" href="../modules/sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.EventHandler</span></code></a> class to raise a score count
+function within the <code class="docutils literal notranslate"><span class="pre">CollisionSystem</span></code>, if the ball collides with
+one of the paddles.</p></li>
+<li><p>write an own render sytem, based on <a class="reference internal" href="../modules/sdl2ext_ebs.html#sdl2.ext.Applicator" title="sdl2.ext.Applicator"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Applicator</span></code></a>,
+which takes care of position and sprite sets</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">StaticRepeatingSprite</span><span class="p">(</span><span class="n">Entity</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">Positions</span><span class="p">((</span><span class="mi">400</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span> <span class="o">...</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p>draw some simple images for 0-9 and render them as sprites,
+depending on the points a player made.</p></li>
+</ul>
+</div></blockquote>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Component-Oriented Programming</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Pong Game</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#adding-the-game-world">Adding the game world</a></li>
+<li><a class="reference internal" href="#moving-the-ball">Moving the ball</a></li>
+<li><a class="reference internal" href="#bouncing">Bouncing</a></li>
+<li><a class="reference internal" href="#reacting-on-player-input">Reacting on player input</a></li>
+<li><a class="reference internal" href="#improved-bouncing">Improved bouncing</a></li>
+<li><a class="reference internal" href="#creating-an-enemy">Creating an enemy</a></li>
+<li><a class="reference internal" href="#next-steps">Next steps</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="helloworld.html"
+                        title="previous chapter">Hello World</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pygamers.html"
+                        title="next chapter">PySDL2 for Pygamers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorial/pong.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pygamers.html" title="PySDL2 for Pygamers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="helloworld.html" title="Hello World"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Learn to fly - the tutorials</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

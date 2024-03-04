@@ -1,0 +1,16 @@
+
+[develop]
+coverage[toml]>=5.0a4
+pytest>=4.6.11
+furo==2021.8.*,>=2021.8.17b43
+sphinx>=3.5.0
+sphinx-notfound-page
+
+[docs]
+furo==2021.8.*,>=2021.8.17b43
+sphinx>=3.5.0
+sphinx-notfound-page
+
+[testing]
+coverage[toml]>=5.0a4
+pytest>=4.6.11

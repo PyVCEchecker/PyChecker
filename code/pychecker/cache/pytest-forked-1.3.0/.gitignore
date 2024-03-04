@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+.cache/
+.eggs/
+.tox/
+build/
+dist/
+src/pytest_forked.egg-info/

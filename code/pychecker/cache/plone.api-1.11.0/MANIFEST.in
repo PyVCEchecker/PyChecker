@@ -1,0 +1,15 @@
+include *.rst LICENSE
+include tox.ini
+
+# Ignore most of the docs directory.
+prune docs
+
+# The doctests point to docs/*.rst, so we need them, including CHANGES.rst.
+include docs/*.rst
+
+graft src
+
+global-exclude *.pyc
+include pyproject.toml
+recursive-exclude news *
+exclude news

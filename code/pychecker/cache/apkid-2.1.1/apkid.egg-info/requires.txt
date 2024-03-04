@@ -1,0 +1,16 @@
+yara-python==3.11.0
+
+[dev]
+mypy
+pypandoc
+
+[test]
+delayed-assert
+factory_boy
+mock
+pytest
+pytest-cov
+pytest-factoryboy
+pytest-flask
+pytest-runner
+tox

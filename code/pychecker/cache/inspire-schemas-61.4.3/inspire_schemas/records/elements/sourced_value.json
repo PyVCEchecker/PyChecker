@@ -1,0 +1,19 @@
+{
+    "additionalProperties": false,
+    "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+    "properties": {
+        "source": {
+            "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+            "minLength": 1,
+            "type": "string"
+        },
+        "value": {
+            "minLength": 1,
+            "type": "string"
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "type": "object"
+}

@@ -1,0 +1,11 @@
+LICENSE.txt
+MANIFEST.in
+setup.cfg
+setup.py
+fake_factory.egg-info/PKG-INFO
+fake_factory.egg-info/SOURCES.txt
+fake_factory.egg-info/dependency_links.txt
+fake_factory.egg-info/pbr.json
+fake_factory.egg-info/top_level.txt
+fake_factory.egg-info/zip-safe
+faker/__init__.py

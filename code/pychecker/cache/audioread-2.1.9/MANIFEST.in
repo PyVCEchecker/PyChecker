@@ -1,0 +1,8 @@
+# Documentation.
+include README.rst
+# Example script.
+include decode.py
+# License
+include LICENSE
+# Include full test suite
+recursive-include test/ *

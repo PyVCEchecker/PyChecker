@@ -1,0 +1,9 @@
+include LICENCE
+include README.md
+recursive-include bench *
+recursive-include docs *
+recursive-include python_jwt *
+recursive-include test *
+include .coveragerc
+include Makefile
+include pylintrc

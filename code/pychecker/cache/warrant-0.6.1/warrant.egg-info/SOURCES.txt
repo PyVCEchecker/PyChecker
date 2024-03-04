@@ -1,0 +1,12 @@
+setup.py
+warrant/__init__.py
+warrant/aws_srp.py
+warrant/exceptions.py
+warrant.egg-info/PKG-INFO
+warrant.egg-info/SOURCES.txt
+warrant.egg-info/dependency_links.txt
+warrant.egg-info/requires.txt
+warrant.egg-info/top_level.txt
+warrant.egg-info/zip-safe
+warrant/tests/__init__.py
+warrant/tests/tests.py

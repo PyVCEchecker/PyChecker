@@ -1,0 +1,3 @@
+[certbot.plugins]
+dns-nodeup = certbot_dns_nodeup._internal.dns_nodeup:Authenticator
+

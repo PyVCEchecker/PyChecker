@@ -1,0 +1,4 @@
+argcomplete
+requests
+typing_extensions
+urllib3

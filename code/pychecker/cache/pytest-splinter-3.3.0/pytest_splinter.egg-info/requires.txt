@@ -1,0 +1,5 @@
+setuptools
+splinter>=0.13.0
+selenium
+pytest>=3.0.0
+urllib3

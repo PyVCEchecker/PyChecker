@@ -1,0 +1,15 @@
+HISTORY.rst
+LICENSE
+MANIFEST.in
+NOTICE
+README.rst
+setup.cfg
+setup.py
+virus_total_apis/__init__.py
+virus_total_apis/api.py
+virustotal_api.egg-info/PKG-INFO
+virustotal_api.egg-info/SOURCES.txt
+virustotal_api.egg-info/dependency_links.txt
+virustotal_api.egg-info/not-zip-safe
+virustotal_api.egg-info/requires.txt
+virustotal_api.egg-info/top_level.txt

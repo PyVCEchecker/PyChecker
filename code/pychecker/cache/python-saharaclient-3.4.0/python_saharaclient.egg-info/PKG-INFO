@@ -1,0 +1,68 @@
+Metadata-Version: 1.2
+Name: python-saharaclient
+Version: 3.4.0
+Summary: Client library for Sahara API
+Home-page: https://docs.openstack.org/python-saharaclient/latest/
+Author: OpenStack
+Author-email: openstack-discuss@lists.openstack.org
+License: Apache License, Version 2.0
+Description: ========================
+        Team and repository tags
+        ========================
+        
+        .. image:: https://governance.openstack.org/tc/badges/python-saharaclient.svg
+            :target: https://governance.openstack.org/tc/reference/tags/index.html
+        
+        .. Change things from this point on
+        
+        Python bindings to the OpenStack Sahara API
+        ===========================================
+        
+        .. image:: https://img.shields.io/pypi/v/python-saharaclient.svg
+            :target: https://pypi.org/project/python-saharaclient/
+            :alt: Latest Version
+        
+        This is a client for the OpenStack Sahara API. There's a Python API (the
+        ``saharaclient`` module), and a command-line script (``sahara``). Each
+        implements the OpenStack Sahara API. You can find documentation for both
+        Python bindings and CLI in `Docs`_.
+        
+        Development takes place via the usual OpenStack processes as outlined
+        in the `developer guide
+        <https://docs.openstack.org/infra/manual/developers.html>`_.
+        
+        .. _Docs: https://docs.openstack.org/python-saharaclient/latest/
+        
+        * License: Apache License, Version 2.0
+        * `PyPi`_ - package installation
+        * `Online Documentation`_
+        * `Blueprints`_ - feature specifications
+        * `Bugs`_ - stories and issue tracking
+        * `Source`_
+        * `Specs`_
+        * `How to Contribute`_
+        
+        .. _PyPi: https://pypi.org/project/python-saharaclient
+        .. _Online Documentation: https://docs.openstack.org/python-saharaclient/latest/
+        .. _Blueprints: http://specs.openstack.org/openstack/sahara-specs/
+        .. _Bugs: https://storyboard.openstack.org/#!/project/934
+        .. _Source: https://opendev.org/openstack/python-saharaclient
+        .. _How to Contribute: https://docs.openstack.org/infra/manual/developers.html
+        .. _Specs: https://specs.openstack.org/openstack/sahara-specs/
+        .. _Release Notes: https://docs.openstack.org/releasenotes/python-saharaclient
+        
+        
+Platform: UNKNOWN
+Classifier: Environment :: OpenStack
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.6

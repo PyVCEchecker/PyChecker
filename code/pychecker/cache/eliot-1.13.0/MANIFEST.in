@@ -1,0 +1,8 @@
+include LICENSE
+include README.rst
+include versioneer.py
+include eliot/_version.py
+recursive-include docs *
+prune docs/_build
+recursive-include benchmarks *
+recursive-include examples *

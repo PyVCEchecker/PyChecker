@@ -1,0 +1,28 @@
+setuptools
+six
+zope.browser
+zope.component
+zope.configuration
+zope.contenttype>=4.0.0
+zope.event
+zope.exceptions
+zope.i18n>=4.0.0
+zope.interface>=4.0.1
+zope.location
+zope.proxy
+zope.security>=4.0.0
+
+[:python_version < "3"]
+multipart<0.2
+
+[:python_version >= "3"]
+multipart
+
+[docs]
+Sphinx
+repoze.sphinx.autointerface
+sphinx_rtd_theme
+
+[test]
+zope.testing
+zope.testrunner

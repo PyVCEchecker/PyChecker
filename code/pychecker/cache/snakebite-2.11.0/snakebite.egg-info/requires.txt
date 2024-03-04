@@ -1,0 +1,6 @@
+protobuf>2.4.1
+argparse
+
+[kerberos]
+python-krbV
+sasl

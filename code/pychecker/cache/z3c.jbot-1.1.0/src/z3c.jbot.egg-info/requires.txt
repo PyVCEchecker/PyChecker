@@ -1,0 +1,13 @@
+setuptools
+six
+zope.pagetemplate
+zope.component
+zope.configuration
+zope.security
+zope.publisher
+
+[test]
+Zope2
+Products.BTreeFolder2
+Products.CMFCore
+plone.resource

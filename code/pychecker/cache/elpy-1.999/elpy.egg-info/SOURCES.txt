@@ -1,0 +1,7 @@
+README.md
+setup.py
+elpy/__init__.py
+elpy.egg-info/PKG-INFO
+elpy.egg-info/SOURCES.txt
+elpy.egg-info/dependency_links.txt
+elpy.egg-info/top_level.txt

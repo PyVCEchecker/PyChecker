@@ -1,0 +1,4 @@
+six
+
+[docs]
+django<3.1

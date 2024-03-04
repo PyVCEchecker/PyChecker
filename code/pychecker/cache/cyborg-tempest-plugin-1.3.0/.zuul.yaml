@@ -1,0 +1,124 @@
+- project:
+    templates:
+      - check-requirements
+      - tempest-plugin-jobs
+    check:
+      jobs:
+        - cyborg-tempest
+        - cyborg-tempest-wallaby
+        - cyborg-tempest-victoria
+        - cyborg-tempest-ussuri
+        - cyborg-tempest-ipv6-only
+    gate:
+      queue: cyborg
+
+- job:
+    name: cyborg-tempest
+    description: |
+      Cyborg devstack tempest tests job for < Ussuri release
+      run on python 2.
+    voting: false
+    parent: devstack-tempest
+    timeout: 7800
+    required-projects: &base_required_projects
+      - openstack/cyborg
+      - openstack/python-cyborgclient
+      - openstack/tempest
+      - openstack/cyborg-tempest-plugin
+    vars: &base_vars
+      devstack_plugins:
+        cyborg: https://opendev.org/openstack/cyborg
+      devstack_services:
+        tempest: true
+        s-account: false
+        s-container: false
+        s-object: false
+        s-proxy: false
+      devstack_localrc:
+        TEMPEST_PLUGINS: "/opt/stack/cyborg-tempest-plugin"
+      tempest_test_regex: cyborg_tempest_plugin
+      tox_envlist: all
+    irrelevant-files: &base_irrelevant_files
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^setup.cfg$
+      - ^releasenotes/.*$
+      - ^(test-|)requirements.txt$
+      - ^.git.*$
+      - ^tox.ini$
+    # NOTE(gmann): This job is for < Ussuri for testing
+    # on py2.
+    branches:
+      - stable/ocata
+      - stable/pike
+      - stable/queens
+      - stable/rocky
+      - stable/stein
+      - stable/train
+
+- job:
+    name: cyborg-tempest
+    description: |
+      Cyborg devstack tempest tests job for >=Ussuri release
+      run on python 3.
+    parent: devstack-tempest
+    timeout: 7800
+    required-projects:
+      - openstack/cyborg
+      - openstack/python-cyborgclient
+      - openstack/tempest
+      - openstack/cyborg-tempest-plugin
+    vars:
+      devstack_plugins:
+        cyborg: https://opendev.org/openstack/cyborg
+      devstack_services:
+        tempest: true
+        s-account: false
+        s-container: false
+        s-object: false
+        s-proxy: false
+        c-api: false
+        c-bak: false
+        c-sch: false
+        c-vol: false
+        cinder: false
+      devstack_localrc:
+        TEMPEST_PLUGINS: "/opt/stack/cyborg-tempest-plugin"
+        USE_PYTHON3: true
+      tempest_test_regex: cyborg_tempest_plugin
+      tox_envlist: all
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^setup.cfg$
+      - ^releasenotes/.*$
+      - ^(test-|)requirements.txt$
+      - ^.git.*$
+      - ^tox.ini$
+
+- job:
+    name: cyborg-tempest-ipv6-only
+    parent: devstack-tempest-ipv6
+    description: |
+      Cyborg devstack tempest tests job for IPv6-only deployment
+    voting: false
+    timeout: 7800
+    required-projects: *base_required_projects
+    vars: *base_vars
+    irrelevant-files: *base_irrelevant_files
+
+- job:
+    name: cyborg-tempest-wallaby
+    parent: cyborg-tempest
+    override-checkout: stable/wallaby
+
+- job:
+    name: cyborg-tempest-victoria
+    parent: cyborg-tempest
+    override-checkout: stable/victoria
+
+- job:
+    name: cyborg-tempest-ussuri
+    parent: cyborg-tempest
+    nodeset: openstack-single-node-bionic
+    override-checkout: stable/ussuri

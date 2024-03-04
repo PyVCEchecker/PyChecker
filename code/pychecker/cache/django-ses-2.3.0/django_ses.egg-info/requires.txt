@@ -1,0 +1,12 @@
+boto3>=1.0.0
+pytz>=2016.10
+future>=0.16.0
+django>=2.2
+
+[bounce]
+requests<3
+M2Crypto
+
+[events]
+requests<3
+M2Crypto

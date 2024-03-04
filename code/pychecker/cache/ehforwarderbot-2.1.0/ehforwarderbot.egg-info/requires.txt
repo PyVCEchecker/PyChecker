@@ -1,0 +1,14 @@
+ruamel.yaml
+bullet
+cjkwrap
+typing_extensions
+
+[telemetry]
+1a23-telemetry
+
+[tests]
+pytest
+mypy
+
+[trace]
+hanging-threads

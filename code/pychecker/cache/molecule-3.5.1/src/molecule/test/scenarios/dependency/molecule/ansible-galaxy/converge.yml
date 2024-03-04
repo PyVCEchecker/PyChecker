@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: Validate that collection was installed
+      debug:
+        msg: "{{ 'foo' | community.molecule.header }}"
+
+    - name: test installed role
+      include_role:
+        name: ssbarnea.ansible_role_helloworld

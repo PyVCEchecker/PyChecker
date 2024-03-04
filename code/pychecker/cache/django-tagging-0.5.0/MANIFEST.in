@@ -1,0 +1,9 @@
+include CHANGELOG.txt
+include LICENSE.txt
+include MANIFEST.in
+include README.rst
+include versions.cfg
+include buildout.cfg
+recursive-include docs *
+recursive-include tagging/tests *.txt
+prune docs/_build

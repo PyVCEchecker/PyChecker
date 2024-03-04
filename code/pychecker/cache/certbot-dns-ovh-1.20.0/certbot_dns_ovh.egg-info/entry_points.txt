@@ -1,0 +1,3 @@
+[certbot.plugins]
+dns-ovh = certbot_dns_ovh._internal.dns_ovh:Authenticator
+

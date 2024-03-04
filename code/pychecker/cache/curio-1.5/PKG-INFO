@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: curio
+Version: 1.5
+Summary: Curio
+Home-page: https://github.com/dabeaz/curio
+Author: David Beazley
+Author-email: dave@dabeaz.com
+Maintainer: David Beazley
+Maintainer-email: dave@dabeaz.com
+License: BSD
+Description: 
+        Curio is a coroutine-based library for concurrent systems programming.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Framework :: Pytest
+Requires-Python: >= 3.7
+Provides-Extra: test

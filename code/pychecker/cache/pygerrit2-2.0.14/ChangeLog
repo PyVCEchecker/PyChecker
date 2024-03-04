@@ -1,0 +1,672 @@
+CHANGES
+=======
+
+2.0.14
+------
+
+* Set the 3.3.0-rc3 version in livetests
+* Allow customization of HTTP adapter
+* Set the 3.3.0-rc2 version in livetests
+* Add 3.3.0-rc1 to the livetests versions under test
+* Bump pbr from 5.5.0 to 5.5.1
+* Bump pytest from 6.1.0 to 6.1.1
+* Update livetests to use the latest Gerrit v3.0.13
+* Bump pytest from 6.0.2 to 6.1.0
+* Bump importlib-metadata from 1.7.0 to 2.0.0
+* Bump pytest from 6.0.1 to 6.0.2
+* Bump pbr from 5.4.5 to 5.5.0
+* Bump testcontainers from 3.0.3 to 3.1.0
+* livetests: Apply latest sole black formatting diff
+* Bump black from 19.10b0 to 20.8b1
+* Bump pydocstyle from 5.1.0 to 5.1.1
+* Bump pydocstyle from 5.0.2 to 5.1.0
+* Update livetests to use latest versions
+* Bump pytest from 5.4.3 to 6.0.1
+* Bump importlib-metadata from 1.6.1 to 1.7.0
+
+2.0.13
+------
+
+* Update livetests to use latest versions
+* Bump requests from 2.23.0 to 2.24.0
+* Return result from review() method
+* Use latest version in live tests
+* Bump testcontainers from 3.0.2 to 3.0.3
+* Bump importlib-metadata from 1.6.0 to 1.6.1
+* Add live tests against 3.2.0
+* Run live test with 2.16.20
+* Bump pytest from 5.4.2 to 5.4.3
+* Use latest releases in live tests
+* Bump testcontainers from 3.0.0 to 3.0.2
+* Bump pytest from 5.4.1 to 5.4.2
+* Bump testcontainers from 2.6.0 to 3.0.0
+* Drop livetests against 2.14.x and 2.15.x
+* Run livetests against 2.16.18
+* Bump pbr from 5.4.4 to 5.4.5
+* Run livetests against 3.1.4
+* Bump importlib-metadata from 1.5.2 to 1.6.0
+
+2.0.12
+------
+
+* Fix anonymous auth
+* Remove remnants of 2.13 auth from livetests
+
+2.0.11
+------
+
+* Run livetests with 2.16.17 and 3.0.8
+* Bump importlib-metadata from 1.5.0 to 1.5.2
+* Fix typo in README
+* Bump pytest from 5.4.0 to 5.4.1
+* Support explicit anonymous access
+* Debug log when .netrc could not be parsed
+* Remove unnecessary string concatenation
+* Minor update in README
+* Bump pytest from 5.3.5 to 5.4.0
+* Bump mock from 4.0.1 to 4.0.2
+* Bump testcontainers from 2.5 to 2.6.0
+* Bump requests from 2.22.0 to 2.23.0
+
+2.0.10
+------
+
+* Bump importlib-metadata from 0.22 to 1.5.0
+* Travis: Drop tests on Python 3.5
+* Update test environment for OSX
+* Explicitly install importlib\_metadata for Python < 3.8.0
+* Update livetest to use most recent versions (2.16.16, 3.0.7, 3.1.3)
+* Bump mock from 4.0.0 to 4.0.1
+* Bump mock from 3.0.5 to 4.0.0
+* Bump pytest from 5.3.4 to 5.3.5
+* Bump pytest from 5.3.3 to 5.3.4
+* Bump pytest from 5.3.2 to 5.3.3
+* Bump pydocstyle from 5.0.1 to 5.0.2
+* Bump pytest from 5.3.1 to 5.3.2
+* Update live tests to latest versions
+* Update live tests to use latest versions
+* Mention python 3.8 support in README
+* Unpin flake8 and pyflakes for 3.8 support
+* Travis: Add build for Python 3.8
+* Bump pydocstyle to 5.0.1
+* Allow setting tag when posting review
+* Bump pydocstyle from 4.0.1 to 5.0.0
+* Bump pytest from 5.3.0 to 5.3.1
+* Bump pbr from 5.4.3 to 5.4.4
+* Bump pytest from 5.2.3 to 5.3.0
+* Run live tests against 3.1.0
+* Bump pytest from 5.2.2 to 5.2.3
+* Run live tests against 3.0.4
+* Run livetests against 2.15.18 and 2.16.13
+* Run livetests against 3.0.3
+* Add contributing section to readme
+* Second attempt at adding make targets for black formatting
+* Reformat \_\_init\_\_.py with black
+* handles case where connection is  not perfect
+* Revert "Add a make target to run the black formatter"
+* Add a make target to run the black formatter
+* Bump black from 19.3b0 to 19.10b0
+* Bump pytest from 5.2.1 to 5.2.2
+* Bump pytest from 5.2.0 to 5.2.1
+* Bump pytest from 5.1.3 to 5.2.0
+* Run livetests against 2.15.17 and 2.16.12
+* Bump pytest from 5.1.2 to 5.1.3
+* Bump pbr from 5.4.2 to 5.4.3
+* Run live tests against latest releases
+* Bump pytest from 5.1.1 to 5.1.2
+* Bump pytest from 5.1.0 to 5.1.1
+* Update .mailmap
+* Bump pytest from 5.0.1 to 5.1.0
+* Bump pydocstyle from 4.0.0 to 4.0.1
+* Bump pbr from 5.4.1 to 5.4.2
+* Pin black at 19.3b0
+* Run live tests against Gerrit 2.15.15
+* Bump testcontainers from 2.3 to 2.5
+* Install black as a dev-package, only for Python 3.6 and later
+* Reformat code with 'black'
+* Upgrade more-itertools to 7.2.0
+* Bump pbr from 5.4.0 to 5.4.1
+* Bump pytest from 5.0.0 to 5.0.1
+* Bump pydocstyle from 3.0.0 to 4.0.0
+* Run live tests against 2.16.10 and 3.0.1
+* Bump pbr from 5.3.1 to 5.4.0
+* Bump pytest from 4.6.3 to 5.0.0
+* Bump pbr from 5.3.0 to 5.3.1
+* Run livetests with 2.15.14 and 2.16.9
+* Bump pbr from 5.2.1 to 5.3.0
+* Bump pytest from 4.6.2 to 4.6.3
+* Bump pytest from 4.6.1 to 4.6.2
+* Bump pytest from 4.5.0 to 4.6.1
+* Bump pbr from 5.2.0 to 5.2.1
+* Run live tests against released 3.0.0 version
+* Bump requests from 2.21.0 to 2.22.0
+* Bump pytest from 4.4.2 to 4.5.0
+* Run live tests against 3.0.0-rc3
+* Bump pytest from 4.4.1 to 4.4.2
+* Bump mock from 3.0.4 to 3.0.5
+* Run live tests against 2.16.8
+* Bump mock from 3.0.3 to 3.0.4
+* Bump mock from 3.0.1 to 3.0.3
+* Bump mock from 2.0.0 to 3.0.1
+* Bump pbr from 5.1.3 to 5.2.0
+* Run livetests against 3.0.0-rc1
+* Add live tests against 3.0.0-rc0
+* Run live tests against latest versions 2.14.20 and 2.15.13
+* [Security] Bump urllib3 from 1.24.1 to 1.24.2
+* Update livetest to use latest Gerrit releases
+* Bump pytest from 4.4.0 to 4.4.1
+* Bump pytest from 4.3.1 to 4.4.0
+* Bump pytest from 4.3.0 to 4.3.1
+* Bump pbr from 5.1.2 to 5.1.3
+
+2.0.9
+-----
+
+* Run livetests against 2.15.11 and 2.16.6
+* Don't attempt to parse empty response content
+* Raise exception for error status before attempting to parse content
+* Add debug log of response content type, status code and encoding
+* Add a test for PUT request with a json file
+* Bump pytest from 4.2.1 to 4.3.0
+* Bump pytest from 4.2.0 to 4.2.1
+* Run live tests against 2.15.10 and 2.16.5
+* Bump pytest from 4.1.1 to 4.2.0
+* Fixed an issue with duplicate output log message
+* Run livetests against 2.15.9 and 2.16.4
+* Set logger format and name
+* Run livetests with 2.14.18, 2.15.8 and 2.16.3
+* Bump pytest from 4.1.0 to 4.1.1
+* Bump pytest from 4.0.2 to 4.1.0
+* Run livetests with 2.16.2
+* Bump pytest from 4.0.1 to 4.0.2
+* Add dependabot badge on the pypi description file
+* Run livetests against 2.16.1
+* Bump requests from 2.20.1 to 2.21.0
+* Bump pytest from 4.0.0 to 4.0.1
+* Drop livetests against 2.13.x
+* Run livetests against 2.16 final release
+* Bump pytest from 3.10.1 to 4.0.0
+* Remove unnecessary warning log
+* Run livetests against 2.14.17 and 2.15.7
+* Bump pytest from 3.10.0 to 3.10.1
+* Bump requests from 2.20.0 to 2.20.1
+* Run livetests against 2.16-rc3
+* Bump pbr from 5.1.0 to 5.1.1
+* Bump pytest from 3.9.3 to 3.10.0
+* Run livetests against 2.16-rc1
+* CVE-2018-18074: Upgrade requests to >=2.20.0
+* Run livetests against 2.16-rc0
+* Bump pytest from 3.9.2 to 3.9.3
+* Run livetests against 2.14.16 and 2.15.6
+* Bump pbr from 5.0.0 to 5.1.0
+* Bump pytest from 3.9.1 to 3.9.2
+* Add dependabot status badge
+* Bump pytest from 3.8.2 to 3.9.1
+* Bump pydocstyle from 2.1.1 to 3.0.0
+* Bump pbr from 4.2.0 to 4.3.0
+* Run livetests against 2.14.14 and 2.15.4
+* Bump pytest from 3.8.1 to 3.8.2
+* Bump pytest from 3.8.0 to 3.8.1
+* Run livetests against 2.14.13
+* Run livetests against 2.14.12
+* Bump pytest from 3.7.4 to 3.8.0
+* Bump pytest from 3.7.3 to 3.7.4
+* Update dependencies
+* Run livetests with Gerrit 2.14.11
+* Update Programming Language classifiers
+
+2.0.7
+-----
+
+* Run livetests with Gerrit 2.15.3
+* Update pipenv
+* Run livetests with Gerrit 2.14.10
+* Allow data to be sent as \`dict\` and automatically convert it to \`json\`
+* Travis: Also test with Python 3.7
+* Run style checks before livetests and unit tests
+* livetests: Remove redundant comments
+* README: Tested on OSX with Python 3.7
+* README: Add brief info about history and difference from pygerrit
+* Update Pipfile dependencies
+* Allow requests up to version 2.19.1
+* Update livetests to use 2.14.9
+* Add back an RST version of the project description
+
+2.0.6
+-----
+
+* Test that an exception is raised for invalid auth type
+* Default to HTTP basic auth from netrc when auth is not specified
+* Add tests for HTTP{Basic|Digest}AuthFromNetrc classes
+* Use svg versions of shields.io badges
+* Remove unused 'requests' link from README
+* Update prerequisites
+* No need to mention dependency on 'requests' in the README
+* Update Gerrit documentation link to 2.15.2
+* Update sample code in README
+* Add build status badge
+* Add a test to confirm that GET works with patch zip file
+* flake8: Add back the line length parameter
+* Make all useful classes importable from root package
+* Simplify setup and tests
+* Add Travis CI config
+* Add .pytest\_cache/ to .gitignore
+* Add Pipfile
+* Wrap livetests inside a class and separate to individual test methods
+* tox: Add missing -s on pytest commands
+* Bump pytest from 3.6.0 to 3.6.1
+* Update compatibility section in README
+* Fix author email field
+* Metadata: Promote development status to production/stable
+* Metadata: Add topic classifier
+* Metadata: Add operating system classifiers, and platform field
+* Remove README.rst
+* Metadata: Add 'information technology' to intended audience classifier
+* Metadata: Update programming language classifiers
+* Metadata: Add a couple more keywords
+* Metadata: Fix keywords field formatting
+
+2.0.5
+-----
+
+* Only run livetests with tox in py36 environment
+* Update tox environments
+* Run pytest in tox
+* Use Gerrit 2.13.11 from gerritcodereview/gerrit
+* Allow override of kwargs in get
+* Add livetests for 2.13.11
+* Refactor livetest to make use of pytest parameterization
+* Abstract creation of Gerrit docker container into GerritContainer
+* Run live server tests against Gerrit running in Docker container
+* Invoke tests with pytest
+* Add .mailmap
+* Add basic tests running against a live Gerrit server
+* Fixes #18: Explicitly set content type header when posting review
+* Remove docs build
+
+2.0.4
+-----
+
+* Add missing docstrings to silence pydocstyle errors
+* Replace pep257 with pydocstyle
+* Fix up various pydocstyle warnings, mostly about spacing
+* pylint: Remove useless subclassing/super() calls
+* pylint: Don't iterate over range(len()), use enumerate()
+* Minor pylint fixes, mostly spacing, indentation, capitalization, naming
+* Bump pyflakes from 1.5.0 to 1.6.0
+* Bump flake8 from 3.3.0 to 3.5.0
+* Exclude docs from analysis
+* Remove doc build; add generated docs folder
+
+2.0.3
+-----
+
+* Allow requests up to version 2.18.4
+* Fixes #11 Remove pypi downloads shields
+* Allow to use requests version 2.18.1
+* Fixes #10: Fix a bug preventing file upload in PUT and POST
+* Fixes #7: Be less strict about requests version
+* Upgrade requests to 2.16.0
+* Adapt to removal of Digest authentication in Gerrit 2.14
+* Update links to Gerrit 2.14
+* Upgrade requests to 2.14.2
+* Add support to return response code
+* Fix docs folder exclusion in tox config
+* Upgrade pyflakes and flake8 to latest versions
+* Remove debug logs
+* rest: use encoding from response instead of UTF-8
+* Upgrade requests to 2.13.0
+* Add back the ReStructured Text version of the README
+
+2.0.2
+-----
+
+* Fix MANIFEST.in with correct README file name
+* Upgrade flake8 to version 3.2.1
+* Upgrade requests to 2.12.1
+* Update Gerrit documentation link to latest major release
+* Upgrade flake8 and pyflakes to latest versions
+* Fix README reference in setup.cfg
+* Upgrade requests to 2.11.1
+* Convert README to markdown
+
+2.0.1
+-----
+
+* Upgrade requests to version 2.11.0
+* Revert "Don't use requests.session()"
+* Upgrade requests to 2.10.0
+* returning raw response for non-JSON Content-Type
+* making use of requests' json argument
+* merging request headers
+* Remove redundant pylint suppressions
+* Rewrite the README with better usage instructions
+* Update prerequisites
+* Add tox configuration
+* Use flake8 instead of pep8
+* GerritReview: dump json content with sorted keys
+* Example: Don't use 'self' in query when not authenticated
+* Python3 compatibility fixes
+
+2.0.0
+-----
+
+* Remove SSH support and rename to pygerrit2
+* Update Gerrit documentation link to latest version
+* Update link to Gerrit home page
+
+1.0.0
+-----
+
+* Use badges from shields.io
+* Upgrade pyflakes to 1.0.0
+* Upgrade PEP-8 to 1.7.0
+* Include event name in UnhandledEvent's \_\_repr\_\_ output
+* Upgrade Paramiko to 1.16.0
+* Upgrade requests to 2.9.1
+* Raise exception if the json content is invalid
+* Add missing docstring for Change#from\_json
+* Added from\_json method for Change model
+* Updated add\_comment() to support line ranges
+
+0.2.11
+------
+
+* Upgrade paramiko to version 1.15.2
+* Add keepalive support to GerritSSHClient
+
+0.2.10
+------
+
+* Don't use requests.session()
+* Don't set Content-Type on PUT/POST if there is no body
+* Add debug log of response content
+
+0.2.9
+-----
+
+* Upgrade requests to 2.7.0
+* Allow unicode characters in gerrit commands
+* Update requests to 2.5.1
+* Fix incorrect docstring
+* Upgrade pyflakes to 0.8.1
+* Be less strict about the pbr version used
+* Restructure docstrings for better html output
+* Bump pep8 to 1.5.7
+* Bump paramiko to 1.15.1 and pycrypto to 2.6.1
+* Bump requests to 2.4.3
+* Fix documentation build
+* Bump python requests version to 2.4.1
+
+0.2.8
+-----
+
+* Add inline review support
+* Replace deprecated assertEquals() with assertEqual()
+* Update PEP257 to 0.2.4
+* Update pyflakes to 0.7.3
+
+0.2.7
+-----
+
+* Add message formatter class
+* Upgrade requests to 2.3.0
+* Fix paramiko link in the README file
+
+0.2.6
+-----
+
+* Add support for ProxyCommand in GerritSSHClient
+* Upgrade paramiko to 1.14.0
+* Revert "Remove support for Gerrit over ssh"
+* Update the README
+* Upgdade requests to 2.2.1
+* Include full description in the setup config
+* Set Content-Type header on PUT and POST requests
+* Set HTTP headers to reduce data transfer time
+* Migrate setup to pbr
+* Stop using pylint
+* Remove support for Gerrit over ssh
+
+0.2.5
+-----
+
+* Version 0.2.5
+* Fix up usage of argparse in examples
+* Update examples to use argparse instead of optparse
+* Fix for hanging connections
+
+0.2.4
+-----
+
+* Version 0.2.4
+* Accept kwargs for request functions
+* Correct Gerrit documentation link
+* Add badges to the README
+* Fix README markup to work properly on Gitlab
+
+0.2.3
+-----
+
+* Version 0.2.3
+* Use find\_packages() in setup
+
+0.2.2
+-----
+
+* Bump version to 0.2.2
+* Release notes for 0.2.2
+* Add user in the Approval object
+* Add support for CurrentPatchSet
+* Include change status in Change object
+* Always set sortkey in Change object
+* Handle errors in REST API example
+* Simplify REST API error handling
+* Add username field in the account data
+* Add method to run a gerrit command from the client
+* Add method to get username and Gerrit version
+* Fix NameError in REST API example
+* Bump to requests 2.0.1 also in setup.py
+* Bump requests version up to 2.0.1
+
+0.2.1
+-----
+
+* Update change log for 0.2.1
+* Document the HTTP password configuration for REST API usage
+* Reword the prerequisites in the readme
+* Separate prerequisites and configuration in the readme
+
+0.2.0
+-----
+
+* Bump version to 0.2.0
+* Update change log for 0.2.0
+* Suppress pylint "Unable to import" error
+* Suppress pylint warning about catching too general exception
+* Fix pylint error in rest\_example.py
+* Change abandoned and restored events don't have a patchset field
+* Add myself to authors
+* Add an authors list that contributors can add themselves to
+* Fix indentation
+* Ensure errors in json parsing doesn't leave everything in a broken state
+* Reason is optional in abandon and restore changes
+* Return sortKey from query result, to allow resuming query
+* Update the README to mention the REST API
+* Avoid busy loop when receiving incoming stream data
+* Add more detailed examples of SSH interface usage in the README
+* Update the README notes about ssh configuration
+* Add support for Kerberos authentication in example script
+* Allow client to disable SSL certificate verification
+* Add REST API example
+* Refactor the authentication handling
+* Add MANIFEST to .gitignore
+* Add method to build url from endpoint
+
+0.1.1
+-----
+
+* Bump version to 0.1.1
+* Add changelog
+* Make get, put, post and delete REST methods public
+* Fix #10: Allow to manually specify ssh username and port
+* Completely refactor the stream event handling
+* Add missing \_\_repr\_\_ methods on ErrorEvent and UnhandledEvent
+* Fix initialisation of error event
+* Fix #11: correct handling of \`identityfile\` in the ssh config
+* Allow example script to continue if errors are received
+* Fix #9: Add a bit more detail in the documentation
+* Fix #8: Support the "topic-changed" stream event
+* Fix #7: Support the "reviewer-added" stream event
+* Fix #6: Support the "merge-failed" stream event
+* Fix #5: Move json parsing and error handling into the event factory
+* Improved logging in the example script
+* Fix #3: Don't treat unhandled event types as errors
+* Fix #4: Keep event's raw json data in the event object
+* Add \_\_repr\_\_ methods on event and model classes
+* Remove redundant \`exec\_command\` method
+* Fix #2: Establish SSH connection in a thread-safe way
+* Fix #1: Use select.select() instead of select.poll()
+* Fix authentication setup
+* Add handling of HTTP error status codes in responses
+* Add support for HTTP digest authentication
+* Initial implementation of Gerrit REST API interface
+* Disable W0142 'Used \* or \*\* magic' in the Pylint configuration
+
+0.1.0
+-----
+
+* Bump version to 0.1.0
+* Add Python trove classifiers to the setup
+* Include full license text in the license parameter of setup
+* Add long description in the setup
+* Add MANIFEST.in file
+* Improve formatting in the README file
+* Rename README to README.rst
+* Add make target and rules to ensure environment setup tools are OK
+* Add a make target to build the API documentation zip archive
+* Don't put copyright and license headers in Python module docstrings
+* Add a make target to build the source distribution
+* Add a make target to check for clean git status
+* Add a make target to check that the git is tagged properly
+* Add generation of package documentation
+* Separate test dependency installation into its own build target
+* Separate environment intialisation into its own build target
+* Make the shebangs consistent
+* Add pylint check in the Makefile
+* Fix pylint warnings
+* Add PEP-257 conformance check in the Makefile
+* Add a unit test to ensure dependency package version consistency
+* Separate package dependencies from verification/test dependencies
+* Bump paramiko dependency to version 1.11.0
+* Fix relative imports
+* Fix one more PEP-257 violation
+* Add a \`clean\` target in the Makefile
+* Add PEP-8 conformance check in the Makefile
+* Add pyflakes check in the Makefile
+* Add a Makefile to install dependencies and run unit tests
+* Only allow strings as query terms and commands
+* Don't hard code version in setup.py
+* Include command in GerritCommandResult
+* Don't open ssh connection until needed
+* Fix UnboundLocalError when stream-event connection fails
+* Add missing docstrings to conform to PEP-257
+* Explicitly depend on paramiko v1.7.6
+* Move requirements.txt to the root
+* Add requirements file
+
+0.0.7
+-----
+
+* Bump to version 0.0.7
+* Better error message in example script
+* Rename the readme and license files
+
+0.0.6
+-----
+
+* Bump to version 0.0.6
+* Better error handling in the example script
+* Move license to its own file and add basic documentation
+* Use correct URL in setup information
+* Handle socket connection error in SSH client
+* Python 2.6 style exception handling
+* Add Eclipse and Pydev project files
+
+0.0.5
+-----
+
+* Bump to version 0.0.5
+* Revert "Basic thread-safeness in the SSH client"
+* Encapsulate the SSH command results in a class
+* Update pylint config to work with version 0.26
+* Only add query result lines to returned data
+* Handle JSON errors in query results
+* Refactor getting the Gerrit version
+* Reduce nested \`if\` blocks in stream handling
+* Add pylint configuration file
+* More error handling improvements in stream
+* Handle exception when running ssh command
+* Fix pylint warnings in stream.py
+* Basic thread-safeness in the SSH client
+* More exception handling in stream
+
+0.0.4
+-----
+
+* Bump version to 0.0.4
+* Fix hostname in unit tests
+* Get Gerrit version during client initialisation
+* Add query functionality
+* Add \_\_str\_\_ on event base class
+* Move SSH client from stream class to main client class
+* Add license information
+* Simplify the unit test structure
+
+0.0.3
+-----
+
+* Bump version to 0.0.3
+* Add an example of how the Gerrit client class is used
+* Wait for thread to complete when stopping stream
+* Handle errors when reading event stream
+* Fix event registration from other module
+* Refactor event stream handling to use SSH client
+* Handle invalid port in ssh config
+* Add GerritSSHClient
+* Add initial stub of GerritClient class
+* Inject event name into event classes with decorator
+* Revert "GerritEventFactory should be a singleton"
+* GerritEventFactory should be a singleton
+* Pass input stream in the constructor of GerritStream
+* Add support for topic name in change attribute
+* Add event factory and refactor event dispatching
+* Events unit tests should also test event dispatching
+* Add helper methods for initialisation from json data
+* Add setup.py
+
+0.0.2
+-----
+
+* Tidy up docstrings to follow the PEP-257 docstring convention
+* Refactor into submodules
+* Add .settings to .gitignore
+* Remove check for supported approval types
+
+0.0.1
+-----
+
+* Add .gitignore
+* Add Makefile and script for unit tests
+* Add unit tests for event handling
+* Reason is missing in ChangeRestoredEvent
+* \`comment-added\` event can have multiple approvals
+* Add support for the \`draft-published\` event
+* Minor refactoring of unit tests
+* Fixing PEP-8 and pylint warnings
+* Python cleanup: inherit from object
+* Undefined variable in GerritCommentAddedEvent
+* Check for callable event handler on attach
+* Minor refactoring and adding initial unit tests
+* Initial version of class for handling Gerrit stream events
+* Initial empty commit

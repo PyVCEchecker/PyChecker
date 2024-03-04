@@ -1,0 +1,9 @@
+six
+numpy>=1.15
+scipy
+Pillow
+matplotlib
+scikit-image>=0.14.2
+opencv-python
+imageio
+Shapely

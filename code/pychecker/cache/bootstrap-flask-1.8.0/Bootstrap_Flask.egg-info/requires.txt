@@ -1,0 +1,13 @@
+Flask
+
+[dev]
+coverage
+tox
+sphinx
+pallets-sphinx-themes
+sphinxcontrib-log-cabinet
+
+[docs]
+sphinx
+pallets-sphinx-themes
+sphinxcontrib-log-cabinet

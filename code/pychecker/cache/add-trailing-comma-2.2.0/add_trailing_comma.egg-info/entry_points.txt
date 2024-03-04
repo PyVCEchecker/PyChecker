@@ -1,0 +1,3 @@
+[console_scripts]
+add-trailing-comma = add_trailing_comma._main:main
+

@@ -1,0 +1,2 @@
+GitPython==3.0.6
+truffleHogRegexes==0.0.7

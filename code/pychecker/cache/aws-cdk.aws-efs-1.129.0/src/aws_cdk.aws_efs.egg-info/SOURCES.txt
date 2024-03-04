@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_efs.egg-info/PKG-INFO
+src/aws_cdk.aws_efs.egg-info/SOURCES.txt
+src/aws_cdk.aws_efs.egg-info/dependency_links.txt
+src/aws_cdk.aws_efs.egg-info/requires.txt
+src/aws_cdk.aws_efs.egg-info/top_level.txt
+src/aws_cdk/aws_efs/__init__.py
+src/aws_cdk/aws_efs/py.typed
+src/aws_cdk/aws_efs/_jsii/__init__.py
+src/aws_cdk/aws_efs/_jsii/aws-efs@1.129.0.jsii.tgz

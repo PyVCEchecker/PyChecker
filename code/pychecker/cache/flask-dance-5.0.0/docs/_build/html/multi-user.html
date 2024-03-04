@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Multi-User Setups &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Logging Out" href="logout.html" />
+    <link rel="prev" title="Understanding the Magic" href="understanding-the-magic.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="logout.html" title="Logging Out"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="understanding-the-magic.html" title="Understanding the Magic"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Multi-User Setups</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="multi-user-setups">
+<h1>Multi-User Setups<a class="headerlink" href="#multi-user-setups" title="Permalink to this headline">¶</a></h1>
+<p>Many websites are designed to have multiple user accounts, where each user has
+one or more OAuth connections to other websites, like Google or Twitter.
+This is a perfectly valid use-case for OAuth, but in order to implement it
+correctly, you need to think carefully about how these OAuth connections are
+created and used. There are a lot of unexpected edge-cases
+that can take you by surprise.</p>
+<section id="defining-expected-behavior">
+<h2>Defining Expected Behavior<a class="headerlink" href="#defining-expected-behavior" title="Permalink to this headline">¶</a></h2>
+<section id="user-association-vs-user-creation">
+<h3>User Association vs User Creation<a class="headerlink" href="#user-association-vs-user-creation" title="Permalink to this headline">¶</a></h3>
+<p>Are users expected to create an account on your website <em>first</em>, and then
+associate OAuth connections <em>afterwards</em>? Or does logging in with an an OAuth
+provider <em>create an account</em> for the user on your site automatically?</p>
+<p>The first option (user association) is useful when you expect users to
+primarily log in to your website using a username/password combination,
+but want to allow your users to perform actions on other sites via OAuth.
+For example, maybe you want to build your own social network website,
+and allow users to invite their friends from Facebook and their followers
+on Twitter. Typically, this setup means that users are able to associate
+their accounts with other websites via OAuth, but they are not required to
+do so.</p>
+<p>The second option (user creation) is useful when you expect users to
+primarily (or exclusively) log in to your website using an OAuth connection.
+For example, maybe you don’t want your users to have to remember another
+username/password combination, so instead, you have a “Log In with Google”
+or “Log In with GitHub” button on your website. When a user clicks on that
+button and logs in with the respective service, they automatically create an
+account on your website in the process. Typically, this setup means that users
+cannot create an account on your website without associating it with an
+OAuth connection.</p>
+</section>
+<section id="associations-with-multiple-providers">
+<h3>Associations with Multiple Providers<a class="headerlink" href="#associations-with-multiple-providers" title="Permalink to this headline">¶</a></h3>
+<p>Can a user associate one account with multiple different OAuth providers?
+For example, can a user login with Google <em>or</em> login with GitHub, and log into
+the same account whichever option they pick?</p>
+<p>This is particularly complicated if you’ve chosen user creation via OAuth,
+instead of user association. When a user logs in with a provider, and your
+website hasn’t seen that particular user on that particular provider before,
+how does your website know whether to create a new user on your website, or
+link this provider to an existing user on your website? If you use user
+association, you can simply require that the user should already be logged
+in to their local account before they can associate that local account
+with an OAuth provider. But if you use user creation, that requirement is
+almost impossible to enforce, because typically people don’t understand
+that they <em>have</em> a local user account.</p>
+</section>
+</section>
+<section id="flask-dance-s-default-behavior">
+<h2>Flask-Dance’s Default Behavior<a class="headerlink" href="#flask-dance-s-default-behavior" title="Permalink to this headline">¶</a></h2>
+<p>Flask-Dance does the best it can to resolve these issues for you, while
+allowing you to take control in complex circumstances. Different token storages
+may handle this differently, but for simplicity, this document will
+refer to the <a class="reference internal" href="storages.html#sqlalchemy-storage"><span class="std std-ref">SQLAlchemy storage</span></a>.</p>
+<section id="id1">
+<h3>User Association vs User Creation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Flask-Dance will <em>never</em> create user accounts for your users automatically.
+Flask-Dance <em>only</em> handles creating OAuth associations and retrieving them
+on a per-user basis. By default, Flask-Dance will associate new OAuth
+connections with the local user that is currently logged in.</p>
+<p>What happens if there no local user is currently logged in? That depends
+on the <code class="docutils literal notranslate"><span class="pre">user_required</span></code> parameter of the
+<a class="reference internal" href="api.html#flask_dance.consumer.storage.sqla.SQLAlchemyStorage" title="flask_dance.consumer.storage.sqla.SQLAlchemyStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyStorage</span></code></a> class. If it is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>, Flask-Dance will create an association that isn’t linked to
+any particular user in your application.
+This is handy if you don’t actually <em>have</em> local user accounts in your
+application, and are using Flask-Dance to connect your entire website to one
+single remote user. For example, this could be the desired behavior if your
+website is actually a bot that responds to incoming requests by making API
+calls to a third-party website, like a Twitter bot that tweets in response
+to certain HTTP requests.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">user_required</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, and no local user is
+currently logged in, then Flask-Dance will raise an exception when trying to
+associate an OAuth connection with the local user. The only way to correctly
+resolve this situation is to override Flask-Dance’s default behavior and
+specify exactly how to create a local user.</p>
+</section>
+<section id="id2">
+<h3>Associations with Multiple Providers<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>By default, Flask-Dance will happily associate multiple different
+OAuth providers with a single user account. This is why the <code class="docutils literal notranslate"><span class="pre">OAuth</span></code> model
+in SQLAlchemy must be separate from the <code class="docutils literal notranslate"><span class="pre">User</span></code> model: so that you can
+associate multiple different <code class="docutils literal notranslate"><span class="pre">OAuth</span></code> models with a single <code class="docutils literal notranslate"><span class="pre">User</span></code> model.</p>
+<p>Since Flask-Dance does user association by default, rather than user creation,
+you don’t need to worry about the question of how Flask-Dance will handle
+new OAuth associations. Using the default behavior, Flask-Dance will <em>never</em>
+create a new user for the connection; instead, it will <em>always</em> associate
+the connection with an existing user.</p>
+</section>
+</section>
+<section id="overriding-the-default-behavior">
+<h2>Overriding the Default Behavior<a class="headerlink" href="#overriding-the-default-behavior" title="Permalink to this headline">¶</a></h2>
+<p>If you want to allow users to log in with OAuth, and create local user accounts
+automatically when they do so, you’ll need to override Flask-Dance’s default
+behavior. To do so, you’ll need to hook into the
+<a class="reference internal" href="signals.html#flask_dance.consumer.oauth_authorized" title="flask_dance.consumer.oauth_authorized"><code class="xref py py-data docutils literal notranslate"><span class="pre">oauth_authorized</span></code></a> signal.</p>
+<p>Flask-Dance’s default behavior comes from storing the OAuth token for you
+automatically. To override the default behavior, write a function that
+subscribes to this signal, handles it the way <em>you</em> want,
+and returns <code class="docutils literal notranslate"><span class="pre">False</span></code> or a <a class="reference external" href="https://werkzeug.palletsprojects.com/en/latest/wrappers/#werkzeug.wrappers.Response" title="(in Werkzeug v2.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> object.
+Returning <code class="docutils literal notranslate"><span class="pre">False</span></code> or a <a class="reference external" href="https://werkzeug.palletsprojects.com/en/latest/wrappers/#werkzeug.wrappers.Response" title="(in Werkzeug v2.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> object
+from this signal handler indicates to Flask-Dance that it should not
+try to store the OAuth token for you. For example, returning a custom redirect
+like <a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.redirect" title="(in Flask v2.1.x)"><code class="xref py py-func docutils literal notranslate"><span class="pre">flask.redirect()</span></code></a> would override the default behavior.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you return <code class="docutils literal notranslate"><span class="pre">False</span></code> from a
+<a class="reference internal" href="signals.html#flask_dance.consumer.oauth_authorized" title="flask_dance.consumer.oauth_authorized"><code class="xref py py-data docutils literal notranslate"><span class="pre">oauth_authorized</span></code></a> signal handler,
+and you do <em>not</em> store the OAuth token in your database,
+the OAuth token will be lost, and you will not be able to use it to make
+API calls in the future!</p>
+</div>
+<p>Here’s an example of how you might want to override Flask-Dance’s default
+behavior in order to create user accounts automatically:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">flask</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">flash</span>
+<span class="kn">from</span> <span class="nn">flask_security</span> <span class="kn">import</span> <span class="n">current_user</span><span class="p">,</span> <span class="n">login_user</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer</span> <span class="kn">import</span> <span class="n">oauth_authorized</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer.storage.sqla</span> <span class="kn">import</span> <span class="n">SQLAlchemyStorage</span>
+<span class="kn">from</span> <span class="nn">flask_dance.contrib.github</span> <span class="kn">import</span> <span class="n">make_github_blueprint</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm.exc</span> <span class="kn">import</span> <span class="n">NoResultFound</span>
+<span class="kn">from</span> <span class="nn">myapp.models</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">OAuth</span><span class="p">,</span> <span class="n">User</span>
+
+
+<span class="n">github_bp</span> <span class="o">=</span> <span class="n">make_github_blueprint</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">SQLAlchemyStorage</span><span class="p">(</span><span class="n">OAuth</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">current_user</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="c1"># create/login local user on successful OAuth login</span>
+<span class="nd">@oauth_authorized</span><span class="o">.</span><span class="n">connect_via</span><span class="p">(</span><span class="n">github_bp</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">github_logged_in</span><span class="p">(</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">:</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Failed to log in with GitHub.&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/user&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Failed to fetch user info from GitHub.&quot;</span>
+        <span class="n">flash</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">github_info</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">github_user_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">github_info</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Find this OAuth token in the database, or create it</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">OAuth</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+        <span class="n">provider</span><span class="o">=</span><span class="n">blueprint</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">provider_user_id</span><span class="o">=</span><span class="n">github_user_id</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">oauth</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">NoResultFound</span><span class="p">:</span>
+        <span class="n">oauth</span> <span class="o">=</span> <span class="n">OAuth</span><span class="p">(</span>
+            <span class="n">provider</span><span class="o">=</span><span class="n">blueprint</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">provider_user_id</span><span class="o">=</span><span class="n">github_user_id</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">oauth</span><span class="o">.</span><span class="n">user</span><span class="p">:</span>
+        <span class="c1"># If this OAuth token already has an associated local account,</span>
+        <span class="c1"># log in that local user account.</span>
+        <span class="c1"># Note that if we just created this OAuth token, then it can&#39;t</span>
+        <span class="c1"># have an associated local account yet.</span>
+        <span class="n">login_user</span><span class="p">(</span><span class="n">oauth</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Successfully signed in with GitHub.&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># If this OAuth token doesn&#39;t have an associated local account,</span>
+        <span class="c1"># create a new local user account for this user. We can log</span>
+        <span class="c1"># in that account as well, while we&#39;re at it.</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
+            <span class="c1"># Remember that `email` can be None, if the user declines</span>
+            <span class="c1"># to publish their email address on GitHub!</span>
+            <span class="n">email</span><span class="o">=</span><span class="n">github_info</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">],</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">github_info</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="c1"># Associate the new local user account with the OAuth token</span>
+        <span class="n">oauth</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
+        <span class="c1"># Save and commit our database models</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add_all</span><span class="p">([</span><span class="n">user</span><span class="p">,</span> <span class="n">oauth</span><span class="p">])</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="c1"># Log in the new local user account</span>
+        <span class="n">login_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Successfully signed in with GitHub.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Since we&#39;re manually creating the OAuth model in the database,</span>
+    <span class="c1"># we should return False so that Flask-Dance knows that</span>
+    <span class="c1"># it doesn&#39;t have to do it. If we don&#39;t return False, the OAuth token</span>
+    <span class="c1"># could be saved twice, or Flask-Dance could throw an error when</span>
+    <span class="c1"># trying to incorrectly save it for us.</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>This example code does not include implementations for the <code class="docutils literal notranslate"><span class="pre">User</span></code>
+and <code class="docutils literal notranslate"><span class="pre">OAuth</span></code> models: you can see that these models are imported from another
+file. However, notice that the <code class="docutils literal notranslate"><span class="pre">OAuth</span></code> model has a field called
+<code class="docutils literal notranslate"><span class="pre">provider_user_id</span></code>, which is used to store the user ID of the GitHub user.
+The example code uses that ID to check if we’ve already saved an OAuth token
+in the database for this GitHub user.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Multi-User Setups</a><ul>
+<li><a class="reference internal" href="#defining-expected-behavior">Defining Expected Behavior</a><ul>
+<li><a class="reference internal" href="#user-association-vs-user-creation">User Association vs User Creation</a></li>
+<li><a class="reference internal" href="#associations-with-multiple-providers">Associations with Multiple Providers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#flask-dance-s-default-behavior">Flask-Dance’s Default Behavior</a><ul>
+<li><a class="reference internal" href="#id1">User Association vs User Creation</a></li>
+<li><a class="reference internal" href="#id2">Associations with Multiple Providers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overriding-the-default-behavior">Overriding the Default Behavior</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="understanding-the-magic.html" title="previous chapter">Understanding the Magic</a></li>
+      <li>Next: <a href="logout.html" title="next chapter">Logging Out</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/multi-user.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

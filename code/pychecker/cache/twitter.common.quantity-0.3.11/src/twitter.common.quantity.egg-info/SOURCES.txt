@@ -1,0 +1,13 @@
+MANIFEST.in
+setup.py
+src/twitter/__init__.py
+src/twitter.common.quantity.egg-info/PKG-INFO
+src/twitter.common.quantity.egg-info/SOURCES.txt
+src/twitter.common.quantity.egg-info/dependency_links.txt
+src/twitter.common.quantity.egg-info/namespace_packages.txt
+src/twitter.common.quantity.egg-info/requires.txt
+src/twitter.common.quantity.egg-info/top_level.txt
+src/twitter.common.quantity.egg-info/zip-safe
+src/twitter/common/__init__.py
+src/twitter/common/quantity/__init__.py
+src/twitter/common/quantity/parse_simple.py

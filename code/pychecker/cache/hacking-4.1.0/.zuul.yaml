@@ -1,0 +1,22 @@
+- project:
+    templates:
+      - publish-openstack-docs-pti
+      - openstack-cover-jobs
+      - openstack-python35-jobs
+      - openstack-python3-wallaby-jobs
+      - release-notes-jobs-python3
+    check:
+      jobs:
+        - hacking-integration-nova:
+            voting: false
+
+- job:
+    name: hacking-integration-nova
+    parent: openstack-tox
+    description: |
+      Run the integration job against nova with proposed hacking change.
+    required-projects:
+      - openstack/nova
+    vars:
+      tox_envlist: integration
+      tox_extra_args: -vv openstack nova {{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/nova'].src_dir }}

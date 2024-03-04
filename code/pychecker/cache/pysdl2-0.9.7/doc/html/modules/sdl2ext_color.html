@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Color handling &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="sdl2.ext.colorpalettes - predefined sets of colors" href="sdl2ext_colorpalettes.html" />
+    <link rel="prev" title="Converting sequences" href="sdl2ext_array.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_colorpalettes.html" title="sdl2.ext.colorpalettes - predefined sets of colors"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_array.html" title="Converting sequences"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" accesskey="U">sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="color-handling">
+<h1>Color handling<a class="headerlink" href="#color-handling" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sdl2.ext.Color">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">Color</code><span class="sig-paren">(</span><em class="sig-param">r=255</em>, <em class="sig-param">g=255</em>, <em class="sig-param">b=255</em>, <em class="sig-param">a=255</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Color" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple RGBA-based color implementation. The Color class uses a
+byte-wise representation of the 4 channels red, green, blue and alpha
+transparency, so that the values range from 0 to 255. It allows basic
+arithmetic operations, e.g. color addition or subtraction and
+conversions to other color spaces such as HSV or CMY.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.Color.r">
+<code class="sig-name descname">r</code><a class="headerlink" href="#sdl2.ext.Color.r" title="Permalink to this definition">¶</a></dt>
+<dd><p>The red channel value of the Color.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Color.g">
+<code class="sig-name descname">g</code><a class="headerlink" href="#sdl2.ext.Color.g" title="Permalink to this definition">¶</a></dt>
+<dd><p>The green channel value of the Color.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Color.b">
+<code class="sig-name descname">b</code><a class="headerlink" href="#sdl2.ext.Color.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>The blue channel value of the Color.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Color.a">
+<code class="sig-name descname">a</code><a class="headerlink" href="#sdl2.ext.Color.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>The alpha channel value of the Color.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Color.cmy">
+<code class="sig-name descname">cmy</code><a class="headerlink" href="#sdl2.ext.Color.cmy" title="Permalink to this definition">¶</a></dt>
+<dd><p>The CMY representation of the Color. The CMY components are in the
+ranges C = [0, 1], M = [0, 1], Y = [0, 1]. Note that this will not
+return the absolutely exact CMY values for the set RGB values in
+all cases. Due to the RGB mapping from 0-255 and the CMY mapping
+from 0-1 rounding errors may cause the CMY values to differ
+slightly from what you might expect.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Color.hsla">
+<code class="sig-name descname">hsla</code><a class="headerlink" href="#sdl2.ext.Color.hsla" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HSLA representation of the Color. The HSLA components are in
+the ranges H = [0, 360], S = [0, 100], L = [0, 100], A = [0,
+100]. Note that this will not return the absolutely exact HSL
+values for the set RGB values in all cases. Due to the RGB mapping
+from 0-255 and the HSL mapping from 0-100 and 0-360 rounding
+errors may cause the HSL values to differ slightly from what you
+might expect.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Color.hsva">
+<code class="sig-name descname">hsva</code><a class="headerlink" href="#sdl2.ext.Color.hsva" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HSVA representation of the Color. The HSVA components are in
+the ranges H = [0, 360], S = [0, 100], V = [0, 100], A = [0,
+100]. Note that this will not return the absolutely exact HSV
+values for the set RGB values in all cases. Due to the RGB mapping
+from 0-255 and the HSV mapping from 0-100 and 0-360 rounding
+errors may cause the HSV values to differ slightly from what you
+might expect.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Color.i1i2i3">
+<code class="sig-name descname">i1i2i3</code><a class="headerlink" href="#sdl2.ext.Color.i1i2i3" title="Permalink to this definition">¶</a></dt>
+<dd><p>The I1I2I3 representation of the Color. The I1I2I3 components are
+in the ranges I1 = [0, 1], I2 = [-0.5, 0.5], I3 = [-0.5,
+0.5]. Note that this will not return the absolutely exact I1I2I3
+values for the set RGB values in all cases. Due to the RGB mapping
+from 0-255 and the I1I2I3 from 0-1 rounding errors may cause the
+I1I2I3 values to differ slightly from what you might expect.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Color.normalize">
+<code class="sig-name descname">normalize</code><span class="sig-paren">(</span><em class="sig-param">) -&gt; (float</em>, <em class="sig-param">float</em>, <em class="sig-param">float</em>, <em class="sig-param">float</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Color.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the normalised RGBA values of the Color as floating point
+values in the range [0, 1].</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Color.__add__">
+<code class="sig-name descname">__add__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">color</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.Color.__add__" title="Permalink to this definition">¶</a></dt>
+<dt id="sdl2.ext.Color.__sub__">
+<code class="sig-name descname">__sub__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">color</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.Color.__sub__" title="Permalink to this definition">¶</a></dt>
+<dt id="sdl2.ext.Color.__mul__">
+<code class="sig-name descname">__mul__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">color</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.Color.__mul__" title="Permalink to this definition">¶</a></dt>
+<dt id="sdl2.ext.Color.__div__">
+<code class="sig-name descname">__div__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">color</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.Color.__div__" title="Permalink to this definition">¶</a></dt>
+<dt id="sdl2.ext.Color.__truediv__">
+<code class="sig-name descname">__truediv__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">color</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.Color.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dt id="sdl2.ext.Color.__mod__">
+<code class="sig-name descname">__mod__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">color</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.Color.__mod__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic arithmetic functions for <a class="reference internal" href="#sdl2.ext.Color" title="sdl2.ext.Color"><code class="xref py py-class docutils literal notranslate"><span class="pre">Color</span></code></a> values. The arithmetic
+operations <code class="docutils literal notranslate"><span class="pre">+,</span> <span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/,</span> <span class="pre">%</span></code> are supported by the <a class="reference internal" href="#sdl2.ext.Color" title="sdl2.ext.Color"><code class="xref py py-class docutils literal notranslate"><span class="pre">Color</span></code></a> class
+and work on a per-channel basis. This means, that the operation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">color</span> <span class="o">=</span> <span class="n">color1</span> <span class="o">+</span> <span class="n">color2</span>
+</pre></div>
+</div>
+<p>is the same as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">color</span> <span class="o">=</span> <span class="n">Color</span><span class="p">()</span>
+<span class="n">color</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">color1</span><span class="o">.</span><span class="n">r</span> <span class="o">+</span> <span class="n">color2</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">color</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">color1</span><span class="o">.</span><span class="n">g</span> <span class="o">+</span> <span class="n">color2</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The operations guarantee that the channel values stay in the allowed
+range of [0, 255].</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.argb_to_color">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">argb_to_color</code><span class="sig-paren">(</span><em class="sig-param">v : int</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.argb_to_color" title="Permalink to this definition">¶</a></dt>
+<dt id="sdl2.ext.ARGB">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">ARGB</code><span class="sig-paren">(</span><em class="sig-param">v : int</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.ARGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an integer value to a Color, assuming the integer represents
+a 32-bit ARGB value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.convert_to_color">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">convert_to_color</code><span class="sig-paren">(</span><em class="sig-param">v : object</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.convert_to_color" title="Permalink to this definition">¶</a></dt>
+<dt id="sdl2.ext.COLOR">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">COLOR</code><span class="sig-paren">(</span><em class="sig-param">v : object</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.COLOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to convert the passed value to a Color object. The value can be
+an arbitrary Python object, which is passed to the different other
+conversion functions. If one of them succeeds, the Color will be
+returned to the caller. If none succeeds, a <code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> will be
+raised.</p>
+<p>If the color is an integer value, it is assumed to be in ARGB layout.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.rgba_to_color">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">rgba_to_color</code><span class="sig-paren">(</span><em class="sig-param">v : int</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.rgba_to_color" title="Permalink to this definition">¶</a></dt>
+<dt id="sdl2.ext.RGBA">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">RGBA</code><span class="sig-paren">(</span><em class="sig-param">v : int</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.RGBA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an integer value to a Color, assuming the integer represents
+a 32-bit RGBA value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.is_rgb_color">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">is_rgb_color</code><span class="sig-paren">(</span><em class="sig-param">v : object</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#sdl2.ext.is_rgb_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks, if the passed value is an item that could be converted to a
+RGB color.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.is_rgba_color">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">is_rgba_color</code><span class="sig-paren">(</span><em class="sig-param">v : object</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#sdl2.ext.is_rgba_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks, if the passed value is an item that could be converted to a
+RGBA color.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.string_to_color">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">string_to_color</code><span class="sig-paren">(</span><em class="sig-param">v : string</em><span class="sig-paren">)</span> &#x2192; Color<a class="headerlink" href="#sdl2.ext.string_to_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a hex color string or color name to a Color value. Supported
+hex values are:</p>
+<ul class="simple">
+<li><p>#RGB</p></li>
+<li><p>#RGBA</p></li>
+<li><p>#RRGGBB</p></li>
+<li><p>#RRGGBBAA</p></li>
+<li><p>0xRGB</p></li>
+<li><p>0xRGBA</p></li>
+<li><p>0xRRGGBB</p></li>
+<li><p>0xRRGGBBAA</p></li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdl2ext_array.html"
+                        title="previous chapter">Converting sequences</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdl2ext_colorpalettes.html"
+                        title="next chapter">sdl2.ext.colorpalettes - predefined sets of colors</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/sdl2ext_color.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_colorpalettes.html" title="sdl2.ext.colorpalettes - predefined sets of colors"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_array.html" title="Converting sequences"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" >sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>feedgen.ext.torrent &#8212; python-feedgen 0.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/lernfunk.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="feedgen.ext.podcast_entry" href="api.ext.podcast_entry.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>python-feedgen 0.9.0 documentation</span></a></h1>
+        <h2 class="heading"><span>feedgen.ext.torrent</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="api.ext.podcast_entry.html">feedgen.ext.podcast_entry</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content" role="main">
+        
+        
+  <script type=application/javascript src=_static/theme_extras.js></script>
+<div class="apititle"><b>Contents</b></div>
+<div class="apitoc"></div><span class="target" id="module-feedgen.ext.torrent"></span><div class="section" id="feedgen-ext-torrent">
+<h1>feedgen.ext.torrent<a class="headerlink" href="#feedgen-ext-torrent" title="Permalink to this headline">¶</a></h1>
+<p>Extends the FeedGenerator to produce torrent feeds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">copyright</dt>
+<dd class="field-odd"><p>2016, Raspbeguy &lt;<a class="reference external" href="mailto:raspbeguy&#37;&#52;&#48;hashtagueule&#46;fr">raspbeguy<span>&#64;</span>hashtagueule<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">license</dt>
+<dd class="field-even"><p>FreeBSD and LGPL, see license.* for more details.</p>
+</dd>
+</dl>
+<dl class="class">
+<dt id="feedgen.ext.torrent.TorrentEntryExtension">
+<em class="property">class </em><code class="sig-prename descclassname">feedgen.ext.torrent.</code><code class="sig-name descname">TorrentEntryExtension</code><a class="headerlink" href="#feedgen.ext.torrent.TorrentEntryExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>FeedEntry extension for torrent feeds</p>
+<dl class="method">
+<dt id="feedgen.ext.torrent.TorrentEntryExtension.contentlength">
+<code class="sig-name descname">contentlength</code><span class="sig-paren">(</span><em class="sig-param">torrent_contentlength=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.torrent.TorrentEntryExtension.contentlength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the size of the target file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>torrent_contentlength</strong> – The target file size.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The target file size.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.ext.torrent.TorrentEntryExtension.extend_rss">
+<code class="sig-name descname">extend_rss</code><span class="sig-paren">(</span><em class="sig-param">entry</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.torrent.TorrentEntryExtension.extend_rss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add additional fields to an RSS item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>feed</strong> – The RSS item XML element to use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.ext.torrent.TorrentEntryExtension.filename">
+<code class="sig-name descname">filename</code><span class="sig-paren">(</span><em class="sig-param">torrent_filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.torrent.TorrentEntryExtension.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the name of the torrent file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>torrent_filename</strong> – The name of the torrent file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The name of the torrent file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.ext.torrent.TorrentEntryExtension.infohash">
+<code class="sig-name descname">infohash</code><span class="sig-paren">(</span><em class="sig-param">torrent_infohash=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.torrent.TorrentEntryExtension.infohash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the hash of the target file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>torrent_infohash</strong> – The target file hash.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The target hash file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.ext.torrent.TorrentEntryExtension.peers">
+<code class="sig-name descname">peers</code><span class="sig-paren">(</span><em class="sig-param">torrent_peers=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.torrent.TorrentEntryExtension.peers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number od peers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>torrent_infohash</strong> – The peers number.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The peers number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.ext.torrent.TorrentEntryExtension.seeds">
+<code class="sig-name descname">seeds</code><span class="sig-paren">(</span><em class="sig-param">torrent_seeds=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.torrent.TorrentEntryExtension.seeds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number of seeds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>torrent_seeds</strong> – The seeds number.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The seeds number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.ext.torrent.TorrentEntryExtension.verified">
+<code class="sig-name descname">verified</code><span class="sig-paren">(</span><em class="sig-param">torrent_verified=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.torrent.TorrentEntryExtension.verified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number of verified peers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>torrent_infohash</strong> – The verified peers number.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The verified peers number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="feedgen.ext.torrent.TorrentExtension">
+<em class="property">class </em><code class="sig-prename descclassname">feedgen.ext.torrent.</code><code class="sig-name descname">TorrentExtension</code><a class="headerlink" href="#feedgen.ext.torrent.TorrentExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>FeedGenerator extension for torrent feeds.</p>
+<dl class="method">
+<dt id="feedgen.ext.torrent.TorrentExtension.extend_ns">
+<code class="sig-name descname">extend_ns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.ext.torrent.TorrentExtension.extend_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict that will be used in the namespace map for the feed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="api.ext.podcast_entry.html">feedgen.ext.podcast_entry</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, Lars Kiesow.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

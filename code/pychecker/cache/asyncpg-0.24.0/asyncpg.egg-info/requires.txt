@@ -1,0 +1,27 @@
+
+[:python_version < "3.8"]
+typing-extensions>=3.7.4.3
+
+[dev]
+Cython<0.30.0,>=0.29.24
+pytest>=6.0
+Sphinx~=4.1.2
+sphinxcontrib-asyncio~=0.3.0
+sphinx_rtd_theme~=0.5.2
+pycodestyle~=2.7.0
+flake8~=3.9.2
+
+[dev:platform_system != "Windows" and python_version >= "3.7"]
+uvloop>=0.15.3
+
+[docs]
+Sphinx~=4.1.2
+sphinxcontrib-asyncio~=0.3.0
+sphinx_rtd_theme~=0.5.2
+
+[test]
+pycodestyle~=2.7.0
+flake8~=3.9.2
+
+[test:platform_system != "Windows" and python_version >= "3.7"]
+uvloop>=0.15.3

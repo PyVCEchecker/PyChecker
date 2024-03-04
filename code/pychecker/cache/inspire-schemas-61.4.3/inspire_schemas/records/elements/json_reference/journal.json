@@ -1,0 +1,17 @@
+{
+    "additionalProperties": false,
+    "properties": {
+        "$ref": {
+            "description": "journals record",
+            "format": "uri",
+            "minLength": 1,
+            "pattern": ".*/api/journals/\\d+$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "$ref"
+    ],
+    "title": "Reference to journal record",
+    "type": "object"
+}

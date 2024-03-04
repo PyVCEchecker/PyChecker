@@ -1,0 +1,5 @@
+simplejson>=3.17.0
+six>=1.14.0
+
+[:python_version < "3.3"]
+ipaddress>=1.0.23

@@ -1,0 +1,8 @@
+EasyProcess
+entrypoint2
+
+[:python_version > "3.4"]
+mss
+
+[:python_version > "3.4" and platform_system == "Linux"]
+jeepney

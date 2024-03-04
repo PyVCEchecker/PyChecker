@@ -1,0 +1,10 @@
+__pycache__
+.cache
+.eggs
+.DS_Store
+.tox
+build
+dist
+*.egg-info
+*.pyc
+*.pyo

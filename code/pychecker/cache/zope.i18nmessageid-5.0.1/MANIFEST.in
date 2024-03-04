@@ -1,0 +1,18 @@
+include *.rst
+include *.txt
+include *.py
+include buildout.cfg
+include tox.ini
+include .travis.yml
+include .coveragerc
+
+recursive-include docs *.rst *.bat *.py Makefile .gitignore
+recursive-include src *.zcml
+
+global-exclude *.dll
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.so
+
+# added by check_manifest.py
+include *.yml

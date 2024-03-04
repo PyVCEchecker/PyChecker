@@ -1,0 +1,17 @@
+adal~=1.2.7
+argcomplete~=1.8
+azure-cli-telemetry==1.0.6.*
+azure-mgmt-core<1.3.0,>=1.2.0
+cryptography
+humanfriendly<10.0,>=4.7
+jmespath
+knack~=0.8.2
+msal<2.0.0,>=1.10.0
+paramiko<3.0.0,>=2.0.8
+pkginfo>=1.5.0.1
+PyJWT>=2.1.0
+pyopenssl>=17.1.0
+requests[socks]~=2.25.1
+six~=1.12
+urllib3[secure]>=1.26.5
+psutil~=5.8

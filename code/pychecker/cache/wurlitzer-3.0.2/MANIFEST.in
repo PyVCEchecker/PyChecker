@@ -1,0 +1,8 @@
+include README.md
+include test.py
+include LICENSE
+include Demo.ipynb
+include dev-requirements.txt
+
+prune htmlcov
+prune build

@@ -1,0 +1,10 @@
+setuptools
+
+[Config]
+
+[Paste]
+Paste
+
+[docs]
+Sphinx>=1.7.5
+pylons-sphinx-themes

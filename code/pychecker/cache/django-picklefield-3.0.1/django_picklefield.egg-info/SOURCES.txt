@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+django_picklefield.egg-info/PKG-INFO
+django_picklefield.egg-info/SOURCES.txt
+django_picklefield.egg-info/dependency_links.txt
+django_picklefield.egg-info/requires.txt
+django_picklefield.egg-info/top_level.txt
+picklefield/__init__.py
+picklefield/constants.py
+picklefield/fields.py

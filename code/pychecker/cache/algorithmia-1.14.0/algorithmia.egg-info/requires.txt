@@ -1,0 +1,7 @@
+algorithmia-adk<1.2,>=1.1
+algorithmia-api-client==1.5.1
+argparse
+enum-compat
+requests
+six
+toml

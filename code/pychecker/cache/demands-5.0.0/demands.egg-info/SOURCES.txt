@@ -1,0 +1,17 @@
+CHANGELOG.md
+LICENSE
+MANIFEST.in
+README.rst
+requirements.txt
+setup.cfg
+setup.py
+demands/__init__.py
+demands/pagination.py
+demands.egg-info/PKG-INFO
+demands.egg-info/SOURCES.txt
+demands.egg-info/dependency_links.txt
+demands.egg-info/requires.txt
+demands.egg-info/top_level.txt
+docs/Makefile
+docs/conf.py
+docs/index.rst

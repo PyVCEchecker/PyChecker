@@ -1,0 +1,6 @@
+coverage>=3.7.1
+fauxquests>=1.1
+pytest
+
+# === Python < 3.3 ===
+# mock>=1.0.1

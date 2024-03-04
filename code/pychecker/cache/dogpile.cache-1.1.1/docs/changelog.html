@@ -1,0 +1,1394 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Changelog &#8212; dogpile.cache 1.1.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature_override.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/changelog.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API" href="api.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dogpile.cache 1.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Changelog</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="change-1.1.1">
+<h2 class="release-version">1.1.1<a class="headerlink" href="#change-1.1.1" title="Permalink to this headline">¶</a></h2>
+Released: Mon Nov 23 2020<div class="section" id="change-1.1.1-bug">
+<h3>bug<a class="headerlink" href="#change-1.1.1-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-1.1.1-0"><span class="target" id="change-017d9b4bf6da96cf455429e89861d793"><strong>[bug] [region]</strong> <a class="changelog-reference headerlink reference internal" href="#change-017d9b4bf6da96cf455429e89861d793">¶</a></span><p>Fixed regression where the serialization and deserialization functions
+could be inadvertently turned into instance methods with an unexpected
+argument signature, namely when pickle.dumps and pickle.loads are the pure
+Python version as is the case in pypy.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/195">#195</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-1.1.0">
+<h2 class="release-version">1.1.0<a class="headerlink" href="#change-1.1.0" title="Permalink to this headline">¶</a></h2>
+Released: Sun Nov 15 2020<div class="section" id="change-1.1.0-feature">
+<h3>feature<a class="headerlink" href="#change-1.1.0-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-1.1.0-0"><span class="target" id="change-ed02a6f3636a245baf548ba033853afa"><strong>[feature] [region]</strong> <a class="changelog-reference headerlink reference internal" href="#change-ed02a6f3636a245baf548ba033853afa">¶</a></span><p>Reworked the means by which values are serialized and deserialized from
+backends, and provided for custom serialization of values.  Added the
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.params.serializer" title="dogpile.cache.region.CacheRegion"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.serializer</span></code></a> and
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.params.deserializer" title="dogpile.cache.region.CacheRegion"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.deserializer</span></code></a> parameters which may be set to any
+serializer.</p>
+<p>Serialization and deserialization now take place within the
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion" title="dogpile.cache.region.CacheRegion"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheRegion</span></code></a> so that backends may now assume string values
+in all cases.  This simplifies the existing backends and also makes
+custom backends easier to write and maintain.</p>
+<p>Additionally, the serializer is now applied to the user-defined value
+portion of the <a class="reference internal" href="api.html#dogpile.cache.api.CachedValue" title="dogpile.cache.api.CachedValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">CachedValue</span></code></a> and not to the metadata or other
+portions of <a class="reference internal" href="api.html#dogpile.cache.api.CachedValue" title="dogpile.cache.api.CachedValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">CachedValue</span></code></a> object itself, so the serialized portion
+is effectively a “payload” within the larger <a class="reference internal" href="api.html#dogpile.cache.api.CachedValue" title="dogpile.cache.api.CachedValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">CachedValue</span></code></a>
+structure that is passed as part of the larger string format.  The overall
+format is a separate JSON of the cached value metadata, followed by the
+serialized form.  This allows for end-user serialization schemes that are
+hardwired to the values themselves without the need to serialize dogpile’s
+internal structures as well.</p>
+<p>Existing custom backends should continue to work without issue;  they
+now have the option to forego any separate serialization steps, and
+can also subclass a new backend <a class="reference internal" href="api.html#dogpile.cache.api.BytesBackend" title="dogpile.cache.api.BytesBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">BytesBackend</span></code></a> that marks them
+as a backend that only deals with bytes coming in and out; all
+internal serialization logic from such a backend can be removed.</p>
+<p>Pull request courtesy Alessio Bogon.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/191">#191</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-1.1.0-misc">
+<h3>misc<a class="headerlink" href="#change-1.1.0-misc" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-1.1.0-1"><span class="target" id="change-0ee6f24401d00300ebc9fd13e4b4a2b1"><strong>[change]</strong> <a class="changelog-reference headerlink reference internal" href="#change-0ee6f24401d00300ebc9fd13e4b4a2b1">¶</a></span><p>Added pep-484 annotations to most of the dogpile.cache package.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-1.0.2">
+<h2 class="release-version">1.0.2<a class="headerlink" href="#change-1.0.2" title="Permalink to this headline">¶</a></h2>
+Released: Fri Aug 7 2020<div class="section" id="change-1.0.2-feature">
+<h3>feature<a class="headerlink" href="#change-1.0.2-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-1.0.2-0"><span class="target" id="change-cf19859e48343586aaabce79d99a7e29"><strong>[feature] [memcached]</strong> <a class="changelog-reference headerlink reference internal" href="#change-cf19859e48343586aaabce79d99a7e29">¶</a></span><p>Added support for TLS connections to the bmemcached backend.  Pull request
+courtesy Moisés Guimarães de Medeiros.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/173">#173</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-1.0.2-bug">
+<h3>bug<a class="headerlink" href="#change-1.0.2-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-1.0.2-1"><span class="target" id="change-51e746cf51e76aa3db2496065eb7c158"><strong>[bug] [installation]</strong> <a class="changelog-reference headerlink reference internal" href="#change-51e746cf51e76aa3db2496065eb7c158">¶</a></span><p>Repaired the setup.cfg file so that the source and wheel distributions will
+not add the “tests” directory to the Python environment.   Pull request
+courtesy Michał Górny.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-1.0.1">
+<h2 class="release-version">1.0.1<a class="headerlink" href="#change-1.0.1" title="Permalink to this headline">¶</a></h2>
+Released: Tue Jul 21 2020<div class="section" id="change-1.0.1-bug">
+<h3>bug<a class="headerlink" href="#change-1.0.1-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-1.0.1-0"><span class="target" id="change-bb4f7418843a9981ce5c479154a7b719"><strong>[bug] [install]</strong> <a class="changelog-reference headerlink reference internal" href="#change-bb4f7418843a9981ce5c479154a7b719">¶</a></span><p>dogpile.cache 1.0.0 was released with a minimum Python version of 3.5.
+However, due to a dependency issue, the minimum version is now Python 3.6.
+The 1.0.0 release will be removed from PyPI so that Python versions prior
+to 3.6 will continue to make use of the previous dogpile.cache 0.9.2.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/184">#184</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-1.0.1-1"><span class="target" id="change-f3975a4454b9593430fcd31ce7a672f0"><strong>[bug] [installation]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f3975a4454b9593430fcd31ce7a672f0">¶</a></span><p>Removed the “universal=1” directive from setup.cfg as this would create
+py2/py3 wheels.   dogpile 1.0.x is Python 3 only so a py3-only wheel is now
+created.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/185">#185</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-1.0.0">
+<h2 class="release-version">1.0.0<a class="headerlink" href="#change-1.0.0" title="Permalink to this headline">¶</a></h2>
+Released: Sun Jul 19 2020<div class="section" id="change-1.0.0-feature">
+<h3>feature<a class="headerlink" href="#change-1.0.0-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-1.0.0-0"><span class="target" id="change-a9b98ff1949d0b4d9c706f5c033264a4"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-a9b98ff1949d0b4d9c706f5c033264a4">¶</a></span><p>Improved plugin scanner performance by switching from pkg_resources
+to stevedore.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-1.0.0-1"><span class="target" id="change-584f46c7276dd47cb85df27bc8f1622e"><strong>[feature] [redis]</strong> <a class="changelog-reference headerlink reference internal" href="#change-584f46c7276dd47cb85df27bc8f1622e">¶</a></span><p>Added support for Redis Sentinel.  Pull request courtesy Stéphane Brunner.
+See <a class="reference internal" href="api.html#dogpile.cache.backends.redis.RedisSentinelBackend" title="dogpile.cache.backends.redis.RedisSentinelBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedisSentinelBackend</span></code></a>.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/181">#181</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-1.0.0-misc">
+<h3>misc<a class="headerlink" href="#change-1.0.0-misc" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-1.0.0-2"><span class="target" id="change-6605f93ec536ced06cf7542eeb9efe9a"><strong>[change: py3k]</strong> <a class="changelog-reference headerlink reference internal" href="#change-6605f93ec536ced06cf7542eeb9efe9a">¶</a></span><p>For version 1.0.0, dogpile.cache now supports Python 3.5 and above
+only.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.9.2">
+<h2 class="release-version">0.9.2<a class="headerlink" href="#change-0.9.2" title="Permalink to this headline">¶</a></h2>
+Released: Mon May 4 2020<div class="section" id="change-0.9.2-bug">
+<h3>bug<a class="headerlink" href="#change-0.9.2-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.9.2-0"><span class="target" id="change-ceb71361f514d2321bb61af19dc3ba99"><strong>[bug] [installation]</strong> <a class="changelog-reference headerlink reference internal" href="#change-ceb71361f514d2321bb61af19dc3ba99">¶</a></span><p>Ensured that the “pyproject.toml” file is not included in builds, as the
+presence of this file indicates to pip that a pep-517 installation process
+should be used.  As this mode of operation appears to be not well supported
+by current tools / distros, these problems are avoided within the scope of
+dogpile.cache installation by omitting the file.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/178">#178</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.9.1">
+<h2 class="release-version">0.9.1<a class="headerlink" href="#change-0.9.1" title="Permalink to this headline">¶</a></h2>
+Released: Wed Apr 29 2020<div class="section" id="change-0.9.1-bug">
+<h3>bug<a class="headerlink" href="#change-0.9.1-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.9.1-0"><span class="target" id="change-1517b5a0dac6394b34a13845a16eba04"><strong>[bug] [tests]</strong> <a class="changelog-reference headerlink reference internal" href="#change-1517b5a0dac6394b34a13845a16eba04">¶</a></span><p>Added <code class="docutils literal notranslate"><span class="pre">decorator</span></code> module as a required testing dependency to
+<code class="docutils literal notranslate"><span class="pre">tox.ini</span></code> so that tests work when this is not pre-installed.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.9.1-1"><span class="target" id="change-fe72050b40ddd7f862afaeae6d282e94"><strong>[bug] [redis]</strong> <a class="changelog-reference headerlink reference internal" href="#change-fe72050b40ddd7f862afaeae6d282e94">¶</a></span><p>Added option to the Redis backend
+<a class="reference internal" href="api.html#dogpile.cache.backends.redis.RedisBackend.params.thread_local_lock" title="dogpile.cache.backends.redis.RedisBackend"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">RedisBackend.thread_local_lock</span></code></a>, which when set to False will
+disable the use of a threading local  by the <code class="docutils literal notranslate"><span class="pre">redis</span></code> module in its
+distributed lock service, which is known to interfere with the lock’s
+behavior when used in an “async” use case, within dogpile this would be
+when using the <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.params.async_creation_runner" title="dogpile.cache.region.CacheRegion"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.async_creation_runner</span></code></a> feature. The
+default is conservatively being left at True, but it’s likely this should
+be set to False in all cases, so a warning is emitted if this flag is not
+set to False in conjunction with the distributed lock. Added an optional
+argument to <a class="reference internal" href="api.html#dogpile.cache.backends.redis.RedisBackend" title="dogpile.cache.backends.redis.RedisBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedisBackend</span></code></a> that specifies whether or not a
+thread-local Redis lock should be used.  This is the default, but it breaks
+asynchronous runner compatibility.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/171">#171</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.9.0">
+<h2 class="release-version">0.9.0<a class="headerlink" href="#change-0.9.0" title="Permalink to this headline">¶</a></h2>
+Released: Mon Oct 28 2019<div class="section" id="change-0.9.0-feature">
+<h3>feature<a class="headerlink" href="#change-0.9.0-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.9.0-0"><span class="target" id="change-f5650a16da629346979bff688ee53078"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f5650a16da629346979bff688ee53078">¶</a></span><p>Added logging facililities into <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion" title="dogpile.cache.region.CacheRegion"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheRegion</span></code></a>, to indicate key
+events such as cache keys missing or regeneration of values.  As these can
+be very high volume log messages, <code class="docutils literal notranslate"><span class="pre">logging.DEBUG</span></code> is used as the log
+level for the events.  Pull request courtesy Stéphane Brunner.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.8.0">
+<h2 class="release-version">0.8.0<a class="headerlink" href="#change-0.8.0" title="Permalink to this headline">¶</a></h2>
+Released: Fri Sep 20 2019<div class="section" id="change-0.8.0-bug">
+<h3>bug<a class="headerlink" href="#change-0.8.0-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.8.0-0"><span class="target" id="change-6729560851d410b2347a63bf9ab423d7"><strong>[bug] [setup]</strong> <a class="changelog-reference headerlink reference internal" href="#change-6729560851d410b2347a63bf9ab423d7">¶</a></span><p>Removed the “python setup.py test” feature in favor of a straight run of
+“tox”.   Per Pypa / pytest developers, “setup.py” commands are in general
+headed towards deprecation in favor of tox.  The tox.ini script has been
+updated such that running “tox” with no arguments will perform a single run
+of the test suite against the default installed Python interpreter.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://github.com/pypa/setuptools/issues/1684">https://github.com/pypa/setuptools/issues/1684</a></p>
+<p><a class="reference external" href="https://github.com/pytest-dev/pytest/issues/5534">https://github.com/pytest-dev/pytest/issues/5534</a></p>
+</div>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/157">#157</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.8.0-1"><span class="target" id="change-a3f98cafd7dc726b8fb7c9e92ce3f7e7"><strong>[bug] [py3k]</strong> <a class="changelog-reference headerlink reference internal" href="#change-a3f98cafd7dc726b8fb7c9e92ce3f7e7">¶</a></span><p>Replaced the Python compatbility routines for <code class="docutils literal notranslate"><span class="pre">getfullargspec()</span></code> with a
+fully vendored version from Python 3.3.  Originally, Python was emitting
+deprecation warnings for this function in Python 3.8 alphas.  While this
+change was reverted, it was observed that Python 3 implementations for
+<code class="docutils literal notranslate"><span class="pre">getfullargspec()</span></code> are an order of magnitude slower as of the 3.4 series
+where it was rewritten against <code class="docutils literal notranslate"><span class="pre">Signature</span></code>.  While Python plans to
+improve upon this situation, SQLAlchemy projects for now are using a simple
+replacement to avoid any future issues.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/154">#154</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.8.0-2"><span class="target" id="change-3754cdd16fa3339f5518b49ec767ffce"><strong>[bug] [installation]</strong> <a class="changelog-reference headerlink reference internal" href="#change-3754cdd16fa3339f5518b49ec767ffce">¶</a></span><p>Pinned minimum version of Python decorator module at 4.0.0 (July, 2015) as
+previous versions don’t provide the API that dogpile is using.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/160">#160</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.8.0-3"><span class="target" id="change-ee28913a40f81f5f2c210b2ac91f32be"><strong>[bug] [py3k]</strong> <a class="changelog-reference headerlink reference internal" href="#change-ee28913a40f81f5f2c210b2ac91f32be">¶</a></span><p>Fixed the <a class="reference internal" href="api.html#dogpile.cache.util.sha1_mangle_key" title="dogpile.cache.util.sha1_mangle_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">sha1_mangle_key()</span></code></a> key mangler to coerce incoming Unicode
+objects into bytes as is required by the Py3k version of this function.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/159">#159</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.7.1">
+<h2 class="release-version">0.7.1<a class="headerlink" href="#change-0.7.1" title="Permalink to this headline">¶</a></h2>
+Released: Tue Dec 11 2018<div class="section" id="change-0.7.1-bug">
+<h3>bug<a class="headerlink" href="#change-0.7.1-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.7.1-0"><span class="target" id="change-adf737934be9e364a66f48c9724e7ec8"><strong>[bug] [region]</strong> <a class="changelog-reference headerlink reference internal" href="#change-adf737934be9e364a66f48c9724e7ec8">¶</a></span><p>Fixed regression in 0.7.0 caused by <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/136">#136</a> where the assumed
+arguments for the <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.params.async_creation_runner" title="dogpile.cache.region.CacheRegion"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.async_creation_runner</span></code></a> expanded to
+include the new <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create.params.creator_args" title="dogpile.cache.region.CacheRegion.get_or_create"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.get_or_create.creator_args</span></code></a>
+parameter, as it was not tested that the async runner would be implicitly
+called with these arguments when the <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments()</span></code></a>
+decorator was used.  The exact signature of <code class="docutils literal notranslate"><span class="pre">async_creation_runner</span></code> is
+now restored to have the same arguments in all cases.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/139">#139</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.7.0">
+<h2 class="release-version">0.7.0<a class="headerlink" href="#change-0.7.0" title="Permalink to this headline">¶</a></h2>
+Released: Mon Dec 10 2018<div class="section" id="change-0.7.0-bug">
+<h3>bug<a class="headerlink" href="#change-0.7.0-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.7.0-0"><span class="target" id="change-9a3359c7d4ed55a3ebb5dcca6d40e1e1"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-9a3359c7d4ed55a3ebb5dcca6d40e1e1">¶</a></span><p>The <code class="docutils literal notranslate"><span class="pre">decorator</span></code> module is now used when creating function decorators
+within <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments()</span></code></a> and
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_multi_on_arguments" title="dogpile.cache.region.CacheRegion.cache_multi_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_multi_on_arguments()</span></code></a> so that function signatures
+are preserved.  Pull request courtesy ankitpatel96.</p>
+<p>Additionally adds a small performance enhancement which is to avoid
+internally creating a <code class="docutils literal notranslate"><span class="pre">&#64;wraps()</span></code> decorator for the creator function on
+every get operation, by allowing the arguments to the creator be passed
+separately to <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create" title="dogpile.cache.region.CacheRegion.get_or_create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_or_create()</span></code></a>.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/137">#137</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.7.0-1"><span class="target" id="change-fced77f26953f045d5a893bad9b324b2"><strong>[bug] [py3k]</strong> <a class="changelog-reference headerlink reference internal" href="#change-fced77f26953f045d5a893bad9b324b2">¶</a></span><p>Fixed all Python 3.x deprecation warnings including
+<code class="docutils literal notranslate"><span class="pre">inspect.getargspec()</span></code>.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/129">#129</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.6.8">
+<h2 class="release-version">0.6.8<a class="headerlink" href="#change-0.6.8" title="Permalink to this headline">¶</a></h2>
+Released: Sat Nov 24 2018<ul class="simple">
+<li><p class="caption" id="change-0.6.8-0"><span class="target" id="change-31d9639097442b37a5a9040ae1962f0f"><strong>[change]</strong> <a class="changelog-reference headerlink reference internal" href="#change-31d9639097442b37a5a9040ae1962f0f">¶</a></span><p>Project hosting has moved to GitHub, under the SQLAlchemy
+organization at <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache">https://github.com/sqlalchemy/dogpile.cache</a></p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.6.7">
+<h2 class="release-version">0.6.7<a class="headerlink" href="#change-0.6.7" title="Permalink to this headline">¶</a></h2>
+Released: Thu Jul 26 2018<div class="section" id="change-0.6.7-bug">
+<h3>bug<a class="headerlink" href="#change-0.6.7-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.7-0"><span class="target" id="change-1935b4be92783ee698217cca05798066"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-1935b4be92783ee698217cca05798066">¶</a></span><p>Fixed issue in the <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create_multi" title="dogpile.cache.region.CacheRegion.get_or_create_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_or_create_multi()</span></code></a> method which
+was erroneously considering the cached value as the timestamp field if the
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.invalidate" title="dogpile.cache.region.CacheRegion.invalidate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.invalidate()</span></code></a> method had ben used, usually causing a
+<code class="docutils literal notranslate"><span class="pre">TypeError</span></code> to occur, or in less frequent cases an invalid result for
+whether or not the cached value was invalid, leading to excessive caching
+or regeneration. The issue was a regression caused by an implementation
+issue in the pluggable invalidation feature added in <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/38">#38</a>.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/128">#128</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.6.6">
+<h2 class="release-version">0.6.6<a class="headerlink" href="#change-0.6.6" title="Permalink to this headline">¶</a></h2>
+Released: Wed Jun 27 2018<div class="section" id="change-0.6.6-feature">
+<h3>feature<a class="headerlink" href="#change-0.6.6-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.6-0"><span class="target" id="change-36f31a05f30752a06d57f3a498648762"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-36f31a05f30752a06d57f3a498648762">¶</a></span><p>Added method <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.actual_backend" title="dogpile.cache.region.CacheRegion.actual_backend"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CacheRegion.actual_backend</span></code></a> which calculates and
+caches the actual backend for the region, which may be abstracted by
+the use of one or more <a class="reference internal" href="api.html#dogpile.cache.proxy.ProxyBackend" title="dogpile.cache.proxy.ProxyBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProxyBackend</span></code></a> subclasses.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/123">#123</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.6.6-bug">
+<h3>bug<a class="headerlink" href="#change-0.6.6-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.6-1"><span class="target" id="change-c41a88ee274426bafc78e1715c824989"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-c41a88ee274426bafc78e1715c824989">¶</a></span><p>Fixed a condition in the <a class="reference internal" href="api.html#dogpile.Lock" title="dogpile.Lock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lock</span></code></a> where the “get” function could be
+called a second time unnecessarily, when returning an existing, expired
+value from the cache.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/122">#122</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.6.5">
+<h2 class="release-version">0.6.5<a class="headerlink" href="#change-0.6.5" title="Permalink to this headline">¶</a></h2>
+Released: Mon Mar 5 2018<div class="section" id="change-0.6.5-bug">
+<h3>bug<a class="headerlink" href="#change-0.6.5-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.5-0"><span class="target" id="change-d1e234bc9da77015bc6251b6ab136f3a"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-d1e234bc9da77015bc6251b6ab136f3a">¶</a></span><p>Fixed import issue for Python 3.7 where several variables named “async”
+were, leading to syntax errors.  Pull request courtesy Brian Sheldon.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/119">#119</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.6.4">
+<h2 class="release-version">0.6.4<a class="headerlink" href="#change-0.6.4" title="Permalink to this headline">¶</a></h2>
+Released: Mon Jun 26, 2017<div class="section" id="change-0.6.4-bug">
+<h3>bug<a class="headerlink" href="#change-0.6.4-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.4-0"><span class="target" id="change-2ad035aef391c0e5b481830ec1787ae8"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-2ad035aef391c0e5b481830ec1787ae8">¶</a></span><p>The method <code class="xref py py-meth docutils literal notranslate"><span class="pre">Region.get_or_create_multi()</span></code> will not pass to the
+cache backend if no values are ultimately to be stored, based on
+the use of the <code class="xref py py-paramref docutils literal notranslate"><span class="pre">Region.get_or_create_multi.should_cache_fn</span></code>
+function.  This empty dictionary is unnecessary and can cause API
+problems for backends like that of Redis.  Pull request courtesy
+Tobias Sauerwein.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.6.4-1"><span class="target" id="change-bc031d16442e01aa823b942e546a6cf3"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-bc031d16442e01aa823b942e546a6cf3">¶</a></span><p>The <code class="xref py py-attr docutils literal notranslate"><span class="pre">api.NO_VALUE</span></code> constant now has a fixed <code class="docutils literal notranslate"><span class="pre">__repr__()</span></code>
+output, so that scenarios where this constant’s string value
+ends up being used as a cache key do not create multiple values.
+Pull request courtesy Paul Brown.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.6.4-2"><span class="target" id="change-520ce52466ee024e779e2de6c2684024"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-520ce52466ee024e779e2de6c2684024">¶</a></span><p>A new exception class <a class="reference internal" href="api.html#dogpile.cache.exception.PluginNotFound" title="dogpile.cache.exception.PluginNotFound"><code class="xref py py-class docutils literal notranslate"><span class="pre">exception.PluginNotFound</span></code></a> is now
+raised when a particular cache plugin class cannot be located
+either as a setuptools entrypoint or as a registered backend.
+Previously, a plain <code class="docutils literal notranslate"><span class="pre">Exception</span></code> was thrown.  Pull request
+courtesy Jamie Lennox.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.6.3">
+<h2 class="release-version">0.6.3<a class="headerlink" href="#change-0.6.3" title="Permalink to this headline">¶</a></h2>
+Released: Thu May 18, 2017<div class="section" id="change-0.6.3-feature">
+<h3>feature<a class="headerlink" href="#change-0.6.3-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.3-0"><span class="target" id="change-534afa0f837c2068011f7a0a507bee12"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-534afa0f837c2068011f7a0a507bee12">¶</a></span><p>Added <code class="docutils literal notranslate"><span class="pre">replace_existing_backend</span></code> to
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.configure_from_config" title="dogpile.cache.region.CacheRegion.configure_from_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.configure_from_config()</span></code></a>.
+Pull request courtesy Daniel Kraus.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.6.2">
+<h2 class="release-version">0.6.2<a class="headerlink" href="#change-0.6.2" title="Permalink to this headline">¶</a></h2>
+Released: Tue Aug 16 2016<div class="section" id="change-0.6.2-feature">
+<h3>feature<a class="headerlink" href="#change-0.6.2-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.2-0"><span class="target" id="change-07f6d3b3ee01e99810f379dc31a8d090"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-07f6d3b3ee01e99810f379dc31a8d090">¶</a></span><p>Added a new system to allow custom plugins specific to the issue of
+“invalidate the entire region”, using a new base class
+<a class="reference internal" href="api.html#dogpile.cache.region.RegionInvalidationStrategy" title="dogpile.cache.region.RegionInvalidationStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegionInvalidationStrategy</span></code></a>. As there are many potential
+strategies to this (special backend function, storing special keys, etc.)
+the mechanism for both soft and hard invalidation is now customizable.
+New approaches to region invalidation can be contributed as documented
+recipes.  Pull request courtesy Alexander Makarov.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/38">#38</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.6.2-1"><span class="target" id="change-0ad56e6950d24eeb8aeee933d68b1f19"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-0ad56e6950d24eeb8aeee933d68b1f19">¶</a></span><p>Added a new cache key generator <a class="reference internal" href="api.html#dogpile.cache.util.kwarg_function_key_generator" title="dogpile.cache.util.kwarg_function_key_generator"><code class="xref py py-func docutils literal notranslate"><span class="pre">kwarg_function_key_generator()</span></code></a>,
+which takes keyword arguments as well as positional arguments into
+account when forming the cache key.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/43">#43</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.6.2-bug">
+<h3>bug<a class="headerlink" href="#change-0.6.2-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.2-2"><span class="target" id="change-89f5fe8c1840a68d816a28705b9cab0f"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-89f5fe8c1840a68d816a28705b9cab0f">¶</a></span><p>Restored some more util symbols that users may have been relying upon
+(although these were not necessarily intended as user-facing):
+<code class="docutils literal notranslate"><span class="pre">dogpile.cache.util.coerce_string_conf</span></code>,
+<code class="docutils literal notranslate"><span class="pre">dogpile.cache.util.KeyReentrantMutex</span></code>,
+<code class="docutils literal notranslate"><span class="pre">dogpile.cache.util.memoized_property</span></code>,
+<code class="docutils literal notranslate"><span class="pre">dogpile.cache.util.PluginLoader</span></code>,
+<code class="docutils literal notranslate"><span class="pre">dogpile.cache.util.to_list</span></code>.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.6.1">
+<h2 class="release-version">0.6.1<a class="headerlink" href="#change-0.6.1" title="Permalink to this headline">¶</a></h2>
+Released: Mon Jun 6 2016<div class="section" id="change-0.6.1-bug">
+<h3>bug<a class="headerlink" href="#change-0.6.1-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.1-0"><span class="target" id="change-0008831af0392b04db1817771788ebab"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-0008831af0392b04db1817771788ebab">¶</a></span><p>Fixed imports for <code class="docutils literal notranslate"><span class="pre">dogpile.core</span></code> restoring <code class="docutils literal notranslate"><span class="pre">ReadWriteMutex</span></code>
+and <code class="docutils literal notranslate"><span class="pre">NameRegistry</span></code> into the base namespace, in addition to
+<code class="docutils literal notranslate"><span class="pre">dogpile.core.nameregistry</span></code> and <code class="docutils literal notranslate"><span class="pre">dogpile.core.readwrite_lock</span></code>.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/99">#99</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.6.0">
+<h2 class="release-version">0.6.0<a class="headerlink" href="#change-0.6.0" title="Permalink to this headline">¶</a></h2>
+Released: Mon Jun 6 2016<div class="section" id="change-0.6.0-feature">
+<h3>feature<a class="headerlink" href="#change-0.6.0-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.0-0"><span class="target" id="change-47cf8f9b28eaa00dc94440323b04f74c"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-47cf8f9b28eaa00dc94440323b04f74c">¶</a></span><p>The <code class="docutils literal notranslate"><span class="pre">dogpile.core</span></code> library has been rolled in as part of the
+<code class="docutils literal notranslate"><span class="pre">dogpile.cache</span></code> distribution.   The configuration of the <code class="docutils literal notranslate"><span class="pre">dogpile</span></code>
+name as a namespace package is also removed from <code class="docutils literal notranslate"><span class="pre">dogpile.cache</span></code>.
+In order to allow existing installations of <code class="docutils literal notranslate"><span class="pre">dogpile.core</span></code> as a separate
+package to remain unaffected, the <code class="docutils literal notranslate"><span class="pre">.core</span></code> package has been retired
+within <code class="docutils literal notranslate"><span class="pre">dogpile.cache</span></code> directly; the <a class="reference internal" href="api.html#dogpile.Lock" title="dogpile.Lock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lock</span></code></a> class is now
+available directly as <code class="docutils literal notranslate"><span class="pre">dogpile.Lock</span></code> and the additional <code class="docutils literal notranslate"><span class="pre">dogpile.core</span></code>
+constructs are under the <code class="docutils literal notranslate"><span class="pre">dogpile.util</span></code> namespace.</p>
+<p>Additionally, the long-deprecated <code class="docutils literal notranslate"><span class="pre">dogpile.core.Dogpile</span></code> and
+<code class="docutils literal notranslate"><span class="pre">dogpile.core.SyncReaderDogpile</span></code> classes have been removed.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/91">#91</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.6.0-bug">
+<h3>bug<a class="headerlink" href="#change-0.6.0-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.6.0-1"><span class="target" id="change-7061032b8e712faa0f0eee8ff73609e0"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-7061032b8e712faa0f0eee8ff73609e0">¶</a></span><p>The Redis backend now creates a copy of the “arguments” dictionary passed
+to it, before popping values out of it.  This prevents the given
+dictionary from losing its keys.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.6.0-2"><span class="target" id="change-3f6d50d2d67a80190492636af2f889be"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-3f6d50d2d67a80190492636af2f889be">¶</a></span><p>Fixed bug in “null” backend where <code class="xref py py-class docutils literal notranslate"><span class="pre">NullLock</span></code> did not
+accept a flag for the <code class="xref py py-meth docutils literal notranslate"><span class="pre">NullLock.acquire()</span></code> method, nor did
+it return a boolean value for “success”.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/97">#97</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.5.7">
+<h2 class="release-version">0.5.7<a class="headerlink" href="#change-0.5.7" title="Permalink to this headline">¶</a></h2>
+Released: Mon Oct 19 2015<div class="section" id="change-0.5.7-feature">
+<h3>feature<a class="headerlink" href="#change-0.5.7-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.7-0"><span class="target" id="change-581d2dfa11c8641d9b6f834e5502eebe"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-581d2dfa11c8641d9b6f834e5502eebe">¶</a></span><p>Added new parameter <a class="reference internal" href="api.html#dogpile.cache.backends.memcached.GenericMemcachedBackend.params.lock_timeout" title="dogpile.cache.backends.memcached.GenericMemcachedBackend"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">GenericMemcachedBackend.lock_timeout</span></code></a>,
+used in conjunction with
+<a class="reference internal" href="api.html#dogpile.cache.backends.memcached.GenericMemcachedBackend.params.distributed_lock" title="dogpile.cache.backends.memcached.GenericMemcachedBackend"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">GenericMemcachedBackend.distributed_lock</span></code></a>, will specify the
+timeout used when communicating to the <code class="docutils literal notranslate"><span class="pre">.add()</span></code> method of the memcached
+client.  Pull request courtesy Frits Stegmann and Morgan Fainberg.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/54">#54</a>, <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/37">pull request 37</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.7-1"><span class="target" id="change-3434a137232e587c56c899406e3526dd"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-3434a137232e587c56c899406e3526dd">¶</a></span><p>Added a new flag <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.configure.params.replace_existing_backend" title="dogpile.cache.region.CacheRegion.configure"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.configure.replace_existing_backend</span></code></a>,
+allows a region to have a new backend replace an existing one.
+Pull request courtesy hbccbh.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/65">#65</a>, <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/35">pull request 35</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.7-2"><span class="target" id="change-bab16e018d75f5c9b6a77d081b0b1f01"><strong>[feature] [tests]</strong> <a class="changelog-reference headerlink reference internal" href="#change-bab16e018d75f5c9b6a77d081b0b1f01">¶</a></span><p>Test suite now runs using py.test.  Pull request courtesy
+John Anderson.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/33">pull request 33</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.5.7-bug">
+<h3>bug<a class="headerlink" href="#change-0.5.7-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.7-3"><span class="target" id="change-b1ce69cf1915f97d25f405ffa1daeb6d"><strong>[bug] [redis]</strong> <a class="changelog-reference headerlink reference internal" href="#change-b1ce69cf1915f97d25f405ffa1daeb6d">¶</a></span><p>Repaired the <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_multi" title="dogpile.cache.region.CacheRegion.get_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_multi()</span></code></a> method when used with a
+list of zero length against the redis backend.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/74">#74</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.5.6">
+<h2 class="release-version">0.5.6<a class="headerlink" href="#change-0.5.6" title="Permalink to this headline">¶</a></h2>
+Released: Mon Feb 2 2015<div class="section" id="change-0.5.6-feature">
+<h3>feature<a class="headerlink" href="#change-0.5.6-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.6-0"><span class="target" id="change-3f14b6b571458399acc1fa0adf141b88"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-3f14b6b571458399acc1fa0adf141b88">¶</a></span><p>Changed the pickle protocol for the file/DBM backend to
+<code class="docutils literal notranslate"><span class="pre">pickle.HIGHEST_PROTOCOL</span></code> when producing new pickles,
+to match that of the redis and memorypickle backends.
+Pull request courtesy anentropic.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/30">pull request 30</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.5.5">
+<h2 class="release-version">0.5.5<a class="headerlink" href="#change-0.5.5" title="Permalink to this headline">¶</a></h2>
+Released: Wed Jan 21 2015<div class="section" id="change-0.5.5-feature">
+<h3>feature<a class="headerlink" href="#change-0.5.5-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.5-0"><span class="target" id="change-9289f479730339107b20de3b315804bd"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-9289f479730339107b20de3b315804bd">¶</a></span><p>Added new arguments
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments.params.function_key_generator" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments.function_key_generator</span></code></a> and
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_multi_on_arguments.params.function_multi_key_generator" title="dogpile.cache.region.CacheRegion.cache_multi_on_arguments"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.cache_multi_on_arguments.function_multi_key_generator</span></code></a>
+which serve as per-decorator replacements for the region-wide
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.params.function_key_generator" title="dogpile.cache.region.CacheRegion"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.function_key_generator</span></code></a> and
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.params.function_multi_key_generator" title="dogpile.cache.region.CacheRegion"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.function_multi_key_generator</span></code></a> parameters,
+respectively, so that custom key production schemes can be applied
+on a per-function basis within one region.
+Pull request courtesy Hongbin Lu.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/26">pull request 26</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.5.5-bug">
+<h3>bug<a class="headerlink" href="#change-0.5.5-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.5-1"><span class="target" id="change-da23f8668894164e90b3ffb7f8ce319f"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-da23f8668894164e90b3ffb7f8ce319f">¶</a></span><p>Fixed bug where sending -1 for the
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create.params.expiration_time" title="dogpile.cache.region.CacheRegion.get_or_create"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.get_or_create.expiration_time</span></code></a> parameter to
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create" title="dogpile.cache.region.CacheRegion.get_or_create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_or_create()</span></code></a> or
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create_multi" title="dogpile.cache.region.CacheRegion.get_or_create_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_or_create_multi()</span></code></a>
+would fail to honor the setting as “no expiration time”.  Pull request
+courtesy Hongbin Lu.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/71">#71</a>, <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/25">pull request 25</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.5-2"><span class="target" id="change-f4ab19b3cb9fb11865eddeb42f763c31"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f4ab19b3cb9fb11865eddeb42f763c31">¶</a></span><p>The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> argument is now propagated when calling
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.configure_from_config" title="dogpile.cache.region.CacheRegion.configure_from_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.configure_from_config()</span></code></a>.  Pull request courtesy
+Jonathan Vanasco.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/41">#41</a>, <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/28">pull request 28</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.5-3"><span class="target" id="change-4ec1bb2a7a7fe0bfccb75d52c22ca39e"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-4ec1bb2a7a7fe0bfccb75d52c22ca39e">¶</a></span><p>Fixed tests under py.test, which were importing a symbol from
+pytest itself <code class="docutils literal notranslate"><span class="pre">is_unittest</span></code> which has been removed.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.5.4">
+<h2 class="release-version">0.5.4<a class="headerlink" href="#change-0.5.4" title="Permalink to this headline">¶</a></h2>
+Released: Sat Jun 14 2014<div class="section" id="change-0.5.4-feature">
+<h3>feature<a class="headerlink" href="#change-0.5.4-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.4-0"><span class="target" id="change-8ac4513518ac5ff998bf7cbe386f8d97"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-8ac4513518ac5ff998bf7cbe386f8d97">¶</a></span><p>Added new <a class="reference internal" href="api.html#dogpile.cache.backends.null.NullBackend" title="dogpile.cache.backends.null.NullBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullBackend</span></code></a>, for testing and cache-disabling
+purposes.  Pull request courtesy Wichert Akkerman.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/18">pull request 18</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.4-1"><span class="target" id="change-f0dedc6203ee2a8011ceccbc1f877bae"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f0dedc6203ee2a8011ceccbc1f877bae">¶</a></span><p>Added new <a class="reference internal" href="api.html#dogpile.cache.backends.redis.RedisBackend.params.connection_pool" title="dogpile.cache.backends.redis.RedisBackend"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">RedisBackend.connection_pool</span></code></a> option
+on the Redis backend; this can be passed a <code class="docutils literal notranslate"><span class="pre">redis.ConnectionPool</span></code>
+instance directly.  Pull request courtesy Masayuko.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/17">pull request 17</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.4-2"><span class="target" id="change-1c2ea7203added6759dada680cc8d982"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-1c2ea7203added6759dada680cc8d982">¶</a></span><p>Added new <a class="reference internal" href="api.html#dogpile.cache.backends.redis.RedisBackend.params.socket_timeout" title="dogpile.cache.backends.redis.RedisBackend"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">RedisBackend.socket_timeout</span></code></a> option
+on the Redis backend.  Pull request courtesy
+Saulius Menkevičius.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/16">pull request 16</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.4-3"><span class="target" id="change-57be77b3b1109f53ae4f4c73568fc610"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-57be77b3b1109f53ae4f4c73568fc610">¶</a></span><p>Added support for tests to run via py.test.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.5.4-bug">
+<h3>bug<a class="headerlink" href="#change-0.5.4-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.4-4"><span class="target" id="change-f8f9360999da4b2de9dffd7b1a138090"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f8f9360999da4b2de9dffd7b1a138090">¶</a></span><p>Added missing Mako test dependency to setup.py.
+Pull request courtesy Wichert Akkerman.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/19">pull request 19</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.4-5"><span class="target" id="change-5889318f3666ef80fcf3a5e55de56b00"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-5889318f3666ef80fcf3a5e55de56b00">¶</a></span><p>Fixed bug where calling <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_multi" title="dogpile.cache.region.CacheRegion.get_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_multi()</span></code></a> or
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.set_multi" title="dogpile.cache.region.CacheRegion.set_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.set_multi()</span></code></a> with an empty list would cause failures
+based on backend.  Pull request courtesy Wichert Akkerman.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/58">#58</a>, <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/20">pull request 20</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.4-6"><span class="target" id="change-2dd7b10181387fd18f6dd1304b93f643"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-2dd7b10181387fd18f6dd1304b93f643">¶</a></span><p>Repaired the entry point for Mako templates; the name of the entrypoint
+itself was wrong vs. what was in the docs, but beyond that the entrypoint
+would load the wrong module name.  Pull request courtesy zoomorph.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/15">pull request 15</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.4-7"><span class="target" id="change-c25ef5066d4fab28b28735ab88b2f835"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-c25ef5066d4fab28b28735ab88b2f835">¶</a></span><p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">coerce_string_conf()</span></code> function, which is used by
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Region.configure_from_config()</span></code>, will now recognize floating point
+values when parsing conf strings and deliver them as such; this supports
+non-integer values such as Redis <code class="docutils literal notranslate"><span class="pre">lock_sleep</span></code>.  Pullreq courtesy
+Jeff Dairiki.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/57">#57</a>, <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/13">pull request 13</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.5.3">
+<h2 class="release-version">0.5.3<a class="headerlink" href="#change-0.5.3" title="Permalink to this headline">¶</a></h2>
+Released: Wed Jan 8 2014<div class="section" id="change-0.5.3-feature">
+<h3>feature<a class="headerlink" href="#change-0.5.3-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.3-0"><span class="target" id="change-3babe0e2e93d2e81205cc8420f7dd948"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-3babe0e2e93d2e81205cc8420f7dd948">¶</a></span><p>Added a <code class="docutils literal notranslate"><span class="pre">get()</span></code> method to complement the <code class="docutils literal notranslate"><span class="pre">set()</span></code>, <code class="docutils literal notranslate"><span class="pre">invalidate()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">refresh()</span></code> methods established on functions decorated by
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments()</span></code></a> and
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_multi_on_arguments" title="dogpile.cache.region.CacheRegion.cache_multi_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_multi_on_arguments()</span></code></a>.  Pullreq courtesy
+Eric Hanchrow.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/55">#55</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.3-1"><span class="target" id="change-b069b36d12644a4149d11dfcb071bd57"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-b069b36d12644a4149d11dfcb071bd57">¶</a></span><p>Added a new variant on <a class="reference internal" href="api.html#dogpile.cache.backends.memory.MemoryBackend" title="dogpile.cache.backends.memory.MemoryBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryBackend</span></code></a>, <a class="reference internal" href="api.html#dogpile.cache.backends.memory.MemoryPickleBackend" title="dogpile.cache.backends.memory.MemoryPickleBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryPickleBackend</span></code></a>.
+This backend applies <code class="docutils literal notranslate"><span class="pre">pickle.dumps()</span></code> and <code class="docutils literal notranslate"><span class="pre">pickle.loads()</span></code> to cached
+values upon set and get, so that similar copy-on-cache behavior as that
+of other backends is employed, guarding cached values against subsequent
+in-memory state changes.  Pullreq courtesy Jonathan Vanasco.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/51">#51</a>, <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/11">pull request 11</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.5.3-bug">
+<h3>bug<a class="headerlink" href="#change-0.5.3-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.3-2"><span class="target" id="change-62ae95cc1002bd5a5448b29bd7496d41"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-62ae95cc1002bd5a5448b29bd7496d41">¶</a></span><p>Fixed bug where the key_mangler would get in the way of usage of the
+async_creation_runner feature within the <code class="xref py py-meth docutils literal notranslate"><span class="pre">Region.get_or_create()</span></code>
+method, by sending in the mangled key instead of the original key.  The
+“mangled” key is only supposed to be exposed within the backend storage,
+not the creation function which sends the key back into the <code class="xref py py-meth docutils literal notranslate"><span class="pre">Region.set()</span></code>,
+which does the mangling itself.  Pull request courtesy Ryan Kolak.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/10">pull request 10</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.3-3"><span class="target" id="change-6f12ed1f7c824e7ea17d6e5b6e8d8b0d"><strong>[bug] [py3k]</strong> <a class="changelog-reference headerlink reference internal" href="#change-6f12ed1f7c824e7ea17d6e5b6e8d8b0d">¶</a></span><p>Fixed bug where the <code class="xref py py-meth docutils literal notranslate"><span class="pre">Region.get_multi()</span></code> method wasn’t calling
+the backend correctly in Py3K (e.g. was passing a destructive <code class="docutils literal notranslate"><span class="pre">map()</span></code>
+object) which would cause this method to fail on the memcached backend.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.3-4"><span class="target" id="change-ffcac0cb0d7f15730564fa0218645249"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-ffcac0cb0d7f15730564fa0218645249">¶</a></span><p>Fixed a format call in the redis backend which would otherwise fail
+on Python 2.6; courtesy Jeff Dairiki.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/9">pull request 9</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.5.2">
+<h2 class="release-version">0.5.2<a class="headerlink" href="#change-0.5.2" title="Permalink to this headline">¶</a></h2>
+Released: Fri Nov 15 2013<div class="section" id="change-0.5.2-feature">
+<h3>feature<a class="headerlink" href="#change-0.5.2-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.2-0"><span class="target" id="change-87ea687c9a525f1ad58b2963036ace4f"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-87ea687c9a525f1ad58b2963036ace4f">¶</a></span><p>Added a new argument <code class="docutils literal notranslate"><span class="pre">lock_factory</span></code> to the <a class="reference internal" href="api.html#dogpile.cache.backends.file.DBMBackend" title="dogpile.cache.backends.file.DBMBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBMBackend</span></code></a>
+implementation.  This allows for drop-in replacement of the default
+<a class="reference internal" href="api.html#dogpile.cache.backends.file.FileLock" title="dogpile.cache.backends.file.FileLock"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileLock</span></code></a> backend, which builds on <code class="docutils literal notranslate"><span class="pre">os.flock()</span></code> and only
+supports Unix platforms.  A new abstract base <a class="reference internal" href="api.html#dogpile.cache.backends.file.AbstractFileLock" title="dogpile.cache.backends.file.AbstractFileLock"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractFileLock</span></code></a>
+has been added to provide a common base for custom lock implementations.
+The documentation points to an example thread-based rw lock which is
+now tested on Windows.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/44">#44</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.5.2-bug">
+<h3>bug<a class="headerlink" href="#change-0.5.2-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.2-1"><span class="target" id="change-0588ab3811118efafa06df69cf6380c0"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-0588ab3811118efafa06df69cf6380c0">¶</a></span><p>Fixes to routines on Windows, including that default unit tests pass,
+and an adjustment to the “soft expiration” feature to ensure the
+expiration works given windows time.time() behavior.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.2-2"><span class="target" id="change-f50fb421dfe25dcab8eaab867dfac95d"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f50fb421dfe25dcab8eaab867dfac95d">¶</a></span><p>Added py2.6 compatibility for unsupported <code class="docutils literal notranslate"><span class="pre">total_seconds()</span></code> call
+in region.py</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.5.1">
+<h2 class="release-version">0.5.1<a class="headerlink" href="#change-0.5.1" title="Permalink to this headline">¶</a></h2>
+Released: Thu Oct 10 2013<div class="section" id="change-0.5.1-feature">
+<h3>feature<a class="headerlink" href="#change-0.5.1-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.1-0"><span class="target" id="change-0dd2dd74cdf269f850ccc2e84620d6f5"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-0dd2dd74cdf269f850ccc2e84620d6f5">¶</a></span><p>The <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.invalidate" title="dogpile.cache.region.CacheRegion.invalidate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.invalidate()</span></code></a> method now supports an option
+<code class="docutils literal notranslate"><span class="pre">hard=True|False</span></code>.  A “hard” invalidation, equivalent to the
+existing functionality of <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.invalidate" title="dogpile.cache.region.CacheRegion.invalidate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.invalidate()</span></code></a>, means
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create" title="dogpile.cache.region.CacheRegion.get_or_create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_or_create()</span></code></a> will not return the “old” value at
+all, forcing all getters to regenerate or wait for a regeneration.
+“soft” invalidation means that getters can continue to return the
+old value until a new one is generated.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/38">#38</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.1-1"><span class="target" id="change-33a62c138e7b5a3ae0f11bc039d28306"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-33a62c138e7b5a3ae0f11bc039d28306">¶</a></span><p>New dogpile-specific exception classes have been added, so that
+issues like “region already configured”, “region unconfigured”,
+raise dogpile-specific exceptions.  Other exception classes have
+been made more specific.  Also added new accessor
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.is_configured" title="dogpile.cache.region.CacheRegion.is_configured"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CacheRegion.is_configured</span></code></a>. Pullreq courtesy Morgan Fainberg.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/40">#40</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.5.1-bug">
+<h3>bug<a class="headerlink" href="#change-0.5.1-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.1-2"><span class="target" id="change-e2eb212d5db8936ffcd1fa031edfa346"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-e2eb212d5db8936ffcd1fa031edfa346">¶</a></span><p>Erroneously missed when the same change was made for <code class="docutils literal notranslate"><span class="pre">set()</span></code>
+in 0.5.0, the Redis backend now uses <code class="docutils literal notranslate"><span class="pre">pickle.HIGHEST_PROTOCOL</span></code>
+for the <code class="docutils literal notranslate"><span class="pre">set_multi()</span></code> method as well when producing pickles.
+Courtesy Łukasz Fidosz.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.1-3"><span class="target" id="change-f1cef983dd56df64647b6bdcd73d0b7d"><strong>[bug] [py3k] [redis]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f1cef983dd56df64647b6bdcd73d0b7d">¶</a></span><p>Fixed an errant <code class="docutils literal notranslate"><span class="pre">u''</span></code> causing incompatibility in Python3.2
+in the Redis backend, courtesy Jimmey Mabey.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/39">#39</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.1-4"><span class="target" id="change-7d679662f9c1cd7f22ae533bf93aa3fe"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-7d679662f9c1cd7f22ae533bf93aa3fe">¶</a></span><p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">util.coerce_string_conf()</span></code> method now correctly coerces
+negative integers and those with a leading + sign. This previously
+prevented configuring a <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion" title="dogpile.cache.region.CacheRegion"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheRegion</span></code></a> with an <code class="docutils literal notranslate"><span class="pre">expiration_time</span></code>
+of <code class="docutils literal notranslate"><span class="pre">'-1'</span></code>. Courtesy David Beitey.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.1-5"><span class="target" id="change-89787f96f239a1db76a09fd6a0876c36"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-89787f96f239a1db76a09fd6a0876c36">¶</a></span><p>The <code class="docutils literal notranslate"><span class="pre">refresh()</span></code> method on <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_multi_on_arguments" title="dogpile.cache.region.CacheRegion.cache_multi_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_multi_on_arguments()</span></code></a>
+now supports the <code class="docutils literal notranslate"><span class="pre">asdict</span></code> flag.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.5.0">
+<h2 class="release-version">0.5.0<a class="headerlink" href="#change-0.5.0" title="Permalink to this headline">¶</a></h2>
+Released: Fri Jun 21 2013<div class="section" id="change-0.5.0-feature">
+<h3>feature<a class="headerlink" href="#change-0.5.0-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.0-0"><span class="target" id="change-e5f3d35873dd7045cc4f8a7f4e81c6cb"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-e5f3d35873dd7045cc4f8a7f4e81c6cb">¶</a></span><p>Now using the <code class="docutils literal notranslate"><span class="pre">Lock</span></code> included with the Python
+<code class="docutils literal notranslate"><span class="pre">redis</span></code> backend, which adds <code class="docutils literal notranslate"><span class="pre">lock_timeout</span></code>
+and <code class="docutils literal notranslate"><span class="pre">lock_sleep</span></code> arguments to the <a class="reference internal" href="api.html#dogpile.cache.backends.redis.RedisBackend" title="dogpile.cache.backends.redis.RedisBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedisBackend</span></code></a>.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.0-1"><span class="target" id="change-a96ad12aa380823ad0fa8cd9da31acf4"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-a96ad12aa380823ad0fa8cd9da31acf4">¶</a></span><p>Added new methods <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create_multi" title="dogpile.cache.region.CacheRegion.get_or_create_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_or_create_multi()</span></code></a>
+and <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_multi_on_arguments" title="dogpile.cache.region.CacheRegion.cache_multi_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_multi_on_arguments()</span></code></a>, which
+make use of the <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_multi" title="dogpile.cache.region.CacheRegion.get_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_multi()</span></code></a> and similar
+functions to store and retrieve multiple keys at once while
+maintaining dogpile semantics for each.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/33">#33</a>, <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/35">#35</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.0-2"><span class="target" id="change-dac67452de22fef43d36634272aaa4e7"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-dac67452de22fef43d36634272aaa4e7">¶</a></span><p>Added a method <code class="docutils literal notranslate"><span class="pre">refresh()</span></code> to functions decorated by
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments()</span></code></a> and
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_multi_on_arguments" title="dogpile.cache.region.CacheRegion.cache_multi_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_multi_on_arguments()</span></code></a>, to complement
+<code class="docutils literal notranslate"><span class="pre">invalidate()</span></code> and <code class="docutils literal notranslate"><span class="pre">set()</span></code>.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/36">#36</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.0-3"><span class="target" id="change-8b0df3dd29ae3b2133eaffaf5708ed33"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-8b0df3dd29ae3b2133eaffaf5708ed33">¶</a></span><p><a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.configure" title="dogpile.cache.region.CacheRegion.configure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.configure()</span></code></a> accepts an
+optional <code class="docutils literal notranslate"><span class="pre">datetime.timedelta</span></code> object
+for the <code class="docutils literal notranslate"><span class="pre">expiration_time</span></code> argument as well
+as an integer, courtesy Jack Lutz.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/13">#13</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.0-4"><span class="target" id="change-6da9117b4816ae747dea94c715d08d76"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-6da9117b4816ae747dea94c715d08d76">¶</a></span><p>The <code class="docutils literal notranslate"><span class="pre">expiration_time</span></code> argument passed to
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments()</span></code></a>
+may be a callable, to return a dynamic
+timeout value.  Courtesy David Beitey.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/20">#20</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.0-5"><span class="target" id="change-303a2346e07fd9e2dacdd012138edc1c"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-303a2346e07fd9e2dacdd012138edc1c">¶</a></span><p>Added support for simple augmentation of existing
+backends using the <a class="reference internal" href="api.html#dogpile.cache.proxy.ProxyBackend" title="dogpile.cache.proxy.ProxyBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProxyBackend</span></code></a> class.
+Thanks to Tim Hanus for the great effort with
+development, testing, and documentation.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/26">#26</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.0-6"><span class="target" id="change-de8eaefc128755672e56f0ff1b9ecad2"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-de8eaefc128755672e56f0ff1b9ecad2">¶</a></span><p>Full support for multivalue get/set/delete
+added, using <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_multi" title="dogpile.cache.region.CacheRegion.get_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_multi()</span></code></a>,
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.set_multi" title="dogpile.cache.region.CacheRegion.set_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.set_multi()</span></code></a>, <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.delete_multi" title="dogpile.cache.region.CacheRegion.delete_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.delete_multi()</span></code></a>,
+courtesy Marcos Araujo Sobrinho.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/14">pull request 14</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.5.0-bug">
+<h3>bug<a class="headerlink" href="#change-0.5.0-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.0-7"><span class="target" id="change-1badbea4436e0410f88871e88e6f93e6"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-1badbea4436e0410f88871e88e6f93e6">¶</a></span><p>The Redis backend now uses <code class="docutils literal notranslate"><span class="pre">pickle.HIGHEST_PROTOCOL</span></code> when
+producing pickles.  Courtesy Lx Yu.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.0-8"><span class="target" id="change-7ec1b644eb3a4d70f5308192a152b935"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-7ec1b644eb3a4d70f5308192a152b935">¶</a></span><p><a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments()</span></code></a> now has a new argument
+<code class="docutils literal notranslate"><span class="pre">to_str</span></code>, defaults to <code class="docutils literal notranslate"><span class="pre">str()</span></code>.  Can be replaced with <code class="docutils literal notranslate"><span class="pre">unicode()</span></code>
+or other functions to support caching of functions that
+accept non-unicode arguments.  Initial patch courtesy Lx Yu.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.5.0-9"><span class="target" id="change-5cd51827d95010fcc7c9e51b5cc668cd"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-5cd51827d95010fcc7c9e51b5cc668cd">¶</a></span><p>Fixed bug where the “name” parameter for
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion" title="dogpile.cache.region.CacheRegion"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheRegion</span></code></a> was ignored entirely.
+Courtesy Wichert Akkerman.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/27">#27</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.5.0-misc">
+<h3>misc<a class="headerlink" href="#change-0.5.0-misc" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.5.0-10"><span class="target" id="change-eb87f2d379b5596882e5612690daa6a2"><strong>[misc]</strong> <a class="changelog-reference headerlink reference internal" href="#change-eb87f2d379b5596882e5612690daa6a2">¶</a></span><p>Source repository has been moved to git.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.4.3">
+<h2 class="release-version">0.4.3<a class="headerlink" href="#change-0.4.3" title="Permalink to this headline">¶</a></h2>
+Released: Thu Apr 4 2013<div class="section" id="change-0.4.3-feature">
+<h3>feature<a class="headerlink" href="#change-0.4.3-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.4.3-0"><span class="target" id="change-07d476b7967b8f8780af932e579b53a2"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-07d476b7967b8f8780af932e579b53a2">¶</a></span><p><a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create" title="dogpile.cache.region.CacheRegion.get_or_create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_or_create()</span></code></a> and
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments()</span></code></a> now accept a new
+argument <code class="docutils literal notranslate"><span class="pre">should_cache_fn</span></code>, receives the value
+returned by the “creator” and then returns True or
+False, where True means “cache plus return”,
+False means “return the value but don’t cache it.”</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/13">pull request 13</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.4.3-bug">
+<h3>bug<a class="headerlink" href="#change-0.4.3-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.4.3-1"><span class="target" id="change-8d502e92619d0a810c04fc254fdfe8de"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-8d502e92619d0a810c04fc254fdfe8de">¶</a></span><p>Added support for the <code class="docutils literal notranslate"><span class="pre">cache_timeout</span></code> Mako
+argument to the Mako plugin, which will pass
+the value to the <code class="docutils literal notranslate"><span class="pre">expiration_time</span></code> argument
+of <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.get_or_create" title="dogpile.cache.region.CacheRegion.get_or_create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.get_or_create()</span></code></a>.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.4.2">
+<h2 class="release-version">0.4.2<a class="headerlink" href="#change-0.4.2" title="Permalink to this headline">¶</a></h2>
+Released: Sat Jan 19 2013<div class="section" id="change-0.4.2-feature">
+<h3>feature<a class="headerlink" href="#change-0.4.2-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.4.2-0"><span class="target" id="change-8c6be78cbf9c36f4fea3b552c4ffa41f"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-8c6be78cbf9c36f4fea3b552c4ffa41f">¶</a></span><p>An “async creator” function can be specified to
+<a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion" title="dogpile.cache.region.CacheRegion"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheRegion</span></code></a> which allows the “creation” function
+to be called asynchronously or be subsituted for
+another asynchronous creation scheme.  Courtesy
+Ralph Bean.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/10">pull request 10</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.4.1">
+<h2 class="release-version">0.4.1<a class="headerlink" href="#change-0.4.1" title="Permalink to this headline">¶</a></h2>
+Released: Sat Dec 15 2012<div class="section" id="change-0.4.1-feature">
+<h3>feature<a class="headerlink" href="#change-0.4.1-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.4.1-0"><span class="target" id="change-62ca869edd5cc8560a7fcd4922a6060d"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-62ca869edd5cc8560a7fcd4922a6060d">¶</a></span><p>The function decorated by <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.cache_on_arguments" title="dogpile.cache.region.CacheRegion.cache_on_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CacheRegion.cache_on_arguments()</span></code></a>
+now includes a <code class="docutils literal notranslate"><span class="pre">set()</span></code> method, in addition to the existing
+<code class="docutils literal notranslate"><span class="pre">invalidate()</span></code> method.   Like <code class="docutils literal notranslate"><span class="pre">invalidate()</span></code>, it accepts
+a set of function arguments, but additionally accepts as the
+first positional argument a new value to place in the cache,
+to take the place of that key.  Courtesy Antoine Bertin.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/pull-request/9">pull request 9</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.4.1-1"><span class="target" id="change-f3d335a01e9dfb19a62b1d1aafb52011"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f3d335a01e9dfb19a62b1d1aafb52011">¶</a></span><p>Redis backend now accepts optional “url” argument,
+will be passed to the new <code class="docutils literal notranslate"><span class="pre">StrictRedis.from_url()</span></code>
+method to determine connection info.  Courtesy
+Jon Rosebaugh.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.4.1-2"><span class="target" id="change-17b4ed14561826bd9aab42d27995435c"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-17b4ed14561826bd9aab42d27995435c">¶</a></span><p>Redis backend now accepts optional “password”
+argument.  Courtesy Jon Rosebaugh.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.4.1-3"><span class="target" id="change-a2eb06d604782fd33fae0a10c51e20d1"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-a2eb06d604782fd33fae0a10c51e20d1">¶</a></span><p>DBM backend has “fallback” when calling dbm.get() to
+instead use dictionary access + KeyError, in the case
+that the “gdbm” backend is used which does not include
+.get().  Courtesy Jon Rosebaugh.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.4.1-bug">
+<h3>bug<a class="headerlink" href="#change-0.4.1-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.4.1-4"><span class="target" id="change-0848e271c95e0b217c34967cf9cc6f88"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-0848e271c95e0b217c34967cf9cc6f88">¶</a></span><p>Fixed bug in DBM backend whereby if an error occurred
+during the “write” operation, the file lock, if enabled,
+would not be released, thereby deadlocking the app.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/15">#15</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.4.1-5"><span class="target" id="change-9c35a33fb4defd2c48d9588f9c72bfe2"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-9c35a33fb4defd2c48d9588f9c72bfe2">¶</a></span><p>The <a class="reference internal" href="api.html#dogpile.cache.util.function_key_generator" title="dogpile.cache.util.function_key_generator"><code class="xref py py-func docutils literal notranslate"><span class="pre">util.function_key_generator()</span></code></a> used by the
+function decorator no longer coerces non-unicode
+arguments into a Python unicode object on Python 2.x;
+this causes failures on backends such as DBM which
+on Python 2.x apparently require bytestrings.  The
+key_mangler is still needed if actual unicode arguments
+are being used by the decorated function, however.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/12">#12</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.4.0">
+<h2 class="release-version">0.4.0<a class="headerlink" href="#change-0.4.0" title="Permalink to this headline">¶</a></h2>
+Released: Tue Oct 30 2012<div class="section" id="change-0.4.0-bug">
+<h3>bug<a class="headerlink" href="#change-0.4.0-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.4.0-0"><span class="target" id="change-e25dfa380964255aa4c623ae6ff723af"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-e25dfa380964255aa4c623ae6ff723af">¶</a></span><p>Using dogpile.core 0.4.0 now, fixes a critical
+bug whereby dogpile pileup could occur on first value
+get across multiple processes, due to reliance upon
+a non-shared creation time.  This is a dogpile.core
+issue.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/1">#1</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.4.0-1"><span class="target" id="change-e8fb6b92a4861fd77499251a63211017"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-e8fb6b92a4861fd77499251a63211017">¶</a></span><p>Fixed missing __future__ with_statement
+directive in region.py.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.3.1">
+<h2 class="release-version">0.3.1<a class="headerlink" href="#change-0.3.1" title="Permalink to this headline">¶</a></h2>
+Released: Tue Sep 25 2012<div class="section" id="change-0.3.1-bug">
+<h3>bug<a class="headerlink" href="#change-0.3.1-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.3.1-0"><span class="target" id="change-c104cf4c043bac521ef0d326c29ab045"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-c104cf4c043bac521ef0d326c29ab045">¶</a></span><p>Fixed the mako_cache plugin which was not yet
+covered, and wasn’t implementing the mako plugin
+API correctly; fixed docs as well.  Courtesy
+Ben Hayden.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.3.1-1"><span class="target" id="change-97204185d161b3123fa49c8d0bacb564"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-97204185d161b3123fa49c8d0bacb564">¶</a></span><p>Fixed setup so that the tests/* directory
+isn’t yanked into the install.  Courtesy Ben Hayden.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.3.0">
+<h2 class="release-version">0.3.0<a class="headerlink" href="#change-0.3.0" title="Permalink to this headline">¶</a></h2>
+Released: Thu Jun 14 2012<div class="section" id="change-0.3.0-feature">
+<h3>feature<a class="headerlink" href="#change-0.3.0-feature" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.3.0-0"><span class="target" id="change-e0917a56f7697d3de6a51e1639fa545e"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-e0917a56f7697d3de6a51e1639fa545e">¶</a></span><p>get() method now checks expiration time
+by default.   Use ignore_expiration=True
+to bypass this.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.3.0-1"><span class="target" id="change-5d77c998eb1d385032f14b36c71fda85"><strong>[feature]</strong> <a class="changelog-reference headerlink reference internal" href="#change-5d77c998eb1d385032f14b36c71fda85">¶</a></span><p>Added new invalidate() method.  Sets the current
+timestamp as a minimum value that all retrieved
+values must be created after.  Is honored by the
+get_or_create() and get() methods.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/7">#7</a></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.3.0-bug">
+<h3>bug<a class="headerlink" href="#change-0.3.0-bug" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p class="caption" id="change-0.3.0-2"><span class="target" id="change-d80e34bb58ddd25f74794fa5b7cf763a"><strong>[bug]</strong> <a class="changelog-reference headerlink reference internal" href="#change-d80e34bb58ddd25f74794fa5b7cf763a">¶</a></span><p>Fixed bug whereby region.get() didn’t
+work if the value wasn’t present.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/8">#8</a></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-0.2.4">
+<h2 class="release-version">0.2.4<a class="headerlink" href="#change-0.2.4" title="Permalink to this headline">¶</a></h2>
+no release date<ul class="simple">
+<li><p class="caption" id="change-0.2.4-0"><span class="target" id="change-e30df0d04b8d023dd46012be1e91de6a"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-e30df0d04b8d023dd46012be1e91de6a">¶</a></span><p>Fixed py3k issue with config string coerce,
+courtesy Alexander Fedorov</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.2.3">
+<h2 class="release-version">0.2.3<a class="headerlink" href="#change-0.2.3" title="Permalink to this headline">¶</a></h2>
+Released: Wed May 16 2012<ul class="simple">
+<li><p class="caption" id="change-0.2.3-0"><span class="target" id="change-44fd2738cb6e4c202e7fc2995e26cf15"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-44fd2738cb6e4c202e7fc2995e26cf15">¶</a></span><p>support “min_compress_len” and “memcached_expire_time”
+with python-memcached backend.  Tests courtesy
+Justin Azoff</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/3">#3</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.2.3-1"><span class="target" id="change-f8bdaadb1a14211ca1f88ea1fb8c2273"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-f8bdaadb1a14211ca1f88ea1fb8c2273">¶</a></span><p>Add support for coercion of string config values
+to Python objects - ints, “false”, “true”, “None”.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/4">#4</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.2.3-2"><span class="target" id="change-4e860395d99d546353901927b825fab4"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-4e860395d99d546353901927b825fab4">¶</a></span><p>Added support to DBM file lock to allow reentrant
+access per key within a single thread, so that
+even though the DBM backend locks for the whole file,
+a creation function that calls upon a different
+key in the cache can still proceed.</p>
+<p>References: <a class="reference external" href="https://github.com/sqlalchemy/dogpile.cache/issues/5">#5</a></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.2.3-3"><span class="target" id="change-51c2f069cc8227285eacd6cf87021d38"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-51c2f069cc8227285eacd6cf87021d38">¶</a></span><p>Fixed DBM glitch where multiple readers
+could be serialized.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.2.3-4"><span class="target" id="change-37452194fad7f42d3610a803bd30b5f0"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-37452194fad7f42d3610a803bd30b5f0">¶</a></span><p>Adjust bmemcached backend to work with newly-repaired
+bmemcached calling API (see bmemcached
+ef206ed4473fec3b639e).</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.2.2">
+<h2 class="release-version">0.2.2<a class="headerlink" href="#change-0.2.2" title="Permalink to this headline">¶</a></h2>
+Released: Thu Apr 19 2012<ul class="simple">
+<li><p class="caption" id="change-0.2.2-0"><span class="target" id="change-71ff41a4f34faa68d0d4ed4e773dcb29"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-71ff41a4f34faa68d0d4ed4e773dcb29">¶</a></span><p>add Redis backend, courtesy Ollie Rutherfurd</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.2.1">
+<h2 class="release-version">0.2.1<a class="headerlink" href="#change-0.2.1" title="Permalink to this headline">¶</a></h2>
+Released: Sun Apr 15 2012<ul class="simple">
+<li><p class="caption" id="change-0.2.1-0"><span class="target" id="change-de94c53049ac567318da7b0803583764"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-de94c53049ac567318da7b0803583764">¶</a></span><p>move tests into tests/cache namespace</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.2.1-1"><span class="target" id="change-89d8fd36ee2af0d2b54bdd78aa2990d5"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-89d8fd36ee2af0d2b54bdd78aa2990d5">¶</a></span><p>py3k compatibility is in-place now, no
+2to3 needed.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.2.0">
+<h2 class="release-version">0.2.0<a class="headerlink" href="#change-0.2.0" title="Permalink to this headline">¶</a></h2>
+Released: Sat Apr 14 2012<ul class="simple">
+<li><p class="caption" id="change-0.2.0-0"><span class="target" id="change-a925a9e1d11e7449ea44d2cd220528a0"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-a925a9e1d11e7449ea44d2cd220528a0">¶</a></span><p>Based on dogpile.core now, to get the package
+namespace thing worked out.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.1.1">
+<h2 class="release-version">0.1.1<a class="headerlink" href="#change-0.1.1" title="Permalink to this headline">¶</a></h2>
+Released: Tue Apr 10 2012<ul class="simple">
+<li><p class="caption" id="change-0.1.1-0"><span class="target" id="change-71455687c0c0734d827f57ae35defa4f"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-71455687c0c0734d827f57ae35defa4f">¶</a></span><p>Fixed the configure_from_config() method of region
+and backend which wasn’t working.  Courtesy
+Christian Klinger.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+<div class="section" id="change-0.1.0">
+<h2 class="release-version">0.1.0<a class="headerlink" href="#change-0.1.0" title="Permalink to this headline">¶</a></h2>
+Released: Sun Apr 08 2012<ul class="simple">
+<li><p class="caption" id="change-0.1.0-0"><span class="target" id="change-aa2613f3a0c93b1c895c4df7d7d69e94"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-aa2613f3a0c93b1c895c4df7d7d69e94">¶</a></span><p>Initial release.</p>
+<p></p>
+</p>
+</li>
+<li><p class="caption" id="change-0.1.0-1"><span class="target" id="change-d9ebcc96d83847fa71b57bf12d926f57"><strong>[no_tags]</strong> <a class="changelog-reference headerlink reference internal" href="#change-d9ebcc96d83847fa71b57bf12d926f57">¶</a></span><p>Includes a pylibmc backend and a plain dictionary backend.</p>
+<p></p>
+</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#change-1.1.1">1.1.1</a><ul>
+<li><a class="reference internal" href="#change-1.1.1-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-1.1.0">1.1.0</a><ul>
+<li><a class="reference internal" href="#change-1.1.0-feature">feature</a></li>
+<li><a class="reference internal" href="#change-1.1.0-misc">misc</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-1.0.2">1.0.2</a><ul>
+<li><a class="reference internal" href="#change-1.0.2-feature">feature</a></li>
+<li><a class="reference internal" href="#change-1.0.2-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-1.0.1">1.0.1</a><ul>
+<li><a class="reference internal" href="#change-1.0.1-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-1.0.0">1.0.0</a><ul>
+<li><a class="reference internal" href="#change-1.0.0-feature">feature</a></li>
+<li><a class="reference internal" href="#change-1.0.0-misc">misc</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.9.2">0.9.2</a><ul>
+<li><a class="reference internal" href="#change-0.9.2-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.9.1">0.9.1</a><ul>
+<li><a class="reference internal" href="#change-0.9.1-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.9.0">0.9.0</a><ul>
+<li><a class="reference internal" href="#change-0.9.0-feature">feature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.8.0">0.8.0</a><ul>
+<li><a class="reference internal" href="#change-0.8.0-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.7.1">0.7.1</a><ul>
+<li><a class="reference internal" href="#change-0.7.1-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.7.0">0.7.0</a><ul>
+<li><a class="reference internal" href="#change-0.7.0-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.6.8">0.6.8</a></li>
+<li><a class="reference internal" href="#change-0.6.7">0.6.7</a><ul>
+<li><a class="reference internal" href="#change-0.6.7-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.6.6">0.6.6</a><ul>
+<li><a class="reference internal" href="#change-0.6.6-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.6.6-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.6.5">0.6.5</a><ul>
+<li><a class="reference internal" href="#change-0.6.5-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.6.4">0.6.4</a><ul>
+<li><a class="reference internal" href="#change-0.6.4-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.6.3">0.6.3</a><ul>
+<li><a class="reference internal" href="#change-0.6.3-feature">feature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.6.2">0.6.2</a><ul>
+<li><a class="reference internal" href="#change-0.6.2-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.6.2-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.6.1">0.6.1</a><ul>
+<li><a class="reference internal" href="#change-0.6.1-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.6.0">0.6.0</a><ul>
+<li><a class="reference internal" href="#change-0.6.0-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.6.0-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.5.7">0.5.7</a><ul>
+<li><a class="reference internal" href="#change-0.5.7-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.5.7-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.5.6">0.5.6</a><ul>
+<li><a class="reference internal" href="#change-0.5.6-feature">feature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.5.5">0.5.5</a><ul>
+<li><a class="reference internal" href="#change-0.5.5-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.5.5-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.5.4">0.5.4</a><ul>
+<li><a class="reference internal" href="#change-0.5.4-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.5.4-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.5.3">0.5.3</a><ul>
+<li><a class="reference internal" href="#change-0.5.3-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.5.3-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.5.2">0.5.2</a><ul>
+<li><a class="reference internal" href="#change-0.5.2-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.5.2-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.5.1">0.5.1</a><ul>
+<li><a class="reference internal" href="#change-0.5.1-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.5.1-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.5.0">0.5.0</a><ul>
+<li><a class="reference internal" href="#change-0.5.0-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.5.0-bug">bug</a></li>
+<li><a class="reference internal" href="#change-0.5.0-misc">misc</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.4.3">0.4.3</a><ul>
+<li><a class="reference internal" href="#change-0.4.3-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.4.3-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.4.2">0.4.2</a><ul>
+<li><a class="reference internal" href="#change-0.4.2-feature">feature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.4.1">0.4.1</a><ul>
+<li><a class="reference internal" href="#change-0.4.1-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.4.1-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.4.0">0.4.0</a><ul>
+<li><a class="reference internal" href="#change-0.4.0-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.3.1">0.3.1</a><ul>
+<li><a class="reference internal" href="#change-0.3.1-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.3.0">0.3.0</a><ul>
+<li><a class="reference internal" href="#change-0.3.0-feature">feature</a></li>
+<li><a class="reference internal" href="#change-0.3.0-bug">bug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-0.2.4">0.2.4</a></li>
+<li><a class="reference internal" href="#change-0.2.3">0.2.3</a></li>
+<li><a class="reference internal" href="#change-0.2.2">0.2.2</a></li>
+<li><a class="reference internal" href="#change-0.2.1">0.2.1</a></li>
+<li><a class="reference internal" href="#change-0.2.0">0.2.0</a></li>
+<li><a class="reference internal" href="#change-0.1.1">0.1.1</a></li>
+<li><a class="reference internal" href="#change-0.1.0">0.1.0</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="previous chapter">API</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dogpile.cache 1.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Changelog</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2020 Mike Bayer.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>

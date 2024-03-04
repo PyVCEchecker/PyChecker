@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyngrok - a Python wrapper for ngrok &#8212; pyngrok 5.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Documentation" href="api.html" />
+    
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+
+    <meta name="description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:title" content="pyngrok - A Python wrapper for ngrok">
+    <meta name="twitter:card"
+          value="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API.">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="pyngrok - A Python wrapper for ngrok"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://pyngrok.readthedocs.io/en/latest/index.html"/>
+    <meta property="og:image" content="https://pyngrok.readthedocs.io/en/latest/_images/logo.png"/>
+    <meta property="og:description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <meta name="yandex-verification" content="ac8f18b56add6591"/>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43184722-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-43184722-4');
+    </script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="hide-header section" id="pyngrok-a-python-wrapper-for-ngrok">
+<h1>pyngrok - a Python wrapper for ngrok<a class="headerlink" href="#pyngrok-a-python-wrapper-for-ngrok" title="Permalink to this headline">¶</a></h1>
+<img alt="pyngrok - a Python wrapper for ngrok" class="align-center" src="_images/logo.png" />
+<a class="reference external image-reference" href="https://badge.fury.io/py/pyngrok"><img alt="https://badge.fury.io/py/pyngrok.svg" src="https://badge.fury.io/py/pyngrok.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/alexdlaird/pyngrok/actions?query=workflow%3ACI%2FCD"><img alt="https://github.com/alexdlaird/pyngrok/workflows/CI/CD/badge.svg" src="https://github.com/alexdlaird/pyngrok/workflows/CI/CD/badge.svg" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/alexdlaird/pyngrok"><img alt="https://codecov.io/gh/alexdlaird/pyngrok/branch/master/graph/badge.svg" src="https://codecov.io/gh/alexdlaird/pyngrok/branch/master/graph/badge.svg" /></a>
+<a class="reference external image-reference" href="https://pyngrok.readthedocs.io/en/latest/?badge=latest"><img alt="https://readthedocs.org/projects/pyngrok/badge/?version=latest" src="https://readthedocs.org/projects/pyngrok/badge/?version=latest" /></a>
+<a class="reference external image-reference" href="https://pypi.org/project/pyngrok/"><img alt="https://img.shields.io/pypi/pyversions/pyngrok.svg" src="https://img.shields.io/pypi/pyversions/pyngrok.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.org/project/pyngrok/"><img alt="https://img.shields.io/pypi/l/pyngrok.svg" src="https://img.shields.io/pypi/l/pyngrok.svg" /></a>
+<a class="reference external image-reference" href="https://twitter.com/intent/tweet?text=Check+out+%23pyngrok%2C+a+Python+wrapper+for+%23ngrok+that+lets+you+programmatically+open+secure+%23tunnels+to+local+web+servers%2C+build+%23webhook+integrations%2C+enable+SSH+access%2C+test+chatbots%2C+demo+from+your+own+machine%2C+and+more.%0D%0A%0D%0A&amp;url=https://github.com/alexdlaird/pyngrok&amp;via=alexdlaird"><img alt="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" /></a>
+<p><code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> is a Python wrapper for <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> that manages its own binary and puts it on your path,
+making <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> readily available from anywhere on the command line and via a convenient Python API.</p>
+<p><a class="reference external" href="https://ngrok.com">ngrok</a> is a reverse proxy tool that opens secure tunnels from public URLs to localhost, perfect
+for exposing local web servers, building webhook integrations, enabling SSH access, testing chatbots, demoing from
+your own machine, and more, and its made even more powerful with native Python integration through <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code>.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> is available on <a class="reference external" href="https://pypi.org/project/pyngrok/">PyPI</a> and can be installed
+using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install pyngrok
+</pre></div>
+</div>
+<p>or <code class="docutils literal notranslate"><span class="pre">conda</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge pyngrok
+</pre></div>
+</div>
+<p>That’s it! <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> is now available <a class="reference external" href="#open-a-tunnel">as a package to our Python projects</a>,
+and <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is now available <a class="reference external" href="#command-line-usage">from the command line</a>.</p>
+</div>
+<div class="section" id="open-a-tunnel">
+<h2>Open a Tunnel<a class="headerlink" href="#open-a-tunnel" title="Permalink to this headline">¶</a></h2>
+<p>To open a tunnel, use the <a class="reference internal" href="api.html#pyngrok.ngrok.connect" title="pyngrok.ngrok.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect</span></code></a> method, which returns a <a class="reference internal" href="api.html#pyngrok.ngrok.NgrokTunnel" title="pyngrok.ngrok.NgrokTunnel"><code class="xref py py-class docutils literal notranslate"><span class="pre">NgrokTunnel</span></code></a>,
+and this returned object has a reference to the public URL generated by <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> in its <code class="docutils literal notranslate"><span class="pre">public_url</span></code> attribute.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="c1"># Open a HTTP tunnel on the default port 80</span>
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">http_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="c1"># Open a SSH tunnel</span>
+<span class="c1"># &lt;NgrokTunnel: &quot;tcp://0.tcp.ngrok.io:12345&quot; -&gt; &quot;localhost:22&quot;&gt;</span>
+<span class="n">ssh_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="s2">&quot;tcp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="api.html#pyngrok.ngrok.connect" title="pyngrok.ngrok.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect</span></code></a> method takes <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> as well, which allows us to pass
+additional properties that are <a class="reference external" href="https://ngrok.com/docs#tunnel-definitions">supported by ngrok</a>,
+<a class="reference external" href="#passing-options-as-kwargs">as shown below</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ngrok</span></code>’s default behavior for <code class="docutils literal notranslate"><span class="pre">http</span></code> when no additional properties are passed is to open <em>two</em> tunnels,
+one <code class="docutils literal notranslate"><span class="pre">http</span></code> and one <code class="docutils literal notranslate"><span class="pre">https</span></code>. <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code>’s <a class="reference internal" href="api.html#pyngrok.ngrok.connect" title="pyngrok.ngrok.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect</span></code></a> method will return a reference to
+the <code class="docutils literal notranslate"><span class="pre">http</span></code> tunnel in this case. If only a single tunnel is needed, pass <code class="docutils literal notranslate"><span class="pre">bind_tls=True</span></code> and a reference to
+the <code class="docutils literal notranslate"><span class="pre">https</span></code> tunnel will be returned.</p>
+</div>
+</div>
+<div class="section" id="get-active-tunnels">
+<h2>Get Active Tunnels<a class="headerlink" href="#get-active-tunnels" title="Permalink to this headline">¶</a></h2>
+<p>It can be useful to ask the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> client what tunnels are currently open. This can be
+accomplished with the <a class="reference internal" href="api.html#pyngrok.ngrok.get_tunnels" title="pyngrok.ngrok.get_tunnels"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_tunnels</span></code></a> method, which returns a list of
+<a class="reference internal" href="api.html#pyngrok.ngrok.NgrokTunnel" title="pyngrok.ngrok.NgrokTunnel"><code class="xref py py-class docutils literal notranslate"><span class="pre">NgrokTunnel</span></code></a> objects.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="c1"># [&lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;]</span>
+<span class="n">tunnels</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">get_tunnels</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="close-a-tunnel">
+<h2>Close a Tunnel<a class="headerlink" href="#close-a-tunnel" title="Permalink to this headline">¶</a></h2>
+<p>All open tunnels will automatically be closed when the Python process terminates, but we can
+also close them manually with <a class="reference internal" href="api.html#pyngrok.ngrok.disconnect" title="pyngrok.ngrok.disconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">disconnect</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="c1"># The NgrokTunnel returned from methods like connect(),</span>
+<span class="c1"># get_tunnels(), etc. contains the public URL</span>
+<span class="n">ngrok</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="n">ngrok_tunnel</span><span class="o">.</span><span class="n">public_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-ngrok-process">
+<h2>The <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> Process<a class="headerlink" href="#the-ngrok-process" title="Permalink to this headline">¶</a></h2>
+<p>Opening a tunnel will start the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process. This process will remain alive, and the tunnels
+open, until <a class="reference internal" href="api.html#pyngrok.ngrok.kill" title="pyngrok.ngrok.kill"><code class="xref py py-func docutils literal notranslate"><span class="pre">kill</span></code></a> is invoked, or until the Python process terminates.</p>
+<p>If we are building a short-lived app, for instance a CLI, we may want to block on the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>
+process so tunnels stay open until the user intervenes. We can do that by accessing the
+<a class="reference internal" href="api.html#pyngrok.process.NgrokProcess" title="pyngrok.process.NgrokProcess"><code class="xref py py-class docutils literal notranslate"><span class="pre">NgrokProcess</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="n">ngrok_process</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">get_ngrok_process</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Block until CTRL-C or some other terminating event</span>
+    <span class="n">ngrok_process</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Shutting down server.&quot;</span><span class="p">)</span>
+
+    <span class="n">ngrok</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="api.html#pyngrok.process.NgrokProcess" title="pyngrok.process.NgrokProcess"><code class="xref py py-class docutils literal notranslate"><span class="pre">NgrokProcess</span></code></a> contains an <code class="docutils literal notranslate"><span class="pre">api_url</span></code> variable, usually initialized to
+<a class="reference external" href="http://127.0.0.1:4040">http://127.0.0.1:4040</a>, from which we can access the <a class="reference external" href="https://ngrok.com/docs#client-api">ngrok client API</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If some feature we need is not available in this package, the client API is accessible to us via the
+<a class="reference internal" href="api.html#pyngrok.ngrok.api_request" title="pyngrok.ngrok.api_request"><code class="xref py py-func docutils literal notranslate"><span class="pre">api_request</span></code></a> method. Additionally, the <a class="reference internal" href="api.html#pyngrok.ngrok.NgrokTunnel" title="pyngrok.ngrok.NgrokTunnel"><code class="xref py py-class docutils literal notranslate"><span class="pre">NgrokTunnel</span></code></a> objects expose a
+<code class="docutils literal notranslate"><span class="pre">uri</span></code> variable, which contains the relative path used to manipulate that resource against the client API.</p>
+<p>This package also gives us access to <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> from the command line, <a class="reference external" href="#command-line-usage">as shown below</a>.</p>
+</div>
+</div>
+<div class="section" id="event-logs">
+<h2>Event Logs<a class="headerlink" href="#event-logs" title="Permalink to this headline">¶</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> emits logs, <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> can surface them to a callback function. To register this
+callback, use <a class="reference internal" href="api.html#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a> and pass the function as <code class="docutils literal notranslate"><span class="pre">log_event_callback</span></code>. Each time a
+log is processed, this function will be called, passing a <a class="reference internal" href="api.html#pyngrok.process.NgrokLog" title="pyngrok.process.NgrokLog"><code class="xref py py-class docutils literal notranslate"><span class="pre">NgrokLog</span></code></a> as its only parameter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">ngrok</span>
+
+<span class="k">def</span> <span class="nf">log_event_callback</span><span class="p">(</span><span class="n">log</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">log</span><span class="p">))</span>
+
+<span class="n">conf</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">log_event_callback</span> <span class="o">=</span> <span class="n">log_event_callback</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If these events aren’t necessary for our use case, some resources can be freed up by turning them off. Set
+<code class="docutils literal notranslate"><span class="pre">monitor_thread</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> in <a class="reference internal" href="api.html#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">ngrok</span>
+
+<span class="n">conf</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">monitor_thread</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Alternatively, <a class="reference internal" href="api.html#pyngrok.process.NgrokProcess.stop_monitor_thread" title="pyngrok.process.NgrokProcess.stop_monitor_thread"><code class="xref py py-func docutils literal notranslate"><span class="pre">stop_monitor_thread</span></code></a> can be used to stop monitoring on a
+running process:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ngrok</span><span class="o">.</span><span class="n">get_ngrok_process</span><span class="p">()</span><span class="o">.</span><span class="n">stop_monitor_thread</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="expose-other-services">
+<h2>Expose Other Services<a class="headerlink" href="#expose-other-services" title="Permalink to this headline">¶</a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> we can expose any number of non-HTTP services, for instances databases, game servers, etc. This
+can be accomplished by using <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> to open a <code class="docutils literal notranslate"><span class="pre">tcp</span></code> tunnel to the desired service.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="c1"># Open a tunnel to MySQL with a Reserved TCP Address</span>
+<span class="c1"># &lt;NgrokTunnel: &quot;tcp://1.tcp.ngrok.io:12345&quot; -&gt; &quot;localhost:3306&quot;&gt;</span>
+<span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="mi">3306</span><span class="p">,</span> <span class="s2">&quot;tcp&quot;</span><span class="p">,</span>
+              <span class="n">remote_addr</span><span class="o">=</span><span class="s2">&quot;1.tcp.ngrok.io:12345&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can also serve up local directories via <a class="reference external" href="https://ngrok.com/docs#http-file-urls">ngrok’s built-in fileserver</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="c1"># Open a tunnel to a local file server</span>
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;file:///&quot;&gt;</span>
+<span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;file:///&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pyngrokconfig">
+<h3><code class="docutils literal notranslate"><span class="pre">PyngrokConfig</span></code><a class="headerlink" href="#pyngrokconfig" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pyngrok</span></code>’s interactions with the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary can be configured using <a class="reference internal" href="api.html#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>.
+The default <code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code> object can updated with our own object using <a class="reference internal" href="api.html#pyngrok.conf.set_default" title="pyngrok.conf.set_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_default</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span>
+
+<span class="n">pyngrok_config</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">PyngrokConfig</span><span class="p">(</span><span class="n">log_event_callback</span><span class="o">=</span><span class="n">log_event_callback</span><span class="p">,</span>
+                                    <span class="n">max_logs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">conf</span><span class="o">.</span><span class="n">set_default</span><span class="p">(</span><span class="n">pyngrok_config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Most methods in the <a class="reference internal" href="api.html#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a> module also accept a <code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code> keyword arg, which can be used
+to pass in the config rather than updating the default as shown above.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pyngrok_config</span></code> argument is only used when the <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> process is first started, which will be
+the first time most methods in the <a class="reference internal" href="api.html#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a> module are called. We can check if a process is already or
+still running by calling its <a class="reference internal" href="api.html#pyngrok.process.NgrokProcess.healthy" title="pyngrok.process.NgrokProcess.healthy"><code class="xref py py-func docutils literal notranslate"><span class="pre">healthy</span></code></a> method.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is not already installed at the <code class="docutils literal notranslate"><span class="pre">ngrok_path</span></code> in <a class="reference internal" href="api.html#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>, it
+will be installed the first time most methods in the <a class="reference internal" href="api.html#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a> module are called.</p>
+<p>If we need to customize the installation of <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>, perhaps specifying a timeout, proxy, use a custom mirror
+for the download, etc. we can do so by leveraging the <a class="reference internal" href="api.html#module-pyngrok.installer" title="pyngrok.installer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">installer</span></code></a> module. Keyword arguments in this
+module are ultimately passed down to <a class="reference external" href="https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">urllib.request.urlopen</span></code></a>, so as long as we use the
+<a class="reference internal" href="api.html#module-pyngrok.installer" title="pyngrok.installer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">installer</span></code></a> module ourselves prior to invoking any <a class="reference internal" href="api.html#module-pyngrok.ngrok" title="pyngrok.ngrok"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ngrok</span></code></a> methods, we can can control
+how <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> is installed and from where.</p>
+</div>
+</div>
+<div class="section" id="setting-the-authtoken">
+<h3>Setting the <code class="docutils literal notranslate"><span class="pre">authtoken</span></code><a class="headerlink" href="#setting-the-authtoken" title="Permalink to this headline">¶</a></h3>
+<p>Running <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> with an auth token enables additional features available on our account (for
+instance, the ability to open multiple tunnels concurrently). We can obtain our auth token from
+the <a class="reference external" href="https://dashboard.ngrok.com">ngrok dashboard</a> and install it to <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>’s config file like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">ngrok</span>
+
+<span class="c1"># Setting an auth token allows us to open multiple</span>
+<span class="c1"># tunnels at the same time</span>
+<span class="n">ngrok</span><span class="o">.</span><span class="n">set_auth_token</span><span class="p">(</span><span class="s2">&quot;&lt;NGROK_AUTH_TOKEN&gt;&quot;</span><span class="p">)</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub1&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel1</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub2&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:8000&quot;&gt;</span>
+<span class="n">ngrok_tunnel2</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can also override <code class="docutils literal notranslate"><span class="pre">ngrok</span></code>’s installed auth token using <a class="reference internal" href="api.html#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">ngrok</span>
+
+<span class="n">conf</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">auth_token</span> <span class="o">=</span> <span class="s2">&quot;&lt;NGROK_AUTH_TOKEN&gt;&quot;</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-the-region">
+<h3>Setting the <code class="docutils literal notranslate"><span class="pre">region</span></code><a class="headerlink" href="#setting-the-region" title="Permalink to this headline">¶</a></h3>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> will open a tunnel in the <code class="docutils literal notranslate"><span class="pre">us</span></code> region. To override this, use
+the <code class="docutils literal notranslate"><span class="pre">region</span></code> parameter in <a class="reference internal" href="api.html#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">ngrok</span>
+
+<span class="n">conf</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="s2">&quot;au&quot;</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.au.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="passing-options-as-kwargs">
+<h3>Passing <code class="docutils literal notranslate"><span class="pre">options</span></code> as <code class="docutils literal notranslate"><span class="pre">kwargs</span></code><a class="headerlink" href="#passing-options-as-kwargs" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to configure the tunnel when it is created, for instance adding authentication,
+a subdomain, or other tunnel properties <a class="reference external" href="https://ngrok.com/docs#tunnel-definitions">supported by ngrok</a>.
+This is accomplished by passing these <code class="docutils literal notranslate"><span class="pre">options</span></code> as additional <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> to <a class="reference internal" href="api.html#pyngrok.ngrok.connect" title="pyngrok.ngrok.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect</span></code></a>,
+then they will be used as properties for the tunnel when it is created.</p>
+<p>Here is an example starting <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> in Australia, then opening a tunnel with subdomain
+<code class="docutils literal notranslate"><span class="pre">foo</span></code> that requires basic authentication for requests.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">ngrok</span>
+
+<span class="n">conf</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="s2">&quot;au&quot;</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://foo.au.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">subdomain</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span>
+                             <span class="n">auth</span><span class="o">=</span><span class="s2">&quot;username:password&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="config-file">
+<h3>Config File<a class="headerlink" href="#config-file" title="Permalink to this headline">¶</a></h3>
+<p>By default, <a class="reference external" href="https://ngrok.com/docs#config">ngrok will look for its config file</a> in the home directory’s <code class="docutils literal notranslate"><span class="pre">.ngrok2</span></code>
+folder. We can override this behavior by updating our default <a class="reference internal" href="api.html#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">ngrok</span>
+
+<span class="n">conf</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">config_path</span> <span class="o">=</span> <span class="s2">&quot;/opt/ngrok/config.yml&quot;</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binary-path">
+<h3>Binary Path<a class="headerlink" href="#binary-path" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> package manages its own <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary. We can use our <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary if we
+want by updating the default <a class="reference internal" href="api.html#pyngrok.conf.PyngrokConfig" title="pyngrok.conf.PyngrokConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyngrokConfig</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngrok</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">ngrok</span>
+
+<span class="n">conf</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">ngrok_path</span> <span class="o">=</span> <span class="s2">&quot;/usr/local/bin/ngrok&quot;</span>
+
+<span class="c1"># &lt;NgrokTunnel: &quot;http://&lt;public_sub&gt;.ngrok.io&quot; -&gt; &quot;http://localhost:80&quot;&gt;</span>
+<span class="n">ngrok_tunnel</span> <span class="o">=</span> <span class="n">ngrok</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="command-line-usage">
+<h2>Command Line Usage<a class="headerlink" href="#command-line-usage" title="Permalink to this headline">¶</a></h2>
+<p>This package puts the default <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> binary on our path, so all features of <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> are also
+available on the command line.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ngrok http <span class="m">80</span>
+</pre></div>
+</div>
+<p>For details on how to fully leverage <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> from the command line, see <a class="reference external" href="https://ngrok.com/docs">ngrok’s official documentation</a>.</p>
+</div>
+<div class="section" id="python-2-7">
+<h2>Python 2.7<a class="headerlink" href="#python-2-7" title="Permalink to this headline">¶</a></h2>
+<p>The last version of <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> that supports Python 2.7 is 4.1.x, so we need to pin <code class="docutils literal notranslate"><span class="pre">pyngrok&gt;=4.1,&lt;4.2</span></code> if we still
+want to use <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> with this version of Python. Its legacy documentation can be found <a class="reference external" href="https://pyngrok.readthedocs.io/en/4.1.x/">here</a>.</p>
+</div>
+<div class="section" id="dive-deeper">
+<h2>Dive Deeper<a class="headerlink" href="#dive-deeper" title="Permalink to this headline">¶</a></h2>
+<p>For more advanced usage, integration examples, and tips to troubleshoot common issues, dive deeper in to the rest of
+the documentation.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-pyngrok.ngrok">Main <code class="docutils literal notranslate"><span class="pre">ngrok</span></code> Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-pyngrok.process">Process Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-pyngrok.conf">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-pyngrok.installer"><code class="docutils literal notranslate"><span class="pre">ngrok</span></code> Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-pyngrok.exception">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integrations.html">Integration Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integrations.html#flask">Flask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations.html#django">Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations.html#fastapi">FastAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations.html#google-colaboratory">Google Colaboratory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations.html#end-to-end-testing">End-to-End Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations.html#aws-lambda-local">AWS Lambda (Local)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations.html#python-http-server">Python HTTP Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations.html#python-tcp-server-and-client">Python TCP Server and Client</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#test-on-the-command-line">Test on the Command Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#enable-logging-to-the-console">Enable Logging to the Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#programmatically-inspect-the-logs">Programmatically Inspect the Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#test-in-the-python-console">Test in the Python Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#check-the-inspector-at-http-localhost-4040">Check the Inspector at http://localhost:4040</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#ngrok-documentation"><code class="docutils literal notranslate"><span class="pre">ngrok</span></code> Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>If you find issues, <a class="reference external" href="https://github.com/alexdlaird/pyngrok/issues">report them on GitHub</a>.</p>
+<p>If you would like to contribute to the code, the process is pretty simple:</p>
+<ol class="arabic simple">
+<li><p>Familiarise yourself with this package, <a class="reference external" href="https://pyngrok.readthedocs.io/en/latest/api.html">pyngrok’s APIs</a> and other documentation, and <a class="reference external" href="https://ngrok.com/docs">ngrok’s documentation</a>.</p></li>
+<li><p>Fork <a class="reference external" href="https://github.com/alexdlaird/pyngrok">the repository on GitHub</a> and start implementing changes.</p></li>
+<li><p>Write a test that plainly validates the changes made.</p></li>
+<li><p>Build and test locally with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">local</span> <span class="pre">test</span></code></p></li>
+<li><p>Submit a <a class="reference external" href="https://help.github.com/en/articles/creating-a-pull-request-from-a-fork">pull requests</a> to get the changes merged.</p></li>
+</ol>
+<p>Also be sure to review the <a class="reference external" href="https://github.com/alexdlaird/pyngrok/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a> before
+submitting issues or pull requests.</p>
+<p>Want to contribute financially? If you’ve found <code class="docutils literal notranslate"><span class="pre">pyngrok</span></code> useful, <a class="reference external" href="https://www.paypal.me/alexdlaird">a donation</a>
+would also be greatly appreciated!</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Getting Around</h3>
+<ul>
+    <li><a class="reference internal" href="#">Basic Usage</a>
+        <ul>
+            <li><a class="reference internal" href="#installation">Installation</a>
+            </li>
+            <li><a class="reference internal" href="#open-a-tunnel">Open a
+                Tunnel</a></li>
+            <li><a class="reference internal"
+                   href="#configuration">Configuration</a></li>
+            <li><a class="reference internal" href="#event-logs">Event Logs</a></li>
+            <li><a class="reference internal" href="#command-line-usage">Command
+                Line Usage</a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="reference internal" href="#dive-deeper">Dive Deeper</a>
+        <ul>
+            <li><a class="reference internal" href="api.html">API Documentation</a></li>
+            <li><a class="reference internal" href="integrations.html">Integration Examples</a></li>
+            <li><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/blob/main/CHANGELOG.md">Changelog</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/issues">Issues</a></li>
+            <li><a class="reference internal" href="#contributing">Contributing</a>
+            </li>
+        </ul>
+    </li>
+</ul><h3>Useful Links</h3>
+<ul>
+    <li><a href="https://ngrok.com/docs"><code class="code docutils literal notranslate"><span class="pre">ngrok</span></code>
+        Documentation</a></li>
+    <li><a href="https://github.com/alexdlaird/pyngrok"><code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code> on GitHub</a></li>
+    <li><a href="https://pypi.org/project/pyngrok/"><code class="code docutils literal notranslate"><span class="pre">pyngrok</span></code>
+        on PyPI</a></li>
+    <li><a href="https://www.paypal.me/alexdlaird">Sponsor <code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code></a></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    
+    <div class="footer">
+      &copy;2020, Alex Laird.
+      
+    </div>
+
+    
+    <a href="https://github.com/alexdlaird/pyngrok" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <div class="footer">This page uses <a href="https://analytics.google.com/">
+        Google Analytics</a> to collect statistics. You can disable it by blocking
+        the JavaScript coming from www.google-analytics.com.
+        <script type="text/javascript">
+            (function () {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ?
+                    'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.setAttribute('async', 'true');
+                document.documentElement.firstChild.appendChild(ga);
+            })();
+        </script>
+    </div>
+
+  </body>
+</html>

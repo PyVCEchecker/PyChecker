@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+set -e
+export PYTHONPATH="$(dirname $0):$PYTHONPATH"
+export PATH="$(dirname $0)/bin:$PATH"
+
+python_best_version() {
+  if [ -x "$(command -v python3)" ] &&
+      python3 -c "import sys; sys.exit(not sys.version_info > (3, 5))"; then
+    exec python3 "$@"
+  else
+    exec python "$@"
+  fi
+}
+
+python_best_version -m "sshuttle" "$@"

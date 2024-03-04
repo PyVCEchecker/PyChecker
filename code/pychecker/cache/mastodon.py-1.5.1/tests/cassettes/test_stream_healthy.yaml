@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/instance/
+  response:
+    body: {string: '{"uri":"localhost","title":"Mastodon","short_description":"","description":"","email":"","version":"3.1.1","urls":{"streaming_api":"ws://localhost:4000"},"stats":{"user_count":3,"status_count":5,"domain_count":0},"thumbnail":"http://localhost/packs/media/images/preview-9a17d32fc48369e8ccd910a75260e67d.jpg","languages":["en"],"registrations":true,"approval_required":false,"contact_account":null}'}
+    headers:
+      Cache-Control: ['max-age=180, public']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 22 Feb 2020 19:30:50 GMT']
+      ETag: [W/"ae0b9ebba044d7ce36cd1878a0f486f0"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [59c55c0b-7c64-4cbf-8a8a-6323e4b30998]
+      X-Runtime: ['0.047892']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['397']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:4000/api/v1/streaming/health
+  response:
+    body: {string: OK}
+    headers:
+      Access-Control-Allow-Headers: ['Authorization, Accept, Cache-Control']
+      Access-Control-Allow-Methods: ['GET, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Connection: [keep-alive]
+      Content-Type: [text/plain]
+      Date: ['Sat, 22 Feb 2020 19:30:50 GMT']
+      Transfer-Encoding: [chunked]
+      X-Powered-By: [Express]
+      X-Request-Id: [d9f58845-c03e-4e2b-b9ef-ecc189f6de53]
+    status: {code: 200, message: OK}
+version: 1

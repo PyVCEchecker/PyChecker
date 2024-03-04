@@ -1,0 +1,8 @@
+six
+sigtools>=2.0
+attrs<22,>=19.1.0
+od
+docutils
+
+[datetime]
+python-dateutil

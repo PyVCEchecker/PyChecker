@@ -1,0 +1,151 @@
+Changelog
+=========
+
+
+4.1 (2021-02-16)
+----------------
+
+- Use collections.abc for ABC import to add Python 3.9 compatibility.
+
+
+4.0.2 (2019-11-04)
+------------------
+
+- A solution for the setup.cfg [Alex Grönholm]
+
+
+4.0.1 (2019-11-03)
+------------------
+
+- The pure setup.cfg config didn't work. All the tests pass fine,
+  but when installing the package somewhere else, nothing gets installed.
+  So I'm reverting that change for now.
+
+
+4.0 (2019-11-02)
+----------------
+
+- Moved all the information from setup.py into setup.cfg.
+
+- Added a Close() command which is different from a Line() command in
+  no way at all, to simplify the handling of closepath commands and subpaths.
+
+- Path()'s no longer have a `closed` attribute.
+
+- Now fully supports the SVG 1.1 "F.6.2 Out-of-range parameters" list.
+
+- Uses circular maths to calculate the length of circular arcs,
+  more accurate and much faster.
+
+
+3.1 (2019-10-25)
+----------------
+
+- The Move null command was not imported into ``__init__.py`` [blokhin]
+- #41: Switched from ``pkg_resource``-style namespace
+  package for ``svg`` to a `pkgutil style
+  <https://packaging.python.org/guides/packaging-namespace-packages/#pkgutil-style-namespace-packages>`_
+  namespace package.
+- A faster ``point()`` implementation for paths. [ClayJarCom]
+- Dropped support for Python 2.6 and Python 3.3.
+- Added support for Python 3.7 and 3.8.
+
+
+3.0 (2018-08-14)
+----------------
+
+- Dropped support for Python 3.1 and 3.2. It still works, but it may stop.
+  Added support for Python 3.6. Dropped support for Jython, it's not
+  supported by Travis, and hasn't seen  a release in over a year.
+
+- #33: Move commands are now preserved when parsed.
+
+- Subpaths are no longer merged even if they are joined.
+
+- #30: Arcs where the endpoint is the same as the start point caused a crash.
+  The SVG specs say that it instead should be the equavalent of skipping
+  that section, which now is the case.
+
+
+2.2 (2016-10-15)
+----------------
+
+- Don't add a line when closing a path if it's not needed.
+
+
+2.1.1 (2016-02-28)
+------------------
+
+- #18: QuadraticBeziers could get a DivideByZero error under certain
+  circumstances. [MTician]
+
+- Accept an error parameter to Path.point() to be able to
+  control error vs performance setting. [saschwarz]
+
+- #25: Arc's could create a MathDomain error under certain circumstances.
+
+- #17: Set last_command always.
+
+
+2.0.1 (2015-10-17)
+------------------
+
+- #20: The doctext for the closed() setter was incorrect.
+
+- #19: Fixed so tests didn't use relative paths. [danstender]
+
+
+2.0 (2015-05-15)
+----------------
+
+- Nothing changed yet.
+
+
+2.0b1 (2014-11-06)
+------------------
+
+- Added a Path.d() function to generate the Path's d attribute.
+
+- Added is_smooth_from() on QubicBezier and QuadradicBezier.
+
+- Path()'s now have a .closed property.
+
+- Fixed the representation so it's parseable.
+
+- The calculations for CubicBezier and Arc segments are now recursive,
+  and will end when a specific accuracy has been achieved.
+  This is somewhat faster for Arcs and somewhat slower for CubicBezier.
+  However, you can now specify an accuracy, so if you want faster but
+  looser calculations, you can have that.
+
+- 't' segments (smooth, relative QuadraticBeziers) whose previous segment was
+  not a QuadraticBezier would get an incorrect control point.
+
+
+1.2 (2014-11-01)
+----------------
+
+- New Quadradic Bezier implementation. [Justin Gruenberg]
+
+- Solved issue #6: Z close path behavior. [abcjjy]
+
+
+1.1 (2013-10-19)
+----------------
+
+- Floats with negative exponents work again.
+
+- New tokenizer that is around 20 times faster.
+
+
+1.0 (2013-05-28)
+----------------
+
+- Solved issue #2: Paths with negative values and no spaces didn't work.
+  [regebro]
+
+
+1.0b1 (2013-02-03)
+------------------
+
+- Original release.

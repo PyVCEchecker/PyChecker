@@ -1,0 +1,10 @@
+README.rst
+setup.py
+deluge_client/__init__.py
+deluge_client/client.py
+deluge_client/rencode.py
+deluge_client/tests.py
+deluge_client.egg-info/PKG-INFO
+deluge_client.egg-info/SOURCES.txt
+deluge_client.egg-info/dependency_links.txt
+deluge_client.egg-info/top_level.txt

@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Google Cloud Storage &mdash; django-storages 1.6.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.6.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-storages 1.6.2 documentation" href="../index.html" />
+    <link rel="next" title="SFTP" href="sftp.html" />
+    <link rel="prev" title="FTP" href="ftp.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sftp.html" title="SFTP"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ftp.html" title="FTP"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="google-cloud-storage">
+<h1>Google Cloud Storage<a class="headerlink" href="#google-cloud-storage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>This backend provides support for Google Cloud Storage using the
+library provided by Google.</p>
+<p>It&#8217;s possible to access Google Cloud Storage in S3 compatibility mode
+using other libraries in django-storages, but this is the only library
+offering native support.</p>
+<p>By default this library will use the credentials associated with the
+current instance for authentication. To override this, see the
+settings below.</p>
+<div class="section" id="settings">
+<h3>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
+<p>To use gcloud set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_FILE_STORAGE</span> <span class="o">=</span> <span class="s">&#39;storages.backends.gcloud.GoogleCloudStorage&#39;</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">GS_BUCKET_NAME</span></tt></p>
+<p>Your Google Storage bucket name, as a string.</p>
+<p><tt class="docutils literal"><span class="pre">GS_PROJECT_ID</span></tt> (optional)</p>
+<p>Your Google Cloud project ID. If unset, falls back to the default
+inferred from the environment.</p>
+<p><tt class="docutils literal"><span class="pre">GS_CREDENTIALS</span></tt> (optional)</p>
+<p>The OAuth 2 credentials to use for the connection. If unset, falls
+back to the default inferred from the environment.</p>
+<p><tt class="docutils literal"><span class="pre">GS_AUTO_CREATE_BUCKET</span></tt> (optional, default is <tt class="docutils literal"><span class="pre">False</span></tt>)</p>
+<p>If True, attempt to create the bucket if it does not exist.</p>
+<p><tt class="docutils literal"><span class="pre">GS_AUTO_CREATE_ACL</span></tt> (optional, default is <tt class="docutils literal"><span class="pre">projectPrivate</span></tt>)</p>
+<p>ACL used when creating a new bucket, from the
+<a class="reference external" href="https://cloud.google.com/storage/docs/access-control/lists#predefined-acl">list of predefined ACLs</a>.
+(A &#8220;JSON API&#8221; ACL is preferred but an &#8220;XML API/gsutil&#8221; ACL will be
+translated.)</p>
+<p>Note that the ACL you select must still give the service account
+running the gcloud backend to have OWNER permission on the bucket. If
+you&#8217;re using the default service account, this means you&#8217;re restricted
+to the <tt class="docutils literal"><span class="pre">projectPrivate</span></tt> ACL.</p>
+<p><tt class="docutils literal"><span class="pre">GS_FILE_CHARSET</span></tt> (optional)</p>
+<p>Allows overriding the character set used in filenames.</p>
+<p><tt class="docutils literal"><span class="pre">GS_FILE_OVERWRITE</span></tt> (optional: default is <tt class="docutils literal"><span class="pre">True</span></tt>)</p>
+<p>By default files with the same name will overwrite each other. Set this to <tt class="docutils literal"><span class="pre">False</span></tt> to have extra characters appended.</p>
+<p><tt class="docutils literal"><span class="pre">GS_MAX_MEMORY_SIZE</span></tt> (optional)</p>
+<p>The maximum amount of memory a returned file can take up before being
+rolled over into a temporary file on disk. Default is 0: Do not roll over.</p>
+</div>
+<div class="section" id="fields">
+<h3>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h3>
+<p>Once you&#8217;re done, default_storage will be Google Cloud Storage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">django.core.files.storage</span> <span class="kn">import</span> <span class="n">default_storage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">default_storage</span><span class="o">.</span><span class="n">__class__</span>
+<span class="go">&lt;class &#39;storages.backends.gcloud.GoogleCloudStorage&#39;&gt;</span>
+</pre></div>
+</div>
+<p>This way, if you define a new FileField, it will use the Google Cloud Storage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Resume</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">pdf</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s">&#39;pdfs&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">photos</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s">&#39;photos&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resume</span> <span class="o">=</span> <span class="n">Resume</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">resume</span><span class="o">.</span><span class="n">pdf</span><span class="o">.</span><span class="n">storage</span>
+<span class="go">&lt;storages.backends.gcloud.GoogleCloudStorage object at ...&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="storage">
+<h3>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h3>
+<p>Standard file access options are available, and work as expected:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">default_storage</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span> <span class="o">=</span> <span class="n">default_storage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;storage contents&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_storage</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span> <span class="o">=</span> <span class="n">default_storage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;storage contents&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_storage</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_storage</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<p>An object without a file has limited functionality:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: None&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">size</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">The &#39;normal&#39; attribute has no file associated with it.</span>
+</pre></div>
+</div>
+<p>Saving a file enables full functionality:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;django_test.txt&#39;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="s">&#39;content&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: tests/django_test.txt&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">size</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;content&#39;</span>
+</pre></div>
+</div>
+<p>Files can be read in a little at a time, if necessary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&#39;con&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;tent&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">chunks</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">&#39;co-nt-en-t&#39;</span>
+</pre></div>
+</div>
+<p>Save another file with the same name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;django_test.txt&#39;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="s">&#39;more content&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: tests/django_test_.txt&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">size</span>
+<span class="go">12</span>
+</pre></div>
+</div>
+<p>Push the objects into the cache to make sure they pickle properly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;obj1&#39;</span><span class="p">,</span> <span class="n">obj1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;obj2&#39;</span><span class="p">,</span> <span class="n">obj2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;obj2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: tests/django_test_.txt&gt;</span>
+</pre></div>
+</div>
+<p>Deleting an object deletes the file it uses, if there are no other objects still using that file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;django_test.txt&#39;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="s">&#39;more content&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: tests/django_test_.txt&gt;</span>
+</pre></div>
+</div>
+<p>Default values allow an object to access a single file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">default</span>
+<span class="go">&lt;FieldFile: tests/default.txt&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;default content&#39;</span>
+</pre></div>
+</div>
+<p>But it shouldn&#8217;t be deleted, even if there are no more objects using it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;default content&#39;</span>
+</pre></div>
+</div>
+<p>Verify the fix for #5655, making sure the directory is only determined once:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj4</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj4</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;random_file&#39;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="s">&#39;random content&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj4</span><span class="o">.</span><span class="n">random</span>
+<span class="go">&lt;FieldFile: .../random_file&gt;</span>
+</pre></div>
+</div>
+<p>Clean up the temporary files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj4</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Google Cloud Storage</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#settings">Settings</a></li>
+<li><a class="reference internal" href="#fields">Fields</a></li>
+<li><a class="reference internal" href="#storage">Storage</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ftp.html"
+                        title="previous chapter">FTP</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sftp.html"
+                        title="next chapter">SFTP</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/backends/gcloud.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sftp.html" title="SFTP"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ftp.html" title="FTP"
+             >previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2017, David Larlet, et. al..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

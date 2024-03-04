@@ -1,0 +1,16 @@
+LICENSE.txt
+MANIFEST.in
+README.rst
+__init__.py
+setup.cfg
+setup.py
+additional_resources/hutto_ICWSM_2014.tar.gz
+vaderSentiment/__init__.py
+vaderSentiment/emoji_utf8_lexicon.txt
+vaderSentiment/vaderSentiment.py
+vaderSentiment/vader_lexicon.txt
+vaderSentiment.egg-info/PKG-INFO
+vaderSentiment.egg-info/SOURCES.txt
+vaderSentiment.egg-info/dependency_links.txt
+vaderSentiment.egg-info/requires.txt
+vaderSentiment.egg-info/top_level.txt

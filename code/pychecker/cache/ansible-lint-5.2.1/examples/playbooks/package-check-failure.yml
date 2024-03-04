@@ -1,0 +1,20 @@
+- hosts: localhost
+  tasks:
+  - name: install ansible
+    yum: name=ansible state=latest
+
+  - name: install ansible-lint
+    pip: name=ansible-lint
+    args:
+      state: latest
+
+  - name: install some-package
+    package:
+      name: some-package
+      state: latest
+
+  - name: install ansible with update_only to false
+    yum:
+      name: sudo
+      state: latest
+      update_only: false

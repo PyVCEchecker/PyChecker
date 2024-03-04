@@ -1,0 +1,54 @@
+[tool.black]
+line-length = 79
+skip-magic-trailing-comma = true
+
+[tool.isort]
+profile = "black"
+line_length = 79
+known_first_party = ["cattr"]
+
+[tool.poetry]
+name = "cattrs"
+version = "1.8.0"
+description = "Composable complex class support for attrs and dataclasses."
+authors = ["Tin Tvrtkovic <tinchester@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/Tinche/cattrs"
+documentation = "https://cattrs.readthedocs.io/en/latest/"
+keywords = ["attrs", "serialization", "dataclasses"]
+packages = [
+    { include = "cattr", from = "src" }
+]
+readme = "README.rst"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+attrs = ">= 20"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.9.0"
+tox = "^3.23.0"
+coverage = "^5.5"
+Sphinx = "^4.1.2"
+pytest = "^6.2.3"
+pytest-benchmark = "^3.2.3"
+hypothesis = "^6.9.2"
+pendulum = "^2.1.2"
+isort = "^5.8.0"
+black = "^21.6b0"
+immutables = "^0.15"
+ujson = "^4.0.2"
+orjson = "^3.5.2"
+msgpack = "^1.0.2"
+PyYAML = "^5.4.1"
+tomlkit = "^0.7.0"
+motor = "^2.5.0"
+furo = "^2021.7.31-beta.41"
+
+[tool.poetry.urls]
+"Changelog" = "https://cattrs.readthedocs.io/en/latest/history.html"
+"Bug Tracker" = "https://github.com/Tinche/cattrs/issues"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

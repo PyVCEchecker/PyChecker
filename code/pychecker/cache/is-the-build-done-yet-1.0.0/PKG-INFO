@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: is-the-build-done-yet
+Version: 1.0.0
+Summary: Make Hue lights change colour when a subprocess is complete
+Home-page: https://github.com/JosiahCraw/Is-the-Build-Done-Yet
+Author: Josiah Craw
+Author-email: jos@joscraw.net
+License: UNKNOWN
+Description: # Is the build done yet??
+        Just a really simple script that changes the colour of Phillips Hue lights on the completion of a script/command
+        
+        ![Usage](https://storage.googleapis.com/is-the-build-done-yet/usage.png)
+        
+        ## Install
+        
+        ![Installation](https://storage.googleapis.com/is-the-build-done-yet/installation.png)
+        
+        ## Setup
+        ![Setup](https://storage.googleapis.com/is-the-build-done-yet/setup.png)
+        
+        ## Author
+        Jos Craw <jos@joscraw.net>
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

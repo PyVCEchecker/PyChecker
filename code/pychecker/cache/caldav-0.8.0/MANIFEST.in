@@ -1,0 +1,4 @@
+include COPYING.*
+include ChangeLog
+include README.md
+recursive-include tests *

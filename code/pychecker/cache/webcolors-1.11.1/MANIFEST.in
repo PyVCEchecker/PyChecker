@@ -1,0 +1,6 @@
+include LICENSE
+include MANIFEST.in
+recursive-include docs *
+include tox.ini
+graft src
+graft tests

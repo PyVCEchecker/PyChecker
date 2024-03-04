@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      xml:lang="en"
+      i18n:domain="example.conference"
+>
+  <body>
+
+    <metal:main fill-slot="main">
+      <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle"></div>
+
+        <h1 class="documentFirstHeading"
+            tal:content="view/label"
+        ></h1>
+
+        <div tal:replace="structure provider:plone.belowcontenttitle"></div>
+
+        <p class="documentDescription"
+           tal:content="context/description"
+        ></p>
+
+        <div tal:replace="structure provider:plone.abovecontentbody"></div>
+        <p tal:condition="view/show_note">
+            Here the table widget is set to DISPLAY_MODE in the
+            updateWidgets method. The table cannot insert / delete or
+            auto-append. However, the individual cells are still in the
+            default mode. They were created before the updateWidgets method was
+            called. You must set the subform widgets to readonly also
+            if you want to disable changes to the table.
+        </p>
+
+        <div id="content-core">
+          <metal:block use-macro="context/@@ploneform-macros/titlelessform" />
+        </div>
+
+        <span tal:replace="structure context/@@demo-collective.z3cform.datagrid-menu"></span>
+
+        <div tal:replace="structure provider:plone.belowcontentbody"></div>
+
+      </tal:main-macro>
+    </metal:main>
+
+  </body>
+</html>

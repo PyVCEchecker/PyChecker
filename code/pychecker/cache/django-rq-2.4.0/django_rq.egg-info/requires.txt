@@ -1,0 +1,9 @@
+django>=2.0
+rq>=1.2
+redis>=3
+
+[Sentry]
+raven>=6.1.0
+
+[testing]
+mock>=2.0.0

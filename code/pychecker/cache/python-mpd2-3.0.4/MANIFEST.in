@@ -1,0 +1,4 @@
+exclude setup.cfg
+include *.txt
+include *.rst
+recursive-include doc *.rst

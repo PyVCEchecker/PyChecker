@@ -1,0 +1,4 @@
+[console_scripts]
+awx-cli = tower_cli.cli.run:cli
+tower-cli = tower_cli.cli.run:cli
+

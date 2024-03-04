@@ -1,0 +1,4 @@
+mock # BSD
+nose # LGPL
+testtools # MIT
+toml # MIT

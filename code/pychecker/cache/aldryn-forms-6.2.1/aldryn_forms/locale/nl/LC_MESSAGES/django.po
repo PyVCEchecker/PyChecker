@@ -1,0 +1,686 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# kurdyma <transifex.com@kurdyenviolien.nl>, 2016
+# Angelo Dini <finalangeljp@hotmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-25 21:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Angelo Dini <finalangeljp@hotmail.com>, 2016\n"
+"Language-Team: Dutch (https://www.transifex.com/divio/teams/58664/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin/base.py:39
+msgid "data"
+msgstr "data"
+
+#: admin/base.py:55
+msgid "people notified"
+msgstr "mensen die op de hoogte zijn gesteld"
+
+#: admin/forms.py:33
+msgid "from date"
+msgstr "van datum"
+
+#: admin/forms.py:38
+msgid "to date"
+msgstr "tot datum"
+
+#: admin/forms.py:43
+msgid "language"
+msgstr "taal"
+
+#: admin/forms.py:58
+msgid ""
+"Export failed! More than 65,536 entries found, exceeded Excel limitation!"
+msgstr ""
+
+#: admin/forms.py:132
+msgid "Please select at least one field to export."
+msgstr "Selecteer in ieder geval 1 veld om te exporteren."
+
+#: admin/views.py:69
+msgid "No records found"
+msgstr "Geen records gevonden"
+
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/display/submission_data.html:3
+#: boilerplates/legacy/templates/admin/aldryn_forms/display/submission_data.html:3
+#: templates/admin/aldryn_forms/display/submission_data.html:3
+msgid "Field"
+msgstr "Veld"
+
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/display/submission_data.html:4
+#: boilerplates/legacy/templates/admin/aldryn_forms/display/submission_data.html:4
+#: models.py:306 models.py:461
+#: templates/admin/aldryn_forms/display/submission_data.html:4
+msgid "Label"
+msgstr "Label"
+
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/display/submission_data.html:5
+#: boilerplates/legacy/templates/admin/aldryn_forms/display/submission_data.html:5
+#: models.py:451 templates/admin/aldryn_forms/display/submission_data.html:5
+msgid "Value"
+msgstr "Waarde"
+
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/export.html:5
+#: boilerplates/legacy/templates/admin/aldryn_forms/export.html:4
+#: boilerplates/legacy/templates/admin/aldryn_forms/export_wizard.html:4
+#: templates/admin/aldryn_forms/export.html:5
+msgid "Export form submissions"
+msgstr "Exporteer formulier inzendingen"
+
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/export.html:8
+#: boilerplates/legacy/templates/admin/aldryn_forms/export.html:7
+#: boilerplates/legacy/templates/admin/aldryn_forms/export_wizard.html:7
+#: templates/admin/aldryn_forms/export.html:8
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Verbeter de fout hieronder."
+msgstr[1] "Verbeter de fouten hieronder."
+
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/export.html:30
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/export_wizard.html:11
+#: boilerplates/legacy/templates/admin/aldryn_forms/export.html:27
+#: boilerplates/legacy/templates/admin/aldryn_forms/export_wizard.html:30
+#: templates/admin/aldryn_forms/export.html:30
+#: templates/admin/aldryn_forms/export_wizard.html:11
+msgid "Export"
+msgstr "Exporteer"
+
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/export_wizard.html:13
+#: boilerplates/legacy/templates/admin/aldryn_forms/export_wizard.html:32
+#: templates/admin/aldryn_forms/export_wizard.html:13
+msgid "Continue"
+msgstr "Ga door"
+
+#: boilerplates/bootstrap3/templates/admin/aldryn_forms/formsubmission/change_list.html:9
+#: boilerplates/legacy/templates/admin/aldryn_forms/formsubmission/change_list.html:9
+#: templates/admin/aldryn_forms/formsubmission/change_list.html:9
+msgid "Export Form Entries"
+msgstr "Exporteer formulier inzendingen"
+
+#: boilerplates/bootstrap3/templates/aldryn_forms/email_notifications/emails/notification.body.html:9
+#: boilerplates/bootstrap3/templates/aldryn_forms/email_notifications/emails/notification.body.txt:8
+#: boilerplates/bootstrap3/templates/aldryn_forms/emails/notification.body.html:3
+#: boilerplates/bootstrap3/templates/aldryn_forms/emails/notification.body.txt:2
+#: boilerplates/bootstrap3/templates/aldryn_forms/emails/user/notification.body.txt:5
+#: boilerplates/legacy/templates/aldryn_forms/email_notifications/emails/notification.body.html:9
+#: boilerplates/legacy/templates/aldryn_forms/email_notifications/emails/notification.body.txt:8
+#: boilerplates/legacy/templates/aldryn_forms/emails/notification.body.html:3
+#: boilerplates/legacy/templates/aldryn_forms/emails/notification.body.txt:2
+#: boilerplates/legacy/templates/aldryn_forms/emails/user/notification.body.txt:5
+#: templates/aldryn_forms/email_notifications/emails/notification.body.html:9
+#: templates/aldryn_forms/email_notifications/emails/notification.body.txt:8
+#: templates/aldryn_forms/emails/notification.body.html:3
+#: templates/aldryn_forms/emails/notification.body.txt:2
+#: templates/aldryn_forms/emails/user/notification.body.txt:5
+#, python-format
+msgid "Form name: %(form_name)s"
+msgstr "Formuliernaam: %(form_name)s"
+
+#: boilerplates/bootstrap3/templates/aldryn_forms/email_notifications/emails/notification.subject.txt:1
+#: boilerplates/bootstrap3/templates/aldryn_forms/emails/notification.subject.txt:1
+#: boilerplates/bootstrap3/templates/aldryn_forms/emails/user/notification.subject.txt:1
+#: boilerplates/legacy/templates/aldryn_forms/email_notifications/emails/notification.subject.txt:1
+#: boilerplates/legacy/templates/aldryn_forms/emails/notification.subject.txt:1
+#: boilerplates/legacy/templates/aldryn_forms/emails/user/notification.subject.txt:1
+#: templates/aldryn_forms/email_notifications/emails/notification.subject.txt:1
+#: templates/aldryn_forms/emails/notification.subject.txt:1
+#: templates/aldryn_forms/emails/user/notification.subject.txt:1
+#, python-format
+msgid "[Form submission] %(form_name)s"
+msgstr "[Formulier inzending] %(form_name)s"
+
+#: boilerplates/bootstrap3/templates/aldryn_forms/field.html:7
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/emailfield.html:9
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/filefield.html:9
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/imagefield.html:9
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/multiplecheckboxselectfield.html:9
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/multipleselectfield.html:9
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/radioselectfield.html:8
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/selectfield.html:9
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/textareafield.html:9
+#: boilerplates/bootstrap3/templates/aldryn_forms/fields/textfield.html:9
+#: templates/aldryn_forms/field.html:14
+#: templates/aldryn_forms/fields/multiplecheckboxselectfield.html:9
+msgid "Required field"
+msgstr "Verplicht veld"
+
+#: boilerplates/bootstrap3/templates/aldryn_forms/form.html:19
+#, python-format
+msgid ""
+"Thank you for submitting your information, you will be <a "
+"href=\"%(form_success_url)s\">redirected shortly</a>."
+msgstr ""
+"Dank u voor het verzenden van uw informatie. U wordt spoedig <a "
+"href=\"%(form_success_url)s\">doorgeleid</a>."
+
+#: cms_apps.py:9 cms_plugins.py:51
+msgid "Forms"
+msgstr "Formulieren"
+
+#: cms_plugins.py:60
+msgid "Form"
+msgstr "Formulier"
+
+#: cms_plugins.py:74 cms_plugins.py:242 cms_plugins.py:383
+#: contrib/email_notifications/cms_plugins.py:137
+msgid "Advanced Settings"
+msgstr "Geavanceerde Settings"
+
+#: cms_plugins.py:204
+msgid "The form has been sent."
+msgstr "Het formulier is verzonden."
+
+#: cms_plugins.py:233
+msgid "Fieldset"
+msgstr "Fieldset"
+
+#: cms_plugins.py:252
+msgid "Form fields"
+msgstr "Formulier velden"
+
+#: cms_plugins.py:420
+msgid "Text Field"
+msgstr "Tekst Veld"
+
+#: cms_plugins.py:444
+msgid "Text Area Field"
+msgstr "Text Area Veld"
+
+#: cms_plugins.py:485
+msgid "Email Field"
+msgstr "Email Veld"
+
+#: cms_plugins.py:520
+msgid "File upload field"
+msgstr "Bestand upload veld"
+
+#: cms_plugins.py:600
+msgid "Image upload field"
+msgstr "Afbeelding upload veld"
+
+#: cms_plugins.py:638
+msgid "Yes/No Field"
+msgstr "Ja/Nee Veld"
+
+#: cms_plugins.py:659
+msgid "Yes"
+msgstr "Ja"
+
+#: cms_plugins.py:659
+msgid "No"
+msgstr "Nee"
+
+#: cms_plugins.py:667
+msgid "Select Field"
+msgstr "Select Veld"
+
+#: cms_plugins.py:701
+msgid "Multiple Select Field"
+msgstr "Multiple Select Veld"
+
+#: cms_plugins.py:737
+msgid "Multiple Checkbox Field"
+msgstr ""
+
+#: cms_plugins.py:741
+msgid "Radio Select Field"
+msgstr "Radio Select Veld"
+
+#: cms_plugins.py:782
+msgid "Captcha Field"
+msgstr "Captcha Veld"
+
+#: cms_plugins.py:803
+msgid "Submit Button"
+msgstr "Verzend Knop"
+
+#: contrib/email_notifications/cms_plugins.py:26
+msgid "new email notification"
+msgstr "nieuw email bericht"
+
+#: contrib/email_notifications/cms_plugins.py:27
+msgid "new email notifications"
+msgstr "nieuwe email berichten"
+
+#: contrib/email_notifications/cms_plugins.py:51 models.py:165
+msgid "Recipients"
+msgstr "Ontvangers"
+
+#: contrib/email_notifications/cms_plugins.py:63
+#, python-brace-format
+msgid ""
+"variables can be used with by wrapping with \"${variable}\" like ${variable}"
+msgstr ""
+"variabelen kunnen gebruikt worden door \"${variable}\" er omheen te zetten, "
+"zoals ${variable}"
+
+#: contrib/email_notifications/cms_plugins.py:92
+msgid "Email"
+msgstr ""
+
+#: contrib/email_notifications/cms_plugins.py:117
+msgid "available text variables"
+msgstr "beschikbare tekst variabelen"
+
+#: contrib/email_notifications/cms_plugins.py:121
+msgid "Form (Advanced)"
+msgstr "Formulier (Geavanceerd)"
+
+#: contrib/email_notifications/models.py:28
+msgid "default"
+msgstr "default"
+
+#: contrib/email_notifications/models.py:62
+msgid "Email notification"
+msgstr ""
+
+#: contrib/email_notifications/models.py:63
+msgid "Email notifications"
+msgstr ""
+
+#: contrib/email_notifications/models.py:66
+msgid "theme"
+msgstr "thema"
+
+#: contrib/email_notifications/models.py:68
+msgid "Provides the base theme for the email."
+msgstr "Verschaft het basis thema voor de email."
+
+#: contrib/email_notifications/models.py:72
+msgid "to name"
+msgstr "'aan' naam"
+
+#: contrib/email_notifications/models.py:77
+msgid "to email"
+msgstr "'aan' email"
+
+#: contrib/email_notifications/models.py:83
+msgid "to user"
+msgstr "'aan' gebruiker"
+
+#: contrib/email_notifications/models.py:89
+msgid "from name"
+msgstr "'van' naam"
+
+#: contrib/email_notifications/models.py:94
+msgid "from email"
+msgstr "'van' email"
+
+#: contrib/email_notifications/models.py:99
+msgid "subject"
+msgstr "onderwerp"
+
+#: contrib/email_notifications/models.py:104
+msgid "email body (txt)"
+msgstr "email body (txt)"
+
+#: contrib/email_notifications/models.py:106
+msgid "used when rendering the email in text only mode."
+msgstr "gebruikt als de email in tekst mode wordt gemaakt."
+
+#: contrib/email_notifications/models.py:109
+msgid "email body (html)"
+msgstr "email body (html)"
+
+#: contrib/email_notifications/models.py:111
+msgid "used when rendering the email in html."
+msgstr "gebruikt als de email in html mode wordt gemaakt."
+
+#: contrib/email_notifications/models.py:127
+msgid "Please provide a recipient."
+msgstr "Geef een ontvanger op."
+
+#: contrib/email_notifications/notification.py:54
+msgid "Fields"
+msgstr "Velden"
+
+#: forms.py:28
+#, python-format
+msgid ""
+"File size must be under %(max_size)s. Current file size is %(actual_size)s."
+msgstr ""
+
+#: forms.py:63
+#, python-format
+msgid ""
+"Image width must be under %(max_size)s pixels. Current width is "
+"%(actual_size)s pixels."
+msgstr ""
+
+#: forms.py:73
+#, python-format
+msgid ""
+"Image height must be under %(max_size)s pixels. Current height is "
+"%(actual_size)s pixels."
+msgstr ""
+
+#: forms.py:168
+msgid "Please provide CMS page for redirect."
+msgstr "Geef een CMS pagina op voor redirect."
+
+#: forms.py:172
+msgid "Please provide an absolute URL for redirect."
+msgstr "Geef een absolute URL op voor redirect"
+
+#: forms.py:216
+msgid "Min value can not be greater than max value."
+msgstr ""
+
+#: forms.py:225
+msgid "Min length"
+msgstr "Min lengte"
+
+#: forms.py:226
+msgid "Required number of characters to type."
+msgstr "Benodigd aantal in te typen karakters."
+
+#: forms.py:228
+msgid "Max length"
+msgstr "Max lengte"
+
+#: forms.py:229
+msgid "Maximum number of characters to type."
+msgstr "Maximaal benodigd aantal in te typen karakters."
+
+#: forms.py:264
+msgid ""
+"Explanatory text displayed next to input field. Just like this one. You can "
+"use MAXSIZE as a placeholder for the maximum size configured below."
+msgstr ""
+"Uitleg die wordt getoond naast het veld. Net zo als deze tekst. Je kunt "
+"MAXSIZE gebruiken als placeholder voor de maximum grootte zoals hieronder "
+"geconfigureerd."
+
+#: forms.py:277
+msgid ""
+"Explanatory text displayed next to input field. Just like this one. You can "
+"use MAXSIZE, MAXWIDTH, MAXHEIGHT as a placeholders for the maximum file size"
+" and dimensions configured below."
+msgstr ""
+"Uitleg die wordt getoond naast het input veld. Net zo als deze tekst. Je "
+"kunt MAXSIZE, MAXWIDTH, MAXHEIGHT gebruiken als placeholder voor de maximum "
+"bestandsgrootte en dimansies zoals hieronder geconfigureerd."
+
+#: forms.py:301
+msgid "Min choices"
+msgstr "Min keuzes"
+
+#: forms.py:302
+msgid "Required amount of elements to chose."
+msgstr "Benodigde aantal elementen om te kiezen."
+
+#: forms.py:304
+msgid "Max choices"
+msgstr "Max keuzes"
+
+#: forms.py:305
+msgid "Maximum amount of elements to chose."
+msgstr "Maximale aantal elementen om te kiezen."
+
+#: models.py:111 models.py:452
+msgid "Default"
+msgstr "Default"
+
+#: models.py:119 models.py:151
+msgid "CMS Page"
+msgstr "CMS Pagina"
+
+#: models.py:120 models.py:152
+msgid "Absolute URL"
+msgstr "Absolute URL"
+
+#: models.py:127
+msgid "Name"
+msgstr "Naam"
+
+#: models.py:129
+msgid "Used to filter out form submissions."
+msgstr "Gebruikt om formulier inzendingen uit te filteren."
+
+#: models.py:132 models.py:309
+msgid "Error message"
+msgstr "Foutboodschap"
+
+#: models.py:135
+msgid "An error message that will be displayed if the form doesn't validate."
+msgstr ""
+"Een foutboodschap die wordt getoond als het formulier niet gevalideerd kan "
+"worden."
+
+#: models.py:139
+msgid "Success message"
+msgstr "Succesboodschap"
+
+#: models.py:142
+msgid "An success message that will be displayed."
+msgstr "Een succesboodschap die wordt getoond."
+
+#: models.py:145
+msgid "Redirect to"
+msgstr "Redirect naar"
+
+#: models.py:148
+msgid "Where to redirect the user when the form has been successfully sent?"
+msgstr ""
+"Waarheen moet de gebruiker worden geredirect als het formulier succesvol "
+"verzonden is?"
+
+#: models.py:154 models.py:296 models.py:345 models.py:463
+msgid "custom css classes"
+msgstr "custom css classes"
+
+#: models.py:156
+msgid "form template"
+msgstr "formulier template"
+
+#: models.py:168
+msgid "People who will get the form content via e-mail."
+msgstr "Mensen die de inhoud van het formulier krijgen via e-mail."
+
+#: models.py:294
+msgid "Legend"
+msgstr "Legenda"
+
+#: models.py:307
+msgid "Field is required"
+msgstr "Veld is verplicht"
+
+#: models.py:312
+msgid ""
+"Error message displayed if the required field is left empty. Default: \"This"
+" field is required\"."
+msgstr ""
+"Foutboodschap die wordt getoond als een verplicht veld leeggelaten wordt. "
+"Default: \"This field is required\"."
+
+#: models.py:316
+msgid "Placeholder text"
+msgstr "Placeholder tekst"
+
+#: models.py:319
+msgid ""
+"Default text in a form. Disappears when user starts typing. Example: "
+"\"email@example.com\""
+msgstr ""
+
+#: models.py:323
+msgid "Help text"
+msgstr "Help tekst"
+
+#: models.py:326
+msgid "Explanatory text displayed next to input field. Just like this one."
+msgstr ""
+"Uitleg die wordt getoond naast het input veld. Net zo als deze tekst. "
+
+#: models.py:333
+msgid "Min value"
+msgstr "Min waarde"
+
+#: models.py:339
+msgid "Max value"
+msgstr "Max waarde"
+
+#: models.py:380
+msgid "columns"
+msgstr "kolommen"
+
+#: models.py:382
+msgid "rows"
+msgstr "rijen"
+
+#: models.py:387
+msgid "send notification when form is submitted"
+msgstr ""
+
+#: models.py:389
+msgid ""
+"When checked, the value of this field will be used to send an email "
+"notification."
+msgstr ""
+"Als dit is aangevinkt, zal de waarde van dit veld worden gebruikt om een "
+"e-mail notificatie te zenden."
+
+#: models.py:393
+msgid "email subject"
+msgstr "email onderwerp"
+
+#: models.py:397
+msgid "Used as the email subject when email_send_notification is checked."
+msgstr ""
+"Gebruikt als email onderwerp als \"email verzonden notificatie\" is "
+"aangevinkt."
+
+#: models.py:401
+msgid "Additional email body"
+msgstr "Additionele email body"
+
+#: models.py:404
+msgid "Additional body text used when email notifications are active."
+msgstr "Additionele email body als email notificaties actief zijn"
+
+#: models.py:411
+msgid "Upload files to"
+msgstr "Upload bestanden naar"
+
+#: models.py:412
+msgid ""
+"Select a folder to which all files submitted through this field will be "
+"uploaded to."
+msgstr ""
+"Selecteer een folder waarheen alle bestanden in dit veld worden geupload."
+
+#: models.py:416
+msgid "Maximum file size"
+msgstr "Maximum bestandsgrootte"
+
+#: models.py:418
+msgid ""
+"The maximum file size of the upload, in bytes. You can use common size "
+"suffixes (kB, MB, GB, ...)."
+msgstr ""
+"De maximum bestandsgrootte van de upload, in bytes, U kunt bekende "
+"achtervoegsels gebruiken (kB, MB, GB, ...)."
+
+#: models.py:432
+msgid "Maximum image width"
+msgstr "Maximale afbeeldingsbreedte"
+
+#: models.py:434
+msgid "The maximum width of the uploaded image, in pixels."
+msgstr "De maximale breedte van de geuploade afbeeldingen, in pixels."
+
+#: models.py:437
+msgid "Maximum image height"
+msgstr "Maximale afbeeldingshoogte"
+
+#: models.py:439
+msgid "The maximum height of the uploaded image, in pixels."
+msgstr "De maximale hoogte van de geuploade afbeeldingen, in pixels."
+
+#: models.py:447
+msgid "Option"
+msgstr ""
+
+#: models.py:448
+msgid "Options"
+msgstr ""
+
+#: models.py:474
+msgid "form name"
+msgstr "formulier naam"
+
+#: models.py:480
+msgid "users notified"
+msgstr "op de hoogte gestelde gebruikers"
+
+#: models.py:482
+msgid "People who got a notification when form was submitted."
+msgstr ""
+"Mensen die op de hoogte worden gesteld als een formulier verzonden wordt."
+
+#: models.py:486
+msgid "form language"
+msgstr "formulier taal"
+
+#: models.py:492
+msgid "form url"
+msgstr "formulier url"
+
+#: models.py:500
+msgid "Form submission"
+msgstr "Formulier verzending"
+
+#: models.py:501
+msgid "Form submissions"
+msgstr "Formulier verzendingen"
+
+#: templates/aldryn_forms/form.html:15
+#, python-format
+msgid ""
+"\n"
+"                Thank you for submitting your information, you will be\n"
+"                <a href=\"%(form_success_url)s\">redirected shortly</a>.\n"
+"            "
+msgstr ""
+"\n"
+"Bedankt voor het verzenden van de informatie, u wordt\n"
+"<a href=\"%(form_success_url)s\">spoedig doorgeleid</a>"
+
+#: validators.py:35
+#, python-format
+msgid ""
+"You have to choose at least %(limit_value)d options (chosen %(show_value)d)."
+msgstr ""
+"U moet minstens %(limit_value)d opties kiezen (gekozen %(show_value)d)."
+
+#: validators.py:41
+#, python-format
+msgid ""
+"You can't choose more than %(limit_value)d options (chosen %(show_value)d)."
+msgstr ""
+"U kunt niet meer dan %(limit_value)d opties kiezen (gekozen %(show_value)d)."
+
+#~ msgid ""
+#~ "\n"
+#~ "                Please correct the error below."
+#~ msgid_plural ""
+#~ "Please correct the errors below.\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                Verbeter de fouten hieronder."
+#~ msgstr[1] ""
+#~ "Verbeter de fouten hieronder.\n"
+#~ "            "

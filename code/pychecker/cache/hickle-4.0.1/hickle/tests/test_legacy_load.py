@@ -1,0 +1,37 @@
+# %% IMPORTS
+# Built-in imports
+import glob
+from os import path
+import warnings
+
+# Package imports
+import h5py
+
+# hickle imports
+import hickle as hkl
+
+
+# %% FUNCTION DEFINITIONS
+def test_legacy_load():
+    dirpath = path.dirname(__file__)
+    filelist = sorted(glob.glob(path.join(dirpath, 'legacy_hkls/*.hkl')))
+
+    # Make all warnings show
+    warnings.simplefilter("always")
+
+    for filename in filelist:
+        try:
+            print(filename)
+            a = hkl.load(filename)
+        except Exception:
+            with h5py.File(filename) as a:
+                print(a.attrs.items())
+                print(a.items())
+                for key, item in a.items():
+                    print(item.attrs.items())
+                raise
+
+
+# %% MAIN SCRIPT
+if __name__ == "__main__":
+    test_legacy_load()

@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers: {}
+    method: GET
+    uri: https://vcsa:80/
+  response:
+    body:
+      string: ""
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '0'
+      Content-Security-Policy:
+      - block-all-mixed-content
+      Content-Type:
+      - text/html
+      Date:
+      - Wed, 26 Jun 2019 20:19:39 GMT
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - '1'
+    status:
+      code: 404
+      message: KO
+version: 1

@@ -1,0 +1,20 @@
+
+[:python_version == "3.6"]
+dataclasses
+
+[docs]
+sphinx
+
+[optional]
+pyrsistent
+
+[tests]
+pyrsistent
+pytest
+pytest-sugar
+coverage
+pytest-coverage
+hypothesis
+
+[tests:implementation_name == "cpython"]
+mypy

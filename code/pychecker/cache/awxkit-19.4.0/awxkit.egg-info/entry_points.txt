@@ -1,0 +1,4 @@
+[console_scripts]
+akit = awxkit.scripts.basic_session:load_interactive
+awx = awxkit.cli:run
+

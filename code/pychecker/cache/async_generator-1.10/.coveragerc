@@ -1,0 +1,8 @@
+[run]
+branch=True
+source=async_generator
+omit=
+  setup.py
+
+[report]
+precision = 1

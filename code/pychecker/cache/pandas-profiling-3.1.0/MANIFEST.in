@@ -1,0 +1,27 @@
+# Requirements
+include requirements*.txt
+
+# Include license, Readme, etc.
+include LICENSE
+include *.md
+include mypy.ini
+include src/pandas_profiling/py.typed
+
+# Styles
+include src/pandas_profiling/visualisation/*.mplstyle
+
+# Templates and static resources
+recursive-include src/pandas_profiling/report/presentation/flavours/html/templates *.html *.js *.css
+
+# Configuration
+include src/pandas_profiling/*.yaml
+
+# Exclude development, docs, testing and example code
+exclude .pre-commit-config.yaml
+exclude commitlint.config.js
+include Makefile make.bat
+exclude docs examples tests docsrc
+recursive-exclude docs *
+recursive-exclude docsrc *
+recursive-exclude examples *
+recursive-exclude tests *

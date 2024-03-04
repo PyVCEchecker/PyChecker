@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>deprecation &#8212; deprecation 2.0.7 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">deprecation 2.0.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="deprecation">
+<h1><code class="docutils literal notranslate"><span class="pre">deprecation</span></code><a class="headerlink" href="#deprecation" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">deprecation</span></code> is a library that enables automated deprecations. It offers
+the <a class="reference internal" href="#deprecation.deprecated" title="deprecation.deprecated"><code class="xref py py-func docutils literal notranslate"><span class="pre">deprecated()</span></code></a> decorator to wrap functions, providing
+proper warnings both in documentation and via Python’s <a class="reference external" href="https://docs.python.org/dev/library/warnings.html#module-warnings" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code></a> system,
+as well as the <a class="reference internal" href="#deprecation.fail_if_not_removed" title="deprecation.fail_if_not_removed"><code class="xref py py-func docutils literal notranslate"><span class="pre">deprecation.fail_if_not_removed()</span></code></a> decorator for test
+methods to ensure that deprecated code is eventually removed.</p>
+<p>See <a class="reference internal" href="#api-documentation">API Documentation</a> to jump straight into the options. See the
+<a class="reference internal" href="sample.html"><span class="doc">sample module</span></a> page for an example of <code class="docutils literal notranslate"><span class="pre">deprecation</span></code>’s effect on a module’s
+Sphinx <a class="reference external" href="http://www.sphinx-doc.org/en/master/ext/autodoc.html">autodoc</a>
+generated documentation.</p>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">deprecation</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-deprecated">
+<h1>Using <code class="docutils literal notranslate"><span class="pre">&#64;deprecated</span></code><a class="headerlink" href="#using-deprecated" title="Permalink to this headline">¶</a></h1>
+<p>To mark a function or method as deprecated, wrap it in the
+<a class="reference internal" href="#deprecation.deprecated" title="deprecation.deprecated"><code class="xref py py-func docutils literal notranslate"><span class="pre">deprecated()</span></code></a> decorator. This does several things for you:</p>
+<ol class="arabic simple">
+<li><p>The docstring of the wrapped function will have details appended
+to it from the arguments you set on <a class="reference internal" href="#deprecation.deprecated" title="deprecation.deprecated"><code class="xref py py-func docutils literal notranslate"><span class="pre">deprecated()</span></code></a>.
+This takes care of telling your users not only that the function
+is deprecated, but can also tell them when it’s going away and
+what they can do in the meantime.</p></li>
+<li><p>In conjunction with the <a class="reference internal" href="#deprecation.fail_if_not_removed" title="deprecation.fail_if_not_removed"><code class="xref py py-func docutils literal notranslate"><span class="pre">fail_if_not_removed()</span></code></a>
+decorator it removes the need for any sort of manual tracking of
+when a sufficiently deprecated piece of code should be removed
+from the codebase. It causes tests to fail when they contain
+code which should be removed.</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">deprecation</span>
+
+<span class="nd">@deprecation</span><span class="o">.</span><span class="n">deprecated</span><span class="p">(</span><span class="n">deprecated_in</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">removed_in</span><span class="o">=</span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+                        <span class="n">current_version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+                        <span class="n">details</span><span class="o">=</span><span class="s2">&quot;Use the bar function instead&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Do some stuff&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now look at the docs. If you you generate API documentation from your source
+like the <a class="reference internal" href="sample.html"><span class="doc">sample module</span></a> does, you’ll see that the a sentence has been
+appended to a deprecated function’s docstring to include information about
+when the function is deprecated, when it’ll be removed, and what you can do
+instead. For example, run <code class="docutils literal notranslate"><span class="pre">help(foo)</span></code> and this is what you’ll get:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Help</span> <span class="n">on</span> <span class="n">function</span> <span class="n">foo</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">example</span><span class="p">:</span>
+
+<span class="n">foo</span><span class="p">()</span>
+    <span class="n">Do</span> <span class="n">some</span> <span class="n">stuff</span>
+
+    <span class="o">*</span><span class="n">Deprecated</span> <span class="ow">in</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">to</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="mf">2.0</span><span class="o">.</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">bar</span> <span class="n">function</span> <span class="n">instead</span><span class="o">*</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>You can pass varying amounts of detail to this decorator, but note that
+in most cases it removes the ability to use
+<a class="reference internal" href="#deprecation.fail_if_not_removed" title="deprecation.fail_if_not_removed"><code class="xref py py-func docutils literal notranslate"><span class="pre">fail_if_not_removed()</span></code></a>. See the <a class="reference internal" href="#api-documentation">API Documentation</a>
+for full details.</p>
+</div>
+<div class="section" id="using-fail-if-not-removed">
+<h1>Using <code class="docutils literal notranslate"><span class="pre">&#64;fail_if_not_removed</span></code><a class="headerlink" href="#using-fail-if-not-removed" title="Permalink to this headline">¶</a></h1>
+<p>Once you’ve marked code for deprecation via <a class="reference internal" href="#deprecation.deprecated" title="deprecation.deprecated"><code class="xref py py-func docutils literal notranslate"><span class="pre">deprecated()</span></code></a>,
+you can sit back and relax as most of the work has been done for you.
+Assuming you’ve provided sufficient detail to the decorator, you now just
+wait for your tests to tell you it’s time to delete the code in question.</p>
+<p>If you wrap test methods which use your now deprecated code in
+<a class="reference internal" href="#deprecation.fail_if_not_removed" title="deprecation.fail_if_not_removed"><code class="xref py py-func docutils literal notranslate"><span class="pre">fail_if_not_removed()</span></code></a>, the test will fail with a message
+notifying you that you should remove this code.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@deprecation</span><span class="o">.</span><span class="n">fail_if_not_removed</span>
+<span class="k">def</span> <span class="nf">test_won</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">won</span><span class="p">())</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Looking at the <a class="reference internal" href="sample.html"><span class="doc">sample module</span></a> docs, we can see that this function would
+fail the tests at version 2.0, when it should be removed. The following
+shows what test output will look like for a failure.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>AssertionError: &lt;function Tests.test_won at 0x10af33268&gt; uses a function
+that should be removed: who is unsupported as of 2.0. Use the ``one``
+function instead
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="module-deprecation">
+<span id="api-documentation"></span><h1>API Documentation<a class="headerlink" href="#module-deprecation" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="deprecation.deprecated">
+<code class="sig-prename descclassname">deprecation.</code><code class="sig-name descname">deprecated</code><span class="sig-paren">(</span><em class="sig-param">deprecated_in=None</em>, <em class="sig-param">removed_in=None</em>, <em class="sig-param">current_version=None</em>, <em class="sig-param">details=''</em><span class="sig-paren">)</span><a class="headerlink" href="#deprecation.deprecated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorate a function to signify its deprecation</p>
+<dl class="simple">
+<dt>This function wraps a method that will soon be removed and does two things:</dt><dd><ul class="simple">
+<li><p>The docstring of the method will be modified to include a notice
+about deprecation, e.g., “Deprecated since 0.9.11. Use foo instead.”</p></li>
+<li><p>Raises a <a class="reference internal" href="#deprecation.DeprecatedWarning" title="deprecation.DeprecatedWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecatedWarning</span></code></a>
+via the <a class="reference external" href="https://docs.python.org/dev/library/warnings.html#module-warnings" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code></a> module, which is a subclass of the built-in
+<a class="reference external" href="https://docs.python.org/dev/library/exceptions.html#DeprecationWarning" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a>. Note that built-in
+<code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning`s</span> <span class="pre">are</span> <span class="pre">ignored</span> <span class="pre">by</span> <span class="pre">default,</span> <span class="pre">so</span> <span class="pre">for</span> <span class="pre">users</span>
+<span class="pre">to</span> <span class="pre">be</span> <span class="pre">informed</span> <span class="pre">of</span> <span class="pre">said</span> <span class="pre">warnings</span> <span class="pre">they</span> <span class="pre">will</span> <span class="pre">need</span> <span class="pre">to</span> <span class="pre">enable</span> <span class="pre">them--see</span>
+<span class="pre">the</span> <span class="pre">:mod:`warnings</span></code> module documentation for more details.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deprecated_in</strong> – The version at which the decorated method is
+considered deprecated. This will usually be the
+next version to be released when the decorator is
+added. The default is <strong>None</strong>, which effectively
+means immediate deprecation. If this is not
+specified, then the <cite>removed_in</cite> and
+<cite>current_version</cite> arguments are ignored.</p></li>
+<li><p><strong>removed_in</strong> – The version or datetime.date when the decorated method
+will be removed. The default is <strong>None</strong>, specifying
+that the function is not currently planned to be removed.
+Note: This parameter cannot be set to a value if
+<cite>deprecated_in=None</cite>.</p></li>
+<li><p><strong>current_version</strong> – The source of version information for the
+currently running code. This will usually be
+a <cite>__version__</cite> attribute on your library.
+The default is <cite>None</cite>.
+When <cite>current_version=None</cite> the automation to
+determine if the wrapped function is actually
+in a period of deprecation or time for removal
+does not work, causing a
+<a class="reference internal" href="#deprecation.DeprecatedWarning" title="deprecation.DeprecatedWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecatedWarning</span></code></a>
+to be raised in all cases.</p></li>
+<li><p><strong>details</strong> – Extra details to be added to the method docstring and
+warning. For example, the details may point users to
+a replacement method, such as “Use the foo_bar
+method instead”. By default there are no details.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="deprecation.message_location">
+<code class="sig-prename descclassname">deprecation.</code><code class="sig-name descname">message_location</code><em class="property"> = 'bottom'</em><a class="headerlink" href="#deprecation.message_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Location where the details are added to a deprecated docstring</p>
+<p>When set to <code class="docutils literal notranslate"><span class="pre">&quot;bottom&quot;</span></code>, the details are appended to the end.
+When set to <code class="docutils literal notranslate"><span class="pre">&quot;top&quot;</span></code>, the details are inserted between the
+summary line and docstring contents.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="deprecation.fail_if_not_removed">
+<code class="sig-prename descclassname">deprecation.</code><code class="sig-name descname">fail_if_not_removed</code><span class="sig-paren">(</span><em class="sig-param">method</em><span class="sig-paren">)</span><a class="headerlink" href="#deprecation.fail_if_not_removed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorate a test method to track removal of deprecated code</p>
+<p>This decorator catches <a class="reference internal" href="#deprecation.UnsupportedWarning" title="deprecation.UnsupportedWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnsupportedWarning</span></code></a>
+warnings that occur during testing and causes unittests to fail,
+making it easier to keep track of when code should be removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/dev/library/exceptions.html#AssertionError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AssertionError</span></code></a> if an
+<a class="reference internal" href="#deprecation.UnsupportedWarning" title="deprecation.UnsupportedWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnsupportedWarning</span></code></a>
+is raised while running the test method.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="deprecation.DeprecatedWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">deprecation.</code><code class="sig-name descname">DeprecatedWarning</code><span class="sig-paren">(</span><em class="sig-param">function</em>, <em class="sig-param">deprecated_in</em>, <em class="sig-param">removed_in</em>, <em class="sig-param">details=''</em><span class="sig-paren">)</span><a class="headerlink" href="#deprecation.DeprecatedWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>A warning class for deprecated methods</p>
+<p>This is a specialization of the built-in <a class="reference external" href="https://docs.python.org/dev/library/exceptions.html#DeprecationWarning" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a>,
+adding parameters that allow us to get information into the __str__
+that ends up being sent through the <a class="reference external" href="https://docs.python.org/dev/library/warnings.html#module-warnings" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code></a> system.
+The attributes aren’t able to be retrieved after the warning gets
+raised and passed through the system as only the class–not the
+instance–and message are what gets preserved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> – The function being deprecated.</p></li>
+<li><p><strong>deprecated_in</strong> – The version that <code class="docutils literal notranslate"><span class="pre">function</span></code> is deprecated in</p></li>
+<li><p><strong>removed_in</strong> – The version or <a class="reference external" href="https://docs.python.org/dev/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> specifying when
+<code class="docutils literal notranslate"><span class="pre">function</span></code> gets removed.</p></li>
+<li><p><strong>details</strong> – Optional details about the deprecation. Most often
+this will include directions on what to use instead
+of the now deprecated code.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="deprecation.UnsupportedWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">deprecation.</code><code class="sig-name descname">UnsupportedWarning</code><span class="sig-paren">(</span><em class="sig-param">function</em>, <em class="sig-param">deprecated_in</em>, <em class="sig-param">removed_in</em>, <em class="sig-param">details=''</em><span class="sig-paren">)</span><a class="headerlink" href="#deprecation.UnsupportedWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>A warning class for methods to be removed</p>
+<p>This is a subclass of <a class="reference internal" href="#deprecation.DeprecatedWarning" title="deprecation.DeprecatedWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecatedWarning</span></code></a> and is used
+to output a proper message about a function being unsupported.
+Additionally, the <a class="reference internal" href="#deprecation.fail_if_not_removed" title="deprecation.fail_if_not_removed"><code class="xref py py-func docutils literal notranslate"><span class="pre">fail_if_not_removed()</span></code></a> decorator
+will handle this warning and cause any tests to fail if the system
+under test uses code that raises this warning.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">deprecation</span></code></a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#using-deprecated">Using <code class="docutils literal notranslate"><span class="pre">&#64;deprecated</span></code></a></li>
+<li><a class="reference internal" href="#using-fail-if-not-removed">Using <code class="docutils literal notranslate"><span class="pre">&#64;fail_if_not_removed</span></code></a></li>
+<li><a class="reference internal" href="#module-deprecation">API Documentation</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">deprecation 2.0.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Brian Curtin.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

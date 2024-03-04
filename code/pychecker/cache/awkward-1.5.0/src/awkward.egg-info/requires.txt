@@ -1,0 +1,40 @@
+numpy>=1.13.1
+setuptools
+
+[all]
+awkward-cuda-kernels==1.5.0
+pytest>=3.9
+flake8
+PyYAML
+
+[all:python_version >= "3.6"]
+autograd
+numba>=0.50.0
+numexpr
+pandas>=0.24.0
+
+[all:python_version >= "3.6" and sys_platform != "win32"]
+jax>=0.2.7
+jaxlib!=0.1.68,>=0.1.57
+pyarrow>=3.0.0
+
+[cuda]
+awkward-cuda-kernels==1.5.0
+
+[dev]
+flake8
+PyYAML
+
+[dev:python_version >= "3.6"]
+autograd
+numba>=0.50.0
+numexpr
+pandas>=0.24.0
+
+[dev:python_version >= "3.6" and sys_platform != "win32"]
+jax>=0.2.7
+jaxlib!=0.1.68,>=0.1.57
+pyarrow>=3.0.0
+
+[test]
+pytest>=3.9

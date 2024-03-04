@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_secretsmanager.egg-info/PKG-INFO
+src/aws_cdk.aws_secretsmanager.egg-info/SOURCES.txt
+src/aws_cdk.aws_secretsmanager.egg-info/dependency_links.txt
+src/aws_cdk.aws_secretsmanager.egg-info/requires.txt
+src/aws_cdk.aws_secretsmanager.egg-info/top_level.txt
+src/aws_cdk/aws_secretsmanager/__init__.py
+src/aws_cdk/aws_secretsmanager/py.typed
+src/aws_cdk/aws_secretsmanager/_jsii/__init__.py
+src/aws_cdk/aws_secretsmanager/_jsii/aws-secretsmanager@1.129.0.jsii.tgz

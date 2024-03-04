@@ -1,0 +1,4 @@
+docutils
+restructuredtext-lint>=0.7
+stevedore
+Pygments

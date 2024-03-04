@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: androidviewclient
+Version: 20.3.0
+Summary: AndroidViewClient is a 100% pure python library and tools         that simplifies test script creation providing higher level         operations and the ability of obtaining the tree of Views present at         any given moment on the device or emulator screen.         
+Home-page: https://github.com/dtmilano/AndroidViewClient/
+Author: Diego Torres Milano
+Author-email: dtmilano@gmail.com
+License: Apache
+Keywords: android uiautomator viewclient monkeyrunner test automation
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+License-File: LICENSE
+
+UNKNOWN
+

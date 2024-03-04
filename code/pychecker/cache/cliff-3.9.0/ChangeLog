@@ -1,0 +1,840 @@
+CHANGES
+=======
+
+3.9.0
+-----
+
+* Colourise and automatically page help output
+* Update unit test to satisfy python3.10+
+* Handle SIGPIPE exit gracefully
+* Add conflict\_handler parameter as attribut in Command class
+
+3.8.0
+-----
+
+* setup.cfg: Replace dashes with underscores
+* Replace getargspec with getfullargspec
+* Use py3 as the default runtime for tox
+* Add Python3 xena unit tests
+
+3.7.0
+-----
+
+* requirements: Uncap PrettyTable
+* Add '--sort-ascending', '--sort-descending' parameters
+* Make 'FormattableColumn' comparable
+* Handle null values when sorting
+* Remove unicode from code
+* gitignore: Ignore reno artefacts
+* Remove lower-constraints
+
+3.6.0
+-----
+
+* trivial: Remove references to Python 2.7
+
+3.5.0
+-----
+
+* columns: Make 'FormattableColumn' comparable
+* Update requirements URLs in tox config
+* Remove six
+* Update requirements
+* doc: Update bug tracker to storyboard
+* Remove references to setuptools
+* Add py38 package metadata
+* Remove Babel from lower-constraints.txt
+* Bump py37 to py38 in tox.ini
+* List setuptools under install\_requires
+* Document KeyboardInterrupt exit code
+* Exit gracefully on Ctrl-C
+* change help action to use its own exception for exit
+* Add Python3 wallaby unit tests
+* Capturing argparse errors due to problem with cmd2
+
+3.4.0
+-----
+
+* switch to stevedore for loading entry points
+
+3.3.0
+-----
+
+* Remove cap on cmd2
+* Fix compatibility with new cmd2
+
+3.2.0
+-----
+
+* drop mock from lower-constraints and requirements
+* Import command group support from osc-lib
+* Remove unneeded tests
+* Migrate to stestr
+* Remove python3.5
+* Stop to use the \_\_future\_\_ module
+* Switch to newer openstackdocstheme version
+* Use unittest.mock instead of third party mock
+* Add Python3 victoria unit tests
+
+3.1.0
+-----
+
+* Re-add support for python 3.5
+* Fix nested argument groups with ignore conflict handler
+* adding missing releasenote for the drop of py27 support
+
+3.0.0
+-----
+
+* [ussuri][goal] Drop python 2.7 support and testing
+
+2.18.0
+------
+
+* Add autoprogram\_cliff\_app\_dist\_name config opt
+* Switch to Ussuri jobs
+* Add contributors link to readme
+
+2.16.0
+------
+
+* Pin cmd2 back to <0.9 on all versions
+* Modify the help message of \`-c\`/\`--column\` parameter
+* Add Python 3 Train unit tests
+* Stop wildcard importing argparse
+
+2.15.0
+------
+
+* Add an errexit attribute to InteractiveApp to exit on command errors
+* Dropping the py35 testing
+* Updates for OpenDev transition
+* OpenDev Migration Patch
+* add python 3.7 unit test job
+* Missing carriage return in some cases, using -f json
+
+2.14.1
+------
+
+* Use template for lower-constraints
+* Change openstack-dev to openstack-discuss
+
+2.14.0
+------
+
+* Don't try to run issubclass on non-classes
+* Removed unused err variable
+* Remove dead files
+* add lib-forward-testing-python3 test job
+* add python 3.6 unit test job
+* switch documentation job to new PTI
+* import zuul job settings from project-config
+
+2.13.0
+------
+
+* Assure executable name is kept when app is called as module
+
+2.12.1
+------
+
+* Build universal wheels
+* fix tox python3 overrides
+* support cmd2 0.9.1 in interactive mode
+
+2.12.0
+------
+
+* update cmd2 dependency to handle py3 only versions
+* Remove travis.yml
+* exclude cmd2 0.8.3 and update to 0.8.4
+* add lower-constraints job
+* fix typos in documentation
+
+2.17.0
+------
+
+* Allow finding command by partial name
+* Updated from global requirements
+* Remove the warning of getargspec removal
+* Align parsed() call with cmd2 versions >= 0.7.3
+* Fix cmd2 doc URL
+* add argparse conflict handler "ignore"
+* sphinxext: Warn if namespace or command pattern invalid
+* Zuul: Remove project name
+* Updated from global requirements
+
+2.11.0
+------
+
+* remove -s alias for --sort-columns
+
+2.10.0
+------
+
+* Remove empty files
+* Add ability to sort data by columns for list commands
+* Updated from global requirements
+* Remove tox\_install.sh and just pass -c in tox
+* Replace legacy tips jobs with shiny new versions
+* Move doc requirements to doc/requirements.txt
+* do not require installing demo app to build docs
+* add support for legacy command name translation
+* Use in-tree cliffdemo app for docs build
+* Updated from global requirements
+* add bandit to pep8 job
+* sphinxext: Support cliff application
+* Fix PEP8 in gate
+* doc: Cleanup of demoapp doc
+* Generate demoapp CLI refernece
+* Fix codec error when format=csv
+
+2.9.1
+-----
+
+* handle more varied top\_level.txt files in distributions
+
+2.9.0
+-----
+
+* show the distribution providing the command in help output
+* Update .gitignore
+* Docs update for more-hooks
+* Updates for stestr
+* Allow command hooks to make changes
+* Updated from global requirements
+* add actual column names to error msg Closes-Bug: 1712876
+* Alias exit to cmd2's quit command to exit interactive shell
+* Updated from global requirements
+* Update doc on Sphinx integration process
+* Fix regexp for detecting long options
+* sphinxext: Correct issues with usage formatting
+* Move comments up in [extras] section of setup.cfg
+* Updated from global requirements
+* Make openstackdocstheme an optional doc dependency
+* Updated from global requirements
+* doc: minor cleanup
+* Update and replace http with https for doc links
+* doc: Remove blank lines between term and definition
+* trivial: Fix comments in sphinxext module
+* Use assertIsNone(...) instead of assertIs(None,...)
+* Updated from global requirements
+
+2.8.0
+-----
+
+* add tests for display command classes and hooks
+* Run hooks for DisplayCommandBase
+* add --fit-width option to table formatter
+* sphinxext: Add 'application' option to the autoprogram directive
+* use openstackdocstheme html context
+* switch from oslosphinx to openstackdocstheme
+* Fix erroneous line in command hook test
+* make smart help formatter test deterministic
+* remove references to distribute in the docs
+* add before and after hooks
+* add hook for get\_epilog
+* add hook for manipulating the argument parser
+* Updated from global requirements
+* pass the command name from HelpCommand
+* Adjust completenames tests for cmd2 0.7.3+
+* rearrange existing content to follow new standard
+* sphinext: Use metavar where possible
+* sphinxext: Use 'argparse.description', 'argparse.epilog'
+* sphinxext: Allow configuration of ignorable options
+* sphinxext: Generate better usage examples
+* add cmd\_name argument to CompleteCommand
+* Ensure python standard argparse module is loaded
+* Updated from global requirements
+
+2.7.0
+-----
+
+* covert test suite to use testrepository
+
+2.6.0
+-----
+
+* Updated from global requirements
+* Add smart help formatter for command parser
+* Add support for epilogs
+* Add 'autoprogram-cliff' Sphinx directive
+* .gitignore: Ignore eggs
+
+2.5.0
+-----
+
+* Use Sphinx 1.5 warning-is-error
+* Update cmd2 fix to still work with 0.6.7
+* Remove support for py34
+* Fix broken test with cmd2 0.7.0
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Add newline if the output formatter is json
+
+2.4.0
+-----
+
+* Add Constraints support
+* Remove tox environments that no longer work
+* Fix command order
+* Show team and repo badges on README
+* Add print\_empty parameter
+
+2.3.0
+-----
+
+* ignore Command docstring when looking for descriptions
+* let the Command get its one-liner description from a class attribute
+* flake8 fix
+* Replace dashes and colons when using bash formatter
+* Show entire command in error message
+* Updated from global requirements
+* Updated from global requirements
+* Fix spelling mistake
+* Add Python 3.5 classifier and venv
+* Updated from global requirements
+* Changed the home-page link
+* Add Apache 2.0 license to source file
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Clean imports in code
+* [doc]Fix URL for 'setuptools entry points'
+* Fix a typo in comment
+
+2.2.0
+-----
+
+* Avoid ASCII encoding errors when output is redirected
+* Fix cliff URLs in doc and demoapp
+* Remove announce.rst
+* Fix Command class doc typo
+* Updated from global requirements
+* Fixed broken link
+* add formattable columns concept
+* Add tests, cover more cases
+* Updated from global requirements
+* pep8: fix F405 error
+* command: make run() return take\_action() value
+
+2.1.0
+-----
+
+* Updated from global requirements
+* Update --max-width help
+* Add more test coverage for shell formatter
+* Add more test coverage for CSV formatter
+* Support multiple sub commands in completion
+* Factorize more test data
+* Factorize some test data
+* Factorize common test code
+* Factorize argparse importing
+* Updated from global requirements
+* Updated from global requirements
+* Add CLIFF\_MAX\_TERM\_WIDTH envvar to complement --max-width
+* Fix prettytable.PrettyTable().max\_width wrong usage
+* Fix AttributeError when entry point load failed
+* Distinguish no existed columns in ShowOne
+* Refactor HelpCommand
+* Updated from global requirements
+* Remove httplib2 from test-requirements.txt
+* Sync help message for --help
+
+2.0.0
+-----
+
+* handle empty list in table formatter
+
+1.17.0
+------
+
+* Drop Python 2.6 support
+* Revert "app,command: disallow abbrev by default"
+* Fixes terminal\_width on Windows
+
+1.16.0
+------
+
+* Updated from global requirements
+* remove openstack-common.conf
+* Add doc for deferred\_help parameter
+* Fix pep8 failure
+* app,command: disallow abbrev by default
+* app: work-around abbrev
+* remove unnecessary dependency on argparse
+* Make verbose and quiet mutually exclusive
+* setup: fix Python versions classifiers
+* Don't import unused logging
+* Don't use non-existent method of Mock
+* Replace dashes with underscores in bash completion
+* Updated from global requirements
+* Resize columns to fit screen width
+* fix fuzzy search for same-distance case
+* Correct path to docs
+* only use unicodecsv for python 2.x
+* Fix test class docstring for py 3.5
+
+1.15.0
+------
+
+* Replace '\r' with ' ' for prettytable
+* Implement a json formatter in cliff
+* Implement a yaml formatter in cliff
+* Updated from global requirements
+* Improve help messages
+
+1.14.0
+------
+
+* Add csv formatter test
+* Fix encoding issue with the default python csv output
+* Remove py26 as a default test from tox.ini
+* Set demo app up with deferred help
+* Add command fuzzy matching
+* Updated from global requirements
+* Remove requirements.txt from tox.ini
+* Updated from global requirements
+* Updated from global requirements
+* Allow subcommands to accept --help when using 'deferred\_help'
+* Updated from global requirements
+* Fix logging config in demo app
+* Use base command for help test
+* Updated from global requirements
+* Include the automatically-generated changelog
+* Updated from global requirements
+
+1.13.0
+------
+
+* Fix object has no attribute debug error
+* Add some docs for list value formatter
+* Add value format for list command
+* Updated from global requirements
+* Remove run\_cross\_tests.sh
+* fix author contact details
+* Print help on help command
+
+1.12.0
+------
+
+* Do not check requirements when loading plugins
+
+1.11.0
+------
+
+* Catch and ignore error when locale can not be set
+* Uncap library requirements for liberty
+* Add documentation for the value formatter
+* Sort the fuzzy matches
+* Defer interactive import
+* Updated from global requirements
+* Update links to setuptools doc
+
+1.10.1
+------
+
+* Pass user command text to the Command object
+* Document print\_help\_if\_requested method
+
+1.10.0
+------
+
+* Allow to call initialize\_app when running --help
+* Hide prompt in batch/pipe mode
+* Correct completion in interactive mode
+* Change the argument passed to \_\_init\_\_ for help
+* Fix pep8 tests for lambda
+* Updated from global requirements
+* Fix git repo urls in tox.ini
+* Add deprecated attribute to commands
+* Workflow documentation is now in infra-manual
+
+1.9.0
+-----
+
+* print the real error cmd argument
+* Updated from global requirements
+
+1.8.0
+-----
+
+* Update link to docs in README
+* Bring doc build up to standard
+* Add pbr to installation requirements
+* Add more detail to the README
+* Updated from global requirements
+* Add docs environment to tox.ini
+* mock.assert\_called\_once() is not a valid method
+* Work toward Python 3.4 support and testing
+* warn against sorting requirements
+
+1.7.0
+-----
+
+* Add release notes for 1.7.0
+* Fix stable integration tests
+* Updated from global requirements
+* Clean up default tox environment list
+* Do not allow wheels for stable tests
+* Set the main logger name to match the application
+* CSV formatter should use system-dependent line ending
+* Make show option compatible with Python 2.6
+* Use six.add\_metaclass instead of \_\_metaclass\_\_
+* fixed typos found by RETF rules
+* The --variable option to shell format is redundant
+* Expose load\_commands publicly
+* Fix wrong method name assert\_called\_once
+* Updated from global requirements
+* Fix pep8 failures on rule E265
+
+1.6.1
+-----
+
+* Remove PrettyTable from documentation requirements
+* Fix a bug in ShellFormatter's escaping of double quotes in strings
+* Import run\_cross\_tests.sh from oslo-incubator
+* add doc requirements to venv
+
+1.6.0
+-----
+
+* Add max-width support for table formatter
+* Add value only output formattter
+* Update readme with links to bug tracker and source
+* Move pep8 dependency into pep8 tox test
+* Fix doc build with Python 2.6.x
+* Fix interactive mode with command line args
+* Update .gitreview after repo rename
+* Escape double quotes in shell formatter
+* Add unit test for shell formatter
+* Rename private attribute to avoid conflict
+* Sync with global requirements
+* Add integration tests with known consumers
+* update history for previous change
+* Make the formatters a private part of the command
+
+1.5.2
+-----
+
+* move to pbr for packaging
+
+1.5.1
+-----
+
+* add venv environ to tox config
+
+1.5.0
+-----
+
+* Update history for next release
+* Move to stackforge
+* update history for stevedore change
+* Use stevedore to load formatter plugins
+* use entry points for completion plugins
+* Clean up recursive data handling
+* Always install complete command
+* attribution for bash completion work in history
+* code style fixes
+* code style fixes
+* various python code optimizations; shuffle I/O to shell classes
+* add bash complete
+* Enable debug in help mode
+* Pass the right args when pulling help from commands
+* prepare for 1.4.5 release
+* add pypy test env configuration
+* Update pyparsing dependency to 2.0.1
+
+1.4.4
+-----
+
+* update for release 1.4.4
+* Re-raise Exception on debug mode
+* Add test to check if return code is 2 on unknown command
+* Return code 1 is already use, use code 2 instead
+* Reraise error on debug
+* Display better error message on unknown command, and return code 1
+* update announce file
+
+1.4.3
+-----
+
+* prepare for 1.4.3 release
+* force python2.6 for that test env
+* Provide a default output encoding
+
+1.4.2
+-----
+
+* prepare for release 1.4.2
+
+1.4.1
+-----
+
+* prepare for release 1.4.1
+* Tighten requirements on cmd2
+* remove use of distribute in demo app
+* Fix default encoding issue with python 2.6
+* move tests into cliff package
+* add tests for dict2columns
+* Add dict2columns()
+* turn off distribute in tox
+
+1.4
+---
+
+* prep for release 1.4
+* fix flake8 issues with setup.py
+* remove the other traces of distribute
+* Remove explicit depend on distribute
+* update history for recent contribution
+* Expose instantiated interpreter instance and assign it to the 'interpreter' variable on the App instance
+* Update announcement for release 1.3.3
+
+1.3.3
+-----
+
+* Prepare for release 1.3.3
+* declare support for python 3.3
+* cmd2 0.6.5.1 was released, and is compatible
+* Restore compatibility with Prettytable < 0.7.2
+
+1.3.2
+-----
+
+* Prepare 1.3.2 release
+* Bump prettytable version accepted
+* add python 3.3 to tox
+* add style checks to tests
+* Add tests for underscore handling
+* use flake8 for style checks
+* update history.rst with convert\_underscores change
+* make converting underscores optional in CommandManager
+* fix version in docs
+
+1.3.1
+-----
+
+* prepare for 1.3.1 release
+* Fix PyParsing dependency
+* Fix typo
+* update history file for previous merge
+* Make list of application commands lexicographically ordered for help command in interactive mode
+
+1.3
+---
+
+* Prepare for 1.3 release
+* clean up history file
+* Document dependency on distribute
+* fix rst formatting in docstring
+* Update history file
+* Add tests for new functionality
+* Allow user to pass argparse\_kwargs argument to the build\_option\_parser method. Those arguments gets passed to the ArgumentParser constructor
+
+1.2.1
+-----
+
+* Set up for 1.2.1 release
+* Remove unused logging import
+* Fix problem with missing izip import in lister.py
+* Update announcement file for new release
+
+1.2
+---
+
+* Set up release 1.2
+* Add python2.6 support
+* remove debug print
+* remove tablib from test requirements
+* Fix logging default behavior
+* Fix interactive help command
+
+1.1.2
+-----
+
+* bumping version number for release
+* remove the entry point data for the moved formatters
+
+1.1.1
+-----
+
+* bump the version number to release a clean build
+
+1.1
+---
+
+* Update version and status values
+* Remove tablib formatters from core
+* fix version # in announcement
+
+1.0
+---
+
+* Doc updates for API changes. Clean up docstrings. Bump version to 1.0
+* merge API refactoring work
+* yet more pep8 work
+* fix help and tests for API change
+* Move take\_action() to Command
+* more pep8 work
+* Refactor DisplayBase.run() to make it easier to override separate parts in subclasses. Rename get\_data() to take\_action() so subclasses that do something other than query for values have a clear place to override
+* pep8 cleanup
+* add attribution to history for the previous merge
+* Adding new line to tablib formatters
+* fix tags declaration
+* document updates for 0.7
+* disable py26 tests since I do not have an environment for running them
+
+0.7
+---
+
+* bump version
+* fix interactive command processor to handle multi-part commands, including some that use the same first word as existing commands
+* declare a couple of commands that use builtin command names but use multiple words
+* update changelog
+* set the interactive mode flag before initializing the app so subclasses can check it; handle initialization errors more cleanly
+* add travis-ci status image to developer docs
+* add travis-ci status image to README
+* add a requirements file for travis-ci
+* bogus commit to trigger ci build
+* add travis-ci.org configuration file
+* add version num to history file
+
+0.6
+---
+
+* bump version number
+* pass more details to initialize\_app so subclasses can decide what sort of initialization to do
+* enable to use in Python2.6
+
+0.5.1
+-----
+
+* remove hard version requirement to unbreak the OpenStack build
+
+0.5
+---
+
+* prepare for 0.5 release
+* document changes in history file
+* make the organization of the classes page a little more clear
+* update formatter documentation
+* fix yaml, html, and json show formatters
+* move the column option so it applies to "show" commands, too
+* add yaml, json, and html formatters
+* move the columns option out of the table formatter and into the lister base
+* make help list commands if none match exactly; fixes #8
+* require at least PrettyTable 0.6 for Python 3 support, fixes #7
+* changes in the prettytable API rolled into the python 3 support update
+* add a tox stage for pep8 testing
+* python 3.2 does not have a unicode type so ignore the error if it is missing
+* move todo list to github issues
+* update todo list
+* note about prettytable and python3
+* refactor ShowOne and Lister to share a common base class
+* more todo notes
+* tests for cliff.help
+* pass the App to the help action instead of passing just the command manager, since the app has the stout handle we want to use for printing the help
+* 100% coverage of cliff.command
+* 100% coverage for commandmanager.py
+* 100% coverage of cliff.app module
+* let the interactive app set its own prompt
+* add tests for App and fix an issue with error handling and clean\_up() in python 3
+* use the stderr handle given to the app instead of assuming the default
+
+0.4
+---
+
+* version number and release note updates for 0.4
+* documentation improvements
+* simplify packaging file for demo app
+* ignore files generated by dev environment
+* first pass at interactive app
+* note to add more options to csv formatter
+* add --prefix option for shell formatter; add docs for shell formatter
+* clean up help text for the other formatters
+* add shell output formatter for single items
+* add longer docstring to show how it is printed by help
+* update todo list
+* fix typo in blog post
+
+0.3
+---
+
+* update blog announcement
+* bump the version number and update the release notes
+* add ShowOne base class for commands that need to show properties of an individual object make the table formatter work as a single object formatter update the docs for the new features
+* handle an empty data set
+* correct the doctoring
+* fix version # in doc build script
+* 0.2 release announcement post
+
+0.2
+---
+
+* bump version number
+* start a release log
+* update doc instructions for getting help
+* only show the one-line description in the command list; add a description of "help"
+* register a custom help action that knows how to print the list of commands available and a help command to generate help for the other commands
+* provide an internal API for applications to register commands without going through setuptools (used for help handler)
+* Use argparse for global arguments
+* fix doc build instructions
+* add some developer instructions and links ot the source repo and bug tracker
+* add announcement blog post source
+* advice from the distutils list was to stick with distribute for now
+* add Makefile with some common release operations
+* add example output to the list formatters
+* add a requirements file for doc build on readthedocs.org
+* add some real documentation
+* Add get\_data() to the Lister base class
+* remove example that I was using as a syntax reminder
+* Add a link to the docs
+* while looking for documentation on entry points I realized distutils2 doesn't seem to support them in the same way
+* fill in a real description of the project
+* start sphinx documentation
+* Added a bit more to the README
+* flesh out instructions for using the demo app
+* add a few more ideas
+* Added a README for the demo app
+* Added download url to both setup.py files and updated the demo setup.py with the new url
+
+0.1
+---
+
+* Added missing distribute setup file
+* move repo link to the dreamhost project
+* more to-do items
+* add demoapp to release package and clean up files being distributed from the test directory
+* notes about work still to be done
+* require PrettyTable package for the table formatter
+* improve error handling when loading formatter plugins
+* add a csv formatter for list apps
+* start creating a subclass of command for producing a list of output in different formats, using prettytable as an example formatter
+* remove unused import
+* better error handling of post-action hook in app
+* Pass the I/O streams into the app
+* add some error handling to App
+* make the log messages slightly easier to parse
+* tweak App api to make it easier to override and perform global actions before and after a command runs
+* use logging for controlling console output verbosity
+* clean up argv handling
+* install nose for tox tests
+* if no arguments are provided at all show the help message
+* replace default --help processor with one that includes the list of subcommands available
+* add debug option to nose
+* clean up dead code
+* include version info when configuring opt parse
+* Sample program with command plugins
+* first pass at an app class that can invoke commands
+* save commands using the name representation to be used in help output; don't modify the input arg list when searching for the command; return the name of the command found so the app can stuff it into the help text of the command
+* start building command manager
+* change to apache license
+* add tox config file for tests
+* add distribute\_setup.py so install works
+* add setup.py and package directory
+* add a basic description to readme
+* convert readme to rst
+* initial commit

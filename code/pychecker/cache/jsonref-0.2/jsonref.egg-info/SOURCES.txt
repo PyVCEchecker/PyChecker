@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.rst
+jsonref.py
+proxytypes.py
+setup.py
+tests.py
+jsonref.egg-info/PKG-INFO
+jsonref.egg-info/SOURCES.txt
+jsonref.egg-info/dependency_links.txt
+jsonref.egg-info/top_level.txt

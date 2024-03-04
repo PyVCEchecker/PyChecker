@@ -1,0 +1,11 @@
+LICENSE
+README.md
+future_fstrings.py
+setup.cfg
+setup.py
+future_fstrings.egg-info/PKG-INFO
+future_fstrings.egg-info/SOURCES.txt
+future_fstrings.egg-info/dependency_links.txt
+future_fstrings.egg-info/entry_points.txt
+future_fstrings.egg-info/requires.txt
+future_fstrings.egg-info/top_level.txt

@@ -1,0 +1,2 @@
+flake8>=3.9.1
+flake8_polyfill<2,>=1.0.2

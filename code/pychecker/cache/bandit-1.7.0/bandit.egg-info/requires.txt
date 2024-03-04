@@ -1,0 +1,7 @@
+GitPython>=1.0.1
+PyYAML>=5.3.1
+six>=1.10.0
+stevedore>=1.20.0
+
+[:(platform_system=="Windows")]
+colorama>=0.3.9

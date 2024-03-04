@@ -1,0 +1,51 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="ftw.upgrade">
+
+    <include package="plone.browserlayer" />
+
+    <i18n:registerTranslations directory="locales" />
+    <include package=".browser" />
+    <include package=".jsonapi" />
+    <configure zcml:condition="installed plone.app.intid">
+      <include package=".intid" />
+    </configure>
+
+
+    <genericsetup:registerProfile
+        name="default"
+        title="ftw.upgrade"
+        directory="profiles/default"
+        description="An advanced upgrade control panel."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+    <adapter factory=".gatherer.UpgradeInformationGatherer" />
+    <adapter factory=".executioner.Executioner" />
+    <adapter factory=".directory.recorder.UpgradeStepRecorder" />
+
+    <subscriber
+        for="Products.GenericSetup.interfaces.IProfileImportedEvent"
+        handler=".directory.subscribers.profile_installed"
+        />
+
+    <configure zcml:condition="installed collective.indexing">
+        <utility
+             provides="collective.indexing.interfaces.IIndexQueueProcessor"
+             name="ftw-upgrade-logging"
+             factory=".indexing.LoggingQueueProcessor"
+             />
+    </configure>
+
+    <configure zcml:condition="have plone-5">
+        <utility
+             provides="Products.CMFCore.interfaces.IIndexQueueProcessor"
+             name="ftw-upgrade-logging"
+             factory=".indexing.LoggingQueueProcessor"
+             />
+    </configure>
+
+</configure>

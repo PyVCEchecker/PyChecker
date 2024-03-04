@@ -1,0 +1,12 @@
+.idea
+dist
+*.pyc
+*.egg-info
+build
+.tox/
+AUTHORS
+ChangeLog
+.eggs/
+doc/_build
+
+/.pytest_cache

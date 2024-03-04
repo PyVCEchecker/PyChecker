@@ -1,0 +1,547 @@
+=== 2.0.X ===
+
+- Django 2 compatibility
+- Added cc/bcc support to email sendings
+
+=== 1.67.X ===
+
+- Allow extra context for emails
+- Enabled request factory mixin to handle old views
+- Fixed unicode issue in html to plain text converter
+- Re-arranged send_email function to make a proper use of cc and bcc options
+- Allow html in help texts
+- fixed logging filter, if no user agent could be detected
+- Replace request.REQUEST
+- Re-arranged utils
+- added fallback for BeautifulSoup import in utils
+- prepared app for Django 1.9 and Python 3.5
+- dropped support for Django<1.6
+- Removed deprecated stuff and updated docs
+- fixed init function of image widget
+- added variables to customize column sizes in horizontal forms
+
+=== 1.66.X ===
+
+- fixed flake8 errors and verbatim tag
+- remove all simple-translation support
+- enhanced ignorable user agents
+- updated factories
+- refined domain context in send_email
+- south is now optional
+- added reply_to and headers attributes to send_email
+
+=== 1.65.X ===
+
+- added hvad model mixin
+- updated hvad factory mixin
+- added get_site template tag
+- added domain variable to email context
+- enhanced send_email method to make use of other mail backends
+- added exabot to ignorable user agents
+- added url to message if ViewRequestFactoryMixin.assert200 fails due to a
+  redirect
+- added msg param to ViewRequestFactoryMixin.is_postable
+- added to_url_name param to ViewRequestFactoryMixin.redirects
+
+=== 1.64.X ===
+
+- added append_s template filter
+- Fixed add_form_widget_attr template tag
+- Added color picker field
+- added IGNORABLE_404_USER_AGENTS setting to be used with
+  FilterIgnorable404URLs logging filter
+- removed all raven related stuff. We don't use sentry any more and we don't
+  want to maintain unused cruft in this repo.
+- improved form templates
+- added session_dict to redirect view test functions
+
+=== 1.63.X ===
+
+- added callback argument to getModalB3 function, that fires once the modal is
+  loaded
+
+=== 1.62.X ===
+
+- added FilterIgnorable404URLs logging filter
+- added AddCurrentUser logging filter
+
+=== 1.61.X ===
+
+- added 'cleanup_mailer_messagelog' management command
+- added session_dict to request factories
+- extended GetModalB3 to be able to define a headline
+- Improved test suite
+- added django_settings.py with INGORABLE_404_URLS
+
+=== 1.60.X ===
+
+- Fixed get_login_url() in ViewTestMixin
+
+=== 1.59.X ===
+
+- Added UpdateCookieAJAXView
+- added is_forbidden to ViewRequestFactoryTestMixin that checks for
+  HttpResponseForbidden
+- fixed UpdateSessionAJAXView
+- Form template improvements
+- Added SSLMiddleware
+- Changed regex for ignorable user agents
+- Added Mail.RU_Bot to ignorable user agents
+- Fixed small bug in HvadPublishedManager
+- Added is_context_variable templatetag
+- Added RAVEN_IGNORE_SPIDERS feature to CustomSentry404CatchMiddleware
+
+=== 1.58.X ===
+
+- Added default setting for RAVEN_IGNORABLE_USER_AGENTS
+
+=== 1.58 ===
+
+- Added CustomSentry404CatchMiddleware
+
+=== 1.57.1 ===
+
+- Added data attribute to view tests redirect function
+
+=== 1.57 ===
+
+- Added PaginatedCommentAJAXView
+
+=== 1.56 ===
+
+- added UpdateSessionAJAXView
+
+=== 1.55 ===
+
+- added maps.js for easier use of Google Maps
+
+=== 1.54 ===
+
+- Added create_random_string util
+
+=== 1.53 ===
+
+- added getModalB3 - a simple Bootstrap 3 version of the getModal js function
+
+=== 1.52 ===
+
+- Added UploadedImageFactory
+
+=== 1.51 ===
+
+- Added 'to_url_name' parameter to is_postable function
+
+=== 1.50 ===
+
+- Added sum templatetag
+
+
+=== 1.49.1 ===
+
+- Circular import fix
+
+=== 1.49 ===
+
+- Added support files for Amazon S3 storage & django-compressor
+
+=== 1.48.1 ===
+
+- Added option to check redirects after post request in views tests
+
+=== 1.48 ===
+
+- Added WhitelistEmailBackend
+
+=== 1.47.1 ===
+
+- Added 'hide_label' variable to form_field.html template
+
+=== 1.47 ===
+
+- Allowing to remove parameters from the query string with get_query_params
+  templatetag
+
+=== 1.46.5 ===
+
+- Added post option to is_not_callable
+
+=== 1.46.4 ===
+
+- Removed custom message from is_not_callable function
+
+=== 1.46.3 ===
+
+- Added custom messages to view test mixin
+
+=== 1.46.2 ===
+
+- Fixed is_callable function of view test mixin
+
+=== 1.46.1 ===
+
+- Update for form_field template
+
+=== 1.46 ===
+
+- fixed hvad import
+- Added ajax parameter to ViewRequestFactoryTestMixin.is_postable
+
+=== 1.45 ===
+
+- Added HvadPublishedManager
+
+=== 1.44 ===
+
+- Added priority kwarg for send_email utility function
+
+=== 1.43 ===
+
+- Added possibility to create a session in views tests
+
+=== 1.42.3 ===
+
+- Fixes for plaintext email generation
+
+=== 1.42.2 ===
+
+- Improved ViewRequestFactoryTestMixin
+- Fixed import error in middleware_1_5
+
+=== 1.42.1 ===
+
+- Bugfixes for CustomBrokenLinkEmailsMiddleware
+
+=== 1.42 ===
+
+- Added days_until, hours_until, minutes_until templatetags
+
+=== 1.41 ===
+
+- Added CustomBrokenLinkEmailsMiddleware for Django 1.6
+
+=== 1.40 ===
+
+- Added CustomCommonMiddleware for Django 1.5
+
+=== 1.39 ===
+
+- Added bautifulsoup to setup.py
+
+=== 1.38 ===
+
+- Added "html to plain text" parser.
+- Use parser to generate the plain text template in send_mail function.
+- Added block_anyfilter templatetag
+
+=== 1.37 ===
+
+- Added get_content_type template tag.
+
+=== 1.37 ===
+
+- Allow modals.js to be used even without modals, on any given div
+
+=== 1.36.1 ===
+
+- Fix for save templatetag: Only manipulating the uppermost context
+
+=== 1.36 ===
+
+- Added save templatetag and dynamic_hr partial template
+
+=== 1.35.2 ===
+
+- Added ErrorMiddleware
+
+=== 1.35.1 ===
+
+- Added ViewRequestFactoryTestMixin (documentation to be done, soon)
+
+=== 1.35 ===
+
+- fixed mutable defaut value for extra in ViewTestMixin
+- removed deprecated code parameter in preference of status_code
+
+=== 1.34 ===
+
+- Improved get_query_params tag: We can now add more than just one query
+  parameter. See docs for more info.
+
+=== 1.33 ===
+
+- Added StripTagsFormMixin
+
+=== 1.32 ===
+
+- Fixed algorithm for pagination (get_range_around templatetag)
+
+=== 1.31 ===
+
+- Added concatenate templatetag
+
+=== 1.30 ===
+
+- Added `exclude` template tag.
+
+=== 1.29 ===
+
+- Extended `call` templatetag. We can call dicts and attribtues now.
+
+=== 1.28 ==
+
+- prepared factories for latest factory boy
+
+=== 1.27.1 ==
+
+- Fixed PlaceholderForm
+
+=== 1.27 ===
+
+- added get_form_field_type templatetag
+
+=== 1.26 ===
+
+- added add_form_widget_attr templatetag
+
+=== 1.25 ===
+
+- Removed anonymize IP from analytics2 code because it doesn't seem to work.
+  Trying to figure out if this is the issue. Might add this back later.
+- Added get_range_around assignment tag
+
+=== 1.24 ===
+
+- Added HvadFactoryMixin
+
+=== 1.23 ===
+
+- added partials/pagination.html template
+
+=== 1.22 ===
+
+- Added ``render_analytics2_code`` tag which uses the new analytics syntax
+
+=== 1.21.1 ===
+
+- Fixed PlaceholderForm for non-text inputs.
+
+=== 1.21 ===
+
+- Added PlaceholderForm.
+
+=== 1.20 ===
+
+- Added block_truncatewords_html template tag (see docs).
+- Addded get_query_params templatetag (see docs).
+
+=== 1.19 ===
+
+- Added set_context templatetag. It allows to put any variable into the
+  template context. See docs for further info.
+
+=== 1.18 ===
+
+- Added $wrapper parameter to getModal and postModal calls. This allows
+  to load the returned html into any wrapper element, not only the
+  $('#ajax-modal') element
+
+=== 1.17 ===
+
+- Added AccessMixin to use login_required decorator for views based on a
+  setting.
+
+=== 1.16 ===
+
+- Added `ajax_redirect_passthrough` parameter to AjaxRedirectMiddleware in
+  order to skip this middleware for some ajax calls, if needed.
+
+=== 1.15 ===
+
+- Improved docs for lockfile decorator
+- Added modals.js for easier Twitter Bootstrap modal handling
+
+=== 1.14 ===
+
+- Extended get_range filter
+
+=== 1.13 ===
+
+- Added conditional_decorator
+
+=== 1.12 ===
+
+- Added use_resolver parameter to navative templatetag
+
+=== 1.11 ===
+
+- auto-setting CUSTOM_FORMAT_MODULE_PATHS setting if not already set
+
+=== 1.10 ===
+
+- added calculate_dimensions_template_tag
+
+=== 1.9 ===
+
+- added verbatim templatetag
+
+=== 1.8 ===
+
+- added get_range templatetag
+
+=== 1.7 ===
+
+- Added render_analytics_code tag
+
+=== 1.6 ===
+
+- Added SimpleTranslationPublishedManager
+
+=== 1.5 ===
+
+- Added MultilingualPublishMixin
+
+=== 1.4.8 ===
+
+- fixed compatibility issue with Django versions prior to 1.5.1
+
+=== 1.4.7 ===
+
+- Added format utils
+
+=== 1.4.6 ===
+
+- Fixed bug that always show deprecation warning
+
+=== 1.4.5 ===
+
+- Fixed status_code issues
+
+=== 1.4.4 ===
+
+- Fixed bug in call templatetag
+
+=== 1.4.3 ===
+
+- using hashlib instead of md5 and using string conversion in username creation
+  because the md5 method does not accept integers.
+
+=== 1.4.2 ===
+
+- only show deprecation warning for ``is_(not_)callable()`` if it's used
+
+=== 1.4.1 ===
+
+- fixed navactive tag
+
+=== 1.4 ===
+- additionally allowing url names for navactive template tag.
+- added ``get_profile`` method
+- added ``ajax`` parameter to is_callable methods.
+- ``code`` parameter and assertions for redirects without ``and_redirects_to``
+  have become deprecated.
+
+=== 1.3 ===
+
+- Added {% load_context %} templatetag
+
+=== 1.2 ===
+
+- load_fqn can now also take a function instead of only a string.
+
+=== 1.1 ===
+
+- Added utility functions for loading functions and classes from strings and
+  settings.
+
+=== 1.0 ===
+
+- BACKWARDS INCOMPATIBLE: Changed attribute names on HybridView
+
+=== 0.17 ===
+
+- Added SimpleTranslationMixin for models that are translated via
+  simple-translation
+- Added SimpleTranslationMixin for factories for models that are translated
+  via simple-translation
+
+=== 0.16 ===
+
+- Added code param to is_callable and is_not_callable to override the
+  expected status code.
+- Added HybridView (see docs)
+
+=== 0.15 ===
+
+- Added call templatetag which allows to call any method with params in a
+  template
+
+=== 0.14.1 ===
+
+- Improved lockfile decorator
+
+=== 0.14 ===
+
+- Added ``getCookie`` js function that can be used to retrieve the csrf token
+  for AJAX POST requests.
+
+=== 0.13 ===
+
+- Added lockfile decorator
+
+=== 0.12 ===
+
+- Added analytics context processor.
+
+=== 0.11 ===
+
+- Added RapidPrototypingView which allows you to render any template by typing
+  it's path into the URL.
+
+=== 0.10 ===
+
+- Added AjaxResponseMixin
+- Added AjaxRedirectMiddleware
+
+=== 0.9 ===
+
+- Added ``is_callable`` and ``is_not_callable`` to ViewTestMixin.
+- Added test_email_backend.py.
+- Added ``send_email`` to utils_email.py.
+- Added test views for testing 404 and 500 templates.
+
+=== 0.8 ===
+
+- Added template tag ``navactive`` and template filter ``get_verbose``.
+- Added DetailViewWithPostAction to handle custom post actions.
+
+=== 0.7 ===
+
+- Set PREPEND_WWW to False in test_settings.
+
+=== 0.6 ===
+
+- Added JSONResponseMixin as suggested in the official Django docs
+
+=== 0.5 ===
+
+- Added new method ``get_data_payload`` to ``ViewTestMixin`` that allows you
+  to call all your views with given POST or GET data. (See docs)
+
+=== 0.4 ===
+
+- Changed test_settings.py so that only 'admin.py$' files are excluded from
+  coverage. Before this change, an app with the name 'foobar_admin' would
+  be completely excluded from coverage, which is bad.
+
+=== 0.3 ===
+
+- Added test mixins to ease the process of writing integration tests with
+  self.client.get. See the docs for further explanation.
+
+=== 0.2 ===
+
+- Added custom testrunner (see docs/testrunner.rst)
+
+=== 0.1 ===
+
+- Initial commit

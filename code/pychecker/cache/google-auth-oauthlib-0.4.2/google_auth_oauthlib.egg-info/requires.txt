@@ -1,0 +1,5 @@
+google-auth
+requests-oauthlib>=0.7.0
+
+[tool]
+click

@@ -1,0 +1,3 @@
+[console_scripts]
+toapi = toapi.cli:cli
+

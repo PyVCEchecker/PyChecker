@@ -1,0 +1,10 @@
+azure-mgmt-authorization==0.50.0
+azure-mgmt-containerservice==5.2.0
+azure-mgmt-compute==5.0.0
+azure-graphrbac==0.60.0
+azure-cli-core
+paramiko<3.0.0,>=2.0.8
+pyyaml
+six
+scp
+sshtunnel

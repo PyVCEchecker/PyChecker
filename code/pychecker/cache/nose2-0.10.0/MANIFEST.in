@@ -1,0 +1,14 @@
+include AUTHORS
+include requirements.txt
+include requirements-*.txt
+include tox.ini
+include unittest.cfg
+include README.rst
+include license.txt
+recursive-include nose2/tests/functional/support *.py *.txt *.cfg *.rst *.json *.egg .coveragerc
+recursive-include docs *.inc *.py *.rst Makefile
+graft bin
+global-exclude __pycache__
+global-exclude *~
+global-exclude *.pyc
+

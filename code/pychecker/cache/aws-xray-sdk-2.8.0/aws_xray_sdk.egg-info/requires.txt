@@ -1,0 +1,6 @@
+wrapt
+future
+botocore>=1.11.3
+
+[:python_version < "3.4"]
+enum34

@@ -1,0 +1,69 @@
+Metadata-Version: 2.1
+Name: treebeard
+Version: 0.1.1
+Summary: Run and schedule jupyter notebook projects in the cloud
+Home-page: https://github.com/treebeardtech/treebeard
+Author: Treebeard Technologies
+Author-email: alex@treebeard.io
+License: Apache-2.0
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: click
+Requires-Dist: halo
+Requires-Dist: papermill
+Requires-Dist: jupyter-repo2docker
+Requires-Dist: colorama
+Requires-Dist: ipykernel
+Requires-Dist: pathlib
+Requires-Dist: timeago
+Requires-Dist: humanfriendly
+Requires-Dist: sentry-sdk
+Requires-Dist: pyyaml
+Requires-Dist: pydantic
+Requires-Dist: docker
+Requires-Dist: nbstripout
+Requires-Dist: requests
+Requires-Dist: jupyter-contrib-nbextensions
+Requires-Dist: jupyter-client (==6.1.5)
+
+## Development Install
+
+```
+pipenv install
+```
+
+## Development against Backend
+
+To run against local services
+
+```
+export TREEBEARD_ENVIRONMENT=development
+```
+
+To run against prod services but with Sentry suppressed
+
+```
+export TREEBEARD_ENVIRONMENT=staging
+```
+
+## Code Quality Checks
+
+Clone typeshed into the **repo root**
+
+```
+git clone https://github.com/python/typeshed.git
+```
+
+```
+pyright && python3.7 -m black --check .
+```
+
+```
+isort -m 3 -tc -y
+```
+
+

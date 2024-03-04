@@ -1,0 +1,3 @@
+[console_scripts]
+rqalpha = rqalpha.__main__:entry_point
+

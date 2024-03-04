@@ -1,0 +1,6 @@
+mock ; python_version < '3.3'
+stestr
+coverage
+pytest-cov
+hacking
+sphinx

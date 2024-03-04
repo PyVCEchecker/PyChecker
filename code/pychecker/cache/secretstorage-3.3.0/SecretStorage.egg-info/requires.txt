@@ -1,0 +1,2 @@
+cryptography>=2.0
+jeepney>=0.6

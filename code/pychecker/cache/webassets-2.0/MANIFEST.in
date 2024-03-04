@@ -1,0 +1,15 @@
+include README.rst LICENSE CHANGES AUTHORS run_tests.py
+
+recursive-include docs *
+prune docs/_build
+
+recursive-include tests *.py
+
+recursive-include examples README README.rst *.py *.yaml
+recursive-exclude examples out.css out.js
+prune examples/appengine-sdk
+
+
+# Be sure this is last
+global-exclude *.pyc .gitignore *.orig
+global-exclude webassets-cache/* .sass-cache/*

@@ -1,0 +1,3 @@
+h11
+async_generator
+anyio~=2.0

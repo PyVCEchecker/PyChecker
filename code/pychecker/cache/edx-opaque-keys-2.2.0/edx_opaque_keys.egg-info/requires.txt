@@ -1,0 +1,5 @@
+stevedore>=0.14.1
+pymongo>=2.7.2
+
+[django]
+Django<3.0,>=2.2

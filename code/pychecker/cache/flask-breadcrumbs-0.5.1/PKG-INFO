@@ -1,0 +1,111 @@
+Metadata-Version: 2.1
+Name: Flask-Breadcrumbs
+Version: 0.5.1
+Summary: Flask-Breadcrumbs adds support for generating site breadcrumb navigation.
+Home-page: https://github.com/inveniosoftware/flask-breadcrumbs/
+Author: CERN
+Author-email: info@inveniosoftware.org
+License: BSD
+Description: ===================
+         Flask-Breadcrumbs
+        ===================
+        
+        .. image:: https://travis-ci.org/inveniosoftware/flask-breadcrumbs.png?branch=master
+            :target: https://travis-ci.org/inveniosoftware/flask-breadcrumbs
+        .. image:: https://coveralls.io/repos/inveniosoftware/flask-breadcrumbs/badge.png?branch=master
+            :target: https://coveralls.io/r/inveniosoftware/flask-breadcrumbs
+        .. image:: https://pypip.in/v/Flask-Breadcrumbs/badge.png
+           :target: https://pypi.python.org/pypi/Flask-Breadcrumbs/
+        .. image:: https://pypip.in/d/Flask-Breadcrumbs/badge.png
+           :target: https://pypi.python.org/pypi/Flask-Breadcrumbs/
+        
+        About
+        =====
+        Flask-Breadcrumbs is a Flask extension that adds support for
+        generating site breadcrumb navigation.
+        
+        Installation
+        ============
+        Flask-Breadcrumbs is on PyPI so all you need is: ::
+        
+            pip install Flask-Breadcrumbs
+        
+        Documentation
+        =============
+        Documentation is readable at http://flask-breadcrumbs.readthedocs.io/ or
+        can be build using Sphinx: ::
+        
+            git submodule init
+            git submodule update
+            pip install Sphinx
+            python setup.py build_sphinx
+        
+        Testing
+        =======
+        Running the test suite is as simple as: ::
+        
+            python setup.py test
+        
+        or, to also show code coverage: ::
+        
+            ./run-tests.sh
+        
+        
+        Changelog
+        =========
+        
+        Here you can see the full list of changes between each Flask-Breadcrumbs
+        release.
+        
+        Version 0.5.1 (released 2020-05-06)
+        
+        - Deprecated Python versions lower than 3.6.0. Now supporting 3.6.0 and 3.7.0
+        - Stop using example app
+        
+        Version 0.5.0 (released 2020-03-10)
+        
+        - Removes support for Python 2.7
+        - Updates Flask dependency
+        
+        Version 0.4.0 (released 2016-07-01)
+        
+        - Removes support for Python 2.6.
+        - Adds an advanced example using MethodViews and Blueprints. (#23)
+        - Amends deprecated import of Flask extensions via `flask.ext`. (#29)
+        
+        Version 0.3.0 (released 2015-03-16)
+        
+        - Improved factory pattern support.  (#19)
+        - Added example of using a dynamic list constructor with variables.
+          (#16 #17)
+        - Allows usage of ordered breadcrumbs as menu.  (#15)
+        
+        Version 0.2.0 (released 2014-11-05)
+        
+        - The Flask-Breadcrumbs extension is now released under more
+          permissive Revised BSD License. (#11)
+        - Documentation improvements. (#13)
+        - Extension initialization improvements. (#12)
+        - Support for Python 3.4. (#5)
+        
+        Version 0.1.0 (released 2014-07-24)
+        
+        - Initial public release
+        
+Keywords: invenio metadata
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Framework :: Flask
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Development Status :: 5 - Production/Stable
+Provides-Extra: docs
+Provides-Extra: tests
+Provides-Extra: all

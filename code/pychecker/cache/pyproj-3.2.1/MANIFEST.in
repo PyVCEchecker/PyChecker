@@ -1,0 +1,19 @@
+include README.md
+include MANIFEST.in
+include pyproject.toml
+include LICENSE
+include Makefile
+include pytest.ini
+include pyproj/py.typed
+include pyproj/*.pyd
+include pyproj/*.pyx
+include pyproj/*.pxd
+include pyproj/*.pxi
+include pyproj/*.pyi
+include test/sample.out
+include test/*.py
+include test/*/*.py
+exclude pyproj/*.c
+recursive-include docs *
+prune docs/_build
+prune pyproj/proj_dir

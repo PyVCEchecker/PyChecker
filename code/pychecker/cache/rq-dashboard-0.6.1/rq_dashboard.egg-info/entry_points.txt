@@ -1,0 +1,3 @@
+[console_scripts]
+rq-dashboard = rq_dashboard.cli:main
+

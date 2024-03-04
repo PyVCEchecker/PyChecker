@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: edx-drf-extensions
+Version: 8.0.0
+Summary: edX extensions of Django REST Framework
+Home-page: https://github.com/edx/edx-drf-extensions
+Author: edX
+Author-email: oscm@edx.org
+License: Apache 2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.2
+Classifier: Framework :: Django :: 3.0
+Classifier: Framework :: Django :: 3.1
+Classifier: Framework :: Django :: 3.2

@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dumpscript &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RunScript" href="runscript.html" />
+    <link rel="prev" title="delete_squashed_migrations" href="delete_squashed_migrations.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="runscript.html" title="RunScript"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="delete_squashed_migrations.html" title="delete_squashed_migrations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dumpscript</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dumpscript">
+<h1>dumpscript<a class="headerlink" href="#dumpscript" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Generates a standalone Python script that will repopulate the database using objects.</p>
+</dd>
+</dl>
+<p>The <cite>dumpscript</cite> command generates a standalone Python script that will
+repopulate the database using objects. The advantage of this approach is that
+it is easy to understand, and more flexible than directly populating the
+database, or using XML.</p>
+<div class="section" id="why">
+<h2>Why?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h2>
+<p>There are a few benefits to this:</p>
+<ul class="simple">
+<li><p>less drama with model evolution: foreign keys handled naturally without IDs,
+new and removed columns are ignored</p></li>
+<li><p>edit script to create 1,000s of generated entries using for loops, generated
+names, python modules etc.</p></li>
+</ul>
+<p>For example, an edited script can populate the database with test data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="n">poll</span> <span class="o">=</span> <span class="n">Poll</span><span class="p">()</span>
+    <span class="n">poll</span><span class="o">.</span><span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;Question #</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span>
+    <span class="n">poll</span><span class="o">.</span><span class="n">pub_date</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span><span class="mi">01</span><span class="p">,</span><span class="mi">01</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">poll</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Real databases will probably be bigger and more complicated so it is useful
+to enter some values using the admin interface and then edit the generated
+scripts.</p>
+</div>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><em>ForeignKey</em> and <em>ManyToManyFields</em> (using python variables, not object IDs)</p></li>
+<li><p>Self-referencing <em>ForeignKey</em> (and M2M) fields</p></li>
+<li><p>Sub-classed models</p></li>
+<li><p><em>ContentType</em> fields and generic relationships</p></li>
+<li><p>Recursive references</p></li>
+<li><p><em>AutoFields</em> are excluded</p></li>
+<li><p>Parent models are only included when no other child model links to it</p></li>
+<li><p>Individual models can be referenced</p></li>
+</ul>
+</div>
+<div class="section" id="how">
+<h2>How?<a class="headerlink" href="#how" title="Permalink to this headline">¶</a></h2>
+<p>To dump the data from all the models in a given Django app (<cite>appname</cite>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py dumpscript appname &gt; scripts/testdata.py
+</pre></div>
+</div>
+<p>To dump the data from just a single model (<cite>appname.ModelName</cite>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py dumpscript appname.ModelName &gt; scripts/testdata.py
+</pre></div>
+</div>
+<p>To reset a given app, and reload with the saved data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py reset appname
+$ ./manage.py runscript testdata
+</pre></div>
+</div>
+<p>Note: Runscript needs <em>scripts</em> to be a module, so create the directory and a
+<em>__init__.py</em> file.</p>
+</div>
+<div class="section" id="caveats">
+<h2>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="naming-conflicts">
+<h3>Naming conflicts<a class="headerlink" href="#naming-conflicts" title="Permalink to this headline">¶</a></h3>
+<p>Please take care that when naming the output files these filenames do not
+clash with other names in your import path. For instance, if the appname is
+the same as the script name, an importerror can occur because rather than importing
+the application modules it tries to load the modules from the dumpscript file itself.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Wrong
+$ ./manage.py dumpscript appname &gt; dumps/appname.py
+
+# Right
+$ ./manage.py dumpscript appname &gt; dumps/appname_all.py
+
+# Right
+$ ./manage.py dumpscript appname.Somemodel &gt; dumps/appname_somemodel.py
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">dumpscript</a><ul>
+<li><a class="reference internal" href="#why">Why?</a></li>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#how">How?</a></li>
+<li><a class="reference internal" href="#caveats">Caveats</a><ul>
+<li><a class="reference internal" href="#naming-conflicts">Naming conflicts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="delete_squashed_migrations.html"
+                        title="previous chapter">delete_squashed_migrations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="runscript.html"
+                        title="next chapter">RunScript</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/dumpscript.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="runscript.html" title="RunScript"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="delete_squashed_migrations.html" title="delete_squashed_migrations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dumpscript</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

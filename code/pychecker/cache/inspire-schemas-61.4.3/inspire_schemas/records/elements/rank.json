@@ -1,0 +1,16 @@
+{
+    "enum": [
+        "STAFF",
+        "SENIOR",
+        "JUNIOR",
+        "VISITOR",
+        "POSTDOC",
+        "PHD",
+        "MASTER",
+        "UNDERGRADUATE",
+        "OTHER"
+    ],
+    "minLength": 1,
+    "title": "Rank of academic position",
+    "type": "string"
+}

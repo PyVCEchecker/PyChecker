@@ -1,0 +1,76 @@
+language: python
+python:
+  - "2.7"
+  - "3.5"
+  - "pypy"
+  - "pypy3"
+
+
+env:
+    - TOX_ENV=tw166
+    - TOX_ENV=tw175
+    - TOX_ENV=tw179
+    - TOX_ENV=twlatest
+    - TOX_ENV=twtrunk
+
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: TOX_ENV=pyflakes
+    - python: pypy
+      env: TOX_ENV=twtrunk
+    - python: pypy3
+      env: TOX_ENV=twtrunk
+
+  include:
+    - python: 3.5
+      env: TOX_ENV=pyflakes
+    - python: 3.5
+      env: TOX_ENV=manifest
+    - python: 3.4
+      env: TOX_ENV=tw179
+    - python: 3.4
+      env: TOX_ENV=tw166
+    - python: 2.7
+      env: TOX_ENV=tw140
+    - python: 2.7
+      env: TOX_ENV=tw150
+    - python: 2.7
+      env: TOX_ENV=tw155
+    - python: pypy
+      env: TOX_ENV=tw140
+    - python: pypy
+      env: TOX_ENV=tw150
+    - python: pypy
+      env: TOX_ENV=tw155
+
+
+
+before_install:
+  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+  - echo 'deb http://repo.mongodb.org/apt/ubuntu '$(lsb_release -sc)'/mongodb-org/3.0 multiverse' | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+  - sudo apt-get update
+  - sudo apt-get install -y --allow-unauthenticated mongodb-org-server
+    # PyCrypto detects libgmp-dev and build its fastmath native extension which is incompatible with pypy. So removing libgmp-dev for pypy builds.
+  - if [[ "$TRAVIS_PYTHON_VERSION" == pypy* ]]; then sudo apt-get remove -y --auto-remove libgmp-dev; fi
+  - mongod --version
+  - mkdir data; mongod --dbpath data --nounixsocket --fork --logpath mongod.log
+
+install:
+  - pip install tox coveralls
+
+before_script:
+  - until nc -z localhost 27017; do echo Waiting for MongoDB; sleep 1; done
+
+script:
+  - tox -e $TOX_ENV
+
+after_success:
+  - coveralls
+
+after_script:
+  - killall monogd
+
+notifications:
+    email: false

@@ -1,0 +1,11 @@
+README.rst
+setup.cfg
+setup.py
+scrapy_fake_useragent/__init__.py
+scrapy_fake_useragent/middleware.py
+scrapy_fake_useragent/providers.py
+scrapy_fake_useragent.egg-info/PKG-INFO
+scrapy_fake_useragent.egg-info/SOURCES.txt
+scrapy_fake_useragent.egg-info/dependency_links.txt
+scrapy_fake_useragent.egg-info/requires.txt
+scrapy_fake_useragent.egg-info/top_level.txt

@@ -1,0 +1,13 @@
+click<9.0,>=7.1
+databind.core<2.0.0,>=1.2.2
+databind.json<2.0.0,>=1.2.2
+docspec<2.0.0,>=1.0.0
+docspec-python<2.0.0,>=1.0.0
+nr.fs<2.0.0,>=1.6.0
+nr.stream<1.0.0,>=0.1.2
+nr.pylang.utils<1.0.0,>=0.1.1
+requests<3.0.0,>=2.23.0
+PyYAML<6.0.0,>=5.3.0
+six<2.0.0,>=1.11.0
+toml<1.0.0,>=0.10.1
+watchdog

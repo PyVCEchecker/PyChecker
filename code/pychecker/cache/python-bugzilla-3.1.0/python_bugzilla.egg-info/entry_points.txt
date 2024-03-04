@@ -1,0 +1,3 @@
+[console_scripts]
+bugzilla = bugzilla._cli:cli
+

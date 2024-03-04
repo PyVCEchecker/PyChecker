@@ -1,0 +1,98 @@
+Testing output to streams
+=========================
+
+.. currentmodule:: testfixtures
+
+In many situations, it's perfectly legitimate for output to be printed
+to one of the standard streams. To aid with testing this kind of
+output, testfixtures provides the :class:`OutputCapture` helper.
+
+This helper is a context manager that captures output sent to
+``sys.stdout`` and ``sys.stderr`` and provides a
+:meth:`~OutputCapture.compare` method to check that the output was as
+expected.
+
+Here's a simple example:
+
+.. code-block:: python
+
+  from testfixtures import OutputCapture
+  import sys
+
+  with OutputCapture() as output:
+      # code under test
+      print("Hello!")
+      print("Something bad happened!", file=sys.stderr)
+
+  output.compare('\n'.join([
+      "Hello!",
+      "Something bad happened!",
+  ]))
+
+To make life easier, both the actual and expected output are stripped
+of leading and trailing whitespace before the comparison is done:
+
+>>> with OutputCapture() as o:
+...    print('  Bar! ')
+...    o.compare(' Foo!  ')
+Traceback (most recent call last):
+...
+AssertionError: 'Foo!' (expected) != 'Bar!' (actual)
+
+However, if you need to make very explicit assertions about what has
+been written to the stream then you can do so using the `captured`
+property of the :class:`OutputCapture`:
+
+>>> with OutputCapture() as o:
+...    print('  Bar! ')
+>>> print(repr(o.captured))
+'  Bar! \n'
+
+If you need to explicitly check whether output went to ``stdout`` or ``stderr``,
+`separate` mode can be used:
+
+.. code-block:: python
+
+  from testfixtures import OutputCapture
+  import sys
+
+  with OutputCapture(separate=True) as output:
+      print("Hello!")
+      print("Something bad happened!", file=sys.stderr)
+
+  output.compare(
+      stdout="Hello!",
+      stderr="Something bad happened!",
+      )
+
+Finally, you may sometimes want to disable an :class:`OutputCapture`
+without removing it from your code. This often happens when you want
+to insert a debugger call while an :class:`OutputCapture` is active;
+if it remains enabled, all debugger output will be captured making the
+debugger very difficult to use!
+
+To deal with this problem, the :class:`OutputCapture` may be disabled
+and then re-enabled as follows:
+
+>>> with OutputCapture() as o:
+...    print('Foo')
+...    o.disable()
+...    print('Bar')
+...    o.enable()
+...    print('Baz')
+Bar
+>>> print(o.captured)
+Foo
+Baz
+<BLANKLINE>
+
+.. note::
+
+  Some debuggers, notably :mod:`pdb`, do interesting things with streams
+  such that calling :meth:`~OutputCapture.disable` from within the debugger
+  will have no effect. A good fallback is to type the following, which will
+  almost always restore output to where you want it:
+
+  .. code-block:: python
+
+    import sys; sys.stdout=sys.__stdout__

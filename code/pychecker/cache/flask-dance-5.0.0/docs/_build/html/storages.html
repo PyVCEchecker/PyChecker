@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Token Storages &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Signals" href="signals.html" />
+    <link rel="prev" title="Providers" href="providers.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signals.html" title="Signals"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="providers.html" title="Providers"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Token Storages</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-flask_dance.consumer.storage"></span><section id="token-storages">
+<h1>Token Storages<a class="headerlink" href="#token-storages" title="Permalink to this headline">¶</a></h1>
+<p>A Flask-Dance blueprint has a token storage associated with it,
+which is an object that knows how to store and retrieve OAuth tokens
+from some kind of persistent storage. A storage is most often
+some kind of database, but it doesn’t have to be.</p>
+<section id="flask-session">
+<span id="flask-session-storage"></span><h2>Flask Session<a class="headerlink" href="#flask-session" title="Permalink to this headline">¶</a></h2>
+<p>The default token storage uses the
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/quickstart/#sessions" title="(in Flask v2.1.x)"><span class="xref std std-ref">Flask session</span></a> to store OAuth tokens, which is simple
+and requires no configuration. However, when the user closes
+their browser, their OAuth token will be lost, so its not a good choice for
+production usage.</p>
+<p>This is a great option for hobby projects, and for a “proof of concept”
+to show that an idea is viable.</p>
+</section>
+<section id="sqlalchemy">
+<span id="sqlalchemy-storage"></span><h2>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Permalink to this headline">¶</a></h2>
+<p>SQLAlchemy is the “standard” <a class="reference external" href="https://docs.python.org/3.4/howto/webservers.html#data-persistence">ORM</a> for Flask applications, and Flask-Dance
+has great support for it. First, define your database model with a <code class="docutils literal notranslate"><span class="pre">token</span></code>
+column and a <code class="docutils literal notranslate"><span class="pre">provider</span></code> column. Flask-Dance includes a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">OAuthConsumerMixin</span></code>
+class to make this easier:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer.storage.sqla</span> <span class="kn">import</span> <span class="n">OAuthConsumerMixin</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">OAuth</span><span class="p">(</span><span class="n">OAuthConsumerMixin</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Next, create an instance of the SQLAlchemy storage
+and assign it to your blueprint:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_dance.consumer.storage.sqla</span> <span class="kn">import</span> <span class="n">SQLAlchemyStorage</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">SQLAlchemyStorage</span><span class="p">(</span><span class="n">OAuth</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And that’s all you need – if you don’t have user accounts in your application.
+If you do, it’s slightly more complicated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">current_user</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer.storage.sqla</span> <span class="kn">import</span> <span class="n">OAuthConsumerMixin</span><span class="p">,</span> <span class="n">SQLAlchemyStorage</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># ... other columns as needed</span>
+
+<span class="k">class</span> <span class="nc">OAuth</span><span class="p">(</span><span class="n">OAuthConsumerMixin</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">SQLAlchemyStorage</span><span class="p">(</span><span class="n">OAuth</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">current_user</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are two things to notice here. One, the model that you use for storing
+OAuth tokens must have a <code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code> relationship to the user
+that it is associated with.
+Two, you must pass a reference to the currently logged-in user (if any)
+to <a class="reference internal" href="api.html#flask_dance.consumer.storage.sqla.SQLAlchemyStorage" title="flask_dance.consumer.storage.sqla.SQLAlchemyStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyStorage</span></code></a>.
+If you’re using <a class="reference external" href="https://flask-login.readthedocs.io/">Flask-Login</a>, the <code class="xref py py-attr docutils literal notranslate"><span class="pre">current_user</span></code> proxy works great,
+but you could instead pass a function that returns the current
+user, if you want.</p>
+<p>You also probably want to use a caching system for your database, so that it
+is more performant under heavy load. The SQLAlchemy token storage
+also integrates with <a class="reference external" href="https://flask-caching.readthedocs.io/">Flask-Caching</a> if you pass an instance of
+Flask-Caching to the storage, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_caching</span> <span class="kn">import</span> <span class="n">Cache</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="c1"># setup Flask-Dance with SQLAlchemy models...</span>
+
+<span class="n">blueprint</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">SQLAlchemyStorage</span><span class="p">(</span><span class="n">OAuth</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="custom">
+<h2>Custom<a class="headerlink" href="#custom" title="Permalink to this headline">¶</a></h2>
+<p>Of course, you don’t have to use <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a>, you’re free to use whatever
+storage system you want. Writing a custom token storage is easy:
+just subclass <code class="xref py py-class docutils literal notranslate"><span class="pre">flask_dance.consumer.storage.BaseStorage</span></code> and
+override the <code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">set()</span></code>, and <code class="xref py py-meth docutils literal notranslate"><span class="pre">delete()</span></code> methods.
+For example, here’s a storage that uses a file on disk:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer.storage</span> <span class="kn">import</span> <span class="n">BaseStorage</span>
+
+<span class="k">class</span> <span class="nc">FileStorage</span><span class="p">(</span><span class="n">BaseStorage</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FileStorage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blueprint</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blueprint</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blueprint</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, just create an instance of your storage and assign it to the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">storage</span></code> attribute of your blueprint, and Flask-Dance will use it.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Token Storages</a><ul>
+<li><a class="reference internal" href="#flask-session">Flask Session</a></li>
+<li><a class="reference internal" href="#sqlalchemy">SQLAlchemy</a></li>
+<li><a class="reference internal" href="#custom">Custom</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="providers.html" title="previous chapter">Providers</a></li>
+      <li>Next: <a href="signals.html" title="next chapter">Signals</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/storages.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

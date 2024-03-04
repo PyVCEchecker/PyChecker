@@ -1,0 +1,11 @@
+exclude *.nix
+exclude .pre-commit-config.yaml
+include *.py
+include testing/*.py
+include tox.ini
+include *.rst
+include LICENSE
+include *.toml
+include mypy.ini
+include testing/Dockerfile.busted-buster
+recursive-include testing *.bash

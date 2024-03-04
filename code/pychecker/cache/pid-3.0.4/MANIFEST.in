@@ -1,0 +1,4 @@
+include README.rst LICENSE AUTHORS CHANGELOG
+graft pid
+graft tests
+global-exclude *.py[co]

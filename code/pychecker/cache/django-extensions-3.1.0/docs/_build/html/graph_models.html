@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph models &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="list_model_info" href="list_model_info.html" />
+    <link rel="prev" title="generate_password" href="generate_password.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="list_model_info.html" title="list_model_info"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="generate_password.html" title="generate_password"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Graph models</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="graph-models">
+<h1>Graph models<a class="headerlink" href="#graph-models" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Renders a graphical overview of your project or specified apps.</p>
+</dd>
+</dl>
+<p>Creates a <a class="reference external" href="http://www.graphviz.org/">GraphViz</a> dot file for the specified app names based on their models.py.
+You can pass multiple app names and they will all be combined into a single model.
+Output is usually directed to a dot file.</p>
+<p>Several options are available: grouping models, including inheritance,
+excluding models and columns, and changing the layout when rendering to an output
+image.</p>
+<p>With the latest revisions it’s also possible to specify an output file if
+<a class="reference external" href="https://pygraphviz.github.io/">pygraphviz</a> is installed and render directly to an image or other supported
+file-type.</p>
+<div class="section" id="selecting-a-library">
+<h2>Selecting a library<a class="headerlink" href="#selecting-a-library" title="Permalink to this headline">¶</a></h2>
+<p>You need to select the library to generate the image. You can do so by passing
+the –pygraphviz or –pydot parameter, depending on which library you want to use.</p>
+<p>When neither of the command line parameters are given the default is to try and load
+pygraphviz or pydot (in that order) to generate the image.</p>
+<p>To install pygraphviz you usually need to run this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install pygraphviz
+</pre></div>
+</div>
+<p>It is possible you can’t install it because it needs some C extensions to build. In
+that case you can try other methods to install or you can use PyDot.</p>
+<p>To install pydot you need to run this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install pyparsing pydot
+</pre></div>
+</div>
+<p>Installation should be fast and easy. Remember to install this exact version of
+pyparsing, otherwise it’s possible you get this error:</p>
+<blockquote>
+<div><p>Couldn’t import dot_parser, loading of dot files will not be possible.</p>
+</div></blockquote>
+</div>
+<div class="section" id="default-settings">
+<h2>Default Settings<a class="headerlink" href="#default-settings" title="Permalink to this headline">¶</a></h2>
+<p>The option GRAPH_MODELS = {} can be used in the settings file to specify default options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GRAPH_MODELS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;all_applications&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">&#39;group_models&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It uses the same names as on the command line only with the leading two dashes removed and
+the other dashes replaced by underscores.</p>
+</div>
+<div class="section" id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>Django templates are used to generate the dot code. This in turn can be drawn into a image
+by libraries like <em>pygraphviz</em> or <em>pydot</em>. You can extend or override the templates if needed.</p>
+<p>Templates used:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>django_extensions/graph_models/digraph.dot</p></li>
+<li><p>django_extensions/graph_models/label.dot</p></li>
+<li><p>django_extensions/graph_models/relation.dot</p></li>
+</ul>
+</div></blockquote>
+<p>Documentation on how to create dot files can be found here: <a class="reference external" href="http://www.graphviz.org/documentation/">http://www.graphviz.org/documentation/</a></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Modifying Django’s default templates behaviour might break <em>graph_models</em></p>
+<p>Please be aware that if you use any <em>template_loaders</em> or extensions that change the
+way templates are rendered that this can cause <em>graph_models</em> to fail.</p>
+<p>An example of this is
+the Django app <em>django-template-minifier</em> this automatically removed the newlines before/after
+template tags even for non-HTML templates which leads to a malformed file.</p>
+</div>
+</div>
+<div class="section" id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+<p>With <em>django-extensions</em> installed you can create a dot-file or an
+image by using the <em>graph_models</em> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a dot file
+$ ./manage.py graph_models -a &gt; my_project.dot
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a PNG image file called my_project_visualized.png with application grouping
+$ ./manage.py graph_models -a -g -o my_project_visualized.png
+
+# Same example but with explicit selection of pygraphviz or pydot
+$ ./manage.py graph_models --pygraphviz -a -g -o my_project_visualized.png
+$ ./manage.py graph_models --pydot -a -g -o my_project_visualized.png
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a dot file for only the &#39;foo&#39; and &#39;bar&#39; applications of your project
+$ ./manage.py graph_models foo bar &gt; my_project.dot
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a graph for only certain models
+$ ./manage.py graph_models -a -I Foo,Bar -o my_project_subsystem.png
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a graph excluding certain models
+$ ./manage.py graph_models -a -X Foo,Bar -o my_project_sans_foo_bar.png
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a graph including models matching a given pattern and excluding some of them
+# It will first select the included ones, then filter out the ones to exclude
+$ ./manage.py graph_models -a -I Product* -X *Meta -o my_project_products_sans_meta.png
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a graph without showing its edges&#39; labels
+$ ./manage.py graph_models -a --hide-edge-labels -o my_project_sans_foo_bar.png
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a graph with &#39;normal&#39; arrow shape for relations
+$ ./manage.py graph_models -a --arrow-shape normal -o my_project_sans_foo_bar.png
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Graph models</a><ul>
+<li><a class="reference internal" href="#selecting-a-library">Selecting a library</a></li>
+<li><a class="reference internal" href="#default-settings">Default Settings</a></li>
+<li><a class="reference internal" href="#templates">Templates</a></li>
+<li><a class="reference internal" href="#example-usage">Example Usage</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generate_password.html"
+                        title="previous chapter">generate_password</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="list_model_info.html"
+                        title="next chapter">list_model_info</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/graph_models.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="list_model_info.html" title="list_model_info"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="generate_password.html" title="generate_password"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Graph models</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

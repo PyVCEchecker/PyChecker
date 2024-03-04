@@ -1,0 +1,9 @@
+#!/bin/sh
+
+PATH=${PWD%code*}code:$PATH
+
+# Null case for prichunkpng
+
+python -m pngsuite basn0g08 | prichunkpng - |
+  pripnglsch - |
+  grep -q IHDR

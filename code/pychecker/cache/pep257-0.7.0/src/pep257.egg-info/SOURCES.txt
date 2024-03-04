@@ -1,0 +1,11 @@
+LICENSE-MIT
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+src/pep257.py
+src/pep257.egg-info/PKG-INFO
+src/pep257.egg-info/SOURCES.txt
+src/pep257.egg-info/dependency_links.txt
+src/pep257.egg-info/entry_points.txt
+src/pep257.egg-info/top_level.txt

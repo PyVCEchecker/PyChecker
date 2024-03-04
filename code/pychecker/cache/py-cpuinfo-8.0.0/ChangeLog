@@ -1,0 +1,131 @@
+04/14/2021 Release 8.0.0
+	* Fixed Bug #161: Accept arm64 as an alias for aarch64
+	* Fixed Bug #160: Add MIPS architecture support
+	* Fixed Bug #74: Add option to trace code paths to file
+	* Fixed Bug #157: Remove multiple checks for sestatus
+
+07/05/2020 Release 7.0.0
+	* Fixed Bug #133: CPU flags vary between runs on Mac OS X
+	* Fixed Bug #150: Change 'byte code' to 'machine code'
+	* Fixed Bug #128: Overhead from generating machine code throws off CPUID HZ
+	* Fixed Bug #136: On non BeOS systems, calling sysinfo may open GUI program
+	* Fixed Bug #138: Invalid escape sequences warn when building in Python 3.8
+	* Fixed Bug #147: Remove extended_model and extended_family fields
+	* Fixed Bug #146: CPUID family and model is wrong
+	* Fixed Bug #144: Cache fields should be full ints instead of kb strings
+
+06/11/2020 Release 6.0.0
+	* Fixed Bug #140: The get_cache function has swapped fields
+	* Fixed Bug #142: Remove empty and zeroed fields
+	* Fixed Bug #115: Missing data on Ryzen CPUs
+	* Fixed Bug #122: Rename fields to be more clear
+	* Fixed Bug #125: Add option to return --version
+ 	* Fixed Bug #126: Make test suite also check SELinux
+	* Fixed Bug #120: Make unit tests also test CPUID
+	* Fixed Bug #69: Add s390x support
+
+03/20/2019 Release 5.0.0
+	* Fixed Bug #117: Remove PyInstaller hacks
+	* Fixed Bug #108: Client script runs multiple times without __main__
+	* Fixed Bug #113: Add option to return results in json
+	* Fixed Bug #110: Always tries to run wmic in get_system_info.py
+
+04/01/2018 Release 4.0.0
+	* Fixed Bug #80: Broken when using Pyinstaller
+	* Fixed Bug #77: Get L1, L2, and L3 cache info from lscpu
+	* Fixed Bug #79: Byte formats are inconsistent
+	* Fixed Bug #81: Byte formatter breaks on non strings
+	* Fixed Bug #84: Fixed wrong setup of CPUID machine code and added more flags
+	* Fixed Bug #88: Get Windows CPU info with wmic
+	* Fixed Bug #94: Fails to detect winreg imported as _winreg in get_system_info
+	* Fixed Bug #95: Include if Python is 32 or 64 bit in get_system_info
+	* Fixed Bug #87: lscpu gets brand field twice
+	* Fixed Bug #96: Include Python version in output
+	* Fixed Bug #85: CPUID HZ measurement is scaled wrong
+	* Fixed Bug #100: Officially drop support for Python 2.6
+	* Fixed Bug #101: Made it only check the dmesg boot log on Linux
+	* Fixed Bug #102: Parsing Haiku sysinfo fails
+
+06/10/2017 Release 3.3.0
+	* Fixed Bug #70: subprocess.Popen breaks under Windows GUI app
+	* Fixed Bug #72: Fails to parse invalid CPUID result.
+
+04/19/2017 Release 3.2.0
+	* Fixed Bug #68: Broken Qemu guest CPU flag parsing on Ubuntu 17.04 POWER8
+
+04/19/2017 Release 3.1.0
+	* Fixed Bug #63: Include py-cpuinfo version in output
+	* Fixed Bug #29: Missing AVX2 CPU flag on OS X
+	* Fixed Bug #41: Broken on Odroid XU3 armhf ARM 32bit
+	* Fixed Bug #61: Not working on RHEL7.3 ppc64le
+	* Fixed Bug #56: Not working on Red Flag Linux ppc64le
+	* Fixed Bug #55: Not working on Fedora 24 ppc64le
+
+04/05/2017 Release 3.0.0
+	* Change API to hide low level functions
+	* Fixed Bug #51: Combine data from all sources instead of picking one
+	* Fixed Bug #59: Not working on OS X 10.12 Sierra
+	* Fixed Bug #58: Change version number format
+	* Fixed Bug #60: Not working on ARM64 odroid-c2
+
+03/13/2017 Release 0.2.7
+	* Fixed Bug #53: CPUID breaks test suite when SE Linux is on (Fedora 25)
+	* Fixed Bug #54: CPUID breaks when it returns nothing (Fedora 26)
+
+02/27/2017 Release 0.2.6
+	* New release because pypi does not allow deleting broken uploads
+
+02/27/2017 Release 0.2.5
+	* New release because pypi does not allow deleting broken uploads
+
+02/27/2017 Release 0.2.4
+	* Fixed Bug #35: Add basic documentation
+	* Fixed Bug #36: Make test suite test real functions too
+	* Fixed Bug #38: get_cpu_info_from_cpuid breaks with Python3
+	* Fixed Bug #47: Include sysctl leaf7_features and extfeatures flags
+
+02/23/2016 Release 0.2.3
+	* Fixed Bug #34: Fixed issue with imports breaking in python3
+
+02/23/2016 Release 0.2.2
+	* Same as previous release. Pypi bug broke uploaded files.
+
+02/23/2016 Release 0.2.0
+	* Fixed Bug #32: Please ship tests to pypi
+	* Fixed Bug #31:  Make "python -m cpuinfo" possible
+	* Fixed Bug #5: Importing is different depending on install method
+
+12/16/2015 Release 0.1.8
+	* New release to get around the brokenness of pypi
+
+12/16/2015 Release 0.1.7
+	* Fixed Bug #23: CPUID failure segfaults Python
+	* Fixed Bug #16: Make it work on Raspberry Pi
+	* FIxed Bug #27: System exit called if CPU is not supported
+
+07/07/2015 Release 0.1.6
+	* Fixed Bug #25: dmesg is missing extra Features in flags
+	* Fixed Bug #19: Add a test suite
+	* Fixed Bug #24: CPUID breaks on brands with many NULL terminators
+
+06/14/2015 Release 0.1.5
+	* Fixed Bug #17: Make a script for easy gathering of CPU info
+	* Fixed Bug #21: Getting CPU info from dmesg fails on Linux but not BSD
+	* Fixed Bug #20: Subprocess stderr is sometimes printed to console
+	* Fixed Bug #15: Make it work on a BeagleBone
+	* Fixed Bug #10: Stepping parse TypeError on ARM
+
+02/11/2015 Release 0.1.4
+	* New release to get around the brokenness of pypi
+
+02/11/2015 Release 0.1.3
+	* Fixed Bug #11: Support cpu strings that do not have @ in them
+	* Fixed Bug #13: Support cpu strings that do not have Hz in them
+
+09/30/2014 Release 0.1.2
+	* Added support for installing to binary path.
+	* Fixed issue with crashing in python 3.
+
+09/23/2014 Release 0.1.1
+	* Fixed Bug #3: It is not obvious if Hz Raw is the current Hz, or the advertised Hz
+	* Fixed Bug #2: Wrong CPU frequency in get_cpu_info_from_proc_cpuinfo()

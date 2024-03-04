@@ -1,0 +1,23 @@
+Metadata-Version: 1.1
+Name: DictObject
+Version: 1.1.1
+Summary: DictObject
+Home-page: https://github.com/luckydonald/DictObject
+Author: luckydonald
+Author-email: DictObject@luckydonald.de
+License: GPLv3+
+Description: Python DictObject allows attribute access on dicts.
+Keywords: dict object oo object orientated attribute property
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Software Development :: Libraries

@@ -1,0 +1,214 @@
+# Translations template for python-fedora.
+# Copyright (C) 2014 ORGANIZATION
+# This file is distributed under the same license as the python-fedora
+# project.
+# 
+# Translators:
+# Albert Carabasa Giribet <albertc@asic.udl.cat>, 2009
+# Robert Antoni Buj i Gelonch <robert.buj@gmail.com>, 2010
+# Ralph Bean <ralph@fedoraproject.org>, 2015. #zanata
+# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2015. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: python-fedora 0.8.0\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-04-21 16:57+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-09-29 06:23-0400\n"
+"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/python-fedora/"
+"language/ca/)\n"
+"Generated-By: Babel 1.3\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.8.3\n"
+
+#: fedora/client/wiki.py:102
+#, python-format
+msgid "From %(then)s to %(now)s"
+msgstr "Des del %(then)s fins al %(now)s"
+
+#: fedora/client/wiki.py:105
+#, python-format
+msgid "%d wiki changes in the past week"
+msgstr "%d canvis al wiki la passada setmana"
+
+#: fedora/client/wiki.py:107
+msgid ""
+"Warning: Number of changes reaches the API return limit.\n"
+"You will not get the complete list of changes unless\n"
+"you run this script using a 'bot' account."
+msgstr ""
+"Advertència: el nombre de canvis arriba al límit de retorn de l'API.\n"
+"No obtindreu la llista completa de canvis llevat que\n"
+"executeu aquest script utilitzant un compte «bot»."
+
+#: fedora/client/wiki.py:118
+msgid "\n"
+"== Most active wiki users =="
+msgstr "\n"
+"== Els usuaris més actius del wiki =="
+
+#: fedora/client/wiki.py:125
+msgid "\n"
+"== Most edited pages =="
+msgstr "\n"
+"== Les pàgines més modificades =="
+
+#: fedora/django/auth/models.py:54
+msgid "Loading FAS groups..."
+msgstr "S'estan carregant els grups del FAS..."
+
+#: fedora/django/auth/models.py:60
+msgid "Unable to load FAS groups. Did you set FAS_USERNAME and FAS_PASSWORD?"
+msgstr ""
+"No es poden carregar els grups del FAS. Heu establert FAS_USERNAME i "
+"FAS_PASSWORD?"
+
+#: fedora/django/auth/models.py:67
+msgid ""
+"FAS groups loaded. Don't forget to set FAS_USERNAME and FAS_PASSWORD to a "
+"low-privilege account."
+msgstr ""
+"Es van carregar els grups del FAS. No oblideu d'establir FAS_USERNAME i "
+"FAS_PASSWORD per als comptes amb pocs privilegis."
+
+#: fedora/tg/controllers.py:73
+#, python-format
+msgid "Welcome, %s"
+msgstr "Benvingut, %s"
+
+#: fedora/tg/controllers.py:82
+msgid ""
+"The credentials you supplied were not correct or did not grant access to "
+"this resource."
+msgstr ""
+"Les credencials proporcionades no són correctes o bé no donen permís per "
+"accedir a aquest recurs."
+
+#: fedora/tg/controllers.py:85
+msgid "You must provide your credentials before accessing this resource."
+msgstr ""
+"Heu de proporcionar les vostres credencials abans d'accedir a aquest recurs."
+
+#: fedora/tg/controllers.py:88
+msgid "Please log in."
+msgstr "Si us plau, inicieu la sessió."
+
+#: fedora/tg/controllers.py:116
+msgid "You have successfully logged out."
+msgstr "Heu tancat la sessió correctament."
+
+#: fedora/tg/templates/genshi/login.html:14
+#: fedora/tg2/templates/genshi/login.html:9
+#: fedora/tg2/templates/mako/login.mak:3
+msgid "Log In"
+msgstr "Inici de la sessió"
+
+#: fedora/tg/templates/genshi/login.html:18
+msgid "User Name:"
+msgstr "Nom d'usuari:"
+
+#: fedora/tg/templates/genshi/login.html:21
+#: fedora/tg2/templates/genshi/login.html:31
+#: fedora/tg2/templates/mako/login.mak:25
+msgid "Password:"
+msgstr "Contrasenya:"
+
+#: fedora/tg/templates/genshi/login.html:25
+#: fedora/tg/templates/genshi/login.html:88
+#: fedora/tg2/templates/genshi/login.html:33
+#: fedora/tg2/templates/genshi/login.html:66
+#: fedora/tg2/templates/mako/login.mak:27
+#: fedora/tg2/templates/mako/login.mak:63
+msgid "Login"
+msgstr "Inicia la sessió"
+
+#: fedora/tg/templates/genshi/login.html:32
+#: fedora/tg2/templates/genshi/login.html:14
+#: fedora/tg2/templates/mako/login.mak:9
+msgid "CSRF attacks"
+msgstr "Atacs CSRF"
+
+#: fedora/tg/templates/genshi/login.html:33
+#: fedora/tg2/templates/genshi/login.html:15
+#: fedora/tg2/templates/mako/login.mak:10
+msgid ""
+" are a means for a malicious website to make a request of another\n"
+"        web server as the user who contacted the malicious web site.  The\n"
+"        purpose of this page is to help protect your account and this server\n"
+"        from attacks from such malicious web sites.  By clicking below, you "
+"are\n"
+"        proving that you are a person rather than just the web browser\n"
+"        forwarding your authentication cookies on behalf of a malicious\n"
+"        website."
+msgstr ""
+" són un mitjà perquè un lloc web maliciós faci una petició a un altre\n"
+"        lloc web, com si l'usuari hagués contactat amb el lloc web\n"
+"        maliciós. El propòsit d'aquesta pàgina és ajudar a protegir el "
+"vostre\n"
+"        compte i aquest servidor d'atacs de llocs web maliciosos. En fer "
+"clic\n"
+"        a sota, esteu provant que sou una persona en lloc d'un navegador\n"
+"        web reenviant les seves galetes d'autenticació en nom d'un lloc web\n"
+"        maliciós."
+
+#: fedora/tg/templates/genshi/login.html:40
+#: fedora/tg2/templates/genshi/login.html:23
+#: fedora/tg2/templates/mako/login.mak:18
+msgid "I am a human"
+msgstr "Sóc humà"
+
+#: fedora/tg/templates/genshi/login.html:45
+#: fedora/tg2/templates/genshi/login.html:37
+#: fedora/tg2/templates/mako/login.mak:31
+msgid "Forgot Password?"
+msgstr "Heu oblidat la contrasenya?"
+
+#: fedora/tg/templates/genshi/login.html:46
+#: fedora/tg2/templates/genshi/login.html:38
+#: fedora/tg2/templates/mako/login.mak:32
+msgid "Sign Up"
+msgstr "Registrar-se"
+
+#: fedora/tg/templates/genshi/login.html:64
+#: fedora/tg2/templates/genshi/login.html:47
+#: fedora/tg2/templates/mako/login.mak:40
+msgid "Welcome"
+msgstr "Benvingut"
+
+#: fedora/tg/templates/genshi/login.html:86
+#: fedora/tg2/templates/genshi/login.html:64
+#: fedora/tg2/templates/mako/login.mak:61
+msgid "You are not logged in"
+msgstr "No heu iniciat la sessió"
+
+#: fedora/tg/templates/genshi/login.html:93
+#: fedora/tg2/templates/genshi/login.html:70
+#: fedora/tg2/templates/mako/login.mak:69
+msgid "CSRF protected"
+msgstr "Amb protecció contra CSRF"
+
+#: fedora/tg/templates/genshi/login.html:95
+#: fedora/tg2/templates/genshi/login.html:72
+#: fedora/tg2/templates/mako/login.mak:72
+msgid "Verify Login"
+msgstr "Verifiqueu l'inici de la sessió"
+
+#: fedora/tg/templates/genshi/login.html:101
+#: fedora/tg2/templates/genshi/login.html:78
+#: fedora/tg2/templates/mako/login.mak:79
+msgid "Logout"
+msgstr "Tanca la sessió"
+
+#: fedora/tg/visit/jsonfasvisit1.py:109
+#, python-format
+msgid "updating visit (%s)"
+msgstr "s'està actualitzant la visita (%s)"
+
+#: fedora/tg2/templates/genshi/login.html:28
+#: fedora/tg2/templates/mako/login.mak:22
+msgid "Username:"
+msgstr "Nom d'usuari:"

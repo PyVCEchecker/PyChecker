@@ -1,0 +1,288 @@
+Version 4.0.1 2020-09-28
+* Maintenance release to fix the Django requirement (Matt Galvis)
+
+Version 4.0.0 2020-09-16
+* Dropped Python 2.7 support 
+* Included support for Neo4j 4.*
+* Updated spatial PointProperty to better reflect the native data type
+* Updated Database housekeeping functions (drop_constraints(), drop_indexes(), install_labels())
+* Updated all underlying queries to better reflect current CYPHER
+* Updated Transaction handling
+* Updated tests
+	* Many thanks to Cristina Escalante, Matt Galvis, JVemmer and a-takahashi223 whose hard work made this release possible.
+
+Version 3.3.2 2019-09-29
+* Fixed validation for unique properties to also be optional (#470) - Jon Daly
+* Fixed tests-with-docker-compose.sh (#452) - Jorge Valhondo Rama
+* Added exclusion example to documentation and improved naming consistency (#456, #466) - Elena Williams 
+* Fixed the Travis-CI build problems by switching to openjdk (#471) - Duncan Booth
+* Minor revisions in `test_set_connection`, `spatial datatypes` and documentation (#442, #446, #447) - Athanasios Anastasiou
+* Added `max_length` constraint on `StringProperty` (#445) - Lazy-Y
+* Upgraded neo4j python driver requirement to 1.7.2 (#432) - Robert Grant
+* Added a `DateTimeFormatProperty` (#428) - Yu Shengnan
+* Updated `setup.py` so that it excludes the `test/` and `test/test_contrib/` sub-packages (#426) - Jorge Valhondo Rama
+* Updated getting_started.rst typo (#419) - fredthehead
+* Fixed NeomodelPoint instantiation bug (#418) - Athanasios Anastasiou
+
+Version 3.3.1 2019-02-08
+ * Fixed a number of warnings due to deprecations both within neomodel and pytest and overall improvements in
+   code style (#381) - Abhishek Modi
+ * Added support for spatial data through neomodel.contrib.spatial_datatypes (#384) - Athanasios Anastasiou
+ * Added the ability to filter "left-hand statements" (in NodeSet expressions) too (#395) - Grzegorz Grzywacz
+ * Refactor the Node Class Registry to make util.Database a true Singleton (#403) - Giorgos Oikonomou
+     * Many thanks to Giorgos Oikonomou, Jon Daly, Adam Romano, Andrew Tergis, Mato Žgajner, Mostafa Moradian, mjmare,
+       Phoebe Bright, Robert Grant, jberends and anyone else who helped flag, track and correct this bug. For more
+       information, please see: https://github.com/neo4j-contrib/neomodel/issues/378
+     * Added the ClassAlreadyDefined exception to prevent against accidental redefinitions of data model classes (#409)
+       - Athanasios Anastasiou
+ * Added the ability to lazily `.nodes.get()` and `.nodes.all()` (#406) - Matan Hart
+ * Fixed a bug in the assumed direction of relationships in _build_merge_query (#408) - MrAnde7son
+
+Version 3.3.0 2018-10-04
+ * Added support for Q() in filter and exclude (#360) - Juan H. Hidalgo
+ * Added  object docs and examples - Juan H. Hidalgo
+ * Raise DoesNotExist when refreshing a non existent inflated node (#355) - lerela
+ * Empty filter bug - Mardanov Timur Rustemovich
+ * Closed #361 Nodes connected with two or more relationships - Mardanov Timur Rustemovich
+ * Exclude method fixed - Mardanov Timur Rustemovich
+ * Filter with OR fixed - Mardanov Timur Rustemovich
+ * Resolved #283, improved object resolution of cypher_query so that it 
+   resolves objects even if they are nested within lists. Overall 
+   documentation edits - Athanasios Anastasiou
+   
+Version 3.2.9 2018-07-04
+ * Add check for wiping db on test run - Athanasios 
+ * Correct function name in doc string - Henry Jordan
+ * Support filtering on properties that end with a hash (#348) - mprahl
+ * Support neo4j-driver v1.6.0 (#347) - mprahl
+ * Explicit write transaction mode (#337) - Robert Grant
+ * Adds a check for Traversal's definition argument (#333) - Frank Sachsenheim
+
+Version 3.2.8 2018-04-29
+ * Fix syntax error in import
+
+Version 3.2.7 2018-04-23
+ * Back compat for exceptions module move - Robin Edwards
+ * Lower the required pytz version (#328) - mprahl
+ * Add the "disconnect_all" and "replace" methods on relationship properties (#327) - mprahl
+ * Add the "first" and "first_or_none" methods on the NodeSet class (#325) - mprahl
+
+Version 3.2.6 2018-04-04
+ * Code clean ups and documentation improvments - Frank Sachsenheim
+ * neomodel.properties.NormalClass is renamed to NormalizedClass
+ * Respect when db_property is set in install_labels and get_or_create - mprahl
+ * Use a clearer relationship name in the Relationships documentation - mprahl
+ * Improve relationship documentation - mprahl
+ * Ensure_connection only called when accessing the database, not when
+ constructing the transaction decorator - Robert Grant
+ * Test against newer neo4j releases - Frank Sachsenheim
+ * Fixes and simplifies pickling of DoesNotExist subclasses - Frank Sachsenheim
+ * Add NeomodelException and move exceptions to a module - Frank Sachsenheim
+ * Many documentation improvements - Frank Sachsenheim
+ * Add newline to is abstract warning #305 - Omer Yampel
+ * Refactors tests to use pytest as runner.- Frank Sachsenheim
+ * Remove support for Python 3.3 - Frank Sachsenheim
+ * Adds support for neo4j 3.3 - Frank Sachsenheim
+ * Updates .travis.yml in order to also test against various neo4j versions - Frank Sachsenheim
+ * Updates neo4j-driver dependency to 1.5.2 - Frank Sachsenheim
+ * Adds a script to tests against various platforms with Docker Compose - Frank Sachsenheim
+ * Fix service unavailable issue (#281) - Warin Isvilanonda
+ * Add neomodel_remove_labels - Ivan Laković
+ * Test for model is None in Traversal.match() - pvanheus
+
+Version 3.2.5 2017-06-10
+ * Upgrade pytz
+ * Remove use of START in match engine breaking neo4j 3.2
+
+Version 3.2.4 2017-04-30
+ * Upgrade neo4j-driver to 1.2.1 #251
+
+Version 3.2.3 2017-04-17
+ * Return StructuredRel instance as opposed to None when no model supplied #248
+ * Fix get_or_create docs and incorrect call to rel_helper #249
+
+Version 3.2.2 2017-03-17
+ * Add get_or_none to RelationshipManager #246
+ * Make sure relationship types are escaped in queries #188
+ * Fix bug causing unsaved node not to appear in deflate error msg
+ * Allow typed arrays in ArrayProperty #237
+ * Add save hooks to StructuredRel #242
+ * Add tests for UniqueIdProperty when used in batch or merge.
+ * Update documentation for batch operations
+ * Add all_relationships() method to RelationshipManager #239
+
+Version 3.2.1 2017-02-19
+ * Dont install test directory #238
+
+Version 3.2.0 2017-02-07
+ * Upgrade neo4j_driver to 1.1.0
+ * Fix install_labels on an abstract node
+ * Clean up hooks code, django_neomodel.DjangoNode required for signals
+ * Add order_by method to relationships
+ * Add config.ENCRYPTED_CONNECTION - adrianicv
+ * Add config.MAX_POOL_SIZE
+ * Add neomodel_install_labels command
+ * Turn off AUTO_INSTALL_LABEL by default
+
+Version 3.1.0 2017-01-26
+ * Improve docs
+ * Add change_neo4j_password
+ * Add clear_neo4j_database
+ * Add UniqueIdProperty for easy ids
+ * remove NEOMODEL_FORCE_TIMEZONE environment var now a config option
+ * Move django signal support to neomodel
+ * Add stdout input to install_labels etc
+
+Version 3.0.3 2017-01-04
+ * Fix indexing bug caught by travis
+
+Version 3.0.2 2017-01-04
+ * More doc strings and added autodoc to sphinx
+ * Install all constraints via core.install_all_labels()
+ * Fix multiple relationships not being created when using a rel model
+ * Fix connection logic for using in ipython
+ * Fix unicode string passed as class in relationship
+
+Version 3.0.1 2016-12-17
+ * Fix empty filters causing empty WHERE clause - Siddharth Maheshwari
+
+Version 3.0.0 2016-11-27
+ * neo4j_driver now used as backend
+ * Support for neo4j versions prior to 3 dropped
+ * REST via py2neo support dropped
+ * New db.set_connection() method to override connection url
+ * New config module for DATABASE_URL and other settings
+ * streaming kwarg now deprecated
+ * py2neo.cypher.error.statement.InvalidSyntax replaced by
+ neo4j.v1.exceptions.CypherError for cypher errors (syntax etc)
+ * CypherException and TransactionException have now been removed
+ * ConstraintValidationFailed exception introduced as super class of
+ UniqueProperty to allow additional classes in the future
+ * Remove category() method from StructuredNode's following its deprecation
+ * Batch operations now must be wrapped in a transaction in order to be atomic (see batch in docs)
+ * Renamed _id property to id, old property now deprecated
+ * Fix numeric propertys defaulting to 0 failing required check
+ * support order_by('?') to mimic django random order by
+ * Stopped connections being shared across processes which caused incorrect
+ results to be returned (in py2neo version) or an SSLError (bolt version).
+ neomodel is now process and thread safe.
+ * Add config option DJANGO_SIGNALS
+ * Add config option AUTO_INSTALL_LABELS
+ * Remove deprecated .index class property on StructuredNode
+ * Add docs and better tests on inheritance
+ * Add __repr__ and __str__ methods to StructuredNode
+ * Add get_or_none method to NodeSet
+ * Fixed filters persisting across node relationship queries (#208)
+ * Un-deprecate is_connected, its intuitive
+ * Fixed NodeSet index returning a list now returns just the node, e.g
+ jim.friends[0] returns a node as opposed to a list containing one node.
+ * Added missing filter and exclude methods to rel manager enabling: jim.friends.filter(name='bob')
+ * Add NormalProperty, RegexProperty, EmailProperty (Rafael Pivato++)
+
+Version 2.0.2 2015-09-04
+ * support for creating or updating a node
+ * support for getting or creating a node
+ * support for wildcard and non explicit traversals
+ * support for additional filters
+ * improved performance for bulk operations
+ * resolved NodeSet.get() and RelationshipManager.get() error messaging
+ * resolved "order_by" bug
+
+Version 2.0.1 2015-08-01
+ * add support for py2neo 2.x
+ * transitioned START queries to MATCH
+ * added authentication documentation for neo4j 2.2.x
+ * removed tight coupling with pytz
+ * resolved DeadlockDetectedException due to duplicate constraint and index
+ creation
+ * resolved conform errors NodeSet.get() and RelationshipManager.get()
+ * resolved username and password interpretation
+ * resolved on_count()'s order_by bug
+ * resolved CypherException TyperError exception bug
+
+Version 1.0.3 unreleased
+ * add support for choices on string properites.
+
+Version 1.0.2 2014-10-21
+ * updated documentation
+ * sphinx and rtd
+ * exception handling in cypher fix (tjakobsen)
+
+Version 1.0.1 2014-08-21
+ * support for transactions
+ * new nodes class property (match API)
+ * support for neo4j 2
+ * no support for neo4j < 2
+ * deprecated category nodes
+ * deprecated index property
+
+Version 0.4.0 unreleased
+ * server compatability check (Robin Edwards)
+ * 1.9 server fixes (Robin Edwards)
+ * upgrade to py2neo 1.6.1 (Panos Katseas)
+ * make __index__ inherited (Sebastian Ortiz)
+ * documentation improvements (Priit Laes)
+ * import RelationshipDefinition and RelationshipManager into main
+
+Version 0.3.6 2013-08-14
+ * Display nice message for operations on deleted node (Robin Edwards)
+ * Re-enable lucene-querybuilder (Robin Edwards)
+ * Fix X-Stream header (Nigel Small)
+ * Enable custom indexes for StructuredNodes
+ * Support for relationship models or 'StructuredRels'
+ * Support filtering in the 'traverse' method (Robin Edwards)
+ * Store datetime objects as float for more accuracy (Robin Edwards)
+ * Setup NEOMODEL_FORCE_TIMEZONE env var to prevent storing of datetimes
+ without a timezone (Robin Edwards)
+ * Add NEOMODEL_CYPHER_DEBUG env var to log querys (Robin Edwards)
+ * Relative relationship classes in definitions (Panos Katseas)
+
+Version 0.3.5 2013-07-05
+ * Add documentation on batch size (Robin Edwards)
+ * Fix default_value type generation for basic properties #53
+ * Add documentation on providing arguments to default functions (Robin Edwards)
+
+Version 0.3.4 2013-07-02
+ * Fix return > 1 for Localised (Marianna Polatoglou)
+
+Version 0.3.3 2013-07-01
+ * Nice exception on missing search params (Robin Edwards)
+
+Version 0.3.2 2013-07-01
+ * Property fixes (Laurie Clark-Michalek)
+
+Version 0.3.1 2013-06-27
+ * Fix exception message (Sam Millar)
+ * Use builtin items (Panos Katseas)
+
+Version 0.3.0 2013-06-20
+------------------------
+ * Fix either direction connect (Robin Edwards)
+ * Make reconnect atomic cypher operation (Panos Katseas)
+ * Add reconnect test case (Panos Katseas)
+
+Version 0.2.9 2013-06-18
+------------------------
+ * python 3.3+ support
+ * remove dependency on lucenequerybuilder (Robin Edwards)
+ * py2neo 1.5 compat and deprecations (Robin Edwards)
+ * JSONProperty (Panos Katseas)
+ * allow classes in relationship definitions (Robin Edwards)
+ * add SemiStructuredNode to contrib (Robin Edwards)
+ * refactor rel manager to use traversals (Robin Edwards)
+ * allow connect on rel managers of direction either (Robin Edwards)
+ * added experimental support for traversals (Robin Edwards)
+ * allow datetime without timezone to be stored (Robin Edwards)
+ * use cypher for delete (Robin Edwards)
+ * project logo (Laura Willis)
+ * _index_name special attribute removed (Robin Edwards)
+ * connect to sub class is no longer permitted (Robin Edwards)
+ * removed ReadOnlyNode class (Robin Edwards)
+
+Version 0.2.8 2013-03-07
+------------------------
+ * connect() with properties (Marianna Polatoglou)
+ * refresh() method (Panos Katseas)
+ * refactor RelationshipManager (Robin Edwards)
+ * NotConnected exception (Robin Edwards)
+ * Fix OneOrMore bug (Robin Edwards)

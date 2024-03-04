@@ -1,0 +1,20 @@
+#
+# Tests to confirm that xfail and skip are working.
+#
+
+tests:
+    
+    - name: wrong status
+      xfail: True
+      url: /
+      status: 404
+
+    - name: non existent header
+      xfail: True
+      url: /
+      response_headers:
+          unlikely_header: no way
+
+    - name: skip me
+      skip: Skipping for now because we can't do it
+      url: http://nowhere.example.com/house

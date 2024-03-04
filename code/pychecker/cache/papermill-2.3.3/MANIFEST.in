@@ -1,0 +1,32 @@
+recursive-include papermill *.py
+recursive-include papermill *.ipynb
+recursive-include papermill *.json
+recursive-include papermill *.yaml
+recursive-include papermill *.yml
+recursive-include papermill *.keep
+recursive-include papermill *.txt
+
+include setup.py
+include requirements*.txt
+include tox.ini
+include pytest.ini
+include README.md
+include LICENSE
+include MANIFEST.in
+include *.md
+include *.toml
+
+include .bumpversion.cfg
+
+# Documentation
+prune docs
+# exclude sample notebooks for binder
+prune binder
+# Scripts
+graft scripts
+# Test env
+prune .tox
+
+# Build files
+exclude .travis.yml
+exclude azure-pipelines.yml

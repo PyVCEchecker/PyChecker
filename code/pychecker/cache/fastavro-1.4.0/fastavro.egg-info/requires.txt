@@ -1,0 +1,14 @@
+
+[codecs]
+python-snappy
+zstandard
+lz4
+
+[lz4]
+lz4
+
+[snappy]
+python-snappy
+
+[zstandard]
+zstandard

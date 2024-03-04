@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>User interface elements &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Image loaders" href="sdl2ext_image.html" />
+    <link rel="prev" title="Text rendering routines" href="sdl2ext_font.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_image.html" title="Image loaders"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_font.html" title="Text rendering routines"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" accesskey="U">sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="user-interface-elements">
+<h1>User interface elements<a class="headerlink" href="#user-interface-elements" title="Permalink to this headline">¶</a></h1>
+<p>User interface elements within <a class="reference internal" href="sdl2ext.html#module-sdl2.ext" title="sdl2.ext: Python extensions for SDL2"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.ext</span></code></a> are simple
+<a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> objects, which are enhanced by certain input hooks; as such,
+they are not classes on their own, but implemented as mixins. The user input
+itself is handled by an <a class="reference internal" href="#sdl2.ext.UIProcessor" title="sdl2.ext.UIProcessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">UIProcessor</span></code></a> object, which takes care of
+delegating input events, such as mouse movements, clicks and keyboard input,
+to the correct UI element.</p>
+<p>Depending on the event type (e.g. pressing a mouse button), the UIProcessor
+will execute its matching method (e.g. <code class="docutils literal notranslate"><span class="pre">mousedown()</span></code>) with only those UI
+elements, which support the event type.</p>
+<img alt="../_images/uiprocessing.png" src="../_images/uiprocessing.png" />
+<div class="section" id="ui-element-types">
+<span id="ui-elem-types"></span><h2>UI element types<a class="headerlink" href="#ui-element-types" title="Permalink to this headline">¶</a></h2>
+<p>Every <a class="reference internal" href="sdl2ext.html#module-sdl2.ext" title="sdl2.ext: Python extensions for SDL2"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext</span></code></a> UI element is a simple <a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> object, to
+which additional attributes and methods are bound.</p>
+<p>Every UI element features the following attributes</p>
+<p><code class="docutils literal notranslate"><span class="pre">element.uitype</span></code></p>
+<blockquote>
+<div><p>The <code class="docutils literal notranslate"><span class="pre">uitype</span></code> attribute can have one of the following values,
+identifying the UI element:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BUTTON</span></code> - a UI element, which can react on mouse input</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CHECKBUTTON</span></code> - as <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>, but it retains its state on clicks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code> - a UI element that reacts on keyboard input</p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">element.events</span></code></p>
+<blockquote>
+<div><p>A dictionary containing the SDL2 event mappings. Each supported SDL2 event
+(e.g. <code class="docutils literal notranslate"><span class="pre">SDL_MOUSEMOTION</span></code>) is associated with a bound
+<a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> acting as callback for user code
+(e.g. <code class="docutils literal notranslate"><span class="pre">mousemotion()</span></code>).</p>
+</div></blockquote>
+<p>Depending on the exact type of the element, it will feature additional methods
+and attributes explained below.</p>
+<div class="section" id="button-elements">
+<h3>Button elements<a class="headerlink" href="#button-elements" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">BUTTON</span></code> UI elements feature a <code class="docutils literal notranslate"><span class="pre">state</span></code> attribute, which can be one of the
+following values.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>state</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RELEASED</p></td>
+<td><p>Indicates that the UI element is not pressed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>HOVERED</p></td>
+<td><p>Indicates that the mouse cursor is currently hovering the UI element.</p></td>
+</tr>
+<tr class="row-even"><td><p>PRESSED</p></td>
+<td><p>Indicates that a mouse button is pressed on the UI element.</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">BUTTON</span></code> UI elements react with the following event handlers on events:</p>
+<p><code class="docutils literal notranslate"><span class="pre">button.motion(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked, if the mouse moves around while
+being over the <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">button.pressed(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked, if a mouse button is pressed on
+the <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">button.released(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked, if a mouse button is released on
+the <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">button.click(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked, if a mouse button is pressed and
+released on the <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>.</p>
+</div></blockquote>
+<p>Besides the <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code> a special <code class="docutils literal notranslate"><span class="pre">CHECKBUTTON</span></code> UI element type exists,
+which enhances the <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code> bindings by an additional <code class="docutils literal notranslate"><span class="pre">checked</span></code> attribute.
+The <code class="docutils literal notranslate"><span class="pre">checked</span></code> attribute switches its status (<code class="docutils literal notranslate"><span class="pre">False</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and
+<code class="docutils literal notranslate"><span class="pre">True</span></code>  to <code class="docutils literal notranslate"><span class="pre">False</span></code>) every time the UI element is clicked.</p>
+</div>
+<div class="section" id="text-input-elements">
+<h3>Text input elements<a class="headerlink" href="#text-input-elements" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code> elements react on text input, once they are activated. Text being
+input, once a <code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code> has been activated, is stored in its <code class="docutils literal notranslate"><span class="pre">text</span></code>
+attribute.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code> reacts with the following event handlers on events:</p>
+<p><code class="docutils literal notranslate"><span class="pre">textentry.motion(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked, if the mouse moves around while
+being over the <code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">textentry.pressed(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked, if a mouse button is pressed on
+the <code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">textentry.released(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked, if a mouse button is released on
+the <code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">textentry.keydown(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked on pressing a key.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">textentry.keyup(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked on releasing a key.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">textentry.input(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked on text input events.
+Text input events are automatically created, once the <a class="reference internal" href="#sdl2.ext.UIProcessor" title="sdl2.ext.UIProcessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">UIProcessor</span></code></a>
+activates a <code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code> UI element.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">textentry.editing(event</span> <span class="pre">:</span> <span class="pre">sdl2.events.SDL_Event)</span></code></p>
+<blockquote>
+<div><p>An <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> that is invoked on text editing events. Text
+editing events are automatically created, once the <a class="reference internal" href="#sdl2.ext.UIProcessor" title="sdl2.ext.UIProcessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">UIProcessor</span></code></a>
+activates a <code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code> UI element.</p>
+<p>Text editing events are however only raised, if an IME system is involved,
+which combines glyphs and symbols to characters or word fragments.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="sdl2.ext.UIFactory">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">UIFactory</code><span class="sig-paren">(</span><em class="sig-param">spritefactory : SpriteFactory</em><span class="optional">[</span>, <em class="sig-param">**kwargs</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.UIFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>A factory class for creating UI elements. The <a class="reference internal" href="#sdl2.ext.UIFactory" title="sdl2.ext.UIFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">UIFactory</span></code></a>
+allows you to create UI elements based on the
+<a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> class. To do this, it requires a <a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.SpriteFactory" title="sdl2.ext.SpriteFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpriteFactory</span></code></a>,
+which will create the sprites, to which the <a class="reference internal" href="#sdl2.ext.UIFactory" title="sdl2.ext.UIFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">UIFactory</span></code></a> then binds
+the additional methods and attributes.</p>
+<p>The additional <em>kwargs</em> are used as default arguments for creating
+<strong>sprites</strong> within the factory methods.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.UIFactory.default_args">
+<code class="sig-name descname">default_args</code><a class="headerlink" href="#sdl2.ext.UIFactory.default_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary containing the default arguments to be passed to the
+sprite creation methods of the bound <a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.SpriteFactory" title="sdl2.ext.SpriteFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpriteFactory</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.UIFactory.spritefactory">
+<code class="sig-name descname">spritefactory</code><a class="headerlink" href="#sdl2.ext.UIFactory.spritefactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.SpriteFactory" title="sdl2.ext.SpriteFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpriteFactory</span></code></a> being used for creating new <a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a>
+objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIFactory.create_button">
+<code class="sig-name descname">create_button</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.UIFactory.create_button" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new button UI element.</p>
+<p><em>kwargs</em> are the arguments to be passed for the sprite
+construction and can vary depending on the sprite type.
+See <a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.SpriteFactory.create_sprite" title="sdl2.ext.SpriteFactory.create_sprite"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SpriteFactory.create_sprite()</span></code></a> for further details.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIFactory.create_check_button">
+<code class="sig-name descname">create_check_button</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.UIFactory.create_check_button" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new checkbutton UI element.</p>
+<p><em>kwargs</em> are the arguments to be passed for the sprite
+construction and can vary depending on the sprite type.
+See <a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.SpriteFactory.create_sprite" title="sdl2.ext.SpriteFactory.create_sprite"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SpriteFactory.create_sprite()</span></code></a> for further details.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIFactory.create_text_entry">
+<code class="sig-name descname">create_text_entry</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.UIFactory.create_text_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new textentry UI element.</p>
+<p><em>kwargs</em> are the arguments to be passed for the sprite
+construction and can vary depending on the sprite type.
+See <a class="reference internal" href="sdl2ext_sprite.html#sdl2.ext.SpriteFactory.create_sprite" title="sdl2.ext.SpriteFactory.create_sprite"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SpriteFactory.create_sprite()</span></code></a> for further details.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIFactory.from_color">
+<code class="sig-name descname">from_color</code><span class="sig-paren">(</span><em class="sig-param">color : object</em>, <em class="sig-param">size</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.UIFactory.from_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a UI element with a specific color.</p>
+<p><em>uitype</em> must be one of the supported <a class="reference internal" href="#ui-elem-types"><span class="std std-ref">UI element types</span></a> classifying
+the type of UI element to be created.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIFactory.from_image">
+<code class="sig-name descname">from_image</code><span class="sig-paren">(</span><em class="sig-param">uitype : int</em>, <em class="sig-param">fname : str</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.UIFactory.from_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a UI element from an image file. The image must be
+loadable via <a class="reference internal" href="sdl2ext_image.html#sdl2.ext.load_image" title="sdl2.ext.load_image"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_image()</span></code></a>.</p>
+<p><em>uitype</em> must be one of the supported <a class="reference internal" href="#ui-elem-types"><span class="std std-ref">UI element types</span></a> classifying
+the type of UI element to be created.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIFactory.from_object">
+<code class="sig-name descname">from_object</code><span class="sig-paren">(</span><em class="sig-param">uitype : int</em>, <em class="sig-param">obj: object</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.UIFactory.from_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a UI element from an object. The object will be passed through
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.rwops_from_object()</span></code> in order to try to load image data from
+it.</p>
+<p><em>uitype</em> must be one of the supported <a class="reference internal" href="#ui-elem-types"><span class="std std-ref">UI element types</span></a> classifying
+the type of UI element to be created.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIFactory.from_surface">
+<code class="sig-name descname">from_surface</code><span class="sig-paren">(</span><em class="sig-param">uitype : int</em>, <em class="sig-param">surface : SDL_Surface</em><span class="optional">[</span>, <em class="sig-param">free=False</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.UIFactory.from_surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a UI element from the passed
+<code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface</span></code>. If <em>free</em> is set to
+<code class="docutils literal notranslate"><span class="pre">True</span></code>, the passed <em>surface</em> will be freed automatically.</p>
+<p><em>uitype</em> must be one of the supported <a class="reference internal" href="#ui-elem-types"><span class="std std-ref">UI element types</span></a> classifying
+the type of UI element to be created.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.UIProcessor">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">UIProcessor</code><a class="headerlink" href="#sdl2.ext.UIProcessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>A processing system for user interface elements and events.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.UIProcessor.handlers">
+<code class="sig-name descname">handlers</code><a class="headerlink" href="#sdl2.ext.UIProcessor.handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict containing the mapping of SDL2 events to the available
+<a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> bindings of the <a class="reference internal" href="#sdl2.ext.UIProcessor" title="sdl2.ext.UIProcessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">UIProcessor</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIProcessor.activate">
+<code class="sig-name descname">activate</code><span class="sig-paren">(</span><em class="sig-param">component : object</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.UIProcessor.activate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activates a UI control to receive text input.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIProcessor.deactivate">
+<code class="sig-name descname">deactivate</code><span class="sig-paren">(</span><em class="sig-param">component : object</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.UIProcessor.deactivate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deactivate the currently active UI control.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIProcessor.passevent">
+<code class="sig-name descname">passevent</code><span class="sig-paren">(</span><em class="sig-param">component : object</em>, <em class="sig-param">event : SDL_Event</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.UIProcessor.passevent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passes the <em>event</em> to a <em>component</em> without any additional checks or
+restrictions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIProcessor.mousemotion">
+<code class="sig-name descname">mousemotion</code><span class="sig-paren">(</span><em class="sig-param">component : object</em>, <em class="sig-param">event : SDL_Event</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.UIProcessor.mousemotion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks, if the event’s motion position is on the <em>component</em> and
+executes the component’s event handlers on demand. If the motion event
+position is not within the area of the <em>component</em>, nothing will be
+done. In case the component is a <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>, its <code class="xref py py-attr docutils literal notranslate"><span class="pre">state</span></code> will be
+adjusted to reflect, if it is currently hovered or not.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIProcessor.mousedown">
+<code class="sig-name descname">mousedown</code><span class="sig-paren">(</span><em class="sig-param">component : object</em>, <em class="sig-param">event : SDL_Event</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.UIProcessor.mousedown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks, if the event’s button press position is on the <em>component</em> and
+executes the component’s event handlers on demand. If the button press
+position is not within the area of the component, nothing will be done.</p>
+<p>In case the component is a <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>, its <code class="xref py py-attr docutils literal notranslate"><span class="pre">state</span></code>
+will be adjusted to reflect, if it is currently pressed or not.</p>
+<p>In case the component is a <code class="docutils literal notranslate"><span class="pre">TEXTENTRY</span></code> and the pressed button is
+the primary mouse button, the component will be marked as the next
+control to activate for text input.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIProcessor.mouseup">
+<code class="sig-name descname">mouseup</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">component</em>, <em class="sig-param">event</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.UIProcessor.mouseup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks, if the event’s button release position is on the <em>component</em> and
+executes the component’s event handlers on demand. If the button release
+position is not within the area of the component, nothing will be done.</p>
+<p>In case the component is a <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>, its <code class="xref py py-attr docutils literal notranslate"><span class="pre">state</span></code>
+will be adjusted to reflect, whether it is hovered or not.</p>
+<p>If the button release followed a button press on the same component and
+if the button is the primary button, the <code class="docutils literal notranslate"><span class="pre">click()</span></code> event handler is
+invoked, if the component is a <code class="docutils literal notranslate"><span class="pre">BUTTON</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIProcessor.dispatch">
+<code class="sig-name descname">dispatch</code><span class="sig-paren">(</span><em class="sig-param">obj : object</em>, <em class="sig-param">event : SDL_Event</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.UIProcessor.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passes an event to the given object. If <em>obj</em> is a
+<a class="reference internal" href="sdl2ext_ebs.html#sdl2.ext.World" title="sdl2.ext.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">World</span></code></a> object, UI relevant components will receive
+the event, if they support the event type. If <em>obj</em> is a single object,
+<code class="docutils literal notranslate"><span class="pre">obj.events</span></code> <strong>must</strong> be a dict consisting of SDL event type
+identifiers and <a class="reference internal" href="sdl2ext_events.html#sdl2.ext.EventHandler" title="sdl2.ext.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> instances bound
+to the object. If <em>obj</em> is a iterable, such as a list or set, every
+item within <em>obj</em> <strong>must</strong> feature an <code class="docutils literal notranslate"><span class="pre">events</span></code> attribute as
+described above.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.UIProcessor.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">world : World</em>, <em class="sig-param">components : iterable</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.UIProcessor.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#sdl2.ext.UIProcessor" title="sdl2.ext.UIProcessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">UIProcessor</span></code></a> class does not implement the <cite>process()</cite>
+method by default. Instead it uses <a class="reference internal" href="#sdl2.ext.UIProcessor.dispatch" title="sdl2.ext.UIProcessor.dispatch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dispatch()</span></code></a> to send events
+around to components. <a class="reference internal" href="#sdl2.ext.UIProcessor.process" title="sdl2.ext.UIProcessor.process"><code class="xref py py-meth docutils literal notranslate"><span class="pre">process()</span></code></a> does nothing.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User interface elements</a><ul>
+<li><a class="reference internal" href="#ui-element-types">UI element types</a><ul>
+<li><a class="reference internal" href="#button-elements">Button elements</a></li>
+<li><a class="reference internal" href="#text-input-elements">Text input elements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdl2ext_font.html"
+                        title="previous chapter">Text rendering routines</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdl2ext_image.html"
+                        title="next chapter">Image loaders</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/sdl2ext_gui.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_image.html" title="Image loaders"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_font.html" title="Text rendering routines"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" >sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+    "additionalProperties": false,
+    "properties": {
+        "$ref": {
+            "description": "seminars record",
+            "format": "uri",
+            "minLength": 1,
+            "pattern": ".*/api/seminars/\\d+$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "$ref"
+    ],
+    "title": "Reference to seminar record",
+    "type": "object"
+}

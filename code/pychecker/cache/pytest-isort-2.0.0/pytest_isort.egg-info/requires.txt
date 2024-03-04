@@ -1,0 +1,4 @@
+isort>=4.0
+
+[tests]
+mock

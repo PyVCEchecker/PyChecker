@@ -1,0 +1,28 @@
+* bob/bob
+  * major
+     - bob/bob.buildout!40 [script] Revert fixes done to tackle issue bob/bob.buildout#15: Revert fixes done to tackle issue bob/bob.buildout#15. https://bugs.python.org/issue30167 is fixed since a couple of years (I cannot reproduce the error anymore on all supported Python versions)
+     - bob/bob.io.video!19 Make reader and writer classes picklable: Fixes bob/bob.io.video#16
+     - bob/bob.ip.draw!5 Deprecating package
+     - bob/bob.ip.gabor!12 Serialization: Serialized bob.ip.gabor.Jet.
+     - bob/bob.ip.gabor!13 Resolve "JetStatistics divides by the wrong value": Closes bob/bob.ip.gabor#5
+     - bob/bob.learn.linear!12 Made bob.learn.linear.Machine picklable: As mentioned in https://gitlab.idiap.ch/bob/bob.bio.face/-/merge_requests/64 the small hacks made in bob.bio.base to handle pickled stuff is giving more headaches than it should.
+     - bob/bob.learn.linear!13 Fixed arguments input_subtract and input_divide during serialization
+     - bob/gridtk!33 Arbitrary extra arguments for SGE: Adds a new option to `jman submit`, `-e/--sge-extra-args`, to pass arbitray extra arguments to `qsub`.
+     - bob/gridtk!34 Verbose flags were separating parameters: Fixes bob/gridtk#34   The `-v` flags were separating the `-d` option (set database name) and the database name argument, in `gridtk.sge._submit_to_grid`, during the wrapper command generation.  This was not a problem with 0 verbosity, since no `v` was inserted.
+     - bob/bob.ip.qualitymeasure!14 [conda] make bob.io. packages test requirements: Fixes bob/bob.ip.qualitymeasure#5
+     - bob/bob.db.mobio!15 New mobile protocol.: Created a new mobile protocol "mobile0-male-female".  This one, 'dev' and 'eval' are not gender-specific
+     - bob/bob.bio.base!183 Remove usage of numpy.testing.decorators: Fixes bob/bob.bio.base#132
+     - bob/bob.bio.base!170 Explain how new databases are configured: using bob's global configuration system
+     - bob/bob.bio.base!191 Resolve "`check_existence` flag incorrectly handled in filelistdatabase query": Closes bob/bob.bio.base#134
+     - bob/bob.bio.base!198 Fixing and adding features to the scores generation script: I was using the score 'gen' script, but needed some features.    Added:  - A way of specifying how the number of scores is defined (number of subjects and probes, or manually specified);  - A way to generate different scores for dev and eval;  - Tests for the gen script.    Changed:  - The way the scores are generated (each probe against each reference model, instead of randomly).    Fixed:  - Duplicate click options (-p);  - 'positive scores' were generated with a 'negative scores' variable.
+     - bob/bob.bio.face!60 Removed outdated COPYING and updated MANIFEST.in: This merge request fixes an inconsistency in the licenses.    The copying file hadn't been removed and the MANIFEST.in file was still using it.    This patch fixes both.
+     - bob/bob.bio.vein!45 add `eval` group to utfvp database: In this MR, `eval` group is added to the utfvp database.   Please note that `eval` group is defined in `nom` protocol and it was missed in the previous version of `bob.bio.vein`.    Many thanks to @andre.anjos for all his help!
+     - bob/bob.pad.base!71 Configure tests: Similar to bob.bio.base!183  Some classes are picked up by test runners while they are not  UnitTest classes.  Fixes bob/bob.pad.base#33
+     - bob/bob.pad.base!72 Update OneClassGMM2.py: Updating joblib import.
+     - bob/bob.fusion.base!12 Make the model optional in the scatter plot
+     - bob/bob.ip.tensorflow_extractor!15 Tensorflow 2 compatibility: Fixes bob/bob.ip.tensorflow_extractor#9
+     - bob/bob.ip.tensorflow_extractor!16 Make FaceNet pickalable: In this MR FaceNet was made picklable. Two things were necessary.    1. Organize the initialization of the public variables of the facenet class  2. Add a semaphore to control two critical regions (__call__ and __getstate__). This allows Dask to smoothly do multithreading.
+     - bob/bob.learn.pytorch!42 Tensorboard: *  Adds native torch logger
+     - bob/bob.ip.binseg!13 Cleanup model implementation: Cleans up model implementation to:    * Re-use all backbones from torchvision  * Simplify checkpointer  * Remove own implementation of model_zoo  * Implement normalization for torchvision-based backbones  * Enable pytorch installation on osx
+     - bob/bob.ip.binseg!14 Fix test after nomenclature change: [test.test_cli] Closes bob/bob.ip.binseg#2
+     - bob/bob.ip.binseg!15 Support for multi-GPU machines, improved random seed settings and reproducibility

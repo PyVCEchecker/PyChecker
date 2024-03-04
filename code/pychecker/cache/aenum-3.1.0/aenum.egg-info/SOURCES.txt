@@ -1,0 +1,15 @@
+MANIFEST.in
+README
+setup.py
+aenum/CHANGES
+aenum/LICENSE
+aenum/README
+aenum/__init__.py
+aenum/test.py
+aenum/test_v3.py
+aenum.egg-info/PKG-INFO
+aenum.egg-info/SOURCES.txt
+aenum.egg-info/dependency_links.txt
+aenum.egg-info/top_level.txt
+aenum/doc/aenum.pdf
+aenum/doc/aenum.rst

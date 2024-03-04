@@ -1,0 +1,14 @@
+ChangeLog
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+tests.py
+aiodns/__init__.py
+aiodns/error.py
+aiodns.egg-info/PKG-INFO
+aiodns.egg-info/SOURCES.txt
+aiodns.egg-info/dependency_links.txt
+aiodns.egg-info/requires.txt
+aiodns.egg-info/top_level.txt

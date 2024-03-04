@@ -1,0 +1,14 @@
+[Unit]
+Description=fedmsg active<->passive relay
+After=network.target
+Documentation=https://fedmsg.readthedocs.org/
+
+[Service]
+ExecStart=/usr/bin/fedmsg-relay
+Type=simple
+User=fedmsg
+Group=fedmsg
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

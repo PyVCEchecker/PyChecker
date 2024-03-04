@@ -1,0 +1,108 @@
+CHANGES
+=======
+
+3.0.1
+-----
+
+* Update requirements.txt
+* travis: Drop pypy testing
+* travis: Fix config
+
+3.0.0
+-----
+
+* Drop Sphinx, click version caps
+* Drop Python 2.7, click 6 support
+* support sphinx==4.0
+
+2.7.1
+-----
+
+* Strip ANSI escape codes
+
+2.7.0
+-----
+
+* Strip ANSI escape codes
+* Support numeric choices
+* Fix black issues
+
+2.6.0
+-----
+
+* Don't require pbr on runtime
+* Explicitly add used requires
+* CLN typos and nitpicks
+* TST formater for CommandCollection with != nesting
+* DOC add basic example with CommandCollection
+* ENH allow for grouped documentation with CommandCollection
+* add whitespace to option choice separator to allow wrapping
+
+2.5.0
+-----
+
+* Make show-nested more granualar
+* Add support for epilogs
+* Support 'metavar'
+* Prettier formatting of detailed opt information
+* Allow extension to be used as simply 'sphinx\_click'
+* trivial: Separate imports
+
+2.4.0
+-----
+
+* tests: Add docstrings
+* Use 'nested\_parse\_with\_titles'
+* Switch to black
+
+2.3.2
+-----
+
+* requirements: Add support for Sphinx 3.x
+
+2.3.1
+-----
+
+* Make sphinx version in sync with the conda package
+* Fixed sphinx version in requirements.txt (#52)
+
+2.3.0
+-----
+
+* improvement: remove the excessive comma in list.append() function call
+* improvement: describe when and why show\_default can be a string
+* fix: when 'show\_default' is a string use it as the default description
+* trivial: Unify 'hidden' checks
+* Don't show hidden commands in toctree
+* trivial: Black fixups
+* Drop support for Python 3.4
+
+2.2.0
+-----
+
+* Add pre-commit support
+* Misc formatting fixes
+* Add instruction to usage docs to enable extension (#45)
+* Change display format to pull options out of in line help text
+* Add click.Choice options to help text
+* Update sphinx supported version
+
+2.1.0
+-----
+
+* Support and test Sphinx 2 and Python 3.7
+
+2.0.1
+-----
+
+* Do not show hidden subcommands as valid command options
+
+2.0.0
+-----
+
+* Misc formatting fixes
+* Remove use of 'build\_sphinx'
+* README: Add docs badge
+* Ignore hidden commands
+* Start testing Click 7.x, drop support for 5.x
+* Fix compatibility with Click 7.0

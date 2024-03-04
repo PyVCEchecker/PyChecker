@@ -1,0 +1,12 @@
+lml>=0.0.4
+pyexcel-io>=0.6.2
+texttable>=0.8.2
+
+[ods]
+pyexcel-ods3>=0.6.0
+
+[xls]
+pyexcel-xls>=0.6.0
+
+[xlsx]
+pyexcel-xlsx>=0.6.0

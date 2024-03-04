@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Understanding the Magic &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Multi-User Setups" href="multi-user.html" />
+    <link rel="prev" title="Concepts" href="concepts.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="multi-user.html" title="Multi-User Setups"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="concepts.html" title="Concepts"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Understanding the Magic</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="understanding-the-magic">
+<h1>Understanding the Magic<a class="headerlink" href="#understanding-the-magic" title="Permalink to this headline">¶</a></h1>
+<p>Flask-Dance might initially seem like magic (“it just works!”),
+but it’s just code. It’s complicated, but understandable. This page
+will teach you how Flask-Dance works.</p>
+<section id="making-the-blueprint">
+<h2>Making the Blueprint<a class="headerlink" href="#making-the-blueprint" title="Permalink to this headline">¶</a></h2>
+<p>The first thing you do with Flask-Dance is make a blueprint. This is
+an instance of
+<a class="reference internal" href="api.html#flask_dance.consumer.OAuth1ConsumerBlueprint" title="flask_dance.consumer.OAuth1ConsumerBlueprint"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth1ConsumerBlueprint</span></code></a> or <a class="reference internal" href="api.html#flask_dance.consumer.OAuth2ConsumerBlueprint" title="flask_dance.consumer.OAuth2ConsumerBlueprint"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth2ConsumerBlueprint</span></code></a>,
+depending on if you’re using OAuth 1 or OAuth 2. (Most providers use
+OAuth 2.)</p>
+<p>When you make your blueprint, you can either pass your client ID
+and client secret to the blueprint directly, or teach your blueprint
+where to find those values on its own using the
+<a class="reference internal" href="api.html#flask_dance.consumer.OAuth2ConsumerBlueprint.from_config" title="flask_dance.consumer.OAuth2ConsumerBlueprint.from_config"><code class="xref py py-attr docutils literal notranslate"><span class="pre">from_config</span></code></a> dictionary. Using this
+dictionary is usually a good idea, since it allows you to specify
+these values in your application configuration instead of in
+your code.</p>
+<p>After you’ve made the blueprint, you need to register it on your
+Flask application, just like you would with any other blueprint.</p>
+</section>
+<section id="using-the-requests-session">
+<h2>Using the Requests Session<a class="headerlink" href="#using-the-requests-session" title="Permalink to this headline">¶</a></h2>
+<p>The Flask-Dance blueprints have a <a class="reference internal" href="api.html#flask_dance.consumer.OAuth2ConsumerBlueprint.session" title="flask_dance.consumer.OAuth2ConsumerBlueprint.session"><code class="xref py py-attr docutils literal notranslate"><span class="pre">session</span></code></a>
+attribute. When you access this attribute, the blueprint
+will create and return a <a class="reference external" href="https://requests.kennethreitz.org/en/latest/api/#requests.Session" title="(in Requests v2.25.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">requests.Session</span></code></a> object,
+properly configured for OAuth authentication. You can use this object
+in exactly the same way as you would normally use the Requests
+library for making HTTP requests.</p>
+<p>The pre-set configurations also allow you to import special objects
+that refer to these Requests session objects. For example,
+if you run this code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_dance.contrib.github</span> <span class="kn">import</span> <span class="n">github</span>
+</pre></div>
+</div>
+<p>You can then call <code class="docutils literal notranslate"><span class="pre">github.get()</span></code> just like you do with Requests.
+However, this <code class="docutils literal notranslate"><span class="pre">github</span></code> object is not actually a Requests session –
+it’s something called a <a class="reference external" href="https://werkzeug.palletsprojects.com/en/latest/local/#werkzeug.local.LocalProxy" title="(in Werkzeug v2.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalProxy</span></code></a>.
+This allows you to access the session within the context of an incoming
+HTTP request, but it will <em>not</em> allow you access it outside that
+context.</p>
+</section>
+<section id="checking-authorization">
+<h2>Checking Authorization<a class="headerlink" href="#checking-authorization" title="Permalink to this headline">¶</a></h2>
+<p>When your application starts up, Flask-Dance will check your token
+storage to see if there is an OAuth token already saved
+there. If so, the <code class="docutils literal notranslate"><span class="pre">authorized</span></code> property on your Requests
+Session object will be <code class="docutils literal notranslate"><span class="pre">True</span></code>; if not, it will be <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+You can use this to determine if the user needs to go through the
+OAuth dance or not.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the OAuth token is expired or invalid, it will not work.
+However, this <code class="docutils literal notranslate"><span class="pre">authorized</span></code> property can not check this for
+you! It only checks if the token <em>exists</em>.</p>
+</div>
+</section>
+<section id="starting-the-dance">
+<h2>Starting the Dance<a class="headerlink" href="#starting-the-dance" title="Permalink to this headline">¶</a></h2>
+<p>In order to start the OAuth dance, redirect the user to the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">login()</span></code> view from your blueprint.
+You will need to provide the name of your blueprint when calling
+Flask’s <a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.url_for" title="(in Flask v2.1.x)"><code class="xref py py-func docutils literal notranslate"><span class="pre">url_for()</span></code></a> function. For example, for the
+GitHub contrib:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
+
+<span class="k">def</span> <span class="nf">my_view_func</span><span class="p">():</span>
+    <span class="c1"># ... implement whatever logic you want here</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;github.login&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<section id="state-security">
+<h3>State &amp; Security<a class="headerlink" href="#state-security" title="Permalink to this headline">¶</a></h3>
+<p>One of the key features of <a class="reference internal" href="api.html#flask_dance.consumer.OAuth2ConsumerBlueprint.session" title="flask_dance.consumer.OAuth2ConsumerBlueprint.session"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OAuth2ConsumerBlueprint.session</span></code></a> is that
+the requests it generates use a <code class="docutils literal notranslate"><span class="pre">state</span></code> variable to ensure that the source
+of OAuth authorization callbacks is in fact your intended OAuth provider.
+By default, the state is a random 30-character string, as provided by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">oauthlib.common.generate_token()</span></code>. This protects your app against one
+kind of CSRF attack. For more information, see <a class="reference external" href="https://tools.ietf.org/html/rfc6749#section-10.12">section 10.12 of the
+OAuth 2 spec</a>.</p>
+</section>
+</section>
+<section id="finishing-the-dance">
+<h2>Finishing the Dance<a class="headerlink" href="#finishing-the-dance" title="Permalink to this headline">¶</a></h2>
+<p>After the user finishes the OAuth dance, they will be redirected
+back to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">authorized()</span></code> view
+from your blueprint. This will save the OAuth token to whatever
+token storage you are using, and will then redirect the user
+to a different page on your website.</p>
+<p>By default, the user will be redirected back to the root page (<code class="docutils literal notranslate"><span class="pre">/</span></code>).
+However, you can set the <code class="docutils literal notranslate"><span class="pre">redirect_url</span></code> or <code class="docutils literal notranslate"><span class="pre">redirect_to</span></code> arguments
+in your blueprint to change this.</p>
+<p>If you want a dynamic redirect, where the URL isn’t known until
+the user finishes the OAuth dance, hook into the
+<a class="reference internal" href="signals.html#flask_dance.consumer.oauth_authorized" title="flask_dance.consumer.oauth_authorized"><code class="xref py py-data docutils literal notranslate"><span class="pre">oauth_authorized</span></code></a>
+signal and return the redirect from your subscriber function.
+For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">flask</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer</span> <span class="kn">import</span> <span class="n">oauth_authorized</span>
+
+<span class="nd">@oauth_authorized</span><span class="o">.</span><span class="n">connect</span>
+<span class="k">def</span> <span class="nf">redirect_to_next_url</span><span class="p">(</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+    <span class="c1"># set OAuth token in the token storage backend</span>
+    <span class="n">blueprint</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
+    <span class="c1"># retrieve `next_url` from Flask&#39;s session cookie</span>
+    <span class="n">next_url</span> <span class="o">=</span> <span class="n">flask</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;next_url&quot;</span><span class="p">]</span>
+    <span class="c1"># redirect the user to `next_url`</span>
+    <span class="k">return</span> <span class="n">flask</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="n">next_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Understanding the Magic</a><ul>
+<li><a class="reference internal" href="#making-the-blueprint">Making the Blueprint</a></li>
+<li><a class="reference internal" href="#using-the-requests-session">Using the Requests Session</a></li>
+<li><a class="reference internal" href="#checking-authorization">Checking Authorization</a></li>
+<li><a class="reference internal" href="#starting-the-dance">Starting the Dance</a><ul>
+<li><a class="reference internal" href="#state-security">State &amp; Security</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#finishing-the-dance">Finishing the Dance</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="concepts.html" title="previous chapter">Concepts</a></li>
+      <li>Next: <a href="multi-user.html" title="next chapter">Multi-User Setups</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/understanding-the-magic.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

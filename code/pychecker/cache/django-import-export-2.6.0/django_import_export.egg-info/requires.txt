@@ -1,0 +1,3 @@
+diff-match-patch
+Django>=2.2
+tablib[html,ods,xls,xlsx,yaml]>=3.0.0

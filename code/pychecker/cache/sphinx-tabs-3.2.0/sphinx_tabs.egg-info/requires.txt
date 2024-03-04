@@ -1,0 +1,16 @@
+sphinx<5,>=2
+pygments
+docutils~=0.16.0
+
+[code_style]
+pre-commit==2.13.0
+
+[testing]
+coverage
+pytest<4,>=3.6
+pytest-cov
+pytest-regressions
+pygments
+sphinx_testing
+bs4
+rinohtype

@@ -1,0 +1,20 @@
+skip_tags: true
+
+os: "Visual Studio 2019"
+
+environment:
+  matrix:
+    # https://www.appveyor.com/docs/windows-images-software/#python
+    # TODO: Update to Python 3.8 once AppVeyor makes it available.
+    - PYTHON: "C:\\Python37-x64"
+
+build_script:
+  - "git --no-pager log -n2"
+  - "echo %APPVEYOR_REPO_COMMIT%"
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;;%PATH%"
+  - "python --version"
+  - "pip install -U --upgrade-strategy=eager -e .[test]"
+  - "pip list"
+
+test_script:
+  - "python run_tests.py"

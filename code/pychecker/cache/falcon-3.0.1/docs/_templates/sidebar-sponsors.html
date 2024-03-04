@@ -1,0 +1,18 @@
+<script>
+$(document).ready(function() {
+    var onComplete = function(data) {
+        if (data && data.length !== 0) {
+            $('#sidebarSupportFalcon').html(data)
+        }
+    }
+
+    $.get('https://raw.githubusercontent.com/falconry/falcon/master/docs/_content/sidebar-sponsors.html', onComplete)
+});
+</script>
+
+<div id="sidebarSupportFalcon">
+    <h3>Patrons</h3>
+    <p style="margin-top:15px">
+        Use Falcon at work? Talk with your team about <a href="https://falconframework.org/#sectionSupportFalconDevelopment" target="_blank">supporting Falcon development</a>.
+    </p>
+</div>

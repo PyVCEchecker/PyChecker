@@ -1,0 +1,14 @@
+setup.cfg
+setup.py
+spec/__init__.py
+spec/_version.py
+spec/cli.py
+spec/plugin.py
+spec/trap.py
+spec/utils.py
+spec.egg-info/PKG-INFO
+spec.egg-info/SOURCES.txt
+spec.egg-info/dependency_links.txt
+spec.egg-info/entry_points.txt
+spec.egg-info/requires.txt
+spec.egg-info/top_level.txt

@@ -1,0 +1,105 @@
+/*
+	Less variables
+*/
+@a: 2;
+@x: @a * @a;
+@y: @x + 1;
+@z: @x * 2 + @y;
+.variables {
+  width: @z + 1cm; // 14cm
+}
+@b: @a * 10;
+@c: #888;
+@fonts: "Trebuchet MS", Verdana, sans-serif;
+@f: @fonts;
+
+@quotes: "~" "~";
+@q: @quotes;
+
+.variables {
+  height: @b + @x + 0px; // 24px
+  color: @c;
+  font-family: @f;
+  quotes: @q;
+}
+
+.redefinition {
+    @var: 4;
+    @var: 2;
+    @var: 3;
+    three: @var;
+}
+
+.values {
+    @a: 'Trebuchet';
+    @multi: 'A', B, C;
+    font-family: @a, @a, @a;
+    color: @c !important;
+    url: url(@a);
+    multi: something @multi, @a;
+}
+
+.variable-names {
+    @var: 'hello';
+    @name: 'var';
+    name: @@name;
+}
+
+.alpha {
+    @var: 42;
+    filter: alpha(opacity=@var);
+}
+/*
+	Lazy eval
+*/
+@lazy: @j;
+@j: 100%;
+.lazy-eval {
+  	width: @lazy;
+}
+/*
+	Variable scoping
+*/
+@x: blue;
+@z: transparent;
+
+.scope1 {
+  	@y: orange;
+  	@z: black;
+  	color: @x; // blue
+  	border-color: @z; // black
+  	.hidden {
+    	@x: #131313;
+  	}
+  	.scope2 {
+    	@y: red;
+    	color: @x; // blue
+    	.scope3 {
+      		@local: white;
+      		color: @y; // red
+      		border-color: @z; // black
+      		background-color: @local; // white
+      		.scope4 {
+      			@y: @z;
+      			color: @y;
+      		}
+    	}
+  	}
+}
+@gnegvar: 1px;
+.negvar {
+	padding: -@gnegvar;
+}
+@a: 1px;
+.varpad {
+	border-left: @a solid transparent;
+    border-right: @a solid transparent;
+    border-top: @a solid black;
+}
+/*
+	Names
+*/
+@1col: 12px;
+.testname {
+	width: @1col;
+}

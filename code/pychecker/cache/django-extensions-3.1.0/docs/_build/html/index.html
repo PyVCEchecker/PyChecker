@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the django-extensions documentation! &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation instructions" href="installation_instructions.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="installation_instructions.html" title="Installation instructions"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">django-extensions 3.0.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to the django-extensions documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-the-django-extensions-documentation">
+<h1>Welcome to the django-extensions documentation!<a class="headerlink" href="#welcome-to-the-django-extensions-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Django Extensions is a collection of custom extensions for the Django Framework.</p>
+<p>These include management commands, additional database fields, admin extensions and
+much more.</p>
+<p><a class="reference external" href="https://django-extensions-zh.readthedocs.io/zh_CN/latest/">这篇文档当然还有中文版</a></p>
+</div>
+<div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>The easiest way to figure out what Django Extensions are all about is to watch the <a class="reference external" href="http://ericholscher.com/blog/2008/sep/12/screencast-django-command-extensions/">excellent screencast by Eric Holscher</a> (<a class="reference external" href="https://vimeo.com/1720508">Direct Vimeo link</a>). In a couple minutes Eric walks you through a half a dozen command extensions.</p>
+</div>
+<div class="section" id="getting-it">
+<h1>Getting it<a class="headerlink" href="#getting-it" title="Permalink to this headline">¶</a></h1>
+<p>You can get Django Extensions by using pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install django-extensions
+</pre></div>
+</div>
+<p>If you want to install it from source, grab the git repository and run setup.py:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone git://github.com/django-extensions/django-extensions.git
+$ cd django-extensions
+$ python setup.py install
+</pre></div>
+</div>
+<p>Then you will need to add the <em>django_extensions</em> application to the
+<code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> setting of your Django project <em>settings.py</em> file.</p>
+<p>For more detailed instructions check out our <a class="reference internal" href="installation_instructions.html"><span class="doc">Installation instructions</span></a>. Enjoy.</p>
+</div>
+<div class="section" id="compatibility-with-versions-of-python-and-django">
+<h1>Compatibility with versions of Python and Django<a class="headerlink" href="#compatibility-with-versions-of-python-and-django" title="Permalink to this headline">¶</a></h1>
+<p>We follow the Django guidelines for supported Python and Django versions. See more at <a class="reference external" href="https://docs.djangoproject.com/en/dev/internals/release-process/#supported-versions">Django Supported Versions</a></p>
+<p>This might mean the django-extensions may work with older or unsupported versions but we do not guarantee it and most likely will not fix bugs related to incompatibilities with older versions.</p>
+</div>
+<div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_instructions.html#installing">Installing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_instructions.html#development">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_instructions.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="admin_extensions.html">Admin Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="admin_extensions.html#depreciation">Depreciation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_extensions.html#known-issues">Known Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_extensions.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_extensions.html">Command Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shell_plus.html">shell_plus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_template_tags.html">create_template_tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delete_squashed_migrations.html">delete_squashed_migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dumpscript.html">dumpscript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runscript.html">RunScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export_emails.html">export_emails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_password.html">generate_password</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph_models.html">Graph models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="list_model_info.html">list_model_info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="list_signals.html">list_signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_model_instances.html">merge_model_instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="print_settings.html">print_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runprofileserver.html">RunProfileServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runserver_plus.html">RunServerPlus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sync_s3.html">sync_s3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="syncdata.html">syncdata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqldiff.html">sqldiff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlcreate.html">sqlcreate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqldsn.html">sqldsn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate_templates.html">validate_templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_generator.html">admin_generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_signals.html">Command Signals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command_signals.html#basic-example">Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_signals.html#custom-permissions-for-all-models">Custom Permissions For All Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_signals.html#using-pre-post-signals-on-your-own-commands">Using pre/post signals on your own commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debugger_tags.html">Debugger Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debugger_tags.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger_tags.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="field_extensions.html">Field Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="field_extensions.html#current-database-model-field-extensions">Current Database Model Field Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jobs_scheduling.html">Jobs Scheduling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jobs_scheduling.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobs_scheduling.html#create-a-job">Create a job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobs_scheduling.html#run-a-job">Run a job</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_extensions.html">Model Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_extensions.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_extensions.html#database-model-extensions">Database Model Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Permissions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="permissions.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions.html#current-mixins">Current Mixins</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#internalips">InternalIPS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="validators.html">Validators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="validators.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validators.html#current-database-model-field-extensions">Current Database Model Field Extensions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to the django-extensions documentation!</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#getting-it">Getting it</a></li>
+<li><a class="reference internal" href="#compatibility-with-versions-of-python-and-django">Compatibility with versions of Python and Django</a></li>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation_instructions.html"
+                        title="next chapter">Installation instructions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="installation_instructions.html" title="Installation instructions"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">django-extensions 3.0.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to the django-extensions documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+sanic-plugin-toolkit>=1.0.0,<2
+sanic>=21.3.1,<22

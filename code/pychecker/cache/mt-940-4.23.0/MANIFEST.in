@@ -1,0 +1,7 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include CHANGES
+include LICENSE
+include README.rst
+include requirements.txt
+recursive-include mt940_tests *.py *.sta *.yml LICENSE

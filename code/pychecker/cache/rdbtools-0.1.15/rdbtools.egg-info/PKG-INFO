@@ -1,0 +1,32 @@
+Metadata-Version: 1.2
+Name: rdbtools
+Version: 0.1.15
+Summary: Utilities to convert Redis RDB files to JSON or SQL formats
+Home-page: https://github.com/sripathikrishnan/redis-rdb-tools
+Author: Sripathi Krishnan, Redis Labs
+Author-email: Sripathi.Krishnan@gmail.com
+Maintainer: Sripathi Krishnan, Redis Labs
+Maintainer-email: oss@redislabs.com
+License: MIT
+Download-URL: https://github.com/sripathikrishnan/redis-rdb-tools/archive/rdbtools-0.1.15.tar.gz
+Description: 
+        Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
+        
+        Rdbtools is a parser for Redis' dump.rdb files. The parser generates events similar to an xml sax parser, and is very efficient memory wise.
+        
+        In addition, rdbtools provides utilities to :
+        
+         1. Generate a Memory Report of your data across all databases and keys
+         2. Convert dump files to JSON
+         3. Compare two dump files using standard diff tools
+        
+        Rdbtools is written in Python, though there are similar projects in other languages. See FAQs (https://github.com/sripathikrishnan/redis-rdb-tools/wiki/FAQs) for more information.
+        
+Keywords: Redis,RDB,Export,Dump,Memory Profiler
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python

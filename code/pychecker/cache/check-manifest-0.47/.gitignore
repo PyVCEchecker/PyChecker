@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+*.pyc
+__pycache__/
+.tox/
+*.egg-info/
+dist/
+tmp/
+.coverage
+build/
+tags
+coverage.xml
+.mypy_cache/

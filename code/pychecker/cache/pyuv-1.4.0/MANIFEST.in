@@ -1,0 +1,12 @@
+include AUTHORS README.rst LICENSE TODO ChangeLog
+include build_inplace setup.py setup_libuv.py setup.cfg tox.ini
+recursive-include docs *
+recursive-include examples *
+recursive-include patches *
+recursive-include src *
+recursive-include tests *
+recursive-include deps *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+prune docs/_build
+

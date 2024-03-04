@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+cfscrape/__init__.py
+cfscrape/user_agents.py
+cfscrape.egg-info/PKG-INFO
+cfscrape.egg-info/SOURCES.txt
+cfscrape.egg-info/dependency_links.txt
+cfscrape.egg-info/requires.txt
+cfscrape.egg-info/top_level.txt

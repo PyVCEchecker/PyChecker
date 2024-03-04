@@ -1,0 +1,6 @@
+ansible/module_utils/hashivault
+ansible/modules/hashivault
+ansible/plugins/action/hashivault_read_to_file
+ansible/plugins/action/hashivault_write_from_file
+ansible/plugins/doc_fragments/hashivault
+ansible/plugins/lookup/hashivault

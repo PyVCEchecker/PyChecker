@@ -1,0 +1,138 @@
+---
+name:  unique1
+desc:  unique constraint test with map
+#
+schema:
+  type: seq
+  sequence:
+    - type: map
+      mapping:
+       "name":
+          unique: true
+       "age":
+          type: int
+#
+data:
+  - name: foo
+    age:  10
+  - name: bar
+    age:  10
+  - name: baz
+    age:  10
+---
+name:  unique2
+desc:  unique constraint test with seq
+#
+schema:
+  type: seq
+  sequence:
+    - type: str
+      unique: true
+#
+data:
+  - foo
+  - ~
+  - bar
+  - ~
+  - baz
+---
+name:  unique3
+desc:  unique constraint and '<<' (merge)
+#
+schema:
+    type: seq
+    sequence:
+      - type: map
+        mapping:
+         "name":
+           type: str
+           required: True
+           unique: true
+         "value": 
+           type: any
+           required: True
+#
+data:
+    # no sense
+    - name: x1
+      value: 10
+    - name: x2
+      value: 20
+---
+name:  unique4
+desc:  unique constrant and anchor
+#
+schema:
+    type: seq
+    sequence:
+      - type: map
+        mapping:
+         "name":
+            type: str
+         "value":
+            type: any
+#
+data:
+    # no sense
+    - name: x1
+      value: 10
+    - name: x2
+      value: 20
+---
+name: unique5
+desc: unique constring in nested data structures
+data:
+  - name: foo
+    email: admin@mail.com
+    groups:
+      - users
+      - foo
+      - admin
+  - name: bar
+    email: admin@mail.com
+    groups:
+      - users
+      - admin
+  - name: baz
+    email: baz@mail.com
+    groups:
+      - users
+schema:
+  type: seq
+  sequence:
+    - type: map
+      required: True
+      mapping:
+        name: 
+          type: str
+          required: True
+          unique: True
+        email:
+          type: str
+        groups:
+          type: seq
+          sequence:
+            - type: str
+              unique: True
+---
+name: unique6
+desc: Test that unique do not fail when the key it tries to lookup is missing
+data:
+  - xref: 'GOC:hm'
+    uri: 'GOC:hm'
+  - uri: 'http://orcid.org/0000-0002-4862-3181'
+schema:
+  type: seq
+  sequence:
+    - type: map
+      mapping:
+        "uri":
+          type: str
+          required: true
+          unique: true
+          pattern: ^((ht|f)tp(s?)\:\/\/\w[\/\.\-\:\w]+)|(GOC\:[\w\_]+)$
+        "xref":
+          type: str
+          required: false
+          unique: true
+          pattern: ^\w+:\w+$

@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: testinfra
+Version: 6.0.0
+Summary: Test infrastructures
+Home-page: https://github.com/philpep/testinfra
+Author: Philippe Pepiot
+Author-email: phil@philpep.org
+License: UNKNOWN
+Description: ##################################
+        Testinfra test your infrastructure
+        ##################################
+        
+        This package is just a transitional package for https://github.com/pytest-dev/philpep you should install pytest-testinfra instead.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 7 - Inactive
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: System :: Systems Administration
+Classifier: Framework :: Pytest
+Requires-Python: >=3.5
+Description-Content-Type: text/x-rst
+Provides-Extra: ansible
+Provides-Extra: docker
+Provides-Extra: kubectl
+Provides-Extra: local
+Provides-Extra: lxc
+Provides-Extra: paramiko
+Provides-Extra: salt
+Provides-Extra: winrm

@@ -1,0 +1,10 @@
+MANIFEST.in
+setup.cfg
+setup.py
+djangorestframework_recursive.egg-info/PKG-INFO
+djangorestframework_recursive.egg-info/SOURCES.txt
+djangorestframework_recursive.egg-info/dependency_links.txt
+djangorestframework_recursive.egg-info/requires.txt
+djangorestframework_recursive.egg-info/top_level.txt
+rest_framework_recursive/__init__.py
+rest_framework_recursive/fields.py

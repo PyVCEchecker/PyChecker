@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Resource management &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sprite, texture and pixel surface routines" href="sdl2ext_sprite.html" />
+    <link rel="prev" title="2D and 3D direct pixel access" href="sdl2ext_pixelaccess.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_sprite.html" title="Sprite, texture and pixel surface routines"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_pixelaccess.html" title="2D and 3D direct pixel access"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" accesskey="U">sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="resource-management">
+<h1>Resource management<a class="headerlink" href="#resource-management" title="Permalink to this headline">¶</a></h1>
+<p>Every application usually ships with various resources, such as image and data
+files, configuration files and so on. Accessing those files in the folder
+hierarchy or in a bundled format for various platforms can become a complex
+task. The <a class="reference internal" href="#sdl2.ext.Resources" title="sdl2.ext.Resources"><code class="xref py py-class docutils literal notranslate"><span class="pre">Resources</span></code></a> class allows you to manage different application
+data in a certain directory, providing a dictionary-style access functionality
+for your in-application resources.</p>
+<p>Let’s assume, your application has the following installation layout</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Application</span> <span class="n">Directory</span>
+    <span class="n">Application</span><span class="o">.</span><span class="n">exe</span>
+    <span class="n">Application</span><span class="o">.</span><span class="n">conf</span>
+    <span class="n">data</span><span class="o">/</span>
+        <span class="n">background</span><span class="o">.</span><span class="n">jpg</span>
+        <span class="n">button1</span><span class="o">.</span><span class="n">jpg</span>
+        <span class="n">button2</span><span class="o">.</span><span class="n">jpg</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p>Within the <code class="docutils literal notranslate"><span class="pre">Application.exe</span></code> code, you can - completely system-agnostic -
+define a new resource that keeps track of all <code class="docutils literal notranslate"><span class="pre">data</span></code> items.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apppath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">appresources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">apppath</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">))</span>
+<span class="c1"># Access some images</span>
+<span class="n">bgimage</span> <span class="o">=</span> <span class="n">appresources</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;background.jpg&quot;</span><span class="p">)</span>
+<span class="n">btn1image</span> <span class="o">=</span> <span class="n">appresources</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;button1.jpg&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>To access individual files, you do not need to concat paths the whole
+time and regardless of the current directory, your application operates
+on, you can access your resource files at any time through the
+<a class="reference internal" href="#sdl2.ext.Resources" title="sdl2.ext.Resources"><code class="xref py py-class docutils literal notranslate"><span class="pre">Resources</span></code></a> instance, you created initially.</p>
+<p>The <a class="reference internal" href="#sdl2.ext.Resources" title="sdl2.ext.Resources"><code class="xref py py-class docutils literal notranslate"><span class="pre">Resources</span></code></a> class is also able to scan an index archived files,
+compressed via ZIP or TAR (gzip or bzip2 compression), and subdiectories
+automatically.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Application</span> <span class="n">Directory</span>
+    <span class="n">Application</span><span class="o">.</span><span class="n">exe</span>
+    <span class="n">Application</span><span class="o">.</span><span class="n">conf</span>
+    <span class="n">data</span><span class="o">/</span>
+        <span class="n">audio</span><span class="o">/</span>
+            <span class="n">example</span><span class="o">.</span><span class="n">wav</span>
+        <span class="n">background</span><span class="o">.</span><span class="n">jpg</span>
+        <span class="n">button1</span><span class="o">.</span><span class="n">jpg</span>
+        <span class="n">button2</span><span class="o">.</span><span class="n">jpg</span>
+        <span class="n">graphics</span><span class="o">.</span><span class="n">zip</span>
+            <span class="p">[</span><span class="n">tileset1</span><span class="o">.</span><span class="n">bmp</span>
+             <span class="n">tileset2</span><span class="o">.</span><span class="n">bmp</span>
+             <span class="n">tileset3</span><span class="o">.</span><span class="n">bmp</span>
+             <span class="p">]</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">dat</span>
+
+<span class="n">tilesimage</span> <span class="o">=</span> <span class="n">appresources</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tileset1.bmp&quot;</span><span class="p">)</span>
+<span class="n">audiofile</span> <span class="o">=</span> <span class="n">appresources</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;example.wav&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you request an indexed file via <a class="reference internal" href="#sdl2.ext.Resources.get" title="sdl2.ext.Resources.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Resources.get()</span></code></a>, you will receive
+a <a class="reference external" href="http://docs.python.org/library/io.html#io.BytesIO" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code></a> stream, containing the file data, for further processing.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The scanned files act as keys within the <a class="reference internal" href="#sdl2.ext.Resources" title="sdl2.ext.Resources"><code class="xref py py-class docutils literal notranslate"><span class="pre">Resources</span></code></a> class. This
+means that two files, that have the same name, but are located in different
+directories, will not be indexed. Only one of them will be accessible
+through the <a class="reference internal" href="#sdl2.ext.Resources" title="sdl2.ext.Resources"><code class="xref py py-class docutils literal notranslate"><span class="pre">Resources</span></code></a> class.</p>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="sdl2.ext.Resources">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">Resources</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">path=None</em><span class="optional">[</span>, <em class="sig-param">subdir=None</em><span class="optional">[</span>, <em class="sig-param">excludepattern=None</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Resources" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Resources class manages a set of file resources and eases
+accessing them by using relative paths, scanning archives
+automatically and so on.</p>
+<dl class="method">
+<dt id="sdl2.ext.Resources.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">filename : string</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Resources.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a file to the resource container. Depending on the
+file type (determined by the file suffix or name) the file will be
+automatically scanned (if it is an archive) or checked for
+availability (if it is a stream or network resource).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Resources.add_archive">
+<code class="sig-name descname">add_archive</code><span class="sig-paren">(</span><em class="sig-param">filename : string</em><span class="optional">[</span>, <em class="sig-param">typehint=&quot;zip&quot;</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Resources.add_archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an archive file to the resource container. This will scan the
+passed archive and add its contents to the list of available and
+accessible resources.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Resources.add_file">
+<code class="sig-name descname">add_file</code><span class="sig-paren">(</span><em class="sig-param">filename : string</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Resources.add_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a file to the resource container. This will only add the
+passed file and do not scan an archive or check the file for
+availability.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Resources.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">filename : string</em><span class="sig-paren">)</span> &#x2192; BytesIO<a class="headerlink" href="#sdl2.ext.Resources.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a specific file from the resource container.</p>
+<p>Raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code>, if the <em>filename</em> could not be found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Resources.get_filelike">
+<code class="sig-name descname">get_filelike</code><span class="sig-paren">(</span><em class="sig-param">filename : string</em><span class="sig-paren">)</span> &#x2192; file object<a class="headerlink" href="#sdl2.ext.Resources.get_filelike" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to <a class="reference internal" href="#sdl2.ext.Resources.get" title="sdl2.ext.Resources.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a>, but tries to return the original file
+handle, if possible. If the found file is only available within an
+archive, a <a class="reference external" href="http://docs.python.org/library/io.html#io.BytesIO" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code></a> instance will be returned.</p>
+<p>Raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code>, if the <em>filename</em> could not be found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Resources.get_path">
+<code class="sig-name descname">get_path</code><span class="sig-paren">(</span><em class="sig-param">filename : string</em><span class="sig-paren">)</span> &#x2192; string<a class="headerlink" href="#sdl2.ext.Resources.get_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the path of the passed <em>filename</em>. If <em>filename</em> is only
+available within an archive, a string in the form
+<code class="docutils literal notranslate"><span class="pre">filename&#64;archivename</span></code> will be returned.</p>
+<p>Raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code>, if the <em>filename</em> could not be found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Resources.scan">
+<code class="sig-name descname">scan</code><span class="sig-paren">(</span><em class="sig-param">path : string[, subdir=None[, excludepattern=None]</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Resources.scan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scans a path and adds all found files to the resource
+container. If a file within the path is a supported archive (ZIP
+or TAR), its contents will be indexed aut added automatically.</p>
+<p>The method will consider the directory part (<code class="docutils literal notranslate"><span class="pre">os.path.dirname</span></code>)
+of the provided <em>path</em> as path to scan, if the path is not a
+directory. If <em>subdir</em> is provided, it will be appended to the
+path and used as starting point for adding files to the resource
+container.</p>
+<p><em>excludepattern</em> can be a regular expression to skip
+directories, which match the pattern.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.open_tarfile">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">open_tarfile</code><span class="sig-paren">(</span><em class="sig-param">archive : string</em>, <em class="sig-param">filename : string</em><span class="optional">[</span>, <em class="sig-param">directory=None</em><span class="optional">[</span>, <em class="sig-param">ftype=None</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; BytesIO<a class="headerlink" href="#sdl2.ext.open_tarfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens and reads a certain file from a TAR archive. The result is
+returned as <code class="xref py py-class docutils literal notranslate"><span class="pre">BytesIO</span></code> stream. <em>filename</em> can be a relative
+or absolute path within the TAR archive. The optional <em>directory</em>
+argument can be used to supply a relative directory path, under which
+<em>filename</em> will be searched.</p>
+<p><em>ftype</em> is used to supply additional compression information, in
+case the system cannot determine the compression type itself, and can
+be either <strong>“gz”</strong> for gzip compression or <strong>“bz2”</strong> for bzip2
+compression.</p>
+<p>If the filename could not be found or an error occurred on reading it,
+<code class="docutils literal notranslate"><span class="pre">None</span></code> will be returned.</p>
+<p>Raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code>, if <em>archive</em> is not a valid TAR archive or
+if <em>ftype</em> is not a valid value of (“gz”, “bz2”).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <em>ftype</em> is supplied, the compression mode will be enforced for
+opening and reading.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.open_url">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">open_url</code><span class="sig-paren">(</span><em class="sig-param">filename : string</em><span class="optional">[</span>, <em class="sig-param">basepath=None</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; file object<a class="headerlink" href="#sdl2.ext.open_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens and reads a certain file from a web or remote location. This
+function utilizes the <a class="reference external" href="http://docs.python.org/library/urllib2.html#module-urllib2" title="(in Python v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib2</span></code></a> module for Python 2.7 and
+<a class="reference external" href="http://docs.python.org/library/urllib.html#module-urllib" title="(in Python v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib</span></code></a> for Python 3.x, which means that it is restricted to
+the types of remote locations supported by the module.</p>
+<p><em>basepath</em> can be used to supply an additional location prefix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.open_zipfile">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">open_zipfile</code><span class="sig-paren">(</span><em class="sig-param">archive : string</em>, <em class="sig-param">filename : string</em><span class="optional">[</span>, <em class="sig-param">directory : string</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; BytesIO<a class="headerlink" href="#sdl2.ext.open_zipfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens and reads a certain file from a ZIP archive. The result is
+returned as <code class="xref py py-class docutils literal notranslate"><span class="pre">BytesIO</span></code> stream. <em>filename</em> can be a relative
+or absolute path within the ZIP archive. The optional <em>directory</em>
+argument can be used to supply a relative directory path, under which
+<em>filename</em> will be searched.</p>
+<p>If the filename could not be found, a <code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code> will be raised.
+Raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code>, if <em>archive</em> is not a valid ZIP archive.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Resource management</a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdl2ext_pixelaccess.html"
+                        title="previous chapter">2D and 3D direct pixel access</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdl2ext_sprite.html"
+                        title="next chapter">Sprite, texture and pixel surface routines</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/sdl2ext_resources.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_sprite.html" title="Sprite, texture and pixel surface routines"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_pixelaccess.html" title="2D and 3D direct pixel access"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" >sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

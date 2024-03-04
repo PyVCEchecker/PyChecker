@@ -1,0 +1,16 @@
+README.md
+setup.cfg
+setup.py
+bayes_opt/__init__.py
+bayes_opt/bayesian_optimization.py
+bayes_opt/domain_reduction.py
+bayes_opt/event.py
+bayes_opt/logger.py
+bayes_opt/observer.py
+bayes_opt/target_space.py
+bayes_opt/util.py
+bayesian_optimization.egg-info/PKG-INFO
+bayesian_optimization.egg-info/SOURCES.txt
+bayesian_optimization.egg-info/dependency_links.txt
+bayesian_optimization.egg-info/requires.txt
+bayesian_optimization.egg-info/top_level.txt

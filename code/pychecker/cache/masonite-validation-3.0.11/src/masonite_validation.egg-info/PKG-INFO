@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: masonite-validation
+Version: 3.0.11
+Summary: Validation Package
+Home-page: https://github.com/MasoniteFramework/masonite
+Author: Joseph Mancuso
+Author-email: joe@masoniteproject.com
+License: MIT
+Description: UNKNOWN
+Keywords: masonite,python web framework,python3
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Utilities

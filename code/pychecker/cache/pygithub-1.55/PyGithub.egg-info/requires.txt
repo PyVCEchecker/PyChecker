@@ -1,0 +1,7 @@
+deprecated
+pyjwt>=2.0
+pynacl>=1.4.0
+requests>=2.14.0
+
+[integrations]
+cryptography

@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: josepy
+Version: 1.10.0
+Summary: JOSE protocol implementation in Python
+Home-page: https://github.com/certbot/josepy
+Author: Certbot Project
+Author-email: client-dev@letsencrypt.org
+License: Apache License 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Security
+Requires-Python: >=3.6
+Provides-Extra: dev
+Provides-Extra: docs
+Provides-Extra: tests
+License-File: LICENSE.txt
+
+JOSE protocol implementation in Python using cryptography
+
+.. image:: https://github.com/certbot/josepy/actions/workflows/check.yaml/badge.svg
+  :target: https://github.com/certbot/josepy/actions/workflows/check.yaml
+
+.. image:: https://codecov.io/gh/certbot/josepy/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/certbot/josepy
+
+.. image:: https://readthedocs.org/projects/josepy/badge/?version=latest
+  :target: http://josepy.readthedocs.io/en/latest/?badge=latest
+
+Originally developed as part of the ACME_ protocol implementation.
+
+.. _ACME: https://pypi.python.org/pypi/acme
+
+

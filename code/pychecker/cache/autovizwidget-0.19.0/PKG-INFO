@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: autovizwidget
+Version: 0.19.0
+Summary: AutoVizWidget: An Auto-Visualization library for pandas dataframes
+Home-page: https://github.com/jupyter-incubator/sparkmagic/autovizwidget
+Author: Jupyter Development Team
+Author-email: jupyter@googlegroups.org
+License: BSD 3-clause
+Download-URL: https://github.com/jupyter-incubator/sparkmagic/autovizwidget
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7

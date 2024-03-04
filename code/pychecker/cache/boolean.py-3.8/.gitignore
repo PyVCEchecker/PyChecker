@@ -1,0 +1,11 @@
+*.pyc
+/boolean.py.egg-info/
+/build/
+/.tox/
+/dist/
+/tmp/
+/.cache/
+/.eggs/
+/.pytest_cache/
+/.idea/
+.python-version

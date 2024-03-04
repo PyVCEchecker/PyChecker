@@ -1,0 +1,8 @@
+
+[:sys_platform != "cygwin"]
+psutil>=4.0.0
+
+[tests]
+pytest
+pytest-cov
+python-daemon

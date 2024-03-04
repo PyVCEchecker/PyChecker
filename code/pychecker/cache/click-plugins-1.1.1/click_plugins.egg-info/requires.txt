@@ -1,0 +1,7 @@
+click>=4.0
+
+[dev]
+pytest>=3.6
+pytest-cov
+wheel
+coveralls

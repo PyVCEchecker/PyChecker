@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+humps/__init__.py
+humps/main.py
+pyhumps.egg-info/PKG-INFO
+pyhumps.egg-info/SOURCES.txt
+pyhumps.egg-info/dependency_links.txt
+pyhumps.egg-info/top_level.txt
+tests/__init__.py
+tests/test_camelize.py
+tests/test_decamelize.py
+tests/test_humps.py
+tests/test_pascalize.py
+tests/test_separate_words.py

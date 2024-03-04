@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Developer Interface &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing to Flask-Dance" href="contributing.html" />
+    <link rel="prev" title="Testing Apps That Use Flask-Dance" href="testing.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing to Flask-Dance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing Apps That Use Flask-Dance"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Developer Interface</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="developer-interface">
+<h1>Developer Interface<a class="headerlink" href="#developer-interface" title="Permalink to this headline">¶</a></h1>
+<section id="consumers">
+<h2>Consumers<a class="headerlink" href="#consumers" title="Permalink to this headline">¶</a></h2>
+<p>An OAuth consumer is a website that allows users to log in with other websites
+(known as OAuth providers). Once a user has gone through the OAuth dance, the
+consumer website is allowed to interact with the provider website on behalf
+of the user.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth1ConsumerBlueprint">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.</span></span><span class="sig-name descname"><span class="pre">OAuth1ConsumerBlueprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">...</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/oauth1.html#OAuth1ConsumerBlueprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.OAuth1ConsumerBlueprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>A subclass of <a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.Blueprint" title="(in Flask v2.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flask.Blueprint</span></code></a> that sets up OAuth 1 authentication.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth1ConsumerBlueprint.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">import_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'HMAC-SHA1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AUTH_HEADER'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rsa_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_include_body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_url_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdomain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_defaults</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">login_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authorized_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request_token_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authorization_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redirect_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redirect_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/oauth1.html#OAuth1ConsumerBlueprint.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.OAuth1ConsumerBlueprint.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Most of the constructor arguments are forwarded either to the
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.Blueprint" title="(in Flask v2.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flask.Blueprint</span></code></a> constructor or the
+<a class="reference external" href="https://requests-oauthlib.readthedocs.io/en/latest/api.html#requests_oauthlib.OAuth1Session" title="(in Requests-OAuthlib v1.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">requests_oauthlib.OAuth1Session</span></code></a> constructor, including
+<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> (which is forwarded to
+<a class="reference external" href="https://requests-oauthlib.readthedocs.io/en/latest/api.html#requests_oauthlib.OAuth1Session" title="(in Requests-OAuthlib v1.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth1Session</span></code></a>).
+Only the arguments that are relevant to Flask-Dance are documented here.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_url</strong> – The base URL of the OAuth provider.
+If specified, all URLs passed to this instance will be
+resolved relative to this URL.</p></li>
+<li><p><strong>request_token_url</strong> – The URL specified by the OAuth provider for
+obtaining a
+<a class="reference external" href="http://oauth.net/core/1.0a/#auth_step1">request token</a>.
+This can be an fully-qualified URL, or a path that is
+resolved relative to the <code class="docutils literal notranslate"><span class="pre">base_url</span></code>.</p></li>
+<li><p><strong>authorization_url</strong> – The URL specified by the OAuth provider for
+the user to
+<a class="reference external" href="http://oauth.net/core/1.0a/#auth_step2">grant token authorization</a>.
+This can be an fully-qualified URL, or a path that is
+resolved relative to the <code class="docutils literal notranslate"><span class="pre">base_url</span></code>.</p></li>
+<li><p><strong>access_token_url</strong> – The URL specified by the OAuth provider for
+obtaining an
+<a class="reference external" href="http://oauth.net/core/1.0a/#auth_step3">access token</a>.
+This can be an fully-qualified URL, or a path that is
+resolved relative to the <code class="docutils literal notranslate"><span class="pre">base_url</span></code>.</p></li>
+<li><p><strong>login_url</strong> – The URL route for the <code class="docutils literal notranslate"><span class="pre">login</span></code> view that kicks off
+the OAuth dance. This string will be
+<a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings" title="(in Python v3.9)"><span class="xref std std-ref">formatted</span></a>
+with the instance so that attributes can be interpolated.
+Defaults to <code class="docutils literal notranslate"><span class="pre">/{bp.name}</span></code>, so that the URL is based on the name
+of the blueprint.</p></li>
+<li><p><strong>authorized_url</strong> – The URL route for the <code class="docutils literal notranslate"><span class="pre">authorized</span></code> view that
+completes the OAuth dance. This string will be
+<a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings" title="(in Python v3.9)"><span class="xref std std-ref">formatted</span></a>
+with the instance so that attributes can be interpolated.
+Defaults to <code class="docutils literal notranslate"><span class="pre">/{bp.name}/authorized</span></code>, so that the URL is
+based on the name of the blueprint.</p></li>
+<li><p><strong>redirect_url</strong> – When the OAuth dance is complete,
+redirect the user to this URL.</p></li>
+<li><p><strong>redirect_to</strong> – When the OAuth dance is complete,
+redirect the user to the URL obtained by calling
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.url_for" title="(in Flask v2.1.x)"><code class="xref py py-func docutils literal notranslate"><span class="pre">url_for()</span></code></a> with this argument. If you do not specify
+either <code class="docutils literal notranslate"><span class="pre">redirect_url</span></code> or <code class="docutils literal notranslate"><span class="pre">redirect_to</span></code>, the user will be
+redirected to the root path (<code class="docutils literal notranslate"><span class="pre">/</span></code>).</p></li>
+<li><p><strong>session_class</strong> – The class to use for creating a Requests session
+between the consumer (your website) and the provider (e.g.
+Twitter). Defaults to
+<a class="reference internal" href="#flask_dance.consumer.requests.OAuth1Session" title="flask_dance.consumer.requests.OAuth1Session"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth1Session</span></code></a>.</p></li>
+<li><p><strong>storage</strong> – A token storage class, or an instance of a token storage
+class, to use for this blueprint. Defaults to
+<a class="reference internal" href="#flask_dance.consumer.storage.session.SessionStorage" title="flask_dance.consumer.storage.session.SessionStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">SessionStorage</span></code></a>.</p></li>
+<li><p><strong>rule_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional arguments that should be passed when adding
+the login and authorized routes. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth1ConsumerBlueprint.session">
+<span class="sig-name descname"><span class="pre">session</span></span><a class="reference internal" href="_modules/flask_dance/consumer/oauth1.html#OAuth1ConsumerBlueprint.session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.OAuth1ConsumerBlueprint.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>An <a class="reference external" href="https://requests-oauthlib.readthedocs.io/en/latest/api.html#requests_oauthlib.OAuth1Session" title="(in Requests-OAuthlib v1.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth1Session</span></code></a> instance that
+automatically loads tokens for the OAuth provider from the token storage.
+This instance is automatically created the first time it is referenced
+for each request to your Flask application.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth1ConsumerBlueprint.storage">
+<span class="sig-name descname"><span class="pre">storage</span></span><a class="headerlink" href="#flask_dance.consumer.OAuth1ConsumerBlueprint.storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="storages.html"><span class="doc">token storage</span></a> that this blueprint
+uses.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth1ConsumerBlueprint.token">
+<span class="sig-name descname"><span class="pre">token</span></span><a class="headerlink" href="#flask_dance.consumer.OAuth1ConsumerBlueprint.token" title="Permalink to this definition">¶</a></dt>
+<dd><p>This property functions as pass-through to the token storage.
+If you read from this property, you will receive the current
+value from the token storage. If you assign a value to this
+property, it will get set in the token storage.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth1ConsumerBlueprint.config">
+<span class="sig-name descname"><span class="pre">config</span></span><a class="headerlink" href="#flask_dance.consumer.OAuth1ConsumerBlueprint.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>A special dictionary that holds information about the current state of
+the application, which the token storage can use to look up the correct OAuth
+token from storage. For example, in a multi-user system, where each user
+has their own OAuth token, information about which user is currently logged
+in for this request is stored in this dictionary. This dictionary is special
+because it automatically alerts the storage when any attribute in the
+dictionary is changed, so that the storage’s caches are appropriately
+invalidated.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth1ConsumerBlueprint.from_config">
+<span class="sig-name descname"><span class="pre">from_config</span></span><a class="headerlink" href="#flask_dance.consumer.OAuth1ConsumerBlueprint.from_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary used to dynamically load variables from the
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/config/" title="(in Flask v2.1.x)"><span class="xref std std-doc">Flask application config</span></a> into the blueprint
+at the start of each request. To tell this blueprint to pull configuration
+from the app, set key-value pairs on this dict. Keys are the name of
+the local variable to set on the blueprint object, and values are the
+variable name in the Flask application config.
+Variable names can be a dotpath. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span><span class="o">.</span><span class="n">from_config</span><span class="p">[</span><span class="s2">&quot;session.client_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GITHUB_OAUTH_CLIENT_ID&quot;</span>
+</pre></div>
+</div>
+<p>Which will cause this line to execute at the start of every request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">client_id</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;GITHUB_OAUTH_CLIENT_ID&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth2ConsumerBlueprint">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.</span></span><span class="sig-name descname"><span class="pre">OAuth2ConsumerBlueprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">...</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/oauth2.html#OAuth2ConsumerBlueprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.OAuth2ConsumerBlueprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>A subclass of <a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.Blueprint" title="(in Flask v2.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flask.Blueprint</span></code></a> that sets up OAuth 2 authentication.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth2ConsumerBlueprint.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">import_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_refresh_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_refresh_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_url_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdomain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_defaults</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">login_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authorized_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authorization_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authorization_url_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_url_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redirect_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redirect_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/oauth2.html#OAuth2ConsumerBlueprint.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.OAuth2ConsumerBlueprint.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Most of the constructor arguments are forwarded either to the
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.Blueprint" title="(in Flask v2.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flask.Blueprint</span></code></a> constructor or the
+<a class="reference external" href="https://requests-oauthlib.readthedocs.io/en/latest/api.html#requests_oauthlib.OAuth2Session" title="(in Requests-OAuthlib v1.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">requests_oauthlib.OAuth2Session</span></code></a> constructor, including
+<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> (which is forwarded to
+<a class="reference external" href="https://requests-oauthlib.readthedocs.io/en/latest/api.html#requests_oauthlib.OAuth2Session" title="(in Requests-OAuthlib v1.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth2Session</span></code></a>).
+Only the arguments that are relevant to Flask-Dance are documented here.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_url</strong> – The base URL of the OAuth provider.
+If specified, all URLs passed to this instance will be
+resolved relative to this URL.</p></li>
+<li><p><strong>authorization_url</strong> – The URL specified by the OAuth provider for
+obtaining an
+<a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-1.3">authorization grant</a>.
+This can be an fully-qualified URL, or a path that is
+resolved relative to the <code class="docutils literal notranslate"><span class="pre">base_url</span></code>.</p></li>
+<li><p><strong>authorization_url_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – A dict of extra
+key-value pairs to include in the query string of the
+<code class="docutils literal notranslate"><span class="pre">authorization_url</span></code>, beyond those necessary for a standard
+OAuth 2 authorization grant request.</p></li>
+<li><p><strong>token_url</strong> – The URL specified by the OAuth provider for
+obtaining an
+<a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-1.4">access token</a>.
+This can be an fully-qualified URL, or a path that is
+resolved relative to the <code class="docutils literal notranslate"><span class="pre">base_url</span></code>.</p></li>
+<li><p><strong>token_url_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – A dict of extra
+key-value pairs to include in the query string of the
+<code class="docutils literal notranslate"><span class="pre">token_url</span></code>, beyond those necessary for a standard
+OAuth 2 access token request.</p></li>
+<li><p><strong>login_url</strong> – The URL route for the <code class="docutils literal notranslate"><span class="pre">login</span></code> view that kicks off
+the OAuth dance. This string will be
+<a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings" title="(in Python v3.9)"><span class="xref std std-ref">formatted</span></a>
+with the instance so that attributes can be interpolated.
+Defaults to <code class="docutils literal notranslate"><span class="pre">/{bp.name}</span></code>, so that the URL is based on the name
+of the blueprint.</p></li>
+<li><p><strong>authorized_url</strong> – The URL route for the <code class="docutils literal notranslate"><span class="pre">authorized</span></code> view that
+completes the OAuth dance. This string will be
+<a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings" title="(in Python v3.9)"><span class="xref std std-ref">formatted</span></a>
+with the instance so that attributes can be interpolated.
+Defaults to <code class="docutils literal notranslate"><span class="pre">/{bp.name}/authorized</span></code>, so that the URL is
+based on the name of the blueprint.</p></li>
+<li><p><strong>redirect_url</strong> – When the OAuth dance is complete,
+redirect the user to this URL.</p></li>
+<li><p><strong>redirect_to</strong> – When the OAuth dance is complete,
+redirect the user to the URL obtained by calling
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.url_for" title="(in Flask v2.1.x)"><code class="xref py py-func docutils literal notranslate"><span class="pre">url_for()</span></code></a> with this argument. If you do not specify
+either <code class="docutils literal notranslate"><span class="pre">redirect_url</span></code> or <code class="docutils literal notranslate"><span class="pre">redirect_to</span></code>, the user will be
+redirected to the root path (<code class="docutils literal notranslate"><span class="pre">/</span></code>).</p></li>
+<li><p><strong>session_class</strong> – The class to use for creating a Requests session
+between the consumer (your website) and the provider (e.g.
+Twitter). Defaults to
+<a class="reference internal" href="#flask_dance.consumer.requests.OAuth2Session" title="flask_dance.consumer.requests.OAuth2Session"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth2Session</span></code></a>.</p></li>
+<li><p><strong>storage</strong> – A token storage class, or an instance of a token storage
+class, to use for this blueprint. Defaults to
+<a class="reference internal" href="#flask_dance.consumer.storage.session.SessionStorage" title="flask_dance.consumer.storage.session.SessionStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">SessionStorage</span></code></a>.</p></li>
+<li><p><strong>rule_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional arguments that should be passed when adding
+the login and authorized routes. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth2ConsumerBlueprint.session">
+<span class="sig-name descname"><span class="pre">session</span></span><a class="reference internal" href="_modules/flask_dance/consumer/oauth2.html#OAuth2ConsumerBlueprint.session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.OAuth2ConsumerBlueprint.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>An <a class="reference external" href="https://requests-oauthlib.readthedocs.io/en/latest/api.html#requests_oauthlib.OAuth2Session" title="(in Requests-OAuthlib v1.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth2Session</span></code></a> instance that
+automatically loads tokens for the OAuth provider from the storage.
+This instance is automatically created the first time it is referenced
+for each request to your Flask application.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth2ConsumerBlueprint.storage">
+<span class="sig-name descname"><span class="pre">storage</span></span><a class="headerlink" href="#flask_dance.consumer.OAuth2ConsumerBlueprint.storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="storages.html"><span class="doc">token storage</span></a> that this blueprint
+uses.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth2ConsumerBlueprint.token">
+<span class="sig-name descname"><span class="pre">token</span></span><a class="headerlink" href="#flask_dance.consumer.OAuth2ConsumerBlueprint.token" title="Permalink to this definition">¶</a></dt>
+<dd><p>This property functions as pass-through to the token storage.
+If you read from this property, you will receive the current
+value from the token storage. If you assign a value to this
+property, it will get set in the token storage.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth2ConsumerBlueprint.config">
+<span class="sig-name descname"><span class="pre">config</span></span><a class="headerlink" href="#flask_dance.consumer.OAuth2ConsumerBlueprint.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>A special dictionary that holds information about the current state of
+the application, which the token storage can use to look up the correct OAuth
+token from storage. For example, in a multi-user system, where each user
+has their own OAuth token, information about which user is currently logged
+in for this request is stored in this dictionary. This dictionary is special
+because it automatically alerts the storage when any attribute in the
+dictionary is changed, so that the storage’s caches are appropriately
+invalidated.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flask_dance.consumer.OAuth2ConsumerBlueprint.from_config">
+<span class="sig-name descname"><span class="pre">from_config</span></span><a class="headerlink" href="#flask_dance.consumer.OAuth2ConsumerBlueprint.from_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary used to dynamically load variables from the
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/config/" title="(in Flask v2.1.x)"><span class="xref std std-doc">Flask application config</span></a> into the blueprint
+at the start of each request. To tell this blueprint to pull configuration
+from the app, set key-value pairs on this dict. Keys are the name of
+the local variable to set on the blueprint object, and values are the
+variable name in the Flask application config.
+Variable names can be a dotpath. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span><span class="o">.</span><span class="n">from_config</span><span class="p">[</span><span class="s2">&quot;session.client_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GITHUB_OAUTH_CLIENT_ID&quot;</span>
+</pre></div>
+</div>
+<p>Which will cause this line to execute at the start of every request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blueprint</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">client_id</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;GITHUB_OAUTH_CLIENT_ID&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="storages">
+<h2>Storages<a class="headerlink" href="#storages" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="flask_dance.consumer.storage.session.SessionStorage">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.storage.session.</span></span><span class="sig-name descname"><span class="pre">SessionStorage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">...</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/storage/session.html#SessionStorage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.storage.session.SessionStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default storage backend. Stores and retrieves OAuth tokens using
+the <a class="reference external" href="https://flask.palletsprojects.com/en/latest/quickstart/#sessions" title="(in Flask v2.1.x)"><span class="xref std std-ref">Flask session</span></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="flask_dance.consumer.storage.session.SessionStorage.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{bp.name}_oauth_token'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/storage/session.html#SessionStorage.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.storage.session.SessionStorage.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name to use as a key for storing the OAuth token in the
+Flask session. This string will have <code class="docutils literal notranslate"><span class="pre">.format(bp=self.blueprint)</span></code>
+called on it before it is used. so you can refer to information
+on the blueprint as part of the key. For example, <code class="docutils literal notranslate"><span class="pre">{bp.name}</span></code>
+will be replaced with the name of the blueprint.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flask_dance.consumer.storage.sqla.SQLAlchemyStorage">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.storage.sqla.</span></span><span class="sig-name descname"><span class="pre">SQLAlchemyStorage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">...</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/storage/sqla.html#SQLAlchemyStorage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.storage.sqla.SQLAlchemyStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores and retrieves OAuth tokens using a relational database through
+the <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a> ORM.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="flask_dance.consumer.storage.sqla.SQLAlchemyStorage.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anon_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/storage/sqla.html#SQLAlchemyStorage.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.storage.sqla.SQLAlchemyStorage.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The SQLAlchemy model class that represents the OAuth token
+table in the database. At a minimum, it must have a
+<code class="docutils literal notranslate"><span class="pre">provider</span></code> column and a <code class="docutils literal notranslate"><span class="pre">token</span></code> column. If tokens are to be
+associated with individual users in the application, it must
+also have a <code class="docutils literal notranslate"><span class="pre">user</span></code> relationship to your User model.
+It is recommended, though not required, that your model class
+inherit from
+<code class="xref py py-class docutils literal notranslate"><span class="pre">OAuthConsumerMixin</span></code>.</p></li>
+<li><p><strong>session</strong> – The <a class="reference external" href="https://docs.sqlalchemy.org/en/14/orm/session_api.html#sqlalchemy.orm.Session" title="(in SQLAlchemy v1.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemy</span> <span class="pre">session</span></code></a>
+for the database. If you’re using <a class="reference external" href="http://pythonhosted.org/Flask-SQLAlchemy/">Flask-SQLAlchemy</a>, this is
+<code class="docutils literal notranslate"><span class="pre">db.session</span></code>.</p></li>
+<li><p><strong>user</strong> – If you want OAuth tokens to be associated with individual users
+in your application, this is a reference to the user that you
+want to use for the current request. It can be an actual User
+object, a function that returns a User object, or a proxy to the
+User object. If you’re using <a class="reference external" href="https://flask-login.readthedocs.io/">Flask-Login</a>, this is
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">current_user</span></code>.</p></li>
+<li><p><strong>user_id</strong> – If you want to pass an identifier for a user instead of an actual
+User object, use this argument instead. Sometimes it can save
+a database query or two. If both <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">user_id</span></code> are
+provided, <code class="docutils literal notranslate"><span class="pre">user_id</span></code> will take precendence.</p></li>
+<li><p><strong>user_required</strong> – If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, an exception will be raised if you try to
+set or retrieve an OAuth token without an associated user.
+If set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, OAuth tokens can be set with or without
+an associated user. The default is auto-detection: it will
+be <code class="docutils literal notranslate"><span class="pre">True</span></code> if you pass a <code class="docutils literal notranslate"><span class="pre">user</span></code> or <code class="docutils literal notranslate"><span class="pre">user_id</span></code> parameter,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p></li>
+<li><p><strong>anon_user</strong> – If anonymous users are represented by a class in your application,
+provide that class here. If you are using <a class="reference external" href="https://flask-login.readthedocs.io/">Flask-Login</a>,
+anonymous users are represented by the
+<a class="reference external" href="https://flask-login.readthedocs.io/en/latest/index.html#flask_login.AnonymousUserMixin" title="(in Flask-Login v0.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flask_login.AnonymousUserMixin</span></code></a> class, but you don’t have
+to provide that – Flask-Dance treats it as the default.</p></li>
+<li><p><strong>cache</strong> – An instance of <a class="reference external" href="https://flask-caching.readthedocs.io/en/latest/">Flask-Caching</a>. Providing a caching system is
+highly recommended, but not required.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flask_dance.consumer.storage.sqla.SQLAlchemyStorage.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blueprint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/storage/sqla.html#SQLAlchemyStorage.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.storage.sqla.SQLAlchemyStorage.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>When you have a statement in your code that says
+“if &lt;provider&gt;.authorized:” (for example “if twitter.authorized:”),
+a long string of function calls result in this function being used to
+check the Flask server’s cache and database for any records associated
+with the current_user. The <cite>user</cite> and <cite>user_id</cite> parameters are actually
+not set in that case (see base.py:token(), that’s what calls this
+function), so the user information is instead loaded from the
+current_user (if that’s what you specified when you created the
+blueprint) with blueprint.config.get(‘user_id’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blueprint</strong> – </p></li>
+<li><p><strong>user</strong> – </p></li>
+<li><p><strong>user_id</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="sessions">
+<h2>Sessions<a class="headerlink" href="#sessions" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth1Session">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.requests.</span></span><span class="sig-name descname"><span class="pre">OAuth1Session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blueprint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/requests.html#OAuth1Session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.requests.OAuth1Session" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://requests.kennethreitz.org/en/latest/api/#requests.Session" title="(in Requests v2.25.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">requests.Session</span></code></a> subclass that can do some special things:</p>
+<ul class="simple">
+<li><p>lazy-loads OAuth1 tokens from the storage via the blueprint</p></li>
+<li><p>handles OAuth1 authentication
+(from <a class="reference external" href="https://requests-oauthlib.readthedocs.io/en/latest/api.html#requests_oauthlib.OAuth1Session" title="(in Requests-OAuthlib v1.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">requests_oauthlib.OAuth1Session</span></code></a> superclass)</p></li>
+<li><p>has a <code class="docutils literal notranslate"><span class="pre">base_url</span></code> property used for relative URL resolution</p></li>
+</ul>
+<p>Note that this is a session between the consumer (your website) and the
+provider (e.g. Twitter), and <em>not</em> a session between a user of your website
+and your website.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth1Session.token">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">token</span></span><a class="reference internal" href="_modules/flask_dance/consumer/requests.html#OAuth1Session.token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.requests.OAuth1Session.token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and set the values in the OAuth token, structured as a dictionary.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth1Session.authorized">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">authorized</span></span><a class="headerlink" href="#flask_dance.consumer.requests.OAuth1Session.authorized" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the property used when you have a statement in your code
+that reads “if &lt;provider&gt;.authorized:”, e.g. “if twitter.authorized:”.</p>
+<p>The way it works is kind of complicated: this function just tries
+to load the token, and then the ‘super()’ statement basically just
+tests if the token exists (see BaseOAuth1Session.authorized).</p>
+<p>To load the token, it calls the load_token() function within this class,
+which in turn checks the ‘token’ property of this class (another
+function), which in turn checks the ‘token’ property of the blueprint
+(see base.py), which calls ‘storage.get()’ to actually try to load
+the token from the cache/db (see the ‘get()’ function in
+storage/sqla.py).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth1Session.authorization_required">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">authorization_required</span></span><a class="headerlink" href="#flask_dance.consumer.requests.OAuth1Session.authorization_required" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.0.</span></p>
+</div>
+<p>This is a decorator for a view function. If the current user does not
+have an OAuth token, then they will be redirected to the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">login()</span></code>
+view to obtain one.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth2Session">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.requests.</span></span><span class="sig-name descname"><span class="pre">OAuth2Session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blueprint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/requests.html#OAuth2Session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.requests.OAuth2Session" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://requests.kennethreitz.org/en/latest/api/#requests.Session" title="(in Requests v2.25.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">requests.Session</span></code></a> subclass that can do some special things:</p>
+<ul class="simple">
+<li><p>lazy-loads OAuth2 tokens from the storage via the blueprint</p></li>
+<li><p>handles OAuth2 authentication
+(from <a class="reference external" href="https://requests-oauthlib.readthedocs.io/en/latest/api.html#requests_oauthlib.OAuth2Session" title="(in Requests-OAuthlib v1.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">requests_oauthlib.OAuth2Session</span></code></a> superclass)</p></li>
+<li><p>has a <code class="docutils literal notranslate"><span class="pre">base_url</span></code> property used for relative URL resolution</p></li>
+</ul>
+<p>Note that this is a session between the consumer (your website) and the
+provider (e.g. Twitter), and <em>not</em> a session between a user of your website
+and your website.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth2Session.token">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">token</span></span><a class="reference internal" href="_modules/flask_dance/consumer/requests.html#OAuth2Session.token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.requests.OAuth2Session.token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and set the values in the OAuth token, structured as a dictionary.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth2Session.access_token">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">access_token</span></span><a class="headerlink" href="#flask_dance.consumer.requests.OAuth2Session.access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <code class="docutils literal notranslate"><span class="pre">access_token</span></code> from the OAuth token.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth2Session.authorized">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">authorized</span></span><a class="headerlink" href="#flask_dance.consumer.requests.OAuth2Session.authorized" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the property used when you have a statement in your code
+that reads “if &lt;provider&gt;.authorized:”, e.g. “if twitter.authorized:”.</p>
+<p>The way it works is kind of complicated: this function just tries
+to load the token, and then the ‘super()’ statement basically just
+tests if the token exists (see BaseOAuth1Session.authorized).</p>
+<p>To load the token, it calls the load_token() function within this class,
+which in turn checks the ‘token’ property of this class (another
+function), which in turn checks the ‘token’ property of the blueprint
+(see base.py), which calls ‘storage.get()’ to actually try to load
+the token from the cache/db (see the ‘get()’ function in
+storage/sqla.py).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="flask_dance.consumer.requests.OAuth2Session.authorization_required">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">authorization_required</span></span><a class="headerlink" href="#flask_dance.consumer.requests.OAuth2Session.authorization_required" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.0.</span></p>
+</div>
+<p>This is a decorator for a view function. If the current user does not
+have an OAuth token, then they will be redirected to the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">login()</span></code>
+view to obtain one.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Developer Interface</a><ul>
+<li><a class="reference internal" href="#consumers">Consumers</a></li>
+<li><a class="reference internal" href="#storages">Storages</a></li>
+<li><a class="reference internal" href="#sessions">Sessions</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="testing.html" title="previous chapter">Testing Apps That Use Flask-Dance</a></li>
+      <li>Next: <a href="contributing.html" title="next chapter">Contributing to Flask-Dance</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

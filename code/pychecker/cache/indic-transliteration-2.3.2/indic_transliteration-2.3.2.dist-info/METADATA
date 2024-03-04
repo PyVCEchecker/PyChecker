@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: indic-transliteration
+Version: 2.3.2
+Summary: Transliteration tools to convert text in one indic script encoding to another
+Home-page: https://github.com/indic-transliteration/indic_transliteration_py
+Author: Sanskrit programmers
+Author-email: sanskrit-programmers@googlegroups.com
+License: MIT
+Keywords: indic script transliteration hindi sanskrit samskritam kannada devanagari tamil malayalam telugu gurumukhi gujarati bengali oriya - Harvard-Kyoto IAST Roman-Unicode) SLP1 WX
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: Hindi
+Classifier: Natural Language :: Tamil
+Classifier: Natural Language :: Bengali
+Classifier: Natural Language :: Panjabi
+Classifier: Natural Language :: Marathi
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: backports.functools-lru-cache (==1.6.4)
+Requires-Dist: selenium (==3.141.0)
+Requires-Dist: regex (==2020.10.11)
+Requires-Dist: typer (==0.3.2)
+Requires-Dist: toml
+Provides-Extra: test
+Requires-Dist: pytest ; extra == 'test'
+
+UNKNOWN
+
+

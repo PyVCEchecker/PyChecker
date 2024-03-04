@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    Add ``--host`` option to ``server migrate`` command
+    (cold migration) to specify the target host of the migration.
+    Requires ``--os-compute-api-version`` 2.56 or greater to target a
+    specific host for the (cold) migration.
+    [Story `2003325 <https://storyboard.openstack.org/#!/story/2003325>`_]

@@ -1,0 +1,2 @@
+flake8>=3
+pydocstyle>=2.1

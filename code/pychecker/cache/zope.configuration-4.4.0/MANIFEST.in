@@ -1,0 +1,11 @@
+include *.rst
+include *.txt
+include *.py
+include buildout.cfg
+include tox.ini
+include .coveragerc
+
+recursive-include docs *.rst *.bat *.py Makefile
+recursive-include src *.zcml *.in
+
+global-exclude *.pyc

@@ -1,0 +1,10 @@
+[default]
+title = Test object
+cache = Default cache manager
+proxy = Manager,Anonymous
+
+[security]
+View management screens = 0:Manager
+
+# [local]
+# local roles, not implemented yet

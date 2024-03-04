@@ -1,0 +1,16 @@
+include *.txt
+include *.rst
+include *.py
+include buildout.cfg
+include tox.ini
+
+recursive-include docs *
+recursive-include transaction *
+
+global-exclude *.pyc
+global-exclude coverage.xml
+
+prune docs/_build
+
+include .coveragerc
+include .travis.yml

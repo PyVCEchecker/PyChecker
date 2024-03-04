@@ -1,0 +1,4 @@
+redis>=3.2
+celery>=4.2
+python-dateutil
+tenacity

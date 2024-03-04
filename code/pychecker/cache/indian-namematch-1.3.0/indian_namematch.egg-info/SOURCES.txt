@@ -1,0 +1,10 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+indian_namematch/fuzzymatch.py
+indian_namematch.egg-info/PKG-INFO
+indian_namematch.egg-info/SOURCES.txt
+indian_namematch.egg-info/dependency_links.txt
+indian_namematch.egg-info/requires.txt
+indian_namematch.egg-info/top_level.txt

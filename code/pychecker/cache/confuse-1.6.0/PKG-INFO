@@ -1,0 +1,7 @@
+Metadata-Version: 1.1
+Name: confuse
+Version: 1.6.0
+Summary: Painless YAML configuration.
+Home-page: https://github.com/beetbox/confuse
+Author: Adrian Sampson
+Author-email: adrian@radbox.org

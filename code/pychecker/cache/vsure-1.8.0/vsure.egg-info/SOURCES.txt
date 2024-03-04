@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+verisure/__init__.py
+verisure/__main__.py
+verisure/session.py
+verisure/urls.py
+vsure.egg-info/PKG-INFO
+vsure.egg-info/SOURCES.txt
+vsure.egg-info/dependency_links.txt
+vsure.egg-info/entry_points.txt
+vsure.egg-info/requires.txt
+vsure.egg-info/top_level.txt
+vsure.egg-info/zip-safe

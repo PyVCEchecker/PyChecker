@@ -1,0 +1,2 @@
+apache-airflow~=1.10
+pinotdb==0.1.1

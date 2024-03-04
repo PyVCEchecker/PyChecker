@@ -1,0 +1,296 @@
+.coveragerc
+LICENSE.md
+MANIFEST.in
+README.md
+mkdocs.yml
+pyproject.toml
+run_tests.py
+setup.cfg
+setup.py
+tox.ini
+docs/src/markdown/faq.md
+docs/src/markdown/index.md
+docs/src/markdown/installation.md
+docs/src/markdown/usage_notes.md
+docs/src/markdown/about/changelog.md
+docs/src/markdown/about/contributing.md
+docs/src/markdown/about/development.md
+docs/src/markdown/about/license.md
+docs/src/markdown/about/releases/6.0.md
+docs/src/markdown/about/releases/7.0.md
+docs/src/markdown/about/releases/8.0.md
+docs/src/markdown/about/releases/9.0.md
+docs/src/markdown/extensions/arithmatex.md
+docs/src/markdown/extensions/b64.md
+docs/src/markdown/extensions/betterem.md
+docs/src/markdown/extensions/caret.md
+docs/src/markdown/extensions/critic.md
+docs/src/markdown/extensions/details.md
+docs/src/markdown/extensions/emoji.md
+docs/src/markdown/extensions/escapeall.md
+docs/src/markdown/extensions/extra.md
+docs/src/markdown/extensions/highlight.md
+docs/src/markdown/extensions/inlinehilite.md
+docs/src/markdown/extensions/keys.md
+docs/src/markdown/extensions/magiclink.md
+docs/src/markdown/extensions/mark.md
+docs/src/markdown/extensions/pathconverter.md
+docs/src/markdown/extensions/progressbar.md
+docs/src/markdown/extensions/saneheaders.md
+docs/src/markdown/extensions/smartsymbols.md
+docs/src/markdown/extensions/snippets.md
+docs/src/markdown/extensions/striphtml.md
+docs/src/markdown/extensions/superfences.md
+docs/src/markdown/extensions/tabbed.md
+docs/src/markdown/extensions/tasklist.md
+docs/src/markdown/extensions/tilde.md
+docs/src/markdown/extras/mermaid.md
+docs/src/markdown/extras/slugs.md
+docs/src/markdown/images/progress.png
+docs/src/markdown/images/tabbed-alternate.png
+docs/src/markdown/images/tabbed-default-narrow.png
+docs/src/markdown/images/tabbed-default.png
+docs/theme/announce.html
+docs/theme/main.html
+docs/theme/site-config.js
+docs/theme/assets/pymdownx-extras/extra-f1e135416b.css
+docs/theme/assets/pymdownx-extras/extra-loader-2c794727.js
+docs/theme/assets/pymdownx-extras/material-extra-theme-7c147bb7.js
+docs/theme/partials/footer.html
+docs/theme/partials/header.html
+docs/theme/partials/libs.html
+pymdown_extensions.egg-info/PKG-INFO
+pymdown_extensions.egg-info/SOURCES.txt
+pymdown_extensions.egg-info/dependency_links.txt
+pymdown_extensions.egg-info/requires.txt
+pymdown_extensions.egg-info/top_level.txt
+pymdownx/__init__.py
+pymdownx/__meta__.py
+pymdownx/_bypassnorm.py
+pymdownx/arithmatex.py
+pymdownx/b64.py
+pymdownx/betterem.py
+pymdownx/caret.py
+pymdownx/critic.py
+pymdownx/details.py
+pymdownx/emoji.py
+pymdownx/emoji1_db.py
+pymdownx/escapeall.py
+pymdownx/extra.py
+pymdownx/gemoji_db.py
+pymdownx/highlight.py
+pymdownx/inlinehilite.py
+pymdownx/keymap_db.py
+pymdownx/keys.py
+pymdownx/magiclink.py
+pymdownx/mark.py
+pymdownx/pathconverter.py
+pymdownx/progressbar.py
+pymdownx/saneheaders.py
+pymdownx/slugs.py
+pymdownx/smartsymbols.py
+pymdownx/snippets.py
+pymdownx/striphtml.py
+pymdownx/superfences.py
+pymdownx/tabbed.py
+pymdownx/tasklist.py
+pymdownx/tilde.py
+pymdownx/twemoji_db.py
+pymdownx/util.py
+requirements/docs.txt
+requirements/extra.txt
+requirements/lint.txt
+requirements/project.txt
+requirements/test.txt
+requirements/tools.txt
+tests/__init__.py
+tests/test_syntax.py
+tests/test_targeted.py
+tests/test_versions.py
+tests/util.py
+tests/extensions/_assets/headeranchor.css
+tests/extensions/_assets/progressbar.css
+tests/extensions/_assets/tabs.css
+tests/extensions/_assets/tasklist.css
+tests/extensions/_assets/tasklist_custom.css
+tests/extensions/_snippets/a.txt
+tests/extensions/_snippets/b.txt
+tests/extensions/_snippets/c.txt
+tests/extensions/_snippets/d.txt
+tests/extensions/_snippets/loop.txt
+tests/extensions/_snippets/loop_block.txt
+tests/extensions/arithmatex/arithmatex (disable).html
+tests/extensions/arithmatex/arithmatex (disable).txt
+tests/extensions/arithmatex/arithmatex (dumb dollar).html
+tests/extensions/arithmatex/arithmatex (dumb dollar).txt
+tests/extensions/arithmatex/arithmatex (generic).html
+tests/extensions/arithmatex/arithmatex (generic).txt
+tests/extensions/arithmatex/arithmatex (no-preview).html
+tests/extensions/arithmatex/arithmatex (no-preview).txt
+tests/extensions/arithmatex/arithmatex.html
+tests/extensions/arithmatex/arithmatex.txt
+tests/extensions/arithmatex/tests.yml
+tests/extensions/betterem/betterem (normal).html
+tests/extensions/betterem/betterem (normal).txt
+tests/extensions/betterem/betterem (reverse).html
+tests/extensions/betterem/betterem (reverse).txt
+tests/extensions/betterem/tests.yml
+tests/extensions/caret/caret (dumb no sup).html
+tests/extensions/caret/caret (dumb no sup).txt
+tests/extensions/caret/caret (dumb).html
+tests/extensions/caret/caret (dumb).txt
+tests/extensions/caret/caret (no insert).html
+tests/extensions/caret/caret (no insert).txt
+tests/extensions/caret/caret (no sup).html
+tests/extensions/caret/caret (no sup).txt
+tests/extensions/caret/caret.html
+tests/extensions/caret/caret.txt
+tests/extensions/caret/tests.yml
+tests/extensions/critic/critic (accept).html
+tests/extensions/critic/critic (accept).txt
+tests/extensions/critic/critic (reject).html
+tests/extensions/critic/critic (reject).txt
+tests/extensions/critic/critic (view).html
+tests/extensions/critic/critic (view).txt
+tests/extensions/critic/tests.yml
+tests/extensions/emoji/emoji1 (entities).html
+tests/extensions/emoji/emoji1 (entities).txt
+tests/extensions/emoji/emoji1 (escaped).html
+tests/extensions/emoji/emoji1 (escaped).txt
+tests/extensions/emoji/emoji1 (long title).html
+tests/extensions/emoji/emoji1 (long title).txt
+tests/extensions/emoji/emoji1 (no title).html
+tests/extensions/emoji/emoji1 (no title).txt
+tests/extensions/emoji/emoji1 (png sprite).html
+tests/extensions/emoji/emoji1 (png sprite).txt
+tests/extensions/emoji/emoji1 (png).html
+tests/extensions/emoji/emoji1 (png).txt
+tests/extensions/emoji/emoji1 (svg sprite).html
+tests/extensions/emoji/emoji1 (svg sprite).txt
+tests/extensions/emoji/emoji1 (svg).html
+tests/extensions/emoji/emoji1 (svg).txt
+tests/extensions/emoji/gemoji (entities).html
+tests/extensions/emoji/gemoji (entities).txt
+tests/extensions/emoji/gemoji (png).html
+tests/extensions/emoji/gemoji (png).txt
+tests/extensions/emoji/tests.yml
+tests/extensions/emoji/twemoji (entities).html
+tests/extensions/emoji/twemoji (entities).txt
+tests/extensions/emoji/twemoji (png).html
+tests/extensions/emoji/twemoji (png).txt
+tests/extensions/emoji/twemoji (svg).html
+tests/extensions/emoji/twemoji (svg).txt
+tests/extensions/escapeall/escapeall (critic).html
+tests/extensions/escapeall/escapeall (critic).txt
+tests/extensions/escapeall/escapeall (ws normal).html
+tests/extensions/escapeall/escapeall (ws normal).txt
+tests/extensions/escapeall/escapeall.html
+tests/extensions/escapeall/escapeall.txt
+tests/extensions/escapeall/tests.yml
+tests/extensions/extra/extra (config).html
+tests/extensions/extra/extra (config).txt
+tests/extensions/extra/extra.html
+tests/extensions/extra/extra.txt
+tests/extensions/extra/tests.yml
+tests/extensions/keys/keys (camel).html
+tests/extensions/keys/keys (camel).txt
+tests/extensions/keys/keys.html
+tests/extensions/keys/keys.txt
+tests/extensions/keys/tests.yml
+tests/extensions/magiclink/magiclink (bitbucket).html
+tests/extensions/magiclink/magiclink (bitbucket).txt
+tests/extensions/magiclink/magiclink (extensions).html
+tests/extensions/magiclink/magiclink (extensions).txt
+tests/extensions/magiclink/magiclink (gitlab).html
+tests/extensions/magiclink/magiclink (gitlab).txt
+tests/extensions/magiclink/magiclink (invalid).html
+tests/extensions/magiclink/magiclink (invalid).txt
+tests/extensions/magiclink/magiclink (shorthand).html
+tests/extensions/magiclink/magiclink (shorthand).txt
+tests/extensions/magiclink/magiclink (shorthand-social).html
+tests/extensions/magiclink/magiclink (shorthand-social).txt
+tests/extensions/magiclink/magiclink.html
+tests/extensions/magiclink/magiclink.txt
+tests/extensions/magiclink/magiclink_hide_protocol.html
+tests/extensions/magiclink/magiclink_hide_protocol.txt
+tests/extensions/magiclink/tests.yml
+tests/extensions/mark/mark (dumb).html
+tests/extensions/mark/mark (dumb).txt
+tests/extensions/mark/mark.html
+tests/extensions/mark/mark.txt
+tests/extensions/mark/tests.yml
+tests/extensions/progressbar/progressbar.html
+tests/extensions/progressbar/progressbar.txt
+tests/extensions/progressbar/tests.yml
+tests/extensions/smartsymbols/smartsymbols (with smarty).html
+tests/extensions/smartsymbols/smartsymbols (with smarty).txt
+tests/extensions/smartsymbols/smartsymbols.html
+tests/extensions/smartsymbols/smartsymbols.txt
+tests/extensions/smartsymbols/tests.yml
+tests/extensions/snippets/snippets (auto-append).html
+tests/extensions/snippets/snippets (auto-append).txt
+tests/extensions/snippets/snippets (block).html
+tests/extensions/snippets/snippets (block).txt
+tests/extensions/snippets/snippets (file).html
+tests/extensions/snippets/snippets (file).txt
+tests/extensions/snippets/snippets (mixed).html
+tests/extensions/snippets/snippets (mixed).txt
+tests/extensions/snippets/snippets.html
+tests/extensions/snippets/snippets.txt
+tests/extensions/snippets/tests.yml
+tests/extensions/striphtml/striphtml (no attr strip).html
+tests/extensions/striphtml/striphtml (no attr strip).txt
+tests/extensions/striphtml/striphtml.html
+tests/extensions/striphtml/striphtml.txt
+tests/extensions/striphtml/tests.yml
+tests/extensions/superfences/superfences (custom).html
+tests/extensions/superfences/superfences (custom).txt
+tests/extensions/superfences/superfences (failures).html
+tests/extensions/superfences/superfences (failures).txt
+tests/extensions/superfences/superfences (no indent blocks).html
+tests/extensions/superfences/superfences (no indent blocks).txt
+tests/extensions/superfences/superfences (no pygments).html
+tests/extensions/superfences/superfences (no pygments).txt
+tests/extensions/superfences/superfences (normal).html
+tests/extensions/superfences/superfences (normal).txt
+tests/extensions/superfences/superfences (preserve tabs).html
+tests/extensions/superfences/superfences (preserve tabs).txt
+tests/extensions/superfences/tests.yml
+tests/extensions/tasklist/tasklist (checkable).html
+tests/extensions/tasklist/tasklist (checkable).txt
+tests/extensions/tasklist/tasklist (custom checkable).html
+tests/extensions/tasklist/tasklist (custom checkable).txt
+tests/extensions/tasklist/tasklist (custom).html
+tests/extensions/tasklist/tasklist (custom).txt
+tests/extensions/tasklist/tasklist.html
+tests/extensions/tasklist/tasklist.txt
+tests/extensions/tasklist/tests.yml
+tests/extensions/tilde/tests.yml
+tests/extensions/tilde/tilde (dumb no sub).html
+tests/extensions/tilde/tilde (dumb no sub).txt
+tests/extensions/tilde/tilde (dumb).html
+tests/extensions/tilde/tilde (dumb).txt
+tests/extensions/tilde/tilde (no delete).html
+tests/extensions/tilde/tilde (no delete).txt
+tests/extensions/tilde/tilde (no sub).html
+tests/extensions/tilde/tilde (no sub).txt
+tests/extensions/tilde/tilde.html
+tests/extensions/tilde/tilde.txt
+tests/test_extensions/__init__.py
+tests/test_extensions/test_arithmatex.py
+tests/test_extensions/test_b64.py
+tests/test_extensions/test_betterem.py
+tests/test_extensions/test_details.py
+tests/test_extensions/test_emoji.py
+tests/test_extensions/test_escapeall.py
+tests/test_extensions/test_highlight.py
+tests/test_extensions/test_inlinehilite.py
+tests/test_extensions/test_legacy_slugs.py
+tests/test_extensions/test_magiclink.py
+tests/test_extensions/test_pathconverter.py
+tests/test_extensions/test_saneheaders.py
+tests/test_extensions/test_slugs.py
+tests/test_extensions/test_striphmtl.py
+tests/test_extensions/test_superfences.py
+tests/test_extensions/test_tabbed.py
+tests/test_extensions/test_tabbed_alternate.py

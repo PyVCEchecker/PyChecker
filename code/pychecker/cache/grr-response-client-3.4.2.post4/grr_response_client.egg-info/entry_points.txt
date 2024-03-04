@@ -1,0 +1,5 @@
+[console_scripts]
+grr_client = grr_response_client.distro_entry:Client
+grr_fleetspeak_client = grr_response_client.distro_entry:FleetspeakClient
+grr_pool_client = grr_response_client.distro_entry:PoolClient
+

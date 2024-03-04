@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shell_plus &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="create_template_tags" href="create_template_tags.html" />
+    <link rel="prev" title="Command Extensions" href="command_extensions.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="create_template_tags.html" title="create_template_tags"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="command_extensions.html" title="Command Extensions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">shell_plus</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="shell-plus">
+<h1>shell_plus<a class="headerlink" href="#shell-plus" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Django shell with autoloading of the apps database models and subclasses of user-defined classes.</p>
+</dd>
+</dl>
+<div class="section" id="interactive-python-shells">
+<h2>Interactive Python Shells<a class="headerlink" href="#interactive-python-shells" title="Permalink to this headline">¶</a></h2>
+<p>There is support for three different types of interactive python shells.</p>
+<p>IPython:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py shell_plus --ipython
+</pre></div>
+</div>
+<p>bpython:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py shell_plus --bpython
+</pre></div>
+</div>
+<p>ptpython:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py shell_plus --ptpython
+</pre></div>
+</div>
+<p>Python:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py shell_plus --plain
+</pre></div>
+</div>
+<p>It is possible to directly add command line arguments to the underlying Python shell using <cite>–</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py shell_plus --ipython -- --profile=foo
+</pre></div>
+</div>
+<p>The default resolution order is: ptpython, bpython, ipython, python.</p>
+<p>You can also set the configuration option SHELL_PLUS to explicitly specify which version you want.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Always use IPython for shell_plus</span>
+<span class="n">SHELL_PLUS</span> <span class="o">=</span> <span class="s2">&quot;ipython&quot;</span>
+</pre></div>
+</div>
+<p>It is also possible to use <a class="reference external" href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">IPython Notebook</a>, an interactive Python shell which
+uses a web browser as its user interface, as an alternative shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py shell_plus --notebook
+</pre></div>
+</div>
+<p>In addition to being savable, IPython Notebooks can be updated (while running) to reflect changes in a Django application’s code with the menu command <cite>Kernel &gt; Restart</cite>.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, models from your own apps and other people’s apps have colliding names,
+or you may want to completely skip loading an app’s models. Here are some examples of how to do that.</p>
+<p>Note: These settings are only used inside shell_plus and will not affect your environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rename the automatic loaded module Messages in the app blog to blog_messages.</span>
+<span class="n">SHELL_PLUS_MODEL_ALIASES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;blog&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Messages&#39;</span><span class="p">:</span> <span class="s1">&#39;blog_messages&#39;</span><span class="p">},}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prefix all automatically loaded models in the app blog with myblog.</span>
+<span class="n">SHELL_PLUS_APP_PREFIXES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;blog&#39;</span><span class="p">:</span> <span class="s1">&#39;myblog&#39;</span><span class="p">,}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dont load the &#39;sites&#39; app, and skip the model &#39;pictures&#39; in the app &#39;blog&#39;</span>
+<span class="n">SHELL_PLUS_DONT_LOAD</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sites&#39;</span><span class="p">,</span> <span class="s1">&#39;blog.pictures&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dont load any models</span>
+<span class="n">SHELL_PLUS_DONT_LOAD</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>You can also combine model_aliases and dont_load.
+When referencing nested modules, e.g. <cite>somepackage.someapp.models.somemodel</cite>, omit the
+package name and the reference to <cite>models</cite>. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SHELL_PLUS_DONT_LOAD</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;someapp.somemodel&#39;</span><span class="p">,</span> <span class="p">]</span>  <span class="c1"># This works</span>
+<span class="n">SHELL_PLUS_DONT_LOAD</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;somepackage.someapp.models.somemodel&#39;</span><span class="p">,</span> <span class="p">]</span>  <span class="c1"># This does NOT work</span>
+</pre></div>
+</div>
+<p>It is possible to ignore autoloaded modules when using manage.py, like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py shell_plus --dont-load app1 --dont-load app2.module1
+</pre></div>
+</div>
+<p>Command line parameters and settings in the configuration file are merged, so you can
+safely append modules to ignore from the commandline for one-time usage.</p>
+<p>Other configuration options include:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Always use IPython for shell_plus</span>
+<span class="n">SHELL_PLUS</span> <span class="o">=</span> <span class="s2">&quot;ipython&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SHELL_PLUS_PRINT_SQL</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Truncate sql queries to this number of characters (this is the default)</span>
+<span class="n">SHELL_PLUS_PRINT_SQL_TRUNCATE</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># To disable truncation of sql queries use</span>
+<span class="n">SHELL_PLUS_PRINT_SQL_TRUNCATE</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Specify sqlparse configuration options when printing sql queries to the console</span>
+<span class="n">SHELL_PLUS_SQLPARSE_FORMAT_KWARGS</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+  <span class="n">reindent_aligned</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="n">truncate_strings</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Specify Pygments formatter and configuration options when printing sql queries to the console</span>
+<span class="kn">import</span> <span class="nn">pygments.formatters</span>
+<span class="n">SHELL_PLUS_PYGMENTS_FORMATTER</span> <span class="o">=</span> <span class="n">pygments</span><span class="o">.</span><span class="n">formatters</span><span class="o">.</span><span class="n">TerminalFormatter</span>
+<span class="n">SHELL_PLUS_PYGMENTS_FORMATTER_KWARGS</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Additional IPython arguments to use</span>
+<span class="n">IPYTHON_ARGUMENTS</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">IPYTHON_KERNEL_DISPLAY_NAME</span> <span class="o">=</span> <span class="s2">&quot;Django Shell-Plus&quot;</span>
+
+<span class="c1"># Additional Notebook arguments to use</span>
+<span class="n">NOTEBOOK_ARGUMENTS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">NOTEBOOK_KERNEL_SPEC_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span> <span class="s2">&quot;python&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="collision-resolvers">
+<h2>Collision resolvers<a class="headerlink" href="#collision-resolvers" title="Permalink to this headline">¶</a></h2>
+<p>You don’t have to worry about inaccessibility of models with conflicting names.</p>
+<p>If you have conflicting model names, all conflicts can be resolved automatically.
+All models will be available under shell_plus, some of them with intuitive aliases.</p>
+<p>This mechanism is highly configurable and you must only set <code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_MODEL_IMPORTS_RESOLVER</span></code>.
+You should set full path to collision resolver class.</p>
+<p>All predefined collision resolvers are in <code class="docutils literal notranslate"><span class="pre">django_extensions.collision_resolvers</span></code> module. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SHELL_PLUS_MODEL_IMPORTS_RESOLVER</span> <span class="o">=</span> <span class="s1">&#39;django_extensions.collision_resolvers.FullPathCR&#39;</span>
+</pre></div>
+</div>
+<p>All collision resolvers searches for models with the same name.</p>
+<p>If conflict is detected they decides, which model to choose.
+Some of them are creating aliases for all conflicting models.</p>
+<p><strong>Example</strong></p>
+<p>Suppose that we have two apps:</p>
+<ul class="simple">
+<li><p>programming(with models Language and Framework)</p></li>
+<li><p>workers(with models Language and Worker)</p></li>
+</ul>
+<p>‘workers’ app is last in alphabetical order, but suppose that ‘programming’ app is occurs firstly in <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code>.</p>
+<p>Collision resolvers won’t change aliases for models Framework and Worker, because their names are unique.
+There are several types of collision resolvers:</p>
+<p><strong>LegacyCR</strong></p>
+<p>Default collision resolver. Model from last application in alphabetical order is selected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">workers</span> <span class="kn">import</span> <span class="n">Language</span>
+</pre></div>
+</div>
+<p><strong>InstalledAppsOrderCR</strong></p>
+<p>Collision resolver which selects first model from INSTALLED_APPS.
+You can set your own app priorities list subclassing him and overwriting <code class="docutils literal notranslate"><span class="pre">APP_PRIORITIES</span></code> field.</p>
+<p>This collision resolver will select model from first app on this list.
+If both app’s are absent on this list, resolver will choose model from first app in alphabetical order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">programming</span> <span class="kn">import</span> <span class="n">Language</span>
+</pre></div>
+</div>
+<p><strong>FullPathCR</strong></p>
+<p>Collision resolver which transform full model name to alias by changing dots to underscores.
+He also removes ‘models’ part of alias, because all models are in models.py files.</p>
+<p>Model from last application in alphabetical order is selected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">programming</span> <span class="kn">import</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">programming_Language</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">workers</span> <span class="kn">import</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">workers_Language</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>AppNamePrefixCR</strong></p>
+<p>Collision resolver which transform pair (app name, model_name) to alias <code class="docutils literal notranslate"><span class="pre">{app_name}_{model_name}</span></code>.
+Model from last application in alphabetical order is selected.</p>
+<p>Result is different than FullPathCR, when model has app_label other than current app:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">programming</span> <span class="kn">import</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">programming_Language</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">workers</span> <span class="kn">import</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">workers_Language</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>AppNameSuffixCR</strong></p>
+<p>Collision resolver which transform pair (app name, model_name) to alias <code class="docutils literal notranslate"><span class="pre">{model_name}_{app_name}</span></code></p>
+<p>Model from last application in alphabetical order is selected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">programming</span> <span class="kn">import</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">Language_programming</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">workers</span> <span class="kn">import</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">Language_workers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>AppNamePrefixCustomOrderCR</strong></p>
+<p>Collision resolver which is mixin of AppNamePrefixCR and InstalledAppsOrderCR.</p>
+<p>In case of collisions he sets aliases like AppNamePrefixCR, but sets default model using InstalledAppsOrderCR:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">programming</span> <span class="kn">import</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">programming_Language</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">workers</span> <span class="kn">import</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">workers_Language</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>AppNameSuffixCustomOrderCR</strong></p>
+<p>Collision resolver which is mixin of AppNameSuffixCR and InstalledAppsOrderCR.</p>
+<p>In case of collisions he sets aliases like AppNameSuffixCR, but sets default model using InstalledAppsOrderCR:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">programming</span> <span class="kn">import</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">Language_programming</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">workers</span> <span class="kn">import</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">Language_workers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>FullPathCustomOrderCR</strong></p>
+<p>Collision resolver which is mixin of FullPathCR and InstalledAppsOrderCR.</p>
+<p>In case of collisions he sets aliases like FullPathCR, but sets default model using InstalledAppsOrderCR:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">programming</span> <span class="kn">import</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">programming_Language</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">workers</span> <span class="kn">import</span> <span class="n">Language</span> <span class="p">(</span><span class="k">as</span> <span class="n">workers_Language</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>AppLabelPrefixCR</strong></p>
+<p>Collision resolver which transform pair (app_label, model_name) to alias <code class="docutils literal notranslate"><span class="pre">{app_label}_{model_name}</span></code></p>
+<p>This is very similar to <code class="docutils literal notranslate"><span class="pre">AppNamePrefixCR</span></code> but this may generate shorter names in case of apps nested
+into several namespace (like Django’s auth app):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># with AppNamePrefixCR</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span> <span class="p">(</span><span class="k">as</span> <span class="n">django_contrib_auth_Group</span><span class="p">)</span>
+
+<span class="c1"># with AppLabelPrefixCR</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span> <span class="p">(</span><span class="k">as</span> <span class="n">auth_Group</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>AppLabelSuffixCR</strong></p>
+<p>Collision resolver which transform pair (app_label, model_name) to alias <code class="docutils literal notranslate"><span class="pre">{model_name}_{app_label}</span></code></p>
+<p>Similar idea as the above, but based on <code class="docutils literal notranslate"><span class="pre">AppNameSuffixCR</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># with AppNamePrefixCR</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span> <span class="p">(</span><span class="k">as</span> <span class="n">Group_django_contrib_auth</span><span class="p">)</span>
+
+<span class="c1"># with AppLabelSuffixCR</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span> <span class="p">(</span><span class="k">as</span> <span class="n">Group_auth</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-your-custom-collision-resolver">
+<h2>Writing your custom collision resolver<a class="headerlink" href="#writing-your-custom-collision-resolver" title="Permalink to this headline">¶</a></h2>
+<p>You can customize models import behaviour by subclassing one of the abstract collision resolvers:</p>
+<p><strong>PathBasedCR</strong></p>
+<p>Abstract resolver which transforms full model name into alias.
+To use him you need to overwrite transform_import function
+which should have one parameter.</p>
+<p>It will be full model name. It should return valid alias as str instance.</p>
+<p><strong>AppNameCR</strong></p>
+<p>Abstract collision resolver which transform pair (app name, model_name) to alias by changing dots to underscores.</p>
+<p>You must define <code class="docutils literal notranslate"><span class="pre">MODIFICATION_STRING</span></code> which should be string to format with two keyword arguments:
+app_name and model_name. For example: <code class="docutils literal notranslate"><span class="pre">{app_name}_{model_name}</span></code>.</p>
+<p>Model from last application in alphabetical order is selected.</p>
+<p>You can mix PathBasedCR or AppNameCR with InstalledAppsOrderCR, but InstalledAppsOrderCR should be second base class.</p>
+<p><strong>BaseCR</strong></p>
+<p>Abstract base collision resolver. All collision resolvers needs to inherit from this class.</p>
+<p>To write custom collision resolver you need to overwrite resolve_collisions function.
+It receives <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">List[str]]</span></code> where key is model name and values are full model names
+(full model name means: module + model_name).</p>
+<p>You should return <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">str]</span></code>, where key is model name and value is full model name.</p>
+</div>
+<div class="section" id="import-subclasses">
+<h2>Import Subclasses<a class="headerlink" href="#import-subclasses" title="Permalink to this headline">¶</a></h2>
+<p>If you want to load automatically all project subclasses of some base class,
+you can achieve this by setting <code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_SUBCLASSES_IMPORT</span></code> option.</p>
+<p>It must be list of either classes or strings containing paths to this classes.</p>
+<p>For example if you want to load all your custom managers than you should provide:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Manager</span>
+<span class="n">SHELL_PLUS_SUBCLASSES_IMPORT</span> <span class="o">=</span> <span class="p">[</span><span class="n">Manager</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Than shell_plus will load all your custom managers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Shell Plus Subclasses Imports</span>
+<span class="kn">from</span> <span class="nn">utils.managers</span> <span class="kn">import</span> <span class="n">AbstractManager</span>
+<span class="kn">from</span> <span class="nn">myapp.managers</span> <span class="kn">import</span> <span class="n">MyCustomManager</span>
+<span class="kn">from</span> <span class="nn">somewhere.else</span> <span class="kn">import</span> <span class="n">MyOtherManager</span>
+<span class="c1"># django.db.models.Manager is not loaded because only project classes are.</span>
+</pre></div>
+</div>
+<p>By default all subclasses of your base class from all projects module will be loaded.</p>
+<p>You can exclude some modules and all their submodules by passing <code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_SUBCLASSES_IMPORT_MODULES_BLACKLIST</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SHELL_PLUS_SUBCLASSES_IMPORT_MODULES_BLACKLIST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;utils&#39;</span><span class="p">,</span> <span class="s1">&#39;somewhere.else&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Elements of this list must be strings containing full modules paths.
+If these modules are excluded only <code class="docutils literal notranslate"><span class="pre">MyCustomManager</span></code> from <code class="docutils literal notranslate"><span class="pre">myapp.managers</span></code> will be loaded.</p>
+<p>If you are using <code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_SUBCLASSES_IMPORT</span></code> shell_plus loads all project modules for finding subclasses.</p>
+<p>Sometimes it can lead to some errors(for example when we have old unused module which contains syntax errors).</p>
+<p>Excluding these modules can help avoid shell_plus crashes in some situations.
+It is recommended to exclude all <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> files.</p>
+</div>
+<div class="section" id="ipython-notebook">
+<h2>IPython Notebook<a class="headerlink" href="#ipython-notebook" title="Permalink to this headline">¶</a></h2>
+<p>There are two settings that you can use to pass your custom options to the IPython
+Notebook in your Django settings.</p>
+<p>The first one is <code class="docutils literal notranslate"><span class="pre">NOTEBOOK_ARGUMENTS</span></code> that can be used to hold those options that available via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ipython notebook -h
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NOTEBOOK_ARGUMENTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;--ip&#39;</span><span class="p">,</span> <span class="s1">&#39;x.x.x.x&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;--port&#39;</span><span class="p">,</span> <span class="s1">&#39;xx&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Another one is <code class="docutils literal notranslate"><span class="pre">IPYTHON_ARGUMENTS</span></code> that for those options that available via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ipython -h
+</pre></div>
+</div>
+<p>The Django settings module and database models are auto-loaded into the
+interactive shell’s global namespace also for IPython Notebook.</p>
+<p>Auto-loading is done by a custom IPython extension which is activated by
+default by passing the
+<code class="docutils literal notranslate"><span class="pre">--ext</span> <span class="pre">django_extensions.management.notebook_extension</span></code>
+argument to the Notebook.  If you need to pass custom options to the IPython
+Notebook, you can override the default options in your Django settings using
+the <code class="docutils literal notranslate"><span class="pre">IPYTHON_ARGUMENTS</span></code> setting.  For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IPYTHON_ARGUMENTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;--ext&#39;</span><span class="p">,</span> <span class="s1">&#39;django_extensions.management.notebook_extension&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;--ext&#39;</span><span class="p">,</span> <span class="s1">&#39;myproject.notebook_extension&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;--debug&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>To activate auto-loading, remember to either include the django-extensions’ default
+notebook extension or copy its auto-loading code into your own extension.</p>
+<p>Note that the IPython Notebook feature doesn’t currently honor the
+<code class="docutils literal notranslate"><span class="pre">--dont-load</span></code> option.</p>
+</div>
+<div class="section" id="additional-imports">
+<h2>Additional Imports<a class="headerlink" href="#additional-imports" title="Permalink to this headline">¶</a></h2>
+<p>In addition to importing the models you can specify other items to import by default.
+These can be specified with the settings <code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_IMPORTS</span></code>, <code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_PRE_IMPORTS</span></code> and <code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_POST_IMPORTS</span></code>.</p>
+<p>The other of import loading is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_PRE_IMPORTS</span></code></p></li>
+<li><p>Subclasses (if enabled)</p></li>
+<li><p>Models (if not disabled)</p></li>
+<li><p>Default Django imports (if not disabled)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_IMPORTS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHELL_PLUS_POST_IMPORTS</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>Example for in your <code class="docutils literal notranslate"><span class="pre">settings.py</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SHELL_PLUS_IMPORTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;from module.submodule1 import class1, function2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;from module.submodule2 import function3 as another1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;from module.submodule3 import *&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;import module.submodule4&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>These symbols will be available as soon as the shell starts.</p>
+</div>
+<div class="section" id="database-application-signature">
+<h2>Database application signature<a class="headerlink" href="#database-application-signature" title="Permalink to this headline">¶</a></h2>
+<p>If using PostgreSQL the <code class="docutils literal notranslate"><span class="pre">application_name</span></code> is set by default to
+<code class="docutils literal notranslate"><span class="pre">django_shell</span></code> to help  identify queries made under shell_plus.</p>
+</div>
+<div class="section" id="sql-queries">
+<h2>SQL queries<a class="headerlink" href="#sql-queries" title="Permalink to this headline">¶</a></h2>
+<p>If the configuration option DEBUG is set to True, it is possible to print SQL queries as they’re executed in shell_plus like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./manage.py shell_plus --print-sql
+</pre></div>
+</div>
+<p>You can also set the configuration option SHELL_PLUS_PRINT_SQL to omit the above command line option.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># print SQL queries in shell_plus</span>
+<span class="n">SHELL_PLUS_PRINT_SQL</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">shell_plus</a><ul>
+<li><a class="reference internal" href="#interactive-python-shells">Interactive Python Shells</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#collision-resolvers">Collision resolvers</a></li>
+<li><a class="reference internal" href="#writing-your-custom-collision-resolver">Writing your custom collision resolver</a></li>
+<li><a class="reference internal" href="#import-subclasses">Import Subclasses</a></li>
+<li><a class="reference internal" href="#ipython-notebook">IPython Notebook</a></li>
+<li><a class="reference internal" href="#additional-imports">Additional Imports</a></li>
+<li><a class="reference internal" href="#database-application-signature">Database application signature</a></li>
+<li><a class="reference internal" href="#sql-queries">SQL queries</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="command_extensions.html"
+                        title="previous chapter">Command Extensions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="create_template_tags.html"
+                        title="next chapter">create_template_tags</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/shell_plus.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="create_template_tags.html" title="create_template_tags"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="command_extensions.html" title="Command Extensions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">shell_plus</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

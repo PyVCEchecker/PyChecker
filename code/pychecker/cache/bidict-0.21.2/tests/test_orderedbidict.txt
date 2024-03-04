@@ -1,0 +1,91 @@
+# Copyright 2009-2020 Joshua Bronson. All Rights Reserved.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+Test for consistency in ordered bidicts after handling duplicate keys/values
+(when passing python's -O flag, this would previously fail
+due to reliance on side effects in assert statements)::
+
+    >>> from bidict import OrderedBidict, DuplicationError, RAISE, DROP_OLD, OnDup
+    >>> b = OrderedBidict([(0, 1)])
+    >>> exc = None
+    >>> try:
+    ...     b.update([(0, 2), (3, 4), (5, 4)])
+    ... except DuplicationError as e:
+    ...     exc = e
+    >>> exc is not None
+    True
+    >>> len(b.inv)
+    1
+
+    >>> exc = None
+    >>> try:
+    ...     b.putall([(2, 1), (2, 3)], OnDup(key=RAISE, val=DROP_OLD))
+    ... except DuplicationError as e:
+    ...     exc = e
+    >>> exc is not None
+    True
+    >>> len(b)
+    1
+
+    >>> b.forceupdate([(0, 1), (2, 3), (0, 3)])
+    >>> b
+    OrderedBidict([(0, 3)])
+
+Test for consistency updating an ordered bidict's inverse:
+
+    >>> b.inv[3] = 'UPDATED KEY'
+    >>> b
+    OrderedBidict([('UPDATED KEY', 3)])
+    >>> b.inv
+    OrderedBidict([(3, 'UPDATED KEY')])
+
+    >>> b.inv.forceput('UPDATED VAL', 'UPDATED KEY')
+    >>> b
+    OrderedBidict([('UPDATED KEY', 'UPDATED VAL')])
+    >>> b.inv
+    OrderedBidict([('UPDATED VAL', 'UPDATED KEY')])
+
+    >>> b.inv['NEW VAL'] = 'NEW KEY'
+    >>> b
+    OrderedBidict([('UPDATED KEY', 'UPDATED VAL'), ('NEW KEY', 'NEW VAL')])
+    >>> b.inv
+    OrderedBidict([('UPDATED VAL', 'UPDATED KEY'), ('NEW VAL', 'NEW KEY')])
+
+    >>> b.inv.forceput('NEW VAL', 'UPDATED KEY')
+    >>> b
+    OrderedBidict([('UPDATED KEY', 'NEW VAL')])
+    >>> b.inv
+    OrderedBidict([('NEW VAL', 'UPDATED KEY')])
+
+    >>> b.inv.update([('NEWER VAL', 'NEWER KEY'), ('NEW VAL', 'NEW KEY'), ('FAIL!', 'NEW KEY')])
+    Traceback (most recent call last):
+        ...
+    ValueDuplicationError: NEW KEY
+    >>> b
+    OrderedBidict([('UPDATED KEY', 'NEW VAL')])
+    >>> b.inv
+    OrderedBidict([('NEW VAL', 'UPDATED KEY')])
+
+    >>> b.inv.forceupdate([('NEWER VAL', 'NEWER KEY'), ('NEW VAL', 'NEW KEY'), ('SUCCESS!', 'NEW KEY')])
+    >>> b
+    OrderedBidict([('NEW KEY', 'SUCCESS!'), ('NEWER KEY', 'NEWER VAL')])
+    >>> b.inv
+    OrderedBidict([('SUCCESS!', 'NEW KEY'), ('NEWER VAL', 'NEWER KEY')])
+
+Test move_to_end here so it shows up in pytest's coverage report
+(its hypothesis tests may not always hit all code paths,
+and the doctests in the Sphinx docs don't get counted in the coverage report)::
+
+    >>> b.move_to_end('NEW KEY')
+    >>> b
+    OrderedBidict([('NEWER KEY', 'NEWER VAL'), ('NEW KEY', 'SUCCESS!')])
+    >>> b.move_to_end('NEW KEY', last=False)
+    >>> b
+    OrderedBidict([('NEW KEY', 'SUCCESS!'), ('NEWER KEY', 'NEWER VAL')])
+    >>> b.move_to_end('NOT FOUND')
+    Traceback (most recent call last):
+        ...
+    KeyError: 'NOT FOUND'

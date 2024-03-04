@@ -1,0 +1,11 @@
+Metadata-Version: 1.2
+Name: grr-response-client
+Version: 3.4.2.post4
+Summary: The GRR Rapid Response client.
+Home-page: https://github.com/google/grr
+Maintainer: GRR Development Team
+Maintainer-email: grr-dev@googlegroups.com
+License: Apache License, Version 2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.6

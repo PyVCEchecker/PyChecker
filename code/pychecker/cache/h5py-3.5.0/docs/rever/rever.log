@@ -1,0 +1,2 @@
+{"activity":"tag","category":"activity-start","message":"starting activity tag","rev":"fb9989a700e60cd1c1dec20e329218d449e039cf","timestamp":1634746855.8988812,"version":"3.5.0"}
+{"activity":"tag","category":"activity-end","data":{"start_rev":"fb9989a700e60cd1c1dec20e329218d449e039cf"},"message":"activity tag complete","rev":"fb9989a700e60cd1c1dec20e329218d449e039cf","timestamp":1634746855.9182875,"version":"3.5.0"}

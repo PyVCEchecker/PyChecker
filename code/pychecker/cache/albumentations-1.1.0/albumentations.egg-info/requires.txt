@@ -1,0 +1,16 @@
+numpy>=1.11.1
+scipy
+scikit-image>=0.16.1
+PyYAML
+qudida>=0.0.4
+opencv-python-headless>=4.1.1
+
+[develop]
+pytest
+imgaug>=0.4.0
+
+[imgaug]
+imgaug>=0.4.0
+
+[tests]
+pytest

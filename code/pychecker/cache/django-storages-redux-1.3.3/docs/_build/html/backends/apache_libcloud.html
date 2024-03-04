@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Apache Libcloud &mdash; django-storages 1.6.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.6.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-storages 1.6.2 documentation" href="../index.html" />
+    <link rel="next" title="Azure Storage" href="azure.html" />
+    <link rel="prev" title="Amazon S3" href="amazon-S3.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="azure.html" title="Azure Storage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="amazon-S3.html" title="Amazon S3"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="apache-libcloud">
+<h1>Apache Libcloud<a class="headerlink" href="#apache-libcloud" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://libcloud.apache.org/">Apache Libcloud</a> is an API wrapper around a range of cloud storage providers.
+It aims to provide a consistent API for dealing with cloud storage (and, more
+broadly, the many other services provided by cloud providers, such as device
+provisioning, load balancer configuration, and DNS configuration).</p>
+<p>Use pip to install apache-libcloud from PyPI:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install apache-libcloud
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>As of v0.10.1, Libcloud supports the following cloud storage providers:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://aws.amazon.com/s3/">Amazon S3</a></li>
+<li><a class="reference external" href="http://cloud.google.com/products/cloud-storage.html">Google Cloud Storage</a></li>
+<li><a class="reference external" href="http://nimbus.io">Nimbus.io</a></li>
+<li><a class="reference external" href="http://ninefold.com/cloud-storage/">Ninefold Cloud Storage</a></li>
+<li><a class="reference external" href="http://www.rackspace.com/cloud/cloud_hosting_products/files/">Rackspace CloudFiles</a></li>
+</ul>
+</dd>
+</dl>
+<p>Libcloud can also be configured with relatively little effort to support any provider
+using EMC Atmos storage, or the OpenStack API.</p>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="libcloud-providers">
+<h3><tt class="docutils literal"><span class="pre">LIBCLOUD_PROVIDERS</span></tt><a class="headerlink" href="#libcloud-providers" title="Permalink to this headline">¶</a></h3>
+<p>This setting is required to configure connections to cloud storage providers.
+Each entry corresponds to a single &#8216;bucket&#8217; of storage. You can have multiple
+buckets for a single service provider (e.g., multiple S3 buckets), and you can
+define buckets at multiple providers. For example, the following configuration
+defines 3 providers: two buckets (<tt class="docutils literal"><span class="pre">bucket-1</span></tt> and <tt class="docutils literal"><span class="pre">bucket-2</span></tt>) on a US-based
+Amazon S3 store, and a third bucket (<tt class="docutils literal"><span class="pre">bucket-3</span></tt>) on Google:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">LIBCLOUD_PROVIDERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;amazon_1&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;libcloud.storage.types.Provider.S3_US_STANDARD_HOST&#39;</span><span class="p">,</span>
+        <span class="s">&#39;user&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;your username here&gt;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;your key here&gt;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;bucket&#39;</span><span class="p">:</span> <span class="s">&#39;bucket-1&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s">&#39;amazon_2&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;libcloud.storage.types.Provider.S3_US_STANDARD_HOST&#39;</span><span class="p">,</span>
+        <span class="s">&#39;user&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;your username here&gt;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;your key here&gt;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;bucket&#39;</span><span class="p">:</span> <span class="s">&#39;bucket-2&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s">&#39;google&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;libcloud.storage.types.Provider.GOOGLE_STORAGE&#39;</span><span class="p">,</span>
+        <span class="s">&#39;user&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;Your Google APIv1 username&gt;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;Your Google APIv1 Key&gt;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;bucket&#39;</span><span class="p">:</span> <span class="s">&#39;bucket-3&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The values for the <tt class="docutils literal"><span class="pre">type</span></tt>, <tt class="docutils literal"><span class="pre">user</span></tt> and <tt class="docutils literal"><span class="pre">key</span></tt> arguments will vary depending on
+your storage provider:</p>
+<blockquote>
+<div><p><strong>Amazon S3</strong>:</p>
+<blockquote>
+<div><p><strong>type</strong>: <tt class="docutils literal"><span class="pre">libcloud.storage.types.Provider.S3_US_STANDARD_HOST</span></tt>,</p>
+<p><strong>user</strong>: Your AWS access key ID</p>
+<p><strong>key</strong>: Your AWS secret access key</p>
+<p>If you want to use a availability zone other than the US default, you
+can use one of <tt class="docutils literal"><span class="pre">S3_US_WEST_HOST</span></tt>, <tt class="docutils literal"><span class="pre">S3_US_WEST_OREGON_HOST</span></tt>,
+<tt class="docutils literal"><span class="pre">S3_EU_WEST_HOST</span></tt>, <tt class="docutils literal"><span class="pre">S3_AP_SOUTHEAST_HOST</span></tt>, or
+<tt class="docutils literal"><span class="pre">S3_AP_NORTHEAST_HOST</span></tt> instead of <tt class="docutils literal"><span class="pre">S3_US_STANDARD_HOST</span></tt>.</p>
+</div></blockquote>
+<p><strong>Google Cloud Storage</strong>:</p>
+<blockquote>
+<div><p><strong>type</strong>: <tt class="docutils literal"><span class="pre">libcloud.storage.types.Provider.GOOGLE_STORAGE</span></tt>,</p>
+<p><strong>user</strong>: Your Google APIv1 username (20 characters)</p>
+<p><strong>key</strong>: Your Google APIv1 key</p>
+</div></blockquote>
+<p><strong>Nimbus.io</strong>:</p>
+<blockquote>
+<div><p><strong>type</strong>: <tt class="docutils literal"><span class="pre">libcloud.storage.types.Provider.NIMBUS</span></tt>,</p>
+<p><strong>user</strong>: Your Nimbus.io user ID</p>
+<p><strong>key</strong>: Your Nimbus.io access key</p>
+</div></blockquote>
+<p><strong>Ninefold Cloud Storage</strong>:</p>
+<blockquote>
+<div><p><strong>type</strong>: <tt class="docutils literal"><span class="pre">libcloud.storage.types.Provider.NINEFOLD</span></tt>,</p>
+<p><strong>user</strong>: Your Atmos Access Token</p>
+<p><strong>key</strong>: Your Atmos Shared Secret</p>
+</div></blockquote>
+<p><strong>Rackspace Cloudfiles</strong>:</p>
+<blockquote>
+<div><p><strong>type</strong>: <tt class="docutils literal"><span class="pre">libcloud.storage.types.Provider.CLOUDFIULES_US</span></tt> or <tt class="docutils literal"><span class="pre">libcloud.storage.types.Provider.CLOUDFIULES_UK</span></tt>,</p>
+<p><strong>user</strong>: Your Rackspace user ID</p>
+<p><strong>key</strong>: Your Rackspace access key</p>
+</div></blockquote>
+</div></blockquote>
+<p>You can specify any bucket name you want; however, the bucket must exist before you
+can start using it. If you need to create the bucket, you can use the storage API.
+For example, to create <tt class="docutils literal"><span class="pre">bucket-1</span></tt> from our previous example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">storages.backends.apache_libcloud</span> <span class="kn">import</span> <span class="n">LibCloudStorage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span> <span class="o">=</span> <span class="n">LibCloudStorage</span><span class="p">(</span><span class="s">&#39;amazon_1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">create_container</span><span class="p">(</span><span class="s">&#39;bucket-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="default-libcloud-provider">
+<h3><tt class="docutils literal"><span class="pre">DEFAULT_LIBCLOUD_PROVIDER</span></tt><a class="headerlink" href="#default-libcloud-provider" title="Permalink to this headline">¶</a></h3>
+<p>Once you have defined your Libcloud providers, you have the option of
+setting one provider as the default provider of Libcloud storage. This
+is done setting <tt class="docutils literal"><span class="pre">DEFAULT_LIBCLOUD_PROVIDER</span></tt> to the key in
+<tt class="docutils literal"><span class="pre">LIBCLOUD_PROVIDER</span></tt> that you want to use as the default provider.
+For example, if you want the <tt class="docutils literal"><span class="pre">amazon-1</span></tt> provider to be the default
+provider, use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_LIBCLOUD_PROVIDER</span> <span class="o">=</span> <span class="s">&#39;amazon-1&#39;</span>
+</pre></div>
+</div>
+<p>If <tt class="docutils literal"><span class="pre">DEFAULT_LIBCLOUD_PROVIDER</span></tt> isn&#8217;t set, the Libcloud backend will assume
+that the default storage backend is named <tt class="docutils literal"><span class="pre">default</span></tt>. Therefore, you can
+avoid settings DEFAULT_LIBCLOUD_PROVIDER by simply naming one of your
+Libcloud providers <tt class="docutils literal"><span class="pre">default</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">LIBCLOUD_PROVIDERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="o">...</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="default-file-storage">
+<h3><tt class="docutils literal"><span class="pre">DEFAULT_FILE_STORAGE</span></tt><a class="headerlink" href="#default-file-storage" title="Permalink to this headline">¶</a></h3>
+<p>If you want your Libcloud storage to be the default Django file store, you can
+set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_FILE_STORAGE</span> <span class="o">=</span> <span class="s">&#39;storages.backends.apache_libcloud.LibCloudStorage&#39;</span>
+</pre></div>
+</div>
+<p>Your default Libcloud provider will be used as the file store.</p>
+</div>
+</div>
+<div class="section" id="certifcate-authorities">
+<h2>Certifcate authorities<a class="headerlink" href="#certifcate-authorities" title="Permalink to this headline">¶</a></h2>
+<p>Libcloud uses HTTPS connections, and in order to validate that these HTTPS connections are
+correctly signed, root CA certificates must be present. On some platforms
+(most notably, OS X and Windows), the required certificates may not be available
+by default. To test</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">storages.backends.apache_libcloud</span> <span class="kn">import</span> <span class="n">LibCloudStorage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span> <span class="o">=</span> <span class="n">LibCloudStorage</span><span class="p">(</span><span class="s">&#39;amazon_1&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ImproperlyConfigured</span>: <span class="n">Unable to create libcloud driver type libcloud.storage.types.Provider.S3_US_STANDARD_HOST: No CA Certificates were found in CA_CERTS_PATH.</span>
+</pre></div>
+</div>
+<p>If you get this error, you need to install a certificate authority.
+<a class="reference external" href="http://curl.haxx.se/ca/cacert.pem">Download a certificate authority file</a>, and then put the following two lines
+into your settings.py:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">libcloud.security</span>
+<span class="n">libcloud</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">CA_CERTS_PATH</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;/path/to/your/cacerts.pem&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Apache Libcloud</a><ul>
+<li><a class="reference internal" href="#settings">Settings</a><ul>
+<li><a class="reference internal" href="#libcloud-providers"><tt class="docutils literal"><span class="pre">LIBCLOUD_PROVIDERS</span></tt></a></li>
+<li><a class="reference internal" href="#default-libcloud-provider"><tt class="docutils literal"><span class="pre">DEFAULT_LIBCLOUD_PROVIDER</span></tt></a></li>
+<li><a class="reference internal" href="#default-file-storage"><tt class="docutils literal"><span class="pre">DEFAULT_FILE_STORAGE</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#certifcate-authorities">Certifcate authorities</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="amazon-S3.html"
+                        title="previous chapter">Amazon S3</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="azure.html"
+                        title="next chapter">Azure Storage</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/backends/apache_libcloud.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="azure.html" title="Azure Storage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="amazon-S3.html" title="Amazon S3"
+             >previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2017, David Larlet, et. al..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

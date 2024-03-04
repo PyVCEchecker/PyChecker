@@ -1,0 +1,65 @@
+appdirs
+attrs>=19.2
+cached_property
+distlib>=0.2.8
+orderedmultidict
+packaging>=19.0
+pep517>=0.5.0
+pip-shims>=0.5.2
+plette[validation]
+python-dateutil
+requests
+setuptools>=40.8
+six>=1.11.0
+tomlkit>=0.5.3
+vistir>=0.3.1
+
+[:python_version < "3.5"]
+scandir
+
+[:python_version == "2.7"]
+contextlib2
+
+[dev]
+vulture
+flake8
+rope
+isort
+invoke
+twine
+pre-commit
+lxml
+towncrier
+parver
+
+[dev:python_version >= "3.5"]
+flake8-bugbear
+
+[dev:python_version >= "3.6"]
+black
+
+[tests]
+mock
+pytest
+twine
+readme-renderer[md]
+pytest-xdist
+pytest-cov
+pytest-timeout
+coverage
+hypothesis
+
+[typing]
+
+[typing:python_version < "3.5"]
+typing
+
+[typing:python_version >= "3.4"]
+mypy
+mypy-extensions
+mypytools
+pytype
+typed-ast
+
+[typing:python_version >= "3.6"]
+monkeytype

@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>validate_templates &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="admin_generator" href="admin_generator.html" />
+    <link rel="prev" title="sqldsn" href="sqldsn.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="admin_generator.html" title="admin_generator"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sqldsn.html" title="sqldsn"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">validate_templates</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="validate-templates">
+<h1>validate_templates<a class="headerlink" href="#validate-templates" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Checks templates on syntax or compile errors.</p>
+</dd>
+</dl>
+<p>This will catch any invalid Django template syntax, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{% foobar %}
+
+{% comment %}
+This throws this error:
+TemplateSyntaxError Invalid block tag on line 1: &#39;foobar&#39;. Did you forget to register or load this tag?
+{% endcomment %}
+</pre></div>
+</div>
+<p>Note that this will not catch invalid HTML, only errors in the Django template
+syntax used.</p>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="verbosity">
+<h3>verbosity<a class="headerlink" href="#verbosity" title="Permalink to this headline">¶</a></h3>
+<p>A higher verbosity level will print out all the files that are processed
+instead of only the ones that contain errors.</p>
+</div>
+<div class="section" id="break">
+<h3>break<a class="headerlink" href="#break" title="Permalink to this headline">¶</a></h3>
+<p>Do not continue scanning other templates after the first failure.</p>
+</div>
+<div class="section" id="ignore-app">
+<h3>ignore_app<a class="headerlink" href="#ignore-app" title="Permalink to this headline">¶</a></h3>
+<p>Ignore this app (can be used multiple times).</p>
+</div>
+<div class="section" id="includes">
+<h3>includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h3>
+<p>Use -i (can be used multiple times) to add directories to the TEMPLATE DIRS.</p>
+</div>
+<div class="section" id="no-apps">
+<h3>no_apps<a class="headerlink" href="#no-apps" title="Permalink to this headline">¶</a></h3>
+<p>Do not automatically include app template directories.</p>
+</div>
+</div>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="validate-templates-ignore-apps">
+<h3>VALIDATE_TEMPLATES_IGNORE_APPS<a class="headerlink" href="#validate-templates-ignore-apps" title="Permalink to this headline">¶</a></h3>
+<p>Ignore the following apps</p>
+</div>
+<div class="section" id="validate-templates-ignores">
+<h3>VALIDATE_TEMPLATES_IGNORES<a class="headerlink" href="#validate-templates-ignores" title="Permalink to this headline">¶</a></h3>
+<p>Ignore file names which matches these patterns.
+Matching is done via <cite>fnmatch</cite>.</p>
+</div>
+<div class="section" id="validate-templates-extra-template-dirs">
+<h3>VALIDATE_TEMPLATES_EXTRA_TEMPLATE_DIRS<a class="headerlink" href="#validate-templates-extra-template-dirs" title="Permalink to this headline">¶</a></h3>
+<p>You can use <cite>VALIDATE_TEMPLATES_EXTRA_TEMPLATE_DIRS</cite> to include a number of template
+dirs by default directly from the settings file. This can be useful for situations
+where TEMPLATE DIRS is dynamically generated or switched in middleware, or when you
+have other template dirs for external applications like celery, and you want to
+check those as well.</p>
+</div>
+</div>
+<div class="section" id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">validate_templates</span>
+</pre></div>
+</div>
+<p>You can also integrate it with your tests, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">django.core.management</span> <span class="kn">import</span> <span class="n">call_command</span>
+
+<span class="k">class</span> <span class="nc">MyTests</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_validate_templates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">call_command</span><span class="p">(</span><span class="s2">&quot;validate_templates&quot;</span><span class="p">)</span>
+        <span class="c1"># This throws an error if it fails to validate</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">validate_templates</a><ul>
+<li><a class="reference internal" href="#options">Options</a><ul>
+<li><a class="reference internal" href="#verbosity">verbosity</a></li>
+<li><a class="reference internal" href="#break">break</a></li>
+<li><a class="reference internal" href="#ignore-app">ignore_app</a></li>
+<li><a class="reference internal" href="#includes">includes</a></li>
+<li><a class="reference internal" href="#no-apps">no_apps</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#settings">Settings</a><ul>
+<li><a class="reference internal" href="#validate-templates-ignore-apps">VALIDATE_TEMPLATES_IGNORE_APPS</a></li>
+<li><a class="reference internal" href="#validate-templates-ignores">VALIDATE_TEMPLATES_IGNORES</a></li>
+<li><a class="reference internal" href="#validate-templates-extra-template-dirs">VALIDATE_TEMPLATES_EXTRA_TEMPLATE_DIRS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-example">Usage Example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sqldsn.html"
+                        title="previous chapter">sqldsn</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="admin_generator.html"
+                        title="next chapter">admin_generator</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/validate_templates.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="admin_generator.html" title="admin_generator"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sqldsn.html" title="sqldsn"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">validate_templates</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

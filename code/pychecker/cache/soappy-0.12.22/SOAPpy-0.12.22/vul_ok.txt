@@ -1,0 +1,21 @@
+POST / HTTP/1.0
+Host: localhost:8080
+User-agent: SOAPpy 0.12.0 (pywebsvcs.sf.net)
+Content-type: text/xml; charset="UTF-8"
+Content-length: 484
+SOAPAction: "echo"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance"
+xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+>
+<SOAP-ENV:Body>
+<echo SOAP-ENC:root="1">
+<v1 xsi:type="xsd:string">Hello world</v1>
+</echo>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

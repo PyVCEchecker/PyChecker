@@ -1,0 +1,8 @@
+AccessControl>=4.0a5
+Acquisition
+ExtensionClass>=4.1a1
+RestrictedPython>=4.0a1
+roman
+zExceptions
+zope.sequencesort
+zope.structuredtext

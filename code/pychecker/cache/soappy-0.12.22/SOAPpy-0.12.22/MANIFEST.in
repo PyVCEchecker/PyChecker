@@ -1,0 +1,10 @@
+include *.txt *.cfg *.rst
+recursive-include validate *
+recursive-include contrib *
+recursive-include src *
+recursive-include tests *
+recursive-include tools *
+recursive-include zope *
+recursive-include docs *
+recursive-include bid *
+global-exclude *pyc

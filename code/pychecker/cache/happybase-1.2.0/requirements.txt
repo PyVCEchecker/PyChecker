@@ -1,0 +1,2 @@
+six
+thriftpy2>=0.4

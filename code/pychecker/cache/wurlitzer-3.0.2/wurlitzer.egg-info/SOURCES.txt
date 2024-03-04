@@ -1,0 +1,13 @@
+Demo.ipynb
+LICENSE
+MANIFEST.in
+README.md
+dev-requirements.txt
+pyproject.toml
+setup.py
+test.py
+wurlitzer.py
+wurlitzer.egg-info/PKG-INFO
+wurlitzer.egg-info/SOURCES.txt
+wurlitzer.egg-info/dependency_links.txt
+wurlitzer.egg-info/top_level.txt

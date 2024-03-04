@@ -1,0 +1,64 @@
+#compdef gallery-dl
+
+local curcontext="$curcontext"
+typeset -A opt_args
+
+local rc=1
+_arguments -C -S \
+{-h,--help}'[Print this help message and exit]' \
+--version'[Print program version and exit]' \
+{-d,--dest}'[Destination directory]':'<dest>':_files \
+{-i,--input-file}'[Download URLs found in FILE ("-" for stdin). More than one --input-file can be specified]':'<file>':_files \
+--cookies'[File to load additional cookies from]':'<file>':_files \
+--proxy'[Use the specified proxy]':'<url>' \
+--clear-cache'[Delete cached login sessions, cookies, etc. for MODULE (ALL to delete everything)]':'<module>' \
+{-q,--quiet}'[Activate quiet mode]' \
+{-v,--verbose}'[Print various debugging information]' \
+{-g,--get-urls}'[Print URLs instead of downloading]' \
+{-G,--resolve-urls}'[Print URLs instead of downloading; resolve intermediary URLs]' \
+{-j,--dump-json}'[Print JSON information]' \
+{-s,--simulate}'[Simulate data extraction; do not download anything]' \
+{-E,--extractor-info}'[Print extractor defaults and settings]' \
+{-K,--list-keywords}'[Print a list of available keywords and example values for the given URLs]' \
+--list-modules'[Print a list of available extractor modules]' \
+--list-extractors'[Print a list of extractor classes with description, (sub)category and example URL]' \
+--write-log'[Write logging output to FILE]':'<file>':_files \
+--write-unsupported'[Write URLs, which get emitted by other extractors but cannot be handled, to FILE]':'<file>':_files \
+--write-pages'[Write downloaded intermediary pages to files in the current directory to debug problems]' \
+{-r,--limit-rate}'[Maximum download rate (e.g. 500k or 2.5M)]':'<rate>' \
+{-R,--retries}'[Maximum number of retries for failed HTTP requests or -1 for infinite retries (default: 4)]':'<n>' \
+--http-timeout'[Timeout for HTTP connections (default: 30.0)]':'<seconds>' \
+--sleep'[Number of seconds to sleep before each download]':'<seconds>' \
+--filesize-min'[Do not download files smaller than SIZE (e.g. 500k or 2.5M)]':'<size>' \
+--filesize-max'[Do not download files larger than SIZE (e.g. 500k or 2.5M)]':'<size>' \
+--no-part'[Do not use .part files]' \
+--no-skip'[Do not skip downloads; overwrite existing files]' \
+--no-mtime'[Do not set file modification times according to Last-Modified HTTP response headers]' \
+--no-download'[Do not download any files]' \
+--no-check-certificate'[Disable HTTPS certificate validation]' \
+{-c,--config}'[Additional configuration files]':'<file>':_files \
+--config-yaml'[==SUPPRESS==]':'<file>':_files \
+{-o,--option}'[Additional "<key>=<value>" option values]':'<opt>' \
+--ignore-config'[Do not read the default configuration files]' \
+{-u,--username}'[Username to login with]':'<user>' \
+{-p,--password}'[Password belonging to the given username]':'<pass>' \
+--netrc'[Enable .netrc authentication data]' \
+--download-archive'[Record all downloaded files in the archive file and skip downloading any file already in it]':'<file>':_files \
+{-A,--abort}'[Stop current extractor run after N consecutive file downloads were skipped]':'<n>' \
+{-T,--terminate}'[Stop current and parent extractor runs after N consecutive file downloads were skipped]':'<n>' \
+--range'[Index-range(s) specifying which images to download. For example "5-10" or "1,3-5,10-"]':'<range>' \
+--chapter-range'[Like "--range", but applies to manga-chapters and other delegated URLs]':'<range>' \
+--filter'[Python expression controlling which images to download. Files for which the expression evaluates to False are ignored. Available keys are the filename-specific ones listed by "-K". Example: --filter "image_width >= 1000 and rating in ("s", "q")"]':'<expr>' \
+--chapter-filter'[Like "--filter", but applies to manga-chapters and other delegated URLs]':'<expr>' \
+--zip'[Store downloaded files in a ZIP archive]' \
+--ugoira-conv'[Convert Pixiv Ugoira to WebM (requires FFmpeg)]' \
+--ugoira-conv-lossless'[Convert Pixiv Ugoira to WebM in VP9 lossless mode]' \
+--write-metadata'[Write metadata to separate JSON files]' \
+--write-infojson'[Write gallery metadata to a info.json file]' \
+--write-tags'[Write image tags to separate text files]' \
+--mtime-from-date'[Set file modification times according to "date" metadata]' \
+--exec'[Execute CMD for each downloaded file. Example: --exec "convert {} {}.png && rm {}"]':'<cmd>' \
+--exec-after'[Execute CMD after all files were downloaded successfully. Example: --exec-after "cd {} && convert * ../doc.pdf"]':'<cmd>' \
+{-P,--postprocessor}'[Activate the specified post processor]':'<name>' && rc=0
+
+return rc

@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>community API &#8212; Community detection for NetworkX 2 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Community detection for NetworkX’s documentation" href="index.html" />
+ 
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{ 
+var pageTracker = _gat._getTracker("UA-7251741-1");
+pageTracker._trackPageview();
+} catch(err) {} 
+</script>
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html">Community detection</a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Community detection for NetworkX’s documentation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+       <li><a href="#">documentation </a> &raquo;</li>
+
+        <li class="nav-item nav-item-this"><a href="">community API</a></li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">community API</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Community detection for NetworkX’s documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="community-api">
+<h1>community API<a class="headerlink" href="#community-api" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-community"></span><p>This package implements community detection.</p>
+<p>Package name is community but refer to python-louvain on pypi</p>
+<dl class="py function">
+<dt id="community.best_partition">
+<code class="sig-prename descclassname">community.</code><code class="sig-name descname">best_partition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">partition</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">weight</span><span class="o">=</span><span class="default_value">'weight'</span></em>, <em class="sig-param"><span class="n">resolution</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">randomize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#community.best_partition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the partition of the graph nodes which maximises the modularity
+(or try..) using the Louvain heuristices</p>
+<p>This is the partition of highest modularity, i.e. the highest partition
+of the dendrogram generated by the Louvain algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>graph</strong><span class="classifier">networkx.Graph</span></dt><dd><p>the networkx graph which is decomposed</p>
+</dd>
+<dt><strong>partition</strong><span class="classifier">dict, optional</span></dt><dd><p>the algorithm will start using this partition of the nodes.
+It’s a dictionary where keys are their nodes and values the communities</p>
+</dd>
+<dt><strong>weight</strong><span class="classifier">str, optional</span></dt><dd><p>the key in graph to use as weight. Default to ‘weight’</p>
+</dd>
+<dt><strong>resolution</strong><span class="classifier">double, optional</span></dt><dd><p>Will change the size of the communities, default to 1.
+represents the time described in
+“Laplacian Dynamics and Multiscale Modular Structure in Networks”,
+R. Lambiotte, J.-C. Delvenne, M. Barahona</p>
+</dd>
+<dt><strong>randomize</strong><span class="classifier">boolean, optional</span></dt><dd><p>Will randomize the node evaluation order and the community evaluation
+order to get different partitions at each call</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, RandomState instance or None, optional (default=None)</span></dt><dd><p>If int, random_state is the seed used by the random number generator;
+If RandomState instance, random_state is the random number generator;
+If None, the random number generator is the RandomState instance used
+by <cite>np.random</cite>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>partition</strong><span class="classifier">dictionnary</span></dt><dd><p>The partition, with communities numbered from 0 to number of communities</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>NetworkXError</dt><dd><p>If the graph is not Eulerian.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#community.generate_dendrogram" title="community.generate_dendrogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_dendrogram</span></code></a></dt><dd><p>to obtain all the decompositions levels</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Uses Louvain algorithm</p>
+<p class="rubric">References</p>
+<p>large networks. J. Stat. Mech 10008, 1-12(2008).</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># basic usage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">community</span> <span class="k">as</span> <span class="nn">community_louvain</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partion</span> <span class="o">=</span> <span class="n">community_louvain</span><span class="o">.</span><span class="n">best_partition</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># display a graph with its communities:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># as Erdos-Renyi graphs don&#39;t have true community structure,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># instead load the karate club graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">community</span> <span class="k">as</span> <span class="nn">community_louvain</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute the best partition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">community_louvain</span><span class="o">.</span><span class="n">best_partition</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># draw the graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># color the nodes according to their partition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">partition</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">partition</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> 
+<span class="gp">&gt;&gt;&gt; </span>                       <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">partition</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="community.generate_dendrogram">
+<code class="sig-prename descclassname">community.</code><code class="sig-name descname">generate_dendrogram</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">part_init</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">weight</span><span class="o">=</span><span class="default_value">'weight'</span></em>, <em class="sig-param"><span class="n">resolution</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">randomize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#community.generate_dendrogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find communities in the graph and return the associated dendrogram</p>
+<p>A dendrogram is a tree and each level is a partition of the graph nodes.
+Level 0 is the first partition, which contains the smallest communities,
+and the best is len(dendrogram) - 1. The higher the level is, the bigger
+are the communities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>graph</strong><span class="classifier">networkx.Graph</span></dt><dd><p>the networkx graph which will be decomposed</p>
+</dd>
+<dt><strong>part_init</strong><span class="classifier">dict, optional</span></dt><dd><p>the algorithm will start using this partition of the nodes. It’s a
+dictionary where keys are their nodes and values the communities</p>
+</dd>
+<dt><strong>weight</strong><span class="classifier">str, optional</span></dt><dd><p>the key in graph to use as weight. Default to ‘weight’</p>
+</dd>
+<dt><strong>resolution</strong><span class="classifier">double, optional</span></dt><dd><p>Will change the size of the communities, default to 1.
+represents the time described in
+“Laplacian Dynamics and Multiscale Modular Structure in Networks”,
+R. Lambiotte, J.-C. Delvenne, M. Barahona</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>dendrogram</strong><span class="classifier">list of dictionaries</span></dt><dd><p>a list of partitions, ie dictionnaries where keys of the i+1 are the
+values of the i. and where keys of the first are the nodes of graph</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>TypeError</dt><dd><p>If the graph is not a networkx.Graph</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#community.best_partition" title="community.best_partition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">best_partition</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Uses Louvain algorithm</p>
+<p class="rubric">References</p>
+<p>networks. J. Stat. Mech 10008, 1-12(2008).</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dendo</span> <span class="o">=</span> <span class="n">generate_dendrogram</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dendo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;partition at level&quot;</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>          <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="n">partition_at_level</span><span class="p">(</span><span class="n">dendo</span><span class="p">,</span> <span class="n">level</span><span class="p">))</span>
+<span class="go">:param weight:</span>
+<span class="go">:type weight:</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="community.induced_graph">
+<code class="sig-prename descclassname">community.</code><code class="sig-name descname">induced_graph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">partition</span></em>, <em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">weight</span><span class="o">=</span><span class="default_value">'weight'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#community.induced_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce the graph where nodes are the communities</p>
+<p>there is a link of weight w between communities if the sum of the weights
+of the links between their elements is w</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>partition</strong><span class="classifier">dict</span></dt><dd><p>a dictionary where keys are graph nodes and  values the part the node
+belongs to</p>
+</dd>
+<dt><strong>graph</strong><span class="classifier">networkx.Graph</span></dt><dd><p>the initial graph</p>
+</dd>
+<dt><strong>weight</strong><span class="classifier">str, optional</span></dt><dd><p>the key in graph to use as weight. Default to ‘weight’</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>g</strong><span class="classifier">networkx.Graph</span></dt><dd><p>a networkx graph where nodes are the parts</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">complete_graph</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">part</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span> <span class="o">%</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ind</span> <span class="o">=</span> <span class="n">induced_graph</span><span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">goal</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">goal</span><span class="o">.</span><span class="n">add_weighted_edges_from</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)])</span>  <span class="c1"># NOQA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="o">.</span><span class="n">is_isomorphic</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">goal</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="community.load_binary">
+<code class="sig-prename descclassname">community.</code><code class="sig-name descname">load_binary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#community.load_binary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load binary graph as used by the cpp implementation of this algorithm</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="community.modularity">
+<code class="sig-prename descclassname">community.</code><code class="sig-name descname">modularity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">partition</span></em>, <em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">weight</span><span class="o">=</span><span class="default_value">'weight'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#community.modularity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the modularity of a partition of a graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>partition</strong><span class="classifier">dict</span></dt><dd><p>the partition of the nodes, i.e a dictionary where keys are their nodes
+and values the communities</p>
+</dd>
+<dt><strong>graph</strong><span class="classifier">networkx.Graph</span></dt><dd><p>the networkx graph which is decomposed</p>
+</dd>
+<dt><strong>weight</strong><span class="classifier">str, optional</span></dt><dd><p>the key in graph to use as weight. Default to ‘weight’</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>modularity</strong><span class="classifier">float</span></dt><dd><p>The modularity</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>KeyError</dt><dd><p>If the partition is not a partition of all graph nodes</p>
+</dd>
+<dt>ValueError</dt><dd><p>If the graph has no link</p>
+</dd>
+<dt>TypeError</dt><dd><p>If graph is not a networkx.Graph</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>structure in networks. Physical Review E 69, 26113(2004).</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">community</span> <span class="k">as</span> <span class="nn">community_louvain</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">community_louvain</span><span class="o">.</span><span class="n">best_partition</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modularity</span><span class="p">(</span><span class="n">partition</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="community.partition_at_level">
+<code class="sig-prename descclassname">community.</code><code class="sig-name descname">partition_at_level</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dendrogram</span></em>, <em class="sig-param"><span class="n">level</span></em><span class="sig-paren">)</span><a class="headerlink" href="#community.partition_at_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the partition of the nodes at the given level</p>
+<p>A dendrogram is a tree and each level is a partition of the graph nodes.
+Level 0 is the first partition, which contains the smallest communities,
+and the best is len(dendrogram) - 1.
+The higher the level is, the bigger are the communities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dendrogram</strong><span class="classifier">list of dict</span></dt><dd><p>a list of partitions, ie dictionnaries where keys of the i+1 are the
+values of the i.</p>
+</dd>
+<dt><strong>level</strong><span class="classifier">int</span></dt><dd><p>the level which belongs to [0..len(dendrogram)-1]</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>partition</strong><span class="classifier">dictionnary</span></dt><dd><p>A dictionary where keys are the nodes and the values are the set it
+belongs to</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>KeyError</dt><dd><p>If the dendrogram is not well formed or the level is too high</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#community.best_partition" title="community.best_partition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">best_partition</span></code></a></dt><dd><p>which directly combines partition_at_level and</p>
+</dd>
+<dt><a class="reference internal" href="#community.generate_dendrogram" title="community.generate_dendrogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_dendrogram</span></code></a></dt><dd><p>to obtain the partition of highest modularity</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dendrogram</span> <span class="o">=</span> <span class="n">generate_dendrogram</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dendrogram</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;partition at level&quot;</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="n">partition_at_level</span><span class="p">(</span><span class="n">dendrogram</span><span class="p">,</span> <span class="n">level</span><span class="p">))</span>  <span class="c1"># NOQA</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Community detection for NetworkX’s documentation"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+       <li><a href="#">documentation </a> &raquo;</li>
+
+        <li class="nav-item nav-item-this"><a href="">community API</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Thomas Aynaud.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+<div class="footer">This page uses <a href="http://analytics.google.com/">
+Google Analytics</a> to collect statistics. You can disable it by blocking
+the JavaScript coming from www.google-analytics.com.
+<script type="text/javascript">
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = ('https:' == document.location.protocol ?
+              'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.setAttribute('async', 'true');
+    document.documentElement.firstChild.appendChild(ga);
+  })();
+</script>
+</div>
+
+  </body>
+</html>

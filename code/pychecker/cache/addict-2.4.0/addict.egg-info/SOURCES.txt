@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+test_addict.py
+addict/__init__.py
+addict/addict.py
+addict.egg-info/PKG-INFO
+addict.egg-info/SOURCES.txt
+addict.egg-info/dependency_links.txt
+addict.egg-info/top_level.txt

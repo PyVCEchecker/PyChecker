@@ -1,0 +1,164 @@
+---
+ci:
+  # format compatible with commitlint
+  autoupdate_commit_msg: "chore: pre-commit autoupdate"
+  autoupdate_schedule: monthly
+  autofix_commit_msg: |
+    chore: auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+  skip:
+  # https://github.com/pre-commit-ci/issues/issues/55
+  - pip-compile
+  - pip-compile-docs
+  - pip-compile-docs-upgrade
+  - pip-compile-upgrade
+repos:
+- repo: local
+  hooks:
+  - id: immutable-setup-py
+    name: Verify that setup.py stays immutable
+    description: >-
+      This is a sanity check that makes sure that
+      the `setup.py` file isn't changed.
+    # Using Python here because using
+    # shell test does not seem to work in CIs:
+    entry: >-
+      sh -c 'git hash-object setup.py
+      |
+      python -c raise\ SystemExit\(input\(\)\ !=\ \"f6d1010b609cbe816d3ef652eee452d09d52979f\"\)
+      '
+    pass_filenames: false
+    language: system
+    files: >-
+      ^setup\.py$
+- repo: https://github.com/pre-commit/pre-commit-hooks.git
+  rev: v4.0.1
+  hooks:
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+    exclude: >
+      (?x)^(
+        examples/playbooks/(with-skip-tag-id|unicode).yml|
+        examples/playbooks/example.yml
+      )$
+  - id: mixed-line-ending
+  - id: fix-byte-order-marker
+  - id: check-executables-have-shebangs
+  - id: check-merge-conflict
+  - id: debug-statements
+    language_version: python3
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.1.0
+  hooks:
+  - id: codespell
+- repo: https://github.com/PyCQA/doc8
+  rev: 0.9.1
+  hooks:
+  - id: doc8
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.26.3
+  hooks:
+  - id: yamllint
+    exclude: >
+      (?x)^(
+        examples/playbooks/templates/.*|
+        examples/other/some.j2.yaml
+      )$
+    files: \.(yaml|yml)$
+    types: [file, yaml]
+    entry: yamllint --strict
+- repo: https://github.com/PyCQA/isort
+  rev: 5.9.3
+  hooks:
+  - id: isort
+    args:
+    # https://github.com/pre-commit/mirrors-isort/issues/9#issuecomment-624404082
+    - --filter-files
+- repo: https://github.com/psf/black
+  rev: 21.9b0
+  hooks:
+  - id: black
+    language_version: python3
+- repo: https://github.com/pycqa/flake8.git
+  rev: 4.0.1
+  hooks:
+  - id: flake8
+    language_version: python3
+    additional_dependencies:
+    - flake8-2020>=1.6.0
+    # - flake8-black>=0.1.1
+    - flake8-docstrings>=1.5.0
+    - flake8-pytest-style>=1.2.2
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v0.910-1
+  hooks:
+  - id: mypy
+    # empty args needed in order to match mypy cli behavior
+    args: ["--strict"]
+    additional_dependencies:
+    - Sphinx>=3.1.2
+    - ansible-core
+    - enrich
+    - flaky
+    - pytest
+    - rich>=10.2.1
+    - ruamel.yaml
+    - tenacity
+    - types-PyYAML
+    - types-dataclasses
+    - types-docutils
+    - types-pkg_resources
+    - wcmatch
+    - yamllint
+    exclude: >
+      (?x)^(
+        test/local-content/.*|
+        plugins/.*
+      )$
+- repo: https://github.com/pre-commit/mirrors-pylint
+  rev: v3.0.0a4
+  hooks:
+  - id: pylint
+    additional_dependencies:
+    - ansible-core
+    - docutils
+    - enrich
+    - flaky
+    - pytest
+    - pyyaml
+    - rich
+    - ruamel.yaml
+    - sphinx
+    - tenacity
+    - typing_extensions
+    - wcmatch
+- # keep at bottom as these are slower
+  repo: local
+  hooks:
+  - id: pip-compile
+    name: pip-compile
+    entry: pip-compile -q --no-annotate --output-file=constraints.txt setup.py setup.cfg --extra test --extra yamllint --strip-extras
+    language: system
+    files: ^(setup\.cfg|=constraints\.txt)$
+    pass_filenames: false
+  - id: pip-compile-docs
+    name: pip-compile-docs
+    entry: pip-compile -q --no-annotate --output-file=docs/requirements.txt --extra yamllint --strip-extras docs/requirements.in setup.cfg
+    language: system
+    files: ^(docs\/requirements\.(txt|in)|)$
+    pass_filenames: false
+  - id: pip-compile-upgrade
+    name: pip-compile-upgrade
+    entry: pip-compile -q --upgrade --no-annotate --output-file=constraints.txt setup.py setup.cfg --extra test --extra yamllint --strip-extras
+    language: system
+    files: ^(setup\.cfg|=constraints\.txt)$
+    pass_filenames: false
+    stages: [manual]
+  - id: pip-compile-docs-upgrade
+    name: pip-compile-docs-upgrade
+    entry: pip-compile -q --upgrade --no-annotate  --extra yamllint --output-file=docs/requirements.txt --strip-extras docs/requirements.in setup.cfg
+    language: system
+    files: ^(docs\/requirements\.(txt|in)|)$
+    pass_filenames: false
+    stages: [manual]

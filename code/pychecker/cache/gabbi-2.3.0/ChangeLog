@@ -1,0 +1,1107 @@
+CHANGES
+=======
+
+2.3.0
+-----
+
+* release 2.3.0
+* 270 replacer casts (#275)
+* Constrain how the JSONHandler accepts content-types (#302)
+* More useful error when data cannot be encoded (#303)
+* Add 'disable\_response\_handler' test data (#301)
+* Update testing to prefer python 3.9 (#300)
+* update IRC channel location
+* Enable workflow\_dispatch for tests action (#295)
+
+2.2.0
+-----
+
+* release 2.2.0
+* Better test name reporting and skipping (#294)
+
+2.1.0
+-----
+
+* release 2.1.0
+* Update python version support and tests (#293)
+* Make host\_info\_from\_target work with modern urlparse (#292)
+* Replace Travis CI with GitHub Actions (#291)
+* pep8 fixes in tests
+* Be more reslient with pytest fixture start (#288)
+
+2.0.4
+-----
+
+* Release 2.0.4
+* Display response body when no content-type (#285)
+
+2.0.3
+-----
+
+* release 2.0.3
+* remove universal wheel creation
+
+2.0.2
+-----
+
+* release 2.0.2
+* Declare package as Python3-only (#281)
+
+2.0.1
+-----
+
+* Release 2.0.1
+* Correct defaults being copied between suites
+
+2.0.0
+-----
+
+* Drop support for py2 and remove testtools (#279)
+
+1.49.0
+------
+
+* Release 1.49.0
+* Update docs for cert\_validate functionality
+* Rename gabbi-run --ignore-cert to --insecure and -k
+* Update tox.ini to modern expectations
+* add cert validation attribute (runner + driver) (#274)
+
+1.48.0
+------
+
+* release 1.48.0
+* Allow pytest 5.0.0
+
+1.47.0
+------
+
+* Release 1.47.0
+* Clean up test warning and tox misconfigurations
+* Pin pytest to <5.0.0
+
+1.46.0
+------
+
+* release 1.46.0
+* Work around issues in urllib3
+* Enable a -q arg to gabbi-run
+
+1.45.0
+------
+
+* release 1.45.0
+* Make use of unsafe yaml forward compatible (#267)
+* extracted placement (#265)
+* Update testing to use python 3.7
+* Add test confirming $RESPONSE in data
+* Tidy up sphinx references in docs
+* Add installation instructions
+* Tweak intro to be more concise and welcoming
+* Fix the placement tox job
+* Turn of uxsuccess validation in test harness
+
+1.44.0
+------
+
+* release 1.44.0
+* jsonhandler: allow reading yaml data from disk (#254)
+
+1.43.0
+------
+
+* Release 1.43.0
+* read data from disk improvement (#251)
+* Block PyYAML above 4.0 for the time being
+* Formatting changes based on pylint and pep8 reviews
+* Switch to using stestr instead of testrepository
+
+1.42.1
+------
+
+* Relase 1.42.1
+* Check for empty string as host in suitemaker
+* Apply skipIf decorator to test method instead of TestCase
+* update release notes
+
+1.42.0
+------
+
+* Release 1.42.0
+* Allow listing of tests with no host configured
+* Use python3 when building releases
+
+1.41.0
+------
+
+* Release 1.41.0
+* Improve the tests for handling numbers, fix a found bug
+* Avoid checking for <@ when data is not a string
+* Make it possible to use non-string $RESPONSE in data
+
+1.40.1
+------
+
+* Release 1.40.1
+* Clean up warnings shown during testing
+* Tweak docstrings for disambiguation
+* Simplify HTTP setup for readability
+
+1.40.0
+------
+
+* Release 1.40.0
+* Pass strict=True when creating httpclient
+* Require gnocchi and placement targets to pass
+* Fix Gnocchi CI
+
+1.39.1
+------
+
+* Release 1.39.1
+* Raise GabbiFormatError when headers are None
+
+1.39.0
+------
+
+* release 1.39.0
+* Tune up the instructions that get tox installed
+* Update documentation to indicate requirements-dev.txt
+* Move header\_key.yaml to intercept tests
+* Add tox to a new requirements-dev (#233)
+* Update documentation for header key substitution
+* Run replace template for response header keys
+* Add test for replacing template header keys
+* Run replace template for header keys
+
+1.38.0
+------
+
+* Release 1.38.0
+* Make todo about test\_pytest more clear
+* Remove support for Python 3.3
+* Fix pytest handling of fixture-level skips
+* Minor pylint driven formtting cleanups
+* update release notes for 1.37.0
+
+1.37.0
+------
+
+* Release 1.37.0
+* Brief documentation for safe\_yaml=False
+* Allow to load python object from yaml
+* create pyup.io config file
+
+1.36.0
+------
+
+* Release 1.36.0
+* Add docs for use\_prior\_test
+* Add use\_prior\_test to the py\_test\_generator
+* Add Zane to the contributors
+* Clarify that regular expressions use search() not match()
+* Don't treat data in substitutions as regular expressions
+* Correctly match regexes that start or end with slashes
+* Allow non-ASCII in response when matching regex
+* use\_prior\_test directive and flag
+* use\_prior\_test directive and flag
+* use\_prior\_test directive and flag
+* use\_prior\_test directive and flag
+* use\_prior\_test directive and flag
+* Update travis test matrix for pypy, pypy3 and py33
+* correct spelling mistake
+
+1.35.1
+------
+
+* Release 1.35.1
+* curl to tar to avoid the file having a location
+* Actually run the placement tox target
+* Add a tox target for testing against openstack placement
+* Test for host or intercept after url processing
+* curl to tar to avoid the file having a location
+* Actually run the placement tox target
+* Add a tox target for testing against openstack placement
+
+1.35.0
+------
+
+* release 1.35.0
+* Documentation for <@ in json path values
+* Allow value of a json path query to be read from disk
+* Make \_load\_data\_file public
+* Add some simple docs for the LHS json path substitution
+* Template expansion in LHS of json path test
+* Correct location of gnocchi repo in gnocchi tests
+
+1.34.1
+------
+
+* Release 1.34.1
+* Add configuration for uploading signed sdists and wheels
+* use assertRegex not assertRegexpMatches
+* Update contributors list to reflect recent activity
+
+1.34.0
+------
+
+* Relase 1.34.0
+* Add additional test to coerce.yaml
+* Manage numerals more effectively in replacers
+* Add optional \`test\` param for custom content handlers (#212)
+
+1.33.0
+------
+
+* Remove .testrepository/times.dbm each test run
+* release 1.33.0
+* Enforce type of response/content-handler test data
+* Make verbose accept additional valid strings
+* Add verbose option to \`build\_tests\`
+* Allow substitutions in count and delay
+* Fix prefix handling for relative urls
+* Add a test for a relative link and add a comment
+* Avoid duplicating prefix when re-using urls
+* Ensure that $HOME is in passenv
+* Unicode content from disk must become bytes
+
+1.32.0
+------
+
+* Release 1.32.0
+* Minor comment clarification
+* Adjust runner to track test suite failures
+
+1.31.0
+------
+
+* Release 1.31.0
+* Handle exceptions when starting fixtures
+* Add a bit of test running arcana to the faq
+
+1.30.2
+------
+
+* Fix verbose printing of json bodies
+
+1.30.1
+------
+
+* Force removal of the .tox when doing make clean
+* Release 1.30.1
+* add application/xml.\* as non-binary
+* Remove FAQ entry about pytest warnings
+* Use newer style of stating method in example.yaml
+* Add optional testing of current gabbi with current gnocchi
+* Try using a matrix to support multiple pythons
+* Try using python 3.5 to run all the tests
+* Add testing infrastructure for python 3.6
+
+1.30.0
+------
+
+* release 1.30.0
+* Add docs for the $HISTORY feature
+* Minor test format doc improvements
+* Fixes for failing tests
+* Add $HISTORY variable
+* Improve coverage testing and handling
+* Improve gabbi-run stdin test coverage
+
+1.29.1
+------
+
+* release 1.29.1
+* gabbi-run: Fix usage of STDIN
+
+1.29.0
+------
+
+* release 1.29.0
+* Adjust 'data' docs in format.rst
+* Add docs explaining use of new pytest technique
+* clarify wording of docs
+* Add a -v or --verbose flag to gabbi-run
+* Use the dirname of each runner testfile as the test\_dir
+* update docs to mention filepath rather than file
+* enable mock\_open to work on py3.3/3.4
+* Allow <@ syntax to safely include subdirectories
+
+1.28.0
+------
+
+* release 1.28.0
+* fixing duplicate word in a comment
+* Pretty print JSON bodies in verbose tests
+
+1.27.1
+------
+
+* release 1.27.1
+* Support verbose with post data
+* Don't compare strings via object identity
+* Make sure the pytester plugin is called
+* Pass metafunc into the pytest generator
+* Fix pytest warnings by using pytest\_generate\_tests
+
+1.27.0
+------
+
+* Release 1.27.0
+* Add some rudimentary docs for runner input files handling
+* Extract sys.stdin handling from the input\_files
+* Extract argparse setup to own method
+* Remove the use of lambda and just call run\_suite directly
+* Refactor file path extraction
+* Improve argument type detection
+* Refactor internals to encapsulate function arguments
+* Change CLI interface for input files
+* Add support for multiple input files to runner
+* Refactor runner in preparation of support for multiple input files
+
+1.26.1
+------
+
+* Use testtools.TestCase instead of TestCaseWithFixtures
+
+1.26.0
+------
+
+* Release 1.26.0
+* Pluralize to remain consistent with previous function name
+* Closes #174 by correcting the function name typo
+* Add doc for inner fixtures
+* Fix docstring typos
+* Remove hacks for dealing with response handler global state
+* Add the concept of an inner fixture
+* Update content-handlers to reflect json regex handling
+* Correct group\_regex in .testr.conf
+* Don't use usedevelop (#173)
+* Fix heading level
+
+1.25.0
+------
+
+* Release 1.25.0
+* Allow test\_loader\_name to override test class module (#171)
+* Add some doc and FAQ about quieting pytest warnings (#172)
+
+1.24.1
+------
+
+* Release 1.24.1
+* Cast json match to string when doing regex match (#167)
+* Add a custom move to six to make mock available for both Python 2 and 3. (#169)
+* Add a FAQ about yaml anchors and aliases
+* Add the framework for including a FAQ in docs (#163)
+* Fixing link to google (#162)
+
+1.24.0
+------
+
+* release 1.24.0
+* Allow regex in json path values (#160)
+* Clean up content-type parsing
+
+1.23.0
+------
+
+* release 1.23.0
+* Add a pytest plugin to fix fixture handling (#152)
+* Send a warning when a yaml filename has an underscore (#157)
+* Be more visible about test loader needs when concurrent
+* Adjustments for release notes
+* Add a release notes page to the docs. (#155)
+* Tune up the docs so modules are presented better
+
+1.22.0
+------
+
+* release 1.22.0
+* Enable a 'url' arg to build\_tests (#153)
+* Report better error when request headers malformed
+* Run prior tests with TestResult class
+* Tidy up after rebasing from master
+* Runner cleanup (#141)
+* Use named argumets when establishing Interceptor
+* Fix failing tests
+* Extract suitemaking out of driver
+
+1.21.0
+------
+
+* release 1.21.0
+* Allowing forcing SSL in build\_tests and gabbi-run
+
+1.20.0
+------
+
+* release 1.20.0
+
+1.19.1
+------
+
+* release 1.19.1
+* Get gabbi working with IPv6 addresses
+* Fix cookie tests and pep8
+* Add a docs for $COOKIE
+* Experiment with implementation of a $COOKIE
+* add docstring to JSONHandler class
+* Make pylint a little happier
+* correct list in handerls docs
+* Tweak the content-handler docs a little bit
+
+1.19.0
+------
+
+* Relase 1.19.0
+* Make sure the pytest generator knows about content\_handlers
+* Handle replacements when no matching content handler
+* Tune up the docs for content-handlers a bit
+* Adjust the definition of LAST\_URL
+* Add missing README for tests directory
+
+1.18.0
+------
+
+* Release 1.18.0
+* All "live" tests to be skipped
+* First pass at implementing $LAST\_URL feature
+
+1.17.5
+------
+
+* Update docs to points to readthedocs.io
+
+1.17.4
+------
+
+* Release 1.17.4
+* Silence urllib3 warnings
+
+1.17.3
+------
+
+* Release 1.17.3
+* Add documentation for ContentHandlers
+* Silence urllib3 warnings
+* Make the list of content\_ and response\_handlers instance oriented
+* Move the handlers into their own dir
+* Conflate the Response and Content handler concepts
+* Initial proof of ContentHandlers
+* Add 'reason' to verbose header blacklist
+
+1.17.2
+------
+
+* pytest needs to be in requirements now
+
+1.17.1
+------
+
+* Run release tox with --skip-missing-interpreters
+* release 1.17.1
+* Get rid of unused pytest argument
+* Update pytest docs
+* Fix pytest failure handling
+* Make slight improvements to pytest related docs
+
+1.17.0
+------
+
+* Release 1.17.0
+* Add docs about the pytest situation
+* Add support for pytest
+
+1.16.1
+------
+
+* Relase 1.16.1
+* Be even more explicit about wsgi-intercept requirement
+* make urllib3 min requirement of 1.11.0
+
+1.16.0
+------
+
+* Release 1.16.0
+* Removing the remaning references to httplib2
+* Be more explicit about redirect and retry handling
+* Switch to use urllib3 from httplib2
+
+1.15.0
+------
+
+* Release 1.15.0
+* Support testing of full json responses
+
+1.14.1
+------
+
+* Release 1.14.1
+* Adjust header evaluation to always use strings
+* Fix JSON formatting in docs
+* Simplify and clarify JSONPath docs
+* Improve internal reference in docs
+* Fix punctuation problem in jsonpath docs
+* Adjust jsonpath documentation
+
+1.14.0
+------
+
+* Release 1.14.0
+* Switch to using jsonpath\_rw\_ext 1.0.0
+
+1.13.1
+------
+
+* Release 1.13.1
+* Be more explicit about expect yaml file encoding
+* Add a test to confirm jsonpath returns a list
+
+1.13.0
+------
+
+* release 1.13.0
+* Add small amount of docs for json extensions
+* Add some tests for json extension
+* Add initial support for jsonpath sort and filter
+* clean up some copyright strays
+* Drop support for python3.2 in tests
+* Fix typo
+* Switch to mdash where appropriate
+* Remove tox from test-requirements
+
+1.12.0
+------
+
+* Release 1.12.0
+* Use the Interceptor class from wsgi\_intercept
+* Expand support for testing with python 3.5
+
+1.11.0
+------
+
+* release 1.11.0
+* Add response\_forbidden\_headers handler
+* Make table names headings for navigation ease
+
+1.10.0
+------
+
+* Release 1.10.0
+* Remove special-casing of 500 errors
+
+1.9.0
+-----
+
+* Release 1.9.0
+* Improve failure reporting for gabbi-run
+* Partially revert change to test['name'] handling
+* Remove obsolete indirection
+* Refactor driver internals for readability
+* Refactor runner internals for readability
+* Fix whitespace for consistency
+* Some docstrings for gabbi.reporter
+* Rename arguments and internal variables for readability
+* Move legacy wrapper into original module
+* Rename test\_suite\_from\_yaml to better reflect the actual input
+* Remove unused import
+* Revert "Extend CI testing to Python 3.5"
+* Extend CI testing to Python 3.5
+* Make some pylint encouraged cleanups
+
+1.8.1
+-----
+
+* Release 1.8.1
+* Clarify test suite generation by restructuring and renaming internals
+* Improve PEP8 compliance regarding blank lines
+* Remove spurious line breaks
+* Clarify misleading comment
+* Make pep8 rules more clear in CONTRIBUTING.md
+* Update and move a comment to reflect reality
+* Clean up the TestMaker concept
+* Move gabbiit tests into the tests dir
+* Correct test class names
+* Fix typos
+* Tidy single test creation
+* Lessen complexity in create\_url
+* fix pep8 line length problem
+* Tune up and test query\_parameters test directive
+* Extract create\_url to utils
+* Increase unittest coverage
+
+1.8.0
+-----
+
+* Tweak documentation markup to improve readability
+* Release 1.8.0
+* Replace func with meth references in docs
+* Document custom response handlers with gabbi-run
+* Make \_dump\_captured in test\_runner work with testr
+* Refactor runner internals, documenting response handler loading
+* Add shorthand for response handler extensions
+* Replace dynamic with static UUID
+* Ensure multiple response handlers are supported
+* Attempt to emit captured streams on failure
+* Add support for custom response handlers to gabbi-run
+* Ensure port is an integer
+* Raise GabbiFormatError on invalid key with dict value
+* Simplify exit interception
+* Create basic gabbi-run test
+* Add note on running individual tests
+* Fix inconsistent font size within tables
+* hack to override rtd back table formatting
+* hack to override rtd back table formatting
+* Reorganize test format documentation
+
+1.7.0
+-----
+
+* release 1.7.0
+* Add method shortcut documentation
+* Rephrase docstring
+* Refactor internals to improve readability
+* Rename internal variable
+* Document validation method
+* Encapsulate method shortcut identification
+* Disallow "METHOD: url" in defaults
+
+1.6.2
+-----
+
+* Clean up urlsplit arg handling
+* cli: target must be optional
+* added optional shortcut for specifying HTTP method and URL
+
+1.6.1
+-----
+
+* release 1.6.1
+
+1.6.0
+-----
+
+* release 1.6.0
+* Simplify phrasing
+* Allow the gabbi-run target to be a full URL
+* Add support for --help on gabbi-run
+
+1.5.1
+-----
+
+* Release 1.5.1
+* Make only one JSONPathParser per process
+
+1.5.0
+-----
+
+* Release 1.5.0
+* Be explict about 'all' working with verbose flag
+* Add docs for verbose http client
+* Allow envivonment variables to set verbose color
+* Extract a COLORMAP
+* Get of useless \_do prefix on the printing methods
+* Fix pep8
+* Highlight start lines and headers through colorization
+* Fix variable reference
+
+1.4.0
+-----
+
+* release 1.4.0
+* Make user agent identifier more informative
+* Set the user-agent to gabbi
+* Clarify HEADER\_BLACKLIST comment
+* Provide an environ to override isatty checking
+* Extract color output handling for reuse
+* Class level PREFIX and BLACKLIST defaults
+* Fix status handling in verbose mode
+* Add missing request/response prefixes in verbose mode
+* Ensure status line is distinct from headers in verbose mode
+* Proof of concept for increased verbosity
+* Clarify query\_parameters documentation
+* Fix pep8 errors in colorization
+* Proof of concept colorization of gabbi-run output
+* Update CONTRIBUTING.md to give some pull request guidance
+
+1.3.0
+-----
+
+* release 1.3.0
+* Add a bit more doc on query\_parameters
+* Add query\_parameters field
+* Add more information when status assertion fail
+* Add more debug information for JSONResponseHandler
+
+1.2.0
+-----
+
+* release 1.2.0
+* Starts tests and docs on JSONPath len extension
+* Confirm additional json derived content types work
+* Add \`len\` extention to the json parser
+* fixed typos
+
+1.1.7
+-----
+
+* release 1.1.7
+* Add tests for case.\_url\_parse
+* NETLOC shouldn't have default port
+* Make sure all response content marked as JSON is decoded
+
+1.1.6
+-----
+
+* release 1.1.6
+* Ensure the unexpected success works in python3
+
+1.1.5
+-----
+
+* release 1.1.5
+* Make the pep8 gods happy
+* Write out the error message with gabbi run
+* Get rid of testtools so we can have sane reporting
+* Add a CONTRIBUTING.md starting point
+
+1.1.4
+-----
+
+* release 1.1.4
+* Check headers in response before Strings and JSON
+
+1.1.3
+-----
+
+* release 1.1.3
+* Treat REPLACER errors as test failures
+* Make sure content\_type is stripped of whitespace
+* Be more robust in processing content-type charset
+* Change format related AssertionErrors to GabbiFormatError
+* Use PATH\_INFO when checking for /poller
+
+1.1.2
+-----
+
+* release 1.1.2
+* Use the apache license by reference
+* Be ambiguous about copyright
+* Ensure missing response header raises AssertionError
+
+1.1.1
+-----
+
+* release 1.1.1
+* Document availability of ' or " in replacers
+* Remove extraneous variable assignment
+* Call super.\_\_init\_\_ on InterceptFixture
+* Allow single or double quotes in replacers
+* Trim excessive whitespace from output
+* Ensure response header comparisons are case-insensitive
+
+1.1.0
+-----
+
+* prep 1.1.0 release
+* Rename module and classes for readability
+* Add fail fast option to gabbi-run
+* Fix PEP8 compliance
+* Add alternative test runner for concise, language-agnostic output
+* Revert "Simplify host/port parsing"
+* Simplify host/port parsing
+* Fix pep8 in ConnectionRefused changes
+* Fix typo
+* Fix compatibility with Python 3.2 and below
+* Attempt to migrate to container-based travis
+* Introduction documentation improvements
+* Ensure polling does not choke on ConnectionRefusedError
+
+1.0.0
+-----
+
+* release 1.0.0
+* Documentation improvements
+
+0.101.2
+-------
+
+* release 0.101.2 with wsgi-intercept prefix fixes
+* Ensure wsgi-intercept is aware of prefix
+
+0.101.1
+-------
+
+* release 0.101.1 with prefix bug fixes
+* Properly handle prefix in requests and replaces
+* Don't ask travis for python3.5 yet
+* Try to add py35 support to testing harness
+
+0.101.0
+-------
+
+* release 0.101.0 with prefix feature
+* Fix typos in prefix feature docs
+* Add the concept of a 'prefix'
+
+0.100.2
+-------
+
+* release 0.100.2 with test validation fix
+* Error out if a test has no 'url' key
+
+0.100.1
+-------
+
+* Treat a JSONPath ValueError as an AssertionError
+
+0.100.0
+-------
+
+* prep 0.100.0 release
+* fix typo in comment
+* Tests to confirm prior test linking not disrupted by poll
+* Add documentation for poll test key
+* Add an xfail of a poll test
+* First prototype of polling
+* Remove artifact of a recent docs review pull request
+* Special case "True" and "False" environment variables
+* Switching JSONPath formatting breadcrumb to jsonpath-rw for exactness
+* JSONPath formatting breadcrumb in the docs
+* Documentation Updates
+
+0.99.2
+------
+
+* release 0.99.2
+* Add links to gabbi-demo
+* Expand the example test loader docs
+* Preliminary Getting Started suggestions for running the tests
+* Add testing support for pypy and pypy3
+* Add some more superficial tests driver.py
+* Adding a tox environment for docs
+* Add unit test for ResponseHandlers
+* docs typo
+* pep8 cleanups
+* Begin coverage of the utils module
+* Initial tests for build\_tests
+* Replace assert with explicit conditional
+* cleanup more author tags
+* Switch to hacking code formatting rules
+* Add support for informing stop\_fixture of any exception
+* Clean up the clean targets so they get more stuff
+
+0.99.1
+------
+
+* release 0.99.1
+* Add docs for verbose rule
+* Add verbose reporting of request and response
+
+0.99.0
+------
+
+* Begin the 1.0 slide
+* Fix example typos
+* Add an example.rst containing a commented YAML example
+* Ensure defaults update correctly
+* Ensure response handlers are initialized in gabbi-run
+* Update docs to add and accomdate gabbi-run
+* Ensure gabbi-run exit code on failure is non-zero
+* Add a command line to to run yaml-tests from stdin
+* Wrap the http request to trap WSGIAppError and reraise
+* Documentation clarifications
+* Only preprocess in handlers if there are assertions
+* Update docs and rename cleanup to preprocess
+* Attempt to clarify response handler documentation
+* Cover HeadersResponseHandler a bit more
+* Adjust the ResponseHandler to require less of subclasses
+* Improve error message
+* Make response handlers more pluggable
+* Avoid adding the handlers multiple times
+* Change around the response handlers to be classes
+* add missing critical handlers file
+* Add the basics of a response handler extension system
+* Fix typo
+
+0.12.1
+------
+
+* release 0.12.1 fixing lambda bug
+
+0.12.0
+------
+
+* release 0.12.0
+* Allows templating dict in response\_json\_paths
+
+0.11.0
+------
+
+* release 0.11
+* Error if build\_tests has no host or intercept
+* Remove useless usage of lambda
+* Cleanup case module for increased clarity
+
+0.10.0
+------
+
+* Document request\_headers template use
+* Allow templating headers
+* docs typo
+
+0.9.0
+-----
+
+* release 0.9.0
+* Document the change to template handling
+* Refactor in an effort to make case less complex
+* Collapose template handling to one controlling method
+* Add support for skipping an entire suite
+
+0.8.0
+-----
+
+* pep8 cleanups and release 0.8.0
+* Enable $RESPONSE handling in response\_headers
+* All references to prior response headers in the current test
+* add covered to requirements
+* add travis irc notifications
+* Neither assume a content-type nor blow up when its missing
+* Ignore .eggs
+
+0.7.1
+-----
+
+* Preserve JSON response data even when there is a failure
+
+0.7.0
+-----
+
+* release 0.7.0
+* fix typo
+* Add support for skipping or expecting failure on a test
+* Make the test-limit test more robust
+
+0.6.0
+-----
+
+* Update docs for $RESPONSE changes
+* Handle $RESPONSE templates in the current response
+
+0.5.1
+-----
+
+* release 0.5.1
+* pep8 corrections
+* Add a cover tox target to do coverage
+* Add a limit tox target
+* Correctly handle fixtures when selecting limited tests
+* Provide a more descriptive message on missing header
+* Formatting cleanups
+* Raise an error if a test has no name
+* Remove explicit requirement on testtools
+* Update interception doc
+
+0.5.0
+-----
+
+* Delay wsgi interception until after fixtures
+
+0.4.0
+-----
+
+* Allow a fixture to cause a file to skip all tests
+* Extract SimpleWsgi to its own module
+* README.rst: Nicer formatting for commands
+
+0.3.3
+-----
+
+* Correct test naming
+
+0.3.2
+-----
+
+* release 0.3.2
+* update readme with additional docs link
+* Don't include version and release info in docs
+* Extract loading test data from yaml to own method
+
+0.3.1
+-----
+
+* Release 0.3.1
+* Be more informative when JSONpaths do not match
+
+0.3.0
+-----
+
+* release 0.3.0
+* Make regexpmatch assertion message a bit more clear
+* Allow regexp for response header expected values
+
+0.2.0
+-----
+
+* prep 0.2.0 release
+* Add some documentation for fixtures
+* Note why nest is needed
+* Change fixtures to be context managers
+
+0.1.1
+-----
+
+* Prep 0.1.1 release
+* Update the format information with data's capabilities
+* Constrain the data file being loaded via yaml
+* Correct flake8 ignoring of docs dir
+* Don't bother with docs coverage at this time
+* Update the target host information
+* Update the YAML format docs
+* Point the docs bullet somewhere useful
+* Add docs badge
+* Make a make rule for making the docs
+* Add some initial doc files
+* Initial commit of sphinx infrastructure
+* Automate test and build a bit more
+
+0.1.0
+-----
+
+* Extract classes to their own files
+* Add some docs to GabbiFixture
+* Start fixtures at the suite level not the TestCase
+* Implement declarable fixtures
+* Allow request body to come from data structure or file
+* Update gabbi driver to reflect new test handling
+* Extract live tests a separate test file
+* Add image and link to travis
+* Add support for automated travis tests
+* Add tox to test-requirements
+* Update method ordering to be more correct
+* Allow reference to the prior test response
+* Allow a request to follow redirects
+* Tune up variable and yaml key names
+* Change json response validation to use jsonpath
+* Establish inheritable defaults per yaml file
+* Allow multiple acceptable status codes in response
+* Several content-decoding related bug fixes
+* Provide a $LOCATION, $NETLOC, $SCHEME variables in YAML
+* Add a testing section to README
+* Nest the tests in a test key in the YAML
+* If a URL has a scheme, use it directly
+* Enable actual HTTP request testing
+* reorder classes and top level methods
+* fix some RST
+* More documentation cleanup
+* Add some docstrings and a bit more README
+* Get rid of testresources, too much complexity
+* update readme with warning
+* Latest fighting
+* Produce tests which have dependencies on others tests
+* Read yaml to inspire tests
+* Extract a driver that loads yaml from a directory
+* Initial stab at a metaclass test generator
+* initial commit

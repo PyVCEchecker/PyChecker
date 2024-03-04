@@ -1,0 +1,4 @@
+
+        [console_scripts]
+        itbdy=is_the_build_done_yet.is_the_build_done_yet:main
+    

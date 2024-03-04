@@ -1,0 +1,6 @@
+
+[Gui]
+wxPython
+
+[Pyro]
+Pyro

@@ -1,0 +1,3 @@
+[console_scripts]
+generate_will_project = will.scripts.generate_will_project:main
+

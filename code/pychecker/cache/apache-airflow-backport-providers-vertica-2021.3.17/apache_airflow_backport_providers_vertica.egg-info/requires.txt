@@ -1,0 +1,2 @@
+apache-airflow~=1.10
+vertica-python>=0.5.1

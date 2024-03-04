@@ -1,0 +1,12 @@
+MANIFEST.in
+setup.py
+src/twitter/__init__.py
+src/twitter.common.contextutil.egg-info/PKG-INFO
+src/twitter.common.contextutil.egg-info/SOURCES.txt
+src/twitter.common.contextutil.egg-info/dependency_links.txt
+src/twitter.common.contextutil.egg-info/namespace_packages.txt
+src/twitter.common.contextutil.egg-info/requires.txt
+src/twitter.common.contextutil.egg-info/top_level.txt
+src/twitter.common.contextutil.egg-info/zip-safe
+src/twitter/common/__init__.py
+src/twitter/common/contextutil/__init__.py

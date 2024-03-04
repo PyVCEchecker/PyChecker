@@ -1,0 +1,17 @@
+README.rst
+setup.cfg
+setup.py
+readchar/__init__.py
+readchar/key.py
+readchar/readchar.py
+readchar/readchar_linux.py
+readchar/readchar_windows.py
+readchar.egg-info/PKG-INFO
+readchar.egg-info/SOURCES.txt
+readchar.egg-info/dependency_links.txt
+readchar.egg-info/not-zip-safe
+readchar.egg-info/top_level.txt
+tests/acceptance/__init__.py
+tests/unit/__init__.py
+tests/unit/test_key.py
+tests/unit/test_readkey.py

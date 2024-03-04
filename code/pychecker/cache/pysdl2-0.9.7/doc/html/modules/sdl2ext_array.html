@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Converting sequences &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Color handling" href="sdl2ext_color.html" />
+    <link rel="prev" title="Common algorithms" href="sdl2ext_algorithms.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_color.html" title="Color handling"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_algorithms.html" title="Common algorithms"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" accesskey="U">sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="converting-sequences">
+<h1>Converting sequences<a class="headerlink" href="#converting-sequences" title="Permalink to this headline">¶</a></h1>
+<p>This module provides various functions and classes to access sequences and
+buffer-style objects in different ways. It also provides conversion routines
+to improve the interoperability of sequences with <a class="reference external" href="http://docs.python.org/library/ctypes.html#module-ctypes" title="(in Python v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> data types.</p>
+<div class="section" id="providing-read-write-access-for-sequential-data">
+<h2>Providing read-write access for sequential data<a class="headerlink" href="#providing-read-write-access-for-sequential-data" title="Permalink to this headline">¶</a></h2>
+<p>Two classes allow you to access sequential data in different ways. The
+<a class="reference internal" href="#sdl2.ext.CTypesView" title="sdl2.ext.CTypesView"><code class="xref py py-class docutils literal notranslate"><span class="pre">CTypesView</span></code></a> provides byte-wise access to iterable objects and allows
+you to convert the object representation to matching byte-widths for
+<a class="reference external" href="http://docs.python.org/library/ctypes.html#module-ctypes" title="(in Python v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> or other modules.</p>
+<p>Depending on the the underlying object and the chosen size of each particular
+item of the object, the <a class="reference internal" href="#sdl2.ext.CTypesView" title="sdl2.ext.CTypesView"><code class="xref py py-class docutils literal notranslate"><span class="pre">CTypesView</span></code></a> allows you to operate directly
+on different representations of the object’s contents.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="s2">&quot;Hello, I am a simple ASCII string!&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctview</span> <span class="o">=</span> <span class="n">CTypesView</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">itemsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctview</span><span class="o">.</span><span class="n">view</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x61</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="go">aello, I am a simple ASCII string!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctview</span><span class="o">.</span><span class="n">to_uint16</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x6554</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="go">aello,Te am a simple ASCII string!&quot;</span>
+</pre></div>
+</div>
+<p>The snippet above provides a single-byte sized view on a <a class="reference external" href="http://docs.python.org/library/functions.html#bytearray" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bytearray()</span></code></a>
+object. Afterwards, the first item of the view is changed, which causes a
+change on the <a class="reference external" href="http://docs.python.org/library/functions.html#bytearray" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bytearray()</span></code></a>, on the first item as well, since both, the
+<a class="reference internal" href="#sdl2.ext.CTypesView" title="sdl2.ext.CTypesView"><code class="xref py py-class docutils literal notranslate"><span class="pre">CTypesView</span></code></a> and the <a class="reference external" href="http://docs.python.org/library/functions.html#bytearray" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">bytearray()</span></code></a> provide a byte-wise access to
+the contents.</p>
+<p>By using <a class="reference internal" href="#sdl2.ext.CTypesView.to_uint16" title="sdl2.ext.CTypesView.to_uint16"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CTypesView.to_uint16()</span></code></a>, we change the access representation to
+a 2-byte unsigned integer <a class="reference external" href="http://docs.python.org/library/ctypes.html#module-ctypes" title="(in Python v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> pointer and change the fourth 2-byte
+value, <em>I</em> to something else.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; text = bytearray(&quot;Hello, I am a simple ASCII string!&quot;)
+&gt;&gt;&gt; ctview = CTypesView(text, itemsize=2)
+&gt;&gt;&gt; ctview.view[0] = 0x61
+&gt;&gt;&gt; print(text)
+aello, I am a simple ASCII string!&quot;
+&gt;&gt;&gt; ctview.to_uint16()[3] = 0x6554
+&gt;&gt;&gt; print(text)    aello,Te am a simple ASCII string!&quot;
+</pre></div>
+</div>
+<p>If the encapsuled object does not provide a (writable) <a class="reference external" href="http://docs.python.org/library/functions.html#buffer" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">buffer()</span></code></a>
+interface, but is iterable, the <a class="reference internal" href="#sdl2.ext.CTypesView" title="sdl2.ext.CTypesView"><code class="xref py py-class docutils literal notranslate"><span class="pre">CTypesView</span></code></a> will create an
+internal copy of the object data using Python’s <a class="reference external" href="http://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code></a> module and
+perform all operations on that copy.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="mi">222</span><span class="p">,</span> <span class="mi">240</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctview</span> <span class="o">=</span> <span class="n">CTypesView</span><span class="p">(</span><span class="n">mylist</span><span class="p">,</span> <span class="n">itemsize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">docopy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ctview</span><span class="o">.</span><span class="n">object</span><span class="p">)</span>
+<span class="go">array(&#39;B&#39;, [18, 52, 86, 120, 154, 188, 222, 240])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctview</span><span class="o">.</span><span class="n">view</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xFF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+<span class="go">[18, 52, 86, 120, 154, 188, 222, 240]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ctview</span><span class="o">.</span><span class="n">object</span><span class="p">)</span>
+<span class="go">array(&#39;B&#39;, [18, 52, 86, 255, 154, 188, 222, 240])</span>
+</pre></div>
+</div>
+<p>As for directly accessible objects, you can define your own itemsize to
+be used. If the iterable does not provide a direct byte access to their
+contents, this won’t have any effect except for resizing the item
+widths.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="mi">222</span><span class="p">,</span> <span class="mi">240</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctview</span> <span class="o">=</span> <span class="n">CTypesView</span><span class="p">(</span><span class="n">mylist</span><span class="p">,</span> <span class="n">itemsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">docopy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ctview</span><span class="o">.</span><span class="n">object</span><span class="p">)</span>
+<span class="go">array(&#39;I&#39;, [18L, 52L, 86L, 120L, 154L, 188L, 222L, 240L])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-data-over-multiple-dimensions">
+<h2>Accessing data over multiple dimensions<a class="headerlink" href="#accessing-data-over-multiple-dimensions" title="Permalink to this headline">¶</a></h2>
+<p>The second class, <a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a> provides an interface to access
+data over multiple dimensions. You can layout and access a simple
+byte stream over e.g. two or more axes, providing a greater flexibility
+for functional operations and complex data.</p>
+<p>Let’s assume, we are reading image data from a file stream into some buffer
+object and want to access and manipulate the image data. Images feature two
+axes, one being the width, the other being the height, defining a rectangular
+graphics area.</p>
+<p>When we read all data from the file, we have an one-dimensional view of the
+image graphics. The <a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a> allows us to define a
+two-dimensional view over the image graphics, so that we can operate on
+both, rows and columns of the image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">imagedata</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="s2">&quot;some 1-byte graphics data&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">view</span> <span class="o">=</span> <span class="n">MemoryView</span><span class="p">(</span><span class="n">imagedata</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+<span class="go">[[s, o, m, e,  ], [1, -, b, y, t], [e,  , g, r, a], [p, h, i, c, s], [ , d, a, t, a]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">view</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">[s, o, m, e,  ]</span>
+<span class="go">[1, -, b, y, t]</span>
+<span class="go">[e,  , g, r, a]</span>
+<span class="go">[p, h, i, c, s]</span>
+<span class="go">[ , d, a, t, a]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">view</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;X&quot;</span>
+<span class="gp">... </span>   <span class="nb">print</span> <span class="n">row</span>
+<span class="gp">...</span>
+<span class="go">[s, X, m, e,  ]</span>
+<span class="go">[1, X, b, y, t]</span>
+<span class="go">[e, X, g, r, a]</span>
+<span class="go">[p, X, i, c, s]</span>
+<span class="go">[ , X, a, t, a]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">imagedata</span><span class="p">)</span>
+<span class="go">sXme 1XbyteXgrapXics Xata</span>
+</pre></div>
+</div>
+<p>On accessing a particular dimension of a <a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a>, a new
+<a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a> is created, if it does not access a single
+element.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">firstrow</span> <span class="o">=</span> <span class="n">view</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">firstrow</span><span class="p">)</span>
+<span class="go">&lt;class &#39;sdl2.ext.array.MemoryView&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">firstrow</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;type &#39;bytearray&#39;&gt;</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a> features, similar to Python’s builtin
+<a class="reference external" href="http://docs.python.org/library/stdtypes.html#memoryview" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">memoryview</span></code></a>, dimensions and strides, accessible via the
+<a class="reference internal" href="#sdl2.ext.MemoryView.ndim" title="sdl2.ext.MemoryView.ndim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MemoryView.ndim</span></code></a> and <a class="reference internal" href="#sdl2.ext.MemoryView.strides" title="sdl2.ext.MemoryView.strides"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MemoryView.strides</span></code></a> attributes.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">view</span><span class="o">.</span><span class="n">ndim</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">view</span><span class="o">.</span><span class="n">strides</span>
+<span class="go">(5, 5)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="#sdl2.ext.MemoryView.strides" title="sdl2.ext.MemoryView.strides"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MemoryView.strides</span></code></a>, which have to be passed on creating a
+new <a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a>, define the layout of the data over different
+dimensions. In the example above, we created a 5x5 two-dimensional view
+to the image graphics.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">twobytes</span> <span class="o">=</span> <span class="n">MemoryView</span><span class="p">(</span><span class="n">imagedata</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">twobytes</span><span class="p">)</span>
+<span class="go">[[sX, me,  1, Xb, yt], [eX, gr, ap, Xi, cs]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="array-api">
+<h2>Array API<a class="headerlink" href="#array-api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="sdl2.ext.CTypesView">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">CTypesView</code><span class="sig-paren">(</span><em class="sig-param">obj : iterable</em><span class="optional">[</span>, <em class="sig-param">itemsize=1</em><span class="optional">[</span>, <em class="sig-param">docopy=False</em><span class="optional">[</span>, <em class="sig-param">objsize=None</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.CTypesView" title="Permalink to this definition">¶</a></dt>
+<dd><p>A proxy class for byte-wise accessible data types to be used in
+ctypes bindings. The CTypesView provides a read-write access to
+arbitrary objects that are iterable.</p>
+<p>In case the object does not provide a <a class="reference external" href="http://docs.python.org/library/functions.html#buffer" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">buffer()</span></code></a> interface for
+direct access, the CTypesView can copy the object’s contents into an
+internal buffer, from which data can be retrieved, once the necessary
+operations have been performed.</p>
+<p>Depending on the item type stored in the iterable object, you might
+need to provide a certain <em>itemsize</em>, which denotes the size per
+item in bytes. The <em>objsize</em> argument might be necessary of iterables,
+for which len() does not return the correct amount of objects or is not
+implemented.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.CTypesView.bytesize">
+<code class="sig-name descname">bytesize</code><a class="headerlink" href="#sdl2.ext.CTypesView.bytesize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the encapsuled object in bytes.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.CTypesView.is_shared">
+<code class="sig-name descname">is_shared</code><a class="headerlink" href="#sdl2.ext.CTypesView.is_shared" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates, if changes on the CTypesView data effect the encapsuled
+object directly. if not, this means that the object was copied
+internally and needs to be updated by the user code outside of the
+CTypesView.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.CTypesView.object">
+<code class="sig-name descname">object</code><a class="headerlink" href="#sdl2.ext.CTypesView.object" title="Permalink to this definition">¶</a></dt>
+<dd><p>The encapsuled object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.CTypesView.view">
+<code class="sig-name descname">view</code><a class="headerlink" href="#sdl2.ext.CTypesView.view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a read-write aware view of the encapsuled object data
+that is suitable for usage from <a class="reference external" href="http://docs.python.org/library/ctypes.html#module-ctypes" title="(in Python v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.CTypesView.to_bytes">
+<code class="sig-name descname">to_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; ctypes.POINTER<a class="headerlink" href="#sdl2.ext.CTypesView.to_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a byte representation of the encapsuled object. The return
+value allows a direct read-write access to the object data, if it
+is not copied. The <a class="reference external" href="http://docs.python.org/library/ctypes.html#ctypes.POINTER" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">ctypes.POINTER()</span></code></a> points to an array of
+<a class="reference external" href="http://docs.python.org/library/ctypes.html#ctypes.c_ubyte" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ctypes.c_ubyte</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.CTypesView.to_uint16">
+<code class="sig-name descname">to_uint16</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; ctypes.POINTER<a class="headerlink" href="#sdl2.ext.CTypesView.to_uint16" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 16-bit representation of the encapsuled object. The return
+value allows a direct read-write access to the object data, if it
+is not copied. The <a class="reference external" href="http://docs.python.org/library/ctypes.html#ctypes.POINTER" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">ctypes.POINTER()</span></code></a> points to an array of
+<a class="reference external" href="http://docs.python.org/library/ctypes.html#ctypes.c_ushort" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ctypes.c_ushort</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.CTypesView.to_uint32">
+<code class="sig-name descname">to_uint32</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; ctypes.POINTER<a class="headerlink" href="#sdl2.ext.CTypesView.to_uint32" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 32-bit representation of the encapsuled object. The return
+value allows a direct read-write access to the object data, if it
+is not copied. The <a class="reference external" href="http://docs.python.org/library/ctypes.html#ctypes.POINTER" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">ctypes.POINTER()</span></code></a> points to an array of
+<a class="reference external" href="http://docs.python.org/library/ctypes.html#ctypes.c_uint" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ctypes.c_uint</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.CTypesView.to_uint64">
+<code class="sig-name descname">to_uint64</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; ctypes.POINTER<a class="headerlink" href="#sdl2.ext.CTypesView.to_uint64" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 64-bit representation of the encapsuled object. The return
+value allows a direct read-write access to the object data, if it
+is not copied. The <a class="reference external" href="http://docs.python.org/library/ctypes.html#ctypes.POINTER" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">ctypes.POINTER()</span></code></a> points to an array of
+<a class="reference external" href="http://docs.python.org/library/ctypes.html#ctypes.c_ulonglong" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ctypes.c_ulonglong</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.MemoryView">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">MemoryView</code><span class="sig-paren">(</span><em class="sig-param">source : object</em>, <em class="sig-param">itemsize : int</em>, <em class="sig-param">strides : tuple</em><span class="optional">[</span>, <em class="sig-param">getfunc=None</em><span class="optional">[</span>, <em class="sig-param">setfunc=None</em><span class="optional">[</span>, <em class="sig-param">srcsize=None</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.MemoryView" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a> provides a read-write access to arbitrary
+data objects, which can be indexed.</p>
+<p><em>itemsize</em> denotes the size of a single item. <em>strides</em> defines
+the dimensions and the length (n items * <em>itemsize</em>) for each
+dimension. <em>getfunc</em> and <em>setfunc</em> are optional parameters to
+provide specialised read and write access to the underlying
+<em>source</em>. <em>srcsize</em> can be used to provide the correct source
+size, if <code class="docutils literal notranslate"><span class="pre">len(source)</span></code> does not return the absolute size of the
+source object in all dimensions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The MemoryView is a pure Python-based implementation and makes
+heavy use of recursion for multi-dimensional access. If you aim
+for speed on accessing a n-dimensional object, you want to
+consider using a specialised library such as numpy. If you need
+n-dimensional access support, where such a library is not
+supported, or if you need to provide access to objects, which do
+not fulfill the requirements of that particular libray,
+<a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a> can act as solid fallback solution.</p>
+</div>
+<dl class="attribute">
+<dt id="sdl2.ext.MemoryView.itemsize">
+<code class="sig-name descname">itemsize</code><a class="headerlink" href="#sdl2.ext.MemoryView.itemsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of a single item in bytes.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.MemoryView.ndim">
+<code class="sig-name descname">ndim</code><a class="headerlink" href="#sdl2.ext.MemoryView.ndim" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of dimensions of the <a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.MemoryView.size">
+<code class="sig-name descname">size</code><a class="headerlink" href="#sdl2.ext.MemoryView.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size in bytes of the underlying source object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.MemoryView.source">
+<code class="sig-name descname">source</code><a class="headerlink" href="#sdl2.ext.MemoryView.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>The underlying data source.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.MemoryView.strides">
+<code class="sig-name descname">strides</code><a class="headerlink" href="#sdl2.ext.MemoryView.strides" title="Permalink to this definition">¶</a></dt>
+<dd><p>A tuple defining the length in bytes for accessing all
+elements in each dimension of the <a class="reference internal" href="#sdl2.ext.MemoryView" title="sdl2.ext.MemoryView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryView</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.to_ctypes">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">to_ctypes</code><span class="sig-paren">(</span><em class="sig-param">dataseq : iterable</em>, <em class="sig-param">dtype</em><span class="optional">[</span>, <em class="sig-param">mcount=0</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; array, int<a class="headerlink" href="#sdl2.ext.to_ctypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an arbitrary sequence to a ctypes array of the specified
+<em>dtype</em> and returns the ctypes array and amount of items as
+two-value tuple.</p>
+<p>Raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code>, if one or more elements in the passed
+sequence do not match the passed <em>dtype</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.to_list">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">to_list</code><span class="sig-paren">(</span><em class="sig-param">dataseq : iterable</em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#sdl2.ext.to_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a ctypes array to a list.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.to_tuple">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">to_tuple</code><span class="sig-paren">(</span><em class="sig-param">dataseq : iterable</em><span class="sig-paren">)</span> &#x2192; tuple<a class="headerlink" href="#sdl2.ext.to_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a ctypes array to a tuple.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.create_array">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">create_array</code><span class="sig-paren">(</span><em class="sig-param">obj : object</em>, <em class="sig-param">itemsize : int</em><span class="sig-paren">)</span> &#x2192; array.array<a class="headerlink" href="#sdl2.ext.create_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an <a class="reference external" href="http://docs.python.org/library/array.html#array.array" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">array.array</span></code></a> based copy of the passed object.
+<em>itemsize</em> denotes the size in bytes for a single element within
+<em>obj</em>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Converting sequences</a><ul>
+<li><a class="reference internal" href="#providing-read-write-access-for-sequential-data">Providing read-write access for sequential data</a></li>
+<li><a class="reference internal" href="#accessing-data-over-multiple-dimensions">Accessing data over multiple dimensions</a></li>
+<li><a class="reference internal" href="#array-api">Array API</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdl2ext_algorithms.html"
+                        title="previous chapter">Common algorithms</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdl2ext_color.html"
+                        title="next chapter">Color handling</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/sdl2ext_array.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_color.html" title="Color handling"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_algorithms.html" title="Common algorithms"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" >sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

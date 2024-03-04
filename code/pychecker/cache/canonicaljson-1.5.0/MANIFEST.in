@@ -1,0 +1,7 @@
+include *.in
+include *.py
+include *.md
+include LICENSE
+include tox.ini
+prune .travis
+prune debian

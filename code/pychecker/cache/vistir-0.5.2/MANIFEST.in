@@ -1,0 +1,23 @@
+include LICENSE* README*
+include CHANGELOG.rst
+include CODE_OF_CONDUCT.md
+include pyproject.toml
+
+exclude .editorconfig
+exclude .coveragerc
+exclude .pre-commit-config.yaml
+exclude .travis.yml
+exclude azure-pipelines.yml
+exclude tox.ini
+exclude appveyor.yml
+exclude Pipfile*
+
+recursive-include docs Makefile *.rst *.py *.bat
+recursive-exclude docs requirements*.txt
+
+prune .github
+prune docs/build
+prune news
+prune tasks
+prune tests
+prune .azure-pipelines

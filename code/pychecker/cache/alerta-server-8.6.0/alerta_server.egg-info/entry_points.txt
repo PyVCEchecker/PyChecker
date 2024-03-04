@@ -1,0 +1,27 @@
+[alerta.plugins]
+acked_by = alerta.plugins.acked_by:AckedBy
+blackout = alerta.plugins.blackout:BlackoutHandler
+escalate = alerta.plugins.escalate:EscalateSeverity
+forwarder = alerta.plugins.forwarder:Forwarder
+heartbeat = alerta.plugins.heartbeat:HeartbeatReceiver
+reject = alerta.plugins.reject:RejectPolicy
+remote_ip = alerta.plugins.remote_ip:RemoteIpAddr
+timeout = alerta.plugins.timeout:TimeoutPolicy
+
+[alerta.webhooks]
+cloudwatch = alerta.webhooks.cloudwatch:CloudWatchWebhook
+grafana = alerta.webhooks.grafana:GrafanaWebhook
+graylog = alerta.webhooks.graylog:GraylogWebhook
+newrelic = alerta.webhooks.newrelic:NewRelicWebhook
+pagerduty = alerta.webhooks.pagerduty:PagerDutyWebhook
+pingdom = alerta.webhooks.pingdom:PingdomWebhook
+prometheus = alerta.webhooks.prometheus:PrometheusWebhook
+riemann = alerta.webhooks.riemann:RiemannWebhook
+serverdensity = alerta.webhooks.serverdensity:ServerDensityWebhook
+slack = alerta.webhooks.slack:SlackWebhook
+stackdriver = alerta.webhooks.stackdriver:StackDriverWebhook
+telegram = alerta.webhooks.telegram:TelegramWebhook
+
+[console_scripts]
+alertad = alerta.commands:cli
+

@@ -1,0 +1,52 @@
+Metadata-Version: 2.1
+Name: quantaxis
+Version: 1.10.1
+Summary: QUANTAXIS:Quantitative Financial Strategy Framework
+Home-page: https://github.com/quantaxis/quantaxis
+Author: yutiansut
+Author-email: yutiansut@qq.com
+License: MIT
+Keywords: quantaxis,quant,finance,Backtest,Framework
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Requires-Dist: pymongo (>=3.10)
+Requires-Dist: bs4
+Requires-Dist: pandas (<0.25.0)
+Requires-Dist: lxml
+Requires-Dist: matplotlib
+Requires-Dist: requests
+Requires-Dist: numpy (>=1.12.0)
+Requires-Dist: pytesseract
+Requires-Dist: gevent-websocket (>=0.10.1)
+Requires-Dist: apscheduler (>=3.3.1)
+Requires-Dist: tornado
+Requires-Dist: zenlog
+Requires-Dist: protobuf (>=3.4.0)
+Requires-Dist: motor (>=1.1)
+Requires-Dist: retrying
+Requires-Dist: seaborn (>=0.8.1)
+Requires-Dist: attrs (>=17.4.0)
+Requires-Dist: pyconvert (>=0.6.3)
+Requires-Dist: demjson (>=2.2.4)
+Requires-Dist: janus (==0.4.0)
+Requires-Dist: pyecharts-snapshot
+Requires-Dist: async-timeout
+Requires-Dist: IPython
+Requires-Dist: jqdatasdk
+Requires-Dist: numba
+Requires-Dist: websocket-client
+Requires-Dist: tushare
+Requires-Dist: statsmodels (<=0.9.0)
+Requires-Dist: scipy (<=1.1.0)
+Requires-Dist: pytdx (>=1.67)
+Requires-Dist: delegator.py (>=0.0.12)
+Requires-Dist: flask (>=0.12.2)
+Requires-Dist: pyecharts (==0.5.11)
+Requires-Dist: six (>=1.10.0)
+
+QUANTAXIS Financial Framework
+
+

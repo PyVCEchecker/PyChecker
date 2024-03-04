@@ -1,0 +1,12 @@
+python-utils>=2.3.0
+six
+
+[docs]
+sphinx>=1.7.4
+
+[tests]
+flake8>=3.7.7
+pytest>=4.6.9
+pytest-cov>=2.6.1
+freezegun>=0.3.11
+sphinx>=1.8.5

@@ -1,0 +1,6 @@
+
+[:python_version >= "3.5"]
+numpy>=1.17.0
+
+[testing]
+pytest

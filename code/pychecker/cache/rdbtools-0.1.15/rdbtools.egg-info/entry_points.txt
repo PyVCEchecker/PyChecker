@@ -1,0 +1,5 @@
+[console_scripts]
+rdb = rdbtools.cli.rdb:main
+redis-memory-for-key = rdbtools.cli.redis_memory_for_key:main
+redis-profiler = rdbtools.cli.redis_profiler:main
+

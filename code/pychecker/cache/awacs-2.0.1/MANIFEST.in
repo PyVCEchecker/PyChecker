@@ -1,0 +1,13 @@
+include LICENSE
+include *.md
+include .gitignore
+include tox.ini
+include awacs/py.typed
+recursive-include awacs *.py
+recursive-include examples *.py
+recursive-include tests *.py
+
+exclude Makefile
+exclude mypy.ini
+recursive-exclude scrape *
+recursive-exclude scripts *

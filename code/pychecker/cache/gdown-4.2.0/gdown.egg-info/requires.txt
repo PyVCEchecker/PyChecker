@@ -1,0 +1,5 @@
+filelock
+requests[socks]
+six
+tqdm
+beautifulsoup4

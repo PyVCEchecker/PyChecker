@@ -1,0 +1,31 @@
+requests>=2.4.3
+mohawk>=0.3.4
+slugid>=2
+taskcluster-urls>=12.1.0
+six>=1.10.0
+
+[:python_version >= "3.6"]
+aiohttp>=3.7.4
+async_timeout>=2.0.0
+
+[test]
+pytest
+pytest-cov
+pytest-mock
+httmock
+mock
+setuptools-lint
+flake8
+psutil
+hypothesis
+tox
+coverage
+python-dateutil
+
+[test:python_version == "2.7"]
+subprocess32
+
+[test:python_version >= "3.6"]
+pytest-asyncio
+aiofiles
+httptest

@@ -1,0 +1,4 @@
+include *.rst
+include *.txt
+graft collective
+global-exclude *.py[co] .DS_Store

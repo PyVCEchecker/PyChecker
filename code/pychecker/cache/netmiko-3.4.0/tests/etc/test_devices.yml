@@ -1,0 +1,168 @@
+---
+
+cisco881:
+  device_type: cisco_ios
+  host: cisco1.lasthop.io
+  username: pyclass
+  password: 88newclass
+  conn_timeout: 30
+  blocking_timeout: 20
+
+cisco3:
+  device_type: cisco_ios
+  host: cisco3.lasthop.io
+  username: pyclass
+  password: 88newclass
+  session_log: cisco3-out.txt
+  conn_timeout: 20
+  blocking_timeout: 20
+
+cisco881_fast:
+  device_type: cisco_ios
+  ip: 184.105.247.70
+  username: pyclass
+  password: 88newclass
+  fast_cli: True
+
+cisco881_slog:
+  device_type: cisco_ios
+  ip: 184.105.247.70
+  username: pyclass
+  password: 88newclass
+  session_log: "SLOG/cisco881_slog.log"
+  session_log_file_mode: write
+
+cisco881_telnet:
+  device_type: cisco_ios_telnet
+  ip: 184.105.247.70
+  username: pyclass
+  password: 88newclass
+
+cisco881_key:
+  device_type: cisco_ios
+  host: cisco1.lasthop.io
+  username: testuser 
+  use_keys: True,
+  key_file: /home/kbyers/.ssh/test_rsa
+  global_delay_factor: 2
+  port: 22
+
+cisco881_ssh_config:
+  device_type: cisco_ios
+  host: cisco1.lasthop.io
+  username: pyclass
+  password: 88newclass
+  port: 22
+  ssh_config_file: '/home/kbyers/.ssh/ssh_config'
+
+cisco881_ssh_proxyjump:
+  device_type: cisco_ios
+  host: cisco1.lasthop.io
+  username: pyclass
+  password: 88newclass
+  port: 22
+  ssh_config_file: '/home/kbyers/.ssh/ssh_config_proxyjump'
+
+cisco_s300:
+  device_type: cisco_s300
+  ip: 184.105.247.67
+  username: admin
+  password: '{g76l%m30WlJ'
+
+cisco_asa:
+  device_type: cisco_asa
+  ip: 184.105.247.66
+  username: admin
+  password: '{g76l%m30WlJ'
+  secret: '{g76l%m30WlJ'
+  allow_auto_change: True
+
+cisco_asa_login:
+  device_type: cisco_asa
+  ip: 184.105.247.66
+  username: admin
+  password: '{g76l%m30WlJ'
+  allow_auto_change: True
+  session_log: asa.out
+
+arista_sw:
+  device_type: arista_eos
+  host: arista9-napalm.lasthop.io
+  username: admin1
+  password: 99saturday
+  secret: ""
+  # global_delay_factor: 5
+
+hp_procurve:
+  device_type: hp_procurve
+  ip: 184.105.247.68
+  username: admin
+  password: '{g76l%m30WlJ'
+  secret: ""
+
+hp_comware:
+  device_type: hp_comware
+  ip: kontrolissues.thruhere.net
+  username: admin
+  password: 'password'
+  secret: ''
+  port: 831
+
+juniper_srx:
+  device_type: juniper_junos
+  host: srx1.lasthop.io
+  username: pyclass
+  password: 88newclass
+  session_log: juniper.out
+  secret: ''
+
+juniper_vmx:
+  device_type: juniper_junos
+  host: vmx1.lasthop.io
+  username: pyclass
+  password: 88newclass
+
+cisco_xrv:
+  device_type: cisco_xr
+  ip: 184.105.247.77
+  username: admin1
+  password: 8monday0X
+  secret: ''
+  banner_timeout: 60
+
+cisco_xr_azure:
+  device_type: cisco_xr
+  host: iosxr3.lasthop.io
+  username: pyclass
+  password: 88newclass
+  secret: ''
+
+linux_srv1:
+  device_type: linux
+  host: pynetqa.lasthop.io
+  username: gituser
+  use_keys: True
+  key_file: /home/kbyers/.ssh/test_rsa
+
+nxos1:
+  device_type: cisco_nxos 
+  host: nxos1.lasthop.io
+  username: pyclass
+  password: 88newclass
+  conn_timeout: 20
+
+sros2:
+  device_type: nokia_sros
+  host: sros.lasthop.io
+  username: admin
+  password: admin
+  secret: 88newclass
+  port: 2212
+
+sros1_md:
+  device_type: nokia_sros
+  host: sros.lasthop.io
+  username: admin
+  password: admin
+  secret: 88newclass
+  port: 2211

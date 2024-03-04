@@ -1,0 +1,90 @@
+Freezegun Changelog
+===================
+
+1.1.0
+-----
+
+* Add support for `time.monotonic` (and `…_ns`)
+
+* Allow to configure default ignore list, and also to just extend the default
+
+* Fixed when accessing from thread after stop()
+
+
+1.0.0
+------
+
+* Dropped Py2 support
+* Added as_kwarg argument in order to have the frozen time object passed with the name provided in as_kwarg argument
+
+0.3.15
+------
+
+* Fix locale timestamp bug. CC #328
+
+0.3.14
+------
+
+* Fix calendar.timegm behavior
+
+0.3.13
+------
+
+* Fix for Py3.8
+* Reset time.time_ns on stop
+
+0.3.12
+------
+
+* Refactor classes to functions
+* Ignore Selenium
+* Move to pytest
+* Conditionally patch time.clock
+* Patch time.time_ns added in Python 3.7
+
+0.3.11
+------
+
+* Performance improvements
+* Fix nesting time.time
+* Add nanosecond property
+
+0.3.10
+------
+
+* Performance improvements
+* Coroutine support
+
+0.3.9
+-----
+
+* If no time to be frozen, use current time
+* Fix uuid1 issues
+* Add support for python 3.6
+
+0.3.8
+-----
+
+* Bugfix for old-style classes
+* Ignore warnings when patching
+* Add `move_to` method to change time
+
+0.3.7
+-----
+
+* Fix CPython detection
+
+0.3.6
+-----
+
+* Catch TypeError when fetching attribute values
+* Speed improvements
+* Add manual tick increment
+
+
+0.3.5
+-----
+
+* Add `tick` argument to allow time to move forward
+* Performance improvements
+* Fix timezone example in README

@@ -1,0 +1,8 @@
+[console_scripts]
+pydruid = pydruid.console:main
+
+[sqlalchemy.dialects]
+druid = pydruid.db.sqlalchemy:DruidHTTPDialect
+druid.http = pydruid.db.sqlalchemy:DruidHTTPDialect
+druid.https = pydruid.db.sqlalchemy:DruidHTTPSDialect
+

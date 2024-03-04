@@ -1,0 +1,14 @@
+HISTORY.rst
+LICENSE
+MANIFEST.in
+README.rst
+flake8_docstrings.py
+setup.cfg
+setup.py
+tox.ini
+flake8_docstrings.egg-info/PKG-INFO
+flake8_docstrings.egg-info/SOURCES.txt
+flake8_docstrings.egg-info/dependency_links.txt
+flake8_docstrings.egg-info/entry_points.txt
+flake8_docstrings.egg-info/requires.txt
+flake8_docstrings.egg-info/top_level.txt

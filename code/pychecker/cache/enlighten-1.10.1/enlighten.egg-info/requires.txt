@@ -1,0 +1,2 @@
+blessed>=1.17.7
+prefixed>=0.3.2

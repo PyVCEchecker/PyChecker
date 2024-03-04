@@ -1,0 +1,4 @@
+DEF JNIUS_PLATFORM = 'win32'
+
+DEF JNIUS_PYTHON3 = True
+

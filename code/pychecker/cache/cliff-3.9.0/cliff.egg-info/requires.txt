@@ -1,0 +1,7 @@
+PrettyTable>=0.7.2
+PyYAML>=3.12
+autopage>=0.4.0
+cmd2>=1.0.0
+pbr!=2.1.0,>=2.0.0
+pyparsing>=2.1.0
+stevedore>=2.0.1

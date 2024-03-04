@@ -1,0 +1,17 @@
+arpeggio~=1.7
+attrs>=19.2
+six~=1.13
+
+[docstest]
+doc8
+sphinx
+sphinx_rtd_theme
+
+[pep8test]
+flake8
+pep8-naming
+
+[test]
+pytest
+hypothesis
+pretend

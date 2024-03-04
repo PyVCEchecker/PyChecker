@@ -1,0 +1,89 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/instance/
+  response:
+    body: {string: '{"uri":"localhost","title":"Mastodon","short_description":"","description":"","email":"","version":"3.1.1","urls":{"streaming_api":"ws://localhost:4000"},"stats":{"user_count":3,"status_count":1,"domain_count":0},"thumbnail":"http://localhost/packs/media/images/preview-9a17d32fc48369e8ccd910a75260e67d.jpg","languages":["en"],"registrations":true,"approval_required":false,"contact_account":null}'}
+    headers:
+      Cache-Control: ['max-age=180, public']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 22 Feb 2020 19:28:14 GMT']
+      ETag: [W/"7ac51e4e7519042ec38c63400c9f91c7"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [f0701b15-f950-4643-a2b9-f3acbe931b53]
+      X-Runtime: ['0.070816']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['397']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/instance/
+  response:
+    body: {string: '{"uri":"localhost","title":"Mastodon","short_description":"","description":"","email":"","version":"3.1.1","urls":{"streaming_api":"ws://localhost:4000"},"stats":{"user_count":3,"status_count":1,"domain_count":0},"thumbnail":"http://localhost/packs/media/images/preview-9a17d32fc48369e8ccd910a75260e67d.jpg","languages":["en"],"registrations":true,"approval_required":false,"contact_account":null}'}
+    headers:
+      Cache-Control: ['max-age=180, public']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 22 Feb 2020 19:28:14 GMT']
+      ETag: [W/"7ac51e4e7519042ec38c63400c9f91c7"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [cdad7c77-1ce4-4ca9-be29-c66f54d5d5b3]
+      X-Runtime: ['0.044544']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['397']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/instance/
+  response:
+    body: {string: '{"uri":"localhost","title":"Mastodon","short_description":"","description":"","email":"","version":"3.1.1","urls":{"streaming_api":"ws://localhost:4000"},"stats":{"user_count":3,"status_count":1,"domain_count":0},"thumbnail":"http://localhost/packs/media/images/preview-9a17d32fc48369e8ccd910a75260e67d.jpg","languages":["en"],"registrations":true,"approval_required":false,"contact_account":null}'}
+    headers:
+      Cache-Control: ['max-age=180, public']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 22 Feb 2020 19:28:14 GMT']
+      ETag: [W/"7ac51e4e7519042ec38c63400c9f91c7"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [6e2b4633-ca82-47a3-bcaf-18dcdc8f67b1]
+      X-Runtime: ['0.046345']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['397']
+    status: {code: 200, message: OK}
+version: 1

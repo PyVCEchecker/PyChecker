@@ -1,0 +1,81 @@
+[tool.poetry]
+name = "pendulum"
+version = "2.1.2"
+description = "Python datetimes made easy"
+authors = ["Sébastien Eustace <sebastien@eustace.io>"]
+license = "MIT"
+readme = 'README.rst'
+homepage = "https://pendulum.eustace.io"
+repository = "https://github.com/sdispater/pendulum"
+documentation = "https://pendulum.eustace.io/docs"
+keywords = ['datetime', 'date', 'time']
+
+packages = [
+    {include = "pendulum"},
+    #{include = "tests", format = "sdist"},
+]
+include = [
+    {path = "pendulum/py.typed"},
+    # C extensions must be included in the wheel distributions
+    {path = "pendulum/_extensions/*.so", format = "wheel"},
+    {path = "pendulum/_extensions/*.pyd", format = "wheel"},
+    {path = "pendulum/parsing/*.so", format = "wheel"},
+    {path = "pendulum/parsing/*.pyd", format = "wheel"},
+]
+
+
+[tool.poetry.dependencies]
+python = "~2.7 || ^3.5"
+python-dateutil = "^2.6"
+pytzdata = ">=2020.1"
+
+# typing is needed for Python < 3.5
+typing = { version = "^3.6", python = "<3.5" }
+
+[tool.poetry.dev-dependencies]
+pytest = "^4.6"
+pytest-cov = "^2.5"
+pytz = ">=2018.3"
+babel = "^2.5"
+cleo = "^0.8.1"
+tox = "^3.0"
+black = { version = "^19.3b0", markers = "python_version >= '3.6' and python_version < '4.0' and implementation_name != 'pypy'" }
+isort = { version = "^4.3.21", markers = "python_version >= '3.6' and python_version < '4.0'" }
+pre-commit = "^1.10"
+mkdocs = { version = "^1.0", python = "^3.5" }
+pymdown-extensions = "^6.0"
+pygments = "^2.2"
+markdown-include = "^0.5.1"
+freezegun = "^0.3.15"
+
+[tool.poetry.build]
+generate-setup-file = false
+script = "build.py"
+
+[tool.isort]
+line_length = 88
+force_single_line = true
+force_grid_wrap = 0
+atomic = true
+include_trailing_comma = true
+lines_after_imports = 2
+lines_between_types = 1
+multi_line_output = 3
+use_parentheses = true
+not_skip = "__init__.py"
+skip_glob = ["*/setup.py"]
+filter_files = true
+
+known_first_party = "pendulum"
+known_third_party = [
+    "babel",
+    "cleo",
+    "dateutil",
+    "freezegun",
+    "pytzdata",
+]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0a9"]
+build-backend = "poetry.core.masonry.api"

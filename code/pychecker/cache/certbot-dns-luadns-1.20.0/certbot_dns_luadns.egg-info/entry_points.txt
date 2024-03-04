@@ -1,0 +1,3 @@
+[certbot.plugins]
+dns-luadns = certbot_dns_luadns._internal.dns_luadns:Authenticator
+

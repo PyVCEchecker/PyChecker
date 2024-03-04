@@ -1,0 +1,27 @@
+
+[:python_version < "3.5"]
+typing
+
+[all]
+redis
+ruamel.yaml
+configobj
+hvac
+
+[configobj]
+configobj
+
+[ini]
+configobj
+
+[redis]
+redis
+
+[toml]
+toml
+
+[vault]
+hvac
+
+[yaml]
+ruamel.yaml

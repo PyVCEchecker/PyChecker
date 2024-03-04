@@ -1,0 +1,17 @@
+.travis.yml
+AUTHORS.rst
+CONTRIBUTING.rst
+HISTORY.rst
+LICENSE
+MANIFEST.in
+Makefile
+README.rst
+first.py
+setup.cfg
+setup.py
+test_first.py
+tox.ini
+first.egg-info/PKG-INFO
+first.egg-info/SOURCES.txt
+first.egg-info/dependency_links.txt
+first.egg-info/top_level.txt

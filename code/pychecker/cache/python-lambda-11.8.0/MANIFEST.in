@@ -1,0 +1,11 @@
+include requirements.txt
+include LICENSE
+include README.md
+include python/boto/endpoints.json
+include *.txt
+include aws_lambda/project_template/config.yaml
+recursive-include tests *.json *.py *.txt *.yaml
+recursive-include templates *
+recursive-exclude * __pycache__
+
+recursive-include docs *.md conf.py Makefile make.bat

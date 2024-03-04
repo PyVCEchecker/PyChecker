@@ -1,0 +1,7 @@
+future<1,>=0.17.1
+python-dateutil<3,>=2.7.5
+requests<3,>=2.20
+
+[docs]
+Sphinx==1.8.1
+sphinx-rtd-theme==0.4.2

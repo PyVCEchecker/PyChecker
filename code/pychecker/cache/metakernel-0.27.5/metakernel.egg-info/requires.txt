@@ -1,0 +1,13 @@
+ipykernel
+pexpect>=4.2
+
+[activity]
+portalocker
+
+[parallel]
+ipyparallel
+
+[test]
+pytest
+pytest-cov
+requests

@@ -1,0 +1,17 @@
+
+[:python_version <= "2.7"]
+enum34>=1.1.6
+
+[docs]
+sphinx>=1.7.2
+GitPython>=2.1.9
+sphinx2rst
+
+[tests]
+pyyaml
+pytest
+pytest-cache
+pytest-cover
+pytest-flakes
+pytest-pep8
+flake8

@@ -1,0 +1,13 @@
+AUTHORS.md
+CHANGES.md
+LICENSE.md
+README.md
+msgpack_numpy.py
+setup.cfg
+setup.py
+tests.py
+msgpack_numpy.egg-info/PKG-INFO
+msgpack_numpy.egg-info/SOURCES.txt
+msgpack_numpy.egg-info/dependency_links.txt
+msgpack_numpy.egg-info/requires.txt
+msgpack_numpy.egg-info/top_level.txt

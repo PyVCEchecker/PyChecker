@@ -1,0 +1,16 @@
+LICENSE.txt
+MANIFEST.in
+setup.py
+vaex_arrow/__init__.py
+vaex_arrow/_version.py
+vaex_arrow/convert.py
+vaex_arrow/dataset.py
+vaex_arrow/export.py
+vaex_arrow/opener.py
+vaex_arrow.egg-info/PKG-INFO
+vaex_arrow.egg-info/SOURCES.txt
+vaex_arrow.egg-info/dependency_links.txt
+vaex_arrow.egg-info/entry_points.txt
+vaex_arrow.egg-info/not-zip-safe
+vaex_arrow.egg-info/requires.txt
+vaex_arrow.egg-info/top_level.txt

@@ -1,0 +1,28 @@
+Metadata-Version: 1.1
+Name: letsencrypt
+Version: 0.7.0
+Summary: ACME client
+Home-page: https://github.com/letsencrypt/letsencrypt
+Author: Certbot Project
+Author-email: client-dev@letsencrypt.org
+License: Apache License 2.0
+Description: This package is a simple shim around the ``certbot`` ACME client for backwards
+        compatibility.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Environment :: Console :: Curses
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Security
+Classifier: Topic :: System :: Installation/Setup
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: System :: Systems Administration
+Classifier: Topic :: Utilities

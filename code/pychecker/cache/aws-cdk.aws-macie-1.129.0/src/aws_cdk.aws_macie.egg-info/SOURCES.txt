@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_macie.egg-info/PKG-INFO
+src/aws_cdk.aws_macie.egg-info/SOURCES.txt
+src/aws_cdk.aws_macie.egg-info/dependency_links.txt
+src/aws_cdk.aws_macie.egg-info/requires.txt
+src/aws_cdk.aws_macie.egg-info/top_level.txt
+src/aws_cdk/aws_macie/__init__.py
+src/aws_cdk/aws_macie/py.typed
+src/aws_cdk/aws_macie/_jsii/__init__.py
+src/aws_cdk/aws_macie/_jsii/aws-macie@1.129.0.jsii.tgz

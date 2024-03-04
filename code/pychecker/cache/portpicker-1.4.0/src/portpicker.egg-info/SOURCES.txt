@@ -1,0 +1,16 @@
+CONTRIBUTING.md
+ChangeLog.md
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.cfg
+test.sh
+src/portpicker.py
+src/portserver.py
+src/portpicker.egg-info/PKG-INFO
+src/portpicker.egg-info/SOURCES.txt
+src/portpicker.egg-info/dependency_links.txt
+src/portpicker.egg-info/top_level.txt
+src/tests/portpicker_test.py
+src/tests/portserver_test.py

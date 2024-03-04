@@ -1,0 +1,73 @@
+<project default="test" name="JPype - Native">
+
+	<property name="src" location="harness"/>
+	<property name="build" location="classes"/>
+        <property name="version" value="${ant.java.version}"/>
+
+	<target name="test" depends="compile">
+	</target>
+
+	<condition property="build-9">
+		<not><or>
+		<equals arg1="${version}" arg2="1.8"/>
+		<equals arg1="${version}" arg2="1.7"/>
+		</or></not>
+	</condition>
+
+	<condition property="build-8">
+		<not><equals arg1="${version}" arg2="1.7"/></not>
+	</condition>
+
+	<target name="compile-9" if="build-9">
+		<javac destdir="${build}"
+			source="${version}"
+			target="${version}"
+			>
+			<compilerarg value="--add-exports"/>
+			<compilerarg value="java.base/jdk.internal.reflect=ALL-UNNAMED"/>
+			<src>
+				<pathelement location="${src}/java9"/>
+			</src>
+			<include name="jpype/**/*"/>
+		</javac>
+	</target>
+
+	<target name="compile-8" if="build-8">
+		<javac destdir="${build}"
+			source="${version}"
+			target="${version}"
+			>
+			<src>
+				<pathelement location="${src}/java8"/>
+			</src>
+			<include name="jpype/**/*"/>
+		</javac>
+	</target>
+
+	<target name="compile-main">
+		<mkdir dir="${build}"/>
+		<javac destdir="${build}"
+			source="${version}"
+			target="${version}"
+			debug="true"
+			debuglevel="lines,vars,source"
+			>
+			<src>
+				<pathelement location="${src}"/>
+			</src>
+			<include name="jpype/**/*"/>
+			<include name="org/**/*"/>
+		</javac>
+	<!--		<rmic base="${build}"
+			classname="jpype.rmi.ServerImpl"
+		/>
+  -->
+	</target>
+
+	<target name="compile" depends="compile-main,compile-8,compile-9"/>
+
+	<target name="clean">
+		<delete dir="${build}"/>
+	</target>
+
+</project>

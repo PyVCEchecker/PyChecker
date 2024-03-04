@@ -1,0 +1,13 @@
+README.md
+setup.py
+tapioca/__init__.py
+tapioca/adapters.py
+tapioca/exceptions.py
+tapioca/serializers.py
+tapioca/tapioca.py
+tapioca_wrapper.egg-info/PKG-INFO
+tapioca_wrapper.egg-info/SOURCES.txt
+tapioca_wrapper.egg-info/dependency_links.txt
+tapioca_wrapper.egg-info/not-zip-safe
+tapioca_wrapper.egg-info/requires.txt
+tapioca_wrapper.egg-info/top_level.txt

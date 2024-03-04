@@ -1,0 +1,93 @@
+import base64
+import logging
+import pickle
+import sys
+import time
+import traceback
+
+from django.contrib.auth import get_user_model
+from django.contrib.sites.models import Site
+from django.core.mail import mail_admins
+
+from . import models as notification
+from .conf import settings
+from .lockfile import AlreadyLocked, FileLock, LockTimeout
+from .models import NoticeQueueBatch
+from .signals import emitted_notices
+
+
+def acquire_lock(*args):
+    if len(args) == 1:
+        lock = FileLock(args[0])
+    else:
+        lock = FileLock("send_notices")
+
+    logging.debug("acquiring lock...")
+    try:
+        lock.acquire(settings.PINAX_NOTIFICATIONS_LOCK_WAIT_TIMEOUT)
+    except AlreadyLocked:
+        logging.debug("lock already in place. quitting.")
+        return
+    except LockTimeout:
+        logging.debug("waiting for the lock timed out. quitting.")
+        return
+    logging.debug("acquired.")
+    return lock
+
+
+def send_all(*args):
+    lock = acquire_lock(*args)
+    if lock is None:
+        logging.debug("no lock acquired. skipping sending.")
+        return
+    batches, sent, sent_actual = 0, 0, 0
+    start_time = time.time()
+
+    try:
+        for queued_batch in NoticeQueueBatch.objects.all():
+            notices = pickle.loads(base64.b64decode(queued_batch.pickled_data))
+            for user, label, extra_context, sender in notices:
+                try:
+                    user = get_user_model().objects.get(pk=user)
+                    logging.info(f"emitting notice {label} to {user}")
+                    # call this once per user to be atomic and allow for logging to
+                    # accurately show how long each takes.
+                    if notification.send_now([user], label, extra_context, sender):
+                        sent_actual += 1
+                except get_user_model().DoesNotExist:
+                    # Ignore deleted users, just warn about them
+                    logging.warning(
+                        "not emitting notice {} to user {} since it does not exist".format(
+                            label,
+                            user)
+                    )
+                sent += 1
+            queued_batch.delete()
+            batches += 1
+        emitted_notices.send(
+            sender=NoticeQueueBatch,
+            batches=batches,
+            sent=sent,
+            sent_actual=sent_actual,
+            run_time="%.2f seconds" % (time.time() - start_time)
+        )
+    except Exception:  # pylint: disable-msg=W0703
+        # get the exception
+        _, e, _ = sys.exc_info()
+        # email people
+        current_site = Site.objects.get_current()
+        subject = f"[{current_site.name} emit_notices] {e}"
+        message = "\n".join(
+            traceback.format_exception(*sys.exc_info())  # pylint: disable-msg=W0142
+        )
+        mail_admins(subject, message, fail_silently=True)
+        # log it as critical
+        logging.critical(f"an exception occurred: {e}")
+    finally:
+        logging.debug("releasing lock...")
+        lock.release()
+        logging.debug("released.")
+
+    logging.info("")
+    logging.info(f"{batches} batches, {sent} sent")
+    logging.info("done in {:.2f} seconds".format(time.time() - start_time))

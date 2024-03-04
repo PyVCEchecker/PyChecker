@@ -1,0 +1,7 @@
+include *.cfg
+include *.rst
+include *.txt
+include tox.ini
+
+recursive-include src *.dtml
+recursive-include src *.out

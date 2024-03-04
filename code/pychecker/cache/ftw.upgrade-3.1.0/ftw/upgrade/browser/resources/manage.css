@@ -1,0 +1,99 @@
+.selection-control {
+  margin-bottom: 1em;
+}
+
+.selection-control > span:after {
+  content: "|";
+}
+
+.selection-control > span:last-child:after {
+  content: "";
+}
+
+.profile {
+  clear: both;
+  margin-bottom: 0.5em;
+  padding: 1px;
+}
+
+.profile:hover {
+  border: 1px solid #ddd;
+  padding: 0px;
+}
+
+.profile-title.outdated-fs-version  {
+  background-color: #ffb8b8;
+}
+
+.profile-title strong {
+  cursor: pointer;
+}
+
+.profile-version {
+  float: right;
+  margin-right: 1em;
+}
+
+.outdated-fs-version .profile-version .fs-version {
+  color: red;
+  font-weight: bold;
+}
+
+.upgrade {
+  clear: both;
+  padding-left: 2em;
+  cursor: pointer;
+}
+
+.upgrade:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.upgrade:hover {
+  background-color: #eee;
+}
+
+.upgrade > span {
+  float: left;
+  margin-left: 1em;
+}
+
+.upgrade span.upgrade-checkbox {
+  margin-left: 0;
+  width: 6em;
+}
+
+.upgrade span.upgrade-version {
+  width: 20em;
+}
+
+.upgrade.outdated-fs-version .dest-version {
+  color: red;
+  font-weight: bold;
+}
+
+.upgrade.done {
+  display: none;
+}
+
+.upgrade.outdated-fs-version {
+  background-color: #fedcdc;
+}
+
+.upgrade.orphan {
+  background-color: #F8CE92;
+}
+
+#upgrade-output {
+  width: 100%;
+  min-height: 500px;
+  border: 1px solid #eee;
+  display: none;
+  overflow: visible;
+}
+
+#back-to-upgrades {
+  display: none;
+}

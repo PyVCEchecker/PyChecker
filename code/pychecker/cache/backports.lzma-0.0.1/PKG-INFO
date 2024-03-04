@@ -1,0 +1,25 @@
+Metadata-Version: 1.0
+Name: backports.lzma
+Version: 0.0.1
+Summary: Backport of Python 3.3's 'lzma' module for XZ/LZMA compressed files.
+Home-page: https://github.com/peterjc/backports.lzma
+Author: Peter Cock, based on work by Nadeem Vawda and Per Oyvind Karlsen
+Author-email: p.j.a.cock@googlemail.com
+License: 3-clause BSD License
+Description: This is a backport of the 'lzma' module included in Python 3.3 or later
+        by Nadeem Vawda and Per Oyvind Karlsen, which provides a Python wrapper for XZ Utils
+        (aka LZMA Utils v2) by Igor Pavlov.
+        
+        In order to compile this, you will need to install XZ Utils from http://tukaani.org/xz/
+        
+Keywords: xy lzma compression decompression
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Topic :: System :: Archiving :: Compression

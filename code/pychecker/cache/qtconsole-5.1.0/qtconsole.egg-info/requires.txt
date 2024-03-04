@@ -1,0 +1,16 @@
+traitlets
+ipython_genutils
+jupyter_core
+jupyter_client>=4.1
+pygments
+ipykernel>=4.1
+qtpy
+pyzmq>=17.1
+
+[doc]
+Sphinx>=1.3
+
+[test]
+flaky
+pytest
+pytest-qt

@@ -1,0 +1,560 @@
+Metadata-Version: 2.1
+Name: mirakuru
+Version: 2.4.1
+Summary: Process executor (not only) for tests.
+Home-page: https://github.com/ClearcodeHQ/mirakuru
+Maintainer: Grzegorz Śliwiński
+Maintainer-email: fizyk+pypi@fizyk.net.pl
+License: LGPLv3+
+Keywords: process,executor,tests,orchestration
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Python: >=3.7
+Description-Content-Type: text/x-rst
+Provides-Extra: tests
+License-File: LICENSE
+License-File: AUTHORS.rst
+
+.. image:: https://raw.githubusercontent.com/ClearcodeHQ/mirakuru/master/logo.png
+    :height: 100px
+    
+mirakuru
+========
+
+Mirakuru is a process orchestration tool designed for functional and integration tests.
+
+Maybe you want to be able to start a database before you start your program
+or maybe you just need to set additional services up for your tests.
+This is where you should consider using **mirakuru** to add superpowers to your program or tests.
+
+
+.. image:: https://img.shields.io/pypi/v/mirakuru.svg
+    :target: https://pypi.python.org/pypi/mirakuru/
+    :alt: Latest PyPI version
+
+.. image:: https://img.shields.io/pypi/wheel/mirakuru.svg
+    :target: https://pypi.python.org/pypi/mirakuru/
+    :alt: Wheel Status
+
+.. image:: https://img.shields.io/pypi/pyversions/mirakuru.svg
+    :target: https://pypi.python.org/pypi/mirakuru/
+    :alt: Supported Python Versions
+
+.. image:: https://img.shields.io/pypi/l/mirakuru.svg
+    :target: https://pypi.python.org/pypi/mirakuru/
+    :alt: License
+
+
+Usage
+-----
+
+In a project that relies on multiple processes there might be a need to guard code
+with tests that verify interprocess communication. So one needs to set up all of
+required databases, auxiliary and application services to verify their cooperation.
+Synchronising (or orchestrating) test procedure with tested processes might be a hell.
+
+If so, then **mirakuru** is what you need.
+
+``Mirakuru`` starts your process and waits for the clear indication that it's running.
+Library provides seven executors to fit different cases:
+
+* **SimpleExecutor** - starts a process and does not wait for anything.
+  It is useful to stop or kill a process and its subprocesses.
+  Base class for all the rest of executors.
+* **Executor** - base class for executors verifying if a process has started.
+* **OutputExecutor** - waits for a specified output to be printed by a process.
+* **TCPExecutor** - waits for the ability to connect through TCP with a process.
+* **UnixSocketExecutor** - waits for the ability to connect through Unix socket
+  with a process
+* **HTTPExecutor** - waits for a successful HEAD request (and TCP before).
+* **PidExecutor** - waits for a specified .pid file to exist.
+
+SimpleExecutor
+++++++++++++++
+
+The simplest executor implementation.
+It simply starts the process passed to constructor, and reports it as running.
+
+.. code-block:: python
+
+    from mirakuru import SimpleExecutor
+
+    process = SimpleExecutor('my_special_process')
+    process.start()
+
+    # Here you can do your stuff, e.g. communicate with the started process
+
+    process.stop()
+
+OutputExecutor
+++++++++++++++
+
+OutputExecutor is the executor that starts the process,
+but does not report it as started, unless it receives specified marker/banner in
+process output.
+
+.. code-block:: python
+
+    from mirakuru import OutputExecutor
+
+    process = OutputExecutor('my_special_process', banner='processed!')
+    process.start()
+
+    # Here you can do your stuff, e.g. communicate with the started process
+
+    process.stop()
+
+What happens during start here, is that the executor constantly checks output
+produced by started process, and looks for the banner part occurring within the
+output.
+Once the output is identified, as in example `processed!` is found in output.
+It is considered as started, and executor releases your script from wait to work.
+
+
+TCPExecutor
++++++++++++
+
+Is the executor that should be used to start
+processes that are using TCP connection. This executor tries to connect with
+the process on given host:port to see if it started accepting connections. Once it
+does, it reports the process as started and a code returns to normal execution.
+
+.. code-block:: python
+
+    from mirakuru import TCPExecutor
+
+    process = TCPExecutor('my_special_process', host='localhost', port=1234)
+    process.start()
+
+    # Here you can do your stuff, e.g. communicate with the started process
+
+    process.stop()
+
+HTTPExecutor
+++++++++++++
+
+Is executor that will be used to start web applications for example.
+To start it, you apart from command, you need to pass a URL.
+This URL will be used to make a (by default) HEAD request. Once successful,
+the executor will be considered started, and a code will return to normal execution.
+
+.. code-block:: python
+
+    from mirakuru import HTTPExecutor
+
+    process = HTTPExecutor('my_special_process', url='http://localhost:6543/status')
+    process.start()
+
+    # Here you can do your stuff, e.g. communicate with the started process
+
+    process.stop()
+
+This executor, however, apart from HEAD request, also inherits TCPExecutor,
+so it'll try to connect to process over TCP first, to determine,
+if it can try to make a HEAD request already.
+
+By default HTTPExecutor waits until its subprocess responds with 2XX HTTP status code.
+If you consider other codes as valid you need to specify them in 'status' argument.
+
+.. code-block:: python
+
+    from mirakuru import HTTPExecutor
+
+    process = HTTPExecutor('my_special_process', url='http://localhost:6543/status', status='(200|404)')
+    process.start()
+
+The "status" argument can be a single code integer like 200, 404, 500 or a regular expression string -
+'^(2|4)00$', '2\d\d', '\d{3}', etc.
+
+There's also a possibility to change the request method used to perform request to the server.
+By default it's HEAD, but GET, POST or other are also possible.
+
+.. code-block:: python
+
+    from mirakuru import HTTPExecutor
+
+    process = HTTPExecutor('my_special_process', url='http://localhost:6543/status', status='(200|404)', method='GET')
+    process.start()
+
+
+PidExecutor
++++++++++++
+
+Is an executor that starts the given
+process, and then waits for a given file to be found before it gives back control.
+An example use for this class is writing integration tests for processes that
+notify their running by creating a .pid file.
+
+.. code-block:: python
+
+    from mirakuru import PidExecutor
+
+    process = PidExecutor('my_special_process', filename='/var/msp/my_special_process.pid')
+    process.start()
+
+    # Here you can do your stuff, e.g. communicate with the started process
+
+    process.stop()
+
+
+.. code-block:: python
+
+    from mirakuru import HTTPExecutor
+    from httplib import HTTPConnection, OK
+
+
+    def test_it_works():
+        # The ``./http_server`` here launches some HTTP server on the 6543 port,
+        # but naturally it is not immediate and takes a non-deterministic time:
+        executor = HTTPExecutor("./http_server", url="http://127.0.0.1:6543/")
+
+        # Start the server and wait for it to run (blocking):
+        executor.start()
+        # Here the server should be running!
+        conn = HTTPConnection("127.0.0.1", 6543)
+        conn.request("GET", "/")
+        assert conn.getresponse().status is OK
+        executor.stop()
+
+
+A command by which executor spawns a process can be defined by either string or list.
+
+.. code-block:: python
+
+    # command as string
+    TCPExecutor('python -m smtpd -n -c DebuggingServer localhost:1025', host='localhost', port=1025)
+    # command as list
+    TCPExecutor(
+        ['python', '-m', 'smtpd', '-n', '-c', 'DebuggingServer', 'localhost:1025'],
+        host='localhost', port=1025
+    )
+
+Use as a Context manager
+------------------------
+
+Starting
+++++++++
+
+Mirakuru executors can also work as a context managers.
+
+.. code-block:: python
+
+    from mirakuru import HTTPExecutor
+
+    with HTTPExecutor('my_special_process', url='http://localhost:6543/status') as process:
+
+        # Here you can do your stuff, e.g. communicate with the started process
+        assert process.running() is True
+
+    assert process.running() is False
+
+Defined process starts upon entering context, and exit upon exiting it.
+
+Stopping
+++++++++
+
+Mirakuru also allows to stop process for given context.
+To do this, simply use built-in stopped context manager.
+
+.. code-block:: python
+
+    from mirakuru import HTTPExecutor
+
+    process = HTTPExecutor('my_special_process', url='http://localhost:6543/status').start()
+
+    # Here you can do your stuff, e.g. communicate with the started process
+
+    with process.stopped():
+
+        # Here you will not be able to communicate with the process as it is killed here
+        assert process.running() is False
+
+    assert process.running() is True
+
+Defined process stops upon entering context, and starts upon exiting it.
+
+
+Methods chaining
+++++++++++++++++
+
+Mirakuru encourages methods chaining so you can inline some operations, e.g.:
+
+.. code-block:: python
+
+    from mirakuru import SimpleExecutor
+
+    command_stdout = SimpleExecutor('my_special_process').start().stop().output
+
+Contributing and reporting bugs
+-------------------------------
+
+Source code is available at: `ClearcodeHQ/mirakuru <https://github.com/ClearcodeHQ/mirakuru>`_.
+Issue tracker is located at `GitHub Issues <https://github.com/ClearcodeHQ/mirakuru/issues>`_.
+Projects `PyPI page <https://pypi.python.org/pypi/mirakuru>`_.
+
+Windows support
+---------------
+
+Frankly, there's none, Python's support differs a bit in required places
+and the team has no experience in developing for Windows.
+However we'd welcome contributions that will allow the windows support.
+
+See:
+
+* `#392 <https://github.com/ClearcodeHQ/mirakuru/issues/392>`_
+* `#336 <https://github.com/ClearcodeHQ/mirakuru/issues/336>`_
+
+Also, With the introduction of `WSL <https://docs.microsoft.com/en-us/windows/wsl/install-win10>`_
+the need for raw Windows support might not be that urgant... If you've got any thoughts or are willing to contribute,
+please start with the issues listed above.
+
+CHANGELOG
+=========
+
+2.4.1
+----------
+
+Misc
+++++
+
+- Use strictier mypy checks
+
+2.4.0
+----------
+
+Features
+++++++++
+
+- Replace `exp_sig` executor parameter with `expected_returncode`.
+  Parameter description already assumed that, however handing it assumed full
+  POSIX compatibility on the process side. Now the POSIX is only assumed if no
+  `expected_returncode` is passed to the executor, and returncode is simply that,
+  a returncode, nothing more
+
+2.3.1
+----------
+
+Misc
+++++
+
+- Moved CI to Github Actions
+- Blackified codebase
+- Compacted Documentation into readme (was pretty small anyway)
+
+2.3.0
+----------
+
+- [enhancement] Ability to set up expected exit code for executor. In Java exit codes 1- 127 have 
+  special meaning, and the regular exit codes are offset by those of special meaning.
+
+2.2.0
+----------
+
+- [enhancement] If process is being closed and the shutdown won't be clean (won't return exit code 0)
+  mirakuru will now rise ProcessFinishedWithError exception with exit_code
+
+2.1.2
+----------
+
+- [bugfix][macos] Fixed typing issue on macOS
+
+2.1.1
+----------
+
+- [bug] Always close connection for HTTPExecutor after_start_check
+- [enhancement] Log debug message if execption occured during
+  HTTPExecutor start check
+- [ehnancement] adjust typing handling in HTTPExecutor
+
+2.1.0
+----------
+
+- [feature] Drop support for python 3.5. Rely on typing syntax and fstrings that
+  is available since python 3.6 only
+- [ehnancement] For output executor on MacOs fallback to `select.select` for OutputExecutor.
+  Increases compatibility with MacOS where presence of `select.poll` depends
+  on the compiler used.
+- [enhancement] Apply shelx.quote on command parts if command is given as a list
+  Should result in similar results when running such command with or without shell.
+
+2.0.1
+----------
+
+- [repackage] - mark python 3.5 as required. Should disallow installing on python 2
+
+2.0.0
+----------
+
+- [feature] Add UnixSocketExecutor for executors that communicate with Unix Sockets
+- [feature] Mirakuru is now fully type hinted
+- [feature] Drop support for python 2
+- [feature] Allow for configuring process outputs to pipe to
+- [feature] OutputExecutor can now check for banner in stderr
+- [feature] HTTPEecutor now can check status on different method.
+  Along with properly configured payload and headers.
+- [feature] Ability to set custom env vars for orchestrated process
+- [feature] Ability to set custom cwd path for orchestrated process
+- [enhancement] psutil is no longer required on cygwin
+
+1.1.0
+----------
+
+- [enhancement] Executor's timeout to be set for both executor's start and stop
+- [enhancement] It's no longer possible to hang indefinitely on the start
+  or stop. Timeout is set to 3600 seconds by default, with values possible
+  between `0` and `sys.maxsize` with the latter still bit longer
+  than `2924712086` centuries.
+
+1.0.0
+----------
+
+- [enhancement] Do not fail if processes child throw EPERM error
+  during clean up phase
+- [enhancement] Run subprocesses in shell by default on Windows
+- [ehnancement] Do not pass preexec_fn on windows
+
+0.9.0
+----------
+
+- [enhancement] Fallback to kill through SIGTERM on Windows,
+  since SIGKILL is not available
+- [enhancement] detect cases where during stop process already exited,
+  and simply clean up afterwards
+
+0.8.3
+----------
+
+- [enhancement] when killing the process ignore OsError with errno `no such process` as the process have already died.
+- [enhancement] small context manager code cleanup
+
+
+0.8.2
+----------
+
+- [bugfix] atexit cleanup_subprocesses() function now reimports needed functions
+
+
+0.8.1
+----------
+
+- [bugfix] Handle IOErrors from psutil (#112)
+- [bugfix] Pass global vars to atexit cleanup_subprocesses function (#111)
+
+
+0.8.0
+----------
+
+- [feature] Kill all running mirakuru subprocesses on python exit.
+- [enhancement] Prefer psutil library (>=4.0.0) over calling 'ps xe' command to find leaked subprocesses.
+
+
+0.7.0
+----------
+
+- [feature] HTTPExecutor enriched with the 'status' argument.
+  It allows to define which HTTP status code(s) signify that a HTTP server is running.
+- [feature] Changed executor methods to return itself to allow method chaining.
+- [feature] Context Manager to return Executor instance, allows creating Executor instance on the fly.
+- [style] Migrated `%` string formating to `format()`.
+- [style] Explicitly numbered replacement fields in string.
+- [docs] Added documentation for timeouts.
+
+0.6.1
+----------
+
+- [refactoring] Moved source to src directory.
+- [fix, feature] Python 3.5 fixes.
+- [fix] Docstring changes for updated pep257.
+
+0.6.0
+----------
+
+- [fix] Modify MANIFEST to prune tests folder.
+- [feature] HTTPExecutor will now set the default 80 if not present in a URL.
+- [feature] Detect subprocesses exiting erroneously while polling the checks and error early.
+- [fix] Make test_forgotten_stop pass by preventing the shell from optimizing forking out.
+
+0.5.0
+----------
+
+- [style] Corrected code to conform with W503, D210 and E402 linters errors as reported by pylama `6.3.1`.
+- [feature] Introduced a hack that kills all subprocesses of executor process.
+  It requires 'ps xe -ww' command being available in OS otherwise logs error.
+- [refactoring] Classes name convention change.
+  Executor class got renamed into SimpleExecutor and StartCheckExecutor class got renamed into Executor.
+
+0.4.0
+-------
+
+- [feature] Ability to set up custom signal for stopping and killing processes managed by executors.
+- [feature] Replaced explicit parameters with keywords for kwargs handled by basic Executor init method.
+- [feature] Executor now accepts both list and string as a command.
+- [fix] Even it's not recommended to import all but `from mirakuru import *` didn't worked. Now it's fixed.
+- [tests] increased tests coverage.
+  Even test cover 100% of code it doesn't mean they cover 100% of use cases!
+- [code quality] Increased Pylint code evaluation.
+
+0.3.0
+-------
+
+- [feature] Introduced PidExecutor that waits for specified file to be created.
+- [feature] Provided PyPy compatibility.
+- [fix] Closing all resources explicitly.
+
+0.2.0
+-------
+
+- [fix] Kill all children processes of Executor started with shell=True.
+- [feature] Executors are now context managers - to start executors for given context.
+- [feature] Executor.stopped - context manager for stopping executors for given context.
+- [feature] HTTPExecutor and TCPExecutor before .start() check whether port
+  is already used by other processes and raise AlreadyRunning if detects it.
+- [refactoring] Moved python version conditional imports into compat.py module.
+
+
+0.1.4
+-------
+
+- [fix] Fixed an issue where setting shell to True would execute only part of the command.
+
+0.1.3
+-------
+
+- [fix] Fixed an issue where OutputExecutor would hang, if started process stopped producing output.
+
+0.1.2
+-------
+
+- [fix] Removed leftover sleep from TCPExecutor._wait_for_connection.
+
+0.1.1
+-------
+
+- [fix] Fixed `MANIFEST.in`.
+- Updated packaging options.
+
+0.1.0
+-------
+
+- Exposed process attribute on Executor.
+- Exposed port and host on TCPExecutor.
+- Exposed URL on HTTPExecutor.
+- Simplified package structure.
+- Simplified executors operating API.
+- Updated documentation.
+- Added docblocks for every function.
+- Applied license headers.
+- Stripped orchestrators.
+- Forked off from `summon_process`.
+
+

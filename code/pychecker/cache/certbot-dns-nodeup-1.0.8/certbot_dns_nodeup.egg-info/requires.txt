@@ -1,0 +1,13 @@
+setuptools
+zope.interface
+graphqlclient
+acme>=1.8.0
+certbot>=1.1.0
+zope.interface
+
+[:python_version < "3.3"]
+mock
+
+[docs]
+Sphinx>=1.0
+sphinx_rtd_theme

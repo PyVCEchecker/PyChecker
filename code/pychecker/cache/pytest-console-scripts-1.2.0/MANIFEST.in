@@ -1,0 +1,7 @@
+graft tests
+
+include tox.ini
+include LICENSE
+include *.md
+
+global-exclude *.py[cod] __pycache__

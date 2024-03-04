@@ -1,0 +1,12 @@
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+azure/__init__.py
+azure/storage/__init__.py
+azure_storage_nspkg.egg-info/PKG-INFO
+azure_storage_nspkg.egg-info/SOURCES.txt
+azure_storage_nspkg.egg-info/dependency_links.txt
+azure_storage_nspkg.egg-info/not-zip-safe
+azure_storage_nspkg.egg-info/requires.txt
+azure_storage_nspkg.egg-info/top_level.txt

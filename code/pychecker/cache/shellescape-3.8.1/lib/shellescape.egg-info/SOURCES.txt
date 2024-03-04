@@ -1,0 +1,13 @@
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+docs/LICENSE
+docs/README.rst
+lib/shellescape/__init__.py
+lib/shellescape/main.py
+lib/shellescape/settings.py
+lib/shellescape.egg-info/PKG-INFO
+lib/shellescape.egg-info/SOURCES.txt
+lib/shellescape.egg-info/dependency_links.txt
+lib/shellescape.egg-info/top_level.txt

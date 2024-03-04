@@ -1,0 +1,5 @@
+Sphinx>=2.1
+docutils>=0.8
+pybtex>=0.20
+pybtex-docutils>=1.0.0
+dataclasses; python_version < '3.7'

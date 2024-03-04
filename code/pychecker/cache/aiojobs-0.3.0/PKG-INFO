@@ -1,0 +1,7 @@
+Metadata-Version: 1.1
+Name: aiojobs
+Version: 0.3.0
+Summary: Jobs scheduler for managing background task (asyncio).
+Home-page: https://github.com/aio-libs/aiojobs
+Author: Andrew Svetlov
+Author-email: andrew.svetlov@gmail.com

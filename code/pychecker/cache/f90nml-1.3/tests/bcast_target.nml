@@ -1,0 +1,32 @@
+&bcast_nml
+    x = 2.0, 2.0
+    y = , , ,
+    z = .true., .true., .true., .true.
+/
+
+&bcast_nml_comma
+    x = 2.0, 2.0
+    y = , , ,
+    z = .true., .true., .true., .true.
+/
+
+&bcast_endnull_nml
+    x = 2.0, 2.0
+    y = , , ,
+/
+
+&bcast_endnull_nml_comma
+    x = 2.0, 2.0
+    y = , , ,
+/
+
+&bcast_mixed_nml
+    x = 1, 1, 1, 2, 3, 4
+    y = 1, 1, 1, 2, 2, 3
+/
+
+&bcast_mixed_null_nml
+    x = 1, , , , 3, 4
+    y = 1, 1, 1, , , , 3, 4
+    z = 1, , , , , 4
+/

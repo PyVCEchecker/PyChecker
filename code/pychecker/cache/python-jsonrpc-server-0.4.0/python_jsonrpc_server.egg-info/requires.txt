@@ -1,0 +1,17 @@
+ujson>=3.0.0
+
+[:python_version < "3"]
+future>=0.14.0
+
+[:python_version < "3.2"]
+futures
+
+[test]
+versioneer
+pylint
+pycodestyle
+pyflakes
+pytest
+mock
+pytest-cov
+coverage

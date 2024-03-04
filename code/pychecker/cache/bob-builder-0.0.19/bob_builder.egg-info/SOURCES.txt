@@ -1,0 +1,13 @@
+README.md
+setup.cfg
+setup.py
+bob/__init__.py
+bob/cli.py
+bob/models.py
+bob/utils.py
+bob_builder.egg-info/PKG-INFO
+bob_builder.egg-info/SOURCES.txt
+bob_builder.egg-info/dependency_links.txt
+bob_builder.egg-info/entry_points.txt
+bob_builder.egg-info/requires.txt
+bob_builder.egg-info/top_level.txt

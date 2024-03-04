@@ -1,0 +1,14 @@
+cryptography>=1.4
+defusedxml
+pyOpenSSL
+python-dateutil
+pytz
+requests>=1.0.0
+six
+importlib_resources
+xmlschema>=1.2.1
+
+[s2repoze]
+paste
+zope.interface
+repoze.who

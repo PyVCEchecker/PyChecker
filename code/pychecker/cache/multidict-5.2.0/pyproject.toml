@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=40", "wheel"]
+
+
+[tool.towncrier]
+package = "multidict"
+filename = "CHANGES.rst"
+directory = "CHANGES/"
+issue_format = "`#{issue} <https://github.com/aio-libs/multidict/issues/{issue}>`_"
+
+
+[tool.cibuildwheel]
+test-requires = "-r requirements/ci.txt"
+test-command = "pytest {project}/tests"
+# don't build PyPy wheels, install from source instead
+skip = "pp*"

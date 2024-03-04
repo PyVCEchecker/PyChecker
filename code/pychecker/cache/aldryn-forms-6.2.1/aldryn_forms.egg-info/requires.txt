@@ -1,0 +1,15 @@
+django>=2.0
+aldryn-boilerplates>=0.7.5
+django-cms>=3.5
+django-emailit
+djangocms-text-ckeditor
+djangocms-attributes-field>=1.0.0
+django-tablib
+tablib
+pillow
+django-filer
+django-sizefield
+six>=1.0
+
+[captcha]
+django-simple-captcha

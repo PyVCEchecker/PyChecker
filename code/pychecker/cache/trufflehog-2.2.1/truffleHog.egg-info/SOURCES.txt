@@ -1,0 +1,11 @@
+README.md
+setup.cfg
+setup.py
+truffleHog/__init__.py
+truffleHog/truffleHog.py
+truffleHog.egg-info/PKG-INFO
+truffleHog.egg-info/SOURCES.txt
+truffleHog.egg-info/dependency_links.txt
+truffleHog.egg-info/entry_points.txt
+truffleHog.egg-info/requires.txt
+truffleHog.egg-info/top_level.txt

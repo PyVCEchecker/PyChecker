@@ -1,0 +1,11 @@
+LICENSE.rst
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+jsonlines/__init__.py
+jsonlines/jsonlines.py
+jsonlines.egg-info/PKG-INFO
+jsonlines.egg-info/SOURCES.txt
+jsonlines.egg-info/dependency_links.txt
+jsonlines.egg-info/top_level.txt

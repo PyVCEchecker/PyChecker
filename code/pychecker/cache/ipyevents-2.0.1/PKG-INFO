@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: ipyevents
+Version: 2.0.1
+Summary: A custom widget for returning mouse and keyboard events to Python
+Home-page: https://github.com/mwcraig/ipyevents
+Author: Matt Craig
+Author-email: mattwcraig@gmail.com
+License: BSD 3-clause
+Keywords: Jupyter,Widgets,IPython
+Platform: Linux
+Platform: Mac OS X
+Platform: Windows
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Framework :: Jupyter
+Provides-Extra: test
+Provides-Extra: docs
+License-File: LICENSE.md
+
+UNKNOWN
+

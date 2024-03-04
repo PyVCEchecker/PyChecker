@@ -1,0 +1,6 @@
+ansible-runner (%VERSION%-%RELEASE%) unstable; urgency=low
+
+  * %VERSION% release
+
+ -- Ansible, Inc. <info@ansible.com>  %DATE%
+

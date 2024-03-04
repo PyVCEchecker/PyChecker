@@ -1,0 +1,13 @@
+*.py[cod]
+.ipynb_checkpoints
+
+dist
+build
+MANIFEST
+
+.coverage
+.tox
+nosetests.xml
+
+# Sphinx
+docs/_build

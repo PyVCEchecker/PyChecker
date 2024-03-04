@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: nox
+Version: 2021.10.1
+Summary: Flexible test automation.
+Home-page: https://nox.thea.codes
+Author: Alethea Katherine Flowers
+Author-email: me@thea.codes
+License: Apache-2.0
+Project-URL: Documentation, https://nox.thea.codes
+Project-URL: Source Code, https://github.com/theacodes/nox
+Project-URL: Bug Tracker, https://github.com/theacodes/nox/issues
+Keywords: testing automation tox
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Software Development :: Testing
+Requires-Python: >=3.6
+Description-Content-Type: text/x-rst
+Provides-Extra: tox_to_nox
+License-File: LICENSE
+
+Nox - Flexible test automation for Python
+=========================================
+
+``nox`` is a command-line tool that automates testing in multiple Python
+environments, similar to `tox`_. Unlike tox, Nox uses a standard Python
+file for configuration.
+
+The latest documentation is available on `Read the Docs`_.
+
+The source code is available on `GitHub`_.
+
+
+.. _tox: https://tox.readthedocs.io
+.. _Read the Docs: https://nox.readthedocs.io
+.. _GitHub: https://github.com/theacodes/nox
+
+

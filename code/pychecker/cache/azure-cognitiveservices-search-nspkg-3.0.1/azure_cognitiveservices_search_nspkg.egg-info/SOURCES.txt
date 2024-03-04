@@ -1,0 +1,11 @@
+MANIFEST.in
+README.rst
+setup.py
+azure/cognitiveservices/__init__.py
+azure/cognitiveservices/search/__init__.py
+azure_cognitiveservices_search_nspkg.egg-info/PKG-INFO
+azure_cognitiveservices_search_nspkg.egg-info/SOURCES.txt
+azure_cognitiveservices_search_nspkg.egg-info/dependency_links.txt
+azure_cognitiveservices_search_nspkg.egg-info/not-zip-safe
+azure_cognitiveservices_search_nspkg.egg-info/requires.txt
+azure_cognitiveservices_search_nspkg.egg-info/top_level.txt

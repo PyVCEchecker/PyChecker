@@ -1,0 +1,12 @@
+[asdf.resource_mappings]
+asdf = asdf.resource:get_core_resource_mappings
+
+[asdf_extensions]
+builtin = asdf.extension:BuiltinExtension
+
+[console_scripts]
+asdftool = asdf.commands.main:main
+
+[pytest11]
+asdf_schema_tester = pytest_asdf.plugin
+

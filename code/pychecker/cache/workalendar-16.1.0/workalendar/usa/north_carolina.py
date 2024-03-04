@@ -1,0 +1,51 @@
+from datetime import date
+
+from ..core import MON, TUE, WED, THU, FRI, SAT, SUN
+from ..registry_tools import iso_register
+from .core import UnitedStates
+
+
+@iso_register('US-NC')
+class NorthCarolina(UnitedStates):
+    """North Carolina"""
+    include_good_friday = True
+    include_christmas_eve = True
+    include_thanksgiving_friday = True
+    include_boxing_day = True
+    include_federal_presidents_day = False
+    include_columbus_day = False
+
+    def get_christmas_shifts(self, year):
+        """
+        Return Specific Christmas days extra shifts.
+        There must be 3 holidays in a row: Christmas Eve, Christmas Day and
+        Boxing Day. If one or the other falls on SUN/SAT, extra days must be
+        added.
+        """
+        xmas = date(year, 12, 25)
+        if xmas.weekday() in (TUE, WED, THU):
+            # No shift, move along
+            return []
+        if xmas.weekday() == FRI:
+            return [
+                (date(year, 12, 28), "Boxing day shift"),
+            ]
+        elif xmas.weekday() == SAT:
+            return [
+                (date(year, 12, 23), "Christmas Eve shift"),
+                (date(year, 12, 27), "Boxing Day shift"),
+            ]
+        elif xmas.weekday() == SUN:
+            return [
+                (date(year, 12, 23), "Christmas Eve shift"),
+                (date(year, 12, 27), "Boxing Day shift"),
+            ]
+        elif xmas.weekday() == MON:
+            return [
+                (date(year, 12, 27), "Christmas Eve shift"),
+            ]
+
+    def get_variable_days(self, year):
+        days = super().get_variable_days(year)
+        days.extend(self.get_christmas_shifts(year))
+        return days

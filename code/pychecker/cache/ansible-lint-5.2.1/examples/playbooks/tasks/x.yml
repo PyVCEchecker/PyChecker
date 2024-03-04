@@ -1,0 +1,5 @@
+- # nothing, checks bug #849
+- name: test include
+  action: funny value=clown
+  args:
+    key: value

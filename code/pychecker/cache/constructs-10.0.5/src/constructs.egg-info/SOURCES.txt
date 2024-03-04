@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/constructs/__init__.py
+src/constructs/py.typed
+src/constructs.egg-info/PKG-INFO
+src/constructs.egg-info/SOURCES.txt
+src/constructs.egg-info/dependency_links.txt
+src/constructs.egg-info/requires.txt
+src/constructs.egg-info/top_level.txt
+src/constructs/_jsii/__init__.py
+src/constructs/_jsii/constructs@10.0.5.jsii.tgz

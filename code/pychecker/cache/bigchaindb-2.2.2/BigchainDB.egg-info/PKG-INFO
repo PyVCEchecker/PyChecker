@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: BigchainDB
+Version: 2.2.2
+Summary: BigchainDB: The Blockchain Database
+Home-page: https://github.com/BigchainDB/bigchaindb/
+Author: BigchainDB Contributors
+Author-email: contact@ipdb.global
+License: Apache Software License 2.0
+Description: BigchainDB allows developers and enterprises to deploy blockchain proof-of-concepts, platforms and applications with a blockchain database. BigchainDB supports a wide range of industries and use cases from identity and intellectual property to supply chains, energy, IoT and financial ecosystems. With high throughput, low latency, powerful query functionality, decentralized control, immutable data storage and built-in asset support, BigchainDB is like a database with blockchain characteristics.
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Database
+Classifier: Topic :: Database :: Database Engines/Servers
+Classifier: Topic :: Software Development
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Requires-Python: >=3.6
+Provides-Extra: test
+Provides-Extra: dev
+Provides-Extra: docs

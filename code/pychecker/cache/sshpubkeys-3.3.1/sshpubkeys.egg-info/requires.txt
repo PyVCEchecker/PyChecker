@@ -1,0 +1,7 @@
+cryptography>=2.1.4
+ecdsa>=0.13
+
+[dev]
+twine
+wheel
+yapf

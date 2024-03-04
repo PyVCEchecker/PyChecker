@@ -1,0 +1,3 @@
+libcouchbase.dll
+C:\Jenkins\workspace\python\sdk\python-scripted-build-pipeline\couchbase-python-client\couchbase_core\libcouchbase_d.dll
+C:\Jenkins\workspace\python\sdk\python-scripted-build-pipeline\couchbase-python-client\couchbase_core\libcouchbase.dll

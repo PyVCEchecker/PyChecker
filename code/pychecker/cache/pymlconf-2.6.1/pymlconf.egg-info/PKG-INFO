@@ -1,0 +1,74 @@
+Metadata-Version: 2.1
+Name: pymlconf
+Version: 2.6.1
+Summary: Another configuration library using yaml
+Home-page: http://github.com/pylover/pymlconf
+Author: Vahid Mardani
+Author-email: vahid.mardani@gmail.com
+License: UNKNOWN
+Description: # pymlconf
+        
+        [![PyPI](http://img.shields.io/pypi/v/pymlconf.svg)](https://pypi.python.org/pypi/pymlconf)
+        [![Build](https://github.com/pylover/pymlconf/workflows/Build/badge.svg?branch=master)](https://github.com/pylover/pymlconf/actions)
+        [![Coverage Status](https://coveralls.io/repos/github/pylover/pymlconf/badge.svg?branch=master)](https://coveralls.io/github/pylover/pymlconf?branch=master)
+        [![Documentation](https://img.shields.io/badge/Documentation-Ready-green.svg)](https://pylover.github.io/pymlconf)
+        
+        
+        ## About
+        
+        `pymlconf` (Python YAML Configuration Library) helps to easily manage
+        and access to your application configurations which was already Written
+        in [YAML](http://pyyaml.org) language.
+        
+        Checkout [Documentation](https://pylover.github.io/pymlconf) for more info.
+        
+        
+        ### Installation
+        
+        
+        ```bash
+        pip install pymlconf
+        ```
+        
+        ### Development
+        
+        ```bash
+        cd path/to/pymlconf
+        pip install -e .
+        pip install -r requirements-dev.txt
+        ```
+        
+        #### Running tests
+        
+        ```bash
+        pytest
+        ```
+        
+        #### Coverage
+        
+        ```bash
+        pytest --cov=pymlconf
+        ```
+        
+        #### Documentation
+        
+        ```bash
+        cd sphinx
+        make doctest
+        ```
+        
+        ```bash
+        make html
+        or
+        make livehtml
+        ```
+        
+        
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Libraries
+Description-Content-Type: text/markdown

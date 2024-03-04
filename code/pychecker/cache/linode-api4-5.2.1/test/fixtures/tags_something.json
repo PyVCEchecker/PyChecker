@@ -1,0 +1,95 @@
+{
+  "page": 1,
+  "pages": 1,
+  "results": 1,
+  "data": [
+    {
+      "type": "linode",
+      "data": {
+        "group": "test",
+        "hypervisor": "kvm",
+        "id": 123,
+        "status": "running",
+        "type": "g5-standard-1",
+        "alerts": {
+          "network_in": 5,
+          "network_out": 5,
+          "cpu": 90,
+          "transfer_quota": 80,
+          "io": 5000
+        },
+        "label": "linode123",
+        "backups": {
+          "enabled": true,
+          "schedule": {
+            "window": "W02",
+            "day": "Scheduling"
+          }
+        },
+        "specs": {
+          "memory": 2048,
+          "disk": 30720,
+          "vcpus": 1,
+          "transfer": 2000
+        },
+        "ipv6": "1234:abcd::1234:abcd:89ef:67cd/64",
+        "created": "2017-01-01T00:00:00",
+        "region": "us-east-1a",
+        "ipv4": [
+          "123.45.67.89"
+        ],
+        "updated": "2017-01-01T00:00:00",
+        "image": "linode/ubuntu17.04",
+        "tags": ["something"]
+      }
+    },
+    {
+      "type": "domain",
+      "data": {
+        "domain": "example.org",
+        "type": "master",
+        "id": 12345,
+        "axfr_ips": [],
+        "retry_sec": 0,
+        "ttl_sec": 300,
+        "status": "active",
+        "master_ips": [],
+        "description": "",
+        "group": "",
+        "expire_sec": 0,
+        "soa_email": "test@example.org",
+        "refresh_sec": 0,
+        "tags": ["something"]
+      }
+    },
+    {
+      "type": "nodebalancer",
+      "data": {
+        "created": "2018-01-01T00:01:01",
+        "ipv6": "c001:d00d:b01::1:abcd:1234",
+        "region": "us-east-1a",
+        "ipv4": "12.34.56.789",
+        "hostname": "nb-12-34-56-789.newark.nodebalancer.linode.com",
+        "id": 123456,
+        "updated": "2018-01-01T00:01:01",
+        "label": "balancer123456",
+        "client_conn_throttle": 0,
+        "tags": ["something"]
+      }
+    },
+    {
+      "type": "volume",
+      "data": {
+        "id": 1,
+        "label": "block1",
+        "created": "2017-08-04T03:00:00",
+        "region": "us-east-1a",
+        "linode_id": null,
+        "size": 40,
+        "updated": "2017-08-04T04:00:00",
+        "status": "active",
+        "tags": ["something"]
+      }
+    }
+  ]
+}

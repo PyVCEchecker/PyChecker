@@ -1,0 +1,23 @@
+
+[:python_version < "3.7"]
+aiocontextvars>=0.2.0
+
+[:sys_platform == "win32"]
+colorama>=0.3.4
+win32-setctime>=1.0.0
+
+[dev]
+codecov>=2.0.15
+colorama>=0.3.4
+flake8>=3.7.7
+tox>=3.9.0
+tox-travis>=0.12
+pytest>=4.6.2
+pytest-cov>=2.7.1
+Sphinx>=2.2.1
+sphinx-autobuild>=0.7.1
+sphinx-rtd-theme>=0.4.3
+
+[dev:python_version >= "3.6"]
+black>=19.10b0
+isort>=5.1.1

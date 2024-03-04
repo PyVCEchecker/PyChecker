@@ -1,0 +1,127 @@
+stages:
+  - build
+  - test:clang-fbsd
+  - test:clang
+  - test:gcc
+  - test:gcc-i386
+  - test:clang-macOS
+
+cache:
+  paths:
+  - apt-cache/
+
+.build-template: &build-template
+  stage: build
+  tags:
+    - docker
+  image: ${REGISTRY_HOST}/beckhoff/docker-mxe:8187
+  script:
+    - $maker CXX=$compiler OS_NAME=$os_name
+    - $maker CXX=$compiler OS_NAME=$os_name AdsLibTest.bin
+    - $maker CXX=$compiler OS_NAME=$os_name AdsLibOOITest.bin
+    - cd example
+    - $maker CXX=$compiler OS_NAME=$os_name
+  artifacts:
+    paths:
+    - AdsLib-$os_name.a
+    - AdsLibTest.bin
+    - AdsLibOOITest.bin
+    - example/example.bin
+
+build:clang:
+  <<: *build-template
+  variables:
+    compiler: /usr/bin/clang++
+    os_name: Linux
+    maker: make
+
+build:clang-fbsd:
+  <<: *build-template
+  variables:
+    compiler: /usr/bin/clang++
+    os_name: FreeBSD
+    maker: /usr/local/bin/gmake
+  tags:
+    - fbsd
+
+build:clang-macOS:
+  <<: *build-template
+  variables:
+    compiler: /usr/bin/clang++
+    os_name: Darwin
+    maker: make
+  tags:
+    - macOS
+
+build:gcc:
+  <<: *build-template
+  variables:
+    compiler: /usr/bin/g++
+    os_name: Linux
+    maker: make
+
+build:gcc-i386:
+  <<: *build-template
+  variables:
+    compiler: /usr/bin/g++
+    os_name: i386
+    maker: make
+    ci_cxx_flags: -m32
+
+build:mxe:
+  <<: *build-template
+  variables:
+    compiler: /mxe/usr/bin/i686-w64-mingw32.static.posix-g++
+    os_name: win32
+    maker: make
+
+.test-linux: &test-linux
+  tags:
+    - kvm
+    - rack
+    - ubuntu1804
+    - x86_64
+  before_script:
+    - sudo dpkg --add-architecture i386
+    - sudo apt-get -o dir::cache::archives="apt-cache" update
+    - sudo apt-get -o dir::cache::archives="apt-cache" install -y libc6:i386 libstdc++6:i386 nmap
+  script:
+    - ./tools/90_run_tests.sh
+
+test:clang:
+  <<: *test-linux
+  stage: test:clang
+  dependencies:
+    - build:clang
+
+test:gcc:
+  <<: *test-linux
+  stage: test:gcc
+  dependencies:
+    - build:gcc
+
+test:gcc-i386:
+  <<: *test-linux
+  stage: test:gcc-i386
+  dependencies:
+    - build:gcc-i386
+
+test:clang-fbsd:
+  stage: test:clang-fbsd
+  dependencies:
+    - build:clang-fbsd
+  tags:
+    - fbsd
+    - rack
+  script:
+    - ./tools/90_run_tests.sh
+
+test:clang-macOS:
+  stage: test:clang-macOS
+  dependencies:
+    - build:clang-macOS
+  tags:
+    - macOS
+    - rack
+  script:
+    - ./tools/90_run_tests.sh

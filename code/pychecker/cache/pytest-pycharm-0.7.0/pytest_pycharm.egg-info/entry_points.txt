@@ -1,0 +1,3 @@
+[pytest11]
+pycharm = pytest_pycharm
+

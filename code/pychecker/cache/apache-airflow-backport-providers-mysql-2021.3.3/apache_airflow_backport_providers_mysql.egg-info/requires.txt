@@ -1,0 +1,12 @@
+apache-airflow~=1.10
+mysql-connector-python<=8.0.22,>=8.0.11
+mysqlclient<1.4,>=1.3.6
+
+[amazon]
+apache-airflow-backport-providers-amazon
+
+[presto]
+apache-airflow-backport-providers-presto
+
+[vertica]
+apache-airflow-backport-providers-vertica

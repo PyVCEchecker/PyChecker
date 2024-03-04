@@ -1,0 +1,12 @@
+[run]
+branch = True
+source = saharaclient
+omit =
+ .tox/*
+ saharaclient/tests/*
+
+[paths]
+source = saharaclient
+
+[report]
+ignore_errors = True

@@ -1,0 +1,13 @@
+ecdsa
+requests
+websocket-client
+appdirs
+scrypt
+pycryptodomex
+pytz
+Click
+click_shell
+prettytable
+ruamel.yaml
+diff_match_patch
+asn1crypto

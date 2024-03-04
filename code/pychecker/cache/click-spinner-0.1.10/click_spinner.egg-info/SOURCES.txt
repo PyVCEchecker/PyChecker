@@ -1,0 +1,13 @@
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+versioneer.py
+click_spinner/__init__.py
+click_spinner/_version.py
+click_spinner.egg-info/PKG-INFO
+click_spinner.egg-info/SOURCES.txt
+click_spinner.egg-info/dependency_links.txt
+click_spinner.egg-info/requires.txt
+click_spinner.egg-info/top_level.txt
+tests/test_spinner.py

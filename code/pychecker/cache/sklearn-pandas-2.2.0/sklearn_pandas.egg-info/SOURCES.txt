@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+sklearn_pandas/__init__.py
+sklearn_pandas/cross_validation.py
+sklearn_pandas/dataframe_mapper.py
+sklearn_pandas/features_generator.py
+sklearn_pandas/pipeline.py
+sklearn_pandas/transformers.py
+sklearn_pandas.egg-info/PKG-INFO
+sklearn_pandas.egg-info/SOURCES.txt
+sklearn_pandas.egg-info/dependency_links.txt
+sklearn_pandas.egg-info/requires.txt
+sklearn_pandas.egg-info/top_level.txt

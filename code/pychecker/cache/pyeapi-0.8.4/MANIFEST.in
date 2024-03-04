@@ -1,0 +1,26 @@
+include *.md
+include *.txt
+include .coveragerc
+include LICENSE
+include Makefile
+include VERSION
+recursive-include examples *.conf
+recursive-include examples *.py
+recursive-include test *.conf
+recursive-include test *.json
+recursive-include test *.portchannel
+recursive-include test *.py
+recursive-include test *.text
+recursive-include test *.vxlan
+recursive-include test *.bgp
+recursive-include test *.ospf
+recursive-include test *.routemaps
+recursive-include test *.varp
+recursive-include test *.varp_null
+recursive-include test *.vrf
+recursive-include test *.vrrp
+recursive-include test *.yaml
+recursive-include docs description.rst
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile

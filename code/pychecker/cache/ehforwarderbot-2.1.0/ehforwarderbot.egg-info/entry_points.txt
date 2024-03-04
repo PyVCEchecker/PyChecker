@@ -1,0 +1,4 @@
+[console_scripts]
+efb-wizard = ehforwarderbot.wizard:main
+ehforwarderbot = ehforwarderbot.__main__:main
+

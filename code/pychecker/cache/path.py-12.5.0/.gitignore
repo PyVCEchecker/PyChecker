@@ -1,0 +1,10 @@
+__pycache__
+*.pyc
+*.egg-info
+*.egg
+.eggs/
+MANIFEST
+build
+dist
+.tox
+docs/_build

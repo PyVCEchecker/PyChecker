@@ -1,0 +1,19 @@
+jsonschema
+
+[:python_version < "3"]
+regex
+
+[dev]
+check-manifest
+sphinx
+sphinx-rtd-theme
+sphinx-tabs
+
+[test]
+coverage
+pytest
+pytest-benchmark
+pytest-cov
+tox
+codecov
+pyfakefs

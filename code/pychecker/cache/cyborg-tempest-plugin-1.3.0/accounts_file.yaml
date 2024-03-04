@@ -1,0 +1,25 @@
+- domain_name: Default
+  password: Q2=T+74@fnlTK^B
+  project_name: tempest-test_creds-1805266339
+  resources:
+    network: tempest-test_creds-1986620958-network
+  username: tempest-test_creds-1805266339
+- domain_name: Default
+  password: L5_YO#Z7Bjh^#XG
+  project_name: tempest-test_creds-59975155
+  resources:
+    network: tempest-test_creds-1329826390-network
+  username: tempest-test_creds-59975155
+- domain_name: Default
+  password: mypassword
+  project_name: admin
+  types:
+  - admin
+  username: admin
+- domain_name: Default
+  password: mypassword
+  project_name: demo
+  types:
+  - primary
+  username: demo
+

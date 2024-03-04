@@ -1,0 +1,3 @@
+[console_scripts]
+cactus = cactus.cli:cli_entrypoint
+

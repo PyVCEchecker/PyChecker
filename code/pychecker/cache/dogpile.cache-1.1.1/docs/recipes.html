@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes &#8212; dogpile.cache 1.1.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature_override.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/changelog.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dogpile Core" href="core_usage.html" />
+    <link rel="prev" title="Usage Guide" href="usage.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="core_usage.html" title="dogpile Core"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage Guide"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dogpile.cache 1.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Recipes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="recipes">
+<h1>Recipes<a class="headerlink" href="#recipes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="invalidating-a-group-of-related-keys">
+<h2>Invalidating a group of related keys<a class="headerlink" href="#invalidating-a-group-of-related-keys" title="Permalink to this headline">¶</a></h2>
+<p>This recipe presents a way to track the cache keys related to a particular region,
+for the purposes of invalidating a series of keys that relate to a particular id.</p>
+<p>Three cached functions, <code class="docutils literal notranslate"><span class="pre">user_fn_one()</span></code>, <code class="docutils literal notranslate"><span class="pre">user_fn_two()</span></code>, <code class="docutils literal notranslate"><span class="pre">user_fn_three()</span></code>
+each perform a different function based on a <code class="docutils literal notranslate"><span class="pre">user_id</span></code> integer value.  The
+region applied to cache them uses a custom key generator which tracks each cache
+key generated, pulling out the integer “id” and replacing with a template.</p>
+<p>When all three functions have been called, the key generator is now aware of
+these three keys:  <code class="docutils literal notranslate"><span class="pre">user_fn_one_%d</span></code>, <code class="docutils literal notranslate"><span class="pre">user_fn_two_%d</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">user_fn_three_%d</span></code>.   The <code class="docutils literal notranslate"><span class="pre">invalidate_user_id()</span></code> function then knows that
+for a particular <code class="docutils literal notranslate"><span class="pre">user_id</span></code>, it needs to hit all three of those keys
+in order to invalidate everything having to do with that id.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dogpile.cache</span> <span class="kn">import</span> <span class="n">make_region</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+
+<span class="n">user_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">my_key_generator</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="k">def</span> <span class="nf">generate_key</span><span class="p">(</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="c1"># generate a key template:</span>
+        <span class="c1"># &quot;fname_%d_arg1_arg2_arg3...&quot;</span>
+        <span class="n">key_template</span> <span class="o">=</span> <span class="n">fname</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+        <span class="c1"># store key template</span>
+        <span class="n">user_keys</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key_template</span><span class="p">)</span>
+
+        <span class="c1"># return cache key</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">key_template</span> <span class="o">%</span> <span class="n">user_id</span>
+
+    <span class="k">return</span> <span class="n">generate_key</span>
+
+<span class="k">def</span> <span class="nf">invalidate_user_id</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">user_keys</span><span class="p">:</span>
+        <span class="n">region</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">key</span> <span class="o">%</span> <span class="n">user_id</span><span class="p">)</span>
+
+<span class="n">region</span> <span class="o">=</span> <span class="n">make_region</span><span class="p">(</span>
+    <span class="n">function_key_generator</span><span class="o">=</span><span class="n">my_key_generator</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+        <span class="s2">&quot;dogpile.cache.memory&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="n">count</span><span class="p">()</span>
+
+<span class="nd">@region</span><span class="o">.</span><span class="n">cache_on_arguments</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">user_fn_one</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;user fn one: </span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">),</span> <span class="n">user_id</span><span class="p">)</span>
+
+<span class="nd">@region</span><span class="o">.</span><span class="n">cache_on_arguments</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">user_fn_two</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;user fn two: </span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">),</span> <span class="n">user_id</span><span class="p">)</span>
+
+<span class="nd">@region</span><span class="o">.</span><span class="n">cache_on_arguments</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">user_fn_three</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;user fn three: </span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">),</span> <span class="n">user_id</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="n">user_fn_one</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">user_fn_two</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">user_fn_three</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">user_fn_two</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">invalidate_user_id</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="s2">&quot;invalidated:&quot;</span>
+<span class="nb">print</span> <span class="n">user_fn_one</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">user_fn_two</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">user_fn_three</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">user_fn_two</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="asynchronous-data-updates-with-orm-events">
+<h2>Asynchronous Data Updates with ORM Events<a class="headerlink" href="#asynchronous-data-updates-with-orm-events" title="Permalink to this headline">¶</a></h2>
+<p>This recipe presents one technique of optimistically pushing new data
+into the cache when an update is sent to a database.</p>
+<p>Using SQLAlchemy for database querying, suppose a simple cache-decorated
+function returns the results of a database query:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@region</span><span class="o">.</span><span class="n">cache_on_arguments</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">get_some_data</span><span class="p">(</span><span class="n">argument</span><span class="p">):</span>
+    <span class="c1"># query database to get data</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">DBClass</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">DBClass</span><span class="o">.</span><span class="n">argument</span> <span class="o">==</span> <span class="n">argument</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p>We would like this particular function to be re-queried when the data
+has changed.  We could call <code class="docutils literal notranslate"><span class="pre">get_some_data.invalidate(argument,</span> <span class="pre">hard=False)</span></code>
+at the point at which the data changes, however this only
+leads to the invalidation of the old value; a new value is not generated until
+the next call, and also means at least one client has to block while the
+new value is generated.    We could also call
+<code class="docutils literal notranslate"><span class="pre">get_some_data.refresh(argument)</span></code>, which would perform the data refresh
+at that moment, but then the writer is delayed by the re-query.</p>
+<p>A third variant is to instead offload the work of refreshing for this query
+into a background thread or process.   This can be acheived using
+a system such as the <a class="reference internal" href="api.html#dogpile.cache.region.CacheRegion.params.async_creation_runner" title="dogpile.cache.region.CacheRegion"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">CacheRegion.async_creation_runner</span></code></a>.
+However, an expedient approach for smaller use cases is to link cache refresh
+operations to the ORM session’s commit, as below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">event</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Session</span>
+
+<span class="k">def</span> <span class="nf">cache_refresh</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">refresher</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Refresh the functions cache data in a new thread. Starts refreshing only</span>
+<span class="sd">    after the session was committed so all database data is available.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">Session</span><span class="p">),</span> \
+        <span class="s2">&quot;Need a session, not a sessionmaker or scoped_session&quot;</span>
+
+    <span class="nd">@event</span><span class="o">.</span><span class="n">listens_for</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s2">&quot;after_commit&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">do_refresh</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">refresher</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Within a sequence of data persistence, <code class="docutils literal notranslate"><span class="pre">cache_refresh</span></code> can be called
+given a particular SQLAlchemy <code class="docutils literal notranslate"><span class="pre">Session</span></code> and a callable to do the work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_new_data</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+    <span class="c1"># add some data</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">something_new</span><span class="p">(</span><span class="n">argument</span><span class="p">))</span>
+
+    <span class="c1"># add a hook to refresh after the Session is committed.</span>
+    <span class="n">cache_refresh</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">get_some_data</span><span class="o">.</span><span class="n">refresh</span><span class="p">,</span> <span class="n">argument</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the event to refresh the data is associated with the <code class="docutils literal notranslate"><span class="pre">Session</span></code>
+being used for persistence; however, the actual refresh operation is called
+with a <strong>different</strong> <code class="docutils literal notranslate"><span class="pre">Session</span></code>, typically one that is local to the refresh
+operation, either through a thread-local registry or via direct instantiation.</p>
+</div>
+<div class="section" id="prefixing-all-keys-in-redis">
+<h2>Prefixing all keys in Redis<a class="headerlink" href="#prefixing-all-keys-in-redis" title="Permalink to this headline">¶</a></h2>
+<p>If you use a redis instance as backend that contains other keys besides the ones
+set by dogpile.cache, it is a good idea to uniquely prefix all dogpile.cache
+keys, to avoid potential collisions with keys set by your own code.  This can
+easily be done using a key mangler function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dogpile.cache</span> <span class="kn">import</span> <span class="n">make_region</span>
+
+<span class="n">region</span> <span class="o">=</span> <span class="n">make_region</span><span class="p">(</span>
+  <span class="n">key_mangler</span><span class="o">=</span><span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="s2">&quot;myapp:dogpile:&quot;</span> <span class="o">+</span> <span class="n">key</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="encoding-decoding-data-into-another-format">
+<h2>Encoding/Decoding data into another format<a class="headerlink" href="#encoding-decoding-data-into-another-format" title="Permalink to this headline">¶</a></h2>
+<div class="sidebar">
+<p class="sidebar-title">A Note on Data Encoding</p>
+<p>Under the hood, dogpile.cache wraps cached data in an instance of
+<code class="docutils literal notranslate"><span class="pre">dogpile.cache.api.CachedValue</span></code> and then pickles that data for storage
+along with some bookkeeping metadata. If you implement a ProxyBackend to
+encode/decode data, that transformation will happen on the pre-pickled data-
+dogpile does not store the data ‘raw’ and will still pass a pickled payload
+to the backend.  This behavior can negate the hopeful improvements of some
+encoding schemes.</p>
+</div>
+<p>Since dogpile is managing cached data, you may be concerned with the size of
+your payloads.  A possible method of helping minimize payloads is to use a
+ProxyBackend to recode the data on-the-fly or otherwise transform data as it
+enters or leaves persistent storage.</p>
+<p>In the example below, we define 2 classes to implement msgpack encoding.  Msgpack
+(<a class="reference external" href="http://msgpack.org/">http://msgpack.org/</a>) is a serialization format that works exceptionally well
+with json-like data and can serialize nested dicts into a much smaller payload
+than Python’s own pickle.  <code class="docutils literal notranslate"><span class="pre">_EncodedProxy</span></code> is our base class
+for building data encoders, and inherits from dogpile’s own <cite>ProxyBackend</cite>.  You
+could just use one class.  This class passes 4 of the main <cite>key/value</cite> functions
+into a configurable decoder and encoder.  The <code class="docutils literal notranslate"><span class="pre">MsgpackProxy</span></code> class simply
+inherits from <code class="docutils literal notranslate"><span class="pre">_EncodedProxy</span></code> and  implements the necessary <code class="docutils literal notranslate"><span class="pre">value_decode</span></code>
+and <code class="docutils literal notranslate"><span class="pre">value_encode</span></code> functions.</p>
+<p>Encoded ProxyBackend Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dogpile.cache.proxy</span> <span class="kn">import</span> <span class="n">ProxyBackend</span>
+<span class="kn">import</span> <span class="nn">msgpack</span>
+
+<span class="k">class</span> <span class="nc">_EncodedProxy</span><span class="p">(</span><span class="n">ProxyBackend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;base class for building value-mangling proxies&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">value_decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;override me&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">value_encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;override me&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_encode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proxied</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxied</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_decode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_multi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;encode to a new dict to preserve unencoded values in-place when</span>
+<span class="sd">           called by `get_or_create_multi`</span>
+<span class="sd">           &quot;&quot;&quot;</span>
+        <span class="n">mapping_set</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">mapping_set</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_encode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxied</span><span class="o">.</span><span class="n">set_multi</span><span class="p">(</span><span class="n">mapping_set</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_multi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxied</span><span class="o">.</span><span class="n">get_multi</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="n">translated</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">translated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value_decode</span><span class="p">(</span><span class="n">record</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span>
+        <span class="k">return</span> <span class="n">translated</span>
+
+
+<span class="k">class</span> <span class="nc">MsgpackProxy</span><span class="p">(</span><span class="n">_EncodedProxy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;custom decode/encode for value mangling&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">value_decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">is</span> <span class="n">NO_VALUE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">NO_VALUE</span>
+        <span class="c1"># you probably want to specify a custom decoder via `object_hook`</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">msgpack</span><span class="o">.</span><span class="n">unpackb</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">CachedValue</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">value_encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="c1"># you probably want to specify a custom encoder via `default`</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">msgpack</span><span class="o">.</span><span class="n">packb</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">use_bin_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span>
+
+<span class="c1"># extend our region configuration from above with a &#39;wrap&#39;</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">make_region</span><span class="p">()</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="s1">&#39;dogpile.cache.pylibmc&#39;</span><span class="p">,</span>
+    <span class="n">expiration_time</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">wrap</span> <span class="o">=</span> <span class="p">[</span><span class="n">MsgpackProxy</span><span class="p">,</span> <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Recipes</a><ul>
+<li><a class="reference internal" href="#invalidating-a-group-of-related-keys">Invalidating a group of related keys</a></li>
+<li><a class="reference internal" href="#asynchronous-data-updates-with-orm-events">Asynchronous Data Updates with ORM Events</a></li>
+<li><a class="reference internal" href="#prefixing-all-keys-in-redis">Prefixing all keys in Redis</a></li>
+<li><a class="reference internal" href="#encoding-decoding-data-into-another-format">Encoding/Decoding data into another format</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usage.html"
+                        title="previous chapter">Usage Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="core_usage.html"
+                        title="next chapter">dogpile Core</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="core_usage.html" title="dogpile Core"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage Guide"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dogpile.cache 1.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Recipes</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2020 Mike Bayer.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>

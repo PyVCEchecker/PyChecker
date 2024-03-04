@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Quickstart &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Concepts" href="concepts.html" />
+    <link rel="prev" title="Installation" href="install.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="concepts.html" title="Concepts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Quickstart</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<p>The fastest way to get up and running with Flask-Dance is to start from
+an example project. First, decide which <a class="reference internal" href="storages.html"><span class="doc">token storage</span></a> you want to use:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api.html#flask_dance.consumer.storage.session.SessionStorage" title="flask_dance.consumer.storage.session.SessionStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">SessionStorage</span></code></a> is the default
+because it requires zero configuration. It uses the
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/quickstart/#sessions" title="(in Flask v2.1.x)"><span class="xref std std-ref">Flask session</span></a> to store OAuth tokens.
+It’s the easiest for getting started, but it’s not a good choice for
+production applications.</p></li>
+<li><p><a class="reference internal" href="api.html#flask_dance.consumer.storage.sqla.SQLAlchemyStorage" title="flask_dance.consumer.storage.sqla.SQLAlchemyStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyStorage</span></code></a> uses a
+relational database to store OAuth tokens. It’s great for production usage,
+but it requires a relational database with <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a>
+and it’s more complicated to set up.</p></li>
+</ul>
+<p>If you’re not sure which to pick, start with <code class="docutils literal notranslate"><span class="pre">SessionStorage</span></code>.
+You can switch later, if you want.</p>
+<p>Next, check the lists below to find the OAuth provider you’re interested in
+and jump to an example project that uses Flask-Dance with that provider!</p>
+<section id="flask-sessions-easiest">
+<h2>Flask sessions (easiest)<a class="headerlink" href="#flask-sessions-easiest" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-github">GitHub</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-google">Google</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-facebook">Facebook</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-slack">Slack</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-twitter">Twitter</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-linkedin">LinkedIn</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-heroku">Heroku</a></p></li>
+</ul>
+</section>
+<section id="sqlalchemy">
+<h2>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-google-sqla">Google</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-google-security-sqla">Google with Flask-Security</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-twitter-sqla">Twitter</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-facebook-sqla">Facebook</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-heroku-sqla">Heroku</a></p></li>
+<li><p><a class="reference external" href="https://github.com/singingwolfboy/flask-dance-multi-provider">Multiple providers simultaneously</a></p></li>
+</ul>
+<div class="admonition-other-providers admonition">
+<p class="admonition-title">Other Providers</p>
+<p>Don’t see the OAuth provider you want? Flask-Dance provides
+<a class="reference internal" href="providers.html"><span class="doc">built-in support for even more providers</span></a>,
+and you can configure Flask-Dance to support
+<a class="reference internal" href="providers.html#custom-provider"><span class="std std-ref">any custom provider you want</span></a>.
+Start with any of the example projects listed above, and modify it to use
+the provider you want!</p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quickstart</a><ul>
+<li><a class="reference internal" href="#flask-sessions-easiest">Flask sessions (easiest)</a></li>
+<li><a class="reference internal" href="#sqlalchemy">SQLAlchemy</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="install.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="concepts.html" title="next chapter">Concepts</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/quickstart.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

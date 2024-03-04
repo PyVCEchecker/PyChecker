@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: truffleHog
+Version: 2.2.1
+Summary: Searches through git repositories for high entropy strings, digging deep into commit history.
+Home-page: https://github.com/dxa4481/truffleHog
+Author: Dylan Ayrey
+Author-email: dxa4481@rit.edu
+License: GNU
+Description: UNKNOWN
+Platform: UNKNOWN

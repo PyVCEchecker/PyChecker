@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Contributing to Flask-Dance &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Developer Interface" href="api.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Developer Interface"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Contributing to Flask-Dance</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="contributing-to-flask-dance">
+<h1>Contributing to Flask-Dance<a class="headerlink" href="#contributing-to-flask-dance" title="Permalink to this headline">¶</a></h1>
+<p>If you want to contribute to Flask-Dance, we would love the help!</p>
+<section id="providers">
+<h2>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to contribute to Flask-Dance is by adding new
+pre-set OAuth providers. Check out the <code class="docutils literal notranslate"><span class="pre">contrib</span></code> directory
+to see how to do that. Don’t forget to check the README file
+to see the requirements for getting your contribution merged!</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Contributing to the documentation is probably the best thing you can do
+for Flask-Dance! OAuth is complicated, and the people using Flask-Dance
+don’t want to understand all the details. Writing clear, comprehensive
+documentation will make everyone’s lives easier.</p>
+</section>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<p>The general checklist for all code contributions is:</p>
+<ul class="simple">
+<li><p>Code</p></li>
+<li><p>Tests</p></li>
+<li><p>Docs</p></li>
+<li><p>Changelog</p></li>
+</ul>
+<p>We strive for roughly 95% test coverage. Not every line needs to be tested,
+but there should be a clear justification for untested lines in your pull
+request. You can use <a class="reference external" href="https://tox.readthedocs.io/">tox</a> to run the unit tests on multiple Python
+versions locally, if you want.</p>
+<p>Documenting changes is very important! Particularly when adding new features
+or changing existing ones, if it isn’t documented, no one will know that
+it exists.</p>
+<p>The changelog is important to people who are using an old version of
+Flask-Dance, and want to upgrade to a more recent version.
+In your pull request, add a bullet point to the “unreleased” section
+of the changelog, describing what your change does.</p>
+<p>Do not modify the version number in your pull request. The maintainer
+will change the version number when releasing a new version of
+Flask-Dance.</p>
+<p>Don’t be afraid to ask for help! If you have a code change you’d like to make,
+and you don’t know how to write the tests or the docs, you’re welcome to
+open a pull request anyway and ask for help with completing the remaining
+steps. (Just don’t expect your pull request to be merged until those steps
+are complete!)</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Contributing to Flask-Dance</a><ul>
+<li><a class="reference internal" href="#providers">Providers</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#code">Code</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api.html" title="previous chapter">Developer Interface</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/contributing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

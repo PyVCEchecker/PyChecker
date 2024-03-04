@@ -1,0 +1,29 @@
+Metadata-Version: 1.1
+Name: bleach-whitelist
+Version: 0.0.11
+Summary: Curated lists of tags and attributes for sanitizing html
+Home-page: https://github.com/yourcelf/bleach-whitelist.git
+Author: Charlie DeTar
+Author-email: cfd@media.mit.edu
+License: BSD License
+Description: Project renamed
+        ================
+        
+        This project and package have been renamed.
+        
+        Please see:
+        
+        - https://github.com/yourcelf/bleach-allowlist
+        - https://pypi.org/project/bleach-allowlist/
+        
+        The package named `bleach-whitelist` will not see further updates, please use
+        `bleach-allowlist` instead.
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content

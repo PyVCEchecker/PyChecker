@@ -1,0 +1,7 @@
+dask>=2022.02.0
+distributed>=2022.02.0
+
+[test]
+pytest
+pytest-asyncio
+cryptography

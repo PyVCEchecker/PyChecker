@@ -1,0 +1,10 @@
+ghp-import
+ipython
+numpydoc
+pydocstyle
+Sphinx>=1.8.3
+pydata_sphinx_theme
+myst-parser
+myst-nb
+sphinx-panels
+sphinx-notfound-page

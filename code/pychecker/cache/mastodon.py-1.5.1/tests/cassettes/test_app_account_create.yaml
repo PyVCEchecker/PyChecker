@@ -1,0 +1,115 @@
+interactions:
+- request:
+    body: client_name=mastodon.py+generated+test+app&scopes=read+write+follow+push&redirect_uris=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['122']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.18.4]
+    method: POST
+    uri: http://localhost:3000/api/v1/apps
+  response:
+    body: {string: '{"id":"2","name":"mastodon.py generated test app","website":null,"redirect_uri":"urn:ietf:wg:oauth:2.0:oob","client_id":"EPr2E85ytcwDMnx2E2jQ9w34FcA4GHy0AoxmOvES4yQ","client_secret":"9cOEKAblYTsCOMXIX0iO4SyUi6_DlPPaTJW13IDj2FA","vapid_key":"BPSW9N0oBHCeTlN6VgEPwlf36QQzuU6XtxguTJSM9xyW9kxnN2I_lzcHsk3ShJMRa0Na7t2kiE9UyJWrtQOsTJo="}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [eb7e8c7c-dce0-44b7-9cba-93e54c88bd92]
+      X-Runtime: ['0.042580']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['331']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/instance/
+  response:
+    body: {string: '{"uri":"localhost","title":"Mastodon","short_description":"","description":"","email":"","version":"3.1.1","urls":{"streaming_api":"ws://localhost:4000"},"stats":{"user_count":3,"status_count":1,"domain_count":0},"thumbnail":"http://localhost/packs/media/images/preview-9a17d32fc48369e8ccd910a75260e67d.jpg","languages":["en"],"registrations":true,"approval_required":false,"contact_account":null}'}
+    headers:
+      Cache-Control: ['max-age=180, public']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 22 Feb 2020 19:28:14 GMT']
+      ETag: [W/"7ac51e4e7519042ec38c63400c9f91c7"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [4a5c507c-e524-45bc-a59e-fc8d05cfa3be]
+      X-Runtime: ['0.091599']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['397']
+    status: {code: 200, message: OK}
+- request:
+    body: scope=read+write+follow+push&client_id=EPr2E85ytcwDMnx2E2jQ9w34FcA4GHy0AoxmOvES4yQ&client_secret=9cOEKAblYTsCOMXIX0iO4SyUi6_DlPPaTJW13IDj2FA&grant_type=client_credentials
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['170']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.18.4]
+    method: POST
+    uri: http://localhost:3000/oauth/token
+  response:
+    body: {string: '{"access_token":"e_sN2EaB2gdiiDcCVBIp3BPPL9bxkRyqUGWGEy3XsIg","token_type":"Bearer","scope":"read
+        write follow push","created_at":1582399694}'}
+    headers:
+      Cache-Control: ['private, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      ETag: [W/"3d2f4be1f0f3460ed11423e6a9afc7bf"]
+      Pragma: [no-cache]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Request-Id: [2cf61c36-ad36-4c6e-919f-06980d46ef9e]
+      X-Runtime: ['0.041155']
+      content-length: ['141']
+    status: {code: 200, message: OK}
+- request:
+    body: locale=en&agreement=1&email=email%40localhost86797&password=swordfish&username=coolguy86797&client_id=EPr2E85ytcwDMnx2E2jQ9w34FcA4GHy0AoxmOvES4yQ&client_secret=9cOEKAblYTsCOMXIX0iO4SyUi6_DlPPaTJW13IDj2FA
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer e_sN2EaB2gdiiDcCVBIp3BPPL9bxkRyqUGWGEy3XsIg]
+      Connection: [keep-alive]
+      Content-Length: ['203']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.18.4]
+    method: POST
+    uri: http://localhost:3000/api/v1/accounts
+  response:
+    body: {string: '{"access_token":"5VZ9ssSlTWJPyO8VGETEZNv2EiQVGXTfY-okvKdgNiw","token_type":"Bearer","scope":"read
+        write follow push","created_at":1582399694}'}
+    headers:
+      Cache-Control: ['private, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      ETag: [W/"4ec66eff3387a9b02348f3cb4dc73773"]
+      Pragma: [no-cache]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [aa57bc51-ac59-4fe8-b716-fbf2cc68d764]
+      X-Runtime: ['0.220777']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['141']
+    status: {code: 200, message: OK}
+version: 1

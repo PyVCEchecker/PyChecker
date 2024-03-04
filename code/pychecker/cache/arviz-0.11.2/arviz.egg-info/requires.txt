@@ -1,0 +1,16 @@
+setuptools>=38.4
+matplotlib>=3.0
+numpy>=1.12
+scipy>=0.19
+packaging
+pandas>=0.23
+xarray>=0.16.1
+netcdf4
+typing_extensions<4,>=3.7.4.3
+
+[all]
+numba
+bokeh>=1.4.0
+ujson
+dask
+zarr>=2.5.0

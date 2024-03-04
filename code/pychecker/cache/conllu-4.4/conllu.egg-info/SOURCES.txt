@@ -1,0 +1,16 @@
+CODE_OF_CONDUCT.md
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+conllu/__init__.py
+conllu/exceptions.py
+conllu/models.py
+conllu/parser.py
+conllu/py.typed
+conllu/serializer.py
+conllu.egg-info/PKG-INFO
+conllu.egg-info/SOURCES.txt
+conllu.egg-info/dependency_links.txt
+conllu.egg-info/top_level.txt

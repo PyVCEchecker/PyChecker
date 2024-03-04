@@ -1,0 +1,14 @@
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/zope-product
+include *.rst
+include *.txt
+include buildout.cfg
+include tox.ini
+
+recursive-include src *.py
+include github_actions.cfg
+include mysql.cfg
+include oracle.cfg
+include postgres.cfg
+include pysqlite.cfg
+recursive-include src *.rst

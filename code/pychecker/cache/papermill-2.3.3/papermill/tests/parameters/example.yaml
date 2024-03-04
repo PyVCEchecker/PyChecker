@@ -1,0 +1,7 @@
+---
+foo: 12345
+bar: "value"
+baz:
+    k1: v1
+    k2: v2
+a_date: 2019-01-01

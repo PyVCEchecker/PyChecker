@@ -1,0 +1,8 @@
+deprecated
+requests
+six
+oauthlib
+requests_oauthlib
+
+[kerberos]
+requests-kerberos

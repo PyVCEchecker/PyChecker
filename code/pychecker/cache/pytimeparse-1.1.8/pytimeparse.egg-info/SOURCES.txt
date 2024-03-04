@@ -1,0 +1,14 @@
+LICENSE.rst
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+pytimeparse/VERSION
+pytimeparse/__init__.py
+pytimeparse/timeparse.py
+pytimeparse.egg-info/PKG-INFO
+pytimeparse.egg-info/SOURCES.txt
+pytimeparse.egg-info/dependency_links.txt
+pytimeparse.egg-info/top_level.txt
+pytimeparse/tests/__init__.py
+pytimeparse/tests/testtimeparse.py

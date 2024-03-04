@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: marathon
+Version: 0.13.0
+Summary: Marathon Client Library
+Home-page: https://github.com/thefactory/marathon-python
+Author: Mike Babineau
+Author-email: michael.babineau@gmail.com
+License: MIT
+Description: Python interface to the Mesos Marathon REST API.
+Platform: Posix; MacOS X; Windows
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

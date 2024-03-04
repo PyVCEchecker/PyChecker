@@ -1,0 +1,14 @@
+ipython_genutils
+traitlets>=4.1
+jsonschema!=2.5.0,>=2.4
+jupyter_core
+
+[fast]
+fastjsonschema
+
+[test]
+check-manifest
+fastjsonschema
+testpath
+pytest
+pytest-cov

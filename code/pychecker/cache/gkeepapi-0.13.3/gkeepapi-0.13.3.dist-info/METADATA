@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: gkeepapi
+Version: 0.13.3
+Summary: An unofficial Google Keep API client
+Home-page: https://github.com/kiwiz/gkeepapi
+Author: Kai
+Author-email: z@kwi.li
+License: MIT
+Keywords: google keep api
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: future (>=0.16.0)
+Requires-Dist: gpsoauth (>=0.4.1)
+Requires-Dist: six (>=1.11.0)
+Requires-Dist: enum34 (>=1.1.6) ; python_version < "3.0"
+
+UNKNOWN
+
+

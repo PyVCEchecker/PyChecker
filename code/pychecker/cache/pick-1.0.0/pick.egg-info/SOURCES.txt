@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+pick/__init__.py
+pick.egg-info/PKG-INFO
+pick.egg-info/SOURCES.txt
+pick.egg-info/dependency_links.txt
+pick.egg-info/requires.txt
+pick.egg-info/top_level.txt

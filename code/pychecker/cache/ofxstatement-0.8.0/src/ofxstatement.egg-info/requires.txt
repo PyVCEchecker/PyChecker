@@ -1,0 +1,7 @@
+setuptools
+appdirs>=1.3.0
+
+[test]
+mock
+pytest>=4.6
+pytest-cov

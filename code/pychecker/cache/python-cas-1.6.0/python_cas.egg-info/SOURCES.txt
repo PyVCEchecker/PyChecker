@@ -1,0 +1,17 @@
+LICENSE.txt
+MANIFEST.in
+Makefile
+README.rst
+cas.py
+requirements-dev.txt
+requirements.txt
+setup.cfg
+setup.py
+tox.ini
+python_cas.egg-info/PKG-INFO
+python_cas.egg-info/SOURCES.txt
+python_cas.egg-info/dependency_links.txt
+python_cas.egg-info/requires.txt
+python_cas.egg-info/top_level.txt
+tests/__init__.py
+tests/test_cas.py

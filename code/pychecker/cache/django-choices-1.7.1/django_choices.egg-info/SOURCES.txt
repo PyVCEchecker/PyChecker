@@ -1,0 +1,14 @@
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+django_choices.egg-info/PKG-INFO
+django_choices.egg-info/SOURCES.txt
+django_choices.egg-info/dependency_links.txt
+django_choices.egg-info/requires.txt
+django_choices.egg-info/top_level.txt
+djchoices/__init__.py
+djchoices/choices.py
+djchoices/tests/__init__.py
+djchoices/tests/test_choices.py
+djchoices/tests/test_private_api.py

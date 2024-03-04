@@ -1,0 +1,215 @@
+# Translations template for python-fedora.
+# Copyright (C) 2014 ORGANIZATION
+# This file is distributed under the same license as the python-fedora
+# project.
+# 
+# Translators:
+# Geert Warrink <geert.warrink@onsnet.nu>, 2011
+# Geert Warrink <geert.warrink@onsnet.nu>, 2015. #zanata
+# Ralph Bean <ralph@fedoraproject.org>, 2015. #zanata
+# Patrick Uiterwijk <puiterwijk@redhat.com>, 2016. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: python-fedora 0.8.0\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-04-21 16:57+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-01-27 08:27-0500\n"
+"Last-Translator: Patrick Uiterwijk <puiterwijk@redhat.com>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/python-fedora/"
+"language/nl/)\n"
+"Generated-By: Babel 1.3\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.8.3\n"
+
+#: fedora/client/wiki.py:102
+#, python-format
+msgid "From %(then)s to %(now)s"
+msgstr "Van %(then)s naar %(now)s "
+
+#: fedora/client/wiki.py:105
+#, python-format
+msgid "%d wiki changes in the past week"
+msgstr "%d wiki veranderingen in de afgelopen week"
+
+#: fedora/client/wiki.py:107
+msgid ""
+"Warning: Number of changes reaches the API return limit.\n"
+"You will not get the complete list of changes unless\n"
+"you run this script using a 'bot' account."
+msgstr ""
+"Waarschuwing: Het aantal veranderingen bereikt de API return limiet.\n"
+"Je krijgt niet de complete lijst van wijzigingen, tenzij\n"
+"je dit script uitvoert met een 'bot' account."
+
+#: fedora/client/wiki.py:118
+msgid "\n"
+"== Most active wiki users =="
+msgstr "\n"
+"== Meest actieve wiki gebruikers =="
+
+#: fedora/client/wiki.py:125
+msgid "\n"
+"== Most edited pages =="
+msgstr "\n"
+"== De meeste bewerkte pagina's =="
+
+#: fedora/django/auth/models.py:54
+msgid "Loading FAS groups..."
+msgstr "FAS groepen laden..."
+
+#: fedora/django/auth/models.py:60
+msgid "Unable to load FAS groups. Did you set FAS_USERNAME and FAS_PASSWORD?"
+msgstr ""
+"Kan FAS groepen niet laden. Heb je FAS_USERNAME en FAS_PASSWORD ingesteld?"
+
+#: fedora/django/auth/models.py:67
+msgid ""
+"FAS groups loaded. Don't forget to set FAS_USERNAME and FAS_PASSWORD to a "
+"low-privilege account."
+msgstr ""
+"FAS groepen geladen. Vergeet niet om FAS_USERNAME en FAS_PASSWORD in te "
+"stellen op een lage-rechten account."
+
+#: fedora/tg/controllers.py:73
+#, python-format
+msgid "Welcome, %s"
+msgstr "Welkom, %s"
+
+#: fedora/tg/controllers.py:82
+msgid ""
+"The credentials you supplied were not correct or did not grant access to "
+"this resource."
+msgstr ""
+"De referenties die je opgegeven hebt zijn niet juist of verlenen geen "
+"toegang tot deze hulpbron."
+
+#: fedora/tg/controllers.py:85
+msgid "You must provide your credentials before accessing this resource."
+msgstr ""
+"Je moet jouw referenties aanbieden voordat deze hulpbron toegankelijk wordt."
+
+#: fedora/tg/controllers.py:88
+msgid "Please log in."
+msgstr "Gelieve in te loggen."
+
+#: fedora/tg/controllers.py:116
+msgid "You have successfully logged out."
+msgstr "Je hebt succesvol afgemeld."
+
+#: fedora/tg/templates/genshi/login.html:14
+#: fedora/tg2/templates/genshi/login.html:9
+#: fedora/tg2/templates/mako/login.mak:3
+msgid "Log In"
+msgstr "Inloggen"
+
+#: fedora/tg/templates/genshi/login.html:18
+msgid "User Name:"
+msgstr "Gebruikersnaam"
+
+#: fedora/tg/templates/genshi/login.html:21
+#: fedora/tg2/templates/genshi/login.html:31
+#: fedora/tg2/templates/mako/login.mak:25
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+#: fedora/tg/templates/genshi/login.html:25
+#: fedora/tg/templates/genshi/login.html:88
+#: fedora/tg2/templates/genshi/login.html:33
+#: fedora/tg2/templates/genshi/login.html:66
+#: fedora/tg2/templates/mako/login.mak:27
+#: fedora/tg2/templates/mako/login.mak:63
+msgid "Login"
+msgstr "Inloggen"
+
+#: fedora/tg/templates/genshi/login.html:32
+#: fedora/tg2/templates/genshi/login.html:14
+#: fedora/tg2/templates/mako/login.mak:9
+msgid "CSRF attacks"
+msgstr "CSRF aanvallen"
+
+#: fedora/tg/templates/genshi/login.html:33
+#: fedora/tg2/templates/genshi/login.html:15
+#: fedora/tg2/templates/mako/login.mak:10
+msgid ""
+" are a means for a malicious website to make a request of another\n"
+"        web server as the user who contacted the malicious web site.  The\n"
+"        purpose of this page is to help protect your account and this server\n"
+"        from attacks from such malicious web sites.  By clicking below, you "
+"are\n"
+"        proving that you are a person rather than just the web browser\n"
+"        forwarding your authentication cookies on behalf of a malicious\n"
+"        website."
+msgstr ""
+" zijn een manier voor een kwaadaardige website om een verzoek van een andere\n"
+"        webserver te vragen als de gebruiker die contact opgenomen heeft met "
+"de schadelijke website.  Het\n"
+"        doel van deze pagina is te helpen om jouw account en deze server\n"
+"        te beschermen tegen aanvallen van dergelijke kwaadaardige websites.  "
+" Door hieronder\n"
+"       te klikken, bewijs je dat je een persoon bent in plaats van alleen de "
+"webbrowser\n"
+"        die jouw authenticatie cookies doorstuurt in naam van een "
+"kwaadaardige\n"
+"        website."
+
+#: fedora/tg/templates/genshi/login.html:40
+#: fedora/tg2/templates/genshi/login.html:23
+#: fedora/tg2/templates/mako/login.mak:18
+msgid "I am a human"
+msgstr "Ik ben een mens"
+
+#: fedora/tg/templates/genshi/login.html:45
+#: fedora/tg2/templates/genshi/login.html:37
+#: fedora/tg2/templates/mako/login.mak:31
+msgid "Forgot Password?"
+msgstr "Wachtwoord vergeten?"
+
+#: fedora/tg/templates/genshi/login.html:46
+#: fedora/tg2/templates/genshi/login.html:38
+#: fedora/tg2/templates/mako/login.mak:32
+msgid "Sign Up"
+msgstr "Aanmelden"
+
+#: fedora/tg/templates/genshi/login.html:64
+#: fedora/tg2/templates/genshi/login.html:47
+#: fedora/tg2/templates/mako/login.mak:40
+msgid "Welcome"
+msgstr "Welkom"
+
+#: fedora/tg/templates/genshi/login.html:86
+#: fedora/tg2/templates/genshi/login.html:64
+#: fedora/tg2/templates/mako/login.mak:61
+msgid "You are not logged in"
+msgstr "Je bent niet ingelogd"
+
+#: fedora/tg/templates/genshi/login.html:93
+#: fedora/tg2/templates/genshi/login.html:70
+#: fedora/tg2/templates/mako/login.mak:69
+msgid "CSRF protected"
+msgstr "CSRF beschermd"
+
+#: fedora/tg/templates/genshi/login.html:95
+#: fedora/tg2/templates/genshi/login.html:72
+#: fedora/tg2/templates/mako/login.mak:72
+msgid "Verify Login"
+msgstr "Inlog verifiëren"
+
+#: fedora/tg/templates/genshi/login.html:101
+#: fedora/tg2/templates/genshi/login.html:78
+#: fedora/tg2/templates/mako/login.mak:79
+msgid "Logout"
+msgstr "Afmelden"
+
+#: fedora/tg/visit/jsonfasvisit1.py:109
+#, python-format
+msgid "updating visit (%s)"
+msgstr "bijwerken van bezoek (%s)"
+
+#: fedora/tg2/templates/genshi/login.html:28
+#: fedora/tg2/templates/mako/login.mak:22
+msgid "Username:"
+msgstr "Gebruikersnaam:"

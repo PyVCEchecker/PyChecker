@@ -1,0 +1,5 @@
+[default]
+title=Test file
+
+[security]
+View management screens = 0:Manager

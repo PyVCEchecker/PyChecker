@@ -1,0 +1,12 @@
+CHANGES.md
+LICENSE
+MANIFEST.in
+README.rst
+pipdeptree.py
+setup.py
+pipdeptree.egg-info/PKG-INFO
+pipdeptree.egg-info/SOURCES.txt
+pipdeptree.egg-info/dependency_links.txt
+pipdeptree.egg-info/entry_points.txt
+pipdeptree.egg-info/requires.txt
+pipdeptree.egg-info/top_level.txt

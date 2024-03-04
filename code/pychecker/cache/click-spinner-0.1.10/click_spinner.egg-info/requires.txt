@@ -1,0 +1,5 @@
+
+[test]
+click
+pytest
+six

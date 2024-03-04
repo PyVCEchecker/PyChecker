@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+django_ipware.egg-info/PKG-INFO
+django_ipware.egg-info/SOURCES.txt
+django_ipware.egg-info/dependency_links.txt
+django_ipware.egg-info/not-zip-safe
+django_ipware.egg-info/top_level.txt
+ipware/__init__.py
+ipware/__version__.py
+ipware/apps.py
+ipware/defaults.py
+ipware/ip.py
+ipware/utils.py

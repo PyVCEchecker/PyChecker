@@ -1,0 +1,26 @@
+include .bumpversion.cfg
+include .mailmap
+include COPYING.md
+include CONTRIBUTING.md
+include README.md
+include RELEASING.md
+include MANIFEST.in
+recursive-include nbformat *.txt
+recursive-include nbformat *.json
+recursive-exclude nbformat/tests *.*
+
+# Javascript
+include package.json
+include index.js
+
+# Documentation
+graft docs
+exclude docs/.DS_Store
+recursive-exclude docs/_build *
+
+# Patterns to exclude from any directory
+global-exclude *~
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude .git
+global-exclude .ipynb_checkpoints

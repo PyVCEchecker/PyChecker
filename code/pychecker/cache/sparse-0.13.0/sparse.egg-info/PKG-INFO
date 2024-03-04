@@ -1,0 +1,52 @@
+Metadata-Version: 2.1
+Name: sparse
+Version: 0.13.0
+Summary: Sparse n-dimensional arrays
+Home-page: https://github.com/pydata/sparse/
+Maintainer: Hameer Abbasi
+Maintainer-email: hameerabbasi@yahoo.com
+License: BSD 3-Clause License (Revised)
+Project-URL: Documentation, https://sparse.pydata.org/
+Project-URL: Source, https://github.com/pydata/sparse/
+Project-URL: Tracker, https://github.com/pydata/sparse/issues
+Description: Sparse Multidimensional Arrays
+        ==============================
+        
+        |Build Status| |Docs Status| |Coverage|
+        
+        This library provides multi-dimensional sparse arrays.
+        
+        * `Documentation <http://sparse.pydata.org/>`_
+        * `Contributing <https://github.com/pydata/sparse/blob/master/docs/contributing.rst>`_
+        * `Bug Reports/Feature Requests <https://github.com/pydata/sparse/issues>`_
+        
+        .. |Build Status| image:: https://github.com/pydata/sparse/actions/workflows/ci.yml/badge.svg
+           :target: https://github.com/pydata/sparse/actions/workflows/ci.yml
+           :alt: Build status
+        
+        .. |Docs Status| image:: https://readthedocs.org/projects/sparse-nd/badge/?version=latest
+           :target: http://sparse.pydata.org/en/latest/?badge=latest
+           :alt: Documentation Status
+        
+        .. |Coverage| image:: https://codecov.io/gh/pydata/sparse/branch/master/graph/badge.svg
+           :target: https://codecov.io/gh/pydata/sparse
+           :alt: Coverage Report
+        
+Keywords: sparse,numpy,scipy,dask
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.6, <4
+Provides-Extra: tox
+Provides-Extra: all
+Provides-Extra: tests
+Provides-Extra: docs

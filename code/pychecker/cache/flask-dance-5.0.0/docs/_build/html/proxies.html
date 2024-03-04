@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Proxies and HTTPS &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Testing Apps That Use Flask-Dance" href="testing.html" />
+    <link rel="prev" title="How OAuth Works" href="how-oauth-works.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing Apps That Use Flask-Dance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="how-oauth-works.html" title="How OAuth Works"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Proxies and HTTPS</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="proxies-and-https">
+<h1>Proxies and HTTPS<a class="headerlink" href="#proxies-and-https" title="Permalink to this headline">¶</a></h1>
+<p>Running a secure HTTPS website is important, but encrypting and decrypting
+HTTPS traffic is computationally expensive. Many people running large-scale
+websites (including <a class="reference external" href="https://www.heroku.com/">Heroku</a>) use a <a class="reference external" href="https://en.wikipedia.org/wiki/TLS_termination_proxy">TLS termination proxy</a> to reduce load
+on the HTTP server. This works great, but means that the webserver running
+your Flask application is actually speaking HTTP, not HTTPS.</p>
+<p>As a result, Flask-Dance can get confused, and generate callback URLs
+that have an <code class="docutils literal notranslate"><span class="pre">http://</span></code> scheme, instead of an <code class="docutils literal notranslate"><span class="pre">https://</span></code> scheme.
+This is bad, because OAuth requires that all connections use HTTPS for
+security purposes, and OAuth providers will reject requests that suggest
+a callback URL with a <code class="docutils literal notranslate"><span class="pre">http://</span></code> scheme.</p>
+<p>When you proxy the request from a <a class="reference external" href="https://en.wikipedia.org/wiki/TLS_termination_proxy">TLS termination proxy</a>, probably your
+load balancer, you need to ensure a few headers are set/proxied correctly
+for Flask to do the right thing out of the box:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Host</span></code>: preserve the Host header of the original request</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X-Real-IP</span></code>: preserve the source IP of the original request</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X-Forwarded-For</span></code>: a list of IP addresses of the source IP and any
+HTTP proxies we’ve been through</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X-Forwarded-Proto</span></code>: the protocol, http or https, that the request
+came in with</p></li>
+</ul>
+<p>In 99.9% of the cases the <a class="reference external" href="https://en.wikipedia.org/wiki/TLS_termination_proxy">TLS termination proxy</a> will be configured to
+do the right thing by default and any well-behaved Flask application will
+work out of the box. However, if you’re accessing the WSGI environment
+directly, you will run into trouble. Don’t do this and instead use the
+functions provided by Werkzeug’s <a class="reference external" href="https://werkzeug.palletsprojects.com/en/latest/wsgi/#module-werkzeug.wsgi" title="(in Werkzeug v2.1.x)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">wsgi</span></code></a> module or Flask’s
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.request" title="(in Flask v2.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">request</span></code></a> to access things like a <code class="docutils literal notranslate"><span class="pre">Host</span></code> header.</p>
+<p>If your Flask app is behind a TLS termination proxy, and you need to make
+sure that Flask is aware of that, check Flask’s documentation for
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/deploying/wsgi-standalone/#deploying-proxy-setups" title="(in Flask v2.1.x)"><span class="xref std std-ref">how to deploy a proxy setup</span></a>.</p>
+<p>Please read it and follow its instructions. This is not unique to
+Flask-Dance and there’s nothing to configure on Flask-Dance’s side
+to solve this. It’s also worth noting you might wish to set Flask’s
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/config/#PREFERRED_URL_SCHEME" title="(in Flask v2.1.x)"><code class="xref py py-data docutils literal notranslate"><span class="pre">PREFERRED_URL_SCHEME</span></code></a>.</p>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="how-oauth-works.html" title="previous chapter">How OAuth Works</a></li>
+      <li>Next: <a href="testing.html" title="next chapter">Testing Apps That Use Flask-Dance</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/proxies.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

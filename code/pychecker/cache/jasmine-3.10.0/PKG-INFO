@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: jasmine
+Version: 3.10.0
+Summary: Jasmine is a Behavior Driven Development testing framework for JavaScript. It does not rely on browsers, DOM, or any JavaScript framework. Thus it's suited for websites, Node.js (http://nodejs.org) projects, or anywhere that JavaScript can run.
+Home-page: http://jasmine.github.io
+Author: Pivotal Labs
+Author-email: jasmine-js@googlegroups.com
+License: MIT
+Description: Jasmine is a Behavior Driven Development testing framework for JavaScript. It does not rely on browsers, DOM, or any JavaScript framework. Thus it's suited for websites, Node.js (http://nodejs.org) projects, or anywhere that JavaScript can run.
+        
+        The Jasmine packages for Python are deprecated. There will be no further
+        releases after the end of the Jasmine 3.x series. We recommend migrating to the
+        following options:
+        
+        * jasmine-browser-runner (<https://github.com/jasmine/jasmine-browser>,
+          `npm install jasmine-browser-runner`) to run specs in browsers, including
+          headless Chrome and Saucelabs. This is the most direct replacement for the
+          jasmine server` and `jasmine ci` commands provided by the `jasmine` Python
+          package.
+        * The jasmine npm package (<https://github.com/jasmine/jasmine-npm>,
+          `npm install jasmine`) to run specs under Node.js.
+        * The standalone distribution from the latest Jasmine release
+          <https://github.com/jasmine/jasmine/releases> to run specs in browsers with
+          no additional tools.
+        * The jasmine-core npm package (`npm install jasmine-core`) if all you need is
+          the Jasmine assets. This is the direct equivalent of the jasmine-core Python
+          package.
+        
+        Except for the standalone distribution, all of the above are distributed through
+        npm.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Quality Assurance
+Classifier: Topic :: Software Development :: Testing
+Description-Content-Type: text/plain

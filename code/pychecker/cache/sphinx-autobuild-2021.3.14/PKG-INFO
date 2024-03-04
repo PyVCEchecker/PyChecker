@@ -1,0 +1,7 @@
+Metadata-Version: 1.1
+Name: sphinx-autobuild
+Version: 2021.3.14
+Summary: Rebuild Sphinx documentation on changes, with live-reload in the browser.
+Home-page: https://github.com/executablebooks/sphinx-autobuild
+Author: Jonathan Stoppani
+Author-email: jonathan@stoppani.name

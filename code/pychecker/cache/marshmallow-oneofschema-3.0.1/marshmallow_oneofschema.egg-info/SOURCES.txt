@@ -1,0 +1,13 @@
+CHANGELOG.rst
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+marshmallow_oneofschema/__init__.py
+marshmallow_oneofschema/one_of_schema.py
+marshmallow_oneofschema.egg-info/PKG-INFO
+marshmallow_oneofschema.egg-info/SOURCES.txt
+marshmallow_oneofschema.egg-info/dependency_links.txt
+marshmallow_oneofschema.egg-info/requires.txt
+marshmallow_oneofschema.egg-info/top_level.txt

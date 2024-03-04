@@ -1,0 +1,17 @@
+include *.rst
+include *.txt
+include .coveragerc
+include buildout.cfg
+include tox.ini
+
+include .gitignore
+exclude .gitignore
+
+include .travis.yml
+exclude .travis.yml
+
+recursive-include src *
+
+global-exclude *.pyc
+global-exclude *.pyo
+

@@ -1,0 +1,9 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+shell.py
+shell.egg-info/PKG-INFO
+shell.egg-info/SOURCES.txt
+shell.egg-info/dependency_links.txt
+shell.egg-info/top_level.txt

@@ -1,0 +1,10 @@
+LICENSE
+LICENSE.md
+MANIFEST.in
+README.md
+setup.py
+dash_html_components/__init__.py
+dash_html_components.egg-info/PKG-INFO
+dash_html_components.egg-info/SOURCES.txt
+dash_html_components.egg-info/dependency_links.txt
+dash_html_components.egg-info/top_level.txt

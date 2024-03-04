@@ -1,0 +1,3 @@
+[console_scripts]
+visdom = visdom.server:download_scripts_and_run
+

@@ -1,0 +1,5 @@
+[console_scripts]
+feeluown = feeluown.__main__:main
+feeluown-genicon = feeluown.cli.install:generate_icon
+fuo = feeluown.__main__:main
+

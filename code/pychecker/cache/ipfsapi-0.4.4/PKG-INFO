@@ -1,0 +1,7 @@
+Metadata-Version: 1.1
+Name: ipfsapi
+Version: 0.4.4
+Summary: Python IPFS API client library
+Home-page: https://github.com/ipfs/py-ipfs-http-client/tree/py-ipfs-api
+Author: py-ipfs-api team
+Author-email: 

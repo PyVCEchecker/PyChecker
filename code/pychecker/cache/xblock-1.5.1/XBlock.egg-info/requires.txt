@@ -1,0 +1,12 @@
+fs
+lxml
+markupsafe
+python-dateutil
+pytz
+pyyaml
+webob
+web-fragments
+
+[django]
+django-pyfs>=1.0.5
+lazy

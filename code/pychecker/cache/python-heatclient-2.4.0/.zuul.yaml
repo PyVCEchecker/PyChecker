@@ -1,0 +1,34 @@
+- job:
+    name: heatclient-functional
+    parent: devstack-tox-functional
+    timeout: 4200
+    required-projects:
+      - openstack/heat
+      - openstack/python-heatclient
+    vars:
+      openrc_enable_export: true
+      devstack_plugins:
+        heat: https://opendev.org/openstack/heat
+    irrelevant-files:
+      - ^(test-|)requirements.txt$
+      - ^setup.cfg$
+      - ^doc/.*$
+      - ^.*\.rst$
+      - ^releasenotes/.*$
+      - ^heatclient/tests/.*$
+
+- project:
+    templates:
+      - openstack-cover-jobs
+      - openstack-lower-constraints-jobs
+      - openstack-python3-xena-jobs
+      - check-requirements
+      - openstackclient-plugin-jobs
+      - publish-openstack-docs-pti
+      - release-notes-jobs-python3
+    check:
+      jobs:
+        - heatclient-functional
+    gate:
+      jobs:
+        - heatclient-functional

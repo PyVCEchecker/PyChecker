@@ -1,0 +1,6 @@
+
+[readme]
+pandoc
+
+[update]
+requests

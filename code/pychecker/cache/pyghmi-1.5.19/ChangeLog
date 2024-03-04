@@ -1,0 +1,1236 @@
+CHANGES
+=======
+
+1.5.19
+------
+
+* Extend IMM remote media
+* Workaround IMM header problems
+* Fix problem with TSM
+* Fix problem with older IBM equipment and python3
+* Support SMMv2 permission check format
+* Support SMMv2 variation
+
+1.5.18
+------
+
+* Fix software sensor data
+
+1.5.17
+------
+
+* Fix more SMM issues
+* Fix NTP configuration of FPC/SMM with py3
+* Add Cascade Lake OEM sensor to sdr
+* Amend refererer
+* Fix the referer for ipv6
+* Add referer to XCC OEM behaviors
+* Fix compatibility with FPC for PSU cfg
+
+1.5.16
+------
+
+* Fix FPC configuration support
+* Coerce to str if bytes in python 3
+* Closes-Bug: 1887953
+* In python2, we must change to bytes explicitly
+* Fix python3 issues with FPC interaction
+* Add smm\_ip setting to XCC devices under IPMI
+
+1.5.15
+------
+
+* Support newer storage api
+* Add dateutil requirement for python2 users
+* Do not swallow TSM errors
+* Tolerate variant of TSMA without sys OEM
+* Fix setting passwords in python3
+* A redfish device with no OEM should be generic
+* Ignore 'fault' light for info-only events
+* Add dateutil dependency
+* Fix RDOC upload of large images
+* Update pep8 import order check
+
+1.5.14
+------
+
+* Fix python3 compatibility with older IBM
+* Support newer XCC firmware raid
+* Retry on etag change
+* Improve redfish errors and identify
+* Fix KCS on python 2
+* Disable OEM on KCS
+* Fix localsession for python2
+* Give up on etag checking for log clear
+* Bump hacking to 3.0.0
+* Fix SEL sensor id with LUN
+* Filter out disabled sensors
+* Fix endless loop with log clear attempt in redfish
+* Make reset Bios configuration adaptive
+* Restore cloned webclient TLS validation behavior
+* Add SMM support for dhcp options 12 and 60
+* Fallback to standard TLS validation
+* Reduce instances of duplicate login
+
+1.5.13
+------
+
+* Have BMC side reply to get cipher suites
+* Fix download error reporting
+* Rewrite download loop
+* Fix setting instanced config on XCC
+* Fix python3 on IMM
+* Add a non-voting job with virtualbmc
+
+1.5.12
+------
+
+* Fix server session to properly support rqlun
+
+1.5.11
+------
+
+* feat(redfish): Add port option to be able to specify redfish server port
+* Force body to str for json
+* Rework LUN support
+
+1.5.10
+------
+
+* Another fix for non-zero LUN
+* Fix incorrect sdr cache naming
+
+1.5.9
+-----
+
+* Discard rsLun in reply
+* Set daemon for IO thread
+
+1.5.8
+-----
+
+* Add a simplesession option
+* Support non-zero LUN
+* fix(kcs): Fix the command class to use bytearray instead of lists for raw data
+* Fix IMM/XCC over network
+* Fix building under wheezy
+* Fix IMM on KCS
+* Transform IPMI version number for XCC
+
+1.5.7
+-----
+
+* Fix KCS problems introduced by pep8 restore
+
+1.5.6
+-----
+
+* Guess a more specific type than Other
+* Redfish accept bytes as credentials
+* Remove vestigial argument of abandoned API choice
+* Extend overwrite protection to ipmi module
+* Prevent overwrite of existing files
+* Add SMM PSU configuration to bmc\_configuration
+* Fix IMM/XCC get extended configuration
+* Change API for extended BMC configuration
+* Speed up uefi settings management
+* Wire redfish clear config to IPMI TSMA
+
+1.5.5
+-----
+
+* Show True and False as choices for booleans
+* Support Boolean types for redfish uefi attribs
+
+1.5.4
+-----
+
+* Connect redfish configuration to TSMA IPMI
+* Fix python 3 incompatibility in the FPC/SMM code
+* Add LXPM Lite image management
+* Use python3 for pyghmi builds except Wheezy
+* Fix breakage incurred from 'style fixup' changes
+* Remove IPMI only function from Redfish
+* Detect indefinitely broken session and mark it
+* Use flake8 for testing
+* Prepare to switch to flake8 - 05
+* Prepare to switch to flake8 - 04
+* Prepare to switch to flake8 - 03
+* Prepare to switch to flake8
+* Prepare to switch to flake8
+
+1.5.3
+-----
+
+* Add missing generic stub for detach\_remote\_media
+
+1.5.2
+-----
+
+* urlencode was not properly imported for py2/py3
+
+1.5.1
+-----
+
+* Fix Python3 SMM setting
+* Add python-dateutil to requirements
+
+1.5.0
+-----
+
+* Fix modification of input headers
+* Convert BadStatusLine result
+* Fix incorrect HD path
+* Handle 109 on verifystate
+* Provide better error on XCC 109
+* Make fishclient optionsal on list\_media
+* Fix some issues with service data
+* Add a 'not ready' for overview fetch
+* Stop assuming a return for select
+* Implement diagnostic data for SR635/SR655
+* Extend TSM remote media to redfish mode
+* Add TSM remote media support
+* Add debug in case of failure to retrieve TSM
+* Check HTTP viability before use
+* Drop old Python versions
+* Fix use of ord() in remaining places
+* Fix some redfish incompatibilities
+* Add PSOC update to SR635/SR655
+* Avoid telling a server to enter existing power state
+* Fix potential for loop on mark\_broken
+* Try to deactive SOL on logout
+* Fix format of UEFI info from a TSMA device
+* Fix BMC security config
+* Offer more robust bmc reset
+* Error if TSM fails to provide info
+* Fix firmware info on incomplete data
+* Return potentially modified filename
+* Fix mistake in the health fallback
+* Enable OEM diag filename modification
+* Support newer TSM level
+* Improve nic configuration management in redfish
+* Fix Python3 incompatibility in DCMI
+* Fix SR635/SR655 firmware updates in python3
+* Fix python3 for ipmi set user
+* Fix python3 compatiblility for upload
+* Fix mistake in python3-ification
+* Further Python2/3 compatibility
+* Fix various python2/3 problems
+* Add a spec template for rpm build
+* Hook redfish sys config to TSM IPMI OEM
+* Add OEM firmware retrieval to SR635/SR655
+* Refactor TSM code to common with redfish
+* Fix display of change interval
+* Add Update of TSM for SR635/SR655
+* Fix incorrect rules scope for SMM
+* Fix problems with unrecognized health
+* Fix typo in ruleset in set\_bmc\_configuration
+* Add etag to set\_system\_configuration
+* Add fanspeed to bmc config  for SMM
+* Add SMM password policy to bmc configuration
+* Set warning according to expiry
+* Add password settings to xcc extended attributes
+* Convert integer when advertised
+* Support instanced configuration
+* Implement extensible BMC configuration
+* Support report settings on read-only BIOS
+* Use etag on setting boot device
+* Explictly manage Host header when % present
+* Amend to add back a missing portion of partial patch
+* Fix behavior of unavailable sensors in redfish
+* Map subordinate chassis when doing sensors
+* Allow setting UEFI/BIOS settings without registry
+* Revamp redfish get\_health
+* Fix redfish issues
+
+1.4.1
+-----
+
+* Hardcode SHA1 in BMC side for now
+
+1.4.0
+-----
+
+* Support HMAC SHA256 in IPMI
+* Fix event log date processing
+* Add log\_id to redfish logs
+* Graceful error on no https in get\_health
+* Provide get\_event\_log even when time unparseable
+* Better error message on no License for XCC
+* Support setting BMC hostname in redfish
+* Fallback to direct ipv4addresses manipulation
+* Relay errors on invalid licenses
+* Fix memory health
+* Check XCC HTTP service health
+* Change bmc restart type to graceful
+* Add user expiration info to redfish
+* Add ability to retrieve user expiry
+* Try generic method for media attach
+* Support no-image media in list
+* Make roles case insensitive
+* Fix set system configuration
+* Fix incorrect call to weblogout
+* Carry Redfish error logic to oem
+* Fix typo in startswith call
+* Improve date parsing performance
+* Improve eventlog performance
+* Fix SD650 Redfish
+* Add license status
+* Fix instances with no agentless update adapter
+* Add support for deleting licenses from XCC
+* Offer save\_licenses to backup license
+* Add retrieval of diagnostic data for SMM
+* Fix download when nominally accepting gzip
+* Implement redfish user management
+* Add license check and install
+* Implement diagnostic data retrieval
+* Add lenovo firmware update to redfish
+* Add attach and detach media
+* Implement upload\_media for Lenovo
+* Have upload auto-ungzip
+* Provide better error handling for XCC/IMM
+* Fix get\_oem\_sensor\_names
+* Correct typo in import
+* Add Proprietary fetch of DIMM in XCC
+* Add missing import to the Lenovo OEM
+* Add XCC storage management
+* Update the unusable stripsize
+* Fix xcc breaking the standard webclient
+* Add redfish list\_media
+* Fix redfish event log
+* Add month/day/year to parse
+* Remove unneeded empty .zuul.yaml
+* Add OEM Lenovo Firmware
+* Add disk hardware information
+* Update docs job
+* Fallback to MessageId
+* Fallback BootSourceOverrideMode for older systems
+* Add mandated client headers
+* Fix system\_configuration
+* Add fallbacks for more redfish implementations
+* Add get\_inventory\_of\_component
+* Allow caller to opt out of some behaviors
+* More clearly indicate bad credentials
+* Cleanly degrade on bad BMC time format
+* Use dependency information for error checking
+* Provide better messages when redfish provides
+* Get pending settings with current
+* Use the registry info to help set
+* Have get\_system\_configuration get detail
+* Add sensor data to redfish
+* Convert to localtime
+* Add log clear to redfish log
+* Ignore blank numeric default
+* OpenDev Migration Patch
+* Add redfish log support
+* Add OEM extensibility framework to pyghmi redfish
+
+1.3.0
+-----
+
+* Add clear system configuration to redfish
+* Workaround 7Y36 model bug
+* If no u-height, revert to default behavior
+* Address another location where 108 may appear
+* Protect more unspported instance variables
+* Implement redfish set\_net\_configuration
+* Remove a round trip delay for inventory
+* Attempt bulk request of inventory
+* Workaround 'dead' IPv4 addresses
+* Support SYSTEM\_PROD\_DATA
+* Hide instanced and password settings
+* Skip empty firmware values
+* Handle 413 directly on the upload
+* Fix fallbackdata
+* Have LED fallback force a sensor if no other explanation
+* Add token refreshes to adapter update
+* Refresh token throughout upload\_media
+* Fallback behavior on unparseable conditionals
+* Genericize bulk requests and fallback to Id
+* Replace openstack.org git:// URLs with https://
+* Performance enhancements for redfish
+* Add missing headers
+* Fix mistake in IMM set property
+* Fetch inventory information
+* Fetch firmware information
+* Add fetching of network config data
+* Change redfish get\_health to look closer to ipmi
+* Add missing init to redfish
+* Pass through message for Optane
+* Add fallback data
+* Check Fault LED in health check
+* Request forced inventory after adapter update
+* Add 0x10 and 0x03 to ignore
+* Fix cache interop between firmware and hardware
+* Add detected, but unknown disks
+* Report pending updates on adapter
+* Report 108 as temporary error
+* Handle firmware upload error 413
+* Fix string formatting
+* Fix incorrect M.2 labelling
+* Support updating multiple adapters
+* Generalize the megaraid check
+* Treat thorn as string terminating
+* Improve consistency with Lenovo tools
+* Suppress Avago RAID config
+* Refresh token between verify
+* Fix vague KeyError exceptions
+* Support ordered default setting
+* Fix git copy in builddeb script
+* Update the Wheezy patch
+* Be compatible with wheezy python
+* Workaround wheezy limitations
+* Directly reference packages in pbr-free setup
+* Fix typo in the setup.py template
+* Enable package builds without pbr
+* Fix break handling in SOL
+* Enable SMM user for web access
+* Add UEFI/BIOS configuration to pyghmi redfish
+* Fix lenovo generic fallback
+* Implement more robust handling of config.efi
+* Ensure XCC health sets general level
+* Reduce assertion of bootable media failure
+* Add support for XCC License key management
+* Avoid stale webclient in XCC client
+* Improve error on unexpected scenario
+* Refresh token during validation
+* Add M.2 Drive Firmware
+* Add OEM support for XCC PSU information
+* Begin redfish implementation in pyghmi
+* Restore support for old XCC update API
+* Support newer FPC CSRF scheme
+* Add support to persist SDR cache to file
+* Share SDR repository info
+* Correct mistake with refactoring JSON calls
+* Support empty successful scenario
+* Fix omission in new API
+* Support upcoming XCC update API
+* Allow SMM downgrade
+* Fix formatting of SMM/FPC version
+* Add FPC/SMM description
+* Fix python3 incompatibilities
+
+1.2.16
+------
+
+* Preserve logout on storage failure
+* Fix storage deletion
+* Have storage functions log out of the session
+* Gate fix: Cap hacking to avoid gate failure
+* Handle response without unconfiguredDisk
+* Fix early life mark\_broken call
+* Prefer more specific IMM/XCC check over FPC check
+* Fix the mistake in last nights fix
+* Clear lastpayload explicitly in some contexts
+* Retry OEM lookup if no specific OEM identified
+* Fix event data for slot events
+* Fix typo in error message
+* Add 'name' subfield to preserve original names
+* Enrich inventory data on Lenovo IMM/XCC equipment
+* Provide 'hardware' inventory for disks
+* Accept wildcards for settings names
+* Provide feedback if the clear system config attempt fails
+* Add method to clear system configuration
+* Fix bay number from IMM property in nextscale chassis
+* Correct probles in the servicedata attempt
+* Fetch diagnostic data
+
+1.2.14
+------
+
+* Provide get\_description for physical description
+* Add a maintenance thread
+
+1.2.12
+------
+
+* Update package documentation
+* Add support for reduced privilege
+* Fix minor .spec issues
+* Do not claim a broken session is valid
+
+1.2.10
+------
+
+* Use list() to avoid size change during iteration
+* Reduce calls to \_monotonic\_time
+* Show hidden settings
+
+1.2.8
+-----
+
+* Forget sessions with poor connectivity that should be forgotten
+
+1.2.7
+-----
+
+* Fix .spec to include bin scripts and build reqs
+
+1.2.6
+-----
+
+* Handle IMM/XCC without xSEC
+* Add spec for python3-pyghmi package build
+* Switch to stestr
+* Refactor console scripts into entry points
+* Fix print statement in console scripts
+* Add more file patterns for git to ignore
+* Add Python3 support to Trove
+
+1.2.4
+-----
+
+* Fix notification of custom keepalive on broken
+
+1.2.2
+-----
+
+* Fix console input with unicode
+
+1.2.0
+-----
+
+* Improve pyghmi performance
+* Abandon a broken session
+* Python 3.7 compatibility: async is reserved keyword
+* Try to clear presence in initting sessions on broken
+* Support default for numeric\_data
+* Print SOL error on broken ipmi session
+* Provide a grace period for session validity
+* Fix build id of FPC
+* Require python-cryptography
+* Fix uploads without otherfields
+* Attempt to logout on the way out when broken
+* Properly pass formname when using FileUploader
+* Add progress indication to SMM update
+* Add IMMv2 remote media upload
+* Wrap bytes in a StringIO
+* Restore IMMv2 mount attempts
+* Move SOL payload retries to console.py
+* fix tox python3 overrides
+* Add specific message for missing media license
+
+1.1.0
+-----
+
+* Migrate from PyCrypto to Cryptography
+* Error on invalid signature
+* Fix SMM updates on newer SMM firmware versions
+* More informative message on password expiry
+* Fix duplicate adapter name handling
+* add lower-constraints
+* Handle missing properties
+* Update to newer hacking
+* Do not run functional (API) tests in the CI
+* Support '=' as a list delimiter
+* Normalize spaces in values and candidates
+* Revise the FPC fix
+* Check the status for no power permission
+* Prefer cyrptodomex if present
+* Add hostname for FPC and XCC
+* Improve performance of get\_health for XCC
+* Have logged set to 0 early
+* Switch the dsvm job to the "ipmi" hardware type
+* Get additional enclosure data
+
+1.0.44
+------
+
+* Ignore small packets claiming to be IPMI payload
+
+1.0.42
+------
+
+* iSCSI settings aren't viable, mask for now
+* Shore up support of numeric\_data, mask others
+* Support text\_data IMM/XCC configuration
+* Fix ordering if list config
+* Preserve comma delimited lists
+
+1.0.40
+------
+
+* Do not set referer on XCC
+* Fix the error message on unsupported protocols
+* Fix media urls
+* Add the bay number for dense Lenovo platform
+* Better error message on unsupported media
+* Explicitly check RDOC list after add
+* Fix init race condition
+* Provide opt-in performance boost to firmware
+* Do not declare 'complete' before the 'mount'
+* Extend the config.efi wait
+
+1.0.38
+------
+
+* Removes relative import for EfiDecompressor
+
+1.0.37
+------
+
+* Fixes import issues
+
+1.0.36
+------
+
+* Provide a sortid to preserve the settings order
+* Handle hypphenated categories
+* Add error checking to settings
+* Convert to using xraw\_command
+* Provide interface for managing sys config
+* Provide better error message for common scenarios
+
+1.0.34
+------
+
+* Correct mistaken function call
+* Rename zuul v3 job
+* Fix the tempest job
+* Keep web session alive while media mounted
+* Sort the inventory data
+
+1.0.32
+------
+
+* Fix the custom cookies feature
+* Add IBM FPC id
+* Obey custom ports in SOL client and server
+* Update webclient management of cookies
+* Implement remote media upload
+
+1.0.30
+------
+
+* Do not error if the platform does not support restricting the MAXSEG
+* Add storage configuration
+* Update test-requirements
+* repeatedly assign value
+
+1.0.28
+------
+
+* Add XCC Pending version to firmware inventory
+* Block problematic operations while update in progress
+* Make the webclient primitives a bit more resilient
+* Zuul: add file extension to playbook path
+* Whitelist more core drivers
+* Provide reseat command
+* Provide for Adapter updates
+* Migrate to zuulv3 - move legacy job to project
+* Do not suppress all exceptions
+* Change from 'Power' to 'Energy'
+* Add support for Lenovo Energy Meters
+* Fix for DIMM models with invalid bytes
+* Skip FPGA when not supported
+* Get UUID of ThinkSystem D2 enclosures
+* Remove NUL bytes from SMM serial/model
+* Add LXPM driver bundle info to inventory
+* Update "nework" to "network" in comments
+* Manage NTP configuration of ThinkSystem D2 SMM
+* Support update of backup XCC bank
+* Connect backend completion to OEM handler
+* Implement state feedback on firmware update
+* Set referer in IMM web
+* Implement SMM data extension
+* Implement firmware update for ThinkSystem SMM
+* Gracefully disable localsession without fcntl
+* Replace IPv4 inet\_p functions with inet\_a
+* Replace waitall mechanism with never wait
+* Request a small MSS in web connection explicitly
+* Provide support for event only SDR
+* Localize console lock
+* Provide more specific info on update process
+* Reduce memory usage for uploading
+* Fix concurrent firmware updates
+* Make XCC update process more robust
+* Fix support for absolute pathname
+* Support XCC variations for inventory
+* Apply firmware update through XCC
+* Correct a typo in dictionary name
+
+1.0.22
+------
+
+* Correct the offset to adjust for IPMIv2
+* Allow things like multiple distinct users
+* Improve (de)activate payload in virshbmc
+* Protect Session.\*\_sessions operations
+* Protect Console.pendingoutput operations
+* Implement util.protect() lock manager
+* Implement Serial-over-LAN (SOL) in BMC
+* Pyghmi does not follow the pep8 standard
+
+1.0.20
+------
+
+* Implement support for ThinkSystem servers
+* Do not reuse an expired session
+* Move raising sync login exception
+* Fix get\_network\_channel for BMCs that dislike 0xe
+* Fix cleanup loop of changing dictionary
+* Abort MAC decode from FRU if not 'binary'
+* Bypass eventlet sendto when detected
+* Change the wording of setup event
+* Set a 60 second timeout on web
+* Support in-band IPMI for Linux systems
+* Allow LookupError on decode
+* Add referer header to https requests
+* Fix issues with idle behavior
+
+1.0.16
+------
+
+* Provide more consistent attributes
+
+1.0.15
+------
+
+* Only complain about Device SDR if no SDRR
+* Refactor Lenovo OEM support
+* Add base for unittests and fix docs
+* Correct offset of a capability bit
+
+1.0.14
+------
+
+* IpmiServer to allow using IP version 4
+* Improve .gitignore
+* Raise IpmiException on error checking power state
+
+1.0.13
+------
+
+* Consolidate IMM date string parsing
+* Ignore KeyError on delete of missing sensor
+
+1.0.12
+------
+
+* Fix bullet points in README.md
+* Correct mistake with image name abbreviation
+* Implement IMM remote media mount
+* Recognize and use CSRF token
+* Have range become xrange where available
+* Fix webclient viability after error
+* Remove xrange for run both Python 2 and Python 3
+* Check for buffer and use memoryview if missing
+* Add script to help build rpms
+* Extend FPC status
+
+1.0.11
+------
+
+* Improve SOL responsiveness
+
+1.0.10
+------
+
+* Handle disconnect notification without session
+* Fix error behavior when target has no SOL session
+* Fix multiple console object behavior
+
+1.0.9
+-----
+
+* Tolerate client reuse of UDP ports
+* Fix errors in IPMI server
+* Fix BMC compatibility with Python 2.6
+* Fix raid driver bitmask
+* Support NMI in bmc
+* Implement identify workaround for ThinkServer SD350
+* Declare strings explicitly as binary
+* Supports cold reset in bmc
+
+1.0.8
+-----
+
+* Implement Python3 compatibility
+* Convert data tuple to a list
+
+1.0.7
+-----
+
+* Correct firmware inventory issue on IBM M4 servers
+
+1.0.6
+-----
+
+* Raise incurred exception if appropriate
+* Fix FPC detection for Lenovo Nextscale
+* Fix KeyError due to lazy use of raw\_command
+
+1.0.5
+-----
+
+* Disable futile attempts to correct uncorrectable time
+* Remove errant IBM nextscale id
+* Fix agentless error on M4 systems
+* Add node status checks to FPC sensors
+* Add Nextscale total power capacity as a sensor
+
+1.0.4
+-----
+
+* Extend session keepalive
+* Remove unused pngmath Sphinx extension
+
+1.0.3
+-----
+
+* Allows BMCs to configure the event loop timeout
+* Add Hardware inventory from Lenovo Agentless
+
+1.0.2
+-----
+
+* Fix IPMI server functionality
+* Add disk inventory when possible from Lenovo IMM
+
+1.0.1
+-----
+
+* Cope with empty agentless fields
+* Briefly cache adapter data
+* Add 'Trusted IMM' to IMM inventory
+
+1.0.0
+-----
+
+* Passthrough errors when not sent by BMC in MegaRAC
+* Change strategy to identify IMM
+* Do not hook generic vendor identifier
+* Add support for IPv4-only environments
+* Add system X firmware information
+* Be apathetic about endianness of SOL port number
+* Fix get\_health with a NextScale FPC
+* Implement MegaRAC IPv6 SNMP destinations
+* Do not warn on nearly full SEL
+* Fix use of weakref.ref
+* Fix cyclic references in SDR
+* Discard reference when no longer needed
+* Remove a cyclical reference in Lenovo OEM
+* Remove event related memory leak
+* Change DIMM serial to show 0 padded hexadecimal
+* Fix UUID padding problem
+* Determine speed from clock by formula
+* Avoid stall waiting on incommand
+* Implement detach media
+* Allow skipping retrieval of gateway mac addresses
+* Provide attach remote media function
+* Remove support for py33/py26
+* Have ipv6 addresses always be represented as list
+* Add support for OEM command for IPv6 address fetch
+* Add a new README
+* Change graphical console launcher to use base64 encoding
+* Add support for TS graphical console fetching
+* Rework wait behavior
+* Fix synchronous logon premature exit
+
+0.9.9
+-----
+
+* Fix 'uptime' time correction attempt
+* Add OEM sensors for Lenovo Nextscale
+* Deprecated tox -downloadcache option removed
+* Add license parameter to setup.py
+* Point to more specific page for pyghmi
+* Update my email
+* Add TLS support and TSM remote video (WIP)
+
+0.9.8
+-----
+
+* Avoid abandoning retry when SOL packet is not ACK
+* Change DIMM SN parsing in TS to match WebUI
+
+0.9.7
+-----
+
+* Allow bind address to be specified
+* Only bind on tmpsocket once
+
+0.9.6
+-----
+
+* Fix exception on logout
+
+0.9.5
+-----
+
+* Fix TSM detection
+
+0.9.4
+-----
+
+* Add device ID fields to FRU 0
+
+0.9.3
+-----
+
+* Fix raw\_command hang when externally 'broken' or 'logged out'
+
+0.9.2
+-----
+
+* Do not raise on bad/unsupported FRU data
+* Implement custom timeout and apply to TSM NTP
+* Handle missing UUID
+* Workaround likely spec deviations and fix parsing
+* Fix crash on missing "board\_extra" field in FRU response
+
+0.9.1
+-----
+
+* Stop spurious retry on incoming data
+
+0.9.0
+-----
+
+* Fix chunk length when unicode on MCI
+* Handle unicode DCMI data incoming
+* Update .gitreview for new namespace
+* Fixing fru date
+* Fix TS inventory parsing bugs (DIMM, PSU)
+* Change acknowledgement\_timeout to acknowledge\_timeout
+* Fix attempt to fetch firmware on System X
+* Fix attempt to get LED against System X
+* Use alert set 1 unconditionally
+* Add custom OEM domain name command for Lenovo ThinkServers
+* Add custom OEM get remote KVM availability for Lenovo ThinkServers
+* Implement NTP support for Lenovo Thinkserver
+* Implement get/set of DCMI asset tag and MCI
+* Add custom OEM PSU Based Power Capping config for Lenovo ThinkServers
+* Autoenable alert policy for a destination
+* Add reset bmc command
+* Add NMI diag command
+* Add RAID drive and controller to ThinkServer inventory
+* Changing Lenovo custom get\_leds method
+* Add custom OEM firmware info parsing for Lenovo ThinkServers
+* Silently ignore broken sensors rather than error
+* Lessen degree of admin backoff
+* Add disable user command
+* Add LED parsing for Lenovo ThinkServers
+* Add custom OEM inventory parsing for Lenovo ThinkServers
+* Implement setting IPv4 configuration on target
+* Implement read of IPv4 network configuration
+* Reword some event/sensor text
+* Provide numeric key data in state description
+* Support 20 byte passwords
+* Provide time data in alert decode
+* Extend and document user\_delete in ipmi.command
+* Have session.py work better in Windows
+* Fix PET acknowledge errors
+* Provide useful error on bad username
+* Gather Thinkserver CPU and Memory independently
+* Handle Lenovo Thinkserver lacking OEM inventory
+* Add record id to SEL data
+* Provide extensibility to sensors by OEM
+* Acknowledge PET alert on decode
+
+0.8.0
+-----
+
+* Provide interface for decoding PET alerts
+* Handle unknown entity ids
+* Tolerate alternative return code for FRU size
+* Remove libvirt from requirements
+* Provide access to get/set community string
+* Add serial field from SPD
+* Implement OEM Inventory components
+* Report/Configure LAN alert destinations
+* Implement Thinkserver OEM SEL decode
+* Fix behavior with some Lenovo Thinkservers
+* Only conditionally delete fields from event
+* Fix python2.6 usage of unpack\_from
+* For unspecified sensors use None as the component
+* Update decode of HDD OEM events for Lenovo
+* Declare one sort of 'non-redundancy' ok
+* Add OEM event fixup
+* Change event text based on assertion/deassertion
+* Tolerate missing UUID
+* Rename 'entity' to 'component'
+* Leave numbers intact
+* Flesh out and rework some sensor descriptions
+* Break out of FRU read if zero data returned
+* Fix time correction code
+* Decrease severity of 'Disabled' presence
+* Rename description field and split data out
+* Implement event log retrieval from BMCs
+
+0.7.1
+-----
+
+* Add system UUID to inventory
+
+0.7.0
+-----
+
+* Fix parsing of 6bit ascii
+* Clean up strings from FRU
+* Add function to fetch a specific items inventory
+* Tolerate errors in 'extra' fields
+* Create framework for OEM extensions
+* Implement FRU inventory
+
+0.6.27
+------
+
+* Try setting optional byte in set user acess
+
+0.6.26
+------
+
+* Reduce cost of packet transmit
+* Ignore packet overrun in RAKP2 and RAKP4
+
+0.6.25
+------
+
+* Streamline and simplify IO Polling
+
+0.6.24
+------
+
+* Reduce severity of a non-redundant state
+* Add missing generic discrete codes
+* Fix exceptions on sdr read
+* Move packet queue into IO thread
+* Fix needless retries due to misdirected packets
+* Handle concurrent session requests
+* Added a BMC (IPMI) frontend for virsh
+* Add a "--port" option to fakebmc
+
+0.6.23
+------
+
+* Correct delay\_xmit behavior
+
+0.6.22
+------
+
+* Rework IO Worker thread behavior
+
+0.6.21
+------
+
+* Correct redundant timedout calls in recursion
+* Assign code to timeout behavior
+* Gracefully handle error while acking SOL
+* add more commands
+* Enhance IpmiException to carry IPMI codenumber
+* Allow request for single sensor by name
+* Expose sensor description data
+* Implement server side IPMI protocol
+* Check for IPMIPASSWORD env var in pyghmiutil
+* Run pep8 on files in bin/
+* Provide access to chassis identify
+* Implement retrieval of uefi flag in boot devs
+* Recover from kill() while in command
+* Remove overly aggressive packet processing
+* Handle custom keepalive modifications on the fly
+* Avoid exception on close
+* Avoid recursing between keepalive and raw\_command
+* Work toward Python 3.4 support and testing
+* Fix IO worker tolerance of errors
+* Force non-numeric for compact sensor records
+* Change to name-only lookups in RAKP
+* Handle non-linear and unrecognized linearizations
+* Add 'persistent' to return dict of get\_bootdev
+* Raise IpmiException on an error setting/getting the boot device
+* Use get() to avoid KeyError on get\_bootdev()
+* Reduce severity of generic discrete assert to 'Ok'
+* Tolerate more privilege degradation scenarios
+* Fix concurrent raw\_command calls to Session
+* Don't defer custom keepalive expiry on all payloads
+* Fix infinitely recursing custom keepalives
+* Fix IPv4 operations where v6only behavior is default
+* Fix pyghmicons script crash on idle
+* Added password file support
+* Correct pool usage count on failed login
+* Correct console behavior when open session fails
+* Deregister timeout on broken
+* Correct ignoring socket when inappropriate
+* Fix coping with incoming packet in incomplete state
+* Fix unregister\_keepalive when no keepalives registered
+* Fix attribute error on particularly bad connections
+* Handle packet loss correctly in logout/logon
+* Avoid looping select() on sockets repeatedly
+* Correct return value of set\_bootdev
+* Install scripts as well as library
+* Remove references to custom keepalives on logout
+
+0.6.1
+-----
+
+* Slow down to chunk-wise retrieval of SDR as needed
+* Implement function to check SOL payload as keepalive
+* Avoid zombie sessions corrupting living sessions
+* Do not reuse a session that is not logged
+* Break session objects on keepalive failures
+* Use multiple sockets instead of one
+* General cleanup of session
+* Correct check for \_sdr in command
+* Clean up command.py
+* Correct mistakes in constants
+* Correct sensor offset for byte 5 state values
+* Fix mass thread initialization of sessions
+* Add sensor information from IPMI 2.0 rev 1.1
+* Add optical and bios aliases for boot devices
+* Auto degrade sessions to operator when admin is forbidden
+* Add more missing sensor specific event information
+* Add version change sensor information
+* Gracefully flag unrecognized discrete sensor states
+* Add discrete states for event log status sensors
+
+0.5.9.3
+-------
+
+* Allow pyghmi to send break over IPMI SOL
+* Switch from PyCrypto HMAC to standard python hmac
+* Tolerate unicode strings as username and password
+* Fix missing delay\_xmit argument breaking power wait requests
+* Fix race condition in requesting delays
+
+0.5.9.1
+-------
+
+* Fix race condition on sending data
+
+0.5.9
+-----
+
+* Fix large paste to SOL session
+* Move previous fix out to command and console
+* Fix session reuse stall for async usage
+* Make pyghmi tolerate arbitrary threading models
+* Do not count empty SOL data as keepalive data
+* Use different timeout values for logon and retry
+* Fix Console write race condition
+* Reasonably relay IPMI errors to console handlers
+* Allow special handling to preceed generic handler
+* Fix exception if login times out
+* Detect and notify Console users of disconnect
+* Detect broken sessions
+* Fix keepalive behavior on broken Sessions
+* Add support for discrete sensors
+* Add BMC bridge request extension
+* Add 'get\_health' to Command class
+* Add 'get\_sensor\_data' to Command class
+* Add support for retrieving SDR data
+* Remove surviving 'callback' code
+* Remove callback from session.py
+* Add errors for activate session response codes
+* Remove callback usage from console.py
+* Fix some reentrant scenarios
+* Have ipmi session objects reuse themselves
+* Stop waiting on logout during atexit
+* Change SOL code to not send empty data to caller
+
+0.5.8
+-----
+
+* Use distinct exceptions for many cases
+* Enhance filehandle registration
+* Fix pyghmi behavior on BMC NACK
+
+0.5.7
+-----
+
+* Update from requirements
+
+0.5.6
+-----
+
+* Correct concatenation of string and int object
+
+0.5.5
+-----
+
+* Expose wait\_for\_rsp class method via public classes
+
+0.5.2
+-----
+
+* Fix mistake with external filehandle and solconnect
+
+0.5.1
+-----
+
+* Change from poll() to select()
+* Have callback recognize any callable
+* Add function to send sol data
+* Add support for non standard ports
+* Finalize rename to pyghmi
+* Fix raw handling by ipmictl.py
+
+0.5.0
+-----
+
+* Rework set\_power handling of errors and noops
+* Rename package from python-ipmi to pyghmi
+* Change long timeout to select() from poll()
+* Enhance wait behavior of set\_power
+* Rename to pyghmi
+* Remove callback arguments from most functions
+* Change session timer to monotonic when possible
+* PEP8 compliance
+* Add raw command to ipmictl
+* Add session keepalive
+* Add SOL support
+* Add more constants to ipmi constant list
+* Fix errors after git repo transition
+* Correct spelling mistakes
+* Rename \_pack\_payload to send\_payload
+* Fix all pep8 errors except E128 and E501
+* Align to OpenStack Build Standards
+* Added gitreview file
+* fix setup to include the private parts of the project
+* Reorganize pieces into 'private' to suggest to consumers the bits tehy need not think too hard about
+* Change to setuptools
+* Change requires to install\_requires
+* Attempt to indicate pycrypto dependency
+* Reorganie things and add a setup.py for fun
+* More style changes
+* More cleanup, correct some syntax errors encountered trying to meet line length
+* More style reworking
+* Stylistic reworks
+* More stylistic changes to ipmi\_command.py
+* Rename ipmi\_syncexample to something less tounge twisting
+* Rework docstrings
+* Reorder imports
+* Change one conditional to perhaps be a bit more readable
+* Add name to TODOs that I put down
+* Add LICENSE excerpt to each file
+* Place project under Apache license 2.0
+* Get acceptable copyright message in place
+* Flesh out documentation
+* Add sphinx 1.0 structure instead of older version
+* Revert "Add sphinx doc generator bits"
+* Add sphinx doc generator bits
+* Add an example chunk of code showing how to code in a synchronous way to the python library
+* Add set\_power, with wait argument to not return until new state confirmed
+* Add retry/timeout behavior to library
+* Have get\_power coded more similarly to get\_bootdev
+* Add boot device control functions
+* Put IBM copyright into the files
+* Add a convenience wrapper to do the higher layer simple commands
+* Fix up error status situation
+* Clean up ipmi\_session a little bit
+* Do some rewording
+* Fix the integrity pad calculation (shame python doesn't have a 'use strict')
+* Remove developer prints
+* Fix decryption... mystery remains as to why logout and only logout seems to fail if aes is not enabled in ipmi 2.0 land.
+* Have IPMI2 work for unencrypted, still sorting out decryption... encryption seems to work, but decrypting the response..
+* Fix problem where the data from bmc was not being integrity checked in 1.5
+* Fix problems with k1 and k2 key generation and HMAC on outgoing
+* Almost working IPMI 2.0 support..... disable encryption to facilitate/narrow debug... currently integrity algorithm is apparantly failing to pass on \*outgoing\* packets, though RAKP4 incoming did pass
+* More forcefully note the TODOs so people know when they hit them
+* Python ipmi can now actually do commands using 1.5
+* More work to make it get further on session establishment
+* Milestone: can now receive and correctly parse get channel auth capabilities result
+* Milestone: now able to craft valid Get channel authentication capabilities request and trigger response
+* Get a lot closer to a working ipmi python implementation
+* Break out constantns to a diff file
+* More progress on perl to python port of ipmi
+* Kick things off with a little bit of header data

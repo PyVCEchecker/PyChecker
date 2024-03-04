@@ -1,0 +1,10 @@
+LICENSE
+Qt.py
+README.md
+setup.cfg
+setup.py
+Qt.py.egg-info/PKG-INFO
+Qt.py.egg-info/SOURCES.txt
+Qt.py.egg-info/dependency_links.txt
+Qt.py.egg-info/not-zip-safe
+Qt.py.egg-info/top_level.txt

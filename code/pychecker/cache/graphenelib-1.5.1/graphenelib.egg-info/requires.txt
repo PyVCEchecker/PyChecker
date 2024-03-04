@@ -1,0 +1,14 @@
+ecdsa<0.14,>=0.13.3
+requests<3,>=2.22.0
+websocket-client<1,>=0.56.0
+pylibscrypt<2,>=1.8.0
+pycryptodome<4,>=3.9.1
+appdirs<2,>=1.4.3
+scrypt<0.9,>=0.8.13
+websockets<9,>=8.1
+aiohttp<4,>=3.5.4
+asyncinit<0.3,>=0.2.4
+expiringdict
+
+[speedups]
+secp256k1>=0.13.2

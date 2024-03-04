@@ -1,0 +1,10 @@
+LICENSE.txt
+setup.py
+botocore/data/sts/2011-06-15/endpoint-rule-set-1.json
+botocore/data/sts/2011-06-15/examples-1.json
+botocore/data/sts/2011-06-15/paginators-1.json
+botocore/data/sts/2011-06-15/service-2.json
+botocore_a_la_carte_sts.egg-info/PKG-INFO
+botocore_a_la_carte_sts.egg-info/SOURCES.txt
+botocore_a_la_carte_sts.egg-info/dependency_links.txt
+botocore_a_la_carte_sts.egg-info/top_level.txt

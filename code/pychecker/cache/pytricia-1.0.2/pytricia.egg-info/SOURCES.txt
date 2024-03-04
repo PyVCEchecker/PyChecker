@@ -1,0 +1,11 @@
+COPYING.LESSER
+MANIFEST.in
+README.md
+patricia.c
+patricia.h
+pytricia.c
+setup.py
+pytricia.egg-info/PKG-INFO
+pytricia.egg-info/SOURCES.txt
+pytricia.egg-info/dependency_links.txt
+pytricia.egg-info/top_level.txt

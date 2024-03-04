@@ -1,0 +1,3 @@
+[console_scripts]
+sure = sure.cli:entrypoint
+

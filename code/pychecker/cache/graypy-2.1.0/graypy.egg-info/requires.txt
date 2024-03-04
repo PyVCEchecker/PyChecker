@@ -1,0 +1,8 @@
+
+[amqp]
+amqplib==1.0.2
+
+[docs]
+sphinx<3.0.0,>=2.1.2
+sphinx_rtd_theme<1.0.0,>=0.4.3
+sphinx-autodoc-typehints<2.0.0,>=1.6.0

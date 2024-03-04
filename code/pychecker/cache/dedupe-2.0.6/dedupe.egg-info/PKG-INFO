@@ -1,0 +1,39 @@
+Metadata-Version: 1.2
+Name: dedupe
+Version: 2.0.6
+Summary: A python library for accurate and scaleable data deduplication and entity-resolution
+Home-page: https://github.com/dedupeio/dedupe
+Author: Forest Gregg
+Author-email: fgregg@datamade.us
+License: UNKNOWN
+Project-URL: Issues, https://github.com/dedupeio/dedupe/issues
+Project-URL: Documentation, https://docs.dedupe.io/en/latest/
+Project-URL: Examples, https://github.com/dedupeio/dedupe-examples
+Project-URL: Twitter, https://twitter.com/DedupeIo
+Project-URL: Changelog, https://github.com/dedupeio/dedupe/blob/master/CHANGELOG.md
+Project-URL: Mailing List, https://groups.google.com/forum/#!forum/open-source-deduplication
+Description: 
+            dedupe is a library that uses machine learning to perform de-duplication and entity resolution quickly on structured data. dedupe is the open source engine for `dedupe.io <https://dedupe.io>`_
+        
+            **dedupe** will help you:
+        
+            * **remove duplicate entries** from a spreadsheet of names and addresses
+            * **link a list** with customer information to another with order history, even without unique customer id's
+            * take a database of campaign contributions and **figure out which ones were made by the same person**, even if the names were entered slightly differently for each record
+        
+            dedupe takes in human training data and comes up with the best rules for your dataset to quickly and automatically find similar records, even with very large databases.
+            
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Information Analysis

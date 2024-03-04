@@ -1,0 +1,149 @@
+Changelog
+=========
+
+5.2 (13.10.2021)
+~~~~~~~~~~~~~~~~
+* Implement `copy_cluster` method on ClusterableModel (Karl Hobley)
+* Add `formset_name` option on ClusterableModel formsets to allow the formset name to differ from the relation name (Matt Westcott)
+* Fix: Fix tests for Django 3.2 (Alex Tomkins, Matt Westcott, María Fernanda Magallanes)
+* Fix: Ensure ptr_id fields are correctly populated when deserialising models with multi-level inheritance (Alex Tomkins)
+
+5.1 (10.09.2020)
+~~~~~~~~~~~~~~~~
+* Allow child form class to be overridden in the `formsets` Meta property of ClusterForm (Helder Correia)
+* Add prefetch_related support to ParentalManyToManyField (Andy Chosak)
+* Implement `copy_child_relation` and `copy_all_child_relations` methods on ClusterableModel (Karl Hobley)
+* Fix: Fix behavior of ParentalKeys and prefetch_related() supplied with a lookup queryset (Juha Yrjölä)
+
+5.0.2 (26.05.2020)
+~~~~~~~~~~~~~~~~~~
+* Fix: Fix compatibility with django-taggit 1.3.0 (Martin Sandström)
+
+5.0.1 (06.01.2020)
+~~~~~~~~~~~~~~~~~~
+* Fix: ClusterForm without an explicit `formsets` kwarg now allows formsets to be omitted from form submissions, to fix regression with nested relations
+* Fix: ParentalManyToManyField data is now loaded correctly by `manage.py loaddata` (Andy Babic)
+
+5.0 (06.08.2019)
+~~~~~~~~~~~~~~~~
+* Removed Python 2 and 3.4 support
+* Removed Django 1.10 and 1.11 support
+* Added django-taggit 1.x compatibility (Gassan Gousseinov, Matt Westcott)
+
+4.4.1 (06.01.2020)
+~~~~~~~~~~~~~~~~~~
+* Fix: ClusterForm without an explicit `formsets` kwarg now allows formsets to be omitted from form submissions, to fix regression with nested relations
+
+4.4 (02.04.2019)
+~~~~~~~~~~~~~~~~
+* Django 2.2 compatibility
+* Support nested child relationships in ClusterForm (Sam Costigan)
+
+4.3 (15.11.2018)
+~~~~~~~~~~~~~~~~
+* Added support for filter lookup expressions such as `__lt`
+
+4.2 (08.08.2018)
+~~~~~~~~~~~~~~~~
+* Django 2.1 compatibility
+* Python 3.7 compatibility
+* Implemented prefetch_related on FakeQuerySet (Haydn Greatnews)
+* Fix: Saving a ClusterableModel with a primary key of 0 no longer throws an IntegrityError (A Lee)
+* Fix: Serialization now respects `serialize=False` on ParentalManyToManyFields (Tadas Dailyda)
+
+4.1 (12.02.2017)
+~~~~~~~~~~~~~~~~
+* `on_delete` on ParentalKey now defaults to CASCADE if not specified
+
+4.0 (13.12.2017)
+~~~~~~~~~~~~~~~~
+* Django 2.0 compatibility
+* Removed Django 1.8 and 1.9 support
+* Child formsets now validate uniqueness constraints
+* Fix: Many-to-many relations inside inline formsets are now saved correctly
+
+3.1 (07.04.2017)
+~~~~~~~~~~~~~~~~
+* Django 1.11 compatibility
+* Python 3.6 compatibility
+* Added the ability to install the optional dependency `django-taggit`
+  using `pip install django-modelcluster[taggit]`
+* Fix: ClusterForm.save(commit=True) now correctly writes ParentalManyToManyField relations back to the database rather than requiring a separate model.save() step
+* Fix: ClusterForm.is_multipart() now returns True when a child form requires multipart submission
+* Fix: ClusterForm.media now includes media defined on child forms
+* Fix: ParentalManyToManyField.value_from_object now returns correct result on unsaved objects
+
+3.0.1 (02.02.2017)
+~~~~~~~~~~~~~~~~~~
+* Fix: Added _result_cache property on FakeQuerySet (necessary for model forms with ParentalManyToManyFields to work correctly on Django 1.8-1.9)
+
+3.0 (02.02.2017)
+~~~~~~~~~~~~~~~~
+* Added support for many-to-many relations (Thejaswi Puthraya, Matt Westcott)
+* Added compatibility with django-taggit 0.20 and dropped support for earlier versions
+* Deprecated the Model._meta.child_relations property (get_all_child_relations should be used instead)
+* Implemented the `set()` method on related managers (introduced in Django 1.9)
+
+2.0 (22.04.2016)
+~~~~~~~~~~~~~~~~
+* Removed Django 1.7 and Python 3.2 support
+* Added system check to disallow related_name='+' on ParentalKey
+* Added support for TAGGIT_CASE_INSENSITIVE on ClusterTaggableManager
+* Field values for serialization are now fetched via pre_save (which, in particular, ensures that file fields are committed to storage)
+* Fix: System checks now correctly report a model name that cannot be resolved to a model
+* Fix: prefetch_related on a ClusterTaggableManager no longer fails (but doesn't prefetch either)
+* Fix: Adding invalid types as tags now correctly reports a ValueError
+
+1.1 (17.12.2015)
+~~~~~~~~~~~~~~~~
+* Django 1.9 compatibility
+* Added exclude() method to FakeQuerySet
+* Removed dependency on the 'six' package, in favour of Django's built-in version
+
+1.0 (09.10.2015)
+~~~~~~~~~~~~~~~~
+* Removed Django 1.6 and Python 2.6 support
+* Added system check to ensure that ParentalKey points to a ClusterableModel
+* Added validate_max, min_num and validate_min parameters to childformset_factory
+
+0.6.2 (13.04.2015)
+~~~~~~~~~~~~~~~~~~
+* Fix: Updated add_ignored_fields declaration so that South / Django 1.6 correctly ignores modelcluster.contrib.taggit.ClusterTaggableManager again
+
+0.6.1 (09.04.2015)
+~~~~~~~~~~~~~~~~~~
+* Django 1.8 compatibility
+* 'modelcluster.tags' module has been moved to 'modelcluster.contrib.taggit'
+
+0.6 (09.04.2015)
+~~~~~~~~~~~~~~~~
+(withdrawn due to packaging issues)
+
+0.5 (03.02.2015)
+~~~~~~~~~~~~~~~~
+* ClusterForm.Meta formsets can now be specified as a dict to allow extra properties to be set on the underlying form.
+* Added order_by() method to FakeQuerySet
+* Fix: Child object ordering is now applied without needing to save to the database
+
+0.4 (04.09.2014)
+~~~~~~~~~~~~~~~~
+ * Django 1.7 compatibility
+ * Fix: Datetimes are converted to UTC on serialisation and to local time on deserialisation, to match Django's behaviour when accessing the database
+ * Fix: ParentalKey relations to a model's superclass are now picked up correctly by that model
+ * Fix: Custom Media classes on ClusterForm now behave correctly
+
+0.3 (17.06.2014)
+~~~~~~~~~~~~~~~~
+ * Added exists(), first() and last() methods on FakeQuerySet
+ * Fix: Model ordering is applied when adding items to DeferringRelatedManager
+
+0.2 (22.05.2014)
+~~~~~~~~~~~~~~~~
+ * Python 2.6 compatibility
+ * Python 3 compatibility
+ * Django 1.7 beta compatibility
+ * Added support for prefetch_related on DeferringRelatedManager
+
+0.1 (05.02.2014)
+~~~~~~~~~~~~~~~~
+ * Initial release.

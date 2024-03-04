@@ -1,0 +1,21 @@
+---
+version: '3'
+services:
+  rpm-builder:
+    build:
+      dockerfile: Dockerfile.${MOCK_CONFIG}
+      context: .
+    image: runner-rpm-builder:${MOCK_CONFIG}
+    environment:
+      MOCK_BIN: "mock --old-chroot"
+      MOCK_CONFIG:
+      RELEASE:
+      OFFICIAL:
+    volumes:
+      - ../../:/ansible-runner
+      - mock-cache:/var/cache/mock
+    entrypoint: ["/bin/bash", "-c"]
+    working_dir: /ansible-runner
+    privileged: true
+volumes:
+  mock-cache:

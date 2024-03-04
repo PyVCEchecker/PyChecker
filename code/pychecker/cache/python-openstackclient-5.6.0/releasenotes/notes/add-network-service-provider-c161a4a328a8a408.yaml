@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Add ``network service provider list`` command.

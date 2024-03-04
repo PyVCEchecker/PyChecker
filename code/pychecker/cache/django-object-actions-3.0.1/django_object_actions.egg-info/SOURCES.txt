@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+django_object_actions/__init__.py
+django_object_actions/models.py
+django_object_actions/utils.py
+django_object_actions.egg-info/PKG-INFO
+django_object_actions.egg-info/SOURCES.txt
+django_object_actions.egg-info/dependency_links.txt
+django_object_actions.egg-info/top_level.txt
+django_object_actions/templates/django_object_actions/change_form.html
+django_object_actions/templates/django_object_actions/change_list.html

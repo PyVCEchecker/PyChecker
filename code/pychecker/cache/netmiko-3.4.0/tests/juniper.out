@@ -1,0 +1,7 @@
+--- JUNOS 12.1X44-D35.5 built 2014-05-19 21:36:43 UTC
+pyclass@srx1> show version 
+Hostname: srx1
+Model: srx100h2
+JUNOS Software Release [12.1X44-D35.5]
+
+pyclass@srx1> 

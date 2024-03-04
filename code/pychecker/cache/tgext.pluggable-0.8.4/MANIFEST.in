@@ -1,0 +1,2 @@
+recursive-include tgext/pluggable/commands/*/template *
+global-exclude *.pyc

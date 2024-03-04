@@ -1,0 +1,2 @@
+TurboGears2>=2.3.0
+gearbox

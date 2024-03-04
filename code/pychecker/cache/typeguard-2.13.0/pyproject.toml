@@ -1,0 +1,37 @@
+[build-system]
+requires = [
+    "setuptools >= 42",
+    "wheel >= 0.29.0",
+    "setuptools_scm[toml] >= 3.4"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "dirty-tag"
+
+[tool.pytest.ini_options]
+addopts = "-rsx --tb=short"
+testpaths = "tests"
+
+[tool.coverage.run]
+source = ["typeguard"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.isort]
+src_paths = ["src"]
+skip_gitignore = true
+line_length = 99
+multi_line_output = 4
+
+[tool.flake8]
+max-line-length = 99
+ignore = ["E251", "W504"]
+
+[tool.mypy]
+python_version = "3.6"
+ignore_missing_imports = true
+strict = true
+pretty = true

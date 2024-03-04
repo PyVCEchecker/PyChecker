@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    Add support to clear/overwrite all flavor properties using
+    ``--no-property`` option with ``flavor set`` command.
+    [Blueprint  :oscbp:`allow-overwrite-set-options`]

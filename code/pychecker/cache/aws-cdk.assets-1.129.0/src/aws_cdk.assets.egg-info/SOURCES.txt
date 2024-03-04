@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.assets.egg-info/PKG-INFO
+src/aws_cdk.assets.egg-info/SOURCES.txt
+src/aws_cdk.assets.egg-info/dependency_links.txt
+src/aws_cdk.assets.egg-info/requires.txt
+src/aws_cdk.assets.egg-info/top_level.txt
+src/aws_cdk/assets/__init__.py
+src/aws_cdk/assets/py.typed
+src/aws_cdk/assets/_jsii/__init__.py
+src/aws_cdk/assets/_jsii/assets@1.129.0.jsii.tgz

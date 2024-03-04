@@ -1,0 +1,12 @@
+flask
+numpy
+pyyaml
+requests
+progressbar2
+botocore
+aws-requests-auth
+msgpack
+Pillow
+python-xlib
+opencv-python
+werkzeug>=0.15.0

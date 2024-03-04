@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sprite, texture and pixel surface routines &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Software Surface manipulation" href="sdl2ext_surface.html" />
+    <link rel="prev" title="Resource management" href="sdl2ext_resources.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_surface.html" title="Software Surface manipulation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_resources.html" title="Resource management"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" accesskey="U">sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sprite-texture-and-pixel-surface-routines">
+<h1>Sprite, texture and pixel surface routines<a class="headerlink" href="#sprite-texture-and-pixel-surface-routines" title="Permalink to this headline">¶</a></h1>
+<dl class="data">
+<dt id="sdl2.ext.TEXTURE">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">TEXTURE</code><a class="headerlink" href="#sdl2.ext.TEXTURE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates that texture-based rendering or sprite creation is wanted.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="sdl2.ext.SOFTWARE">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">SOFTWARE</code><a class="headerlink" href="#sdl2.ext.SOFTWARE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates that software-based rendering or sprite creation is wanted.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.Sprite">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">Sprite</code><a class="headerlink" href="#sdl2.ext.Sprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple 2D object, implemented as abstract base class.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.Sprite.x">
+<code class="sig-name descname">x</code><a class="headerlink" href="#sdl2.ext.Sprite.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>The top-left horizontal offset at which the <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a>
+resides.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Sprite.y">
+<code class="sig-name descname">y</code><a class="headerlink" href="#sdl2.ext.Sprite.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>The top-left vertical offset at which the <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a>
+resides.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Sprite.position">
+<code class="sig-name descname">position</code><a class="headerlink" href="#sdl2.ext.Sprite.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The top-left position (<a class="reference internal" href="#sdl2.ext.Sprite.x" title="sdl2.ext.Sprite.x"><code class="xref py py-attr docutils literal notranslate"><span class="pre">x</span></code></a> and <a class="reference internal" href="#sdl2.ext.Sprite.y" title="sdl2.ext.Sprite.y"><code class="xref py py-attr docutils literal notranslate"><span class="pre">y</span></code></a>) as tuple.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Sprite.size">
+<code class="sig-name descname">size</code><a class="headerlink" href="#sdl2.ext.Sprite.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The width and height of the <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> as tuple.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is an abstract property and needs to be implemented by inheriting
+classes.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Sprite.area">
+<code class="sig-name descname">area</code><a class="headerlink" href="#sdl2.ext.Sprite.area" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rectangular area occupied by the <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Sprite.depth">
+<code class="sig-name descname">depth</code><a class="headerlink" href="#sdl2.ext.Sprite.depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>The layer depth on which to draw the <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a>.
+<a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> objects with higher <a class="reference internal" href="#sdl2.ext.Sprite.depth" title="sdl2.ext.Sprite.depth"><code class="xref py py-attr docutils literal notranslate"><span class="pre">depth</span></code></a> values will be
+drawn on top of other <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> values by the
+<a class="reference internal" href="#sdl2.ext.SpriteRenderSystem" title="sdl2.ext.SpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpriteRenderSystem</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.SoftwareSprite">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">SoftwareSprite</code><span class="sig-paren">(</span><em class="sig-param">imgsurface : sdl2.SDL_Surface</em>, <em class="sig-param">free : boolean</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.SoftwareSprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple, visible, pixel-based 2D object, implemented on top of
+SDL2 software surfaces. <em>free</em> indicates, whether <em>imgsurface</em> shall be
+automatically freed on deleting the <em>SoftwareSprite</em>.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.SoftwareSprite.free">
+<code class="sig-name descname">free</code><a class="headerlink" href="#sdl2.ext.SoftwareSprite.free" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates, if the bound <a class="reference internal" href="#sdl2.ext.SoftwareSprite.surface" title="sdl2.ext.SoftwareSprite.surface"><code class="xref py py-attr docutils literal notranslate"><span class="pre">surface</span></code></a> shall be freed on deleting the
+<a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.SoftwareSprite.surface">
+<code class="sig-name descname">surface</code><a class="headerlink" href="#sdl2.ext.SoftwareSprite.surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Surface</span></code> containing the pixel data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.SoftwareSprite.size">
+<code class="sig-name descname">size</code><a class="headerlink" href="#sdl2.ext.SoftwareSprite.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of the <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> as tuple.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SoftwareSprite.subsprite">
+<code class="sig-name descname">subsprite</code><span class="sig-paren">(</span><em class="sig-param">area : (int</em>, <em class="sig-param">int</em>, <em class="sig-param">int</em>, <em class="sig-param">int)</em><span class="sig-paren">)</span> &#x2192; SoftwareSprite<a class="headerlink" href="#sdl2.ext.SoftwareSprite.subsprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates another <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> from a part of the
+<a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a>. The two sprites share pixel data, so if the
+parent sprite’s surface is not managed by the sprite (<code class="docutils literal notranslate"><span class="pre">free</span></code> is False),
+you will need to keep it alive while the subsprite exists.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.TextureSprite">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">TextureSprite</code><span class="sig-paren">(</span><em class="sig-param">texture : sdl2.SDL_Texture</em><span class="optional">[</span>, <em class="sig-param">free=True</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.TextureSprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple, visible, pixel-based 2D object, implemented on top of SDL2
+textures. <em>free</em> indicates, whether <em>texture</em> shall be automatically freed
+on deleting the <em>TextureSprite</em>.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.TextureSprite.free">
+<code class="sig-name descname">free</code><a class="headerlink" href="#sdl2.ext.TextureSprite.free" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates, if the bound <a class="reference internal" href="#sdl2.ext.TextureSprite.texture" title="sdl2.ext.TextureSprite.texture"><code class="xref py py-attr docutils literal notranslate"><span class="pre">texture</span></code></a> shall be freed on deleting the
+<a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.TextureSprite.angle">
+<code class="sig-name descname">angle</code><a class="headerlink" href="#sdl2.ext.TextureSprite.angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rotation angle for the <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.TextureSprite.center">
+<code class="sig-name descname">center</code><a class="headerlink" href="#sdl2.ext.TextureSprite.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>The center to use for rotating the <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a>. <cite>None</cite> will
+reset the center to the default center of the <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.TextureSprite.flip">
+<code class="sig-name descname">flip</code><a class="headerlink" href="#sdl2.ext.TextureSprite.flip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows the <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a> to be flipped over its horizontal or
+vertical axis via the appropriate SDL_FLIP_* value.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.TextureSprite.size">
+<code class="sig-name descname">size</code><a class="headerlink" href="#sdl2.ext.TextureSprite.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of the <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a> as tuple.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.TextureSprite.texture">
+<code class="sig-name descname">texture</code><a class="headerlink" href="#sdl2.ext.TextureSprite.texture" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Texture</span></code> containing the texture data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.SpriteRenderSystem">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">SpriteRenderSystem</code><a class="headerlink" href="#sdl2.ext.SpriteRenderSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>A rendering system for <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> components. This is a base class for
+rendering systems capable of drawing and displaying <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> based
+objects. Inheriting classes need to implement the rendering capability by
+overriding the render() method.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.SpriteRenderSystem.sortfunc">
+<code class="sig-name descname">sortfunc</code><a class="headerlink" href="#sdl2.ext.SpriteRenderSystem.sortfunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort function for the component processing order. The default sort order
+is based on the depth attribute of every sprite. Lower depth values will
+cause sprites to be drawn below sprites with higher depth values.  If
+<a class="reference internal" href="#sdl2.ext.SpriteRenderSystem.sortfunc" title="sdl2.ext.SpriteRenderSystem.sortfunc"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sortfunc</span></code></a> shall be overridden, it must match the callback
+requirements for <a class="reference external" href="http://docs.python.org/library/functions.html#sorted" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">sorted()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteRenderSystem.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">world : World</em>, <em class="sig-param">components : iterable</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.SpriteRenderSystem.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the passed <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> objects via the
+<a class="reference internal" href="#sdl2.ext.SpriteRenderSystem.render" title="sdl2.ext.SpriteRenderSystem.render"><code class="xref py py-meth docutils literal notranslate"><span class="pre">render()</span></code></a> method. The <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> objects are sorted
+via <a class="reference internal" href="#sdl2.ext.SpriteRenderSystem.sortfunc" title="sdl2.ext.SpriteRenderSystem.sortfunc"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sortfunc</span></code></a> before they are passed to <a class="reference internal" href="#sdl2.ext.SpriteRenderSystem.render" title="sdl2.ext.SpriteRenderSystem.render"><code class="xref py py-meth docutils literal notranslate"><span class="pre">render()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteRenderSystem.render">
+<code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param">sprite : iterable</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.SpriteRenderSystem.render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> objects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a no-op function and needs to be implemented by inheriting
+classes.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.SoftwareSpriteRenderSystem">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">SoftwareSpriteRenderSystem</code><span class="sig-paren">(</span><em class="sig-param">window : object</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.SoftwareSpriteRenderSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>A rendering system for <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> components. The
+<a class="reference internal" href="#sdl2.ext.SoftwareSpriteRenderSystem" title="sdl2.ext.SoftwareSpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSpriteRenderSystem</span></code></a> class uses a <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Window</span></code> as
+drawing device to display <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> surfaces. It uses the
+internal SDL surface of the <em>window</em> as drawing context, so that GL
+operations, such as texture handling or the usage of SDL renderers is not
+possible.</p>
+<p><em>window</em> can be either a <a class="reference internal" href="sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a> or
+<code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Window</span></code> instance.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.SoftwareSpriteRenderSystem.window">
+<code class="sig-name descname">window</code><a class="headerlink" href="#sdl2.ext.SoftwareSpriteRenderSystem.window" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Window</span></code> that is used as drawing device.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.SoftwareSpriteRenderSystem.surface">
+<code class="sig-name descname">surface</code><a class="headerlink" href="#sdl2.ext.SoftwareSpriteRenderSystem.surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Surface</span></code> that acts as drawing context for
+<a class="reference internal" href="#sdl2.ext.SoftwareSpriteRenderSystem.window" title="sdl2.ext.SoftwareSpriteRenderSystem.window"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SoftwareSpriteRenderSystem.render">
+<code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param">sprites : object</em><span class="optional">[</span>, <em class="sig-param">x=None</em><span class="optional">[</span>, <em class="sig-param">y=None</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.SoftwareSpriteRenderSystem.render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws the passed <em>sprites</em> on the <a class="reference internal" href="sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a> surface. <em>x</em>
+and <em>y</em> are optional arguments that can be used as relative drawing
+location for <em>sprites</em>. If set to <code class="docutils literal notranslate"><span class="pre">None</span></code>, the location information of
+the <em>sprites</em> are used. If set and <em>sprites</em> is an iterable, such as a
+list of <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> objects, <em>x</em> and <em>y</em> are relative
+location values that will be added to each individual sprite’s
+position. If <em>sprites</em> is a single <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a>, <em>x</em> and <em>y</em>
+denote the absolute position of the <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a>, if set.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.TextureSpriteRenderSystem">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">TextureSpriteRenderSystem</code><span class="sig-paren">(</span><em class="sig-param">target : object</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.TextureSpriteRenderSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>A rendering system for <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a> components. The
+<a class="reference internal" href="#sdl2.ext.TextureSpriteRenderSystem" title="sdl2.ext.TextureSpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSpriteRenderSystem</span></code></a> class uses a <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Renderer</span></code> as
+drawing device to display <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> surfaces.</p>
+<p><em>target</em> can be a <a class="reference internal" href="sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Window</span></code>,
+a:class:<cite>sdl2.ext.Renderer</cite> or a <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Renderer</span></code>. If it is a
+<a class="reference internal" href="sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Window</span></code> instance, it will try
+to create a <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Renderer</span></code> with hardware acceleration for it.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.TextureSpriteRenderSystem.sdlrenderer">
+<code class="sig-name descname">sdlrenderer</code><a class="headerlink" href="#sdl2.ext.TextureSpriteRenderSystem.sdlrenderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Renderer</span></code> that is used as drawing context.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.TextureSpriteRenderSystem.rendertarget">
+<code class="sig-name descname">rendertarget</code><a class="headerlink" href="#sdl2.ext.TextureSpriteRenderSystem.rendertarget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The target for which the <a class="reference internal" href="#sdl2.ext.TextureSpriteRenderSystem.sdlrenderer" title="sdl2.ext.TextureSpriteRenderSystem.sdlrenderer"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdlrenderer</span></code></a> was created, if any.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.TextureSpriteRenderSystem.render">
+<code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param">sprites : object</em><span class="optional">[</span>, <em class="sig-param">x=None</em><span class="optional">[</span>, <em class="sig-param">y=None</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.TextureSpriteRenderSystem.render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the passed <em>sprites</em> via the <code class="xref py py-attr docutils literal notranslate"><span class="pre">renderer</span></code>.  <em>x</em> and
+<em>y</em> are optional arguments that can be used as relative drawing
+location for <em>sprites</em>. If set to <code class="docutils literal notranslate"><span class="pre">None</span></code>, the location
+information of the <em>sprites</em> are used. If set and <em>sprites</em> is an
+iterable, such as a list of <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a> objects, <em>x</em>
+and <em>y</em> are relative location values that will be added to each
+individual sprite’s position. If <em>sprites</em> is a single
+<a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a>, <em>x</em> and <em>y</em> denote the absolute position of the
+<a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a>, if set.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.SpriteFactory">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">SpriteFactory</code><span class="sig-paren">(</span><em class="sig-param">sprite_type=TEXTURE</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.SpriteFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>A factory class for creating <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> objects. The
+<a class="reference internal" href="#sdl2.ext.SpriteFactory" title="sdl2.ext.SpriteFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpriteFactory</span></code></a> can create <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a> or
+<a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> instances, depending on the <em>sprite_type</em>
+being passed to it, which can be <code class="docutils literal notranslate"><span class="pre">SOFTWARE</span></code> or <code class="docutils literal notranslate"><span class="pre">TEXTURE</span></code>. The
+additional <em>kwargs</em> are used as default arguments for creating
+sprites within the factory methods.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.SpriteFactory.sprite_type">
+<code class="sig-name descname">sprite_type</code><a class="headerlink" href="#sdl2.ext.SpriteFactory.sprite_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sprite type created by the factory. This will be either
+<code class="docutils literal notranslate"><span class="pre">SOFTWARE</span></code> for <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> or <code class="docutils literal notranslate"><span class="pre">TEXTURE</span></code> for
+<a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a> objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.SpriteFactory.default_args">
+<code class="sig-name descname">default_args</code><a class="headerlink" href="#sdl2.ext.SpriteFactory.default_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default arguments to use for creating new sprites.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.create_software_sprite">
+<code class="sig-name descname">create_software_sprite</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">bpp=32</em>, <em class="sig-param">masks=None</em><span class="sig-paren">)</span> &#x2192; SoftwareSprite<a class="headerlink" href="#sdl2.ext.SpriteFactory.create_software_sprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a software sprite. A <em>size</em> tuple containing the width and
+height of the sprite and a <em>bpp</em> value, indicating the bits per
+pixel to be used, need to be provided.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.create_sprite">
+<code class="sig-name descname">create_sprite</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.SpriteFactory.create_sprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a>. Depending on the <a class="reference internal" href="#sdl2.ext.SpriteFactory.sprite_type" title="sdl2.ext.SpriteFactory.sprite_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sprite_type</span></code></a>,
+this will return a <a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> or
+<a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a>.</p>
+<p><em>kwargs</em> are the arguments to be passed for the sprite
+construction and can vary depending on the sprite type. Usually
+they have to follow the <a class="reference internal" href="#sdl2.ext.SpriteFactory.create_software_sprite" title="sdl2.ext.SpriteFactory.create_software_sprite"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_software_sprite()</span></code></a> and
+<a class="reference internal" href="#sdl2.ext.SpriteFactory.create_texture_sprite" title="sdl2.ext.SpriteFactory.create_texture_sprite"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_texture_sprite()</span></code></a> method signatures. <em>kwargs</em>
+however will be mixed with the set <a class="reference internal" href="#sdl2.ext.SpriteFactory.default_args" title="sdl2.ext.SpriteFactory.default_args"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_args</span></code></a> so that
+one does not necessarily have to provide all arguments, if they
+are set within the <a class="reference internal" href="#sdl2.ext.SpriteFactory.default_args" title="sdl2.ext.SpriteFactory.default_args"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_args</span></code></a>. If <em>kwargs</em> and
+<a class="reference internal" href="#sdl2.ext.SpriteFactory.default_args" title="sdl2.ext.SpriteFactory.default_args"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_args</span></code></a> contain the same keys, the key-value pair of
+<em>kwargs</em> is chosen.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.create_sprite_render_system">
+<code class="sig-name descname">create_sprite_render_system</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; SpriteRenderSystem<a class="headerlink" href="#sdl2.ext.SpriteFactory.create_sprite_render_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new <a class="reference internal" href="#sdl2.ext.SpriteRenderSystem" title="sdl2.ext.SpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpriteRenderSystem</span></code></a>, based on the set
+<a class="reference internal" href="#sdl2.ext.SpriteFactory.sprite_type" title="sdl2.ext.SpriteFactory.sprite_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sprite_type</span></code></a>. If <a class="reference internal" href="#sdl2.ext.SpriteFactory.sprite_type" title="sdl2.ext.SpriteFactory.sprite_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sprite_type</span></code></a> is <code class="docutils literal notranslate"><span class="pre">TEXTURE</span></code>, a
+<a class="reference internal" href="#sdl2.ext.TextureSpriteRenderSystem" title="sdl2.ext.TextureSpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSpriteRenderSystem</span></code></a> is created with the the
+<code class="docutils literal notranslate"><span class="pre">renderer</span></code> from the <a class="reference internal" href="#sdl2.ext.SpriteFactory.default_args" title="sdl2.ext.SpriteFactory.default_args"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_args</span></code></a>. Other keyword
+arguments are ignored in that case.</p>
+<p>Otherwise a <a class="reference internal" href="#sdl2.ext.SoftwareSpriteRenderSystem" title="sdl2.ext.SoftwareSpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSpriteRenderSystem</span></code></a> is created and <em>args</em>
+and <em>kwargs</em> are passed to it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.create_texture_sprite">
+<code class="sig-name descname">create_texture_sprite</code><span class="sig-paren">(</span><em class="sig-param">renderer : object</em>, <em class="sig-param">size</em>, <em class="sig-param">pformat=sdl2.SDL_PIXELFORMAT_RGBA8888</em>, <em class="sig-param">access=sdl2.SDL_TEXTUREACCESS_STATIC</em><span class="sig-paren">)</span> &#x2192; TextureSprite<a class="headerlink" href="#sdl2.ext.SpriteFactory.create_texture_sprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a texture sprite. A <em>size</em> tuple containing the width and
+height of the sprite needs to be provided.</p>
+<p><a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a> objects are assumed to be static by
+default, making it impossible to access their pixel buffer in
+favour for faster copy operations. If you need to update the pixel
+data frequently or want to use the texture as target for rendering
+operations, <em>access</em> can be set to the relevant
+SDL_TEXTUREACCESS_* flag.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.from_color">
+<code class="sig-name descname">from_color</code><span class="sig-paren">(</span><em class="sig-param">color : object</em>, <em class="sig-param">size</em>, <em class="sig-param">bpp=32</em>, <em class="sig-param">masks=None</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.SpriteFactory.from_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> with a certain color.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.from_image">
+<code class="sig-name descname">from_image</code><span class="sig-paren">(</span><em class="sig-param">fname : str</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.SpriteFactory.from_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> from an image file. The image must be
+loadable via <a class="reference internal" href="sdl2ext_image.html#sdl2.ext.load_image" title="sdl2.ext.load_image"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.load_image()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.from_object">
+<code class="sig-name descname">from_object</code><span class="sig-paren">(</span><em class="sig-param">obj: object</em><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.SpriteFactory.from_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> from an object. The object will be
+passed through <code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.rwops_from_object()</span></code> in
+order to try to load image data from it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.from_surface">
+<code class="sig-name descname">from_surface</code><span class="sig-paren">(</span><em class="sig-param">surface : SDL_Surface</em><span class="optional">[</span>, <em class="sig-param">free=False</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.SpriteFactory.from_surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> from the passed
+<code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Surface</span></code>. If <em>free</em> is set to
+<code class="docutils literal notranslate"><span class="pre">True</span></code>, the passed <em>surface</em> will be freed automatically.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.SpriteFactory.from_text">
+<code class="sig-name descname">from_text</code><span class="sig-paren">(</span><em class="sig-param">text : str</em><span class="optional">[</span>, <em class="sig-param">**kwargs</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; Sprite<a class="headerlink" href="#sdl2.ext.SpriteFactory.from_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <a class="reference internal" href="#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> from a string of text. This method
+requires a <a class="reference internal" href="sdl2ext_font.html#sdl2.ext.FontManager" title="sdl2.ext.FontManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.FontManager</span></code></a> to be in <em>kwargs</em> or
+<a class="reference internal" href="#sdl2.ext.SpriteFactory.default_args" title="sdl2.ext.SpriteFactory.default_args"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_args</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sdl2.ext.Renderer">
+<em class="property">class </em><code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">Renderer</code><span class="sig-paren">(</span><em class="sig-param">target : obj[, logical_size=None[, index=-1[, flags=sdl2.SDL_RENDERER_ACCELERATED]]</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Renderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A rendering context for windows and sprites that can use hardware or
+software-accelerated graphics drivers.</p>
+<p>If target is a <a class="reference internal" href="sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Window</span></code>,
+<em>index</em> and <em>flags</em> are passed to the relevant
+<code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_CreateRenderer()</span></code> call. If <em>target</em> is a
+<a class="reference internal" href="#sdl2.ext.SoftwareSprite" title="sdl2.ext.SoftwareSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftwareSprite</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Surface</span></code>, the <em>index</em>
+and <em>flags</em> arguments are ignored.</p>
+<dl class="attribute">
+<dt id="sdl2.ext.Renderer.sdlrenderer">
+<code class="sig-name descname">sdlrenderer</code><a class="headerlink" href="#sdl2.ext.Renderer.sdlrenderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The underlying <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Renderer</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Renderer.rendertarget">
+<code class="sig-name descname">rendertarget</code><a class="headerlink" href="#sdl2.ext.Renderer.rendertarget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The target for which the <a class="reference internal" href="#sdl2.ext.Renderer" title="sdl2.ext.Renderer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Renderer</span></code></a> was created.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Renderer.logical_size">
+<code class="sig-name descname">logical_size</code><a class="headerlink" href="#sdl2.ext.Renderer.logical_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logical size of the renderer.</p>
+<p>Setting this allows you to draw as if your renderer had this size, even
+though the target may be larger or smaller. When drawing, the renderer will
+automatically scale your contents to the target, creating letter-boxing or
+sidebars if necessary.</p>
+<p>To reset your logical size back to the target’s, set it to <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code>.</p>
+<p>Setting this to a lower value may be useful for low-resolution effects.</p>
+<p>Setting this to a larger value may be useful for antialiasing.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Renderer.color">
+<code class="sig-name descname">color</code><a class="headerlink" href="#sdl2.ext.Renderer.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="sdl2ext_color.html#sdl2.ext.Color" title="sdl2.ext.Color"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Color</span></code></a> to use for draw and fill operations.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Renderer.blendmode">
+<code class="sig-name descname">blendmode</code><a class="headerlink" href="#sdl2.ext.Renderer.blendmode" title="Permalink to this definition">¶</a></dt>
+<dd><p>The blend mode used for drawing operations (fill and line). This
+can be a value of</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SDL_BLENDMODE_NONE</span></code> for no blending</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SDL_BLENDMODE_BLEND</span></code> for alpha blending</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SDL_BLENDMODE_ADD</span></code> for additive color blending</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SDL_BLENDMODE_MOD</span></code> for multiplied color blending</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sdl2.ext.Renderer.scale">
+<code class="sig-name descname">scale</code><a class="headerlink" href="#sdl2.ext.Renderer.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>The horizontal and vertical drawing scale as two-value tuple.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Renderer.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">color=None</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.Renderer.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears the rendering context with the currently set or passed
+<em>color</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Renderer.copy">
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param">src : obj</em><span class="optional">[</span>, <em class="sig-param">srcrect=None</em><span class="optional">[</span>, <em class="sig-param">dstrect=None</em><span class="optional">[</span>, <em class="sig-param">angle=0</em><span class="optional">[</span>, <em class="sig-param">center=None</em><span class="optional">[</span>, <em class="sig-param">flip=render.SDL_FLIP_NONE</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.Renderer.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies (blits) the passed <em>src</em>, which can be a <a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a> or
+<code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Texture</span></code>, to the target of the
+<a class="reference internal" href="#sdl2.ext.Renderer" title="sdl2.ext.Renderer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Renderer</span></code></a>. <em>srcrect</em> is the source rectangle to be used for
+clipping portions of <em>src</em>. <em>dstrect</em> is the destination rectangle.
+<em>angle</em> will cause the texture to be rotated around <em>center</em> by the given
+degrees. <em>flip</em> can be one of the SDL_FLIP_* constants and will flip the
+texture over its horizontal or vertical middle axis. If <em>src</em> is a
+<a class="reference internal" href="#sdl2.ext.TextureSprite" title="sdl2.ext.TextureSprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextureSprite</span></code></a>, <em>angle</em>, <em>center</em> and <em>flip</em> will be set from
+<em>src</em>’s attributes, if not provided.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Renderer.draw_line">
+<code class="sig-name descname">draw_line</code><span class="sig-paren">(</span><em class="sig-param">points : iterable</em><span class="optional">[</span>, <em class="sig-param">color=None</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.Renderer.draw_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws one or multiple lines on the rendering context. If <em>line</em> consists
+of four values <code class="docutils literal notranslate"><span class="pre">(x1,</span> <span class="pre">y1,</span> <span class="pre">x2,</span> <span class="pre">y2)</span></code> only, a single line is drawn. If
+<em>line</em> contains more than four values, a series of connected lines is
+drawn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Renderer.draw_point">
+<code class="sig-name descname">draw_point</code><span class="sig-paren">(</span><em class="sig-param">points : iterable</em><span class="optional">[</span>, <em class="sig-param">color=None</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.Renderer.draw_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws one or multiple points on the rendering context. The <em>points</em>
+argument contains the x and y values of the points as simple sequence in
+the form <code class="docutils literal notranslate"><span class="pre">(point1_x,</span> <span class="pre">point1_y,</span> <span class="pre">point2_x,</span> <span class="pre">point2_y,</span> <span class="pre">...)</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Renderer.draw_rect">
+<code class="sig-name descname">draw_rect</code><span class="sig-paren">(</span><em class="sig-param">rects : iterable</em><span class="optional">[</span>, <em class="sig-param">color=None</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.Renderer.draw_rect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws one or multiple rectangles on the rendering context. <em>rects</em>
+contains sequences of four values denoting the x and y offset and width
+and height of each individual rectangle in the form <code class="docutils literal notranslate"><span class="pre">((x1,</span> <span class="pre">y1,</span> <span class="pre">w1,</span> <span class="pre">h1),</span>
+<span class="pre">(x2,</span> <span class="pre">y2,</span> <span class="pre">w2,</span> <span class="pre">h2),</span> <span class="pre">...)</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Renderer.fill">
+<code class="sig-name descname">fill</code><span class="sig-paren">(</span><em class="sig-param">rects : iterable</em><span class="optional">[</span>, <em class="sig-param">color=None</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.Renderer.fill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills one or multiple rectangular areas on the rendering context with
+the current set or passed <em>color</em>. <em>rects</em> contains sequences of four
+values denoting the x and y offset and width and height of each
+individual rectangle in the form <code class="docutils literal notranslate"><span class="pre">((x1,</span> <span class="pre">y1,</span> <span class="pre">w1,</span> <span class="pre">h1),</span> <span class="pre">(x2,</span> <span class="pre">y2,</span> <span class="pre">w2,</span> <span class="pre">h2),</span>
+<span class="pre">...)</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sdl2.ext.Renderer.present">
+<code class="sig-name descname">present</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#sdl2.ext.Renderer.present" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the rendering context, causing changes to the render buffers
+to be shown.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdl2ext_resources.html"
+                        title="previous chapter">Resource management</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdl2ext_surface.html"
+                        title="next chapter">Software Surface manipulation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/sdl2ext_sprite.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_surface.html" title="Software Surface manipulation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_resources.html" title="Resource management"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" >sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+
+[:python_version<"2.7"]
+ordereddict
+
+[cryptography:python_version<"2.7"]
+cryptography<2.2
+
+[cryptography:python_version>="2.7"]
+cryptography

@@ -1,0 +1,3 @@
+[certbot.plugins]
+dns-gehirn = certbot_dns_gehirn._internal.dns_gehirn:Authenticator
+

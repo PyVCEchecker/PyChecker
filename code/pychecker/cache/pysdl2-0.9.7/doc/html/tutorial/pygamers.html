@@ -1,0 +1,919 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>PySDL2 for Pygamers &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API reference" href="../modules/index.html" />
+    <link rel="prev" title="The Pong Game" href="pong.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../modules/index.html" title="API reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pong.html" title="The Pong Game"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Learn to fly - the tutorials</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pysdl2-for-pygamers">
+<h1>PySDL2 for Pygamers<a class="headerlink" href="#pysdl2-for-pygamers" title="Permalink to this headline">¶</a></h1>
+<p>Care to move to a newer SDL with your Pygame knowledge? Then you should
+know one thing or two about PySDL2 before hacking code, since it is
+completely different from Pygame. Do not let that fact scare you away,
+the basics with graphics and sound are still the same (as they are
+fundamental), but you will not find many similarities to the Pygame API
+within PySDL2.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>More details, examples, etc.</p>
+</div>
+<div class="section" id="technical-differences">
+<h2>Technical differences<a class="headerlink" href="#technical-differences" title="Permalink to this headline">¶</a></h2>
+<p>Pygame is implemented as a mixture of Python, C and Assembler code,
+wrapping 3rd party libraries with CPython API interfaces. PySDL2 in
+contrast is written in pure Python, using <a class="reference external" href="http://docs.python.org/library/ctypes.html#module-ctypes" title="(in Python v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> to interface
+with the C interfaces of 3rd party libraries.</p>
+</div>
+<div class="section" id="api-differences">
+<h2>API differences<a class="headerlink" href="#api-differences" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pygame">
+<span id="pygamers-pygame"></span><h3>pygame<a class="headerlink" href="#pygame" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_Init()</span></code> where appropriate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quit()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_Quit()</span></code> where appropriate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">error</span></code></p></td>
+<td><p>No equivalent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_error()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GetError()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_error()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_SetError()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_sdl_version()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GetVersion()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_sdl_byteorder()</span></code></p></td>
+<td><p><code class="xref py py-data docutils literal notranslate"><span class="pre">sdl2.SDL_BYTEORDER</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">register_quit()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encode_string()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encode_file_path()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="../modules/sdl2ext_common.html#sdl2.ext.init" title="sdl2.ext.init"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.init()</span></code></a> initializes only the video subsystem. By comparison,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pygame.init()</span></code> initializes all Pygame submodules (which includes
+initializing other SDL subsystems).</p>
+</div>
+<div class="section" id="pygame-cdrom">
+<h3>pygame.cdrom<a class="headerlink" href="#pygame-cdrom" title="Permalink to this headline">¶</a></h3>
+<p>PySDL2 does not feature any CD-ROM related interfaces. They were
+removed in SDL2 and PySDL2 does not provide its own facilities.</p>
+</div>
+<div class="section" id="pygame-color">
+<h3>pygame.Color<a class="headerlink" href="#pygame-color" title="Permalink to this headline">¶</a></h3>
+<p>You can find a similar class in <a class="reference internal" href="../modules/sdl2ext_color.html#sdl2.ext.Color" title="sdl2.ext.Color"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Color</span></code></a>. It does
+not feature a <code class="docutils literal notranslate"><span class="pre">set_length()</span></code> or <code class="docutils literal notranslate"><span class="pre">correct_gamma()</span></code> method, though.</p>
+</div>
+<div class="section" id="pygame-cursors">
+<h3>pygame.cursors<a class="headerlink" href="#pygame-cursors" title="Permalink to this headline">¶</a></h3>
+<p>PySDL2 does not feature any pre-defined cursor settings at the moment.</p>
+</div>
+<div class="section" id="pygame-display">
+<h3>pygame.display<a class="headerlink" href="#pygame-display" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.display</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_common.html#sdl2.ext.init" title="sdl2.ext.init"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.init()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quit()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_common.html#sdl2.ext.quit" title="sdl2.ext.quit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.quit()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_init()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_WasInit()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_mode()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window" title="sdl2.ext.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Window</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_surface()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window.get_surface" title="sdl2.ext.Window.get_surface"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sdl2.ext.Window.get_surface()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">flip()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window.refresh" title="sdl2.ext.Window.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sdl2.ext.Window.refresh()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">update()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window.refresh" title="sdl2.ext.Window.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sdl2.ext.Window.refresh()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_driver()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GetCurrentVideoDriver()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Info</span></code></p></td>
+<td><p>No equivalent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_wm_info()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GetWindowWMInfo()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list_modes()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GetNumDisplayModes()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mode_ok()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GetClosestDisplayMode()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gl_get_attribute()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GL_GetAttribute()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gl_set_attribute()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GL_SetAttribute()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_active()</span></code></p></td>
+<td><p>No equivalent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">iconify()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window.minimize" title="sdl2.ext.Window.minimize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sdl2.ext.Window.minimize()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">toggle_fullscreen()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_SetWindowFullscreen()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_gamma()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_SetWindowBrightness()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_gamma_ramp()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_SetWindowGammaRamp.()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_icon()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_SetWindowIcon()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_caption()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window.title" title="sdl2.ext.Window.title"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.ext.Window.title</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_caption()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_window.html#sdl2.ext.Window.title" title="sdl2.ext.Window.title"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.ext.Window.title</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_palette()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_SetSurfacePalette()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-draw">
+<h3>pygame.draw<a class="headerlink" href="#pygame-draw" title="Permalink to this headline">¶</a></h3>
+<p>Drawing primitives can be accessed through either the
+<code class="docutils literal notranslate"><span class="pre">sdl2.SDL_RenderDraw*()</span></code> and <code class="docutils literal notranslate"><span class="pre">sdl2.SDL_RenderFill*()</span></code> functions or
+the more powerful <a class="reference internal" href="../modules/sdl2_sdlgfx.html#module-sdl2.sdlgfx" title="sdl2.sdlgfx: SDL2_gfx library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.sdlgfx</span></code></a> module,</p>
+</div>
+<div class="section" id="pygame-event">
+<h3>pygame.event<a class="headerlink" href="#pygame-event" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.event</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pump()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_PumpEvents()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_PollEvent()</span></code> or <a class="reference internal" href="../modules/sdl2ext_common.html#sdl2.ext.get_events" title="sdl2.ext.get_events"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.get_events()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">poll()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_PollEvent()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wait()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_WaitEvent()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">peek()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_PeepEvents()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">clear()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_FlushEvents()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">event_name()</span></code></p></td>
+<td><p>No equivalent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_blocked()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_EventState()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_blocked()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_EventState()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_allowed()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_EventState()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_grab()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_SetWindowGrab()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_grab()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_GetWindowGrab()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">post()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_PeepEvents()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Event</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Event</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-font">
+<h3>pygame.font<a class="headerlink" href="#pygame-font" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.font</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlttf.TTF_Init()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quit()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlttf.TTF_Quit()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_init()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlttf.TTF_WasInit()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_default_font()</span></code></p></td>
+<td><p>No equivalent planned <a class="footnote-reference brackets" href="#f1" id="id2">1</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_fonts()</span></code></p></td>
+<td><p>No equivalent planned <a class="footnote-reference brackets" href="#f1" id="id3">1</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">match_font()</span></code></p></td>
+<td><p>No equivalent planned <a class="footnote-reference brackets" href="#f1" id="id4">1</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SysFont</span></code></p></td>
+<td><p>No equivalent planned <a class="footnote-reference brackets" href="#f1" id="id5">1</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Font</span></code></p></td>
+<td><p>No equivalent planned <a class="footnote-reference brackets" href="#f1" id="id6">1</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-freetype">
+<h3>pygame.freetype<a class="headerlink" href="#pygame-freetype" title="Permalink to this headline">¶</a></h3>
+<p>PySDL2 does not feature direct FreeType support.</p>
+</div>
+<div class="section" id="pygame-gfxdraw">
+<h3>pygame.gfxdraw<a class="headerlink" href="#pygame-gfxdraw" title="Permalink to this headline">¶</a></h3>
+<p>PySDL2 offers SDL_gfx support through the <a class="reference internal" href="../modules/sdl2_sdlgfx.html#module-sdl2.sdlgfx" title="sdl2.sdlgfx: SDL2_gfx library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.sdlgfx</span></code></a> module.</p>
+</div>
+<div class="section" id="pygame-image">
+<h3>pygame.image<a class="headerlink" href="#pygame-image" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.image</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">load()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlimage.IMG_Load()</span></code>,
+<a class="reference internal" href="../modules/sdl2ext_image.html#sdl2.ext.load_image" title="sdl2.ext.load_image"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.load_image()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">save()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_SaveBMP()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlimage.IMG_SavePNG()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_extended()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlimage.IMG_isBMP()</span></code> et al.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tostring()</span></code></p></td>
+<td><p>No equivalent yet</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fromstring()</span></code></p></td>
+<td><p>No equivalent yet</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">frombuffer()</span></code></p></td>
+<td><p>No equivalent yet</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-joystick">
+<h3>pygame.joystick<a class="headerlink" href="#pygame-joystick" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.joystick</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_Init()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quit()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_Quit()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_init()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_WasInit()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_count()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.joystick.SDL_NumJoysticks()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Joystick()</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.joystick.SDL_Joystick</span></code> and related
+functions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-key">
+<h3>pygame.key<a class="headerlink" href="#pygame-key" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.key</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_focused()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.keyboard.SDL_GetKeyboardFocus()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_pressed()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.keyboard.SDL_GetKeyboardState()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_mods()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.keyboard.SDL_GetModState()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_mods()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.keyboard.SDL_SetModState()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_repeat()</span></code></p></td>
+<td><p>Based on the OS/WM settings, no equivalent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_repeat()</span></code></p></td>
+<td><p>Based on the OS/WM settings, no equivalent</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.keyboard.SDL_GetKeyName()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-locals">
+<h3>pygame.locals<a class="headerlink" href="#pygame-locals" title="Permalink to this headline">¶</a></h3>
+<p>Constants in PySDL2 are spread across the different packages and
+modules, depending on where they originate from.</p>
+</div>
+<div class="section" id="pygame-mixer">
+<h3>pygame.mixer<a class="headerlink" href="#pygame-mixer" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.mixer</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_Init()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quit()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_Quit()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_init()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">stop()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_HaltChannel()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_HaltGroup()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_HaltMusic()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pause()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_Pause()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_PauseMusic()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unpause()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_Resume()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_ResumeMusic()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fadeout()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_FadeOutChannel()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_FadeOutGroup()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_FadeOutMusic()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_num_channels()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_AllocateChannels()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_num_channels()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_AllocateChannels()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_reserved()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_ReserveChannels()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">find_channel()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_busy()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_ChannelFinished()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Sound</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.sdlmixer.Mix_Chunk</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Channel</span></code></p></td>
+<td><p>No equivalent, use the channel functions instead</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-mixer-music">
+<h3>pygame.mixer.music<a class="headerlink" href="#pygame-mixer-music" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="#pygame-mixer">pygame.mixer</a>.</p>
+</div>
+<div class="section" id="pygame-mouse">
+<h3>pygame.mouse<a class="headerlink" href="#pygame-mouse" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.mouse</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_pressed()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.mouse.SDL_GetMouseState()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_pos()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.mouse.SDL_GetMouseState()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_rel()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.mouse.SDL_GetRelativeMouseState()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_pos()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.mouse.SDL_WarpMouseInWindow()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_visible()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.mouse.SDL_ShowCursor()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_focused()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.mouse.SDL_GetMouseFocus()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_cursor()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.mouse.SDL_GetCursor()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_cursor()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.mouse.SDL_SetCursor()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-movie">
+<h3>pygame.movie<a class="headerlink" href="#pygame-movie" title="Permalink to this headline">¶</a></h3>
+<p>No such module is planned for PySDL2.</p>
+</div>
+<div class="section" id="pygame-overlay">
+<h3>pygame.Overlay<a class="headerlink" href="#pygame-overlay" title="Permalink to this headline">¶</a></h3>
+<p>You can work with YUV overlays by using the <code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.render</span></code> module
+with <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.render.SDL_Texture</span></code> objects.</p>
+</div>
+<div class="section" id="pygame-pixelarray">
+<h3>pygame.PixelArray<a class="headerlink" href="#pygame-pixelarray" title="Permalink to this headline">¶</a></h3>
+<p>You can access pixel data of sprites and surfaces directly via the
+<a class="reference internal" href="../modules/sdl2ext_pixelaccess.html#sdl2.ext.PixelView" title="sdl2.ext.PixelView"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.PixelView</span></code></a> class. It does not feature comparison or
+extractions methods.</p>
+</div>
+<div class="section" id="pygame-rect">
+<h3>pygame.Rect<a class="headerlink" href="#pygame-rect" title="Permalink to this headline">¶</a></h3>
+<p>No such functionality is available for PySDL2. Rectangles are represented
+via <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.rect.SDL_Rect</span></code> for low-level SDL2 wrappers or 4-value
+tuples.</p>
+</div>
+<div class="section" id="pygame-scrap">
+<h3>pygame.scrap<a class="headerlink" href="#pygame-scrap" title="Permalink to this headline">¶</a></h3>
+<p>PySDL2 offers basic text-based clipboard access via the
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.clipboard</span></code> module. A feature-rich clipboard API as for Pygame
+does not exist yet.</p>
+</div>
+<div class="section" id="pygame-sndarray">
+<h3>pygame.sndarray<a class="headerlink" href="#pygame-sndarray" title="Permalink to this headline">¶</a></h3>
+<p>No such module is available for PySDL2 yet.</p>
+</div>
+<div class="section" id="pygame-sprite">
+<h3>pygame.sprite<a class="headerlink" href="#pygame-sprite" title="Permalink to this headline">¶</a></h3>
+<p>PySDL2 uses a different approach of rendering and managing sprite
+objects via a component-based system and the <a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.Sprite" title="sdl2.ext.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.Sprite</span></code></a>
+class. A sprite module as for Pygame is not planned.</p>
+</div>
+<div class="section" id="pygame-surface">
+<h3>pygame.Surface<a class="headerlink" href="#pygame-surface" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.Surface</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">blit()</span></code></p></td>
+<td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">sdl2.surface.SDL_BlitSurface()</span></code>,
+<a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.SpriteRenderSystem" title="sdl2.ext.SpriteRenderSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.SpriteRenderSystem</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">convert()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_ConvertSurface()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">convert_alpha()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_ConvertSurface()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">copy()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_ConvertSurface()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fill()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_FillRect()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_FillRects()</span></code>,
+<a class="reference internal" href="../modules/sdl2ext_draw.html#sdl2.ext.fill" title="sdl2.ext.fill"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.fill()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scroll()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_colorkey()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_SetColorKey()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_colorkey()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_GetColorKey()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_alpha()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_SetSurfaceAlphaMod()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_alpha()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_GetSurfaceAlphaMod()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lock()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_LockSurface()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unlock()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_UnlockSurface()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mustlock()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_MUSTLOCK()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_locked()</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.locked</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_locks()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_at()</span></code></p></td>
+<td><p>Direct access to the pixels for surfaces can be
+achieved via the <a class="reference internal" href="../modules/sdl2ext_pixelaccess.html#sdl2.ext.PixelView" title="sdl2.ext.PixelView"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.PixelView</span></code></a> class</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_at()</span></code></p></td>
+<td><p>Direct access to the pixels for surfaces can be
+achieved via the <a class="reference internal" href="../modules/sdl2ext_pixelaccess.html#sdl2.ext.PixelView" title="sdl2.ext.PixelView"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.PixelView</span></code></a> class</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_at_mapped()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_palette()</span></code></p></td>
+<td><p>via <code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.format</span></code> and the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_PixelFormat.palette</span></code>
+attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_palette_at()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_Palette.colors[offset]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_palette()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_SetSurfacePalette()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_palette_at()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_Palette.colors[offset]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">map_rgb()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_MapRGB()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unmap_rgb()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_GetRGB()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_clip()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_SetClipRect()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_clip()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.surface.SDL_GetClipRect()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">subsurface()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_surface.html#sdl2.ext.subsurface" title="sdl2.ext.subsurface"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.subsurface()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_parent()</span></code></p></td>
+<td><p>No equivalent yet</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_abs_parent()</span></code></p></td>
+<td><p>As for <code class="docutils literal notranslate"><span class="pre">get_parent</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_offset()</span></code></p></td>
+<td><p>As for <code class="docutils literal notranslate"><span class="pre">get_parent</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_abs_offset()</span></code></p></td>
+<td><p>As for <code class="docutils literal notranslate"><span class="pre">get_parent</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_size()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_sprite.html#sdl2.ext.Sprite.size" title="sdl2.ext.Sprite.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.ext.Sprite.size</span></code></a>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.w</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.h</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_width()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sdl2.ext.Sprite.size[0]</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.w</span></code>,</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_height()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sdl2.ext.Sprite.size[1]</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.h</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_rect()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_bitsize()</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_PixelFormat.BitsPerPixel</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_bytesize()</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_PixelFormat.BytesPerPixel</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_flags()</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.flags</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_pitch()</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.pitch</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_masks()</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_PixelFormat.Rmask</span></code>, …</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_shifts()</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_PixelFormat.Rshift</span></code>, …</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_losses()</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.pixels.SDL_PixelFormat.Rloss</span></code>, …</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_bounding_rect()</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_view()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_pixelaccess.html#sdl2.ext.PixelView" title="sdl2.ext.PixelView"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.PixelView</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_buffer()</span></code></p></td>
+<td><p><a class="reference internal" href="../modules/sdl2ext_pixelaccess.html#sdl2.ext.PixelView" title="sdl2.ext.PixelView"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.PixelView</span></code></a> or
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.surface.SDL_Surface.pixels</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-surfarray">
+<h3>pygame.surfarray<a class="headerlink" href="#pygame-surfarray" title="Permalink to this headline">¶</a></h3>
+<p>2D and 3D pixel access can be achieved via the
+<a class="reference internal" href="../modules/sdl2ext_pixelaccess.html#sdl2.ext.PixelView" title="sdl2.ext.PixelView"><code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.ext.PixelView</span></code></a> class in environments without
+numpy. Simplified numpy-array creation with direct pixel access (similar
+to <code class="docutils literal notranslate"><span class="pre">pygame.surfarray.pixels2d()</span></code> and <code class="docutils literal notranslate"><span class="pre">pygame.surfarray.pixels3d()</span></code>)
+is available via <a class="reference internal" href="../modules/sdl2ext_pixelaccess.html#sdl2.ext.pixels2d" title="sdl2.ext.pixels2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.pixels2d()</span></code></a> and
+<a class="reference internal" href="../modules/sdl2ext_pixelaccess.html#sdl2.ext.pixels3d" title="sdl2.ext.pixels3d"><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.ext.pixels3d()</span></code></a>.</p>
+</div>
+<div class="section" id="pygame-time">
+<h3>pygame.time<a class="headerlink" href="#pygame-time" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.time</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_ticks()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.timer.SDL_GetTicks()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wait()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.timer.SDL_Delay()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">delay()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.timer.SDL_Delay()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Clock</span></code></p></td>
+<td><p>No equivalent planned</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pygame-transform">
+<h3>pygame.transform<a class="headerlink" href="#pygame-transform" title="Permalink to this headline">¶</a></h3>
+<p>The are no transformation helpers in PySDL2 at moment. Those might be
+implemented later on via numpy helpers, the Python Imaging Library or
+other 3rd party packages.</p>
+</div>
+<div class="section" id="pygame-version">
+<h3>pygame.version<a class="headerlink" href="#pygame-version" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pygame.version</p></th>
+<th class="head"><p>sdl2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ver</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.__version__</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vernum</span></code></p></td>
+<td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">sdl2.version_info</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets">1</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>,<a href="#id4">3</a>,<a href="#id5">4</a>,<a href="#id6">5</a>)</span></dt>
+<dd><p>Check <a class="reference external" href="https://bitbucket.org/marcusva/python-utils">https://bitbucket.org/marcusva/python-utils</a> for an easy
+to use system font detection module</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PySDL2 for Pygamers</a><ul>
+<li><a class="reference internal" href="#technical-differences">Technical differences</a></li>
+<li><a class="reference internal" href="#api-differences">API differences</a><ul>
+<li><a class="reference internal" href="#pygame">pygame</a></li>
+<li><a class="reference internal" href="#pygame-cdrom">pygame.cdrom</a></li>
+<li><a class="reference internal" href="#pygame-color">pygame.Color</a></li>
+<li><a class="reference internal" href="#pygame-cursors">pygame.cursors</a></li>
+<li><a class="reference internal" href="#pygame-display">pygame.display</a></li>
+<li><a class="reference internal" href="#pygame-draw">pygame.draw</a></li>
+<li><a class="reference internal" href="#pygame-event">pygame.event</a></li>
+<li><a class="reference internal" href="#pygame-font">pygame.font</a></li>
+<li><a class="reference internal" href="#pygame-freetype">pygame.freetype</a></li>
+<li><a class="reference internal" href="#pygame-gfxdraw">pygame.gfxdraw</a></li>
+<li><a class="reference internal" href="#pygame-image">pygame.image</a></li>
+<li><a class="reference internal" href="#pygame-joystick">pygame.joystick</a></li>
+<li><a class="reference internal" href="#pygame-key">pygame.key</a></li>
+<li><a class="reference internal" href="#pygame-locals">pygame.locals</a></li>
+<li><a class="reference internal" href="#pygame-mixer">pygame.mixer</a></li>
+<li><a class="reference internal" href="#pygame-mixer-music">pygame.mixer.music</a></li>
+<li><a class="reference internal" href="#pygame-mouse">pygame.mouse</a></li>
+<li><a class="reference internal" href="#pygame-movie">pygame.movie</a></li>
+<li><a class="reference internal" href="#pygame-overlay">pygame.Overlay</a></li>
+<li><a class="reference internal" href="#pygame-pixelarray">pygame.PixelArray</a></li>
+<li><a class="reference internal" href="#pygame-rect">pygame.Rect</a></li>
+<li><a class="reference internal" href="#pygame-scrap">pygame.scrap</a></li>
+<li><a class="reference internal" href="#pygame-sndarray">pygame.sndarray</a></li>
+<li><a class="reference internal" href="#pygame-sprite">pygame.sprite</a></li>
+<li><a class="reference internal" href="#pygame-surface">pygame.Surface</a></li>
+<li><a class="reference internal" href="#pygame-surfarray">pygame.surfarray</a></li>
+<li><a class="reference internal" href="#pygame-time">pygame.time</a></li>
+<li><a class="reference internal" href="#pygame-transform">pygame.transform</a></li>
+<li><a class="reference internal" href="#pygame-version">pygame.version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pong.html"
+                        title="previous chapter">The Pong Game</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../modules/index.html"
+                        title="next chapter">API reference</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorial/pygamers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../modules/index.html" title="API reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pong.html" title="The Pong Game"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Learn to fly - the tutorials</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

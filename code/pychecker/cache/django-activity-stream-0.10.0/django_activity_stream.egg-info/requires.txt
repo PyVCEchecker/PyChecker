@@ -1,0 +1,3 @@
+
+[jsonfield]
+django-jsonfield-backport<2.0,>=1.0.2

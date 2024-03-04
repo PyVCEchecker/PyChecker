@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: drf-extensions
+Version: 0.7.0
+Summary: Extensions for Django REST Framework
+Home-page: http://github.com/chibisov/drf-extensions
+Author: Asif Saif Uddin, Gennady Chibisov
+Author-email: auvipy@gmail.com
+License: BSD
+Download-URL: https://pypi.python.org/pypi/drf-extensions/
+Description: DRF-extensions is a collection of custom extensions for Django REST Framework
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Internet :: WWW/HTTP

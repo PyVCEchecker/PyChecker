@@ -1,0 +1,7 @@
+fixtures
+mock
+purl
+pytest
+sphinx
+testrepository>=0.0.18
+testtools

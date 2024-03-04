@@ -1,0 +1,9 @@
+portalocker
+regex
+tabulate>=0.8.9
+numpy>=1.17
+colorama
+
+[ja]
+mecab-python3==1.0.3
+ipadic<2.0,>=1.0

@@ -1,0 +1,3 @@
+2016/11: the single file cma.py is split up into a package. Distribution sampler 
+  are separated from the core CMA Evolution Strategy code. The test interface
+  has changed to ``python -m cma.test``. 

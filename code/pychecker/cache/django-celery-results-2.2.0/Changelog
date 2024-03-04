@@ -1,0 +1,147 @@
+.. _changelog:
+
+================
+ Change history
+================
+
+.. _version-2.2.0:
+
+2.2.0
+=====
+:release-date: 2021-07-02 11:00 a.m. UTC+6:00
+:release-by: Asif Saif Uddin
+
+- add new urls with nouns first structure (#216) 
+- Remove duplicate indexes 
+- fix group status view return data, add tests for it (#215)
+- typo fix (#218)
+- Use the DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH for group_id/task_id
+- Minor code clean up
+
+.. _version-2.1.0:
+
+2.1.0
+=====
+:release-date: 2021-06-14 09:00 p.m. UTC+6:00
+:release-by: Asif Saif Uddin
+
+- Don't raise an error when ChordCounter is not found 
+- add default_auto_field to apps.py
+- Use the provided chord_size when available
+- Match apply_chord call signature to Celery 5.1
+- Add support for GroupResult (#161)
+- Minor code clean up
+
+.. _version-2.0.1:
+
+2.0.1
+=====
+:release-date: 2021-01-19 07:30 p.m. UTC+6:00
+:release-by: 
+
+- Fix backward compatibility in DatabaseBackend._store_result function
+- Fix 'args' and 'kwargs' propiertes of AsyncResult for DatabaseBackend
+- Fix task_args/task_kwargs in task_protocol=1
+- Test refactors
+- Add task_args and task_kwargs to admins searchable fields (#182) 
+
+.. _version-2.0.0:
+
+2.0.0
+=====
+:release-date: 
+:release-by: 
+
+- Add Spanish translations (#134)
+- Add support for Django 3.0 and 3.1 (#145, #163)
+- Add support for Celery 5 (#163)
+- Drop support for Django < 2.2 (#147, #152)
+- Drop support for Python < 3.6 (#146, #147, #152)
+- Add Chord syncronisation from the database (#144)
+- Encode `task_args` and `task_kwargs` of `TaskResult` using `json.dumps` instead of using `str` (#78)
+
+.. _version-1.1.2:
+
+1.1.2
+=====
+:release-date: 2019-06-06 00:00 a.m. UTC+6:00
+:release-by: Asif Saif Uddin
+
+
+- Fixed few regressions
+
+.. _version-1.1.0:
+
+1.1.0
+=====
+:release-date: 2019-05-21 17:00 p.m. UTC+6:00
+:release-by: Asif Saif Uddin
+
+
+- Django 2.2+.
+- Drop python 3.4 and django 2.0
+- Support specifying the database to use for the store_result method (#63)
+- Fix MySQL8 system variable tx_isolation issue (#84)
+
+
+.. _version-1.0.4:
+
+1.0.4
+=====
+:release-date: 2018-11-12 19:00 p.m. UTC+2:00
+:release-by: Omer Katz
+
+1.0.3 is broken. Use 1.0.4
+
+- Revert renaming label as it is a breaking change.
+
+.. _version-1.0.3:
+
+1.0.3
+=====
+:release-date: 2018-11-12 18:00 p.m. UTC+2:00
+:release-by: Omer Katz
+
+- Revert renaming label as it is a breaking change.
+
+.. _version-1.0.2:
+
+1.0.2
+=====
+:release-date: 2018-11-12 18:00 p.m. UTC+2:00
+:release-by: Omer Katz
+
+- Store task name, args, kwargs as part of the task results in database.
+    Contributed by :github_user: `wardal`.
+
+- Admin screen changes - task name filter, search on task_name, task_id, status.
+    Contributed by :github_user: `jaylynch`.
+
+- Added default_app_config.
+- Added missing migration.
+- Fix MySQL max length issue.
+- Drop support for Django<1.11.
+
+.. _version-1.0.1:
+
+1.0.1
+=====
+:release-date: 2016-11-07 02:00 p.m. PST
+:release-by: Ask Solem
+
+- Migrations were not being installed as part of the distribution (Issue #4).
+
+- Now includes simple task result admin interface.
+
+    Contributed by :github_user:`zeezdev`.
+
+- Now depends on Celery 4.0.0.
+
+.. _version-1.0.0:
+
+1.0.0
+=====
+:release-date: 2016-09-08 03:19 p.m. PDT
+:release-by: Ask Solem
+
+- Initial release

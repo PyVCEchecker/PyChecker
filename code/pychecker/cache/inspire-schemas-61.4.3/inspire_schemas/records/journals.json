@@ -1,0 +1,472 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+        },
+        "_bucket": {
+            "description": "Used by `invenio-records-files` to store information about the\nbucket attached to this record.\n\n.. note::\n\n    This field is maintained by `invenio-records-files` and should\n    not be edited manually.",
+            "minLength": 1,
+            "type": "string"
+        },
+        "_collections": {
+            "items": {
+                "enum": [
+                    "Journals"
+                ],
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "Collections to which this record belongs",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "_harvesting_info": {
+            "additionalProperties": false,
+            "description": ":MARC: ``583``\n\nMetadata about the harvesting process of this journal.",
+            "properties": {
+                "coverage": {
+                    "description": ":MARC: ``583__a``\n\nWhether all articles are automatically added to Inspire\n(``full``) or a selection is made (``partial``).",
+                    "enum": [
+                        "full",
+                        "partial"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "date_last_harvest": {
+                    "description": ":MARC: ``583__c``\n\nDate on which the most recent harvest was performed.\n\n.. note::\n\n    This date does not necessarily mean that any records\n    were created on that day. This can happen if there was\n    no journal update since the previous time, or that the\n    update did not have any relevant effect for Inspire.",
+                    "format": "date",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "last_seen_item": {
+                    "description": ":MARC: ``583__3``\n\nInformation about last processed item in the harvest. This\nitem can be a volume, an issue or even a specific article.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "method": {
+                    "description": ":MARC: ``583__i``\n\nHow the harvesting is performed. Possible values are:\n\n``feed``\n    Inspire receives a feed with publisher updates.\n\n``harvest``\n    harvesting is done through webscraping.\n\n``print``\n    articles are picked manually from the printed journal.\n\n``hepcrawl``\n    harvesting is done through a native ``hepcrawl`` spider.",
+                    "enum": [
+                        "feed",
+                        "harvest",
+                        "print",
+                        "hepcrawl"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "_private_notes": {
+            "description": ":MARC: ``595__a``, ``667__x``\n\nThese notes are only visible to privileged users, not regular\nusers.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of private notes",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "book_series": {
+            "description": ":MARC: ``980__a:BookSeries`` corresponds to ``true``\n\nWhether this \u201cjournal\u201d is actually a serial whose volumes are\nbooks, i.e. a book series.",
+            "type": "boolean"
+        },
+        "control_number": {
+            "description": ":MARC: ``001``\n\nRead-only field. Also called ``record ID`` or ``recid``.",
+            "title": "ID of current record",
+            "type": "integer"
+        },
+        "date_ended": {
+            "description": ":MARC: Not present.\n\nDate of last publication of the journal.",
+            "format": "date",
+            "minLength": 1,
+            "type": "string"
+        },
+        "date_started": {
+            "description": ":MARC: Not present.\n\nDate of first publication of the journal.",
+            "format": "date",
+            "minLength": 1,
+            "type": "string"
+        },
+        "deleted": {
+            "description": ":MARC: ``980__a/c:deleted``",
+            "title": "Whether this record has been deleted",
+            "type": "boolean"
+        },
+        "deleted_records": {
+            "description": ":MARC: ``981__a``\n\nList of records that were deleted because they were replaced by\nthis one. This typically happens when merging two records: one of\nthem gets enriched with the information of the other one, which is\nthen superfluous and gets deleted.\n\nFor the opposite concept, see :ref:`new_record`.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "$ref": {
+                        "description": "journals record",
+                        "format": "uri",
+                        "minLength": 1,
+                        "pattern": ".*/api/journals/\\d+$",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$ref"
+                ],
+                "title": "Reference to journal record",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "doi_prefixes": {
+            "description": ":MARC: ``677__d``\n\nThis DOI prefix is the common start of DOIs in this journals, that\nall articles share.\n\n.. note::\n    This is a list because journals can change publishers, and the\n    new publisher will often assign new DOIs in its own prefix.",
+            "items": {
+                "minLength": 1,
+                "pattern": "^10\\.\\d+(\\.\\d+)?/.*$",
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "List of DOI prefixes for this journal",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "inspire_categories": {
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``65017`` with ``2:INSPIRE``\n\nThe Inspire category (also called field category) classifies the subject\nthis record is related to.  This classification schema is similar to the\narXiv one (see `elements/arxiv_categories.json`) and there is a way to map\nfrom arXiv categories to Inspire categories.",
+                "properties": {
+                    "source": {
+                        "enum": [
+                            "arxiv",
+                            "curator",
+                            "cds",
+                            "magpie",
+                            "user"
+                        ],
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "term": {
+                        "enum": [
+                            "Accelerators",
+                            "Astrophysics",
+                            "Computing",
+                            "Data Analysis and Statistics",
+                            "Experiment-HEP",
+                            "Experiment-Nucl",
+                            "General Physics",
+                            "Gravitation and Cosmology",
+                            "Instrumentation",
+                            "Lattice",
+                            "Math and Math Physics",
+                            "Other",
+                            "Phenomenology-HEP",
+                            "Theory-HEP",
+                            "Theory-Nucl"
+                        ],
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "term"
+                ],
+                "title": "Inspire category",
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of Inspire categories",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "issns": {
+            "description": ":MARC: ``022``",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "medium": {
+                        "description": ":MARC: ``022__b``",
+                        "enum": [
+                            "online",
+                            "print"
+                        ],
+                        "minLength": 1,
+                        "title": "Physical medium to which this ISSN refers",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": ":MARC: ``022__a``\n:example: ``0295-5075``",
+                        "minLength": 1,
+                        "pattern": "^\\d{4}-\\d{3}[\\dX]$",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of ISSNs",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "journal_title": {
+            "additionalProperties": false,
+            "properties": {
+                "source": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "subtitle": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "title": {
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title"
+            ],
+            "type": "object"
+        },
+        "legacy_creation_date": {
+            "description": ":MARC: ``961__x``\n\nOnly present if the record already existed on legacy Inspire.",
+            "format": "date",
+            "minLength": 1,
+            "title": "Date of record creation on legacy",
+            "type": "string"
+        },
+        "legacy_version": {
+            "description": ":MARC: ``005``\n\nUsed to indicate the version of the record on legacy.",
+            "minLength": 1,
+            "title": "Last record update",
+            "type": "string"
+        },
+        "license": {
+            "additionalProperties": false,
+            "description": ":MARC: ``540``",
+            "properties": {
+                "license": {
+                    "description": ":MARC: ``540__a``\n\nEither the short name of the license or the full\nlicense statement.\n\n:example: ``CC-BY-4.0``",
+                    "minLength": 1,
+                    "title": "License statement",
+                    "type": "string"
+                },
+                "url": {
+                    "description": ":MARC: ``540__u``\n\nURL where the full license statement may be found, if\nonly a short name is provided in ``license``.",
+                    "format": "uri",
+                    "minLength": 1,
+                    "title": "URL of the license",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "new_record": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "journals record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/journals/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to journal record",
+            "type": "object"
+        },
+        "proceedings": {
+            "description": ":MARC: ``690__a:Proceedings`` corresponds to ``true``\n\nWhether this journal publishes conference proceedings. If it\npublishes both conference proceedings and peer reviewed articles\n(depending on issue), both this field and :ref:`refereed` are\n``true``.",
+            "type": "boolean"
+        },
+        "public_notes": {
+            "description": ":MARC: ``500__a``, ``640__a``, ``680__i``\n\nAny notes about the document that do not fit into another field.\n\n.. note::\n\n    These notes are publicly visible. For notes not shown to\n    regular users, see :ref:`_private_notes`.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of public notes",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "publisher": {
+            "description": ":MARC: ``643__b``\n\nThe first element of the list is the current publisher of the journal.\n\n.. note::\n    This is a list because journals can change publishers.",
+            "items": {
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "List of publishers",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "refereed": {
+            "description": ":MARC: ``690__a:Peer review`` corresponds to ``true``,\n    ``690__a:NON-PUBLISHED`` to ``false``\n\nWhether this journal is considered to perform peer review. This\nassessment might differ from the journal's.\n\nIf the journal does not publish proceedings :ref:`proceedings`, all\narticles in it are flagged as :ref:`hep.json#/properties/refereed`.\nOtherwise, it is only the case if the article is not a ``conference\npaper``.",
+            "type": "boolean"
+        },
+        "related_records": {
+            "description": ":MARC: ``530``",
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``78002``, ``78502``, ``78708```and ``510`` (depending on type of\n    record and :ref:`related_record.json#/properties/relation`)",
+                "properties": {
+                    "curated_relation": {
+                        "type": "boolean"
+                    },
+                    "record": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "$ref": {
+                                "description": "URL to the referenced resource",
+                                "format": "uri",
+                                "minLength": 1,
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "$ref"
+                        ],
+                        "title": "Reference to another record",
+                        "type": "object"
+                    },
+                    "relation": {
+                        "description": "The possible values are:\n\n``predecessor``\n    :MARC: ``510__w:a`` (for Institutions and Experiments),\n        ``530__w:a`` (for Journals) or the field comes from\n        ``78002`` (for Literature).\n\n    The related record is a predecessor of the current one, i.e.\n    the current record supersedes the related one.\n\n    - For a Literature record, this is typically the case if the\n      related record is a preliminary note and this record is the\n      final version.\n    - For a Journal record, this happens when the journal has\n      changed name: the related record has the previous name and\n      this one the new name.\n    - For an Institution record, this means that the related record\n      represents an institution that does no longer exist and has\n      become the one represented by this record.\n    - For a Project record, this happens when the related record is\n      a project that finished and was superseded by the one in this\n      record (e.g. two successive runs of an experiment).\n\n``successor``\n    :MARC: ``510__w:b`` (for Institutions and Experiments),\n        ``530__w:b`` (for Journals) or the field comes from\n        ``78502`` (for Literature).\n\n    The related record is a successor of the current one, i.e.\n    the current record is superseded by the related one.\n\n    - For a Literature record, this is typically the case if the\n      current record is a preliminary note and the related record is the\n      final version.\n    - For a Journal record, this happens when the journal has\n      changed name: the current record has the previous name and\n      the related one the new name.\n    - For an Institution record, this means that the current record\n      represents an institution that does no longer exist and has\n      become the one represented by the related record.\n    - For a Project record, this happens when the current record is\n      a project that finished and was superseded by the related\n      record (e.g. two successive runs of an experiment).\n\n``parent``\n    :MARC: ``510__w:t`` (for an Institution record)\n\n    The related record is the parent of the current one, i.e. the\n    current record is a child of the related one.\n\n    - For an Institution record, this means that the related record\n      represents a parent institution (e.g. a university if this\n      record is a department).\n\n``commented``\n    :MARC: ``78708i:commented`` (for a Literature record)\n\n    The related record has been commented by the current one, i.e.\n    the current record is a comment on the related one.\n\n    .. note::\n\n       This only makes sense for a Literature record.\n\n\nIf none of the relations apply, a free textual relation can be\nprovided in :ref:`relation_freetext`.\n\n.. note::\n\n    Only one directional links are currently allowed for technical\n    reasons, but this should change in the future when Inspire can\n    handle atomic updates of the two directions. For example,\n    ``78502`` is currently discarded.",
+                        "enum": [
+                            "predecessor",
+                            "successor",
+                            "parent",
+                            "commented"
+                        ],
+                        "minLength": 1,
+                        "title": "Relation of the linked record to this one",
+                        "type": "string"
+                    },
+                    "relation_freetext": {
+                        "description": ":MARC: ``510__i`` (for Institutions and Experiments), ``530__i``\n    (for Journals) or ``78708i`` (for Literature).\n\nIf none of the standard relations in :ref:`relation` fit, a textual\nrelation can alternatively be provided here.",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "record"
+                ],
+                "title": "Decorated link to a related record",
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of related records",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "self": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "journals record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/journals/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to journal record",
+            "type": "object"
+        },
+        "short_title": {
+            "description": ":MARC: ``711__a``\n\nNormalized title of the journal\n\n:example: ``Phys.Rev. D``",
+            "minLength": 1,
+            "type": "string"
+        },
+        "title_variants": {
+            "description": ":MARC: ``730__a``\n\nThese name variants appear in references and are used to properly\nrecognize citations.\n\n:example: ``PHYS REVIEW``",
+            "items": {
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "List of journal name variants",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "urls": {
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``8564``",
+                "properties": {
+                    "description": {
+                        "description": ":MARC: ``8654__y``",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": ":MARC: ``8564_u``",
+                        "format": "uri",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "URL of related document",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        }
+    },
+    "required": [
+        "journal_title",
+        "short_title",
+        "_collections"
+    ],
+    "title": "A record representing a Journal",
+    "type": "object"
+}

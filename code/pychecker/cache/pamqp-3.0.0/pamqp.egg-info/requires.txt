@@ -1,0 +1,17 @@
+
+[codegen]
+lxml
+requests
+yapf
+
+[test]
+coverage
+flake8
+flake8-comprehensions
+flake8-deprecated
+flake8-import-order
+flake8-print
+flake8-quotes
+flake8-rst-docstrings
+flake8-tuple
+nose

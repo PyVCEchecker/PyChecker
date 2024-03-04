@@ -1,0 +1,58 @@
+colorama!=0.4.2,>=0.3.4
+six
+
+[:python_version < "3.6"]
+pathlib2
+
+[:python_version == "2.7"]
+backports.functools_lru_cache
+backports.shutil_get_terminal_size
+backports.weakref
+
+[dev]
+pre-commit
+coverage
+isort
+flake8
+rope
+invoke
+parver
+sphinx
+sphinx-rtd-theme
+
+[dev:python_version >= "3.5"]
+flake8-bugbear
+
+[dev:python_version >= "3.6"]
+black
+
+[requests]
+requests
+
+[spinner]
+yaspin
+
+[tests]
+hypothesis
+hypothesis-fspaths
+pytest
+pytest-rerunfailures<9.0
+pytest-xdist
+pytest-timeout
+readme-renderer[md]
+twine
+
+[tests:python_version < "3.3"]
+mock
+
+[typing]
+
+[typing:python_version <= "3.4"]
+typing
+
+[typing:python_version >= "3.4"]
+mypy
+mypy-extensions
+mypytools
+pytype
+typed-ast

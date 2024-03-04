@@ -1,0 +1,16 @@
+CHANGELOG.md
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+django_cleanup/__init__.py
+django_cleanup/apps.py
+django_cleanup/cache.py
+django_cleanup/cleanup.py
+django_cleanup/handlers.py
+django_cleanup/signals.py
+django_cleanup.egg-info/PKG-INFO
+django_cleanup.egg-info/SOURCES.txt
+django_cleanup.egg-info/dependency_links.txt
+django_cleanup.egg-info/top_level.txt

@@ -1,0 +1,4 @@
+pymongo<4,>=3.12
+
+[encryption]
+pymongo[encryption]<4,>=3.12

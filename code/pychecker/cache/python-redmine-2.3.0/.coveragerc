@@ -1,0 +1,8 @@
+[run]
+source = redminelib
+
+[report]
+show_missing = True
+omit =
+    */python?.?/*
+    */site-packages/*

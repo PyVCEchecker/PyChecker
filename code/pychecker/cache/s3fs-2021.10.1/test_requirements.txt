@@ -1,0 +1,5 @@
+mock; python_version < '3.3'
+moto>=2.0.0
+flask
+pytest>=4.2.0
+pytest-env

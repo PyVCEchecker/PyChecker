@@ -1,0 +1,138 @@
+CHANGES
+=======
+
+1.2.2
+-----
+
+* Fix README.rst formatting
+
+1.2.1
+-----
+
+* Use py37 at some place
+* Use py37 at some place
+* Add test for None value case
+* Fix problem with None value of element
+* Remove old OpenStack stuff
+* Fix filter examples syntax
+
+1.2.0
+-----
+
+* feature: adding regex match filter (#17)
+* travis: list python version to install
+
+1.1.3
+-----
+
+* Added convenience shortcut functions
+* travis: move to python version 3.5/3.6
+
+1.1.2
+-----
+
+* Allow to skip tests
+* Remove unused Babel dependency
+
+1.1.1
+-----
+
+* Use modern PBR and hacking packages
+
+1.1.0
+-----
+
+* Update release script and fix doc
+* PEP8 - line length
+* Added support for boolean values in filters
+
+1.0.0
+-----
+
+* Fix pep8
+* Make results of a sort indexable and traversable
+* Added support for floating point types in filter predicates
+
+0.3.0
+-----
+
+* Fix error when the filtered datum is not iterable
+
+0.2
+---
+
+* Set minimum version of jsonpath-rw
+* Fix reference to jsonpath-rw
+
+0.1.9
+-----
+
+* Fix README
+
+0.1.8
+-----
+
+* Add sub and split named\_operator
+* doc: Fix typo
+* Add a long description to README
+* Add more tests
+* Improve documentation
+
+0.1.7
+-----
+
+* Fix py3 tests
+* Ensure pep8,py27,py34 pass before releasing
+* Typo in documentation
+* Fix pep8 errors
+
+0.1.6
+-----
+
+* Implements simple operator + - \* /
+* Returns all datum if no filter are set
+
+0.1.5
+-----
+
+* Move parser to module
+
+0.1.4
+-----
+
+* Fixes py3 tests
+* Remove useless FILTER\_VALUE type
+* Remove useless code
+* Fix examples
+* Fixes a tests, add examples
+
+0.1.3
+-----
+
+* Add jsonpath test to ensure we didn't break it
+* Allows jsonpath in sort, not just ID
+* Allow json query syntax for sorted list
+
+0.1.2
+-----
+
+* Fix package name in README
+
+0.1.1
+-----
+
+* Fix package name
+
+0.1.0
+-----
+
+* Change homepage
+* Update release script
+* Use universal wheel
+* Remove py32, mock is not supported
+* Add releases script
+* Fix py3 tests
+* Allow '==' operator
+* Add reallife example
+* Build docs with travis
+* Initial Commit

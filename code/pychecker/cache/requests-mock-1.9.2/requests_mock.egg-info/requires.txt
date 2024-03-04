@@ -1,0 +1,14 @@
+requests<3,>=2.3
+six
+
+[fixture]
+fixtures
+
+[test]
+fixtures
+mock
+purl
+pytest
+sphinx
+testrepository>=0.0.18
+testtools

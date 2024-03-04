@@ -1,0 +1,10 @@
+thumbor
+
+[tests]
+tornado==4.4
+tornado-pyvows>=0.6.0
+coverage
+mock
+colorama
+pillow<4.2.0
+nose

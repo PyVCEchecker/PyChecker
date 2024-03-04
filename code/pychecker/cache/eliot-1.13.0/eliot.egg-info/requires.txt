@@ -1,0 +1,25 @@
+six
+zope.interface
+pyrsistent>=0.11.8
+boltons>=19.0.1
+
+[:python_version < "3.7" and python_version > "2.7"]
+aiocontextvars
+
+[dev]
+setuptools>=40
+twine>=1.12.1
+coverage
+sphinx
+sphinx_rtd_theme
+flake8
+black
+
+[journald]
+cffi>=1.1.2
+
+[test]
+hypothesis>=1.14.0
+testtools
+pytest
+pytest-xdist

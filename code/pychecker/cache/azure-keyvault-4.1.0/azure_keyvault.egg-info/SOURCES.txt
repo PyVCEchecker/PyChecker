@@ -1,0 +1,11 @@
+CHANGELOG.md
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+azure_keyvault.egg-info/PKG-INFO
+azure_keyvault.egg-info/SOURCES.txt
+azure_keyvault.egg-info/dependency_links.txt
+azure_keyvault.egg-info/not-zip-safe
+azure_keyvault.egg-info/requires.txt
+azure_keyvault.egg-info/top_level.txt

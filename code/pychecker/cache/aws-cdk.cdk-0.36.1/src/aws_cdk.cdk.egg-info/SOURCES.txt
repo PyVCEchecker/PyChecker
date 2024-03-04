@@ -1,0 +1,11 @@
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.cdk.egg-info/PKG-INFO
+src/aws_cdk.cdk.egg-info/SOURCES.txt
+src/aws_cdk.cdk.egg-info/dependency_links.txt
+src/aws_cdk.cdk.egg-info/requires.txt
+src/aws_cdk.cdk.egg-info/top_level.txt
+src/aws_cdk/cdk/_jsii/__init__.py
+src/aws_cdk/cdk/_jsii/cdk@0.36.1.jsii.tgz

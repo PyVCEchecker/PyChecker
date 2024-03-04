@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: petl
+Version: 1.7.0
+Summary: A Python package for extracting, transforming and loading tables of data.
+Home-page: https://github.com/petl-developers/petl
+Author: Alistair Miles
+Author-email: alimanfoo@googlemail.com
+License: MIT License
+Description: petl - Extract, Transform and Load (Tables of Data)
+        ===================================================
+        
+        ``petl`` is a general purpose Python package for extracting, transforming and 
+        loading tables of data.
+        
+        - Docs: http://petl.readthedocs.org/
+        - Source: https://github.com/alimanfoo/petl
+        - Download: http://pypi.python.org/pypi/petl
+        - Mailing list: http://groups.google.com/group/python-etl
+        
+        See also `petlx <https://github.com/alimanfoo/petlx>`_, a library of
+        extension modules for ``petl``.
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
+Provides-Extra: xpath
+Provides-Extra: xlsx
+Provides-Extra: http
+Provides-Extra: avro
+Provides-Extra: db
+Provides-Extra: bcolz
+Provides-Extra: remote
+Provides-Extra: hdf5
+Provides-Extra: xls
+Provides-Extra: interval
+Provides-Extra: whoosh
+Provides-Extra: pandas
+Provides-Extra: numpy
+Provides-Extra: smb

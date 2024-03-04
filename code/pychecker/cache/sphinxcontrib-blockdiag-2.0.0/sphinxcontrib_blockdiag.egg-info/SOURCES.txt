@@ -1,0 +1,15 @@
+AUTHORS
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+sphinxcontrib/__init__.py
+sphinxcontrib/blockdiag.py
+sphinxcontrib_blockdiag.egg-info/PKG-INFO
+sphinxcontrib_blockdiag.egg-info/SOURCES.txt
+sphinxcontrib_blockdiag.egg-info/dependency_links.txt
+sphinxcontrib_blockdiag.egg-info/namespace_packages.txt
+sphinxcontrib_blockdiag.egg-info/not-zip-safe
+sphinxcontrib_blockdiag.egg-info/requires.txt
+sphinxcontrib_blockdiag.egg-info/top_level.txt

@@ -1,0 +1,171 @@
+# `pydot` changelog
+
+
+1.4.1 (2018-12-12)
+------------------
+
+- Make graph, edge, node attributes order deterministic
+- Fix string formatting after catching error (#201)
+
+
+1.4.0 (2018-12-01)
+------------------
+
+- Installation of pydot in conda env on Windows directly supported
+- Fixed comparing of SHA hash in regression tests (which fail now)
+
+
+1.3.0 (2018-11-19)
+------------------
+
+- Dropped Python 2.6 support (#185)
+- Move errno from os to builtin. Fixes #177 (#191, #182)
+
+
+1.2.4 (2017-12-25)
+------------------
+
+- ENH: propagate `LD_LIBRARY_PATH` when calling GraphViz
+- API: raise `OSError` when a GraphViz executable is not found
+- API: add method `__str__` to classes `Node, Edge, Graph`
+- API: add arg `encoding` to `Dot` methods `create, write`
+- API: quote cluster names when necessary
+- API: give source and destination nodes as separate args to `Edge.__init__`
+- API: never ignore `src, dst`, overwrite if `points` defined in `obj_dict`
+
+
+1.2.3 (2016-10-06)
+------------------
+
+- support Python 2.6
+- several corrections
+- quote empty strings to avoid graphviz errors
+
+
+1.2.0 (2016-07-01)
+------------------
+
+- support Python 3
+- bumped dependency to `pyparsing >= 2.1.4`
+- tests running on Travis CI
+- tests require `chardet`
+- detect character encoding for most test files
+  using the package `chardet`
+
+API:
+
+- on all operating systems, search GraphViz
+  executables in environment `$PATH`,
+  using `subprocess.Popen`.
+  No paths hard-coded due to security and privacy issues.
+
+- add option to pass GraphViz executable name
+  or absolute path as `prog` to `pydot.Dot.write_*` methods.
+  This provides an alternative to
+  adding GraphViz to the `$PATH`.
+
+- the functions:
+    - `pydot.graph_from_dot_data`
+    - `pydot.graph_from_dot_file`
+    - `dot_parser.parse_dot_data`
+  changed to always return a `list` of graphs,
+  instead of behaving differently for singletons.
+
+- require that the user explicitly give an encoding to
+  the function `pydot.graph_from_dot_file`,
+  with default encoding same as `io.open`.
+
+- decode to unicode at program boundaries, and
+  treat binary images as bytes,
+  for more compatibility with python 3.
+  Use `io.open`, instead of the built-in `open`.
+
+- rm function `pydot.set_graphviz_executables`
+
+- rm attribute `pydot.Dot.progs`
+
+
+1.1.0 (2016-05-23)
+------------------
+
+- compatibility with `pyparsing >= 1.5.7`
+
+API:
+
+- `pydot.Graph.to_string`: hide `subgraph` keyword only if so requested
+- produce `warnings.warn` if `pydot.dot_parser` fails to import,
+  instead of `print`
+
+
+1.0.29 (2016-05-16)
+------------------
+
+- Maintenance release that keeps the same API
+- pin `pyparsing == 1.5.7`
+- update version number in source code
+- update `setup.py`
+
+
+2004-04-28 21:50  carrer
+
+	* pydot.py: Some of the changes already made should allow pydot to
+	  run on OSX.  Bumped version to 0.9.2
+
+2004-04-24 17:52  carrer
+
+	* setup.py: Added more metainformation to the distribution.
+
+2004-04-24 17:51  carrer
+
+	* pydot.py: Added support for circo and fdp. Fixed piping mechanism
+	  to not to capture stderr.
+
+2004-04-24 13:26  carrer
+
+	* ChangeLog, LICENSE, MANIFEST, README, setup.py: Adding
+	  supplementary files to the distribution to the CVS.
+
+2004-04-24 12:57  carrer
+
+	* pydot.py: Bumped version to 0.9.1
+
+2004-04-24 01:36  carrer
+
+	* pydot.py: Implemented tweaks suggested by John B. Cole to handle
+	  non-str nodes, converting them to strings.
+
+2004-04-24 01:10  carrer
+
+	* pydot.py: Applied patch for Windows support by Kent Johnson.
+
+2004-04-24 01:05  carrer
+
+	* pydot.py: Fixed to properly handle unicode strings in attributes.
+
+2004-04-20 00:06  carrer
+
+	* pydot.py:
+	  Fixed silly error in graph_from_edges. When pasting the function
+	  into the code, the references to the pydot module were not
+	  removed, which are no longer needed since we now are _in_ the
+	  module.
+
+2004-04-19 23:33  carrer
+
+	* pydot.py:
+	  Added support to write files with the desired output format with
+	  write_[format]
+
+2004-04-19 22:53  carrer
+
+	* pydot.py:
+	  Done some clean up, no major changes.
+
+2004-04-08 00:22  carrer
+
+	* pydot.py:
+	  Initial revision.
+
+2004-04-08 00:22  carrer
+
+	* pydot.py: Initial revision

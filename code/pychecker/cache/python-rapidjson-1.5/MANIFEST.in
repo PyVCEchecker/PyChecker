@@ -1,0 +1,13 @@
+include .dir-locals.el
+include LICENSE MANIFEST.in *.cfg *.ini *.py *.rst *.txt
+include python-rapidjson/*.cpp python-rapidjson/*.h
+include benchmarks/*.py tests/*.py
+
+exclude .github .gitmodules
+
+recursive-include docs Makefile *.png *.rst *.bat *.sh *.css *.py
+prune docs/_build
+
+prune rapidjson
+include rapidjson/readme.md rapidjson/license.txt
+recursive-include rapidjson/include *.h

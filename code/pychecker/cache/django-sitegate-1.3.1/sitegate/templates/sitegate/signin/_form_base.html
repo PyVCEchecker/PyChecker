@@ -1,0 +1,10 @@
+{% if signin_form.flow_enabled %}
+    <form method="post">
+    {% for hidden in signin_form.hidden_fields %}{{ hidden }}{% endfor %}
+    {% csrf_token %}
+    {% block fields %}{% endblock %}
+    </form>
+    {% include "sitegate/signin/form_remotes.html" with or_clause=1 %}
+{% else %}
+    {{ signin_form.flow_disabled_text }}
+{% endif %}

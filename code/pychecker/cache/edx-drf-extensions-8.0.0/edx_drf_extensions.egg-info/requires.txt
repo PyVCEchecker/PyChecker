@@ -1,0 +1,12 @@
+python-dateutil>=2.0
+edx-opaque-keys
+Django>=2.2
+djangorestframework>=3.9.0
+pyjwkest
+edx-django-utils>=3.8.0
+semantic_version
+django-waffle
+pyjwt[crypto]>=2.1.0
+drf-jwt
+six
+requests>=2.7.0

@@ -1,0 +1,7 @@
+README.md
+nginx.py
+setup.py
+python_nginx.egg-info/PKG-INFO
+python_nginx.egg-info/SOURCES.txt
+python_nginx.egg-info/dependency_links.txt
+python_nginx.egg-info/top_level.txt

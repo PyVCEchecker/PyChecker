@@ -1,0 +1,9 @@
+Metadata-Version: 1.2
+Name: pyvex
+Version: 9.0.5002
+Summary: A Python interface to libVEX and VEX IR
+Home-page: https://github.com/angr/pyvex
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.6

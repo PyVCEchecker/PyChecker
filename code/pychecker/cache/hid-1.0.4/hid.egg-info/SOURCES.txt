@@ -1,0 +1,10 @@
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+hid/__init__.py
+hid.egg-info/PKG-INFO
+hid.egg-info/SOURCES.txt
+hid.egg-info/dependency_links.txt
+hid.egg-info/not-zip-safe
+hid.egg-info/top_level.txt

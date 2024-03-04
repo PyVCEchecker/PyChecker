@@ -1,0 +1,7 @@
+idna<3
+pytablereader[excel,sqlite]>=0.29
+pytest>=6.0.1
+pytest-discord>=0.0.7
+pytest-md-report>=0.1
+sqliteschema
+tablib

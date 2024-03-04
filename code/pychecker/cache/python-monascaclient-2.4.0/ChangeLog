@@ -1,0 +1,531 @@
+CHANGES
+=======
+
+2.4.0
+-----
+
+* Fix Docker build
+* Fix zuul publish docker image job
+* Add Python3 xena unit tests
+* Update master for stable/wallaby
+
+2.3.0
+-----
+
+* Uncap PrettyTable
+* Fix zuul publish docker image job
+* Add doc/requirements
+* Update doc8 version
+* Remove six
+* Add Python3 wallaby unit tests
+* Update master for stable/victoria
+
+2.2.1
+-----
+
+
+2.2.0
+-----
+
+* Stop to use the \_\_future\_\_ module
+* Switch to newer openstackdocstheme and reno versions
+* Add releasenotes link to README
+* Update CONTRIBUTING.rst
+* Fix hacking min version to 3.0.1
+* Bump default tox env from py37 to py38
+* Add py38 package metadata
+* Use unittest.mock instead of third party mock
+* Add Python3 victoria unit tests
+* Update master for stable/ussuri
+
+2.1.0
+-----
+
+* Fix mock import statements
+* Cleanup py27 support
+* Update hacking for Python3
+* Don't hard code notification types into Monasca client
+* Allow users to set periodic notifications on all notification types
+
+2.0.0
+-----
+
+* [ussuri][goal] Drop python 2.7 support and testing
+* Switch to Ussuri jobs
+* Sync Sphinx requirement
+* Update the constraints url
+* Update master for stable/train
+
+1.16.0
+------
+
+* Add Python 3 Train unit tests
+* Switch python3 versions of test jobs to match Train PTI
+* Change repository links usage in Dockerfile and build image
+* Replace git.openstack.org URLs with opendev.org URLs
+* Dropping the py35 testing
+* OpenDev Migration Patch
+* Push Docker image to Docker Hub
+* Create Docker image and build in Zuul
+* Fix metric list formatting with Python 3
+* Replace openstack.org git:// URLs with https://
+* Update master for stable/stein
+
+1.14.0
+------
+
+* Update hacking version
+* Update json module to jsonutils
+* add python 3.7 unit test job
+
+1.13.0
+------
+
+* Fix alarm-definition-list in Python 3
+* Return status from running command
+* Change openstack-dev to openstack-discuss
+* Add Python 3.6 classifier to setup.cfg
+* Add python 3.6 unit test job
+* Remove setup.py check from pep8 job
+* Don't quote {posargs} in tox.ini
+* fix tox python3 overrides
+* Use templates for docs, cover and lower-constraints
+* Add using requirements.txt to tox tests run
+* add python 3.6 unit test job
+* switch documentation job to new PTI
+* import zuul job settings from project-config
+* Update reno for stable/rocky
+
+1.12.1
+------
+
+* Clean up README.rst
+* Move CLI usage examples to doc/cli directory
+* Add syntax check for reStructuredText
+* Restore old content of reference/index.rst
+
+1.12.0
+------
+
+* Fix rst errors in README
+* Remove unused TimingSession class
+* Remove testrepository and .testr.conf
+* Remove the duplicated word
+* fix tox python3 overrides
+* replace unicode with six.text\_type
+* Switch to using stestr
+* Redistribute README to doc/source
+* Trivial: Update pypi url to new url
+
+1.11.0
+------
+
+* Update pep8 checks
+* Clean up tox.ini
+* add lower-constraints job
+* Updated from global requirements
+* Update links in README
+* Updated from global requirements
+* Updated from global requirements
+* Update reno for stable/queens
+
+1.10.0
+------
+
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Update usage examples
+* TrivialFix: remove redundant import alias
+* Updated from global requirements
+
+1.9.0
+-----
+
+* Updated from global requirements
+* Updated from global requirements
+* Avoid tox\_install.sh for constraints support
+* Enable client documentation
+
+1.8.0
+-----
+
+* Fix auth version detection
+* Updated from global requirements
+* Updated from global requirements
+* Cleanup repo and update documentation
+* Allow to reuse the session
+* Exclude tests from coverage
+* Update the documentation link for doc migration
+
+1.7.0
+-----
+
+* Bringing back backward compatybility
+* Updated from global requirements
+* Integrate client with osc-lib
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+
+1.6.0
+-----
+
+* Added support for os\_auth\_version when os\_auth\_url is unversiond
+* Added support for os\_tenant\_{name,id} after os\_project\_
+* Optimize the link address
+* Updated from global requirements
+* Replacing six.iteritems() with .items()
+* Updated from global requirements
+* Migrate fully to ostestr
+* Updated from global requirements
+* Remove unused requirements
+* Fix notification-patch CLI fails if type not given
+* Fix: CLI metric-create using project-id fails
+* Updated from global requirements
+* Turn on bandit check as part of pep8
+
+1.5.0
+-----
+
+* Typo fix: recieve => receive
+* Remove support for py33
+* Updated from global requirements
+* Don't send X-Auth- headers in requests
+* Use requests-mock instead of custom fakes
+* H803 hacking have been deprecated
+
+1.4.0
+-----
+
+* Updated from global requirements
+* Delete deprecated Hacking in tox.ini
+* Add py35 tox environment
+* Use the new copy of tox\_install.sh for global constraints support
+* Correct reraising of exception
+* Add \_\_ne\_\_ built-in function
+* Show team and repo badges on README
+* Add list\_next for pagination
+* Add CONTRIBUTING.rst
+
+1.3.0
+-----
+
+* Fix LOG.warn to LOG.warning
+* move old apiclient code out of openstack/common
+* remove unused openstack/common/gettextutils.py
+* use six.moves.urllib.parse instead of py3kcompat
+* Use correct ENV variables for scoping
+* Changed author and author-email
+* Remove a space of Docstring
+* Add state-updated-timestamp filter to alarm count CLI
+* Sample nagios plugin and examples directory
+* Remove white space between print and ()
+* Dimension value list doesn't recognize dimension name input
+* Change LOG.warn to LOG.warning
+* Add list dimension names and values in CLI
+* Use constraints everywhere
+* Sync tools/tox\_install.sh
+* Add support for new rest api notification-type-list
+* Remove discover from test-requirements
+* Fix dimension validation and help message for alarm count
+* Patch-notification failed with period=0
+* Prevent potentially destructive updates on data
+* Fix monasca enpoint port in example and README
+* Fix \_\_str\_\_ not returning a String for KeystoneException
+* Fix monasca notification-show help message
+* Fixes H904: wrapping using parantheses
+* Add notification-patch into CLI
+
+1.2.0
+-----
+
+* Add metric-name-list help command description
+* Revert 'Adding keystoneauth sessions support'
+* Sort by alarm\_definition\_name
+
+1.1.0
+-----
+
+* Remove the debian folder
+* Oslo.utils safe\_decode
+* Update copyright in monascaclient
+* Adding keystoneauth sessions support
+* Graduate to oslo.utils strutils
+* Graduate to using oslo.utils importutils
+* Graduate to oslo.serialization jsonutils
+* [python-monascaclient] Change tox to use https instead of git
+* Add period field to notification methods
+* code compatibility with py3
+* Constraint tox targets with upper-constraints.txt
+* Fix the homepage in setup.cfg
+* Add support for group\_by to measurements and statistics resources
+* Manually sync with global-requirements
+* [Trivial] Remove executable privilege of setup.py
+* Add --tenant-id option for some commands
+* Specify match\_by in alarm-definition-update help message
+* Alarm def update/patch failed with empty param
+* Change tox file
+* Implement monasca metric-name-list
+* Fix metric dimensions having only key
+
+1.0.30
+------
+
+* Fix argument name bug
+* Allow sorting notifications
+* Fixes typo in help messages for Monasca client
+* Convert to lower case before validating sort-by
+* Allow filtering by severity
+* Check Status Code in Monasca Client
+* Add in HPE Copyrights
+* Add missing spaces in help message
+
+1.0.29
+------
+
+* Enhanced dimension filtering
+* Allow sorting alarms
+
+1.0.28
+------
+
+* Unlocking requirements for Mitaka compatibility
+* Add alarm-count command
+* Remove MANIFEST.in
+* remove python 2.6 trove classifier
+* Return monasca specific error on conneciton refused
+* Deprecated tox -downloadcache option removed
+
+1.0.27
+------
+
+* Adding oslo.concurrency to requirements
+
+1.0.26
+------
+
+* Further restrictions on oslo.service
+
+1.0.25
+------
+
+* Adding liberty versions of oslo to requirements.txt
+* Fix documentation for creating metrics
+* Add start and end time optional parms to metric list
+* Delete python bytecode before every test run
+* Require all fields alarm definition update
+* use last specified value for duplicate dimension
+* Adding thousandths column to value output
+* mask X-Auth-Key for log\_curl\_request
+* Remove default environment variable string
+* Add the ability to use env variables
+
+1.0.24
+------
+
+* Update .gitreview for new namespace
+* Fix unicode output format
+* X-Auth-Key should not be required in the header
+
+1.0.23
+------
+
+* Pinning version of keystone client
+* Add timeout to keystone requests
+* Obfuscate Token in Debug Mode
+* Enable optional timeouts for http get or post requests
+
+1.0.22
+------
+
+* Add HP copyright to files that HP has changed
+* Force oslo.utils<2.0
+* support users in domains other than Default (KSv3)
+
+1.0.21
+------
+
+* Make sure that we do not output token
+
+1.0.20
+------
+
+* Moved pbr requirements to a newer constraint
+* Removed output sorting in client
+* changed alarm-list output to match expected
+
+1.0.19
+------
+
+* added relative start time feature
+* Fixed README for Python API - about re-athenticate
+* replace v2.0 auth\_url with v3
+* re-authenticates (once) with keystone to handle token expiration
+* Add lifecycle fields to CLI
+* The ERROR word was removed from the HttpException
+
+2015.1
+------
+
+* Moved CLI specific error message from ksclient to shell
+
+1.0.18
+------
+
+* Correctly selects endpoint based on region
+* added link to pypi versions
+* Fixed display problem with value\_meta
+* Add metric name list to the client library
+
+1.0.17
+------
+
+* Fixed readme with line feeds
+* Adjusted formatting functions for new measurement data
+* Made metric name required for measurement-list command
+* Expose state\_updated\_timestamp and created\_timestamp in alarm table
+
+1.0.16
+------
+
+* Adjusted client for influx 0.9
+* Made name parameter for measurement-list optional
+* Fixed suppression of HTTP exceptions
+* Added offset and limit for list based commands
+
+1.0.15
+------
+
+
+1.0.14
+------
+
+* Handle API returning dict instead of list
+
+1.0.13
+------
+
+* Add measurement valueMeta
+* Conversion to milliseconds
+* Added development package and install instructions
+
+1.0.12
+------
+
+* No longer send application/json-patch+json as Content-Type
+* remove ChangeLog file so pbr can generate it from git
+* help for metric-create, and updated README
+* Fixed missing Pagerduty refs in docs and cli messages
+* Added pagerduty to the valid set of notifications
+
+1.0.11
+------
+
+* Remove match-by argument for alarm-definition-patch
+
+1.0.10
+------
+
+* Put the keystone auth in its own class
+* Enabling the support of Webhook notification on client
+* Allow service\_type to be overwritten
+* Pass the --os-service-type argument to keystone
+
+1.0.8
+-----
+
+* Use relative path for monasca.bash\_completion
+
+1.0.7
+-----
+
+* Update ChangeLog
+* Removing support for SMS on client
+* Need to pass the ca-file arg to keystone, too
+
+1.0.6
+-----
+
+* Use keystone v3 and get a project scoped token
+
+1.0.5
+-----
+
+* alarm formatting changes
+
+1.0.4
+-----
+
+* Alarmed metrics API changes supported
+* updated README.rst for API clients
+
+1.0.3
+-----
+
+* Added cross domain tenant param to metric POST
+* fixed unicode decode problem when printing exception
+* use keystone endpoint when api url is not input
+
+1.0.2
+-----
+
+* Updated Changelog
+* help for dimensions mentions need for quoting
+* supports unicode
+
+1.0.1
+-----
+
+* Fix several bashate issues
+* user pbr.version, update ChangeLog
+* Add .gitreview file
+* Bump hacking to 0.9.x series
+* removed transform dimension calls for alarm commands
+* quote alarm expression dimension values to allow special chars
+
+1.0.0
+-----
+
+* renaming monclient to monascaclient, alarm-update fix
+* GET alarms by name, Client replace\_token, help fixes, id size
+* Add .gitreview file. pep8 fixes
+* README update for bash completion
+* added bash completion script to the install
+* pep8 changes
+* fixed timestamp ordering in measurement-list, alarm-history. renamed enabled to actions-enabled
+* Fixed enabled parms for alarm-patch, alarm-update
+* 1.0.3
+* Add babel as a dependency
+* Updated version info
+* Updated README
+* Added metric-statistics command
+* Modified the auth token to match dev env
+* Added severity to alarm commands, Added alarm-list by state option
+* 1.0.1 changelog
+* new metric-create-raw command to support raw json body
+* Temporary fix for version problems in the egg/wheel
+* Added ChangeLog and .idea to the .gitignore
+* Modified README.rst
+* Improved the README.rst
+* alarm-list supports optional dimensions
+* Removed personal info from example and tests
+* Updated setup.cfg
+* Added HP copyright and Apache 2.0 license header. Added HACKING.rst and LICENSE file
+* Simplified exception handling by catching HTTPException
+* Updated client\_api\_example.py
+* removed runlocal args from resource commands, added example for api
+* support for alarm-history, fixed timestamp format measurement-list
+* Support for PUT,PATCH alarms, PUT notification-methods
+* Fixed measurement-list, alarm-list
+* added -j,--json output parameter, supported multi-dimensions in single parameter
+* Improved dict and dictlist formatting - put this in utils.py
+* fixed help formatting. metric-list formatting changed
+* added -l option, pep8 spacing
+* Latest changes to clean up the list commands
+* list and show implemented for alarms and notifications
+* Notification create working
+* Initial debian package setup
+* Unit tests working
+* metrics-create working
+* Initial monclient files.  Help, and versioning is working

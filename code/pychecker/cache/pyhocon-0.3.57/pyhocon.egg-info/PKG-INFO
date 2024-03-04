@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: pyhocon
+Version: 0.3.57
+Summary: HOCON parser for Python
+Home-page: http://github.com/chimpler/pyhocon/
+Author: Francois Dang Ngoc
+Author-email: francois.dangngoc@gmail.com
+License: Apache License 2.0
+Description: pyhocon is a HOCON parser for Python. Additionally we provide a tool (pyhocon) to convert any HOCON content into json, yaml and properties format.
+Keywords: hocon parser
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Provides-Extra: Duration

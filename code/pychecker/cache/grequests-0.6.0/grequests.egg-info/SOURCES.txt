@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.rst
+grequests.py
+setup.py
+grequests.egg-info/PKG-INFO
+grequests.egg-info/SOURCES.txt
+grequests.egg-info/dependency_links.txt
+grequests.egg-info/not-zip-safe
+grequests.egg-info/requires.txt
+grequests.egg-info/top_level.txt

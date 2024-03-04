@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Common algorithms &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Converting sequences" href="sdl2ext_array.html" />
+    <link rel="prev" title="sdl2.ext - Python extensions for SDL2" href="sdl2ext.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_array.html" title="Converting sequences"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext.html" title="sdl2.ext - Python extensions for SDL2"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" accesskey="U">sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="common-algorithms">
+<h1>Common algorithms<a class="headerlink" href="#common-algorithms" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sdl2.ext.cohensutherland">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">cohensutherland</code><span class="sig-paren">(</span><em class="sig-param">left : int</em>, <em class="sig-param">top : int</em>, <em class="sig-param">right : int</em>, <em class="sig-param">bottom : int</em>, <em class="sig-param">x1 : int</em>, <em class="sig-param">y1 : int</em>, <em class="sig-param">x2 : int</em>, <em class="sig-param">y2 : int</em><span class="sig-paren">)</span> &#x2192; int, int, int, int<a class="headerlink" href="#sdl2.ext.cohensutherland" title="Permalink to this definition">¶</a></dt>
+<dd><p>This implements the Cohen-Sutherland line clipping
+algorithm. <em>left</em>, <em>top</em>, <em>right</em> and <em>bottom</em> denote the
+clipping area, into which the line defined by <em>x1</em>, <em>y1</em> (start
+point) and <em>x2</em>, <em>y2</em> (end point) will be clipped.</p>
+<p>If the line does not intersect with the rectangular clipping area,
+four <code class="docutils literal notranslate"><span class="pre">None</span></code> values will be returned as tuple. Otherwise a tuple of
+the clipped line points will be returned in the form <code class="docutils literal notranslate"><span class="pre">(cx1,</span> <span class="pre">cy1,</span>
+<span class="pre">cx2,</span> <span class="pre">cy2)</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.liangbarsky">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">liangbarsky</code><span class="sig-paren">(</span><em class="sig-param">left : int</em>, <em class="sig-param">top : int</em>, <em class="sig-param">right : int</em>, <em class="sig-param">bottom : int</em>, <em class="sig-param">x1 : int</em>, <em class="sig-param">y1 : int</em>, <em class="sig-param">x2 : int</em>, <em class="sig-param">y2 : int</em><span class="sig-paren">)</span> &#x2192; int, int, int, int<a class="headerlink" href="#sdl2.ext.liangbarsky" title="Permalink to this definition">¶</a></dt>
+<dd><p>This implements the Liang-Barsky line clipping algorithm. <em>left</em>,
+<em>top</em>, <em>right</em> and <em>bottom</em> denote the clipping area, into
+which the line defined by <em>x1</em>, <em>y1</em> (start point) and <em>x2</em>,
+<em>y2</em> (end point) will be clipped.</p>
+<p>If the line does not intersect with the rectangular clipping area,
+four <code class="docutils literal notranslate"><span class="pre">None</span></code> values will be returned as tuple. Otherwise a tuple of
+the clipped line points will be returned in the form <code class="docutils literal notranslate"><span class="pre">(cx1,</span> <span class="pre">cy1,</span>
+<span class="pre">cx2,</span> <span class="pre">cy2)</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.clipline">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">clipline</code><span class="sig-paren">(</span><em class="sig-param">left : int</em>, <em class="sig-param">top : int</em>, <em class="sig-param">right : int</em>, <em class="sig-param">bottom : int</em>, <em class="sig-param">x1 : int</em>, <em class="sig-param">y1 : int</em>, <em class="sig-param">x2 : int</em>, <em class="sig-param">y2 : int</em><span class="optional">[</span>, <em class="sig-param">method=liangbarsky</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; int, int, int, int<a class="headerlink" href="#sdl2.ext.clipline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clips a line to a rectangular area.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.point_on_line">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">point_on_line</code><span class="sig-paren">(</span><em class="sig-param">p1 : iterable</em>, <em class="sig-param">p2 : iterable</em>, <em class="sig-param">point : iterable</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#sdl2.ext.point_on_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks, if <em>point</em>, a two-value tuple, is on the line segment defined by <em>p1</em>
+and <em>p2</em>.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdl2ext.html"
+                        title="previous chapter">sdl2.ext - Python extensions for SDL2</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdl2ext_array.html"
+                        title="next chapter">Converting sequences</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/sdl2ext_algorithms.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_array.html" title="Converting sequences"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext.html" title="sdl2.ext - Python extensions for SDL2"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" >sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

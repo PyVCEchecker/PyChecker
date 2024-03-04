@@ -1,0 +1,58 @@
+{
+    "additionalProperties": false,
+    "description": ":MARC: ``541``\n\nOnly the first source is stored: if the record later gets enriched with\nmetadata coming from a second source, the `acquisition_source` is not\nupdated.",
+    "properties": {
+        "datetime": {
+            "description": ":MARC: ``541__d``\n\nThis does not necessarily coincide with the creation date of the\nrecord, as there might be some delay between the moment the\noriginal information is obtained and a record is finally created in\nthe system.",
+            "format": "date-time",
+            "minLength": 1,
+            "title": "Date on which the metadata was obtained",
+            "type": "string"
+        },
+        "email": {
+            "description": ":MARC: ``541__b``\n\nThis only gets populated when `method` is `submitter`.",
+            "format": "email",
+            "minLength": 1,
+            "title": "Email address associated to the submitter's account",
+            "type": "string"
+        },
+        "internal_uid": {
+            "description": ":MARC: ``541__a`` with ``inspire:uid:`` prefix.\n\nThis only gets populated when `method` is `submitter`.",
+            "title": "Inspire user ID of the submitter",
+            "type": "integer"
+        },
+        "method": {
+            "description": "Possible values are:\n\n`submitter`\n    when obtained from a user submission. In this case, `orcid`,\n    `internal_uid` and `email` store identifiers of the submitter,\n    and `submission_number` an ID of the submission.\n\n`oai`\n    when obtained by OAI-PMH harvesting.\n\n`batchuploader`\n    when obtained through the batch uploader.\n\n`hepcrawl`\n    when obtained from a hepcrawl crawler. In this case, `source`\n    stores the publisher or the repository that was crawled.\n\n`beard`\n    when created after author disambiguation",
+            "enum": [
+                "submitter",
+                "oai",
+                "batchuploader",
+                "hepcrawl",
+                "beard"
+            ],
+            "minLength": 1,
+            "title": "How the medata was obtained",
+            "type": "string"
+        },
+        "orcid": {
+            "description": ":MARC: ``541__a`` with ``orcid:`` prefix\n\nThis only gets populated when `method` is `submitter`.",
+            "minLength": 1,
+            "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$",
+            "title": "ORCID of the submitter",
+            "type": "string"
+        },
+        "source": {
+            "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+            "minLength": 1,
+            "type": "string"
+        },
+        "submission_number": {
+            "description": ":MARC: ``541__e``\n\nThis only gets populated when `method` is `submitter`.",
+            "minLength": 1,
+            "title": "Holding pen record ID of the submission",
+            "type": "string"
+        }
+    },
+    "title": "Origin of the metadata in the record",
+    "type": "object"
+}

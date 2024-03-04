@@ -1,0 +1,16 @@
+MANIFEST.in
+setup.py
+src/twitter/__init__.py
+src/twitter.common.dirutil.egg-info/PKG-INFO
+src/twitter.common.dirutil.egg-info/SOURCES.txt
+src/twitter.common.dirutil.egg-info/dependency_links.txt
+src/twitter.common.dirutil.egg-info/namespace_packages.txt
+src/twitter.common.dirutil.egg-info/requires.txt
+src/twitter.common.dirutil.egg-info/top_level.txt
+src/twitter.common.dirutil.egg-info/zip-safe
+src/twitter/common/__init__.py
+src/twitter/common/dirutil/__init__.py
+src/twitter/common/dirutil/chroot.py
+src/twitter/common/dirutil/fileset.py
+src/twitter/common/dirutil/lock.py
+src/twitter/common/dirutil/tail.py

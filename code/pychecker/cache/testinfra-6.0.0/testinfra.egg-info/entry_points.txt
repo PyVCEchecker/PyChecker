@@ -1,0 +1,3 @@
+[pytest11]
+pytest11._testinfra_renamed = _testinfra_renamed
+

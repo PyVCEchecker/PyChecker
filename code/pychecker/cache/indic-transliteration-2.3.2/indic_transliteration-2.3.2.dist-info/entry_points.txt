@@ -1,0 +1,3 @@
+[console_scripts]
+sanscript = indic_transliteration.sanscript_cli:app
+

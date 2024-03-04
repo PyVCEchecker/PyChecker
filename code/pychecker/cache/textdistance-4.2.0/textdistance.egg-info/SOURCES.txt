@@ -1,0 +1,17 @@
+README.rst
+setup.cfg
+setup.py
+textdistance/libraries.py
+textdistance/utils.py
+textdistance/benchmark.py
+textdistance/__init__.py
+textdistance/algorithms/sequence_based.py
+textdistance/algorithms/compression_based.py
+textdistance/algorithms/token_based.py
+textdistance/algorithms/vector_based.py
+textdistance/algorithms/__init__.py
+textdistance/algorithms/edit_based.py
+textdistance/algorithms/base.py
+textdistance/algorithms/phonetic.py
+textdistance/algorithms/simple.py
+textdistance/libraries.json

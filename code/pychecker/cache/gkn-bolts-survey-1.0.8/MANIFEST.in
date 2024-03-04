@@ -1,0 +1,5 @@
+
+include README.md
+include LICENSE
+include gkn_bolts_survey/tests/test_AtlasCopco.xls
+include gkn_bolts_survey/tests/test_Excel.xlsx

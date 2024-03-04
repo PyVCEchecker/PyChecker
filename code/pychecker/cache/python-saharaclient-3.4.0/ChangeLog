@@ -1,0 +1,825 @@
+CHANGES
+=======
+
+3.4.0
+-----
+
+* Update master for stable/wallaby
+
+3.3.0
+-----
+
+* Remove install unnecessary packages
+* Add Python3 wallaby unit tests
+* Update master for stable/victoria
+
+3.2.1
+-----
+
+* [goal] Migrating testing to Ubuntu Focal
+* Remove Babel requirement
+* drop mock from lower-constraints
+
+3.2.0
+-----
+
+* Switch to newer openstackdocstheme and reno versions
+* Fix hacking min version to 3.0.1
+* Bump default tox env from py37 to py38
+* Add py38 package metadata
+* Ussuri contributor docs community goal
+* Use unittest.mock instead of third party mock
+* Remove pypy job
+* Add Python3 victoria unit tests
+* Update master for stable/ussuri
+
+3.1.0
+-----
+
+* Cleanup py27 support
+* Update hacking for Python3
+* Fix the "image register" command (OSC 5.2.0 regression)
+
+3.0.0
+-----
+
+* fix: typo in tox minversion option
+* [ussuri][goal] Drop python 2.7 support and testing
+* Switch to Ussuri jobs
+* Update master for stable/train
+
+2.3.0
+-----
+
+* py3: use the train test template and other updates
+* Update sphinx from current requirements
+* Py3: fix the OSC download job binary command
+* Replace git.openstack.org URLs with opendev.org URLs
+* OpenDev Migration Patch
+* Update master for stable/stein
+* Add py37 and API v2 jobs (scenario, tempest)
+
+2.2.0
+-----
+
+* Add missing APIv2 features to client, OSC
+
+2.1.0
+-----
+
+* Preparing OSC for APIv2
+* Add Python 3.6 classifier to setup.cfg
+* add python 3.6 unit test job
+* Update devel info: mailing list
+* Use templates for cover and lower-constraints
+* add python 3.6 unit test job
+* switch documentation job to new PTI
+* import zuul job settings from project-config
+* Update reno for stable/rocky
+
+2.0.0
+-----
+
+* Clean S3 data source create/update
+* Support of S3 data sources in OSC
+* Adding boot from volume to osc
+* Adding boot from volume
+* Correct a missed job\_execution->job
+* Fix the cover tox target (switch to stestr)
+* Revert "Fix the cover tox target (switch to stestr)"
+* Allow S3 credentials in data source create
+* Rework saharaclient authentication
+* Reflect response fixes for jobs/jobs templates
+* Fix the cover tox target (switch to stestr)
+* Switch to using stestr
+* Add release note link in README
+* Reflect change to multiple clusters creation
+* Support of the improved force-delete in client
+* Remove PyPI downloads
+* fix tox python3 overrides
+* Fix build with Sphinx 1.7.x
+* Trivial: Update pypi url to new url
+
+1.6.0
+-----
+
+* Tox: cleanup usage of py34, remove a now-useless section
+* Updated from global requirements
+* add lower-constraints job
+* Remove outdated tools and files
+* Updated from global requirements
+* Follow the new PTI for document build
+* Migration to Storyboard (2)
+* Migration to Storyboard
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Native Zuul v3 jobs
+* Update reno for stable/queens
+
+1.5.0
+-----
+
+* Auto-document members properly
+* APIv2 support in client
+* Updated from global requirements
+* Modify home page in setup.cfg
+* Updated from global requirements
+* Updated from global requirements
+* Support of S3 binaries in OSC
+* Fix misleading docstring
+* Properly document job binary "extra"
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Remove -U from pip install
+* Avoid tox\_install.sh for constraints support
+* Remove setting of version/release from releasenotes
+
+1.4.0
+-----
+
+* Updated from global requirements
+* Updated from global requirements
+* Add export of node group templates to CLI
+* Add export of cluster templates
+* Fix KeyError in "cluster scale" command
+* Updated from global requirements
+* [ut] replace .testr.conf with .stestr.conf
+* Updated from global requirements
+* Reorganize the documentation following the new structure
+* Updated from global requirements
+* Add import of node group templates
+* Add import of Cluster Templates
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Adding volume\_mount\_prefix parameter
+* Add export of node group templates
+* Update reno for stable/pike
+
+1.3.0
+-----
+
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Clone sahara hacking checks to saharaclient
+* Update and optimize documentation links
+* Updated from global requirements
+* doc: migrate to openstackdocstheme
+* doc: enable warning-is-error and fix warnings
+* Remove log translations
+* Use 'project' instead of 'tenant'
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Fix html\_last\_updated\_fmt for Python3
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+
+1.2.0
+-----
+
+* Updated from global requirements
+* Replace six.iteritems() with .items()
+* Updated from global requirements
+* Fix a bug in jobs.py
+* PYthon 3.5 is added
+* Updated from global requirements
+* [Fix gate]Update test requirement
+* Updated from global requirements
+* Spelling replaced from "ot" to "of"
+* Fixed log messages
+* Updated from global requirements
+* Updated from global requirements
+* Set client module \_\_version\_\_
+* Update reno for stable/ocata
+
+1.1.0
+-----
+
+* Updated from global requirements
+* [trivial] Fix spelling
+* Updated from global requirements
+* Enable coverage report in console output
+* Add Constraints support
+* Replace logging with oslo\_log
+* Updated from global requirements
+* Updated from global requirements
+* Show team and repo badges on README
+* Updated from global requirements
+
+1.0.0
+-----
+
+* Updated from global requirements
+* Updated from global requirements
+* Provide the cluster info about WebUI
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Add plug-in summary for osc doc
+* Enable release notes translation
+* Optimize command job-binary-download
+* Raise exception in command "plugin configs get"
+* remove old cli commands
+* Return error\_code in command "job binary download"
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Add newline to strings in stdout/stderr.write()
+* Updated from global requirements
+* Updated from global requirements
+* standardize release note page ordering
+* Update reno for stable/newton
+* Fix doc build if git is absent
+
+0.18.0
+------
+
+* Updated from global requirements
+* Updated from global requirements
+
+0.17.0
+------
+
+* Add sorting ability to Python-saharaclient
+* Designate integration
+* Updated from global requirements
+
+0.16.0
+------
+
+* Updated from global requirements
+* Add pagination ability to Python-saharaclient
+* Remove discover from test-requirements
+* Updated from global requirements
+* include storm.pyleus in job types
+* Updated from global requirements
+* support event logs for CLI
+* plugin's api update support
+* Updated from global requirements
+* Remove unused functional tests
+* Updated from global requirements
+* Updated from global requirements
+* Add openstackclient dependency back
+* Use osc\_lib instead of cliff
+* Updated from global requirements
+* Updated from global requirements
+* Use osc-lib instead of openstackclient
+* Updated from global requirements
+* Remove incorrectly used "# flake8: noqa"
+* print statment has become a function in py3
+* Updated from global requirements
+* avoid additional requirement for building docs
+* Migrate functional tests to openstack-client
+
+0.15.0
+------
+
+* Change plugin version 'version' parameter to 'plugin-version'
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Replace tempest\_lib with tempest.lib
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Remove integration tests from saharaclient
+* Update reno for stable/mitaka
+* Updated from global requirements
+
+0.13.0
+------
+
+* Remove unused pngmath Sphinx extension
+* Fixing updates via CLI
+* Fixing cluster creation with neutron network via CLI
+* Use ostestr instead of the custom pretty\_tox.sh
+* Adding "health verification --show" CLI call
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Add debug testenv in tox
+
+0.12.0
+------
+
+* Keystoneclient to keystoneauth migration
+* Updated from global requirements
+* verifications impl for saharaclient
+* Adding release notes for saharaclient
+* Updated from global requirements
+* Adding ability to unset fields with update calls
+* Updated from global requirements
+* Replace deprecated library function os.popen() with subprocess
+* Updated from global requirements
+* Remove argparse dependency from requirements.txt file
+* Adding release notes for saharaclient
+* Fixing cluster scaling via CLI
+* Updated from global requirements
+* Updated from global requirements
+* Drop py33 support
+* Updated from global requirements
+* Deprecated tox -downloadcache option removed
+* Updated from global requirements
+* Add releasenotes to sahara client
+* Updated from global requirements
+* Remove py26 support
+* remove netaddr from requirements
+* Delete python bytecode before every test run
+* Updated from global requirements
+* Updated from global requirements
+* Adding indications of results after delete operations
+* Adding ability to get plugin processes via CLI
+* Updated from global requirements
+* Replacing hard coded cluster status using utils in sahara-client
+* Updated from global requirements
+* Fixing data source update in CLI
+* Adding ability to provide name or ID of the flavor in CLI
+* Updated from global requirements
+* Enabling DeprecationWarning if session is not provided
+* Adding sphinx extension for CLI docs autogeneration
+* Last sync from oslo-incubator
+* Adding autogenerated saharaclient API docs
+* Adding Sahara CLI overview to docs and fixing warnings
+* Images CLI improvement
+* Making desc parameter of update\_image optional
+* Deprecation of the Sahara CLI
+* Allowing for shares to be edited on an existing cluster
+* Fix bypass-url for CLI
+* Fixing updates for CLI
+* Add \*.log to gitignore
+* Adding get\_resource\_id method to CLI utils
+* Adding Job Binaries support to CLI
+* Updated from global requirements
+* Adding Jobs support to CLI
+* Updated from global requirements
+* Making parameters of job binaries create optional
+* Adding Job Types support to CLI
+* Adding Job Templates support to CLI
+* Making parameters of job executions create optional
+* Making parameters of job create optional
+* Updated from global requirements
+* Adding Clusters support to CLI
+* Adding Cluster Templates support to CLI
+* Adding Node Group Templates support to CLI
+* Changing public/protected options handling
+* Improve readme contents
+* Updated from global requirements
+* Updated from global requirements
+* Add the mising requriements
+* Updated from global requirements
+* Updated from global requirements
+* Adding Images support to CLI
+* Fix functional tests in gate
+* Fixed problem with tags update
+* Added volume\_mount\_prefix for node group templates
+* Adding update and minor fixes to Data Sources CLI
+* print usage when no argument is specified for python3
+* Fixing cluster and node group template updates
+* Adding sahara\_url and endpoint\_type to OpenstackClient CLI
+* Adding return of updated image for update\_image, update\_tags
+* Updated from global requirements
+* Fix functional tests in saharaclient
+* Remove duplicate .coverage in .gitignore file
+* Shows reason of failure in base.get
+* Remove \`data source update\` from setup.cfg
+* Change ignore-errors to ignore\_errors
+* Adding missed public/protected support for jobs creation
+* Updating saharaclient api docs
+
+0.11.0
+------
+
+* Updated from global requirements
+* Support updates and ACL for objects
+* Updated from global requirements
+* Updated from global requirements
+* Improve help strings
+* Fixing query string for multiple opts
+* Updated from global requirements
+* Adding Data Sources support to CLI
+
+0.10.1
+------
+
+* Fix backward compat issue for job interfaces
+* Add initial commit for integration with Openstackclient
+
+0.10.0
+------
+
+* Updated from global requirements
+* API to mount manila shares to clusters
+* Add support OS\_ENDPOINT\_TYPE env variable to CLI
+* Add support of use\_autoconfig field
+* Add to\_dict() method to Resource class
+* Updated from global requirements
+* Add cluster-scale command to the CLI
+* Adding interface argument for job template and job
+* Fix \_get\_by\_id\_or\_name method
+* Updated from global requirements
+* Updated from global requirements
+* Allow multiple clusters creation
+* Sorting 'job-list' output by start\_time
+* Including 'start\_time' column at 'sahara job-list' command
+* Updated from global requirements
+* pass environment variables of proxy to tox
+* Updated from global requirements
+* Updated from global requirements
+
+0.9.1
+-----
+
+* Adding job binary editing to library and CLI
+* Pass OpenStack environment variables to client tests
+* Adding data source editing to library and CLI
+* Updated from global requirements
+* Adding node group template editing to CLI
+* Adding cluster template editing to CLI
+* Updated from global requirements
+* Drop use of 'oslo' namespace package
+* Updated from global requirements
+* Try getting old service type if session used
+* Add .coveragerc to saharaclient
+* Update README to work with release tools
+
+0.9.0
+-----
+
+* Uncap library requirements for liberty
+* Add regions support to saharaclient
+* Provide user-agent in saharaclient
+* Mark saharaclient as being a universal wheel
+* Add CONTRIBUTING.rst
+* Port to Python 3
+* add --name option to assign name to job-binary-internal
+* Rework authentication
+* Add support for job-types-list
+* Add post\_test\_hook for functional tests
+* Copy functional tests from tempest CLI
+* Updated from global requirements
+* Add support for show\_events parameter
+* Added support of instance locality
+
+0.8.0
+-----
+
+* Removed cluster validation on client side
+* Add how to participate doc
+* Added --bypass-url support for keystone 3
+* Updated from global requirements
+* Remove strutils from openstack/common
+* Remove importutils from openstack-common.conf
+* Pass service type argument in Sahara CLI
+* Fixed work with 'data\_processing' service spelling
+* Added support of is\_proxy\_gateway field for node group
+* Pass endpoint\_type to Sahara client constructor
+* Use pretty-tox for better test output
+* Update apiclient.exceptions oslo-incubator module
+* Update apiclient.auth oslo-incubator module
+* Update \_i18n oslo-incubator module
+* Remove unused uuidutils dep
+* Remove obsolete gettextutils
+* Remove unused apiclient oslo files
+* apiclient.auth is required since d02f0e1d (21 sep 2014)
+* Add find\_unique base manager method
+* Add ability to get events from saharaclient
+* Using oslo\_\* instead of oslo.\*
+* Updated from global requirements
+* Added SSL-related parameters to the client
+* Added ability to pass image\_id for node group
+* Fix output of supported api versions
+* Use requests-mock for mocking
+* Remove cyclic dependency
+* Fix for sahara CLI
+* Enable W292 and E123
+* Move to hacking 0.10
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Workflow documentation is now in infra-manual
+* Update oslo-incubator importutils
+* Update oslo-incubator apiclient.exceptions
+* Update oslo-incubator cliutils
+* Updating oslo-incubator
+* Update oslo-incubator strutils
+* Set default service\_type to "data-processing" in client
+* Added unit tests for python bindings
+
+0.7.6
+-----
+
+* Replacing data\_processing with data-processing
+* Adding support for query filtering to list() calls
+* Fixed old style class declaration
+* Add Support for Keystone V3 CLI
+
+0.7.5
+-----
+
+* Add volume\_type support to node group templates
+* Support Cinder availability zones
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Support Nova availability zones
+* Fix arguments order in assertEqual
+* Use base utils from oslo-incubator instead copy-pasted from nova
+
+0.7.4
+-----
+
+* Updated from global requirements
+
+0.7.3
+-----
+
+* Fixed backward compatibility of sahara client
+
+0.7.2
+-----
+
+* Sync oslo cliutils module
+* Sync oslo apiclient.exceptions module
+* Updated from global requirements
+* Sync oslo strutils module
+* [client] Fixed pep8 and py27 tasks on tox 1.7.2
+* Add warn re sorting requirements
+* Add doc8 tox env
+* Work toward Python 3.4 support and testing
+* Fix duplicate help strings
+
+0.7.1
+-----
+
+* Updated from global requirements
+* Added hadling of non-json response from Sahara
+* Updated from global requirements
+* Updated from global requirements
+* Added support of security groups management
+* Updated from global requirements
+* Updated from global requirements
+* updating link to Sahara docs
+* Add oslo.i18n lib to requirements
+* Update oslo-incubator cliutils module
+* Update oslo-incubator apiclient module
+* Update oslo-incubator strutils module
+* Update oslo-incubator gettextutils module
+* Update oslo-incubator apiclient.exceptions module
+* Remove docutils pin
+* Jar files for pig and mapreduce EDP tests
+* Update code for new hacking/pep8/flake8 global requirements
+* Make Cluster Template accept default\_image\_id field
+* Fixes ambiguous cli output between "None" and NoneType
+* Updated from global requirements
+* Remove vim editor configuration from comments
+* Updated from global requirements
+* Updated from global requirements
+* Don't set json content type for non-json data
+* Updated from global requirements
+* Added new hacking version to requirements
+* Updated from global requirements
+* Remove excutils from openstack-common.conf
+* Updated from global requirements
+* Fix network passing for cluster-template-create
+* removed unused methods from nova.utils
+* Update oslo-incubator cliutils
+* Update oslo-incubator apiclient.exceptions
+* Update oslo-incubator importutils
+* Update oslo-incubator strutils (and gettextutils)
+* Remove timeutils from openstack-common.conf
+* Updated from global requirements
+* use strutils.to\_slug() instead of utils.slugify()
+* replace string format arguments with function parameters
+* Add help string to job-create
+* Updated from global requirements
+* Add EDP jobs to cli integration tests
+* Add cli cluster creation and teardown test
+* Updated from global requirements
+* Updated from global requirements
+* Stub integration tests for vanilla, vanilla2 and hdp plugins
+* Restructure tests directory in preparation for cli integration tests
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+
+0.7.0
+-----
+
+* Remove savanna aliases
+* Add README file
+
+0.6.0
+-----
+
+* Implement "sahara --version"
+* Change internal variables and classes to 'sahara'
+* Change packaging references to python-saharaclient
+* Swap the saharaclient and savannaclient directories
+* Change client doc references to sahara
+* Change the enduser facing apects of the shell
+* Update .gitreview to point on updated repo
+* Make savanna able to be executed/used as sahara
+* Add excutils and timeutils to openstack/common
+* Update oslo-incubator cliutils module
+* Update oslo-incubator apiclient.exceptions modules
+* Add missed PrettyTable requirement
+* Updated from global requirements
+
+0.5.0
+-----
+
+* Args should be passed as a list on job creation
+* Check for presence of 'credentials' before filtering
+* Check for presence of 'extra' before filtering
+* Updated from global requirements
+* Improve help strings
+* Api Exception improvement
+* Update oslo-incubator cliutils module
+* Update oslo-incubator apiclient.exceptions module
+* update oslo-incubator strutils module
+* Update oslo-incubator gettextutils module
+* Update oslo-incubator importutils module
+* Add importutils module
+* Fix typo in doc string
+* Move client docs to the client
+* Add savannaclient/version.py to store version info
+* Make the single entrypoint for client
+* Remove dependent module py3kcompat
+* Removed copy\_if\_defined function from ClusterManager
+* print\_list(): do not call decode() on a text string
+* Some improvements in tox.ini
+* Sync with global requirements
+* Changed base Resource class to prevent changing of passed arguments
+* Add --name option to image unregister & tag cmds
+* Remove job\_exec\_data argument
+* Add --name option to appropriate delete commands
+* Add --name option to appropriate show commands
+* Add space to name for consistency
+* Map neutron\_management\_network to net\_id in CLI
+* Add job-create to CLI
+* Add job-template-create to CLI
+* Fixed issue when savanna url is not provided
+* Update oslo-incubator cliutils module
+* Update oslo-incubator strutils module
+* Make --bypass-url default to env(BYPASS\_URL)
+* Refactor display of a job
+* Updated from global requirements
+* Refactor display of job template
+* Add job-binary-create to CLI
+* Refactor display of a job binary
+* Send credentials only when they are provided
+* Add data-source-create to CLI
+* Refactor display of a single data-source
+* Add job-binary-data-create to CLI
+* Refactor display of job-binary-data elements
+* Add job-delete to CLI
+* Add job-show to CLI
+* Add job-list to CLI
+* Add job-template-delete to CLI
+* Add job-template-show to CLI
+* Add job-template-list to CLI
+* Add job-binary-delete to CLI
+* Add job-binary-show to CLI
+* Add job-binary-list to CLI
+* Add job-binary-data-delete to CLI
+* Add job-binary-data-list to CLI
+* Add data-source-delete to CLI
+* Add data-source-show to CLI
+* Add data-source-list to CLI
+* Fix default service-type name in help
+* Add cluster-create to CLI
+* Add cluster-template-create to CLI
+* Add node-group-template-create to CLI
+* Add --json option to cluster-show
+* Add --json option to cluster-template-show
+* Add --json option to node-group-template-show
+* Refactor display of cluster
+* Refactor display of cluster template
+* Refactor display of node group template
+* Add cluster-template-show command to CLI
+* Add node-group-template-show command to CLI
+* Make plugin commands singular
+* Force wrap line for cluster-show
+* Remove version from setup.cfg
+
+0.4.1
+-----
+
+* JobExecutionsManager.create() should handle input\_id/output\_id == None
+* Clean up versions display in plugins-show
+* Clean up printing of image details
+* Allow passing extra args to JobExecutionsManager.create()
+* Add pretty printing of node group fields
+* Add some pretty printing for list fields
+* Add initial cluster-template-\* commands to CLI
+* Add initial node-group-template-\* commands to CLI
+* Add initial cluster-\* commands to CLI
+* Add initial image-\* commands to CLI
+* Update oslo-incubator apiclient module
+* Update oslo-incubator py3kcompat module
+* Update oslo-incubator gettextutils module
+* Add run\_test.sh for running tests
+* Python 3: use six.iteritems() instead of iteritems()
+* Python3: use six.moves.urllib.parse instead of urlparse
+* Add basic tests for savanna CLI
+* Add initial Savanna CLI
+* Adding the ability to modify node group templates
+* Adding the ability to modify cluster templates
+* Removal of AUTHORS file from repo
+* Removing vim headers from savannaclient
+* Fix call to catalog.get during endpoint discovery
+* Client creation refactoring
+
+0.4.0
+-----
+
+* Enforce keystone service endpoint URL for auth
+* Run tests using testrepository
+* Bump client version to 0.4.0
+* Revert "Support building wheels (PEP-427)"
+* Add unregister\_image(id) call
+* Bump version to 2014.1
+* Support building wheels (PEP-427)
+* Add HACKING.rst with link to the style guidelines
+* Hacking contains all needed requirements
+* Updated from global requirements
+* Adding support for downloading a job binary
+* py33 and pypy added to the envlist
+* Unused pylint requirement removed
+* Sync with global requirements
+
+0.3
+---
+
+* Add lower bound for the six dep
+
+0.3.rc4
+-------
+
+* Fixed UI bug with broken plugins page
+* Added transient field for cluster
+
+0.3.rc3
+-------
+
+* Set upper limit for requests library
+
+0.3.rc2
+-------
+
+* Adding Jeremy Stanley to AUTHORS
+* Remove timeout argument
+* Update .gitreview file following repository move
+* Sync with global requirements
+
+0.3.rc1
+-------
+
+* Support for keystone v3
+* Removed oslo.config and oslo-incubator
+
+0.3a3
+-----
+
+* Fix config handling for Node Group Templates
+
+0.3a2
+-----
+
+* Bump oslo.config to >=1.2.0
+* Fix Node Groups handling on creation
+* Fix job\_binary\_internals creation
+* Fix job\_binary\_internals creation
+* Get job configs call for sync dashboard
+
+0.3a1
+-----
+
+* Sync with dashboard
+* Remove version pbr pins from setup\_requires
+* Sync requiremnts with global requirements
+* Adjusting json resource names
+* Fix to requirements.txt
+* Adjust client to account API changes for EDP
+* Added converting project name to project id
+* Added authentication by tenant name
+* Create methods return object while object creation
+* Added support for Job Binaries and Job Executions API
+* Now create methods return a new object
+* Added API for job, data\_source and job\_origin
+* Update pbr and sync requirements
+* Python Savanna Client initial implementation
+* Added .gitreview

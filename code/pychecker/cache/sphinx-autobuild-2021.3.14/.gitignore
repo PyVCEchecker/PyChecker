@@ -1,0 +1,18 @@
+# Build artifacts
+/build
+/dist
+__pycache__
+
+# Generated artifacts
+*.py[cod]
+*.egg-info
+.*cache*
+.idea
+
+# OS-specific files
+.DS_Store
+
+# Unit test / coverage reports
+.coverage
+.htmlcov
+.nox

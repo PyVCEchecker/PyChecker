@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+marshmallow_dataclass/__init__.py
+marshmallow_dataclass/collection_field.py
+marshmallow_dataclass/mypy.py
+marshmallow_dataclass/py.typed
+marshmallow_dataclass/typing.py
+marshmallow_dataclass/union_field.py
+marshmallow_dataclass.egg-info/PKG-INFO
+marshmallow_dataclass.egg-info/SOURCES.txt
+marshmallow_dataclass.egg-info/dependency_links.txt
+marshmallow_dataclass.egg-info/requires.txt
+marshmallow_dataclass.egg-info/top_level.txt

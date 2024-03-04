@@ -1,0 +1,13 @@
+plone.app.z3cform
+plone.autoform
+Products.CMFPlone>=5.0
+plone.api
+setuptools
+z3c.form>=2.4.3dev
+
+[dev]
+pdbpp
+
+[test]
+plone.app.testing
+plone.app.robotframework[debug]

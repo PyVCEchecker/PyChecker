@@ -1,0 +1,6 @@
+[invenio_base.api_apps]
+invenio_db = invenio_db:InvenioDB
+
+[invenio_base.apps]
+invenio_db = invenio_db:InvenioDB
+

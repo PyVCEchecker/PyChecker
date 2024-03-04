@@ -1,0 +1,8 @@
+pyyaml
+requests
+
+[gibberish]
+gibberish-detector
+
+[word_list]
+pyahocorasick

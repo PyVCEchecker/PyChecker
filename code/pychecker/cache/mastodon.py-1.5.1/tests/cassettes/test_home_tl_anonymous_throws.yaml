@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/timelines/home
+  response:
+    body: {string: '{"error":"The access token is invalid"}'}
+    headers:
+      Cache-Control: ['private, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Pragma: [no-cache]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      WWW-Authenticate: ['Bearer realm="Doorkeeper", error="invalid_token", error_description="The
+          access token is invalid"']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [34a49889-cfb9-4d71-b3cb-1157026c0ace]
+      X-Runtime: ['0.025829']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['39']
+    status: {code: 401, message: Unauthorized}
+version: 1

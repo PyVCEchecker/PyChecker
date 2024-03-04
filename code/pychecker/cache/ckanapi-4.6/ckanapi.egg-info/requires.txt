@@ -1,0 +1,5 @@
+docopt
+python-slugify>=1.0
+requests
+setuptools
+six<2.0,>=1.9

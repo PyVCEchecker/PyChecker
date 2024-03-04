@@ -1,0 +1,10 @@
+robotframework
+requests
+
+[test]
+robotframework>=3.2.1
+pytest
+flask
+six
+coverage
+flake8

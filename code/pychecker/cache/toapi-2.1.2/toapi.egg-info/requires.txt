@@ -1,0 +1,7 @@
+colorama
+cchardet
+requests
+htmlparsing
+htmlfetcher
+flask
+click

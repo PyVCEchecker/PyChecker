@@ -1,0 +1,5 @@
+[console_scripts]
+qarun = QUANTAXIS.QACmd.runner:run
+quantaxis = QUANTAXIS.QACmd:QA_cmd
+quantaxisq = QUANTAXIS.QAFetch.QATdx_adv:bat
+

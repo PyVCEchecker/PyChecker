@@ -1,0 +1,2 @@
+jsonpath-rw>=1.2.0
+pbr>=1.8

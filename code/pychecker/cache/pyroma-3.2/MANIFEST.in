@@ -1,0 +1,7 @@
+include *.txt
+recursive-include pyroma/testdata *.py *.txt *.cfg *.html *.json
+prune pyroma/testdata/complete/*.egg
+graft pyroma/testdata/distributions
+include tox.ini
+include DEVELOPMENT.rst
+include Makefile

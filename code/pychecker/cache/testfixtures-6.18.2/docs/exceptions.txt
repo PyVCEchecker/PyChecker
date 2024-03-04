@@ -1,0 +1,139 @@
+Testing exceptions
+==================
+
+.. currentmodule:: testfixtures
+
+The :mod:`unittest` support for asserting that exceptions are raised
+when expected is fairly weak. Like many other Python testing
+libraries, testfixtures has tools to help with this.
+
+The :class:`ShouldRaise` context manager
+----------------------------------------
+
+If you are using a version of Python where the :keyword:`with`
+statement can be used, it's recommended that you use the
+:class:`ShouldRaise` context manager. 
+
+Suppose we wanted to test the following function to make sure that the
+right exception was raised:
+
+.. code-block:: python
+
+  def the_thrower(throw=True):
+      if throw:
+          raise ValueError('Not good!')
+
+The following example shows how to test that the correct exception is
+raised:
+
+>>> from testfixtures import ShouldRaise
+>>> with ShouldRaise(ValueError('Not good!')):
+...     the_thrower()
+
+If the exception raised doesn't match the one expected,
+:class:`ShouldRaise` will raise an :class:`AssertionError`
+causing the tests in which it occurs to fail:
+
+>>> with ShouldRaise(ValueError('Is good!')):
+...     the_thrower()
+Traceback (most recent call last):
+...
+AssertionError: ValueError('Is good!'...) (expected) != ValueError('Not good!'...) (raised)
+
+If you're not concerned about anything more than the type of the
+exception that's raised, you can check as follows:
+
+>>> from testfixtures import ShouldRaise
+>>> with ShouldRaise(ValueError):
+...     the_thrower()
+
+If you're feeling slack and just want to check that an exception is
+raised, but don't care about the type of that exception, the following
+will suffice:
+
+>>> from testfixtures import ShouldRaise
+>>> with ShouldRaise():
+...     the_thrower()
+
+If no exception is raised by the code under test, :class:`ShouldRaise`
+will raise an :class:`AssertionError` to indicate this:
+
+>>> from testfixtures import ShouldRaise
+>>> with ShouldRaise():
+...     the_thrower(throw=False)
+Traceback (most recent call last):
+...
+AssertionError: No exception raised!
+
+:class:`ShouldRaise` has been implemented such that it can be
+successfully used to test if code raises both :class:`SystemExit` and
+:class:`KeyboardInterrupt` exceptions.
+
+To help with :class:`SystemExit` and other exceptions that are
+tricky to construct yourself, :class:`ShouldRaise` instances have a
+:attr:`~ShouldRaise.raised` attribute. This will contain the actual
+exception raised and can be used to inspect parts of it:
+
+>>> import sys
+>>> from testfixtures import ShouldRaise
+>>> with ShouldRaise() as s:
+...     sys.exit(42)
+>>> s.raised.code
+42
+
+The :func:`should_raise` decorator
+-----------------------------------------
+
+If you are working in a traditional :mod:`unittest` environment and
+want to check that a particular test function raises an exception, you
+may find the decorator suits your needs better:
+ 
+.. code-block:: python
+
+  from testfixtures import should_raise
+  
+  @should_raise(ValueError('Not good!'))
+  def test_function():
+      the_thrower()
+
+This decorator behaves exactly as the :class:`ShouldRaise` context
+manager described in the documentation above.
+
+.. note:: 
+
+  It is slightly recommended that you use the context manager rather
+  than the decorator in most cases. With the decorator, all exceptions
+  raised within the decorated function will be checked, which can
+  hinder test development. With the context manager, you can make
+  assertions about only the exact lines of code that you expect to
+  raise the exception.
+
+Exceptions that are conditionally raised
+----------------------------------------
+
+Some exceptions are only raised in certain versions of Python. For
+example, in Python 2, ``bytes()`` will turn both bytes and strings into
+bytes, while in Python 3, it will raise an exception when presented
+with a string. If you wish to make assertions that this behaviour is
+expected, you can use the ``unless`` option to :class:`ShouldRaise`
+as follows:
+
+.. code-block:: python
+
+  import sys
+  from testfixtures import ShouldRaise
+
+  PY2 = sys.version_info[:2] <  (3, 0)
+
+  with ShouldRaise(TypeError, unless=PY2):
+      bytes('something')
+
+.. note:: 
+
+  Do **not** abuse this functionality to make sloppy assertions. It is
+  always better have two different tests that cover a case when an
+  exception should be raised and a case where an exception should not
+  be raised rather than using it above functionality. It is *only*
+  provided to help in cases where something in the environment that
+  cannot be mocked out or controlled influences whether or not an
+  exception is raised.

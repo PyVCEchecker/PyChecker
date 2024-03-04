@@ -1,0 +1,4 @@
+django<4.0,>=2.2
+djangorestframework<4.0
+social-auth-core<5.0,>=4.0
+social-auth-app-django<5.0,>=4.0

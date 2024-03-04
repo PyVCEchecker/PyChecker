@@ -1,0 +1,81 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/.well-known/nodeinfo
+  response:
+    body: {string: '{"links":[{"rel":"http://nodeinfo.diaspora.software/ns/schema/2.0","href":"http://localhost/nodeinfo/2.0"}]}'}
+    headers:
+      Cache-Control: ['max-age=259200, public']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 22 Feb 2020 19:28:40 GMT']
+      ETag: [W/"765ed8d65d8333f722ad1b021068b547"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept, Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [2857405a-9a6a-49aa-94ab-cb5331a15df2]
+      X-Runtime: ['0.048451']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['108']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost/nodeinfo/2.0
+  response:
+    body: {string: "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>404
+        Not Found</h1></center>\r\n<hr><center>nginx/1.14.0 (Ubuntu)</center>\r\n</body>\r\n</html>\r\n"}
+    headers:
+      Connection: [keep-alive]
+      Content-Type: [text/html]
+      Date: ['Sat, 22 Feb 2020 19:28:40 GMT']
+      Server: [nginx/1.14.0 (Ubuntu)]
+      Transfer-Encoding: [chunked]
+      content-length: ['178']
+    status: {code: 404, message: Not Found}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/nodeinfo/2.0
+  response:
+    body: {string: '{"version":"2.0","software":{"name":"mastodon","version":"3.1.1"},"protocols":["activitypub"],"usage":{"users":{"total":3,"activeMonth":3,"activeHalfyear":3},"localPosts":1},"openRegistrations":true}'}
+    headers:
+      Cache-Control: ['max-age=1800, public']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 22 Feb 2020 19:28:41 GMT']
+      ETag: [W/"dce5048b9050141b18d1d3fda5194615"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept,Accept-Encoding']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [a8211f49-3b92-412c-927a-a16d31c55a3d]
+      X-Runtime: ['0.039172']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['199']
+    status: {code: 200, message: OK}
+version: 1

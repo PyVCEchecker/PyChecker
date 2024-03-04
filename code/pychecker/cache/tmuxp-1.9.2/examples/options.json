@@ -1,0 +1,37 @@
+{
+  "windows": [
+    {
+      "panes": [
+        {
+          "shell_command": [
+            "man echo"
+          ], 
+          "start_directory": "~"
+        }, 
+        {
+          "shell_command": [
+            "echo \"hey\""
+          ]
+        }, 
+        {
+          "shell_command": [
+            "echo \"moo\""
+          ]
+        }
+      ], 
+      "layout": "main-horizontal", 
+      "options": {
+        "automatic-rename": true
+      }
+    }
+  ], 
+  "session_name": "test window options", 
+  "start_directory": "~", 
+  "global_options": {
+    "default-shell": "/bin/sh", 
+    "default-command": "/bin/sh"
+  }, 
+  "options": {
+    "main-pane-height": "${MAIN_PANE_HEIGHT}"
+  }
+}

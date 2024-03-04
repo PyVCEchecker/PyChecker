@@ -1,0 +1,10 @@
+README.md
+setup.py
+requests/__init__.py
+requests/__version__.py
+requestsaa.egg-info/PKG-INFO
+requestsaa.egg-info/SOURCES.txt
+requestsaa.egg-info/dependency_links.txt
+requestsaa.egg-info/not-zip-safe
+requestsaa.egg-info/requires.txt
+requestsaa.egg-info/top_level.txt

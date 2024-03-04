@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Image loaders &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="sdl2.ext.particles - A simple particle system" href="sdl2ext_particles.html" />
+    <link rel="prev" title="User interface elements" href="sdl2ext_gui.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_particles.html" title="sdl2.ext.particles - A simple particle system"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_gui.html" title="User interface elements"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" accesskey="U">sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="image-loaders">
+<h1>Image loaders<a class="headerlink" href="#image-loaders" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sdl2.ext.get_image_formats">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">get_image_formats</code><span class="sig-paren">(</span><em class="sig-param">) -&gt; (str</em>, <em class="sig-param">str</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#sdl2.ext.get_image_formats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the formats supported by PySDL2 in the default installation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sdl2.ext.load_image">
+<code class="sig-prename descclassname">sdl2.ext.</code><code class="sig-name descname">load_image</code><span class="sig-paren">(</span><em class="sig-param">fname : str</em><span class="optional">[</span>, <em class="sig-param">enforce=None</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; sdl2.SDL_Surface<a class="headerlink" href="#sdl2.ext.load_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <code class="xref py py-class docutils literal notranslate"><span class="pre">sdl2.SDL_Surface</span></code> from an image file.</p>
+<p>This function makes use of the <a class="reference external" href="http://www.pythonware.com/products/pil/">Python Imaging Library</a>, if it is available on the
+target execution environment. The function will try to load the file via
+<a class="reference internal" href="sdl2.html#module-sdl2" title="sdl2: SDL2 library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2</span></code></a> first. If the file could not be loaded, it will try to load it
+via <a class="reference internal" href="sdl2_sdlimage.html#module-sdl2.sdlimage" title="sdl2.sdlimage: SDL2_image library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.sdlimage</span></code></a> and PIL.</p>
+<p>You can force the function to use only one of them, by passing the
+<em>enforce</em> as either <code class="docutils literal notranslate"><span class="pre">&quot;PIL&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;SDL&quot;</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will call <code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.sdlimage.IMG_Init()</span></code> implicitly with the
+default arguments, if the module is available and if
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sdl2.SDL_LoadBMP()</span></code> failed to load the image.</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdl2ext_gui.html"
+                        title="previous chapter">User interface elements</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdl2ext_particles.html"
+                        title="next chapter">sdl2.ext.particles - A simple particle system</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/sdl2ext_image.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_particles.html" title="sdl2.ext.particles - A simple particle system"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdl2ext_gui.html" title="User interface elements"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySDL2 0.9.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="sdl2ext.html" >sdl2.ext - Python extensions for SDL2</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

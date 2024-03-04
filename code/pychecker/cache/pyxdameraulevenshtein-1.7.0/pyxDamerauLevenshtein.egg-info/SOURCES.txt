@@ -1,0 +1,9 @@
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+pyxDamerauLevenshtein.egg-info/PKG-INFO
+pyxDamerauLevenshtein.egg-info/SOURCES.txt
+pyxDamerauLevenshtein.egg-info/dependency_links.txt
+pyxDamerauLevenshtein.egg-info/top_level.txt
+pyxdameraulevenshtein/pyxdameraulevenshtein.c

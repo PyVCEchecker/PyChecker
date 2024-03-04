@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_iotevents.egg-info/PKG-INFO
+src/aws_cdk.aws_iotevents.egg-info/SOURCES.txt
+src/aws_cdk.aws_iotevents.egg-info/dependency_links.txt
+src/aws_cdk.aws_iotevents.egg-info/requires.txt
+src/aws_cdk.aws_iotevents.egg-info/top_level.txt
+src/aws_cdk/aws_iotevents/__init__.py
+src/aws_cdk/aws_iotevents/py.typed
+src/aws_cdk/aws_iotevents/_jsii/__init__.py
+src/aws_cdk/aws_iotevents/_jsii/aws-iotevents@1.129.0.jsii.tgz

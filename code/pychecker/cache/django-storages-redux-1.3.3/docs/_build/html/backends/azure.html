@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Azure Storage &mdash; django-storages 1.6.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.6.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-storages 1.6.2 documentation" href="../index.html" />
+    <link rel="next" title="DropBox" href="dropbox.html" />
+    <link rel="prev" title="Apache Libcloud" href="apache_libcloud.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="dropbox.html" title="DropBox"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="apache_libcloud.html" title="Apache Libcloud"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="azure-storage">
+<h1>Azure Storage<a class="headerlink" href="#azure-storage" title="Permalink to this headline">¶</a></h1>
+<p>A custom storage system for Django using Windows Azure Storage backend.</p>
+<p>Before you start configuration, you will need to install the Azure SDK for Python.</p>
+<p>Install the package:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install azure
+</pre></div>
+</div>
+<p>Add to your requirements file:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip freeze &gt; requirements.txt
+</pre></div>
+</div>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<p>To use <cite>AzureStorage</cite> set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_FILE_STORAGE</span> <span class="o">=</span> <span class="s">&#39;storages.backends.azure_storage.AzureStorage&#39;</span>
+</pre></div>
+</div>
+<p>The following settings are available:</p>
+<p><tt class="docutils literal"><span class="pre">AZURE_ACCOUNT_NAME</span></tt></p>
+<blockquote>
+<div><p>This setting is the Windows Azure Storage Account name, which in many cases is also the first part of the url for instance: <a class="reference external" href="http://azure_account_name.blob.core.windows.net/">http://azure_account_name.blob.core.windows.net/</a> would mean:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">AZURE_ACCOUNT_NAME</span> <span class="o">=</span> <span class="s">&quot;azure_account_name&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">AZURE_ACCOUNT_KEY</span></tt></p>
+<blockquote>
+<div>This is the private key that gives your Django app access to your Windows Azure Account.</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">AZURE_CONTAINER</span></tt></p>
+<blockquote>
+<div>This is where the files uploaded through your Django app will be uploaded.
+The container must be already created as the storage system will not attempt to create it.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Azure Storage</a><ul>
+<li><a class="reference internal" href="#settings">Settings</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="apache_libcloud.html"
+                        title="previous chapter">Apache Libcloud</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dropbox.html"
+                        title="next chapter">DropBox</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/backends/azure.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="dropbox.html" title="DropBox"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="apache_libcloud.html" title="Apache Libcloud"
+             >previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2017, David Larlet, et. al..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

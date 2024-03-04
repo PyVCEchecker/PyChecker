@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyngrok.exception &#8212; pyngrok 5.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+
+    <meta name="description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:title" content="pyngrok - A Python wrapper for ngrok">
+    <meta name="twitter:card"
+          value="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API.">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="pyngrok - A Python wrapper for ngrok"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://pyngrok.readthedocs.io/en/latest/_modules/pyngrok/exception.html"/>
+    <meta property="og:image" content="https://pyngrok.readthedocs.io/en/latest/_images/logo.png"/>
+    <meta property="og:description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <meta name="yandex-verification" content="ac8f18b56add6591"/>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43184722-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-43184722-4');
+    </script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pyngrok.exception</h1><div class="highlight"><pre>
+<span></span><span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Alex Laird&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2020, Alex Laird&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;4.1.0&quot;</span>
+
+
+<div class="viewcode-block" id="PyngrokError"><a class="viewcode-back" href="../../api.html#pyngrok.exception.PyngrokError">[docs]</a><span class="k">class</span> <span class="nc">PyngrokError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when a general ``pyngrok`` error has occurred.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="PyngrokSecurityError"><a class="viewcode-back" href="../../api.html#pyngrok.exception.PyngrokSecurityError">[docs]</a><span class="k">class</span> <span class="nc">PyngrokSecurityError</span><span class="p">(</span><span class="n">PyngrokError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when a ``pyngrok`` security error has occurred.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="PyngrokNgrokInstallError"><a class="viewcode-back" href="../../api.html#pyngrok.exception.PyngrokNgrokInstallError">[docs]</a><span class="k">class</span> <span class="nc">PyngrokNgrokInstallError</span><span class="p">(</span><span class="n">PyngrokError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when an error has occurred while downloading and installing the ``ngrok`` binary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="PyngrokNgrokError"><a class="viewcode-back" href="../../api.html#pyngrok.exception.PyngrokNgrokError">[docs]</a><span class="k">class</span> <span class="nc">PyngrokNgrokError</span><span class="p">(</span><span class="n">PyngrokError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when an error occurs interacting directly with the ``ngrok`` binary.</span>
+
+<span class="sd">    :var error: A description of the error being thrown.</span>
+<span class="sd">    :vartype error: str</span>
+<span class="sd">    :var ngrok_logs: The ``ngrok`` logs, which may be useful for debugging the error.</span>
+<span class="sd">    :vartype ngrok_logs: list[NgrokLog]</span>
+<span class="sd">    :var ngrok_error: The error that caused the ``ngrok`` process to fail.</span>
+<span class="sd">    :vartype ngrok_error: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">ngrok_logs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ngrok_error</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PyngrokNgrokError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ngrok_logs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ngrok_logs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngrok_logs</span> <span class="o">=</span> <span class="n">ngrok_logs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngrok_error</span> <span class="o">=</span> <span class="n">ngrok_error</span></div>
+
+
+<div class="viewcode-block" id="PyngrokNgrokHTTPError"><a class="viewcode-back" href="../../api.html#pyngrok.exception.PyngrokNgrokHTTPError">[docs]</a><span class="k">class</span> <span class="nc">PyngrokNgrokHTTPError</span><span class="p">(</span><span class="n">PyngrokNgrokError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when an error occurs making a request to the ``ngrok`` web interface. The ``body``</span>
+<span class="sd">    contains the error response received from ``ngrok``.</span>
+
+<span class="sd">    :var error: A description of the error being thrown.</span>
+<span class="sd">    :vartype error: str</span>
+<span class="sd">    :var url: The request URL that failed.</span>
+<span class="sd">    :vartype url: str</span>
+<span class="sd">    :var status_code: The response status code from ``ngrok``.</span>
+<span class="sd">    :vartype status_code: int</span>
+<span class="sd">    :var message: The response message from ``ngrok``.</span>
+<span class="sd">    :vartype message: str</span>
+<span class="sd">    :var headers: The request headers sent to ``ngrok``.</span>
+<span class="sd">    :vartype headers: dict[str, str]</span>
+<span class="sd">    :var body: The response body from ``ngrok``.</span>
+<span class="sd">    :vartype body: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">status_code</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PyngrokNgrokHTTPError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">status_code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">body</span></div>
+
+
+<div class="viewcode-block" id="PyngrokNgrokURLError"><a class="viewcode-back" href="../../api.html#pyngrok.exception.PyngrokNgrokURLError">[docs]</a><span class="k">class</span> <span class="nc">PyngrokNgrokURLError</span><span class="p">(</span><span class="n">PyngrokNgrokError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when an error occurs when trying to initiate an API request.</span>
+
+<span class="sd">    :var error: A description of the error being thrown.</span>
+<span class="sd">    :vartype error: str</span>
+<span class="sd">    :var reason: The reason for the URL error.</span>
+<span class="sd">    :vartype reason: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PyngrokNgrokURLError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reason</span> <span class="o">=</span> <span class="n">reason</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Getting Around</h3>
+<ul>
+    <li><a class="reference internal" href="../../index.html">Basic Usage</a>
+        <ul>
+            <li><a class="reference internal" href="../../index.html#installation">Installation</a>
+            </li>
+            <li><a class="reference internal" href="../../index.html#open-a-tunnel">Open a
+                Tunnel</a></li>
+            <li><a class="reference internal"
+                   href="../../index.html#configuration">Configuration</a></li>
+            <li><a class="reference internal" href="../../index.html#event-logs">Event Logs</a></li>
+            <li><a class="reference internal" href="../../index.html#command-line-usage">Command
+                Line Usage</a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="reference internal" href="../../index.html#dive-deeper">Dive Deeper</a>
+        <ul>
+            <li><a class="reference internal" href="../../api.html">API Documentation</a></li>
+            <li><a class="reference internal" href="../../integrations.html">Integration Examples</a></li>
+            <li><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/blob/main/CHANGELOG.md">Changelog</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/issues">Issues</a></li>
+            <li><a class="reference internal" href="../../index.html#contributing">Contributing</a>
+            </li>
+        </ul>
+    </li>
+</ul><h3>Useful Links</h3>
+<ul>
+    <li><a href="https://ngrok.com/docs"><code class="code docutils literal notranslate"><span class="pre">ngrok</span></code>
+        Documentation</a></li>
+    <li><a href="https://github.com/alexdlaird/pyngrok"><code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code> on GitHub</a></li>
+    <li><a href="https://pypi.org/project/pyngrok/"><code class="code docutils literal notranslate"><span class="pre">pyngrok</span></code>
+        on PyPI</a></li>
+    <li><a href="https://www.paypal.me/alexdlaird">Sponsor <code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code></a></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    
+    <div class="footer">
+      &copy;2020, Alex Laird.
+      
+    </div>
+
+    
+    <a href="https://github.com/alexdlaird/pyngrok" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <div class="footer">This page uses <a href="https://analytics.google.com/">
+        Google Analytics</a> to collect statistics. You can disable it by blocking
+        the JavaScript coming from www.google-analytics.com.
+        <script type="text/javascript">
+            (function () {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ?
+                    'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.setAttribute('async', 'true');
+                document.documentElement.firstChild.appendChild(ga);
+            })();
+        </script>
+    </div>
+
+  </body>
+</html>

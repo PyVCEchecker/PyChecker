@@ -1,0 +1,31 @@
+include AUTHORS
+include CHANGELOG
+include COPYRIGHT
+include README.rst
+include REFERENCES
+include LICENSE
+include Makefile
+include MANIFEST.in
+include release.py
+include setup.cfg
+include setup.py
+
+recursive-include docs/source *.rst *.py
+
+include netaddr/__init__.py
+include netaddr/core.py
+include netaddr/compat.py
+include netaddr/fbsocket.py
+
+recursive-include netaddr/contrib *.py
+recursive-include netaddr/eui *.py *.txt *.idx
+recursive-include netaddr/ip *.py *.xml
+recursive-include netaddr/strategy *.py
+
+include netaddr/tests/__init__.py
+recursive-include netaddr/tests/core *.py
+recursive-include netaddr/tests/eui *.py *.txt
+recursive-include netaddr/tests/ip *.py
+recursive-include netaddr/tests/strategy *.py
+
+include netaddr/tools/netaddr

@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Logging Out &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Projects Using Flask-Dance" href="examples.html" />
+    <link rel="prev" title="Multi-User Setups" href="multi-user.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Projects Using Flask-Dance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="multi-user.html" title="Multi-User Setups"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Logging Out</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="logging-out">
+<h1>Logging Out<a class="headerlink" href="#logging-out" title="Permalink to this headline">¶</a></h1>
+<p>Many websites use OAuth as an authentication system (see <a class="reference internal" href="multi-user.html"><span class="doc">Multi-User Setups</span></a>
+for more information). Although this can work quite well, it gets more
+complicated when you want to allow the user to log out of your website.
+For starters, we need to understand what “logging out” even <em>means</em>.</p>
+<section id="local-accounts-vs-provider-accounts">
+<h2>Local Accounts vs Provider Accounts<a class="headerlink" href="#local-accounts-vs-provider-accounts" title="Permalink to this headline">¶</a></h2>
+<p>When you use OAuth as an authentication system, your users still have
+local accounts on your system. OAuth allows your users to log in
+with a provider (such as Google or Facebook), and use their provider
+login to authenticate to your local account. Essentially, the
+exchange looks something like this, if we assume that “CustomSite”
+is the name of your website, and it’s using the Google provider:</p>
+<ol class="arabic simple">
+<li><p>User: Hey CustomSite, I’m user ShinyStar99. Let me in.</p></li>
+<li><p>CustomSite: Sorry user, anyone could claim that and I don’t trust you.
+How do I know you’re telling the truth?</p></li>
+<li><p>User: My friend Google can back me up. You trust Google, right?</p></li>
+<li><p>CustomSite: Yes, I trust Google. Hey Google, who is this user?</p></li>
+<li><p>Google: Hold on, I need to ask my user if I have permission to
+give you any information at all. Hey User, CustomSite wants
+to know who you are. Do you want me to tell CustomSite some
+basic information about you?</p></li>
+<li><p>User: Yes, please.</p></li>
+<li><p>Google: Alright CustomSite, I can tell you that on <em>my</em> website,
+this user has the ID 987654.</p></li>
+<li><p>CustomSite: Alright, let me check my database.
+Google user ID 987654 matches up with one of my local users,
+with ID 12345. And it looks like that local user is ShinyStar99!</p></li>
+<li><p>User: You see? I told you so!</p></li>
+<li><p>CustomSite: Come in, ShinyStar99. Who’s next?</p></li>
+</ol>
+<p>In this exchange, you can see that there are two <em>different</em> user accounts
+involved: one user account on Google, and one user account on CustomSite.
+They have different user IDs, and could contain different sets of information,
+even though they both represent the same user.</p>
+<p>So if you want to cause a user to log out, what exactly do you mean?
+We’ll go step-by-step through the different options.</p>
+</section>
+<section id="log-out-local-account">
+<h2>Log Out Local Account<a class="headerlink" href="#log-out-local-account" title="Permalink to this headline">¶</a></h2>
+<p>If you want to cause a user to log out of their local user account,
+check the documentation for whatever system you’re using to manage
+local accounts. If you’re using <a class="reference external" href="https://flask-login.readthedocs.io/">Flask-Login</a> (or <a class="reference external" href="https://pythonhosted.org/Flask-Security/">Flask-Security</a>,
+which is built on top of Flask-Login), you can import and call the
+<a class="reference external" href="https://flask-login.readthedocs.io/en/latest/index.html#flask_login.logout_user" title="(in Flask-Login v0.4.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">flask_login.logout_user()</span></code></a> function, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">logout_user</span>
+<span class="c1"># other imports as necessary</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+<span class="hll">    <span class="n">logout_user</span><span class="p">()</span>
+</span>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">somewhere</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After you do this, your application will treat the user like any other
+anonymous user. However, logging out your user from their local account
+doesn’t do anything about the provider account. As a result, if the
+user tries to log in again after you’ve logged them out this way,
+the conversation will look like this:</p>
+<ol class="arabic simple">
+<li><p>User: Hey CustomSite, I’m user ShinyStar99. Let me in.
+Ask Google if you don’t believe me.</p></li>
+<li><p>CustomSite: Hey Google, who is this user?</p></li>
+<li><p>Google: My user already gave me permission to tell you some
+basic information. On <em>my</em> website, this user has the ID 987654.</p></li>
+<li><p>CustomSite: Oh right, it’s ShinyStar99 again. Go ahead.</p></li>
+</ol>
+<p>In most cases, this is what you want. However, sometimes you want to
+really reset things back to the start, as though the user had never
+granted consent to share information in the first place.</p>
+</section>
+<section id="revoking-access-with-the-provider">
+<h2>Revoking Access with the Provider<a class="headerlink" href="#revoking-access-with-the-provider" title="Permalink to this headline">¶</a></h2>
+<p>Undoing the user’s permission to share information from the provider
+to your custom site is called “revoking access”. Unfortunately,
+every provider has a different way of doing this, so you’ll need
+to check the OAuth documentation provided by your OAuth provider.</p>
+<p>When you are granted access by a user, the provider will give your
+application a “token” that is used for making subsequent API requests.
+In order to revoke access for a user, you may need to include this
+token as an argument, so the provider knows which token to revoke.
+You can get this information by checking the <code class="docutils literal notranslate"><span class="pre">token</span></code> property of the
+Flask-Dance blueprint.</p>
+<p>We’ll use Google as an example. First, check
+<a class="reference external" href="https://developers.google.com/identity/protocols/OAuth2WebServer#tokenrevoke">Google’s documentation for how to revoke access via OAuth2</a>.
+Notice that you do indeed need to provide the token in order to revoke it.</p>
+<p>Here’s some sample code that works with Google:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="kn">from</span> <span class="nn">flask_dance.contrib.google</span> <span class="kn">import</span> <span class="n">make_google_blueprint</span><span class="p">,</span> <span class="n">google</span>
+<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">logout_user</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">blueprint</span> <span class="o">=</span> <span class="n">make_google_blueprint</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">token</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]</span>
+<span class="hll">    <span class="n">resp</span> <span class="o">=</span> <span class="n">google</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span><span class="hll">        <span class="s2">&quot;https://accounts.google.com/o/oauth2/revoke&quot;</span><span class="p">,</span>
+</span><span class="hll">        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">token</span><span class="p">},</span>
+</span><span class="hll">        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/x-www-form-urlencoded&quot;</span><span class="p">}</span>
+</span><span class="hll">    <span class="p">)</span>
+</span>    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">ok</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">logout_user</span><span class="p">()</span>        <span class="c1"># Delete Flask-Login&#39;s session cookie</span>
+    <span class="k">del</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">token</span>  <span class="c1"># Delete OAuth token from storage</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">somewhere</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After the user uses this method to log out, Google will not remember that they
+granted consent to share information with your website.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In this sample code, we are using an <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html#assert" title="(in Python v3.9)"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">assert</span></code></a> statement.
+This works fine for debugging, but not for production. Be sure to modify
+this code to appropriately handle cases where there is an API failure
+when trying to revoke the token.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this code, we already have a reference to the <code class="docutils literal notranslate"><span class="pre">blueprint</span></code> object,
+so we could grab the token easily. But what if you don’t have access
+to that object? Instead, you can use the <a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.current_app" title="(in Flask v2.1.x)"><code class="xref py py-data docutils literal notranslate"><span class="pre">flask.current_app</span></code></a> proxy
+to pull out the blueprint object you need. For example, instead of
+this line:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">token</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>You could use this line instead:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">blueprints</span><span class="p">[</span><span class="s2">&quot;google&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">token</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="log-out-provider-account">
+<h2>Log Out Provider Account<a class="headerlink" href="#log-out-provider-account" title="Permalink to this headline">¶</a></h2>
+<p>You can log out the user from their local account, and you can revoke access
+with the provider. But what about logging the user out from their provider
+account? Can you force the user to type their password into Google again
+if they want to log in to your website in the future?</p>
+<p>The short answer is: no, you can’t. You can’t control how a user interacts
+with other websites, except for in the ways that those other websites
+specifically allow you to. And since this could potentially be used as
+part of a security exploit, websites will generally <em>not</em> allow you
+to force users to log out.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Logging Out</a><ul>
+<li><a class="reference internal" href="#local-accounts-vs-provider-accounts">Local Accounts vs Provider Accounts</a></li>
+<li><a class="reference internal" href="#log-out-local-account">Log Out Local Account</a></li>
+<li><a class="reference internal" href="#revoking-access-with-the-provider">Revoking Access with the Provider</a></li>
+<li><a class="reference internal" href="#log-out-provider-account">Log Out Provider Account</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="multi-user.html" title="previous chapter">Multi-User Setups</a></li>
+      <li>Next: <a href="examples.html" title="next chapter">Projects Using Flask-Dance</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/logout.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

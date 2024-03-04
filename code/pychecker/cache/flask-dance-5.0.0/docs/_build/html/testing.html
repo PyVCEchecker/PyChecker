@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Testing Apps That Use Flask-Dance &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developer Interface" href="api.html" />
+    <link rel="prev" title="Proxies and HTTPS" href="proxies.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Developer Interface"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="proxies.html" title="Proxies and HTTPS"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Testing Apps That Use Flask-Dance</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="testing-apps-that-use-flask-dance">
+<h1>Testing Apps That Use Flask-Dance<a class="headerlink" href="#testing-apps-that-use-flask-dance" title="Permalink to this headline">¶</a></h1>
+<p>Automated tests are a great way to keep your Flask app stable
+and working smoothly. The Flask documentation has
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/testing/" title="(in Flask v2.1.x)"><span class="xref std std-doc">some great information on how to write automated tests
+for Flask apps</span></a>.</p>
+<p>However, Flask-Dance presents some challenges for writing tests.
+What happens when you have a view function that requires OAuth
+authorization? How do you handle cases where the user has a valid
+OAuth token, an expired token, or no token at all?
+Fortunately, we’ve got you covered.</p>
+<section id="mock-storages">
+<h2>Mock Storages<a class="headerlink" href="#mock-storages" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to write tests with Flask-Dance is to use a
+mock token storage. This allows you to easily control
+whether Flask-Dance believes the current user is authorized
+with the OAuth provider or not. Flask-Dance provides two
+mock token storages:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="flask_dance.consumer.storage.NullStorage">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.storage.</span></span><span class="sig-name descname"><span class="pre">NullStorage</span></span><a class="reference internal" href="_modules/flask_dance/consumer/storage.html#NullStorage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.storage.NullStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This mock storage will never store OAuth tokens.
+If you try to retrieve a token from this storage, you will always
+get <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flask_dance.consumer.storage.MemoryStorage">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.storage.</span></span><span class="sig-name descname"><span class="pre">MemoryStorage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_dance/consumer/storage.html#MemoryStorage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_dance.consumer.storage.MemoryStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This mock storage stores an OAuth token in memory and so that it can
+be retrieved later. Since the token is not persisted in any way,
+this is mostly useful for writing automated tests.</p>
+<p>The initializer accepts a <code class="docutils literal notranslate"><span class="pre">token</span></code> argument, for setting the
+initial value of the token.</p>
+</dd></dl>
+
+<p>Let’s say you are testing the following code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
+<span class="kn">from</span> <span class="nn">flask_dance.contrib.github</span> <span class="kn">import</span> <span class="n">make_github_blueprint</span><span class="p">,</span> <span class="n">github</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">github_bp</span> <span class="o">=</span> <span class="n">make_github_blueprint</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">github_bp</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">github</span><span class="o">.</span><span class="n">authorized</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;github.login&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s2">&quot;You are authorized&quot;</span>
+</pre></div>
+</div>
+<p>You want to write tests to cover two cases: what happens when the user
+is authorized with the OAuth provider, and what happens when they are not.
+Here’s how you could do that with <a class="reference external" href="https://docs.pytest.org/">pytest</a> and the <a class="reference internal" href="#flask_dance.consumer.storage.MemoryStorage" title="flask_dance.consumer.storage.MemoryStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryStorage</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_dance.consumer.storage</span> <span class="kn">import</span> <span class="n">MemoryStorage</span>
+<span class="kn">from</span> <span class="nn">myapp</span> <span class="kn">import</span> <span class="n">app</span><span class="p">,</span> <span class="n">github_bp</span>
+
+<span class="k">def</span> <span class="nf">test_index_unauthorized</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
+    <span class="n">storage</span> <span class="o">=</span> <span class="n">MemoryStorage</span><span class="p">()</span>
+<span class="hll">    <span class="n">monkeypatch</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="n">github_bp</span><span class="p">,</span> <span class="s2">&quot;storage&quot;</span><span class="p">,</span> <span class="n">storage</span><span class="p">)</span>
+</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">test_client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">302</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Location&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;https://example.com/login/github&quot;</span>
+
+<span class="k">def</span> <span class="nf">test_index_authorized</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
+    <span class="n">storage</span> <span class="o">=</span> <span class="n">MemoryStorage</span><span class="p">({</span><span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;fake-token&quot;</span><span class="p">})</span>
+<span class="hll">    <span class="n">monkeypatch</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="n">github_bp</span><span class="p">,</span> <span class="s2">&quot;storage&quot;</span><span class="p">,</span> <span class="n">storage</span><span class="p">)</span>
+</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">test_client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">as_text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;You are authorized&quot;</span>
+</pre></div>
+</div>
+<p>In this example, we’re using the
+<a class="reference external" href="https://docs.pytest.org/en/latest/how-to/monkeypatch.html">monkeypatch fixture</a>
+to set a mock storage on the Flask-Dance blueprint. This fixture will
+ensure that the original storage is put back on the blueprint after the
+test is finished, so that the test doesn’t change the code being tested.
+Then, we create a test client and access the <code class="docutils literal notranslate"><span class="pre">index</span></code> view.
+The mock storage will control whether <code class="docutils literal notranslate"><span class="pre">github.authorized</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>
+or <code class="docutils literal notranslate"><span class="pre">False</span></code>, and the rest of the test asserts that the result is what
+we expect.</p>
+</section>
+<section id="mock-api-responses">
+<h2>Mock API Responses<a class="headerlink" href="#mock-api-responses" title="Permalink to this headline">¶</a></h2>
+<p>Once you’ve gotten past the question of whether the current user is
+authorized or not, you still have to account for any API calls that
+your view makes. It’s usually a bad idea to make real API calls in an
+automated test: not only does it make your tests run significantly
+more slowly, but external factors like rate limits can affect whether
+your tests pass or fail.</p>
+<p>There are several other libraries that you can use to mock API responses,
+but I recommend <a class="reference external" href="https://github.com/betamaxpy/betamax">Betamax</a>. It’s powerful, flexible, and it’s designed
+to work with <a class="reference external" href="https://requests.kennethreitz.org/">Requests</a>, the HTTP library that Flask-Dance is built on.
+Betamax is also created and maintained by one of the primary maintainers
+of the Requests library, <a class="reference external" href="https://github.com/sigmavirus24/">&#64;sigmavirus24</a>.</p>
+<p>Let’s say your testing the same code as before, but now the <code class="docutils literal notranslate"><span class="pre">index</span></code>
+view looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">github</span><span class="o">.</span><span class="n">authorized</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;github.login&quot;</span><span class="p">))</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">github</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/user&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;You are @</span><span class="si">{login}</span><span class="s2"> on GitHub&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">login</span><span class="o">=</span><span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;login&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Here’s how you could test this view using Betamax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer.storage</span> <span class="kn">import</span> <span class="n">MemoryStorage</span>
+<span class="kn">from</span> <span class="nn">flask_dance.contrib.github</span> <span class="kn">import</span> <span class="n">github</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">betamax</span> <span class="kn">import</span> <span class="n">Betamax</span>
+<span class="kn">from</span> <span class="nn">myapp</span> <span class="kn">import</span> <span class="n">app</span> <span class="k">as</span> <span class="n">_app</span>
+<span class="kn">from</span> <span class="nn">myapp</span> <span class="kn">import</span> <span class="n">github_bp</span>
+
+<span class="k">with</span> <span class="n">Betamax</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span> <span class="k">as</span> <span class="n">config</span><span class="p">:</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">cassette_library_dir</span> <span class="o">=</span> <span class="s1">&#39;cassettes&#39;</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">app</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">_app</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">betamax_github</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+
+    <span class="nd">@app</span><span class="o">.</span><span class="n">before_request</span>
+    <span class="k">def</span> <span class="nf">wrap_github_with_betamax</span><span class="p">():</span>
+        <span class="n">recorder</span> <span class="o">=</span> <span class="n">Betamax</span><span class="p">(</span><span class="n">github</span><span class="p">)</span>
+        <span class="n">recorder</span><span class="o">.</span><span class="n">use_cassette</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">recorder</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="nd">@app</span><span class="o">.</span><span class="n">after_request</span>
+        <span class="k">def</span> <span class="nf">unwrap</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+            <span class="n">recorder</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">response</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="n">addfinalizer</span><span class="p">(</span>
+            <span class="k">lambda</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">after_request_funcs</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">unwrap</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">request</span><span class="o">.</span><span class="n">addfinalizer</span><span class="p">(</span>
+        <span class="k">lambda</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">before_request_funcs</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">wrap_github_with_betamax</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">usefixtures</span><span class="p">(</span><span class="s2">&quot;betamax_github&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_index_authorized</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">):</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GITHUB_OAUTH_ACCESS_TOKEN&quot;</span><span class="p">,</span> <span class="s2">&quot;fake-token&quot;</span><span class="p">)</span>
+    <span class="n">storage</span> <span class="o">=</span> <span class="n">MemoryStorage</span><span class="p">({</span><span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="n">access_token</span><span class="p">})</span>
+    <span class="n">monkeypatch</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="n">github_bp</span><span class="p">,</span> <span class="s2">&quot;storage&quot;</span><span class="p">,</span> <span class="n">storage</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">test_client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">as_text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;You are @singingwolfboy on GitHub&quot;</span>
+</pre></div>
+</div>
+<p>In this example, we first
+<a class="reference external" href="https://betamax.readthedocs.io/en/latest/configuring.html" title="(in Betamax v0.8.2)"><span class="xref std std-doc">configure Betamax globally</span></a>
+so that it stores cassettes (recorded HTTP interactions) in the <code class="docutils literal notranslate"><span class="pre">cassettes</span></code>
+directory. Betamax expects you to commit these cassettes to your repository,
+so that if the HTTP interactions change, that will show up in code review.</p>
+<p>Next, we define a utility function that will wrap Betamax around the <code class="docutils literal notranslate"><span class="pre">github</span></code>
+<a class="reference external" href="https://requests.kennethreitz.org/en/latest/api/#requests.Session" title="(in Requests v2.25.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code></a> object at the start of the incoming HTTP request,
+and unwrap it afterwards.
+This allows Betamax to record and intercept HTTP requests
+during the test. Note that we also use <code class="docutils literal notranslate"><span class="pre">request.addfinalizer</span></code> to remove
+these “before_request” and “after_request” functions, so that they don’t
+interfere with other tests. If you are recreating your <code class="docutils literal notranslate"><span class="pre">app</span></code> object
+from scratch each time using
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/patterns/appfactories/" title="(in Flask v2.1.x)"><span class="xref std std-doc">the application factory pattern</span></a>,
+you don’t need to include these <code class="docutils literal notranslate"><span class="pre">request.addfinalizer</span></code> lines.</p>
+<p>In the actual test, we check for the <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_OAUTH_ACCESS_TOKEN</span></code>
+environment variable. When recording a cassette with Betamax, it will
+send real HTTP requests to the OAuth provider, so you’ll need to include
+a real OAuth access token if you expect the API call to succeed.
+However, once the cassette has been recorded, you can re-run the tests
+without setting this environment variable.</p>
+<p>Also notice that you can (and should!) make assertions in your test that
+expect a particular API response. In this test, I assert that the current
+user is named <code class="docutils literal notranslate"><span class="pre">&#64;singingwolfboy</span></code>. I can do that, because when I recorded
+the cassette, that was the GitHub user that I used. When the cassette is
+replayed in the future, the API response will always be the same, so
+I can write my assertions expecting that.</p>
+</section>
+<section id="module-flask_dance.fixtures.pytest">
+<span id="provided-pytest-fixture"></span><h2>Provided Pytest Fixture<a class="headerlink" href="#module-flask_dance.fixtures.pytest" title="Permalink to this headline">¶</a></h2>
+<p>Flask-Dance provides a handy <a class="reference external" href="https://docs.pytest.org/">Pytest</a> fixture named
+<code class="docutils literal notranslate"><span class="pre">betamax_record_flask_dance</span></code> that wraps Flask-Dance
+sessions with <a class="reference external" href="https://github.com/betamaxpy/betamax">Betamax</a> to record and replay HTTP requests.
+In order to use this fixture, you must install Betamax in your testing
+environment. You must also define two other Pytest fixtures:
+<code class="docutils literal notranslate"><span class="pre">app</span></code> and <code class="docutils literal notranslate"><span class="pre">flask_dance_sessions</span></code>. The <code class="docutils literal notranslate"><span class="pre">app</span></code> fixture must
+return the Flask app that is being tested, and the
+<code class="docutils literal notranslate"><span class="pre">flask_dance_sessions</span></code> fixture must return the Flask-Dance
+session or sessions that should be wrapped using Betamax.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_dance.contrib.github</span> <span class="kn">import</span> <span class="n">github</span>
+<span class="kn">from</span> <span class="nn">myapp</span> <span class="kn">import</span> <span class="n">app</span> <span class="k">as</span> <span class="n">_app</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">app</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">_app</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">flask_dance_sessions</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">github</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">flask_dance_sessions</span></code> fixture can return either a single
+session, or a list/tuple of sessions.</p>
+<p>To use this fixture, it’s generally easiest to decorate your test
+with <a class="reference external" href="https://docs.pytest.org/en/latest/reference/reference.html#pytest.mark.usefixtures" title="(in pytest v6.3.0.dev333+g045ad5ac2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.mark.usefixtures()</span></code></a>, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">usefixtures</span><span class="p">(</span><span class="s2">&quot;betamax_record_flask_dance&quot;</span><span class="p">)</span>
+</span><span class="k">def</span> <span class="nf">test_home_page</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">test_client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing Apps That Use Flask-Dance</a><ul>
+<li><a class="reference internal" href="#mock-storages">Mock Storages</a></li>
+<li><a class="reference internal" href="#mock-api-responses">Mock API Responses</a></li>
+<li><a class="reference internal" href="#module-flask_dance.fixtures.pytest">Provided Pytest Fixture</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="proxies.html" title="previous chapter">Proxies and HTTPS</a></li>
+      <li>Next: <a href="api.html" title="next chapter">Developer Interface</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/testing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

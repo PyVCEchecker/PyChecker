@@ -1,0 +1,13 @@
+AUTHORS.rst
+LICENSE
+MANIFEST.in
+README.rst
+pytest_pycharm.py
+setup.py
+pytest_pycharm.egg-info/PKG-INFO
+pytest_pycharm.egg-info/SOURCES.txt
+pytest_pycharm.egg-info/dependency_links.txt
+pytest_pycharm.egg-info/entry_points.txt
+pytest_pycharm.egg-info/not-zip-safe
+pytest_pycharm.egg-info/requires.txt
+pytest_pycharm.egg-info/top_level.txt

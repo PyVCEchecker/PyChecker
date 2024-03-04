@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+tasklib/__init__.py
+tasklib/backends.py
+tasklib/filters.py
+tasklib/lazy.py
+tasklib/serializing.py
+tasklib/task.py
+tasklib/tests.py
+tasklib.egg-info/PKG-INFO
+tasklib.egg-info/SOURCES.txt
+tasklib.egg-info/dependency_links.txt
+tasklib.egg-info/requires.txt
+tasklib.egg-info/top_level.txt

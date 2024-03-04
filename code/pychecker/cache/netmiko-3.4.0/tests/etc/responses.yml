@@ -1,0 +1,282 @@
+---
+
+cisco3:
+  base_prompt: cisco3
+  router_prompt : cisco3>
+  enable_prompt: cisco3#
+  interface_ip: 10.220.88.22
+  interface_name: GigabitEthernet0/0/0
+  version_banner: "Cisco IOS-XE software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+  scp_remote_space: 20000000
+  save_config: 'OK'
+  save_config_response: ''
+
+cisco881:
+  base_prompt: cisco1
+  router_prompt : cisco1>
+  enable_prompt: cisco1#
+  interface_ip: 10.220.88.20
+  interface_name: FastEthernet2
+  version_banner: "Cisco IOS Software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+  scp_remote_space: 30000000
+  save_config: 'OK'
+  save_config_response: ''
+
+cisco881_fast:
+  base_prompt: cisco1 
+  router_prompt : cisco1>
+  enable_prompt: cisco1#
+  interface_ip: 10.220.88.20
+  interface_name: FastEthernet2
+  version_banner: "Cisco IOS Software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+  scp_remote_space: 30000000
+  fast_cli: True
+  save_config: 'OK'
+  save_config_response: ''
+
+cisco881_slog:
+  base_prompt: cisco1 
+  router_prompt : cisco1>
+  enable_prompt: cisco1#
+  interface_ip: 10.220.88.20
+  interface_name: FastEthernet2
+  version_banner: "Cisco IOS Software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+  scp_remote_space: 30000000
+  session_log: "SLOG/cisco881_slog.log"
+  session_log_wr: "SLOG/cisco881_slog_wr.log"
+  session_log_append: "SLOG/cisco881_slog_append.log"
+  compare_log: "SLOG/cisco881_slog_compare.log"
+  compare_log_wr: "SLOG/cisco881_slog_wr_compare.log"
+  compare_log_append: "SLOG/cisco881_slog_append_compare.log"
+  save_config: 'OK'
+  save_config_response: ''
+
+cisco881_telnet:
+  base_prompt: cisco1 
+  router_prompt : cisco1>
+  enable_prompt: cisco1#
+  interface_ip: 10.220.88.20
+  interface_name: FastEthernet2
+  version_banner: "Cisco IOS Software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+  save_config: 'OK'
+  save_config_response: ''
+
+cisco881_key:
+  base_prompt: cisco1 
+  router_prompt : cisco1>
+  enable_prompt: cisco1#
+  interface_ip: 10.220.88.20
+  interface_name: FastEthernet2
+  version_banner: "Cisco IOS Software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+  scp_remote_space: 30000000
+  save_config: 'OK'
+  save_config_response: ''
+
+cisco881_ssh_config:
+  base_prompt: cisco1 
+  router_prompt : cisco1>
+  enable_prompt: cisco1#
+  interface_ip: 10.220.88.20
+  interface_name: FastEthernet2
+  version_banner: "Cisco IOS Software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+  save_config: 'OK'
+  save_config_response: ''
+
+cisco881_ssh_proxyjump:
+  base_prompt: cisco1 
+  router_prompt : cisco1>
+  enable_prompt: cisco1#
+  interface_ip: 10.220.88.20
+  interface_name: FastEthernet2
+  version_banner: "Cisco IOS Software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+  save_config: 'OK'
+  save_config_response: ''
+
+cisco_xr_azure:
+  base_prompt: RP/0/RP0/CPU0:iosxr3
+  router_prompt : RP/0/RP0/CPU0:iosxr3#
+  enable_prompt: RP/0/RP0/CPU0:iosxr3#
+  interface_ip: 10.0.2.15
+  version_banner: "Cisco IOS XR Software"
+  multiple_line_output: "ssh server v2"
+  commit_comment: 'Unit test on commit with comment'
+  scp_remote_space: 150000000
+
+cisco_xrv:
+  base_prompt: RP/0/0/CPU0:pynet-iosxr1
+  router_prompt : RP/0/0/CPU0:pynet-iosxr1#
+  enable_prompt: RP/0/0/CPU0:pynet-iosxr1#
+  interface_ip: 10.220.88.37
+  interface_name: GigabitEthernet0/0/0/0
+  version_banner: "Cisco IOS XR Software"
+  multiple_line_output: "ssh server v2"
+  commit_comment: 'Unit test on commit with comment'
+  scp_remote_space: 1500000000
+
+cisco_s300:
+  base_prompt: sf-dc-sw1
+  router_prompt : sf-dc-sw1#
+  enable_prompt: sf-dc-sw1#
+  interface_ip: 10.220.90.20
+  interface_name: "vlan 90"
+  version_banner: "SW version"
+  multiple_line_output: "ip default-gateway"
+  file_check_cmd: "logging buffered warnings"
+  save_config: Copy succeeded
+  save_config_response: Y
+
+cisco_asa:
+  base_prompt: twb-dc-fw1
+  router_prompt : twb-dc-fw1>
+  enable_prompt: twb-dc-fw1#
+  interface_ip: 10.220.88.1
+  interface_name: Vlan2
+  version_banner: 'Cisco Adaptive Security Appliance'
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered warnings"
+
+cisco_asa_login:
+  base_prompt: twb-dc-fw1
+  router_prompt : twb-dc-fw1>
+  enable_prompt: twb-dc-fw1#
+  interface_ip: 10.220.88.1
+  interface_name: Vlan2
+  version_banner: 'Cisco Adaptive Security Appliance'
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered warnings"
+
+arista_sw:
+  base_prompt: arista9-napalm
+  router_prompt: arista9-napalm>
+  enable_prompt: arista9-napalm#
+  interface_ip: 10.220.88.43
+  version_banner: "Arista"
+  multiple_line_output: "ztp                        debugging"
+  scp_remote_space: 3000000000
+
+hp_procurve:
+  base_prompt: twb-sf-hpsw1
+  router_prompt: twb-sf-hpsw1>
+  enable_prompt: twb-sf-hpsw1#
+  interface_ip: 10.220.90.21
+  version_banner: 'Image stamp:'
+  multiple_line_output: 'Bottom of Log'
+
+hp_comware:
+  base_prompt: '5900'
+  router_prompt: '<5900>'
+  enable_prompt: '[5900]'
+  interface_ip: 10.20.10.10
+  version_banner: 'HPE Comware Software'
+  multiple_line_output: 'Reboot Cause'
+
+juniper_srx:
+  base_prompt: pyclass@srx1
+  router_prompt: pyclass@srx1>
+  enable_prompt: pyclass@srx1>
+  interface_ip: 10.220.88.39
+  version_banner: 'JUNOS Software Release'
+  multiple_line_output: 'security-zone untrust'
+  cmd_response_init: 'archive size 110k files 3'
+  cmd_response_final: 'archive size 120k files 3'
+  commit_comment: 'Unit test on commit with comment'
+  scp_remote_space: 500000000
+
+juniper_vmx:
+  base_prompt: pyclass@vmx1
+  router_prompt: pyclass@vmx1>
+  enable_prompt: pyclass@vmx1>
+  interface_ip: 172.30.0.221
+  version_banner: "Junos: 18.4R1.8"
+  multiple_line_output: root-authentication
+  cmd_response_init: archive size 110k files 3
+  cmd_response_final: archive size 120k files 3
+  commit_comment: Unit test on commit with comment
+  scp_remote_space: 500000000
+
+linux_srv1:
+  base_prompt: '(pynet36_tools) [gituser@pynetqa ~]'
+  router_prompt: '(pynet36_tools) [gituser@pynetqa ~]'
+  enable_prompt: '(pynet36) [root@pynetqa gituser]#'
+  interface_ip: 127.0.0.1
+  version_banner: 'Linux'
+  multiple_line_output: 'Active Internet connections'
+  scp_remote_space: 500000000
+
+dell_force10:
+  base_prompt: CWD_LAB_S4820T
+  router_prompt : CWD_LAB_S4820T#
+  enable_prompt: CWD_LAB_S4820T#
+  interface_ip: 132.237.161.205
+  interface_name: ManagementEthernet 0/0
+  version_banner: "Dell Real Time Operating System Software"
+  multiple_line_output: "ManagementEthernet 11/0"
+
+nxos1:
+  base_prompt: nxos1
+  router_prompt : nxos1#
+  enable_prompt: nxos1#
+  interface_ip: 10.0.2.15
+  interface_name: Eth2/1
+  version_banner: "Cisco Nexus Operating System"
+  multiple_line_output: "virtual-service"
+  scp_remote_space: 1000000000
+
+ios_xe:
+  base_prompt: cisco1
+  router_prompt : cisco1>
+  enable_prompt: cisco1#
+  interface_ip: 10.0.0.51
+  interface_name: GigabitEthernet1
+  version_banner: "Cisco IOS-XE software"
+  multiple_line_output: "Configuration register is"
+  file_check_cmd: "logging buffered 8880"
+
+sros1-md:
+  base_prompt: A:admin@sros1
+  router_prompt : A:admin@sros1#
+  enable_prompt: A:admin@sros1#
+  interface_ip: 10.217.12.1
+  interface_name: conn1
+  version_banner: "B-20.5.R2"
+  multiple_line_output: "EFM OAM Dying Gasp Rst : Disabled"
+
+sros1_md:
+  base_prompt: A:admin@sros1
+  router_prompt : A:admin@sros1#
+  enable_prompt: A:admin@sros1#
+  interface_ip: 10.217.12.1
+  interface_name: conn1
+  version_banner: "B-20.5.R2"
+  multiple_line_output: "EFM OAM Dying Gasp Rst : Disabled"
+  cmd_response_init: 'location "azure"'
+  cmd_response_final: 'location "San Francisco"'
+  scp_remote_space: 20000000
+
+sros2:
+  base_prompt: A:sros2
+  router_prompt : A:sros2#
+  enable_prompt: A:sros2#
+  interface_ip: 10.217.12.2
+  interface_name: conn1
+  version_banner: "B-20.5.R2"
+  multiple_line_output: "EFM OAM Dying Gasp Rst : Disabled"
+  cmd_response_init: 'location "azure"'
+  cmd_response_final: 'location "San Francisco"'
+  scp_remote_space: 20000000

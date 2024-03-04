@@ -1,0 +1,12 @@
+README.rst
+setup.cfg
+setup.py
+src/codacy/__init__.py
+src/codacy/__main__.py
+src/codacy/reporter.py
+src/codacy_coverage.egg-info/PKG-INFO
+src/codacy_coverage.egg-info/SOURCES.txt
+src/codacy_coverage.egg-info/dependency_links.txt
+src/codacy_coverage.egg-info/entry_points.txt
+src/codacy_coverage.egg-info/requires.txt
+src/codacy_coverage.egg-info/top_level.txt

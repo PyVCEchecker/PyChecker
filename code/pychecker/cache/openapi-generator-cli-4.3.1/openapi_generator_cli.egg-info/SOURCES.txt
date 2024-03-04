@@ -1,0 +1,8 @@
+README.md
+setup.py
+openapi_generator_cli/__init__.py
+openapi_generator_cli.egg-info/PKG-INFO
+openapi_generator_cli.egg-info/SOURCES.txt
+openapi_generator_cli.egg-info/dependency_links.txt
+openapi_generator_cli.egg-info/entry_points.txt
+openapi_generator_cli.egg-info/top_level.txt

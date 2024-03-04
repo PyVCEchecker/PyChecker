@@ -1,0 +1,3 @@
+azure-cli-core
+azure-mgmt-authorization==0.50.0
+azure-mgmt-managementgroups==0.1.0

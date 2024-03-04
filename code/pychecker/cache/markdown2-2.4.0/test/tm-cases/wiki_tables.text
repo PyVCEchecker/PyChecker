@@ -1,0 +1,37 @@
+|| *Year* || *Temperature (low)* || *Temperature (high)* ||
+|| 1900 || -10 || 25 ||
+|| 1910 || -15 || 30 ||
+|| 1920 || -10 || 32 ||
+
+# With header row
+
+||~ Name ||~ Class ||~ Race ||~ Level ||
+|| Vlad || Barbarian || Dragonborn || 12 ||
+|| Jimbo || Rogue || Halfling || 13 ||
+
+# With only header row
+
+||~ Name ||~ Class ||~ Race ||~ Level ||
+
+# With header row, alternate spacing
+
+|| ~Name || ~Class || ~Race || ~Level ||
+|| Vlad || Barbarian || Dragonborn || 12 ||
+|| Jimbo || Rogue || Halfling || 13 ||
+
+# just one line
+
+||foo||bar||baz||
+
+
+# blockquote
+
+> ||grinch||stole||xmas||
+> ||green||**eggs**||ham||
+>
+> -- Dr. Seuss
+
+
+# end of file
+
+||ResourceNotFound||If :login does not exist||

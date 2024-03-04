@@ -1,0 +1,4 @@
+humanfriendly>=9.1
+
+[cron]
+capturer>=2.4

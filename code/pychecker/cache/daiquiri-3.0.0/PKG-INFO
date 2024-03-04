@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: daiquiri
+Version: 3.0.0
+Summary: Library to configure Python logging easily
+Home-page: https://github.com/jd/daiquiri
+Author: Julien Danjou
+Author-email: julien@danjou.info
+License: Apache 2.0
+Description: =======================================
+        daiquiri -- Python logging setup helper
+        =======================================
+        
+        .. image:: https://circleci.com/gh/jd/daiquiri.svg?style=svg
+           :target: https://circleci.com/gh/jd/daiquiri
+        
+        .. image:: https://img.shields.io/pypi/v/daiquiri.svg
+            :target: https://pypi.python.org/pypi/daiquiri
+            :alt: Latest Version
+        
+        The daiquiri library provides an easy way to configure logging. It also
+        provides some custom formatters and handlers.
+        
+        You can read the whole documentation at http://daiquiri.readthedocs.io/
+        
+        * Free software: Apache license
+        * Source: https://github.com/jd/daiquiri
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Provides-Extra: test
+Provides-Extra: systemd

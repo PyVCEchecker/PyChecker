@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+pdf2image/__init__.py
+pdf2image/exceptions.py
+pdf2image/generators.py
+pdf2image/parsers.py
+pdf2image/pdf2image.py
+pdf2image.egg-info/PKG-INFO
+pdf2image.egg-info/SOURCES.txt
+pdf2image.egg-info/dependency_links.txt
+pdf2image.egg-info/requires.txt
+pdf2image.egg-info/top_level.txt

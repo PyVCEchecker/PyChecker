@@ -1,0 +1,19 @@
+numpy>=1.14
+six
+termcolor>=1.1
+tabulate>=0.7.7
+tqdm>4.29.0
+msgpack>=0.5.2
+msgpack-numpy>=0.4.4.2
+pyzmq>=16
+psutil>=5
+
+[all]
+scipy
+h5py>=2.1
+lmdb>=0.92
+matplotlib
+scikit-learn
+
+[all: "linux" in sys_platform]
+python-prctl

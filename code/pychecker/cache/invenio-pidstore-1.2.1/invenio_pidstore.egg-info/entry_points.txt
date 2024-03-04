@@ -1,0 +1,23 @@
+[invenio_admin.views]
+invenio_pidstore_pid = invenio_pidstore.admin:pid_adminview
+
+[invenio_base.api_apps]
+invenio_pidstore = invenio_pidstore:InvenioPIDStore
+
+[invenio_base.apps]
+invenio_pidstore = invenio_pidstore:InvenioPIDStore
+
+[invenio_db.alembic]
+invenio_pidstore = invenio_pidstore:alembic
+
+[invenio_db.models]
+invenio_pidstore = invenio_pidstore.models
+
+[invenio_pidstore.fetchers]
+recid = invenio_pidstore.fetchers:recid_fetcher
+recid_v2 = invenio_pidstore.fetchers:recid_fetcher_v2
+
+[invenio_pidstore.minters]
+recid = invenio_pidstore.minters:recid_minter
+recid_v2 = invenio_pidstore.minters:recid_minter_v2
+

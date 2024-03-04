@@ -1,0 +1,14 @@
+README
+setup.py
+googleads/__init__.py
+googleads/ad_manager.py
+googleads/adwords.py
+googleads/common.py
+googleads/errors.py
+googleads/oauth2.py
+googleads/util.py
+googleads.egg-info/PKG-INFO
+googleads.egg-info/SOURCES.txt
+googleads.egg-info/dependency_links.txt
+googleads.egg-info/requires.txt
+googleads.egg-info/top_level.txt

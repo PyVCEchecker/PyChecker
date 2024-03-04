@@ -1,0 +1,1059 @@
+CHANGES
+=======
+
+2.16.3
+------
+
+* use github actions to publish lib instead of trivis
+
+2.16.2
+------
+
+* fix tests
+* Update init.py (#618)
+
+2.16.1
+------
+
+* hotfix for multiprocess call reset\_uiautomator
+* update ISSUE\_TEMPLATE for REQUIRED logs
+* update doc
+
+2.16.0
+------
+
+* add cli:doctor
+* add doc
+
+2.15.2
+------
+
+* add support reconnect when device disconnect
+* update requirements
+* Update \_\_init\_\_.py (#679)
+
+2.15.1
+------
+
+* try to fix when wifi connect device still try to upgrade atx-agent bug
+* add multi thread example
+
+2.15.0
+------
+
+* add init --addr support
+* update func doc
+
+2.14.1
+------
+
+* fix init error
+
+2.14.0
+------
+
+* mark useless tests
+* add atx-agent version check when something when wrong
+* update apk and atx-agent version
+* skip flake8 check
+
+2.13.2
+------
+
+* update atx-agent to fix security error, ref openatx/atx-agent#82
+
+2.13.1
+------
+
+* update minicap download address to devicefarmer group, which support sdk:30
+
+2.13.0
+------
+
+* add d.xpath(..).child support
+
+2.12.3
+------
+
+* show float window in tmq platform
+
+2.12.2
+------
+
+* fix bug #650
+* add typing for image, commented findit
+
+2.12.1
+------
+
+* fix d.settings to self.settings
+* change localhost to 127.0.0.1
+
+2.12.0
+------
+
+* add open\_url method
+
+2.11.5
+------
+
+* fix swipe set duration no effect, close #591
+
+2.11.4
+------
+
+* xpath: %xxx% support content-desc
+
+2.11.3
+------
+
+* add missing builtin arg
+* add builtin and autostart to watch\_context
+* add hire doc
+
+2.11.2
+------
+
+* update requirements
+
+2.11.1
+------
+
+* fix settings props check
+
+2.11.0
+------
+
+* add watch\_context which may replace watcher
+* fix reset-uiautomator on windows error
+
+2.10.2
+------
+
+* add retry for app\_current, fix #572
+* update sponsor link
+
+2.10.1
+------
+
+* update tests, prevent atx-agent log too large
+
+2.10.0
+------
+
+* add more tests
+* add Direction, support scroll\_to, update some doc
+* d.xpath add scroll support
+
+2.9.6
+-----
+
+* fix support for d(resourceId='android:id/text1')[-1].get\_text()
+
+2.9.5
+-----
+
+* support change to production use os.environ['TMQ'] = true
+* raise EnvironmentError directly when connected with wifi, but atx-agent is down
+
+2.9.4
+-----
+
+* fix recover logic when atx-agent is not responsing
+
+2.9.3
+-----
+
+* enable screenrecord test
+* fix screenrecord
+
+2.9.2
+-----
+
+* fix wait\_for\_device not finished error
+
+2.9.1
+-----
+
+* fix selector long\_click bug
+* update doc
+
+2.9.0
+-----
+
+* add operation\_delay support
+
+2.8.6
+-----
+
+* add init into connect\_usb for compability
+
+2.8.5
+-----
+
+* remove humanize
+* add support d(description=我的淘宝).screenshot()
+
+2.8.4
+-----
+
+* hotfix for set\_new\_command\_timeout error
+
+2.8.3
+-----
+
+* hot fix for connect error when atx-agent not installed
+
+2.8.2
+-----
+
+* support fallback to WiFi when usb disconnected, add deprecated method :service
+
+2.8.1
+-----
+
+* fix app\_start missing stop=True error
+* support push url
+
+2.8.0
+-----
+
+* change property serial back
+* add double\_click, set click\_pre and post delay to 0
+* fix bugs reported in qq
+* remove useless code
+* add missing swipe\_ext and @address(teditor)
+* finally version
+* add missing toast
+* add more method
+* rewrite uiautomator2, too complex
+
+2.7.3
+-----
+
+* add timeout(60s) in init.py to prevent hang on apk install page
+
+2.7.2
+-----
+
+* update adbutils which buildin adb.exe for windows
+* rewrite part of init code
+
+2.7.1
+-----
+
+* upgrade adbutils: support download adb.exe when missing on windows
+
+2.7.0
+-----
+
+* add click\_exists to xpath
+
+2.6.2
+-----
+
+* fix with reinstall apks when meet signature not matched error
+* add image.click doc and tests
+
+2.6.1
+-----
+
+* screenrecord support horizontal and vertical, support limit fps
+* add screenrecord usage
+
+2.6.0
+-----
+
+* add screenrecord code
+* add screenrecord sample
+
+2.5.9
+-----
+
+* upgrade atx-agent to 0.9.4 to fix go panic on go12
+
+2.5.8
+-----
+
+* update minicap sync method
+* update atx-agent version and apk version
+* call watcher when d.xpath calls
+* let d.touch.down support percent position, remove stop-app when reset-uiautomator
+* update doc
+* support Android Q minicap, show debug log when image search
+
+2.5.7
+-----
+
+* fix click on infinitly display not working bug
+* add recommended article
+* support generate all docs by sphinx
+* fix docs generate with sphinx, not very well
+* add missing file
+* fix retry when take screenshot, update readthedocs
+* add readthedocs for test
+
+2.5.6
+-----
+
+* add match and scroll\_to to xpath object, update atx-agent version
+
+2.5.5
+-----
+
+* change connect\_usb not start uiautomator automatically
+
+2.5.4
+-----
+
+* update atx-agent and apk version to use minitouchagent
+
+2.5.3
+-----
+
+
+2.5.2
+-----
+
+* fix pull error
+* add readTimeout handle
+
+2.5.1
+-----
+
+* fix \_request func recursive error
+
+2.5.0
+-----
+
+* add d.alibaba support
+* update scale and wait-for-device timeout to 70s
+* fix when device replugin, d.shell fails
+
+2.4.6
+-----
+
+* fix wait am instrument too short, change timeout from 20 to 40
+* fix adbutils shell decode error
+* add retry in push\_url
+
+2.4.5
+-----
+
+* fix usb cable replug raise ConnectionError bug
+
+2.4.4
+-----
+
+* update apk version, and atx-agent version
+* update atx-agent to 0.8.1, do lot of code format
+* fix Android Q screenshot error
+* fix init may raise FileNotFoundError bug
+* add uiautomator2 version in command line
+* add session test
+
+2.4.3
+-----
+
+* add fallback and session add some missing method
+* fix github workflow
+* fix flake8 warning
+* test github actions
+* change callback to fallback
+* add d.xpath(xxxxx).callback(click, px, py).click() support
+* add back token again
+* check if travis notification is working
+* add d.xpath.position方法
+
+2.4.2
+-----
+
+* change am instrument logic again
+* rewrite jsonrpc\_retry\_call logic
+* make recover uiautomator logic more simple
+
+2.4.1
+-----
+
+* add taobao plugin for internal network
+* add long\_click to d.xpath
+
+2.4.0
+-----
+
+* change logic of start uiautomator, upgrade apk version
+* fix bug, reported by h.t
+* am start apk twice to make sure, uiautomator can be recovered
+
+2.3.4
+-----
+
+* show lib version when init for easily debug
+* support config service recover behavior
+
+2.3.3
+-----
+
+* fix d.serial return None bug, fix tests on large screen
+* update doc, add quick-reference.md
+* add quick ref guide
+
+2.3.2
+-----
+
+* fix init command not resolve signature mismatch bug, fix uninstall can not uninstall apk bug
+
+2.3.1
+-----
+
+* add xpath\_debug to settings, fix xpath %xx and xx%
+* update watcher doc
+
+2.3.0
+-----
+
+* add d.watcher method to handle popups
+* add settings code
+* add basic settings.py
+* Update README.md
+* hotfix for windows
+* remove timeout for function: pull
+
+2.2.0
+-----
+
+* add cmd\_purge, add set\_new\_command\_timeout api
+
+2.1.0
+-----
+
+* add image.py, change uiautomator from v1 to v2
+* add uauto
+* typo (#476)
+* fix missing \_parent error, close #477
+* hot fix for #475
+* fix spell error
+* fix logo not show error in readme
+* add hogwarts sponsor
+* add wait to image.py
+* fix xpath start-with and ends-with, add image click
+
+2.0.0
+-----
+
+* remove toast from readme
+* add app list api
+* support multi xpath(xx).xpath(xx), and add .info in xpath
+* add clipboard doc
+* change to uiautomator 1.0
+* Fixes #451
+* add clipboard support
+* Update README.md
+* fix d.xpath.when(..).when(..), thread-safe reset-uiautomator
+
+1.3.6
+-----
+
+* use monkey command to install apk on TMQ platform
+* fix d.xpath.watcher, fix d.shell can not handle & and ? bug
+
+1.3.5
+-----
+
+* add xpath.apply\_watch\_from\_yaml, support xpath.when(1).when(2)
+* fix homepage link
+* fix atx-agent version compare check
+
+1.3.4
+-----
+
+* remove useless cli
+* use jsonrpc.dumpWindowsHierarchy instead of http GET /dump/hierarchy
+* assert file\_size when cache\_download
+
+1.3.3
+-----
+
+* fix uiautomator start error
+
+1.3.2
+-----
+
+* update atx-agent to fix UIAutomation not connected error
+* upgrade apk version
+* enhance reset\_uiautomator()
+
+1.3.1
+-----
+
+* fix adbutils dep version
+
+1.3.0
+-----
+
+* fix check atx-agent
+* fix last commit
+* add function to check atx-agent version
+* update atx-agent version
+* update dingtalk webhook again
+* update dingtalk webhook
+
+1.2.6
+-----
+
+* fix when uiautomator not alive, func connect can not auto init error
+
+1.2.5
+-----
+
+* update dingtalk robot webhook url
+* set init as default, set default screenshot name when use cli:uiautomator2 screenshot
+* rename current\_app to app\_current
+* add webview for future develop
+
+1.2.4
+-----
+
+* fix app\_start without activity not launch error
+* add adcd.py(abstract class about device) and implement pure adb to run test
+* implement pure adb to run test
+* use Baidu OCR to select element (#419)
+
+1.2.3
+-----
+
+* update androidbinary to fix momo can not start error #393
+* add support u2.connect\_usb(serial, init=False)
+* change function behavior d.touch.up() to d.touch.up(x, y)
+
+1.2.2
+-----
+
+* fix app\_list\_running() only show 3rd party apps bug, add support to read from env-var ANDROID\_SERIAL
+
+1.2.1
+-----
+
+* fix and add doc for app\_start #425, add uiautomator check in dump\_hierarchy
+* add thread lock in dump\_hierarchy
+* fix session restart
+* Update README.md
+* add notification about dingtalk travis
+
+1.2.0
+-----
+
+* add wait gone
+* add strict argument to session()
+* rename UIAutomatorServer to Device, add session.restart() method
+* change http://tool.appetizer.io to https protocol
+* add swipe\_ext('right', 0.9) method
+* add app\_wait, app\_list\_running
+
+1.1.0
+-----
+
+* add swipe and screenshot to d.xpath element
+* fix  init with serial
+* update changelog, remove d.watchers.watched, use IPython.embed first in cmd:uiautomator2 console
+* add console in command line
+* fix shell(stream=True) timeout error, close #394
+
+1.0.3
+-----
+
+* fix android Q support again
+
+1.0.2
+-----
+
+* replace google-fire with argparse, add current, stop, start subcommand in command line
+* remove useless u2cli
+
+1.0.1
+-----
+
+* fix init unknown host service, close #373
+* add develop.md
+
+1.0.0
+-----
+
+* upgrade atx-agent version, and android-uiautomator-version, update doc
+* fix swipe\_points usage in readme
+* init add mirror of appetizer
+* fix str decode error
+* fix debug mode decode error
+
+0.3.3
+-----
+
+* add watch\_clear and address
+* add xpath.watch\_stop()
+
+0.3.2
+-----
+
+* fix debug curl print
+* fix shell calls in connect
+
+0.3.1
+-----
+
+* fix #370
+* test with 3.5
+
+0.3.0
+-----
+
+* fix fix
+* fix travis again
+* fix travis
+* update readme
+* add missing dep:adbutils
+* update xpath doc, add set\_text to xpath
+* remove uiautomator2/adbutils.py, use thirdparty adbutils
+* add quickstart, fix healthcheck for OnePlus
+* fix screenshot method
+* say goodbye to python2 and welcome python3
+* Update ISSUE\_TEMPLATE.md
+* use /dump/hierarchy to instead of call:dumpHierarchy
+* update atx-agent version
+
+0.2.3
+-----
+
+* xpath element support click
+* add http\_timeout for shell function, resolve #353
+* add xpath quicksheet
+* resolve #348
+* remove code which leads to minicap install error
+* add get method of xpath
+* add xpath::get\_text(), close #337
+* add connect\_adb\_wifi function
+* add probot link
+* auto stale issue when tagged as invalid
+* serial support none
+* 修复多台设备时，list-forward失败 (#327)
+* \`python -m uiautomator2 init\`初始化403报错，增加header atx\_agent\_url中报错变量错误修复
+
+0.2.2
+-----
+
+* update atx-agent version
+* typo (#318)
+* fix connect\_usb error
+
+0.2.1
+-----
+
+* fix #317, fix #316
+
+0.2.0
+-----
+
+* merge change
+* remove pure-python-adb dependency, use adbutils.py instead
+* format \_\_init\_\_.py, update adbutils with ADB Protocol
+* update changelog
+* part of job
+
+0.1.11
+------
+
+* limit pure-python-adb version, to fix from adb.client import error
+* support args
+
+0.1.10
+------
+
+* remove cmd:init from fire.Fire, fix forward error when muti device connect to one machine
+* upgrade atx-agent
+* ext\_xpath support
+* remove 3.7
+* fix travis test again
+* fix travis
+* sort imports
+* split code to different files
+* Update README.md
+* Update README.md
+* remove debug with dict: which will lead misunderstanding
+* update atx-agent version
+* appveyor
+* exedir detection everywhere
+* fix
+* come at me
+* need android components nowadays
+* travis 2018 switches from android-21 to android-22
+* fix pip install requirements
+* fix travis lang
+* add emulator and tests to travis and update README
+* fix typo. (#278)
+
+0.1.9
+-----
+
+* fix connect\_usb init error, close #276
+* fix typo
+* add set\_fail\_prompt function
+* add d.touch.(down|move|up) in readme
+* fix atxagent version code
+
+0.1.8
+-----
+
+* update atx-agent add api app\_info, and app\_icon
+* update atx-agent version to 0.5.1, fix session timeout error
+* update atx-agent version and netease music example
+* add wait\_activity
+* raise IndexError when UiObject returned by child\_by\_xxx, close #261
+* fix xpath py2 py3 compatibale
+* fix xpath ext resource-id error
+* Update README.md (#260)
+* update weditor install method
+
+0.1.7
+-----
+
+* sem-ver:bugfix, fix init with PATH env error on windows
+* fix doc
+* update apk to 1.1.7 to fix dumpHierarchy, close #207
+
+0.1.6
+-----
+
+* use atx-agent server -stop before launch
+* force stop atx-agent when init
+* fix launch atx-agent with wrong PATH, which may cause /info get wrong info
+* fix test on android P emulator
+* 加入aricv图像识别插件 (#250)
+* update atx-agent version
+
+0.1.5
+-----
+
+* fix init, because of mirror down
+* fix xpath python2 support, perf create dir if not exists
+* fix little bug
+* update readme
+* first xpath plugin version
+* add more comment about xpath plugin
+* add xpath plugin
+
+0.1.4
+-----
+
+* update install method
+* update install part
+* add install test code
+* fix fps collect
+* update atx-agent version
+* fix if log bug in ext/info
+* 修改info插件调用模式 (#245)
+* add test info plugin (#240)
+* fix perf get data error (#239)
+* Update README.md
+* open python 3.7 support
+* 更改一处类型提示错误 (#229)
+* add beta method hooks\_register
+* fix #206, init gives 'inf' as serial <class 'float'> (#216)
+* 修改init不成功的问题 (#221)
+* update to new atx-agent
+* fix current\_app in sumsung, add tcp and udp in perf
+* add images
+* add fps
+* swipe duration default 0.1(old 0.5), add swipe ui
+* fix perf uiautomator in python2
+* update doc
+* fix perf d not exists bug
+* add traffic into perf plugin
+* update atx-agent version
+* catch AttributeError in UIAutomatorServer
+* add back implicitly wait
+* add perf doc
+* add perf plugin
+* runyaml fix
+* add plugin\_register and ocr plugin
+* add plugin support
+* let shell return namedtuple, remove outdated docs
+* use q|query instead of xpath in steps
+* add send\_action support
+* fix #200
+* add with into session, update oppo support
+* fix merge conflict
+* click add offset, support oppo install with browser
+* add oppo install method, not finished yet
+* fix str(err.data) encode error
+* Update \_\_init\_\_.py
+* add some comment
+* 1.修改截图定位线
+* raise error when error found in uiautomator2.cli install
+* catch NullPointerExceptionError on jsonrpc call
+* patch to catch UiAutomation not connect
+* use github-mirror for update-apk command
+* fix healthcheck
+* add unlock screen for healthcheck
+* add retry for objInfo
+* fix conflict
+* hot fix for update\_instance
+* add implicit\_wait function
+* remove pid file when stop atx-agent
+
+0.1.3
+-----
+
+* fix init twice error, update atx-agent t0 0.4.1
+* support vivo install
+* add cancel request support
+* fix python requires
+* update to new version
+* exclude py 3.7 version
+* make u2cli work
+* fix when no progress
+* update uiautomator2.cli install
+* show progress
+* add missing file
+* add u2cli entry
+* add qrcode of qq
+* add fail reason
+* todo: add push folder support
+* add --mirror document, ref #173
+* add retry for dump\_hierarchy, because of UiDevice NullPointer Exception
+* support github-mirror to make download faster
+* chmod +x report bad mode on xiaomi HMNote3
+* Change method of detecting executable dir
+* merge openatx
+* fix push to /data/local/tmp/mini... instead of /data/local/tmp
+* fix requests RemoteDisconnected error
+* Use pure-python-adb to get serials of all android devices when initializing
+* If adb client can't connect to the adb server, try to use adb cli to start adb server
+* Use pure-python-adb package to replace adb wrapper
+* support --mirror
+* fix get toast error
+* hot fix for executable dir
+* replace $ into -, fix #152
+* update document
+* use /data/local/tmp as default exec dir
+* forgot to update apk version
+* manually merge pr 46
+* parens are necessary to catch multi exception in python3
+* add screenshot(format=raw), fix init timeoutError, close #114
+* Replace os.path.join with string format, so can run as normal on windows
+* Revert changes to install\_atx\_agent
+* Provide alternative execute directory to /data/local/tmp, so can install to devices like 'ZUK's Z2
+* Solve ZUK's no permission to /data/local/tmp problem
+* fix xpath wait, fix connect simulator bug, update apk, to make watchers faster
+* Replace os.path.join with string format, so can run as normal on windows
+* Revert changes to install\_atx\_agent
+* Provide alternative execute directory to /data/local/tmp, so can install to devices like 'ZUK's Z2
+* hot fix for session launch
+* fix fix
+* update apk version to fix #138 #137
+* update view
+* add xpath support
+* fix session can not start app error
+* start atx-agent if atx-agent dead when connect\_usb
+* fix ext/htmlreport unpatch
+* exists return class, fix watchers.watched not working bug
+* add toast capture support
+* add d.watchers.watched = True support
+
+0.1.2
+-----
+
+* Import update on uiautomator-server, fix current app function fix #41
+* \_wait\_install\_finished 增加 hasattr(sys.stdout, 'isatty')判断
+* fix current\_ime() failed
+* Solve ZUK's no permission to /data/local/tmp problem
+* add shell function in order to replace adb\_shell one day
+* support long running command
+* package info should return None
+* comment useless code
+* update apk version, try to catch NullException
+* run code again for NullObjectException and StaleObjectException
+* fix install -g error
+* handle StaleObjectException
+* fix dns when network change
+* only build in python 2.7
+* add healthcheck in command line
+* update travis
+* format code, add click\_gone function
+* change prompt
+* add double click support
+* add proxyhttp.go not finished yet
+* stash code
+* add support to patch long\_click
+* add fancybox into htmlreport
+* add qqicon
+
+0.1.1
+-----
+
+* fix message in None error
+* try to fix #73
+* update atx-agent version
+* add screenshot into cli
+* fix for failed to init
+* modified for android simulator
+* add docstring for swipe\_points
+* add swipe points description
+* add --ignore-apk-check option
+* add issue template
+* little fix
+* wait disable\_popups for fix
+* UiObject support long\_click with duration
+* add issue robot
+* support back to init multi devices
+* if adb without -g, remove -g and try again
+* add DeleteImmediatelly in disable\_popups
+* update apk version to support toast
+* add support to show toast
+* add how to do with popups
+* update version
+* add disable\_popups support
+* update atx agent
+* change TMPDIR to support upload large file
+* fix UINotFoundEncoding error
+* check if apk installed after init
+* open u2 github URL after success init
+* add adbkit-init
+* fix raise exception unicode code encode error
+* fix click\_nowait missing error
+* support stop uiautomator keeper
+* fix htmlreport
+* add some useful link
+* add htmlreport support, remove click\_nowait and tap
+
+0.1.0
+-----
+
+* add session support
+* add syntax error retry on screenshot error
+* hot fix to fix atx-agent screenshot bug
+* 修改import错误 ：ImportError: cannot import name popup
+* update atx-agent version
+* send\_keys use adb shell input text when set\_fast\_ime failed.  upgrade pos\_rel2abs  function
+* add tkgui for experiment
+* show better app\_install progress on noatty, make healthcheck better
+* update TOC
+* sync to atx-agent new download logic
+* travis fight
+* no android for now
+* boring travis non-python pip problem
+* fix travis build
+* add Android emulator to travis and deploy only once on py2.7
+* clarify adb\_shell; fix typos
+* Update README.md
+* fix healthcheck on xiaomi device
+
+0.0.3
+-----
+
+* fix apk version name
+* hot fix
+* not raise RuntimeError in current\_app()
+* add window\_size api
+* remove ReadTimeout from jsonrpc\_retry\_call
+* update logic, when uiautomator2 is down, restart apk
+* fix input method
+* add timeout in screenshot and restart uiautomator.apk shen connect 502
+* hot fix for weditor
+* stop uiautomator before start when do healthcheck()
+* open identify activity with am start -n
+* fix deprecated warn error
+* deprecated set\_click\_post\_delay
+* add deault wait\_timeout  set support
+* add retry to prevent screenshot error on some special conditions
+* update screenshot to support opencv
+* update atx agent version
+* update the connect method
+* update atx-agent version
+* add push\_url api
+* 增加init时对代理的支持
+* support install on emulator
+* suppress warning when uninstall error
+* rename examples/powerweb to webbattery
+* add webpower ^\_^
+* fix displayHeight error on Huawei
+* update atx\_agent version to 0.1.1
+* make pos\_rel2abs a little faster
+* modify http\_timeout according to wait(timeout..)
+
+0.0.2
+-----
+
+* update doc
+* update doc
+* support oppo auto install
+* add app\_install\_local, handle serial contains &
+* swipe\_points support percent points
+* long click support seconds
+* add minitouch install support
+* add minitouch but not tested
+* add FastInputIME
+* add send\_keys method
+* guesture relative pos to real, close #12
+* fix click\_exists
+* add gesture and pinch
+* add select count and fling, scroll
+* update ABOUT.rst addr
+
+0.0.1
+-----
+
+* setup travis build on all\_branches
+* add skip cleanup
+* update doc again
+* check com.github.uiautotor.test when init
+* update badge link
+* fix datetime error
+* add debug
+* add identify method
+* add default timeout to requests
+* update to new version
+* change healthcheck logic, launch com.github.uiautomator and then HOME
+* update atx-agent version to 0.0.9
+* sync with atx-agent code
+* when device ip is empty, connect\_usb will be called
+* add pull support
+* support stop in app\_start
+* add app-stop-all method
+* add unlock cli
+* add watcher support
+* update install guide
+* add pypi version badge
+* add readme
+* am\_start add stop param
+* click when exists
+* add healthcheck and connect\_usb, close #3
+* add unlock method
+* add delay after click
+* fix abilist is empty error
+* add session check(check if app is alive when test is running
+* fix atx-agent install error
+* add clear cache support
+* add pushfile support
+* support kill all apps
+* support percent positions
+* fix detect device from adb devices -l error
+* remove useless print
+* support init multi devices
+* support percent tap, recode init logic
+* fix raise UiObjectNotFoundError error
+* fix incompatible in py3
+* tired, want to sleep
+* add output
+* fix auto install method
+* add auto install requirements scripts
+* update document
+* screenshot return PIL.Image
+* ref |> update function app\_start(..) can input packagename and activity to start app
+* update doc to lastest
+* add selector long\_click, update some doc
+* add example test
+* set default port to 7912
+* update readme
+* add connect(..) and add some doc
+* fix some error
+* initial project
+* Initial commit

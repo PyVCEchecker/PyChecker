@@ -1,0 +1,10 @@
+LICENSE.rst
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+bumpversion.egg-info/PKG-INFO
+bumpversion.egg-info/SOURCES.txt
+bumpversion.egg-info/dependency_links.txt
+bumpversion.egg-info/requires.txt
+bumpversion.egg-info/top_level.txt

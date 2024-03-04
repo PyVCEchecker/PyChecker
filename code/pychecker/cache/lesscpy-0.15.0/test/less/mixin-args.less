@@ -1,0 +1,141 @@
+/*
+	Mixin-functions
+*/
+.empty () {}
+#empty {
+	.empty();
+	.empty(red, 1px);
+}
+.basic(@a: 3px) {
+	line-height: @a;
+}
+#basic {
+	.basic();
+	.basic(6px);
+}
+#idbasic (@a: 3px){
+	line-height: @a;
+}
+.idbasic {
+	#idbasic();
+	#idbasic(6px);
+}
+/*
+	Args
+*/
+.args (@color, @width) {
+	color: @color;
+	width: @width;
+}
+#args {
+	.args(red, 1px);
+}
+#args_locals {
+	@a: green;
+	@b: 3px;
+	.args(@a, @b);
+}
+/*
+	Vars and scope
+*/
+.local () {
+	@var: red;
+	color: @var;
+}
+#local {
+	@var: blue;
+	padding: 0;
+	.local();
+}
+@glob: 5;
+.global-mixin(@a:2) {
+  	width: @glob + @a;
+}
+.scope-mix {
+  	.global-mixin(3);
+}
+/*
+	Call as block mixin
+*/
+.hidden() {
+  	color: transparent;
+}
+#hidden {
+  	.hidden;
+  	.hidden();
+}
+/*
+	kwargs
+*/
+.kwarg (@a: 1px, @b: 50%) {
+  	width: @a * 5;
+  	height: @b - 1%;
+}
+.both {
+	.kwarg(3px, 20%);
+}
+.one-arg {
+  	.kwarg(3px);
+}
+.no-parens {
+  	.kwarg;
+}
+.no-args {
+  	.kwarg();
+}
+/*
+	@arguments
+*/
+.mixin-arguments (@width: 0px) {
+    border: @arguments;
+}
+.arguments {
+    .mixin-arguments(1px, solid, black);
+}
+.arguments2 {
+    .mixin-arguments(1px);
+}
+.arguments3 {
+    .mixin-arguments();
+}
+.arguments_empty() {
+	border: @arguments;
+}
+.arguments3 {
+    .arguments_empty(1px, solid, red);
+}
+.arguments4 {
+    .arguments_empty(1px solid red);
+}
+//
+// filter mixins
+//
+.placeholder(@color: #000) {
+  :-moz-placeholder {
+    color: @color;
+  }
+  &::-webkit-input-placeholder {
+    color: @color;
+  }
+}
+.div {
+	.placeholder(#fff);
+}
+// argument list variables
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+.arglist {
+	.box-shadow();
+}
+// Reversed
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+.a {
+	.border-radius(0 3px 3px 0);
+}

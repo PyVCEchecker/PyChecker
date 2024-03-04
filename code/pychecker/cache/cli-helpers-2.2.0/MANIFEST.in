@@ -1,0 +1,9 @@
+include *.txt *.rst *.py
+include AUTHORS CHANGELOG LICENSE
+include tox.ini
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile
+recursive-include tests *.py
+include tests/config_data/*
+exclude .pre-commit-config.yaml .git-blame-ignore-revs

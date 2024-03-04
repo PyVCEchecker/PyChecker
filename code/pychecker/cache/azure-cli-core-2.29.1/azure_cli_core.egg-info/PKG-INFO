@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: azure-cli-core
+Version: 2.29.1
+Summary: Microsoft Azure Command-Line Tools Core Module
+Home-page: https://github.com/Azure/azure-cli
+Author: Microsoft Corporation
+Author-email: azpycli@microsoft.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.6.0
+License-File: LICENSE.txt
+
+Microsoft Azure CLI Core Module
+==================================
+
+Release History
+===============
+
+See `Release History on GitHub <https://github.com/Azure/azure-cli/blob/dev/src/azure-cli-core/HISTORY.rst>`__.
+
+

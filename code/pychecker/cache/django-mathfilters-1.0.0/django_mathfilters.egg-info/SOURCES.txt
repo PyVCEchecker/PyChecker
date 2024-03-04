@@ -1,0 +1,12 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+django_mathfilters.egg-info/PKG-INFO
+django_mathfilters.egg-info/SOURCES.txt
+django_mathfilters.egg-info/dependency_links.txt
+django_mathfilters.egg-info/top_level.txt
+mathfilters/__init__.py
+mathfilters/tests.py
+mathfilters/templatetags/__init__.py
+mathfilters/templatetags/mathfilters.py

@@ -1,0 +1,28 @@
+[console_scripts]
+humilis = humilis.cli:main
+
+[humilis.jinja2_filters]
+is_list = humilis.j2:is_list
+iso_timestamp = humilis.j2:iso_timestamp
+password = humilis.j2:password
+timestamp = humilis.j2:timestamp
+uuid = humilis.j2:uuid4
+uuid4 = humilis.j2:uuid4
+
+[humilis.layers]
+
+
+[humilis.reference_parsers]
+boto3 = humilis.reference:boto3
+environment = humilis.reference:environment
+environment_output = humilis.reference:environment
+environment_resource = humilis.reference:environment
+file = humilis.reference:file
+j2_template = humilis.reference:j2_template
+lambda = humilis.reference:lambda_ref
+layer = humilis.reference:layer
+layer_output = humilis.reference:layer
+layer_resource = humilis.reference:layer
+output = humilis.reference:output
+secret = humilis.reference:secret
+

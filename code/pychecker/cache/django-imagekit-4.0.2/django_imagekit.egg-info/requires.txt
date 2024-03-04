@@ -1,0 +1,9 @@
+django-appconf>=0.5
+pilkit>=0.2.0
+six
+
+[async]
+django-celery>=3.0
+
+[async_rq]
+django-rq>=0.6.0

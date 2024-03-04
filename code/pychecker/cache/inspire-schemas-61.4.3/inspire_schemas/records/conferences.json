@@ -1,0 +1,839 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+        },
+        "_bucket": {
+            "description": "Used by `invenio-records-files` to store information about the\nbucket attached to this record.\n\n.. note::\n\n    This field is maintained by `invenio-records-files` and should\n    not be edited manually.",
+            "minLength": 1,
+            "type": "string"
+        },
+        "_collections": {
+            "items": {
+                "enum": [
+                    "Conferences"
+                ],
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "Collections to which this record belongs",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "_private_notes": {
+            "description": ":MARC: ``595``\n\nThese notes are only visible to privileged users, not regular\nusers.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of private notes",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "acronyms": {
+            "items": {
+                "description": ":MARC: ``111__e``\n:example: ``SUSY 2018``",
+                "minLength": 1,
+                "title": "Conference acronym",
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "List of acronyms of the conference",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "addresses": {
+            "description": ":MARC: ``111__c`` (in the form ``city, country``), ``270__b``\n\nThis field is a list because a conference can sometimes be split among\nseveral cities.\n\n.. note::\n\n    The :ref:`address.json#/properties/postal_address` should not\n    be provided for a conference.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "cities": {
+                        "description": "Sometimes conferences and institutes are officially located in a\nlittle-known place, but their location is widely known as being in\na major neighboring city.  In this way, we can store information\nabout both the technically correct but little-known place and the\nwell-known but technically incorrect place.\n\nThe cities should be ordered from most specific to least specific.\n\n:example: ``[\"Batavia\", \"Chicago\"]``",
+                        "items": {
+                            "description": ":example: ``Geneva``",
+                            "minLength": 1,
+                            "title": "A city",
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "title": "List of cities",
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "country_code": {
+                        "enum": [
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BA",
+                            "BB",
+                            "WF",
+                            "JT",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "WK",
+                            "BI",
+                            "BJ",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "WS",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "JE",
+                            "BY",
+                            "BZ",
+                            "RU",
+                            "RW",
+                            "RS",
+                            "TL",
+                            "BL",
+                            "TM",
+                            "TJ",
+                            "RO",
+                            "RH",
+                            "TK",
+                            "GW",
+                            "GU",
+                            "GT",
+                            "GS",
+                            "GR",
+                            "GQ",
+                            "GP",
+                            "BH",
+                            "GY",
+                            "GG",
+                            "GF",
+                            "GE",
+                            "GD",
+                            "GB",
+                            "GA",
+                            "SV",
+                            "GN",
+                            "GM",
+                            "GL",
+                            "GI",
+                            "GH",
+                            "OM",
+                            "TN",
+                            "JM",
+                            "JO",
+                            "HR",
+                            "HV",
+                            "HT",
+                            "HU",
+                            "HK",
+                            "HN",
+                            "SU",
+                            "HM",
+                            "VD",
+                            "VE",
+                            "PR",
+                            "PS",
+                            "PW",
+                            "PT",
+                            "PU",
+                            "PZ",
+                            "PY",
+                            "PC",
+                            "PA",
+                            "PF",
+                            "PG",
+                            "PE",
+                            "PK",
+                            "PH",
+                            "PN",
+                            "PL",
+                            "PM",
+                            "ZM",
+                            "EH",
+                            "EE",
+                            "EG",
+                            "ZA",
+                            "EC",
+                            "IT",
+                            "VN",
+                            "SB",
+                            "ET",
+                            "SO",
+                            "ZW",
+                            "SA",
+                            "ZR",
+                            "ER",
+                            "ME",
+                            "MD",
+                            "MG",
+                            "MF",
+                            "IQ",
+                            "MC",
+                            "UZ",
+                            "MM",
+                            "ML",
+                            "MO",
+                            "MN",
+                            "MI",
+                            "MH",
+                            "MK",
+                            "MU",
+                            "MT",
+                            "MW",
+                            "MV",
+                            "MQ",
+                            "MP",
+                            "MS",
+                            "MR",
+                            "IM",
+                            "UG",
+                            "TZ",
+                            "MY",
+                            "MX",
+                            "IL",
+                            "FQ",
+                            "FR",
+                            "IO",
+                            "FX",
+                            "SH",
+                            "JP",
+                            "RE",
+                            "SJ",
+                            "FI",
+                            "FJ",
+                            "FK",
+                            "MA",
+                            "FM",
+                            "FO",
+                            "NH",
+                            "NI",
+                            "NL",
+                            "NO",
+                            "NA",
+                            "VU",
+                            "NC",
+                            "NE",
+                            "NF",
+                            "NG",
+                            "NZ",
+                            "ES",
+                            "NP",
+                            "NQ",
+                            "NR",
+                            "NT",
+                            "NU",
+                            "CK",
+                            "CI",
+                            "CH",
+                            "CO",
+                            "CN",
+                            "CM",
+                            "CL",
+                            "CC",
+                            "CA",
+                            "CG",
+                            "CF",
+                            "CD",
+                            "CZ",
+                            "CY",
+                            "CX",
+                            "CS",
+                            "CR",
+                            "CW",
+                            "CV",
+                            "CU",
+                            "CT",
+                            "SZ",
+                            "SY",
+                            "SX",
+                            "KG",
+                            "KE",
+                            "SS",
+                            "SR",
+                            "KI",
+                            "KH",
+                            "KN",
+                            "KM",
+                            "ST",
+                            "SK",
+                            "KR",
+                            "SI",
+                            "KP",
+                            "KW",
+                            "SN",
+                            "SM",
+                            "SL",
+                            "SC",
+                            "KZ",
+                            "KY",
+                            "SG",
+                            "SE",
+                            "SD",
+                            "DO",
+                            "DM",
+                            "DJ",
+                            "DK",
+                            "VG",
+                            "DD",
+                            "DE",
+                            "YE",
+                            "YD",
+                            "DZ",
+                            "US",
+                            "DY",
+                            "UY",
+                            "YU",
+                            "YT",
+                            "UM",
+                            "LB",
+                            "LC",
+                            "LA",
+                            "TV",
+                            "TW",
+                            "TT",
+                            "TR",
+                            "LK",
+                            "TP",
+                            "LI",
+                            "LV",
+                            "TO",
+                            "LT",
+                            "LU",
+                            "LR",
+                            "LS",
+                            "TH",
+                            "TF",
+                            "TG",
+                            "TD",
+                            "TC",
+                            "LY",
+                            "VA",
+                            "VC",
+                            "AE",
+                            "AD",
+                            "AG",
+                            "AF",
+                            "AI",
+                            "VI",
+                            "IS",
+                            "IR",
+                            "AM",
+                            "AL",
+                            "AO",
+                            "AN",
+                            "AQ",
+                            "AS",
+                            "AR",
+                            "AU",
+                            "AT",
+                            "AW",
+                            "IN",
+                            "AX",
+                            "AZ",
+                            "IE",
+                            "ID",
+                            "UA",
+                            "QA",
+                            "MZ"
+                        ],
+                        "maxLength": 2,
+                        "minLength": 2,
+                        "title": "ISO 3166-1 or 3166-3 alpha 2 country code",
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "description": ":example: 50.7736",
+                        "title": "Latitude of the location",
+                        "type": "number"
+                    },
+                    "longitude": {
+                        "description": ":example: 6.07532",
+                        "title": "Longitude of the location",
+                        "type": "number"
+                    },
+                    "place_name": {
+                        "description": "Name of the specific place where this is located.\n\n- For a Conference record, this could be an institution or a hotel\n  hosting the conference.\n\n  :MARC: ``270__b``\n  :example: ``Dan Panorama hotel``\n\n- For an Institution record representing an independent institute\n  and not a department, this could be a university where it is\n  located.\n\n  :MARC: Not present.\n  :example: ``U. Libre Brussels``",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "postal_address": {
+                        "description": "Full postal address in the original language, with\none element for every line, but excluding the country.\n\n:example: ``[\"Notkestra\u00dfe 85\", \"22607 Hamburg\"]``\n\n.. note::\n\n    This is used for Institution records, but not for Conferences.",
+                        "items": {
+                            "minLength": 1,
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "type": "array",
+                        "uniqueItems": false
+                    },
+                    "postal_code": {
+                        "description": ":example: 1050",
+                        "minLength": 1,
+                        "title": "Postal code of the location",
+                        "type": "string"
+                    },
+                    "state": {
+                        "description": "For American states, standard 2-letter codes are used.\n\n:example: TX",
+                        "minLength": 1,
+                        "title": "State or province of the location",
+                        "type": "string"
+                    }
+                },
+                "title": "Location associated to the record",
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of locations of the conference",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "alternative_titles": {
+            "description": ":MARC: ``711``\n\nSometimes conferences are known by several titles/acronyms. These\nname variants can be provided here.\n\n.. note::\n\n    If a conference has several titles or acronyms, it is more\n    appropriate to use :ref:`titles` or :`acronyms`.\n\n    This field is meant mainly to port information from legacy, that\n    was not categorized well into title/acronym variants and was\n    used to boost search results.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "source": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "subtitle": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "title": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "title"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of alternative titles",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "closing_date": {
+            "description": "``111__y``",
+            "format": "date",
+            "minLength": 1,
+            "title": "Conference closing date",
+            "type": "string"
+        },
+        "cnum": {
+            "description": "The CNUM is based on the starting day of the conference, with an extra\nnumber appended to distinguish conferences starting on the first day.\n\n:example: The first conference (in order of creation on Inspire) starting\n    on December 25, 1987 has CNUM ``C87-12-25`` whereas, say, the third\n    one, has CNUM ``C87-12-25.2``",
+            "minLength": 1,
+            "pattern": "^C\\d\\d-\\d\\d-\\d\\d(\\.\\d+)?$",
+            "title": "CNUM identifier of the conference",
+            "type": "string"
+        },
+        "contact_details": {
+            "description": ":MARC: ``270``",
+            "items": {
+                "additionalProperties": false,
+                "description": "Contact person's data",
+                "properties": {
+                    "curated_relation": {
+                        "type": "boolean"
+                    },
+                    "email": {
+                        "description": "Contact person's e-mail",
+                        "format": "email",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Contact person's name",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "record": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "$ref": {
+                                "description": "authors record",
+                                "format": "uri",
+                                "minLength": 1,
+                                "pattern": ".*/api/authors/\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "$ref"
+                        ],
+                        "title": "Reference to author record",
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "Contact information",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "control_number": {
+            "description": ":MARC: ``001``\n\nRead-only field. Also called ``record ID`` or ``recid``.",
+            "title": "ID of current record",
+            "type": "integer"
+        },
+        "core": {
+            "description": ":MARC: ``980:CORE`` corresponds to ``true``",
+            "title": "Whether this record is CORE",
+            "type": "boolean"
+        },
+        "deleted": {
+            "description": ":MARC: ``980__a/c:deleted``",
+            "title": "Whether this record has been deleted",
+            "type": "boolean"
+        },
+        "deleted_records": {
+            "description": ":MARC: ``981__a``\n\nList of records that were deleted because they were replaced by\nthis one. This typically happens when merging two records: one of\nthem gets enriched with the information of the other one, which is\nthen superfluous and gets deleted.\n\nFor the opposite concept, see :ref:`new_record`.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "$ref": {
+                        "description": "conferences record",
+                        "format": "uri",
+                        "minLength": 1,
+                        "pattern": ".*/api/conferences/\\d+$",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$ref"
+                ],
+                "title": "Reference to conference record",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "external_system_identifiers": {
+            "description": "List of identifiers of this document on external systems.",
+            "items": {
+                "anyOf": [
+                    {
+                        "additionalProperties": false,
+                        "properties": {
+                            "schema": {
+                                "enum": [
+                                    "SPIRES"
+                                ],
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": ":MARC: ``970__a``",
+                                "minLength": 1,
+                                "pattern": "^CONF-\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "schema",
+                            "value"
+                        ],
+                        "type": "object"
+                    }
+                ]
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "inspire_categories": {
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``65017`` with ``2:INSPIRE``\n\nThe Inspire category (also called field category) classifies the subject\nthis record is related to.  This classification schema is similar to the\narXiv one (see `elements/arxiv_categories.json`) and there is a way to map\nfrom arXiv categories to Inspire categories.",
+                "properties": {
+                    "source": {
+                        "enum": [
+                            "arxiv",
+                            "curator",
+                            "cds",
+                            "magpie",
+                            "user"
+                        ],
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "term": {
+                        "enum": [
+                            "Accelerators",
+                            "Astrophysics",
+                            "Computing",
+                            "Data Analysis and Statistics",
+                            "Experiment-HEP",
+                            "Experiment-Nucl",
+                            "General Physics",
+                            "Gravitation and Cosmology",
+                            "Instrumentation",
+                            "Lattice",
+                            "Math and Math Physics",
+                            "Other",
+                            "Phenomenology-HEP",
+                            "Theory-HEP",
+                            "Theory-Nucl"
+                        ],
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "term"
+                ],
+                "title": "Inspire category",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "keywords": {
+            "description": ":MARC: ``6531`` and ``695`` (depending on presence of :ref:`keywords/items/properties/schema`)\n\nKeywords give information about the specific contents of the\nrecord, much more precisely than :ref:`inspire_categories`.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "schema": {
+                        "description": "Describes to which vocabulary the keyword in :ref:`value`\nbelongs.\n\n``INSPIRE``\n    :MARC: ``695__2:INSPIRE``\n\n    The keyword has been assigned by Inspire, and\n    belongs to its vocabulary.\n\n.. note::\n\n    If not present, the keyword is a free-form keyword,\n    not necessarily part of any vocabulary.",
+                        "enum": [
+                            "INSPIRE"
+                        ],
+                        "minLength": 1,
+                        "title": "Keyword vocabulary",
+                        "type": "string"
+                    },
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": ":MARC: ``6531__a`` (depending on :ref:`schema`)\n\nIt belongs to the vocabulary specified by :ref:`schema`.\n\n:example: ``black hole: mass`` (for :ref:`schema` =\n    ``INSPIRE``)",
+                        "minLength": 1,
+                        "title": "A keyword",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of keywords",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "legacy_creation_date": {
+            "format": "date",
+            "minLength": 1,
+            "type": "string"
+        },
+        "legacy_version": {
+            "description": ":MARC: ``005``\n\nUsed to indicate the version of the record on legacy.",
+            "minLength": 1,
+            "title": "Last record update",
+            "type": "string"
+        },
+        "new_record": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "conferences record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/conferences/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to conference record",
+            "type": "object"
+        },
+        "opening_date": {
+            "description": ":MARC: ``111__x``",
+            "format": "date",
+            "minLength": 1,
+            "title": "Conference opening date",
+            "type": "string"
+        },
+        "public_notes": {
+            "description": ":MARC: ``500``\n\nAny notes about the document that do not fit into another field.\n\n.. note::\n\n    These notes are publicly visible. For notes not shown to\n    regular users, see :ref:`_private_notes`.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of public notes",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "self": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "conferences record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/conferences/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to conference record",
+            "type": "object"
+        },
+        "series": {
+            "description": ":MARC: ``411``",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "name": {
+                        "description": "``411__a``",
+                        "minLength": 1,
+                        "title": "Name of the conference series",
+                        "type": "string"
+                    },
+                    "number": {
+                        "description": "``411__n``",
+                        "title": "Number of the conference in the series",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "name"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "Conference series that this is part of",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "short_description": {
+            "additionalProperties": false,
+            "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+            "properties": {
+                "source": {
+                    "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "value": {
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "titles": {
+            "description": ":MARC: ``111__a/b``",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "source": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "subtitle": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "title": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "title"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of titles of the conference",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "urls": {
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``8564``",
+                "properties": {
+                    "description": {
+                        "description": ":MARC: ``8654__y``",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": ":MARC: ``8564_u``",
+                        "format": "uri",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "URL of related document",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        }
+    },
+    "required": [
+        "_collections"
+    ],
+    "title": "Conference",
+    "type": "object"
+}

@@ -1,0 +1,32 @@
+# The order of packages is significant, because pip processes them in the order
+# of appearance. Changing the order has an impact on the overall integration
+# process, which may cause wedges in the gate later.
+openstackdocstheme>=2.2.1 # Apache-2.0
+reno>=3.1.0 # Apache-2.0
+sphinx>=2.0.0,!=2.1.0 # BSD
+sphinxcontrib-apidoc>=0.2.0 # BSD
+
+# redirect tests in docs
+whereto>=0.4.0 # Apache-2.0
+
+# Install these to generate sphinx autodocs
+aodhclient>=0.9.0 # Apache-2.0
+gnocchiclient>=3.3.1 # Apache-2.0
+osc-placement>=1.7.0 # Apache-2.0
+python-barbicanclient>=4.5.2 # Apache-2.0
+python-designateclient>=2.7.0 # Apache-2.0
+python-heatclient>=1.10.0 # Apache-2.0
+python-ironicclient>=2.3.0 # Apache-2.0
+python-ironic-inspector-client>=1.5.0 # Apache-2.0
+python-manilaclient>=2.0.0 # Apache-2.0
+python-mistralclient!=3.2.0,>=3.1.0 # Apache-2.0
+python-muranoclient>=0.8.2 # Apache-2.0
+python-neutronclient>=6.7.0 # Apache-2.0
+python-octaviaclient>=1.11.0 # Apache-2.0
+python-rsdclient>=1.0.1 # Apache-2.0
+python-saharaclient>=1.4.0 # Apache-2.0
+python-senlinclient>=1.1.0 # Apache-2.0
+python-troveclient>=3.1.0 # Apache-2.0
+python-watcherclient>=2.5.0 # Apache-2.0
+python-zaqarclient>=1.0.0 # Apache-2.0
+python-zunclient>=3.6.0 # Apache-2.0

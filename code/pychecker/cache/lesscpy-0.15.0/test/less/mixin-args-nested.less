@@ -1,0 +1,129 @@
+/*
+	Args nested
+*/
+.a(@radius) {
+  	radius: @radius;
+}
+.b(@radius) {
+  	.a(@radius);
+}
+.c(@radius) {
+	.b(@radius);
+}
+.d(@radius) {
+	.c(@radius);
+}
+#e {
+  	.d(5px);
+}
+// kwarg
+.f(@radius: 1px) {
+  	radius: @radius;
+}
+.g(@radius) {
+  	.f(@radius);
+}
+.h(@radius) {
+	.g(@radius);
+}
+.i(@radius: 1px) {
+	.h(@radius);
+}
+#j {
+  	.i(5px);
+}
+#k {
+  	.i();
+}
+//
+// Nested
+//
+.nested-ruleset (@width: 200px) {
+    width: @width;
+    .column { 
+    	margin: @width; 
+    	&.blue {
+    		color: blue;
+    		.deep {
+    			padding: @width;
+    		}
+    	}
+    }
+}
+.content {
+    .nested-ruleset(600px);
+} 
+.content-em {
+    .nested-ruleset();
+}
+.nested-2(@width: 300px) {
+	width: @width;
+	.nested-ruleset(@width);
+}
+.test-2 {
+	.nested-2();
+}
+.test-2-em {
+	.nested-2(600px);
+}
+/*
+	Inner nested mixins
+*/
+.outer {
+	.inner(@width) {
+		padding: @width;
+	}
+	.innerkwarg(@width: 3px) {
+		margin: @width;
+	}
+}
+.tx {
+	.outer .inner(3px);
+	.outer .innerkwarg(1px);
+}
+.ty {
+	@width: 7px;
+	.outer .inner(@width);
+	.outer .innerkwarg();
+}
+#font {
+  	#family {
+    	.serif() {
+      		font-family: Georgia, "Times New Roman", Times, serif;
+    	}
+  	}
+  	.serif(@size: @baseFontSize, @weight: normal, @lineHeight: @baseLineHeight) {
+    	#font > #family > .serif;
+  	}
+}
+.font {
+	#font > .serif();
+}
+/*
+	Deferred calls.
+*/
+.gradientBar(@primaryColor, @secondaryColor) {
+  	#gradient > .vertical(@primaryColor, @secondaryColor);
+}
+#gradient {
+  	.vertical(@startColor: #555, @endColor: #333) {
+    	background-color: mix(@startColor, @endColor, 60%);
+  	}
+}
+.deferred {
+	.gradientBar(#555, #964);
+}
+/*
+	Mixins called within own scope
+*/
+.callswithinscope {
+	.inner() {
+		.call(@index: 3px) {
+			padding: @index;
+		}
+		.call(6px);
+	}
+}
+span.callswithinscope {
+	.callswithinscope > .inner();
+}

@@ -1,0 +1,2 @@
+include README.rst ChangeLog LICENSE tests/* test_suite.py
+

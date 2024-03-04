@@ -1,0 +1,6 @@
+
+[database]
+django-picklefield
+
+[redis]
+redis

@@ -1,0 +1,12 @@
+include AUTHORS
+include HACKING
+include INSTALL
+include LICENSE
+include Makefile
+include MANIFEST.in
+include README.rst
+recursive-include doc *
+recursive-include tests *
+recursive-include el_pagination/static *
+recursive-include el_pagination/locale *
+recursive-include el_pagination/templates *

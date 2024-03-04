@@ -1,0 +1,17 @@
+CHANGELOG.md
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+jsonrpcclient/__init__.py
+jsonrpcclient/id_generators.py
+jsonrpcclient/py.typed
+jsonrpcclient/requests.py
+jsonrpcclient/responses.py
+jsonrpcclient/sentinels.py
+jsonrpcclient/utils.py
+jsonrpcclient.egg-info/PKG-INFO
+jsonrpcclient.egg-info/SOURCES.txt
+jsonrpcclient.egg-info/dependency_links.txt
+jsonrpcclient.egg-info/not-zip-safe
+jsonrpcclient.egg-info/top_level.txt

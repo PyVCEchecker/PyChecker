@@ -1,0 +1,6 @@
+six
+pytest
+gprof2dot
+
+[tests]
+pytest-virtualenv

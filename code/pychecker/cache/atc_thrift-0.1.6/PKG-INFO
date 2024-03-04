@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: atc_thrift
+Version: 0.1.6
+Summary: ATC Thrift Library
+Home-page: https://github.com/facebook/augmented-traffic-control
+Author: Emmanuel Bretelle
+Author-email: chantra@fb.com
+License: UNKNOWN
+Description: ATC Thrift
+        ==========
+        
+        ATC Thrift is `Augmented Traffic Control` (ATC) Thrift Library
+        
+        `atc_thrift.thrift` contains the description of the atc_thrift interface.
+        Change to the API should be made in this file and the client/server code should
+        be regenerated using:
+          make
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python

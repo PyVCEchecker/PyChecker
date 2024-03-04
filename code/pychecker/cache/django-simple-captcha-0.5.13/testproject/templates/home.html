@@ -1,0 +1,12 @@
+<body style="background-color: #aba">
+<form action="." method="post">
+    {% csrf_token %}
+
+    {{form.captcha.errors}}
+    {{form.captcha}}
+
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+</body>

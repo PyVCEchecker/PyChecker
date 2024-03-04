@@ -1,0 +1,4 @@
+pip>=6.0.0
+
+[graphviz]
+graphviz

@@ -1,0 +1,361 @@
+1.16
+- support Python 3.9 officially
+- unify @memoize() and @cache(): both have .skip/.memory/.invalidate/.invalidate_all now
+- support dynamic resulting exception in @reraise() (Laurens Duijvesteijn)
+- made () optional for @decorator-made decorators with kw-only args
+- added @throttle()
+- added has_path() (Denys Zorinets)
+- fixed autocurry kwargs handling
+
+1.15
+- made rpartial accept keyworded arguments (Ruan Comelli)
+- made `@cache.invalidate()` idempotent (Dmitry Vasilyanov)
+- made raiser() accept a string as a shortcut
+- fixed cheatsheat description for 'distinct' helper (tsouvarev)
+- fixed some seqs docstrings
+- fixed some typos (Tim Gates)
+
+1.14
+- stated Python 3.7 and 3.8 support
+- dropped Python 2.6
+- added @wrap_prop()
+- added filter_errors param to @retry()
+- published nullcontext properly
+
+1.13
+- added @wrap_with()
+- added nullcontext
+
+1.12
+- added @cached_readonly
+- more introspection in @decorator decorators
+- documented @cached_property inheritance limitations
+- included tests in pypi sdist tarball (Tomáš Chvátal)
+
+1.11
+- switched docs and internals to Python 3
+- improved docs: better texts and examples here and there
+- support Python 3.7 officially
+- added popups over functions everywhere in docs
+- accept any iterables of errors in flow utils
+- fixed walk_values() for defaultdicts with empty factory
+- fixed xmap() signature introspection
+- documented lzip()
+
+1.10.3
+- added repr_len param to various debug utils
+- dropped testing in Python 3.3
+
+1.10.2
+- support extended function semantics in iffy (Eric Prykhodko)
+- distribute as a universal wheel.
+
+1.10.1
+- use raise from in reraise()
+- fix @cache with mixed positional and keywords args (thx to adrian-dankiv)
+
+1.10
+- added @reraise()
+- added unit and threshold params to *_durations() utils
+- published and documented LazyObject
+- fixed iffy() default argument when action is not present (Dmytro Kabakchei)
+
+1.9.1
+- make where() skip nonexistent keys (Aleksei Voronov)
+- fixed r?curry() on funcy i?map(), i?mapcat() and merge_with()
+
+1.9
+- filled in docstrings and some names
+- better currying:
+    - all *curry() now work with builtins and classes
+    - autocurry() is robust in deciding when to call
+    - deprecated autocurry() n arg
+- @memoize now exposes its memory and accepts key_func arg
+- @cache also accepts key_func and supports funcs with **kwargs
+- added omit() (Petr Melnikov)
+- fixed/hacked PyCharm import introspection
+- optimized i?reductions() in Python 3
+- backported accumulate() to Python 2
+
+1.8
+- added count_reps()
+- published namespace class
+- added LazyObject (simplistic, experimental and not documented)
+- support class dicts in walk*(), select*(), compact(), project() and empty()
+- support Python 3 dict.keys(), .values() and .items() in walk*() and friends
+- fixed empty() on iterators
+- optimized chunking range() in Python 3
+
+1.7.5
+- fixed defaults in double @decorated function
+- fixed @decorator with more than one default
+
+1.7.4
+- better error message on call.missed_arg access
+- optimized call.arg access in @decorator
+
+1.7.3
+- support Python 3.6 officially
+- fix deprecation warnings in Python 3.5 and 3.6
+
+1.7.2
+- added cheatsheet
+- many fixes in docs
+- documented @post_processing()
+- fixed (print|log)_* on non-function callables
+
+1.7.1
+- fixed 3+ argument map() in Python 3
+
+1.7
+- support Python 3.5 officially
+- added group_values()
+- fixed i?partition_by() for non-boolean extended mapper
+- cleanups and optimizations in colls and seqs
+
+1.6
+- added i?tree_nodes()
+- added (log|print)_iter_durations() to debug utils
+- added lists support to get_in(), set_in() and update_in()
+- single argument takewhile() and dropwhile()
+- published iwhere(), ipluck(), ipluck_attr() and iinvoke()
+- support @retry() with list (not tuple) of errors (Zakhar Zibarov)
+- changed µs to mks in time messages
+- optimized update_in()
+
+1.5
+- added rcompose()
+- added i?tree_leaves()
+- added pluck_attr() (Marcus McCurdy)
+- added set_in() and update_in()
+- added get_in() (Swaroop)
+- fixed bug with flatten() follow not passed deep
+
+1.4
+- added rpartial() and rcurry()
+- support arguments in print_(calls|exits)
+- made print_(errors|durations) work both with and without arguments
+- made (log|print)_errors() work as context manager
+- made (log|print)_durations() work as context managers
+- pass func docstring to @cached_property
+
+1.3
+- added with_next()
+- added timeout argument to @retry() (rocco66)
+- support kwargs in @memoize'd functions (Lukasz Dobrzanski)
+- do not cut result repr in @(log|print)_calls() and @(log|print)_exits
+
+1.2
+- support pypy3
+- added @contextmanager, ContextDecorator
+- added @(log|print)_(enters|exits)
+- print stack trace in @(log|print)_(calls|errors)
+- added label argument for tap()
+- better formatted call signatures in debug utilities
+- added itervalues()
+- exposed empty(), iteritems()
+- exposed @wraps and unwrap()
+- slightly optimized last() and nth()
+- fixed signatures of functions wrapped with @wrap_(mapper|selector)
+
+1.1
+- added merge_with() and join_with()
+- added @once, @once_per_args and @once_per()
+- added suppress() context manager
+- added is_set()
+- added name argument to @monkey
+- decorators created with @decorator now set __original__ attribute
+- optimized @decorator
+- optimized nth() and last()
+- lzip() is now exported by default from/for py3
+Backward incompatible fixes:
+- made pluck(), where() and invoke() return interators in python 3
+- __wrapped__ attribute added by decorators now correctly refers to immediate wrapped not innermost
+
+1.0.0
+- @silent, @ignore() and decorators created with @decorator will now work
+  with method_descriptors and other non-wrappable callables.
+- chained decorators now have access to arguments by name
+- exposed cut_prefix() and cut_suffix()
+- optimized re_tester()
+- fixed @retry in python 3
+Backward incompatible changes:
+- function made from dict will now use __getitem__ instead of get.
+  Means possible KeyErrors for dicts and factory function calls for defaultdict.
+  Use `a_dict.get` instead of just `a_dict` for old behaviour.
+- reverted imap(None, seq) to default strange behaviour.
+
+0.10.1
+- optimized @decorator
+
+0.10
+- added is_tuple()
+- raiser() can now be called without arguments, defaults to Exception
+- support del @cached_property
+- optimized and cleaned up @cached_property
+- optimized i?split(), split_at() and split_by()
+- optimized @memoize
+- optimized zipdict()
+Backward incompatible changes:
+- split(), split_at() and split_by() now return a tuple of two lists instead of list of them
+- @cached_property no longer uses _name to store cached value
+- partial() is now an alias to functools.partial, use func_partial() for old behaviour
+
+0.9
+- added experimental python 3 support
+- added python 2.6 support
+- added autocurry()
+- published idistinct(), isplit(), isplit_at(), isplit_by()
+- some optimizations
+
+0.8
+- added raiser()
+- added idistinct()
+- added key argument to i?distinct()
+- added key argument to is_distinct()
+- added group_by_keys()
+Backward incompatible changes:
+- walk_values() now updates defaultdict item factory to composition of mapper and old one
+- izip_dicts() now packs values in tuple separate from key
+- @decorator raises AttributeError not NameError when non-existent argument is accessed by name
+
+0.7
+- added i?flatten()
+- added pairwise()
+- added nth()
+- added is_seqcont()
+- greatly optimized @decorator
+- added @log_durations and @print_durations
+- @logs_calls and @print_calls now provide call signature on return
+- @logs_calls and @print_calls now log errors, optional for @log_calls
+- better call signature stringification for @(log|print)_(calls|errors)
+- fixed i?partition() and i?chunks() with xrange()
+Backward incompatible changes:
+- is_iter() now returns False given xrange() object
+
+0.6.0
+- added izip_values() and izip_dicts()
+- added last() and butlast()
+- added isnone() and notnone() primitives
+- added extended fn semantics to group_by(), count_by() and i?partition_by()
+- added fill argument to with_prev()
+- optimized ilen()
+
+0.5.6
+- fixed installation issue
+
+0.5.5
+- added count_by()
+- added i?partition_by()
+
+0.5.4
+- added @post_processing() flow utility
+- partition() and chunks() can handle iterators now
+- added ipartition() and ichunks()
+
+0.5.3
+- fixed decorators produced with @decorator over non-functions
+- optimized @ignore and @silent
+
+0.5.2
+- added i?without()
+- more and better docs
+Backward incompatible changes:
+- compact() now strips all falsy values not just None
+
+0.5.1
+- added ints and slices to extended fn semantics
+- added extended semantics to *_fn(), compose(), complement and i?juxt()
+- can now @monkey() patch modules
+- cached properties can now be set
+
+0.5.0
+- added type testing utilities
+- added @monkey
+- added cut_prefix() and cut_suffix() privately
+- added @silent_lookuper
+- exported @retry directly from from funcy
+- better support for arg introspection in @decorator
+Backward incompatible changes:
+- removed defaults for log_calls() and log_errors()
+- @make_lookuper decorated functions now will raise LookupError on memory miss,
+  use @silent_lookuper for old behavior
+- call object in @decorator access to func, args and kwargs
+  is now done through _func, _args and _kwargs
+
+0.4.1
+- decorators created with @decorator are now able to pass additional args and kwargs
+- @collecting, @joining() and @limit_error_rate() now exported directly from funcy
+- @tap(), @log_calls and @log_errors() now exported directly from funcy
+- added @print_calls and @print_errors
+- better handling passing None to optional parameter
+- docs for debugging utilities
+Backward incompatible changes:
+- @log renamed to @log_calls
+
+0.4.0
+- extended predicate/mapping semantics for seq and coll utils
+- added str_join()
+- added @collecting and @joining()
+- added sums() and isums()
+- better docs
+
+0.3.4
+- added with_prev()
+- added iterable()
+- support iterators in walk*(), select*(), empty() and project()
+- reexport itertools.chain()
+- faster curry
+- more docs
+
+0.3.3
+- added compact(), i?reductions()
+- added default argument to @ignore()
+- added tap() experimental debug utility
+- @make_lookuper() now works on functions with arguments
+- exposed ilen() publicly
+- added default argument to @ignore()
+- fix: join() and merge() now correctly fail when receive [None, ...]
+- better docs
+Backward incompatible changes:
+- renamed @memoize.lookup() to @make_lookuper()
+
+0.3.2
+- added ilen()
+- added some object helpers: namespace base class and @cached_property
+- more docs
+
+0.3.1
+- added @memoize.lookup()
+- more and better docs
+Backward incompatible changes:
+- removed generator based @decorator version
+- pluck() now accepts key as first parameter
+
+0.3.0
+- partial docs
+- added where(), pluck() and invoke() inspired by underscore
+- added split_by()
+- second() made public
+- reexport itertools.cycle()
+- walk() and select() work with strings now
+Backward incompatible changes:
+- renamed groupby() to group_by()
+- separated split_at() from split()
+- automatically unpack one-element tuples returned from re_*()
+- join() now returns None on empty input instead of TypeError
+- made fallback() accept multiple arguments
+Bugfixes:
+- fixed join() swallowing first coll from iterator of colls
+
+0.2.1
+- one argument keep()
+- fallback() flow
+
+0.2
+- added curry() to funcs
+- added re_test(), re_tester() and re_finder() to strings
+- added second() to seqs
+- added one() and one_fn() to colls and funcolls
+- support defaultdicts in walk*(), select*(), project(), empty()
+- one argument and uncallable default in iffy()

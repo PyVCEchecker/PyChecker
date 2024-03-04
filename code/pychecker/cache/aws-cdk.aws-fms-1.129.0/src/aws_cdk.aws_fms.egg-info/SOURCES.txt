@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_fms.egg-info/PKG-INFO
+src/aws_cdk.aws_fms.egg-info/SOURCES.txt
+src/aws_cdk.aws_fms.egg-info/dependency_links.txt
+src/aws_cdk.aws_fms.egg-info/requires.txt
+src/aws_cdk.aws_fms.egg-info/top_level.txt
+src/aws_cdk/aws_fms/__init__.py
+src/aws_cdk/aws_fms/py.typed
+src/aws_cdk/aws_fms/_jsii/__init__.py
+src/aws_cdk/aws_fms/_jsii/aws-fms@1.129.0.jsii.tgz

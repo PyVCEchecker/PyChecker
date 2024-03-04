@@ -1,0 +1,9 @@
+LICENSE
+README.md
+cfgv.py
+setup.cfg
+setup.py
+cfgv.egg-info/PKG-INFO
+cfgv.egg-info/SOURCES.txt
+cfgv.egg-info/dependency_links.txt
+cfgv.egg-info/top_level.txt

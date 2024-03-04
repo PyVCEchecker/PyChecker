@@ -1,0 +1,3 @@
+[console_scripts]
+travis-sphinx = travis_sphinx.main:main
+

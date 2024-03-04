@@ -1,0 +1,109 @@
+Metadata-Version: 2.1
+Name: behave-django
+Version: 1.4.0
+Summary: Behave BDD integration for Django
+Home-page: https://github.com/behave/behave-django
+Author: Mitchel Cabuloy
+Author-email: mixxorz@gmail.com
+Maintainer: Mitchel Cabuloy, Peter Bittner
+Maintainer-email: mixxorz@gmail.com
+License: MIT
+Description: behave-django |latest-version|
+        ==============================
+        
+        |build-status| |health| |python-support| |license| |docs-status| |gitter|
+        
+        Behave BDD integration for Django
+        
+        .. features-marker
+        
+        Features
+        --------
+        
+        - Web Browser Automation ready
+        - Database transactions per scenario
+        - Use Django's testing client
+        - Use unittest + Django assert library
+        - Use behave's command line arguments
+        - Use behave's configuration file
+        - Fixture loading
+        - Page objects
+        
+        .. support-marker
+        
+        Version Support
+        ---------------
+        
+        *behave-django* is `tested against`_ the officially supported combinations of
+        Python and Django (Django 2.2, 3.0 on Python 3.5, 3.6, 3.7, 3.8).
+        
+        The version of `behave`_ is not tied to our integration (read: "independent").
+        We test against the latest release on PyPI, and run a sample against Behave's
+        current ``master`` branch.
+        
+        .. docs-marker
+        
+        Documentation
+        -------------
+        
+        - Documentation is available from `behave-django.readthedocs.io`_
+        - Read more about *behave* at `behave.readthedocs.io`_
+        
+        .. contribute-marker
+        
+        How to Contribute
+        -----------------
+        
+        Please, read the `contributing guide`_ in the docs.
+        
+        .. references-marker
+        
+        
+        .. _tested against: https://travis-ci.org/behave/behave-django
+        .. _behave: https://pypi.python.org/pypi/behave
+        .. _behave-django.readthedocs.io: https://behave-django.readthedocs.io/en/latest/
+        .. _behave.readthedocs.io: https://behave.readthedocs.io/en/latest/usecase_django.html
+        .. _contributing guide: https://behave-django.readthedocs.io/en/latest/contribute.html
+        .. |latest-version| image:: https://img.shields.io/pypi/v/behave-django.svg
+            :target: https://pypi.python.org/pypi/behave-django/
+            :alt: Latest version
+        .. |build-status| image:: https://img.shields.io/travis/behave/behave-django/master.svg
+            :target: https://travis-ci.org/behave/behave-django
+            :alt: Build status
+        .. |health| image:: https://img.shields.io/codacy/grade/ffcbf7a0c11445a6b95adf80ac9da029/master.svg
+            :target: https://www.codacy.com/app/behave-contrib/behave-django
+            :alt: Code health
+        .. |python-support| image:: https://img.shields.io/pypi/pyversions/behave-django.svg
+            :target: https://pypi.python.org/pypi/behave-django
+            :alt: Python versions
+        .. |license| image:: https://img.shields.io/pypi/l/behave-django.svg
+            :target: https://github.com/behave/behave-django/blob/master/LICENSE
+            :alt: Software license
+        .. |docs-status| image:: https://img.shields.io/readthedocs/behave-django/stable.svg
+            :target: https://readthedocs.org/projects/behave-django/
+            :alt: Documentation Status
+        .. |gitter| image:: https://img.shields.io/gitter/room/behave/behave-django.svg
+            :alt: Gitter chat room
+            :target: https://gitter.im/behave/behave-django
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Environment :: Plugins
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.2
+Classifier: Framework :: Django :: 3.0
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Testing
+Description-Content-Type: text/x-rst

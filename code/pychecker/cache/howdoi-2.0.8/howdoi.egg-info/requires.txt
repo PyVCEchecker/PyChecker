@@ -1,0 +1,8 @@
+Pygments
+cssselect
+lxml
+pyquery
+requests
+cachelib==0.1
+appdirs
+keep

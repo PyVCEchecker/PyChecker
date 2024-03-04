@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: thumbor-plugins
+Version: 0.2.4
+Summary: Optimizers and filters contributed by the Thumbor community
+Home-page: https://github.com/globocom/thumbor/wiki
+Author: globo.com
+Author-email: timehome@corp.globo.com
+License: MIT
+Description: UNKNOWN
+Keywords: imaging face detection feature thumbnail imagemagick pil opencv
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Multimedia :: Graphics :: Presentation
+Provides-Extra: tests

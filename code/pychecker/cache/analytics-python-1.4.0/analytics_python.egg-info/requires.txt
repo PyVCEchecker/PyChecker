@@ -1,0 +1,10 @@
+requests<3.0,>=2.7
+six>=1.5
+monotonic>=1.5
+backoff==1.10.0
+python-dateutil>2.1
+
+[test]
+mock==2.0.0
+pylint==1.9.3
+flake8==3.7.9

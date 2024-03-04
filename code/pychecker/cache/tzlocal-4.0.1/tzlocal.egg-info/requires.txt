@@ -1,0 +1,17 @@
+pytz_deprecation_shim
+
+[:platform_system == "Windows"]
+tzdata
+
+[:python_version < "3.9"]
+backports.zoneinfo
+
+[devenv]
+black
+pyroma
+pytest-cov
+zest.releaser
+
+[test]
+pytest-mock>=3.3
+pytest>=4.3

@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+
+import alarmdecoder
+import sys, select
+import termios, tty
+import time
+
+def main():
+    if len(sys.argv) != 5:
+        print "Syntax: {0} [host:port] [ca cert] [client cert] [client key]\r".format(sys.argv[0])
+        return 1
+
+    host, port = sys.argv[1].split(':')
+    ca_cert = sys.argv[2]
+    client_cert = sys.argv[3]
+    client_key = sys.argv[4]
+
+    running = True
+
+    old_term_settings = termios.tcgetattr(sys.stdin.fileno())
+    tty.setraw(sys.stdin.fileno())
+
+    try:
+        print "Opening connection to {0}:{1}\r".format(host, port)
+
+        dev = alarmdecoder.devices.SocketDevice(interface=(host, int(port)))
+        dev.ssl = True
+        dev.ssl_certificate = client_cert
+        dev.ssl_key = client_key
+        dev.ssl_ca = ca_cert
+
+        dev.open(no_reader_thread=True)
+        dev.write("\r")     # HACK: Prime the pump.  This likely has to do with the SSL handshake
+                            #       not being completed when we get down to the select.
+
+        while running:
+            ifh, ofh, efh = select.select([sys.stdin, dev._device], [], [], 0)
+
+            for h in ifh:
+                if h == sys.stdin:
+                    data = h.read(1)
+
+                    # Break out if we get a CTRL-C
+                    if data == "\x03":
+                        print "Exiting..\r"
+                        running = False
+                        break
+
+                    else:
+                        dev.write(data)
+
+                else:
+                    data = h.read(100)
+
+                    sys.stdout.write(data)
+                    sys.stdout.flush()
+
+        dev.close()
+        print "Connection closed.\r"
+
+    finally:
+        termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, old_term_settings)
+
+
+if __name__ == '__main__':
+    main()

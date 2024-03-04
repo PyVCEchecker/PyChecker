@@ -1,0 +1,7 @@
+opencensus-context==0.1.2
+
+[:python_version < "3.6"]
+google-api-core<2.0.0,>=1.0.0
+
+[:python_version >= "3.6"]
+google-api-core<3.0.0,>=1.0.0

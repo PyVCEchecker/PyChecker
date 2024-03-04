@@ -1,0 +1,7 @@
+[console_scripts]
+litecli = litecli.main:cli
+
+[distutils.commands]
+lint = tasks:lint
+test = tasks:test
+

@@ -1,0 +1,16 @@
+cryptography>=2.1.4
+josepy>=1.9.0
+PyOpenSSL>=17.3.0
+pyrfc3339
+pytz
+requests>=2.14.2
+requests-toolbelt>=0.3.0
+setuptools>=39.0.1
+
+[docs]
+Sphinx>=1.0
+sphinx_rtd_theme
+
+[test]
+pytest
+pytest-xdist

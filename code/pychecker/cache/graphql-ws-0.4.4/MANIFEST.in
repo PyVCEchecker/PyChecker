@@ -1,0 +1,15 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include HISTORY.rst
+include LICENSE
+include README.rst
+include tox.ini
+
+graft graphql_ws/django/templates
+graft examples
+prune examples/django_channels2/.cache
+graft tests
+global-exclude __pycache__
+global-exclude *.py[co]
+
+recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif

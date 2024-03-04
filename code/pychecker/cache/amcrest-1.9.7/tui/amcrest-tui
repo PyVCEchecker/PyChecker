@@ -1,0 +1,221 @@
+#!/usr/bin/env python3
+"""Amcrest Text User Interface."""
+# -*- coding: utf-8 -*-
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# vim:sw=4:ts=4:et
+# pylint: disable=invalid-name
+
+from __future__ import print_function
+
+import os
+import signal
+import subprocess
+import tempfile
+import time
+
+try:
+    # import for Python 2.x
+    from ConfigParser import ConfigParser, NoOptionError, NoSectionError
+except ImportError:
+    # import for Python 3.x
+    from configparser import ConfigParser, NoOptionError, NoSectionError
+
+from argparse import ArgumentParser
+from amcrest import AmcrestCamera
+
+
+class AmcrestTuiViewer(object):
+    """Amcrest Text User Interface."""
+
+    AMCREST_CONF = "{0}/.config/amcrest.conf".format(os.path.expanduser("~"))
+
+    def __init__(self,
+                 config_file_name,
+                 channel_snapshot,
+                 timer_between_snapshots,
+                 timeout_error_msg,
+                 merge_snapshots,
+                 framebuffer_device):
+        """
+        Define AmcrestTuiViever init method.
+
+        Config_file_name - optional amcrest config file
+        Timer_between_snapshots - timer between each snapshot
+        """
+        if not os.path.exists(self.AMCREST_CONF):
+            raise RuntimeError(
+                "Please set the initial {0}".format(self.AMCREST_CONF)
+            )
+
+        # Timeout settings
+        self.timer_between_snapshots = timer_between_snapshots
+        self.timeout_error_msg = timeout_error_msg
+
+        # Channel for snapshot
+        self.channel_snapshot = channel_snapshot
+
+        # Hold fbi pid
+        self.cmd = None
+
+        # pylint: disable=fixme
+        # FIXME: User might be able to provide config file path
+        self.config_file_name = config_file_name
+
+        # FIXME: Add such feature via convert tool
+        self.merge_snapshots = merge_snapshots
+        self.fb_device = framebuffer_device
+
+        # Setting config stuff for amcrest.conf
+        self.config = ConfigParser()
+        self.config.read(self.AMCREST_CONF)
+
+        # Creating dict to hold cameras data from config file
+        self.amcrest_config = {}
+
+        # Filling the dictionary amcrest_config with all cameras available
+        for camera_number in range(len(self.config.sections())):
+
+            camera_name = self.config.sections()[camera_number]
+
+            try:
+                self.amcrest_config[camera_name] = {
+                    'hostname': self.config.get(camera_name, 'hostname'),
+                    'port': self.config.get(camera_name, 'port'),
+                    'username': self.config.get(camera_name, 'username'),
+                    'password': self.config.get(camera_name, 'password'),
+                    'device': AmcrestCamera(
+                        host=self.config.get(camera_name, 'hostname'),
+                        port=self.config.get(camera_name, 'port'),
+                        user=self.config.get(camera_name, 'username'),
+                        password=self.config.get(
+                            camera_name, 'password')).camera
+                }
+            except (NoSectionError, NoOptionError) as e:
+                print("ERROR! %s found at %s" % (e, self.AMCREST_CONF))
+                raise
+
+    def _kill_process(self, alarm, stack):
+        # As fbida waits users input to close the program,
+        # we need to set timeout and as soon the time expire send
+        # SIGTERM to program to open a new one and avoid race.
+        os.kill(self.cmd.pid, signal.SIGTERM)
+
+    def _view_image(self, image):
+        self.cmd = subprocess.Popen(
+            ['fbi', '-a', '-noverbose', '-d', self.fb_device, image],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=False
+        )
+        signal.signal(signal.SIGALRM, self._kill_process)
+        signal.alarm(self.timer_between_snapshots)
+        self.cmd.communicate()
+
+    def _snapshot(self, tmpfile):
+        # Execute the snapshot for each camera listed
+        try:
+            self.dev.snapshot(channel=self.channel_snapshot, path_file=tmpfile)
+        except Exception as e:
+            raise RuntimeError(e) from e
+
+    # pylint: disable=unused-variable
+    def run(self):
+        """Call run method."""
+        for counter, camera in enumerate(self.amcrest_config):
+            with tempfile.NamedTemporaryFile(dir='/tmp',
+                                             delete=True) as tmpfile:
+
+                # pylint: disable=attribute-defined-outside-init
+                # Add new tmpfile name
+                self.dev = self.amcrest_config[camera]['device']
+
+                os.system("clear")
+                print("Loading new image from: {0}".format(camera))
+                try:
+                    self._snapshot(tmpfile.name)
+                except RuntimeError as e:
+                    print(("Error trying to get a snapshot! "
+                           "{0}".format(str(e))))
+                    time.sleep(self.timeout_error_msg)
+                    continue
+
+                self._view_image(tmpfile.name)
+
+
+if __name__ == "__main__":
+
+    parser = ArgumentParser()
+    parser.add_argument(
+        '-f',
+        '--config-file-name',
+        help="specify the amcrest config file",
+        required=False
+    )
+
+    parser.add_argument(
+        '-c',
+        '--channel-snapshot',
+        help="channel for snapshot",
+        default=0,
+        required=False
+    )
+
+    parser.add_argument(
+        '-d',
+        '--framebuffer-device',
+        help="speficy the framebuffer device, default /dev/fb0",
+        default="/dev/fb0",
+        required=False
+    )
+    parser.add_argument(
+        '-t',
+        '--timer-between-snapshots',
+        help="timer between snapshots, default 2 sec",
+        default=2,
+        required=False
+    )
+
+    parser.add_argument(
+        '-e',
+        '--timeout-error-msg',
+        help="timeout in case errors messages should be displayed"
+             ", default 5sec",
+        default=5,
+        required=False
+    )
+
+    parser.add_argument(
+        '-m',
+        '--merge-snapshots',
+        help="merge snapshots from all cameras in one photo to be displayed",
+        required=False
+    )
+    args = parser.parse_args()
+
+    # Check if we have permission to framebuffer device
+    with open(args.framebuffer_device, 'r') as f:
+        pass
+
+    # pylint: disable=fixme
+    # FIXME: Add option to save the snapshots in the disk
+    # (requires to set dir as well)
+    tui_viewer = AmcrestTuiViewer(
+        config_file_name=args.config_file_name,
+        channel_snapshot=args.channel_snapshot,
+        timer_between_snapshots=args.timer_between_snapshots,
+        timeout_error_msg=args.timeout_error_msg,
+        merge_snapshots=args.merge_snapshots,
+        framebuffer_device=args.framebuffer_device
+    )
+
+    while True:
+        tui_viewer.run()

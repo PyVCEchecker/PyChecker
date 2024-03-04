@@ -1,0 +1,13 @@
+qtpy>=1.9
+
+[develop]
+qtsass
+watchdog
+
+[docs]
+sphinx
+sphinx_rtd_theme
+
+[example]
+pyqt5
+pyside2

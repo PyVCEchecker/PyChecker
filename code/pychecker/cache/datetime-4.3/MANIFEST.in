@@ -1,0 +1,13 @@
+include *.rst
+include *.txt
+include .coveragerc
+include buildout.cfg
+include tox.ini
+
+include bootstrap.py
+exclude bootstrap.py
+
+recursive-include src/DateTime *
+
+global-exclude *.pyc
+global-exclude *.pyo

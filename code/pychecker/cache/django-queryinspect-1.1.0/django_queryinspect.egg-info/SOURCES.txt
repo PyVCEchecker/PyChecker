@@ -1,0 +1,9 @@
+README.md
+setup.py
+django_queryinspect.egg-info/PKG-INFO
+django_queryinspect.egg-info/SOURCES.txt
+django_queryinspect.egg-info/dependency_links.txt
+django_queryinspect.egg-info/requires.txt
+django_queryinspect.egg-info/top_level.txt
+qinspect/__init__.py
+qinspect/middleware.py

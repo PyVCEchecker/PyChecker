@@ -1,0 +1,5 @@
+Shapely==1.7.1
+neo4j-driver==4.1.1
+neobolt==1.7.17
+pytest>=6.0.1
+pytz>=2016.10

@@ -1,0 +1,6 @@
+
+[fast]
+fastnumbers>=2.0.0
+
+[icu]
+PyICU>=1.0.0

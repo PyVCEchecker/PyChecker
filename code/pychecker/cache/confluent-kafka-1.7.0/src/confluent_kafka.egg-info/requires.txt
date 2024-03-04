@@ -1,0 +1,64 @@
+
+[:python_version < "3.2"]
+futures
+
+[:python_version < "3.4"]
+enum34
+
+[avro]
+requests
+
+[avro:python_version < "3.0"]
+fastavro<1.0,>=0.23.0
+avro==1.10.0
+
+[avro:python_version > "3.0"]
+fastavro>=1.0
+avro-python3==1.10.0
+
+[dev]
+pytest-timeout
+flake8
+requests
+
+[dev:python_version < "3.0"]
+pytest==4.6.4
+fastavro<1.0,>=0.23.0
+avro==1.10.0
+
+[dev:python_version > "3.0"]
+fastavro>=1.0
+avro-python3==1.10.0
+
+[dev:python_version >= "3.0"]
+pytest
+
+[doc]
+sphinx
+sphinx-rtd-theme
+requests
+
+[doc:python_version < "3.0"]
+fastavro<1.0,>=0.23.0
+avro==1.10.0
+
+[doc:python_version > "3.0"]
+fastavro>=1.0
+avro-python3==1.10.0
+
+[json]
+jsonschema
+requests
+
+[json:python_version < "3.0"]
+pyrsistent==0.16.1
+
+[json:python_version > "3.0"]
+pyrsistent
+
+[protobuf]
+protobuf
+requests
+
+[schema-registry]
+requests

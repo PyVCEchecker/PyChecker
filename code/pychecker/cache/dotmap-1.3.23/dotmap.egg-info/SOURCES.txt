@@ -1,0 +1,11 @@
+LICENSE.txt
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+dotmap/__init__.py
+dotmap/test.py
+dotmap.egg-info/PKG-INFO
+dotmap.egg-info/SOURCES.txt
+dotmap.egg-info/dependency_links.txt
+dotmap.egg-info/top_level.txt

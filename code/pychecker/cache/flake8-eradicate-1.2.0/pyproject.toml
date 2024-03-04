@@ -1,0 +1,73 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry]
+name = "flake8-eradicate"
+version = "1.2.0"
+description = "Flake8 plugin to find commented out code"
+
+license = "MIT"
+
+authors = [
+  "Nikita Sobolev <mail@sobolevn.me>"
+]
+
+readme = "README.md"
+
+repository = "https://github.com/wemake-services/flake8-eradicate"
+homepage = "https://github.com/wemake-services/flake8-eradicate"
+
+keywords = [
+  "flake8",
+  "plugin",
+  "linting",
+  "wemake.services",
+  "code quality"
+]
+
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Framework :: Flake8",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[tool.poetry.plugins."flake8.extension"]
+E8 = "flake8_eradicate:Checker"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+flake8 = ">=3.5,<5"
+eradicate = "^2.0"
+attrs = "*"
+
+[tool.poetry.dev-dependencies]
+pytest-cov = "^2.12"
+pytest-randomly = "^3.8"
+pytest = "^6.2"
+
+flake8-print = "^4.0"
+flake8-builtins = "^1.5"
+flake8-commas = "^2.0"
+flake8-quotes = "^3.2"
+flake8-comprehensions = "^3.5"
+flake8-docstrings = "^1.6"
+flake8-string-format = "^0.3"
+flake8-pep3101 = "^1.3"
+flake8-super-call = "^1.0"
+flake8-debugger = "^4.0"
+flake8-isort = "^4.0"
+pep8-naming = "^0.12"
+
+mypy = "^0.910"
+types-pkg-resources = "^0.1.3"
+
+safety = "^1.10"
+
+zipp = "3.5.0"

@@ -1,0 +1,10 @@
+README.md
+credstash.py
+setup.cfg
+setup.py
+credstash.egg-info/PKG-INFO
+credstash.egg-info/SOURCES.txt
+credstash.egg-info/dependency_links.txt
+credstash.egg-info/entry_points.txt
+credstash.egg-info/requires.txt
+credstash.egg-info/top_level.txt

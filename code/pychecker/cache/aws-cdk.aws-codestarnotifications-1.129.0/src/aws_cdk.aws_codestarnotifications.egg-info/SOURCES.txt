@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_codestarnotifications.egg-info/PKG-INFO
+src/aws_cdk.aws_codestarnotifications.egg-info/SOURCES.txt
+src/aws_cdk.aws_codestarnotifications.egg-info/dependency_links.txt
+src/aws_cdk.aws_codestarnotifications.egg-info/requires.txt
+src/aws_cdk.aws_codestarnotifications.egg-info/top_level.txt
+src/aws_cdk/aws_codestarnotifications/__init__.py
+src/aws_cdk/aws_codestarnotifications/py.typed
+src/aws_cdk/aws_codestarnotifications/_jsii/__init__.py
+src/aws_cdk/aws_codestarnotifications/_jsii/aws-codestarnotifications@1.129.0.jsii.tgz

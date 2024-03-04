@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: azure
+Version: 5.0.0
+Summary: Microsoft Azure Client Libraries for Python
+Home-page: https://github.com/Azure/azure-sdk-for-python
+Author: Microsoft Corporation
+Author-email: azpysdkhelp@microsoft.com
+License: MIT License
+Description: # Microsoft Azure SDK for Python
+        
+        This package was the Microsoft Azure bundle.
+        
+        Starting with v5.0.0, this package is deprecated. Please install the service specific packages prefixed by `azure` needed for your application.
+        
+        The complete list of available packages can be found at:
+        https://aka.ms/azsdk/python/all
+        
+        Here's a non-exhaustive list of common packages:
+        
+        -  [azure-mgmt-compute](https://pypi.python.org/pypi/azure-mgmt-compute) : Management of Virtual Machines, etc.
+        -  [azure-mgmt-storage](https://pypi.python.org/pypi/azure-mgmt-storage) : Management of storage accounts.
+        -  [azure-mgmt-resource](https://pypi.python.org/pypi/azure-mgmt-resource) : Generic package about Azure Resource Management (ARM)
+        -  [azure-keyvault-secrets](https://pypi.python.org/pypi/azure-keyvault-secrets) : Access to secrets in Key Vault
+        -  [azure-storage-blob](https://pypi.python.org/pypi/azure-storage-blob) : Access to blobs in storage accounts
+        
+        A more comprehensive discussion of the rationale for this decision can be found in the following issue:
+        https://github.com/Azure/azure-sdk-for-python/issues/10646
+        
+        ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-python%2Fazure%2FREADME.png)
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 7 - Inactive
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/markdown

@@ -1,0 +1,12 @@
+README.rst
+setup.cfg
+setup.py
+virtualenv_api.egg-info/PKG-INFO
+virtualenv_api.egg-info/SOURCES.txt
+virtualenv_api.egg-info/dependency_links.txt
+virtualenv_api.egg-info/requires.txt
+virtualenv_api.egg-info/top_level.txt
+virtualenvapi/__init__.py
+virtualenvapi/exceptions.py
+virtualenvapi/manage.py
+virtualenvapi/util.py

@@ -1,0 +1,6 @@
+argcomplete
+colorama
+jmespath
+pygments
+pyyaml
+tabulate

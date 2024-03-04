@@ -1,0 +1,23 @@
+# Packages needed for miniwdl development, in addition to those in
+# requirements.txt which are needed for miniwdl to run in common use.
+-r requirements.txt
+pyre-check==0.0.27
+black==21.7b0
+pylint
+sphinx
+sphinx-autobuild
+sphinx_rtd_theme
+graphviz
+coverage
+python-coveralls
+wheel
+pbr
+twine
+testfixtures
+pytest
+pytest-cov
+pytest-xdist
+recommonmark
+sphinx-argparse
+boto3
+flake8

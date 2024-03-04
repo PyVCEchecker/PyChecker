@@ -1,0 +1,3 @@
+azure-cli-core
+azure-mgmt-media==1.1.1
+azure-graphrbac==0.60.0

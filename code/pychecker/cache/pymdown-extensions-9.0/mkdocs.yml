@@ -1,0 +1,176 @@
+site_name: PyMdown Extensions Documentation
+site_url: https://facelessuser.github.io/pymdown-extensions
+repo_url: https://github.com/facelessuser/pymdown-extensions
+edit_uri: tree/master/docs/src/markdown
+site_description: A Collection of Useful Extensions for Python Markdown
+copyright: |
+  Copyright &copy; 2014 - 2021 <a href="https://github.com/facelessuser"  target="_blank" rel="noopener">Isaac Muse</a>
+
+docs_dir: docs/src/markdown
+theme:
+  name: material
+  custom_dir: docs/theme
+  icon:
+    logo: material/book-open-page-variant
+  palette:
+    scheme: dracula
+    primary: deep purple
+    accent: deep purple
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.instant
+
+nav:
+  - Home:
+    - Pymdown Extensions: index.md
+    - Installation: installation.md
+    - Usage Notes: usage_notes.md
+  - Extensions:
+    - Arithmatex: extensions/arithmatex.md
+    - B64: extensions/b64.md
+    - BetterEm: extensions/betterem.md
+    - Caret: extensions/caret.md
+    - Critic: extensions/critic.md
+    - Details: extensions/details.md
+    - Emoji: extensions/emoji.md
+    - EscapeAll: extensions/escapeall.md
+    - Extra: extensions/extra.md
+    - Highlight: extensions/highlight.md
+    - InlineHilite: extensions/inlinehilite.md
+    - Keys: extensions/keys.md
+    - MagicLink: extensions/magiclink.md
+    - Mark: extensions/mark.md
+    - PathConverter: extensions/pathconverter.md
+    - ProgressBar: extensions/progressbar.md
+    - SaneHeaders: extensions/saneheaders.md
+    - SmartSymbols: extensions/smartsymbols.md
+    - Snippets: extensions/snippets.md
+    - StripHTML: extensions/striphtml.md
+    - SuperFences: extensions/superfences.md
+    - Tabbed: extensions/tabbed.md
+    - Tasklist: extensions/tasklist.md
+    - Tilde: extensions/tilde.md
+  - Extras:
+    - Slugs: extras/slugs.md
+    - Advanced Mermaid Notes: extras/mermaid.md
+  - FAQ:
+    - Frequently Asked Questions: faq.md
+  - About:
+    - Contributing &amp; Support: about/contributing.md
+    - Development: about/development.md
+    - Changelog: about/changelog.md
+    - Migration Notes:
+        - '6.0': about/releases/6.0.md
+        - '7.0': about/releases/7.0.md
+        - '8.0': about/releases/8.0.md
+        - '9.0': about/releases/9.0.md
+    - License: about/license.md
+
+markdown_extensions:
+  - markdown.extensions.toc:
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
+      permalink: ""
+  - markdown.extensions.admonition:
+  - markdown.extensions.smarty:
+      smart_quotes: false
+  - pymdownx.betterem:
+  - markdown.extensions.attr_list:
+  - markdown.extensions.def_list:
+  - markdown.extensions.tables:
+  - markdown.extensions.abbr:
+  - markdown.extensions.footnotes:
+  - markdown.extensions.md_in_html:
+  - pymdownx.superfences:
+      preserve_tabs: true
+      custom_fences:
+        # Mermaid diagrams
+        - name: diagram
+          class: diagram
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: math
+          class: arithmatex
+          format: !!python/object/apply:pymdownx.arithmatex.arithmatex_fenced_format {kwds: {mode: generic, tag: pre}}
+        - name: md-render
+          class: md-render
+          format: !!python/name:tools.pymdownx_md_render.md_sub_render
+  - pymdownx.highlight:
+      extend_pygments_lang:
+        - name: php-inline
+          lang: php
+          options:
+            startinline: true
+        - name: pycon3
+          lang: pycon
+          options:
+            python3: true
+      linenums_style: pymdownx-inline
+  - pymdownx.inlinehilite:
+      custom_inline:
+        - name: math
+          class: arithmatex
+          format: !!python/object/apply:pymdownx.arithmatex.arithmatex_inline_format {kwds: {mode: generic}}
+  - pymdownx.magiclink:
+      repo_url_shortener: true
+      repo_url_shorthand: true
+      social_url_shorthand: true
+      social_url_shortener: true
+      user: facelessuser
+      repo: pymdown-extensions
+      normalize_issue_symbols: true
+  - pymdownx.tilde:
+  - pymdownx.caret:
+  - pymdownx.smartsymbols:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.escapeall:
+      hardbreak: True
+      nbsp: True
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.progressbar:
+  - pymdownx.arithmatex:
+      generic: true
+      block_tag: 'pre'
+  - pymdownx.mark:
+  - pymdownx.striphtml:
+  - pymdownx.snippets:
+      base_path:
+      - docs/src/markdown/_snippets
+      - LICENSE.md
+      auto_append:
+      - refs.txt
+      check_paths: true
+  - pymdownx.keys:
+      separator: "\uff0b"
+  - pymdownx.details:
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.saneheaders:
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/facelessuser
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/TWs8Tgr
+extra_css:
+  # - https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css
+  - assets/pymdownx-extras/extra-f1e135416b.css
+extra_javascript:
+  - site-config.js
+  - https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js
+  # - https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - assets/pymdownx-extras/extra-loader-2c794727.js
+
+plugins:
+  - search
+  - git-revision-date-localized
+  - minify:
+      minify_html: true

@@ -1,0 +1,7 @@
+_markupbase.py
+setup.py
+micropython_markupbase.egg-info/PKG-INFO
+micropython_markupbase.egg-info/SOURCES.txt
+micropython_markupbase.egg-info/dependency_links.txt
+micropython_markupbase.egg-info/requires.txt
+micropython_markupbase.egg-info/top_level.txt

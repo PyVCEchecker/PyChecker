@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: awxkit
+Version: 19.4.0
+Summary: The official command line interface for Ansible AWX
+Home-page: https://github.com/ansible/awx
+Author: Red Hat, Inc.
+Author-email: info@ansible.com
+License: Apache 2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: System :: Software Distribution
+Classifier: Topic :: System :: Systems Administration
+Requires-Python: >=3.8
+Provides-Extra: websockets
+Provides-Extra: formatting
+Provides-Extra: crypto

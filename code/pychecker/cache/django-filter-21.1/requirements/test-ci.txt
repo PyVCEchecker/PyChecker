@@ -1,0 +1,7 @@
+markdown
+coreapi
+django-crispy-forms
+
+coverage
+pytz
+unittest-xml-reporting

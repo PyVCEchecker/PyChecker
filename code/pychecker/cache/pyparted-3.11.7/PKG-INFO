@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: pyparted
+Version: 3.11.7
+Summary: Python bindings for GNU parted
+Home-page: https://github.com/dcantrell/pyparted/
+Author: David Cantrell
+Author-email: dcantrell@redhat.com
+License: GPLv2+
+Description: UNKNOWN
+Platform: UNKNOWN

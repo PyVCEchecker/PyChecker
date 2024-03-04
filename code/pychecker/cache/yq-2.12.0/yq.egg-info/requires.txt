@@ -1,0 +1,10 @@
+setuptools
+PyYAML>=3.11
+xmltodict>=0.11.0
+toml>=0.10.0
+argcomplete>=1.8.1
+
+[test]
+coverage
+flake8
+wheel

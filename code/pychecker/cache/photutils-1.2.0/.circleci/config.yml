@@ -1,0 +1,14 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: quay.io/pypa/manylinux1_i686
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies for Python 3.7
+          command: /opt/python/cp37-cp37m/bin/pip install tox
+      - run:
+          name: Run tests for Python 3.7
+          command: /opt/python/cp37-cp37m/bin/python -m tox -e py37-test

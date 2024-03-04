@@ -1,0 +1,5 @@
+h2
+multidict
+
+[:python_version < "3.7"]
+dataclasses

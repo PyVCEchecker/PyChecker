@@ -1,0 +1,12 @@
+CHANGELOG
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+marshmallow_enum/__init__.py
+marshmallow_enum.egg-info/PKG-INFO
+marshmallow_enum.egg-info/SOURCES.txt
+marshmallow_enum.egg-info/dependency_links.txt
+marshmallow_enum.egg-info/requires.txt
+marshmallow_enum.egg-info/top_level.txt

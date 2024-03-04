@@ -1,0 +1,19 @@
+---
+features:
+  - |
+    Add ``--no-incremental``, ``--property`` and ``--availability-zone``
+    options to ``volume backup create`` command, allowing users to request a
+    non-incremental backup, set a metadata property on the created backup, and
+    set an availability zone on the created backup, respectively.
+  - |
+    Add ``--property`` and ``--no-property`` options to the
+    ``volume backup set`` command to set a metadata property or remove all
+    metadata properties from an existing backup.
+  - |
+    Add new ``volume backup unset`` command to allow unsetting of properties
+    from an existing volume backup.
+fixes:
+  - |
+    The ``--name`` and ``--description`` options of the ``volume backup set``
+    command will now verify the version requested on the client side.
+    Previously this would fail on the server side.

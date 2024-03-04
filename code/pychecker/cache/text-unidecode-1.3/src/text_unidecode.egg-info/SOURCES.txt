@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.rst
+_dump.pl
+setup.cfg
+setup.py
+test_unidecode.py
+src/text_unidecode/__init__.py
+src/text_unidecode/data.bin
+src/text_unidecode.egg-info/PKG-INFO
+src/text_unidecode.egg-info/SOURCES.txt
+src/text_unidecode.egg-info/dependency_links.txt
+src/text_unidecode.egg-info/top_level.txt

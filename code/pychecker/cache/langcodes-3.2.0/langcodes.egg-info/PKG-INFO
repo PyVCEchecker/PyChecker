@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: langcodes
+Version: 3.2.0
+Summary: Labels and compares human languages in a standardized way
+Home-page: http://github.com/rspeer/langcodes
+Maintainer: Robyn Speer
+Maintainer-email: rspeer@arborelia.net
+License: MIT
+Platform: any
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.6
+Provides-Extra: data
+License-File: LICENSE.txt
+
+
+langcodes is a toolkit for working with and comparing the standardized codes
+for languages, such as 'en' for English, 'es' for Spanish, and 'zh-Hant' for
+Traditional Chinese. These are BCP 47 language codes, formerly known as ISO
+language codes.
+
+The documentation for langcodes lives in its README file, which you can read
+on GitHub: https://github.com/rspeer/langcodes
+
+

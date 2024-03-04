@@ -1,0 +1,10 @@
+README.md
+setup.cfg
+setup.py
+pyquaternion/__init__.py
+pyquaternion/quaternion.py
+pyquaternion.egg-info/PKG-INFO
+pyquaternion.egg-info/SOURCES.txt
+pyquaternion.egg-info/dependency_links.txt
+pyquaternion.egg-info/requires.txt
+pyquaternion.egg-info/top_level.txt

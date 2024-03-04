@@ -1,0 +1,94 @@
+interactions:
+- request:
+    body: status=cool+free+%23ringtones
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      Content-Length: ['29']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.18.4]
+    method: POST
+    uri: http://localhost:3000/api/v1/statuses
+  response:
+    body: {string: '{"id":"103704145201710428","created_at":"2020-02-22T19:27:56.578Z","in_reply_to_id":null,"in_reply_to_account_id":null,"sensitive":false,"spoiler_text":"","visibility":"public","language":"ja","uri":"http://localhost/users/mastodonpy_test/statuses/103704145201710428","url":"http://localhost/@mastodonpy_test/103704145201710428","replies_count":0,"reblogs_count":0,"favourites_count":0,"favourited":false,"reblogged":false,"muted":false,"bookmarked":false,"pinned":false,"content":"\u003cp\u003ecool
+        free \u003ca href=\"http://localhost/tags/ringtones\" class=\"mention hashtag\"
+        rel=\"tag\"\u003e#\u003cspan\u003eringtones\u003c/span\u003e\u003c/a\u003e\u003c/p\u003e","reblog":null,"application":{"name":"Mastodon.py
+        test suite","website":null},"account":{"id":"1234567890123456","username":"mastodonpy_test","acct":"mastodonpy_test","display_name":"John
+        Lennon","locked":true,"bot":false,"discoverable":null,"group":false,"created_at":"2020-02-22T20:26:54.402Z","note":"\u003cp\u003eI
+        walk funny\u003c/p\u003e","url":"http://localhost/@mastodonpy_test","avatar":"http://localhost/system/accounts/avatars/123/456/789/012/345/original/4cb344b864cbd0bf.jpeg?1582399672","avatar_static":"http://localhost/system/accounts/avatars/123/456/789/012/345/original/4cb344b864cbd0bf.jpeg?1582399672","header":"http://localhost/system/accounts/headers/123/456/789/012/345/original/9b01d187d95da821.jpeg?1582399672","header_static":"http://localhost/system/accounts/headers/123/456/789/012/345/original/9b01d187d95da821.jpeg?1582399672","followers_count":0,"following_count":0,"statuses_count":1,"last_status_at":"2020-02-22","emojis":[],"fields":[{"name":"bread","value":"toasty.","verified_at":null},{"name":"lasagna","value":"no!!!","verified_at":null}]},"media_attachments":[],"mentions":[],"tags":[{"name":"ringtones","url":"http://localhost/tags/ringtones"}],"emojis":[],"card":null,"poll":null}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [17f5560a-dde2-466e-af3d-b2aef45b3c4a]
+      X-Runtime: ['0.287699']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['1890']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/featured_tags/suggestions
+  response:
+    body: {string: '[{"name":"ringtones","url":"http://localhost/tags/ringtones","history":[{"day":"1582329600","uses":"1","accounts":"1"},{"day":"1582243200","uses":"0","accounts":"0"},{"day":"1582156800","uses":"0","accounts":"0"},{"day":"1582070400","uses":"0","accounts":"0"},{"day":"1581984000","uses":"0","accounts":"0"},{"day":"1581897600","uses":"0","accounts":"0"},{"day":"1581811200","uses":"0","accounts":"0"}]}]'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [491203fd-fa9f-4505-906b-586d001adcc6]
+      X-Runtime: ['1.719362']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['403']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.18.4]
+    method: DELETE
+    uri: http://localhost:3000/api/v1/statuses/103704145201710428
+  response:
+    body: {string: '{"id":"103704145201710428","created_at":"2020-02-22T19:27:56.578Z","in_reply_to_id":null,"in_reply_to_account_id":null,"sensitive":false,"spoiler_text":"","visibility":"public","language":"ja","uri":"http://localhost/users/mastodonpy_test/statuses/103704145201710428","url":"http://localhost/@mastodonpy_test/103704145201710428","replies_count":0,"reblogs_count":0,"favourites_count":0,"favourited":false,"reblogged":false,"muted":false,"bookmarked":false,"pinned":false,"text":"cool
+        free #ringtones","reblog":null,"application":{"name":"Mastodon.py test suite","website":null},"account":{"id":"1234567890123456","username":"mastodonpy_test","acct":"mastodonpy_test","display_name":"John
+        Lennon","locked":true,"bot":false,"discoverable":null,"group":false,"created_at":"2020-02-22T20:26:54.402Z","note":"\u003cp\u003eI
+        walk funny\u003c/p\u003e","url":"http://localhost/@mastodonpy_test","avatar":"http://localhost/system/accounts/avatars/123/456/789/012/345/original/4cb344b864cbd0bf.jpeg?1582399672","avatar_static":"http://localhost/system/accounts/avatars/123/456/789/012/345/original/4cb344b864cbd0bf.jpeg?1582399672","header":"http://localhost/system/accounts/headers/123/456/789/012/345/original/9b01d187d95da821.jpeg?1582399672","header_static":"http://localhost/system/accounts/headers/123/456/789/012/345/original/9b01d187d95da821.jpeg?1582399672","followers_count":0,"following_count":0,"statuses_count":1,"last_status_at":"2020-02-22","emojis":[],"fields":[{"name":"bread","value":"toasty.","verified_at":null},{"name":"lasagna","value":"no!!!","verified_at":null}]},"media_attachments":[],"mentions":[],"tags":[{"name":"ringtones","url":"http://localhost/tags/ringtones"}],"emojis":[],"card":null,"poll":null}'}
+    headers:
+      Cache-Control: ['no-cache, no-store']
+      Content-Type: [application/json; charset=utf-8]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [f1ab60db-77af-4bc8-833d-ff88502afd32]
+      X-Runtime: ['0.236557']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['1721']
+    status: {code: 200, message: OK}
+version: 1

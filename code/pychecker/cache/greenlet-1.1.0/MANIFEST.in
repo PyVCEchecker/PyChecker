@@ -1,0 +1,48 @@
+###
+# Source code
+###
+recursive-include src *.py
+recursive-include src *.c
+recursive-include src *.cpp
+recursive-include src *.h
+recursive-include src *.cmd
+recursive-include src *.asm
+recursive-include src *.obj
+recursive-include benchmarks *
+
+###
+# Documentation
+###
+recursive-include docs *
+prune docs/_build
+
+###
+# Configuration and project files
+###
+
+include *.yml
+include *.txt
+include *.ini
+include *.rst
+include *.cfg
+include *.py
+include *.ini
+include .clang-format
+
+recursive-include appveyor *.cmd
+recursive-include appveyor *.ps1
+recursive-include appveyor *.py
+
+recursive-include .github *.yml
+
+include AUTHORS
+include LICENSE
+include LICENSE.PSF
+include MANIFEST.in
+
+include make-manylinux
+
+global-exclude *.pyc
+global-exclude *.pyd
+global-exclude *.so
+global-exclude .coverage

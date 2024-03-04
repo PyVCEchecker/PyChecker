@@ -1,0 +1,14 @@
+LICENSE.txt
+MANIFEST.in
+README.rst
+gnupg.py
+messages.json
+setup.cfg
+setup.py
+test_gnupg.py
+test_pubring.gpg
+test_secring.gpg
+python_gnupg.egg-info/PKG-INFO
+python_gnupg.egg-info/SOURCES.txt
+python_gnupg.egg-info/dependency_links.txt
+python_gnupg.egg-info/top_level.txt

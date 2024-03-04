@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  tasks:
+    - name: This task has a name
+      command: echo "Hello World"
+    - name: Debug task with name
+      debug: msg="Hello World"
+    - name: Flush handler with name
+      meta: flush_handlers

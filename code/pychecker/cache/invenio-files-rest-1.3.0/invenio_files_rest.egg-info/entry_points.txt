@@ -1,0 +1,38 @@
+[invenio_access.actions]
+bucket_listmultiparts_all = invenio_files_rest.permissions:bucket_listmultiparts_all
+bucket_read_all = invenio_files_rest.permissions:bucket_read_all
+bucket_read_versions_all = invenio_files_rest.permissions:bucket_read_versions_all
+bucket_update_all = invenio_files_rest.permissions:bucket_update_all
+location_update_all = invenio_files_rest.permissions:location_update_all
+multipart_delete_all = invenio_files_rest.permissions:multipart_delete_all
+multipart_read_all = invenio_files_rest.permissions:multipart_read_all
+object_delete_all = invenio_files_rest.permissions:object_delete_all
+object_delete_version_all = invenio_files_rest.permissions:object_delete_version_all
+object_read_all = invenio_files_rest.permissions:object_read_all
+object_read_version_all = invenio_files_rest.permissions:object_read_version_all
+
+[invenio_admin.views]
+bucket_adminview = invenio_files_rest.admin:bucket_adminview
+fileinstance_adminview = invenio_files_rest.admin:fileinstance_adminview
+location_adminview = invenio_files_rest.admin:location_adminview
+multipartobject_adminview = invenio_files_rest.admin:multipartobject_adminview
+object_adminview = invenio_files_rest.admin:object_adminview
+
+[invenio_base.api_apps]
+invenio_files_rest = invenio_files_rest:InvenioFilesREST
+
+[invenio_base.api_blueprints]
+invenio_files_rest = invenio_files_rest.views:blueprint
+
+[invenio_base.apps]
+invenio_files_rest = invenio_files_rest:InvenioFilesREST
+
+[invenio_celery.tasks]
+invenio_files_rest = invenio_files_rest.tasks
+
+[invenio_db.alembic]
+invenio_files_rest = invenio_files_rest:alembic
+
+[invenio_db.models]
+invenio_files_rest = invenio_files_rest.models
+

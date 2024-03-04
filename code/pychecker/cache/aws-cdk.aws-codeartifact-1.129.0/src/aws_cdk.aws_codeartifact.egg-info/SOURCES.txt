@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_codeartifact.egg-info/PKG-INFO
+src/aws_cdk.aws_codeartifact.egg-info/SOURCES.txt
+src/aws_cdk.aws_codeartifact.egg-info/dependency_links.txt
+src/aws_cdk.aws_codeartifact.egg-info/requires.txt
+src/aws_cdk.aws_codeartifact.egg-info/top_level.txt
+src/aws_cdk/aws_codeartifact/__init__.py
+src/aws_cdk/aws_codeartifact/py.typed
+src/aws_cdk/aws_codeartifact/_jsii/__init__.py
+src/aws_cdk/aws_codeartifact/_jsii/aws-codeartifact@1.129.0.jsii.tgz

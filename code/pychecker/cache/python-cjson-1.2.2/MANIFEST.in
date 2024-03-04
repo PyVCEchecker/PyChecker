@@ -1,0 +1,7 @@
+include ChangeLog
+include LICENSE
+include README
+include MANIFEST.in
+
+include build_inplace
+include jsontest.py

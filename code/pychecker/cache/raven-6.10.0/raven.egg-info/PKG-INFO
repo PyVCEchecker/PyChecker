@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: raven
+Version: 6.10.0
+Summary: Raven is a client for Sentry (https://getsentry.com)
+Home-page: https://github.com/getsentry/raven-python
+Author: Sentry
+Author-email: hello@getsentry.com
+License: BSD
+Description: 
+        Raven
+        =====
+        
+        Raven is a Python client for `Sentry <http://getsentry.com/>`_. It provides
+        full out-of-the-box support for many of the popular frameworks, including
+        `Django <djangoproject.com>`_, `Flask <http://flask.pocoo.org/>`_, and `Pylons
+        <http://www.pylonsproject.org/>`_. Raven also includes drop-in support for any
+        `WSGI <https://wsgi.readthedocs.io/>`_-compatible web application.
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Provides-Extra: flask
+Provides-Extra: tests

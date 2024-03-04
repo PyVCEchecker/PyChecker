@@ -1,0 +1,17 @@
+README.md
+setup.cfg
+setup.py
+dataset/__init__.py
+dataset/chunked.py
+dataset/database.py
+dataset/table.py
+dataset/types.py
+dataset/util.py
+dataset.egg-info/PKG-INFO
+dataset.egg-info/SOURCES.txt
+dataset.egg-info/dependency_links.txt
+dataset.egg-info/namespace_packages.txt
+dataset.egg-info/not-zip-safe
+dataset.egg-info/requires.txt
+dataset.egg-info/top_level.txt
+test/test_dataset.py

@@ -1,0 +1,38 @@
+Metadata-Version: 2.1
+Name: vaderSentiment
+Version: 3.3.2
+Summary: VADER Sentiment Analysis. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media, and works well on texts from other domains.
+Home-page: https://github.com/cjhutto/vaderSentiment
+Author: C.J. Hutto
+Author-email: cjhutto@gatech.edu
+License: MIT License
+Download-URL: https://github.com/cjhutto/vaderSentiment/archive/master.zip
+Description: **VADER Sentiment Analysis**
+        
+        VADER (Valence Aware Dictionary and sEntiment Reasoner) is a lexicon and rule-based sentiment analysis tool that is *specifically attuned to sentiments expressed in social media*. It is fully open-sourced under the `[MIT License] <http://choosealicense.com/>`_ (we sincerely appreciate all attributions and readily accept most contributions, but please don't hold us liable).
+        
+        **Citation Information**
+        
+        If you use either the dataset or any of the VADER sentiment analysis tools (VADER sentiment lexicon or Python code for rule-based sentiment analysis engine) in your research, please cite the above paper. For example:  
+        
+          **Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.** 
+        
+        
+        * Code examples are provided on the `[VADER GitHub Repo] <https://github.com/cjhutto/vaderSentiment>`_
+        * Details about the scoring are provided on the `[VADER GitHub Repo] <https://github.com/cjhutto/vaderSentiment>`_
+        * VADER has been ported to Java, JavaScript, PHP, Scala, C#, Rust, and Go (see details and links to these on the `[VADER GitHub Repo] <https://github.com/cjhutto/vaderSentiment>`_
+        
+        
+        
+Keywords: vader,sentiment,analysis,opinion,mining,nlp,text,data,text analysis,opinion analysis,sentiment analysis,text mining,twitter sentiment,opinion mining,social media,twitter,social,media
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Topic :: Text Processing :: General
+Description-Content-Type: text/x-rst

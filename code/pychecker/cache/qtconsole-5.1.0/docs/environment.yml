@@ -1,0 +1,13 @@
+name: qtconsole_docs
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.5
+  - ipykernel
+  - pexpect
+  - pygments
+  - pyqt
+  - qtpy
+  - sphinx
+  - sphinx_rtd_theme

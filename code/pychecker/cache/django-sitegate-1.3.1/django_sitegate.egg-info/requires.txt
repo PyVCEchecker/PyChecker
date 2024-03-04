@@ -1,0 +1,3 @@
+django-etc>=1.2.0
+django-siteprefs>=1.1.0
+requests

@@ -1,0 +1,35 @@
+
+[full]
+prompt-toolkit>=3
+pyperclip
+pygments>=2.2
+
+[full:platform_system == "Darwin"]
+gnureadline
+
+[full:platform_system == "Linux"]
+distro
+
+[full:platform_system == "Windows"]
+setproctitle
+
+[linux]
+distro
+
+[mac]
+gnureadline
+
+[proctitle]
+setproctitle
+
+[ptk]
+prompt-toolkit>=3.0
+pyperclip
+
+[pygments]
+pygments>=2.2
+
+[zipapp]
+
+[zipapp:python_version < "3.7"]
+importlib_resources

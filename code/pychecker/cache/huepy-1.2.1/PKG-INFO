@@ -1,0 +1,26 @@
+Metadata-Version: 1.1
+Name: huepy
+Version: 1.2.1
+Summary: Print awesomely in terminals.
+Home-page: https://github.com/s0md3v/huepy
+Author: Somdev Sangwan
+Author-email: s0md3v@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/s0md3v/huepy/tarball/master
+Description: UNKNOWN
+Keywords: hue,color,terminal color,colorama
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Intended Audience :: Developers
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Operating System :: OS Independent
+Classifier: Environment :: Console
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

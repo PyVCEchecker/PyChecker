@@ -1,0 +1,15 @@
+CHANGES.rst
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+flake8_commas/__init__.py
+flake8_commas/_base.py
+flake8_commas.egg-info/PKG-INFO
+flake8_commas.egg-info/SOURCES.txt
+flake8_commas.egg-info/dependency_links.txt
+flake8_commas.egg-info/entry_points.txt
+flake8_commas.egg-info/requires.txt
+flake8_commas.egg-info/top_level.txt
+test/test_checks.py
+test/test_flake8.py

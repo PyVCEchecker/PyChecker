@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+requirements-dev.txt
+setup.cfg
+setup.py
+spinners/__init__.py
+spinners/spinners.py
+spinners.egg-info/PKG-INFO
+spinners.egg-info/SOURCES.txt
+spinners.egg-info/dependency_links.txt
+spinners.egg-info/requires.txt
+spinners.egg-info/top_level.txt

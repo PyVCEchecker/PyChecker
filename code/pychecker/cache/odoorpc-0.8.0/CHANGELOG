@@ -1,0 +1,88 @@
+Unreleased
+==========
+
+- IMP: integrate pre-commit with some hooks such as black, flake8, pyupgrade
+       and isort + reformat the whole code base
+- FIX: int, float, etc type conversion might raise TypeError, catch em all
+- FIX: odoorpc.db.drop: remove existing user session to avoid HTTP session error
+- FIX: Do not create a fake 'name' field on proxy models (common 'display_name'
+       field handles already that case)
+
+0.7.0
+=====
+- IMP: Support added for Odoo 12.0
+- IMP: Convenient script 'run_tests_docker.sh' to run tests locally against
+       the official Odoo Docker image
+- IMP: Implement 'with_context(...)' and 'with_env(...)' methods on the Model
+       class (they were only available on recordset until now)
+- IMP: Logger added (all requests, params + response) + Documentation
+
+0.6.2
+=====
+- FIX: Perform HTTP requests with or without a leading slash in the URL
+- FIX: Handle RPCError exceptions with either bytes or unicode message
+- FIX: Sphinx doc: could not import extension sphinx_ext.doctest_custom
+
+0.6.1
+=====
+- IMP: OCA rebranding
+- IMP: Drop support for Python 3.2 and 3.3
+- IMP: Support added for Odoo 11.0
+
+0.6.0
+=====
+- IMP: Adds support for passing a custom URL opener
+  (e.g. to handle HTTP basic authentication)
+- IMP: Support added for Python 3.6
+
+0.5.1
+=====
+- FIX: Session file loading, read the `timeout` value as a float
+
+0.5.0
+=====
+- IMP: Support added for Odoo 10.0
+- IMP: Documentation updated to be in line with Odoo 10.0
+
+0.4.3
+=====
+- IMP: Documentation (minor fixes)
+
+0.4.2
+=====
+- IMP: Unit tests:
+    - autodetect server version
+    - tests added for binary fields
+- IMP: The timeout can be set to 'None' (infinite timeout)
+- FIX: Underscore prefixed methods are not forwarded to the server
+
+0.4.1
+=====
+- IMP: New feature, check if a model exists in the Odoo database (see the
+  README or Quick Start section in the documentation)
+- IMP: Support added for Jython 270
+- FIX: Some methods in Odoo 9 return no result (issue #12)
+
+0.4.0
+=====
+- IMP: Support added for Odoo 9.0
+- IMP: Support added for Python 3.5
+- IMP: The 'data' parameter of the 'ODOO.http()' method is now optional
+
+0.3.0
+=====
+- FIX: 'ODOO.exec_workflow()' method now works correctly (issue #7)
+- FIX: .travis.yml - URL of wkhtmltox has changed (issue #9)
+- FIX: README.rst - Fixed shields (pypip.in replaced by shields.io)
+
+0.2.0
+=====
+- IMP: Sphinx Doctest integration (with Travis CI)
+- IMP: Internal Python modules reorganized
+- FIX: The recordset environment/context was not taken into account when
+  calling a RPC method from it ('ODOO.env' was used instead)
+- FIX: Missing the MANIFEST.in file (issue #6)
+
+0.1.0
+=====
+- Initial release

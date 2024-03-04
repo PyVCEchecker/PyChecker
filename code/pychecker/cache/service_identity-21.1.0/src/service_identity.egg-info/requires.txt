@@ -1,0 +1,27 @@
+attrs>=19.1.0
+pyasn1-modules
+pyasn1
+cryptography
+six
+
+[:python_version < "3.3"]
+ipaddress
+
+[dev]
+coverage[toml]>=5.0.2
+pytest
+sphinx
+furo
+idna
+pyOpenSSL
+
+[docs]
+sphinx
+furo
+
+[idna]
+idna
+
+[tests]
+coverage[toml]>=5.0.2
+pytest

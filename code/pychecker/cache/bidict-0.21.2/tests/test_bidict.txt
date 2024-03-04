@@ -1,0 +1,240 @@
+# Copyright 2009-2020 Joshua Bronson. All Rights Reserved.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+Test script for bidict.bidict::
+
+    >>> from bidict import bidict
+    >>> keys = (1, 2, 3)
+    >>> vals = ('one', 'two', 'three')
+    >>> bi = bidict(zip(keys, vals))
+    >>> bi == bidict({1: 'one', 2: 'two', 3: 'three'})
+    True
+
+Works like dict for getting and changing forward mappings::
+
+    >>> bi[2]
+    'two'
+    >>> bi[2] = 'twain'
+    >>> bi[2]
+    'twain'
+    >>> bi[4]
+    Traceback (most recent call last):
+        ...
+    KeyError: 4
+    >>> del bi[2]
+    >>> bi.pop(3)
+    'three'
+    >>> bi
+    bidict({1: 'one'})
+
+``put`` can also be used to insert a mapping as long as its key and value
+don't already exist::
+
+    >>> bi.put(0, 'zero')
+    >>> bi[0]
+    'zero'
+    >>> bi.put(1, 'aught')
+    Traceback (most recent call last):
+        ...
+    KeyDuplicationError: 1
+    >>> del bi[1]
+    >>> bi.put(1, 'aught')
+    >>> bi[1]
+    'aught'
+    >>> del bi[0]
+    >>> bi
+    bidict({1: 'aught'})
+
+bidicts maintain references to their inverses via the ``inv`` property,
+which can also be used to access or modify them::
+
+    >>> bi.inv
+    bidict({'aught': 1})
+    >>> bi.inv['aught']
+    1
+    >>> bi.inv['aught'] = 'one'
+    >>> bi
+    bidict({'one': 'aught'})
+    >>> bi.inv.pop('aught')
+    'one'
+    >>> bi == bi.inv == bidict()
+    True
+    >>> bi.inv.update(one=1)
+    >>> bi
+    bidict({1: 'one'})
+    >>> bi is bi.inv.inv
+    True
+    >>> bi.inv is bi.inv.inv.inv
+    True
+
+bidicts work with ``inverted`` as expected::
+
+    >>> from bidict import inverted
+    >>> biinv = bidict(inverted(bi))
+    >>> biinv
+    bidict({'one': 1})
+
+This created a new object (equivalent but not identical)::
+
+    >>> biinv == bi.inv
+    True
+    >>> biinv is bi.inv
+    False
+
+Inverting the inverse should round-trip::
+
+    >>> bi == bidict(inverted(inverted(bi)))
+    True
+    >>> bi = bi.inv
+    >>> bi == bidict(inverted(inverted(bi)))
+    True
+
+The rest of the ``MutableMapping`` interface is supported::
+
+    >>> bi.get('one')
+    1
+    >>> bi.get('zero')
+    >>> bi.get('zero', 'default')
+    'default'
+    >>> list(bi.keys())
+    ['one']
+    >>> list(bi.values())
+    [1]
+    >>> list(bi.items())
+    [('one', 1)]
+    >>> bi.setdefault('one', 2)
+    1
+    >>> bi.setdefault('two', 2)
+    2
+    >>> bi.pop('one')
+    1
+    >>> bi
+    bidict({'two': 2})
+    >>> bi.inv
+    bidict({2: 'two'})
+    >>> bi.pop('wrong', 'number', 'of', 'args')
+    Traceback (most recent call last):
+        ...
+    TypeError: pop expected at most 2 arguments (got 4)
+    >>> bi.popitem()
+    ('two', 2)
+    >>> bi.popitem()
+    Traceback (most recent call last):
+        ...
+    KeyError: 'popitem(): bidict is empty'
+    >>> bi.inv.setdefault(3, 'three')
+    'three'
+    >>> bi
+    bidict({'three': 3})
+    >>> len(bi)  # calls __len__
+    1
+    >>> [key for key in bi]  # calls __iter__, returns keys like dict
+    ['three']
+    >>> 'three' in bi  # calls __contains__
+    True
+    >>> list(bi.keys())
+    ['three']
+    >>> list(bi.values())
+    [3]
+    >>> bi.update([('four', 4)])
+    >>> bi.update({'five': 5}, six=6, seven=7)
+    >>> sorted(bi.items(), key=lambda x: x[1])
+    [('three', 3), ('four', 4), ('five', 5), ('six', 6), ('seven', 7)]
+    >>> bi.clear()
+    >>> bi
+    bidict()
+
+Empty update is a no-op::
+
+    >>> bi.update()
+    >>> bi
+    bidict()
+
+Not part of the public API, but test this anyway for the coverage::
+
+    >>> bi._update(False, None)
+    >>> bi
+    bidict()
+
+Initializing with different keys mapping to the same value fails::
+
+    >>> bidict([(1, 1), (2, 1)])
+    Traceback (most recent call last):
+        ...
+    ValueDuplicationError: 1
+
+Adding a new key associated with an existing value fails::
+
+    >>> b = bidict({1: 1})
+    >>> b[2] = 1
+    Traceback (most recent call last):
+        ...
+    ValueDuplicationError: 1
+    >>> b.update({2: 1})
+    Traceback (most recent call last):
+        ...
+    ValueDuplicationError: 1
+
+``forceput`` and ``forceupdate`` can be used instead::
+
+    >>> b.forceput(2, 1)
+    >>> b
+    bidict({2: 1})
+    >>> b.forceupdate({1: 1})
+    >>> b
+    bidict({1: 1})
+
+Trying to insert an existing mapping does not raise, and is a no-op::
+
+    >>> b = bidict({1: 'one'})
+    >>> b[1] = 'one'
+    >>> b[1]
+    'one'
+    >>> b.inv['one'] = 1
+    >>> b.inv['one']
+    1
+
+The following case does not half-succeed,
+i.e. the bidict is not in an inconsistent state after::
+
+    >>> b = bidict(one=1, two=2)
+    >>> b['one'] = 2
+    Traceback (most recent call last):
+        ...
+    KeyAndValueDuplicationError: ('one', 2)
+    >>> len(b) == len(b.inv)
+    True
+
+``put`` and ``putall`` allow you to have
+per-call control over duplication behavior
+(see doctests in ``../docs/unique-values.rst.inc``).
+
+Even with RAISE duplication behavior,
+inserting existing items is a no-op (i.e. it doesn't raise)::
+
+    >>> from bidict import RAISE, OnDup
+    >>> b.putall(
+    ...     [('three', 3), ('one', 1)],
+    ...     OnDup(key=RAISE, val=RAISE)
+    ... )  # does not raise an error because these items were already contained
+    >>> b0 = b.copy()
+    >>> b.putall([])  # no-op
+    >>> b == b0
+    True
+
+Make sure copy.copy and copy.deepcopy create shallow and deep copies, respectively::
+
+    >>> from copy import copy, deepcopy
+    >>> from bidict import frozenbidict
+    >>> b = frozenbidict({1: frozenbidict()})
+    >>> c = copy(b)
+    >>> d = deepcopy(b)
+    >>> b == c == d
+    True
+    >>> b[1] is c[1]
+    True
+    >>> b[1] is d[1]
+    False

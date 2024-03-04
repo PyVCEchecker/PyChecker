@@ -1,0 +1,59 @@
+[tool.black]
+target-version = ['py36']
+
+
+[tool.towncrier]
+# Usage:
+# - PRs should drop a file like "issuenumber.feature" in newsfragments
+#   (or "bugfix", "doc", "removal", "misc"; misc gets no text, we can
+#    customize this)
+# - At release time after bumping version number, run: towncrier
+#   (or towncrier --draft)
+package = "trio"
+filename = "docs/source/history.rst"
+directory = "newsfragments"
+underlines = ["-", "~", "^"]
+issue_format = "`#{issue} <https://github.com/python-trio/trio/issues/{issue}>`__"
+
+[[tool.towncrier.type]]
+directory = "headline"
+name = "Headline features"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "feature"
+name = "Features"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "bugfix"
+name = "Bugfixes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "doc"
+name = "Improved documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "deprecated"
+name = "Deprecations and removals"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "misc"
+name = "Miscellaneous internal changes"
+showcontent = true
+
+[tool.pytest.ini_options]
+addopts = ["--strict-markers", "--strict-config"]
+xfail_strict = true
+faulthandler_timeout = 60
+markers = ["redistributors_should_skip: tests that should be skipped by downstream redistributors"]
+junit_family = "xunit2"
+filterwarnings = ["error"]

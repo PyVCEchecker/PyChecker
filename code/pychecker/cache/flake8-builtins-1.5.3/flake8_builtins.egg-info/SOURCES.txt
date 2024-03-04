@@ -1,0 +1,15 @@
+CHANGES.rst
+LICENSE
+README.rst
+flake8_builtins.py
+requirements.txt
+run_tests.py
+setup.cfg
+setup.py
+flake8_builtins.egg-info/PKG-INFO
+flake8_builtins.egg-info/SOURCES.txt
+flake8_builtins.egg-info/dependency_links.txt
+flake8_builtins.egg-info/entry_points.txt
+flake8_builtins.egg-info/not-zip-safe
+flake8_builtins.egg-info/requires.txt
+flake8_builtins.egg-info/top_level.txt

@@ -1,0 +1,131 @@
+Metadata-Version: 2.1
+Name: sure
+Version: 2.0.0
+Summary: utility belt for automated testing in python for python
+Home-page: http://github.com/gabrielfalcao/sure
+Author: Gabriel Falcao
+Author-email: gabriel@nacaolivre.org
+Maintainer: Timo Furrer
+Maintainer-email: tuxtimo@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Software Development :: Testing
+Description-Content-Type: text/x-rst
+License-File: COPYING
+
+sure
+====
+
+
+
+.. image:: https://img.shields.io/pypi/dm/sure
+   :target: https://pypi.org/project/sure
+
+.. image:: https://github.com/gabrielfalcao/sure/workflows/Sure%20Tests/badge.svg
+   :target: https://github.com/gabrielfalcao/sure/actions?query=workflow%3A%22Sure+Tests%22
+
+.. image:: https://img.shields.io/readthedocs/sure
+   :target: https://sure.readthedocs.io/
+
+.. image:: https://img.shields.io/github/license/gabrielfalcao/sure?label=Github%20License
+   :target: https://github.com/gabrielfalcao/sure/blob/master/LICENSE
+
+.. image:: https://img.shields.io/pypi/v/sure
+   :target: https://pypi.org/project/sure
+
+.. image:: https://img.shields.io/pypi/l/sure?label=PyPi%20License
+   :target: https://pypi.org/project/sure
+
+.. image:: https://img.shields.io/pypi/format/sure
+   :target: https://pypi.org/project/sure
+
+.. image:: https://img.shields.io/pypi/status/sure
+   :target: https://pypi.org/project/sure
+
+.. image:: https://img.shields.io/pypi/pyversions/sure
+   :target: https://pypi.org/project/sure
+
+.. image:: https://img.shields.io/pypi/implementation/sure
+   :target: https://pypi.org/project/sure
+
+.. image:: https://img.shields.io/github/v/tag/gabrielfalcao/sure
+   :target: https://github.com/gabrielfalcao/sure/releases
+
+.. image:: https://img.shields.io/badge/pydoc-web-ff69b4.svg
+   :target: http://pydoc.net/sure
+
+An idiomatic testing library for python with powerful and flexible created by `Gabriel Falcão <https://github.com/gabrielfalcao>`_.
+Sure's developer experience is inspired and modeled after `RSpec Expectations
+<http://rspec.info/documentation/3.5/rspec-expectations/>`_ and
+`should.js <https://github.com/shouldjs/should.js>`_.
+
+Installing
+----------
+
+.. code:: bash
+
+    $ pip install sure
+
+Documentation
+-------------
+
+Available in the `website <https://sure.readthedocs.io/en/latest/>`__ or under the
+``docs`` directory.
+
+You can also build the documentation locally using sphinx:
+
+.. code:: bash
+
+    make docs
+
+Here is a tease
+---------------
+
+Equality
+~~~~~~~~
+
+(number).should.equal(number)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    import sure
+
+    (4).should.be.equal(2 + 2)
+    (7.5).should.eql(3.5 + 4)
+
+    (3).shouldnt.be.equal(5)
+
+Assert dictionary and its contents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    {'foo': 'bar'}.should.equal({'foo': 'bar'})
+    {'foo': 'bar'}.should.have.key('foo').which.should.equal('bar')
+
+"A string".lower().should.equal("a string") also works
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    "Awesome ASSERTIONS".lower().split().should.equal(['awesome', 'assertions'])
+
+

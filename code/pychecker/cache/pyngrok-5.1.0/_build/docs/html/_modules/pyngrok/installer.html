@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyngrok.installer &#8212; pyngrok 5.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+
+    <meta name="description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:title" content="pyngrok - A Python wrapper for ngrok">
+    <meta name="twitter:card"
+          value="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API.">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="pyngrok - A Python wrapper for ngrok"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://pyngrok.readthedocs.io/en/latest/_modules/pyngrok/installer.html"/>
+    <meta property="og:image" content="https://pyngrok.readthedocs.io/en/latest/_images/logo.png"/>
+    <meta property="og:description"
+          content="A Python wrapper for ngrok that makes ngrok readily available from anywhere on the command line and via a convenient Python API."/>
+
+    <meta name="yandex-verification" content="ac8f18b56add6591"/>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43184722-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-43184722-4');
+    </script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pyngrok.installer</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">http</span> <span class="kn">import</span> <span class="n">HTTPStatus</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">pyngrok.exception</span> <span class="kn">import</span> <span class="n">PyngrokNgrokInstallError</span><span class="p">,</span> <span class="n">PyngrokSecurityError</span><span class="p">,</span> <span class="n">PyngrokError</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Alex Laird&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2021, Alex Laird&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;5.1.0&quot;</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">CDN_URL_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;https://bin.equinox.io/c/4VmDzA7iaHb/&quot;</span>
+<span class="n">PLATFORMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;darwin_x86_64&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-darwin-amd64.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;darwin_x86_64_arm&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-darwin-arm64.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;windows_x86_64&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-windows-amd64.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;windows_i386&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-windows-386.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;linux_x86_64_arm&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-linux-arm64.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;linux_i386_arm&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-linux-arm.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;linux_i386&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-linux-386.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;linux_x86_64&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-linux-amd64.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;freebsd_x86_64&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-freebsd-amd64.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;freebsd_i386&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-freebsd-386.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cygwin_x86_64&quot;</span><span class="p">:</span> <span class="n">CDN_URL_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;ngrok-stable-windows-amd64.zip&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">DEFAULT_DOWNLOAD_TIMEOUT</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">DEFAULT_RETRY_COUNT</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">_config_cache</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_print_progress_enabled</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<div class="viewcode-block" id="get_ngrok_bin"><a class="viewcode-back" href="../../api.html#pyngrok.installer.get_ngrok_bin">[docs]</a><span class="k">def</span> <span class="nf">get_ngrok_bin</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the ``ngrok`` executable for the current system.</span>
+
+<span class="sd">    :return: The name of the ``ngrok`` executable.</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;darwin&quot;</span><span class="p">,</span> <span class="s2">&quot;linux&quot;</span><span class="p">,</span> <span class="s2">&quot;freebsd&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;ngrok&quot;</span>
+    <span class="k">elif</span> <span class="n">system</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;windows&quot;</span><span class="p">,</span> <span class="s2">&quot;cygwin&quot;</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">return</span> <span class="s2">&quot;ngrok.exe&quot;</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">raise</span> <span class="n">PyngrokNgrokInstallError</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2"> is not a supported platform&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="install_ngrok"><a class="viewcode-back" href="../../api.html#pyngrok.installer.install_ngrok">[docs]</a><span class="k">def</span> <span class="nf">install_ngrok</span><span class="p">(</span><span class="n">ngrok_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download and install the latest ``ngrok`` for the current system, overwriting any existing contents</span>
+<span class="sd">    at the given path.</span>
+
+<span class="sd">    :param ngrok_path: The path to where the ``ngrok`` binary will be downloaded.</span>
+<span class="sd">    :type ngrok_path: str</span>
+<span class="sd">    :param kwargs: Remaining ``kwargs`` will be passed to :func:`_download_file`.</span>
+<span class="sd">    :type kwargs: dict, optional</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+        <span class="s2">&quot;Installing ngrok to </span><span class="si">{}{}</span><span class="s2"> ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ngrok_path</span><span class="p">,</span> <span class="s2">&quot;, overwriting&quot;</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ngrok_path</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+    <span class="n">ngrok_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">ngrok_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ngrok_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">ngrok_dir</span><span class="p">)</span>
+
+    <span class="n">arch</span> <span class="o">=</span> <span class="s2">&quot;x86_64&quot;</span> <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">32</span> <span class="k">else</span> <span class="s2">&quot;i386&quot;</span>
+    <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">uname</span><span class="p">()[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;arm&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+            <span class="n">platform</span><span class="o">.</span><span class="n">uname</span><span class="p">()[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;aarch64&quot;</span><span class="p">):</span>
+        <span class="n">arch</span> <span class="o">+=</span> <span class="s2">&quot;_arm&quot;</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s2">&quot;cygwin&quot;</span> <span class="ow">in</span> <span class="n">system</span><span class="p">:</span>
+        <span class="n">system</span> <span class="o">=</span> <span class="s2">&quot;cygwin&quot;</span>
+
+    <span class="n">plat</span> <span class="o">=</span> <span class="n">system</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">arch</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">PLATFORMS</span><span class="p">[</span><span class="n">plat</span><span class="p">]</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Platform to download: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">plat</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">PyngrokNgrokInstallError</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2"> is not a supported platform&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">plat</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">download_path</span> <span class="o">=</span> <span class="n">_download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">_install_ngrok_zip</span><span class="p">(</span><span class="n">ngrok_path</span><span class="p">,</span> <span class="n">download_path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">PyngrokNgrokInstallError</span><span class="p">(</span><span class="s2">&quot;An error occurred while downloading ngrok from </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="_install_ngrok_zip"><a class="viewcode-back" href="../../api.html#pyngrok.installer._install_ngrok_zip">[docs]</a><span class="k">def</span> <span class="nf">_install_ngrok_zip</span><span class="p">(</span><span class="n">ngrok_path</span><span class="p">,</span> <span class="n">zip_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract the ``ngrok`` zip file to the given path.</span>
+
+<span class="sd">    :param ngrok_path: The path where ``ngrok`` will be installed.</span>
+<span class="sd">    :type ngrok_path: str</span>
+<span class="sd">    :param zip_path: The path to the ``ngrok`` zip file to be extracted.</span>
+<span class="sd">    :type zip_path: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_print_progress</span><span class="p">(</span><span class="s2">&quot;Installing ngrok ... &quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Extracting ngrok binary from </span><span class="si">{}</span><span class="s2"> to </span><span class="si">{}</span><span class="s2"> ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">ngrok_path</span><span class="p">))</span>
+        <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">ngrok_path</span><span class="p">))</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">ngrok_path</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;777&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="n">_clear_progress</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="get_ngrok_config"><a class="viewcode-back" href="../../api.html#pyngrok.installer.get_ngrok_config">[docs]</a><span class="k">def</span> <span class="nf">get_ngrok_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the ``ngrok`` config from the given path.</span>
+
+<span class="sd">    :param config_path: The ``ngrok`` config path to read.</span>
+<span class="sd">    :type config_path: str</span>
+<span class="sd">    :param use_cache: Use the cached version of the config (if populated).</span>
+<span class="sd">    :type use_cache: bool</span>
+<span class="sd">    :return: The ``ngrok`` config.</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_config_cache</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_config_cache</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">use_cache</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">_config_cache</span> <span class="o">=</span> <span class="n">config</span>
+
+    <span class="k">return</span> <span class="n">_config_cache</span></div>
+
+
+<div class="viewcode-block" id="install_default_config"><a class="viewcode-back" href="../../api.html#pyngrok.installer.install_default_config">[docs]</a><span class="k">def</span> <span class="nf">install_default_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Install the given data to the ``ngrok`` config. If a config is not already present for the given path, create one.</span>
+<span class="sd">    Before saving new data to the default config, validate that they are compatible with ``pyngrok``.</span>
+
+<span class="sd">    :param config_path: The path to where the ``ngrok`` config should be installed.</span>
+<span class="sd">    :type config_path: str</span>
+<span class="sd">    :param data: A dictionary of things to add to the default config.</span>
+<span class="sd">    :type data: dict, optional</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">config_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">config_dir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_path</span><span class="p">):</span>
+        <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_ngrok_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">validate_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Installing default ngrok config to </span><span class="si">{}</span><span class="s2"> ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config_path</span><span class="p">))</span>
+
+        <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">config_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="validate_config"><a class="viewcode-back" href="../../api.html#pyngrok.installer.validate_config">[docs]</a><span class="k">def</span> <span class="nf">validate_config</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate that the given dict of config items are valid for ``ngrok`` and ``pyngrok``.</span>
+
+<span class="sd">    :param data: A dictionary of things to be validated as config items.</span>
+<span class="sd">    :type data: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;web_addr&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">PyngrokError</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">web_addr</span><span class="se">\&quot;</span><span class="s2"> cannot be False, as the ngrok API is a dependency for pyngrok&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;log_format&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;json&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">PyngrokError</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">log_format</span><span class="se">\&quot;</span><span class="s2"> must be </span><span class="se">\&quot;</span><span class="s2">term</span><span class="se">\&quot;</span><span class="s2"> to be compatible with pyngrok&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;log_level&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="s2">&quot;debug&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">PyngrokError</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">log_level</span><span class="se">\&quot;</span><span class="s2"> must be </span><span class="se">\&quot;</span><span class="s2">info</span><span class="se">\&quot;</span><span class="s2"> to be compatible with pyngrok&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_download_file"><a class="viewcode-back" href="../../api.html#pyngrok.installer._download_file">[docs]</a><span class="k">def</span> <span class="nf">_download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download a file to a temporary path and emit a status to stdout (if possible) as the download progresses.</span>
+
+<span class="sd">    :param url: The URL to download.</span>
+<span class="sd">    :type url: str</span>
+<span class="sd">    :param retries: The retry attempt index, if download fails.</span>
+<span class="sd">    :type retries: int, optional</span>
+<span class="sd">    :param kwargs: Remaining ``kwargs`` will be passed to :py:func:`urllib.request.urlopen`.</span>
+<span class="sd">    :type kwargs: dict, optional</span>
+<span class="sd">    :return: The path to the downloaded temporary file.</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;timeout&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DOWNLOAD_TIMEOUT</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">PyngrokSecurityError</span><span class="p">(</span><span class="s2">&quot;URL must start with </span><span class="se">\&quot;</span><span class="s2">http</span><span class="se">\&quot;</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_print_progress</span><span class="p">(</span><span class="s2">&quot;Downloading ngrok ...&quot;</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Download ngrok from </span><span class="si">{}</span><span class="s2"> ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="n">local_filename</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">status_code</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">getcode</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">status_code</span> <span class="o">!=</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Response status code: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">status_code</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">length</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">getheader</span><span class="p">(</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">length</span><span class="p">:</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+            <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">4096</span><span class="p">,</span> <span class="n">length</span> <span class="o">//</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">*</span> <span class="mi">1024</span>
+
+        <span class="n">download_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">(),</span> <span class="n">local_filename</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">download_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">buffer</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">buffer</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+                <span class="n">size</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">length</span><span class="p">:</span>
+                    <span class="n">percent_done</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">length</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+                    <span class="n">_print_progress</span><span class="p">(</span><span class="s2">&quot;Downloading ngrok: </span><span class="si">{}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">percent_done</span><span class="p">))</span>
+
+        <span class="n">_clear_progress</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">download_path</span>
+    <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">timeout</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">retries</span> <span class="o">&lt;</span> <span class="n">DEFAULT_RETRY_COUNT</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;ngrok download failed, retrying in 0.5 seconds ...&quot;</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">_download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">retries</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span></div>
+
+
+<span class="k">def</span> <span class="nf">_print_progress</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">_print_progress_enabled</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\r</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_clear_progress</span><span class="p">(</span><span class="n">spaces</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">_print_progress_enabled</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">spaces</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Getting Around</h3>
+<ul>
+    <li><a class="reference internal" href="../../index.html">Basic Usage</a>
+        <ul>
+            <li><a class="reference internal" href="../../index.html#installation">Installation</a>
+            </li>
+            <li><a class="reference internal" href="../../index.html#open-a-tunnel">Open a
+                Tunnel</a></li>
+            <li><a class="reference internal"
+                   href="../../index.html#configuration">Configuration</a></li>
+            <li><a class="reference internal" href="../../index.html#event-logs">Event Logs</a></li>
+            <li><a class="reference internal" href="../../index.html#command-line-usage">Command
+                Line Usage</a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="reference internal" href="../../index.html#dive-deeper">Dive Deeper</a>
+        <ul>
+            <li><a class="reference internal" href="../../api.html">API Documentation</a></li>
+            <li><a class="reference internal" href="../../integrations.html">Integration Examples</a></li>
+            <li><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/blob/main/CHANGELOG.md">Changelog</a></li>
+            <li><a href="https://github.com/alexdlaird/pyngrok/issues">Issues</a></li>
+            <li><a class="reference internal" href="../../index.html#contributing">Contributing</a>
+            </li>
+        </ul>
+    </li>
+</ul><h3>Useful Links</h3>
+<ul>
+    <li><a href="https://ngrok.com/docs"><code class="code docutils literal notranslate"><span class="pre">ngrok</span></code>
+        Documentation</a></li>
+    <li><a href="https://github.com/alexdlaird/pyngrok"><code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code> on GitHub</a></li>
+    <li><a href="https://pypi.org/project/pyngrok/"><code class="code docutils literal notranslate"><span class="pre">pyngrok</span></code>
+        on PyPI</a></li>
+    <li><a href="https://www.paypal.me/alexdlaird">Sponsor <code class="code docutils literal notranslate"><span
+            class="pre">pyngrok</span></code></a></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    
+    <div class="footer">
+      &copy;2020, Alex Laird.
+      
+    </div>
+
+    
+    <a href="https://github.com/alexdlaird/pyngrok" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <div class="footer">This page uses <a href="https://analytics.google.com/">
+        Google Analytics</a> to collect statistics. You can disable it by blocking
+        the JavaScript coming from www.google-analytics.com.
+        <script type="text/javascript">
+            (function () {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ?
+                    'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.setAttribute('async', 'true');
+                document.documentElement.firstChild.appendChild(ga);
+            })();
+        </script>
+    </div>
+
+  </body>
+</html>

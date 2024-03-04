@@ -1,0 +1,4 @@
+
+[async]
+aiocoap==0.4b3
+DTLSSocket==0.1.12

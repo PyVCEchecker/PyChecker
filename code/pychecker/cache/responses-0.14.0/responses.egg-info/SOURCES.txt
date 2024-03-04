@@ -1,0 +1,16 @@
+CHANGES
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+tox.ini
+responses/__init__.py
+responses/matchers.py
+responses/test_responses.py
+responses.egg-info/PKG-INFO
+responses.egg-info/SOURCES.txt
+responses.egg-info/dependency_links.txt
+responses.egg-info/not-zip-safe
+responses.egg-info/requires.txt
+responses.egg-info/top_level.txt

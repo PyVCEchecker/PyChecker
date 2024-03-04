@@ -1,0 +1,7 @@
+Django
+coverage
+coveralls
+tox
+freezegun
+wheel
+flake8

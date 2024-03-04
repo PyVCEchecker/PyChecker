@@ -1,0 +1,28 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+    <include package="Products.CMFCore" file="permissions.zcml" />
+
+    <browser:resourceDirectory
+        name="ftw.upgrade"
+        directory="resources"
+        />
+
+    <browser:page
+        name="manage-upgrades"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        template="templates/manage.pt"
+        class=".manage.ManageUpgrades"
+        permission="cmf.ManagePortal"
+        />
+
+    <browser:page
+        name="manage-upgrades-plain"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        template="templates/manage_plain.pt"
+        class=".manage.ManageUpgradesPlain"
+        permission="cmf.ManagePortal"
+        />
+
+</configure>

@@ -1,0 +1,44 @@
+##
+---
+name: sequence1
+desc: sequence test
+#
+schema:
+  type: seq
+  sequence:
+    - type: str
+data:
+  - foo
+  - bar
+  - baz
+---
+name: sequence2
+desc: test sequence showrtcut
+schema:
+  type: seq
+  seq:
+    - type: str
+data:
+  - foo
+  - bar
+  - baz
+---
+name: sequence3
+desc: Test that you do not have to specify type seq when keyword sequence is present
+data:
+  - foo
+  - bar
+  - foobar
+schema:
+  sequence:
+    - type: str
+---
+name: sequence4
+desc: Test that you do not have to specify type seq when keyword seq is present
+data:
+  - foo
+  - bar
+  - foobar
+schema:
+  seq:
+    - type: str

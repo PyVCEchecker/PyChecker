@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+# addopts = """--doctest-glob="*.rst" --strict-markers -rfEX"""
+addopts = """--strict-markers -rfEX"""
+markers = [
+    "client_data",
+    "controller_data",
+    "handler_data",
+]
+
+# region #### coverage.py settings ###########################################
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = [
+    "aiosmtpd/docs/*",
+    "aiosmtpd/qa/*",
+    "aiosmtpd/testing/*",
+    "aiosmtpd/tests/*",
+    ".tox/*",
+    "*/helpers/pycharm/*",
+    "*/hostedtoolcache/*",  # GitHub Actions site-packages location
+]
+plugins = [
+    "coverage_conditional_plugin"
+]
+
+[tool.coverage.paths]
+source = [
+    "aiosmtpd",
+]
+
+[tool.coverage.coverage_conditional_plugin.rules]
+# Here we specify our pragma rules:
+py-ge-38 = "sys_version_info >= (3, 8)"
+py-gt-36 = "sys_version_info > (3, 6)"
+has-mypy = "is_installed('mypy')"
+has-pwd = "is_installed('pwd')"
+on-win32 = "sys_platform == 'win32'"
+on-wsl = "'Microsoft' in platform_release"
+    # On Windows, platform.release() returns the Windows version (e.g., "7" or "10")
+    # On Linux (incl. WSL), platform.release() returns the kernel version.
+    # As of 2021-02-07, only WSL has a kernel with "Microsoft" in the version.
+on-not-win32 = "sys_platform != 'win32'"
+on-cygwin = "sys_platform == 'cygwin'"
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: nocover",
+]
+fail_under = 100
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov/${TOX_ENV_NAME}"
+title = "aiosmtpd coverage for ${TOX_ENV_NAME}"
+
+[tool.coverage.xml]
+output = "_dump/coverage-${INTERP}.xml"
+
+# endregion
+
+[tool.check-manifest]
+ignore = [
+    "examples/**",
+]
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+known_local_folder = [
+    "aiosmtpd"
+]
+combine_as_imports = true

@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_autoscaling.egg-info/PKG-INFO
+src/aws_cdk.aws_autoscaling.egg-info/SOURCES.txt
+src/aws_cdk.aws_autoscaling.egg-info/dependency_links.txt
+src/aws_cdk.aws_autoscaling.egg-info/requires.txt
+src/aws_cdk.aws_autoscaling.egg-info/top_level.txt
+src/aws_cdk/aws_autoscaling/__init__.py
+src/aws_cdk/aws_autoscaling/py.typed
+src/aws_cdk/aws_autoscaling/_jsii/__init__.py
+src/aws_cdk/aws_autoscaling/_jsii/aws-autoscaling@1.129.0.jsii.tgz

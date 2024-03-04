@@ -1,0 +1,10 @@
+lml>=0.0.4
+
+[ods]
+pyexcel-ods3>=0.6.0
+
+[xls]
+pyexcel-xls>=0.6.0
+
+[xlsx]
+pyexcel-xlsx>=0.6.0

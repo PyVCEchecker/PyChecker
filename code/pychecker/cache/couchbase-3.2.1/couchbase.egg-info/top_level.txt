@@ -1,0 +1,4 @@
+acouchbase
+couchbase
+couchbase_core
+txcouchbase

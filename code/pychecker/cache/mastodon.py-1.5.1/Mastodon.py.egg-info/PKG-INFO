@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: Mastodon.py
+Version: 1.5.1
+Summary: Python wrapper for the Mastodon API
+Home-page: https://github.com/halcy/Mastodon.py
+Author: Lorenz Diener
+Author-email: lorenzd+mastodonpypypi@gmail.com
+License: MIT
+Description: UNKNOWN
+Keywords: mastodon api microblogging
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Communications
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Provides-Extra: blurhash
+Provides-Extra: test
+Provides-Extra: webpush

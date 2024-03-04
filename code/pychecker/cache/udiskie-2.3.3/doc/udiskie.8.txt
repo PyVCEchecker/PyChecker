@@ -1,0 +1,377 @@
+/////
+vim:set ts=4 sw=4 syntax=asciidoc noet:
+/////
+udiskie(8)
+==========
+
+
+Name
+----
+udiskie - automounter for removable media
+
+
+Synopsis
+--------
+'udiskie' [OPTIONS]
+
+'udiskie-mount' [OPTIONS] (-a | DEVICE...)
+
+'udiskie-umount' [OPTIONS] (-a | PATH...)
+
+
+Description
+-----------
+*udiskie* is an udisks2 front-end written in python. Its main purpose is automatically mounting removable media, such as CDs or flash drives. It has optional mount notifications, a GTK tray icon and user level CLIs for manual mount and unmount operations. The media will be mounted in a new directory under '/media' or '/run/media/USER/', using the device name if possible.
+
+
+Common options
+--------------
+*-h, \--help*::
+	Show help message and exit.
+
+*-V, \--version*::
+	Show help message and exit.
+
+*-v, \--verbose*::
+	Verbose output.
+
+*-q, \--quiet*::
+	Quiet output.
+
+*-c FILE, \--config=FILE*::
+	Specify config file.
+
+*-C, \--no-config*::
+	Don't use any config file.
+
+
+Shared Mount and Daemon options
+-------------------------------
+
+*-p COMMAND, \--password-prompt=COMMAND*::
+	Password retrieval command. The string is formatted with the device attributes as keyword arguments, e.g.:
+
+	-p "zenity --entry --hide-text --text 'Enter password for {device_presentation}:'"
+
+*-P, \--no-password-prompt*::
+	Disable unlocking of LUKS devices.
+
+
+Daemon options
+--------------
+*-a, \--automount*::
+	Enable automounting new devices (default).
+
+*-A, \--no-automount*::
+	Disable automounting new devices.
+
+*-n, \--notify*::
+	Enable pop-up notifications (default).
+
+*-N, \--no-notify*::
+	Disable pop-up notifications.
+
+*-t, \--tray*::
+	Show tray icon.
+
+*-s, \--smart-tray*::
+	Show tray icon that automatically hides when there is no action available.
+
+*-T, \--no-tray*::
+	Disable tray icon (default).
+
+*-f PROGRAM, \--file-manager=PROGRAM*::
+	Set program to open mounted directories. Default is \'+xdg-open+'. Pass an empty string to disable this feature.
+
+*-F, \--no-file-manager*::
+	Disable browsing.
+
+*--terminal=PROGRAM*::
+	Set terminal command line to open mounted directories. Default is none! Pass an empty string to disable this feature.
+
+*--no-terminal*::
+	Disable terminal action.
+
+*--appindicator*::
+	Use AppIndicator3 for the status icon. Use this on Ubuntu/Unity if no icon is shown.
+
+*--no-appindicator*::
+	Use Gtk.StatusIcon for the status icon (default).
+
+*--password-cache MINUTES*::
+	Cache passwords for LUKS partitions and set the timeout.
+
+*--no-password-cache*::
+	Never cache passwords (default).
+
+*--notify-command COMMAND*::
+	Command to execute on device events. Command string be formatted using the event name and the list of device attributes (see below), e.g.:
+
+	--notify-command "zenity --info --text '{event}: {device_presentation}'"
+
+*--no-notify-command*::
+	No notify command (default).
+
+
+Mount options
+-------------
+*-a, \--all*::
+	Mount all handled devices.
+
+*-r, \--recursive*::
+	Recursively mount cleartext partitions after unlocking a LUKS device. This will happen by default when running the udiskie daemon.
+
+*-R, \--no-recursive*::
+	Disable recursive mounting (default).
+
+*-o OPTIONS, \--options=OPTIONS*::
+	Set mount options.
+
+
+Unmount options
+---------------
+*-a, \--all*::
+	Unmount all handled devices.
+
+*-d, \--detach*::
+	Detach drive by e.g. powering down its physical port.
+
+*-D, \--no-detach*::
+	Don't detach drive (default).
+
+*-e, \--eject*::
+	Eject media from the drive, e.g CDROM.
+
+*-E, \--no-eject*::
+	Don't eject media (default).
+
+*-f, \--force*::
+	Force removal (recursive unmounting).
+
+*-F, \--no-force*::
+	Don't force removal (default).
+
+*-l, \--lock*::
+	Lock device after unmounting (default).
+
+*-L, \--no-lock*::
+	Don't lock device.
+
+
+Example Usage[[EU]]
+-------------------
+Start *udiskie* in '~/.xinitrc':
+
+	udiskie &
+
+Unmount media and power down USB device:
+
+	udiskie-umount --detach /media/Sticky
+
+Mount all media:
+
+	udiskie-mount -a
+
+Mount '/dev/sdb1':
+
+	udiskie-mount /dev/sdb1
+
+
+Configuration
+-------------
+The file '.config/udiskie/config.yml' can be used to configure defaults for command line parameters and customize further settings. The actual path may differ depending on '$XDG_CONFIG_HOME'. The file format is YAML, see http://en.wikipedia.org/wiki/YAML. If you don't want to install PyYAML, it is possible to use an equivalent JSON file with the name 'config.json' instead.
+
+----------------------------------------------------------------------
+# This is an example (nonsense) configuration file for udiskie.
+
+program_options:
+  # Configure defaults for command line options
+
+  tray:             auto    # [bool] Enable the tray icon. "auto"
+                            # means auto-hide the tray icon when
+                            # there are no handled devices.
+
+  menu:             flat    # ["flat" | "nested"] Set the
+                            # systray menu behaviour.
+
+  automount:        false   # [bool] Enable automatic mounting.
+
+  notify:           true    # [bool] Enable notifications.
+
+  password_cache:   30      # [int] Password cache in minutes. Caching is
+                            # disabled by default. It can be disabled
+                            # explicitly by setting it to false
+
+  file_manager:     xdg-open
+    # [string] Set program to open directories. It will be invoked
+    # with the folder path as its last command line argument.
+
+  terminal:         'termite -d'
+    # [string] Set terminal command line to open directories. It will be
+    # invoked with thefolder path as its last command line argument.
+
+  password_prompt: ["gnome-keyring-query", "get", "{id_uuid}"]
+    # [string|list] Set command to retrieve passwords. If specified
+    # as a list it defines the ARGV array for the program call. If
+    # specified as a string, it will be expanded in a shell-like
+    # manner. Each string will be formatted using `str.format`. For a
+    # list of device attributes, see below. The two special string values
+    # "builtin:gui" and "builtin:tty" signify to use udiskie's
+    # builtin password prompt.
+
+  notify_command: "zenity --info --text '{event}: {device_presentation}'"
+    # [string|list] Set command to be executed on any device event.
+    # This is specified like `password_prompt`.
+
+device_config:
+
+  # List of device option rules. Each item can match any combination of device
+  # attributes. Additionally, it defines the resulting action (see below).
+  # Any rule can contain multiple filters (AND) and multiple actions.
+  # Only the first matching rule that defines a given action is used.
+  # The rules defined here are simply prepended to the builtin device rules,
+  # so that it is possible to completely overwrite the defaults by specifying
+  # a catch-all rule (i.e. a rule without device attributes).
+
+- device_file: /dev/dm-5    # [filter]
+  ignore:      false        # [action] never ignore this device
+- id_uuid: 9d53-13ba        # [filter] match by device UUID
+  options: [noexec, nodev]  # [action] mount options can be given as list
+  ignore:  false            # [action] never ignore this device (even if fs=FAT)
+  automount: false          # [action] do not automount this device
+- id_type: vfat             # [filter] match file system type
+  ignore:  true             # [action] ignore all FAT devices
+
+- id_type: ntfs             # [filter] (optional)
+  skip: true                # [action] skip all further (even builtin) rules
+                            # for all matched devices, and resolve action result
+                            # on parent device
+
+- ignore:    True           # never mount/unmount or even show this in the GUI
+  automount: False          # show but do not automount this device
+  options: []               # additional options to be passed when mounting
+
+mount_options:              # [deprecated] do not use
+ignore_device:              # [deprecated] do not use
+
+notifications:
+  # Customize which notifications are shown for how long. Possible
+  # values are:
+  #   positive number         timeout in seconds
+  #   false                   disable
+  #   -1                      use the libnotify default timeout
+
+  timeout:          1.5     # set the default for all notifications
+
+  # Specify only if you want to overwrite the the default:
+  device_mounted:   5       # mount notification
+  device_unmounted: false   # unmount notification
+  device_added:     false   # device has appeared
+  device_removed:   false   # device has disappeared
+  device_unlocked:  -1      # encrypted device was unlocked
+  device_locked:    -1      # encrypted device was locked
+  job_failed:       -1      # mount/unlock/.. has failed
+
+quickmenu_actions: [mount, unmount, unlock, terminal, detach, delete]
+  # List of actions to be shown in the quickmenu or the special value 'all'.
+  # The quickmenu is shown on left-click if using flat menu type.
+
+notification_actions:
+  # Define which actions should be shown on notifications. Note that there
+  # are currently only a limited set of actions available for each
+  # notification. Events that are not explicitly specified show the default
+  # set of actions. Specify an empty list if you don't want to see any
+  # notification for the specified event:
+
+  device_mounted:   [browse]
+  device_added:     [mount]
+
+icon_names:
+  # Customize the icon set used by the tray widget. Each entry
+  # specifies a list of icon names. The first installed icon from
+  # that list will be used.
+
+  media:   [drive-removable-media, media-optical]
+  browse:  [document-open, folder-open]
+  terminal: [terminal, terminator, xfce-terminal]
+  mount:   [udiskie-mount]
+  unmount: [udiskie-unmount]
+  unlock:  [udiskie-unlock]
+  lock:    [udiskie-lock]
+  eject:   [udiskie-eject, media-eject]
+  detach:  [udiskie-detach]
+  delete:  [udiskie-eject]
+  quit:    [application-exit]
+----------------------------------------------------------------------
+
+All keys are optional. Reasonable defaults are used if you leave them
+unspecified.
+
+
+Device attributes
+-----------------
+
+Some of the config entries make use of Device attributes. The following list
+of attributes is currently available, but there is no guarantee that they will
+remain available:
+
+    Attribute               Hint/Example
+
+    is_drive
+    is_block
+    is_partition_table
+    is_partition
+    is_filesystem
+    is_luks
+    is_loop
+    is_toplevel
+    is_detachable
+    is_ejectable
+    has_media
+    device_file             block device path, e.g. "/dev/sdb1"
+    device_presentation     display string, e.g. "/dev/sdb1"
+    device_size             block device size
+    device_id               unique, persistent device identifier
+    id_usage                E.g. "filesystem" or "crypto"
+    is_crypto
+    is_ignored
+    id_type                 E.g. "ext4" or "crypto_LUKS"
+    id_label                device label
+    id_uuid                 device UUID
+    is_luks_cleartext
+    is_external             udisks flag HintSystem=false
+    is_systeminternal       udisks flag HintSystem=true
+    is_mounted
+    mount_paths             list of mount paths
+    mount_path              any mount path
+    is_unlocked
+    in_use                  device or any of its children mounted
+    should_automount
+    ui_label
+    loop_file               file backing the loop device
+    setup_by_uid            user that setup the loop device
+    autoclear               automatically delete loop device after use
+    symlinks
+    drive_model
+    drive_vendor
+    drive_label
+    ui_device_label
+    ui_device_presentation
+    ui_id_label
+    ui_id_uuid
+
+
+See Also
+--------
+linkman:udisks[1]
+
+http://www.freedesktop.org/wiki/Software/udisks/
+
+
+Contact
+-------
+You can use the github issues to report any issues you encounter, ask general questions or suggest new features. If you don't have or like github, you can contact me by email:
+
+https://github.com/coldfix/udiskie/issues
+
+thomas@coldfix.de

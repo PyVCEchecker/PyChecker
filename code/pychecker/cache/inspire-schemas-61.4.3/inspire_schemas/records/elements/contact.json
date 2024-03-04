@@ -1,0 +1,38 @@
+{
+    "additionalProperties": false,
+    "description": "Contact person's data",
+    "properties": {
+        "curated_relation": {
+            "type": "boolean"
+        },
+        "email": {
+            "description": "Contact person's e-mail",
+            "format": "email",
+            "minLength": 1,
+            "type": "string"
+        },
+        "name": {
+            "description": "Contact person's name",
+            "minLength": 1,
+            "type": "string"
+        },
+        "record": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "authors record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/authors/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to author record",
+            "type": "object"
+        }
+    },
+    "type": "object"
+}

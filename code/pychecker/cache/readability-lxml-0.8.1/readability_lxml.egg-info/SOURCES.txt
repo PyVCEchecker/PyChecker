@@ -1,0 +1,17 @@
+README.rst
+setup.py
+readability/__init__.py
+readability/browser.py
+readability/cleaners.py
+readability/debug.py
+readability/encoding.py
+readability/htmls.py
+readability/readability.py
+readability/compat/__init__.py
+readability/compat/three.py
+readability/compat/two.py
+readability_lxml.egg-info/PKG-INFO
+readability_lxml.egg-info/SOURCES.txt
+readability_lxml.egg-info/dependency_links.txt
+readability_lxml.egg-info/requires.txt
+readability_lxml.egg-info/top_level.txt

@@ -1,0 +1,4 @@
+botocore<2.0a.0,>=1.12.36
+
+[crt]
+botocore[crt]<2.0a.0,>=1.20.29

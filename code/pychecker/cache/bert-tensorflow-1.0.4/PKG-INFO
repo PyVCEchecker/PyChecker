@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: bert-tensorflow
+Version: 1.0.4
+Summary: BERT
+Home-page: https://github.com/google-research/bert
+Author: Google Inc.
+Author-email: no-reply@google.com
+License: Apache 2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Provides-Extra: tensorflow
+Provides-Extra: tensorflow_gpu
+Provides-Extra: tensorflow-hub

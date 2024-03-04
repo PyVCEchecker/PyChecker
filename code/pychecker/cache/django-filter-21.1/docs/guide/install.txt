@@ -1,0 +1,29 @@
+============
+Installation
+============
+
+Django-filter can be installed from PyPI with tools like ``pip``:
+
+.. code-block:: bash
+
+    $ pip install django-filter
+
+Then add ``'django_filters'`` to your ``INSTALLED_APPS``.
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        ...
+        'django_filters',
+    ]
+
+
+Requirements
+------------
+
+Django-filter requires a current version of `Django`__ and is tested against
+all supported versions of Python, as well as the latest version of Django REST
+Framework (`DRF`__).
+
+__ https://www.djangoproject.com/download/#supported-versions
+__ http://www.django-rest-framework.org/

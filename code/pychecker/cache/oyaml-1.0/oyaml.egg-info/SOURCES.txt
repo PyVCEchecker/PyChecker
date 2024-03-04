@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.rst
+oyaml.py
+setup.cfg
+setup.py
+oyaml.egg-info/PKG-INFO
+oyaml.egg-info/SOURCES.txt
+oyaml.egg-info/dependency_links.txt
+oyaml.egg-info/requires.txt
+oyaml.egg-info/top_level.txt

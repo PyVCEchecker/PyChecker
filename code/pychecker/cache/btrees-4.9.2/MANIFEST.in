@@ -1,0 +1,22 @@
+include pyproject.toml
+
+include *.txt
+include *.rst
+include *.py
+include buildout.cfg
+include tox.ini
+include .coveragerc
+
+recursive-include docs *
+recursive-include src *
+recursive-include .github *
+
+global-exclude *.dll
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.so
+global-exclude *~
+global-exclude *\#
+global-exclude coverage.xml
+
+prune docs/_build

@@ -1,0 +1,17 @@
+entrypoints
+jinja2
+jsonschema
+numpy
+pandas>=0.18
+toolz
+
+[dev]
+black
+docutils
+ipython
+flake8
+pytest
+sphinx
+m2r
+vega_datasets
+recommonmark

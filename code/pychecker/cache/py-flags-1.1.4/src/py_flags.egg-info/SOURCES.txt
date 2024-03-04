@@ -1,0 +1,17 @@
+CHANGES.rst
+LICENSE.txt
+MANIFEST.in
+README.rst
+setup.py
+src/flags.py
+src/py_flags.egg-info/PKG-INFO
+src/py_flags.egg-info/SOURCES.txt
+src/py_flags.egg-info/dependency_links.txt
+src/py_flags.egg-info/requires.txt
+src/py_flags.egg-info/top_level.txt
+tests/__init__.py
+tests/test_arithmetic.py
+tests/test_base.py
+tests/test_decorators.py
+tests/test_flags.py
+tests/test_pickling.py

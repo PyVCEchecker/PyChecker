@@ -1,0 +1,37 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "sphinx_autobuild"
+dist-name = "sphinx-autobuild"
+description-file = "README.md"
+author = "Jonathan Stoppani"
+author-email = "jonathan@stoppani.name"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+home-page = "https://github.com/executablebooks/sphinx-autobuild"
+license = "MIT"
+requires-python = ">=3.6"
+requires = [
+  "sphinx",
+  "livereload",
+  "colorama",
+]
+
+[tool.flit.scripts]
+sphinx-autobuild = "sphinx_autobuild.__main__:main"
+
+[tool.flit.metadata.requires-extra]
+test = ["pytest", "pytest-cov"]
+docs = []

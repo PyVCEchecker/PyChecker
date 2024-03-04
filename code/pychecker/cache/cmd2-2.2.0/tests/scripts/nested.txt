@@ -1,0 +1,4 @@
+_relative_run_script precmds.txt
+help
+shortcuts
+_relative_run_script postcmds.txt

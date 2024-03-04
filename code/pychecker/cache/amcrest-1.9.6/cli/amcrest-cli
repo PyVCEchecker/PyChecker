@@ -1,0 +1,911 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# vim:sw=4:ts=4:et
+
+# pylint: disable=invalid-name
+
+from __future__ import print_function
+
+import os
+import signal
+import sys
+import threading
+import getpass
+import argparse
+import argcomplete
+
+try:
+    # import for Python 2.x
+    from ConfigParser import ConfigParser, NoOptionError, NoSectionError
+except ImportError:
+    # import for Python 3.x
+    from configparser import ConfigParser, NoOptionError, NoSectionError
+
+from amcrest import AmcrestCamera
+
+if os.name == 'nt':
+    AMCREST_CONF = os.path.join(os.getenv("HOMEPATH"), '.config\\amcrest.conf')
+else:
+    AMCREST_CONF = os.path.join(os.getenv("HOME"), '.config/amcrest.conf')
+
+
+def graceful_exit(_signo, _stack_frame):
+    """
+    When the process get SIGTERM, we might see "Terminated" message in console.
+    As this cli is user friendly, let's just terminate silently.
+    """
+    sys.exit(0)
+
+
+def __sigtermproc(process_pid):
+    """
+    For continuous flows, i.e: audio packets, there is no
+    option in the http api to pass the maximum time for
+    capturing the audio sequence. In that case, let's send
+    a SIGTERM to amcrest-cli when the max time of capture
+    is done and task finished.
+    """
+    os.kill(process_pid, signal.SIGTERM)
+
+
+def main():
+
+    signal.signal(signal.SIGTERM, graceful_exit)
+    parser = argparse.ArgumentParser(
+        description='Command line interface for Amcrest cameras.',
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+
+    # pylint: disable=fixme
+    # FIXME: Add metavar in the options for better understanding in the
+    # --help output
+
+    parser.add_argument('-H', '--hostname',
+                        dest='hostname',
+                        help='hostname or ip address for Amcrest camera')
+
+    parser.add_argument('-u',
+                        '--username',
+                        dest='username',
+                        help='username for Amcrest camera')
+
+    parser.add_argument('-p',
+                        '--password',
+                        dest='password',
+                        help='password for Amcrest camera')
+
+    parser.add_argument('-P',
+                        '--port',
+                        dest='port',
+                        default=80,
+                        help='port to Amcrest camera. Default: 80')
+
+    parser.add_argument('--camera',
+                        dest='camera',
+                        help='specify which section to read from '
+                             '~/.config/amcrest.conf')
+
+    parser.add_argument('--info-user',
+                        dest='info_user',
+                        help='info about username')
+
+    parser.add_argument('--info-all-users',
+                        action='store_true',
+                        help='info about all users')
+
+    parser.add_argument('--info-all-active-users',
+                        action='store_true',
+                        help='info about all active users')
+
+    parser.add_argument('--info-group',
+                        dest='info_group',
+                        help='info about group')
+
+    parser.add_argument('--info-all-groups',
+                        action='store_true',
+                        help='info about all groups')
+
+    parser.add_argument('--delete-user',
+                        dest='delete_user',
+                        help='delete username')
+
+    parser.add_argument('--add-user',
+                        dest='add_user',
+                        metavar='username password group [sharable]'
+                                ' [reserved] [memo]',
+                        nargs='+',
+                        help='Add new user')
+
+    parser.add_argument('--modify-password',
+                        dest='modify_password',
+                        nargs='+',
+                        metavar='username newpwd oldpwd',
+                        help='modify user password')
+
+    parser.add_argument('--modify-user',
+                        dest='modify_user',
+                        nargs='+',
+                        metavar='username attribute newvalue',
+                        help='modify user attribute')
+
+    # FIXME: Add param in the cli to users pass the delay option
+    # in reboot
+    parser.add_argument('--reboot',
+                        action='store_true',
+                        help='reboot the camera')
+
+    parser.add_argument('--shutdown',
+                        action='store_true',
+                        help='shutdown the camera')
+
+    parser.add_argument('--general-config',
+                        action='store_true',
+                        help='general configuration')
+
+    parser.add_argument('--software-information',
+                        action='store_true',
+                        help='software information')
+
+    parser.add_argument('--device-class',
+                        action='store_true',
+                        help='device class')
+
+    parser.add_argument('--machine-name',
+                        action='store_true',
+                        help='machine name')
+
+    parser.add_argument('--serial-number',
+                        action='store_true',
+                        help='serial number')
+
+    parser.add_argument('--onvif-information',
+                        action='store_true',
+                        help='onvif information')
+
+    parser.add_argument('--vendor-information',
+                        action='store_true',
+                        help='vendor information')
+
+    parser.add_argument('--system-information',
+                        action='store_true',
+                        help='the system information')
+
+    parser.add_argument('--device-type',
+                        action='store_true',
+                        help='device type')
+
+    parser.add_argument('--config-backup',
+                        action='store_true',
+                        help='config backup')
+
+    parser.add_argument('--hardware-version',
+                        action='store_true',
+                        help='hardware version')
+
+    parser.add_argument('--audio-input-channels-numbers',
+                        action='store_true',
+                        help='audio input channels numbers')
+
+    parser.add_argument('--audio-output-channels-numbers',
+                        action='store_true',
+                        help='audio output channels numbers')
+
+    parser.add_argument('--snapshot',
+                        dest='snapshot_option',
+                        default='0',
+                        nargs='?',
+                        const='0',
+                        help='get snapshot, use 0, 1 or 2\n'
+                             '0 - regular snapshot\n'
+                             '1 - motion detection snapshot\n'
+                             '2 - alarm snapshot')
+
+    parser.add_argument('--network-interfaces',
+                        action='store_true',
+                        help='Get network interfaces')
+
+    parser.add_argument('--video-blind-detect-config',
+                        action='store_true',
+                        help='Get video blind detect config')
+
+    parser.add_argument('--video-loss-detect-config',
+                        action='store_true',
+                        help='Get video loss detect config')
+
+    parser.add_argument('--version-http-api',
+                        action='store_true',
+                        help='Get version of HTTP API')
+
+    parser.add_argument('--scan-devices',
+                        dest='scan_devices',
+                        help='scan Amcrest cameras in the subnet provided\n'
+                             'i.e: 192.168.1.0/24')
+
+    parser.add_argument('--play-wav',
+                        dest='play_wav',
+                        help='play wav files')
+
+    parser.add_argument('--timeout',
+                        dest='timeout',
+                        type=int,
+                        const=None,
+                        help='set timeout for operations like\n'
+                             ' scan-devices')
+
+    parser.add_argument('--current-time',
+                        nargs='?',
+                        const=-1,
+                        help='camera current time')
+
+    parser.add_argument('--motion-detection',
+                        nargs='?',
+                        const=-1,
+                        help='enable/disable motion detection (True or False)')
+
+    parser.add_argument('--network-config',
+                        nargs='?',
+                        const=-1,
+                        help='network configuration')
+
+    parser.add_argument('--upnp-status',
+                        nargs='?',
+                        const=-1,
+                        help='upnp status')
+
+    parser.add_argument('--upnp-config',
+                        nargs='?',
+                        const=-1,
+                        help='upnp config')
+
+    parser.add_argument('--ntp-config',
+                        nargs='?',
+                        const=-1,
+                        help='ntp config')
+
+    parser.add_argument('--snapshot-config',
+                        nargs='?',
+                        const=-1,
+                        help='get snapshot configuration')
+
+    parser.add_argument('--save',
+                        dest='save',
+                        help='save output as file for operations like:\n'
+                             '--snapshot\n'
+                             '--audio-stream-capture\n'
+                             '--config-backup')
+
+    parser.add_argument('--event-handler-config',
+                        dest='event_handler_config',
+                        help='get event handler configname')
+
+    parser.add_argument('--alarm-config',
+                        action='store_true',
+                        help='get alarm config')
+
+    parser.add_argument('--alarm-out-config',
+                        action='store_true',
+                        help='get alarm out config')
+
+    parser.add_argument('--alarm-states-output-channels',
+                        action='store_true',
+                        help='alarm states output channels')
+
+    parser.add_argument('--alarm-states-input-channels',
+                        action='store_true',
+                        help='alarm states input channels')
+
+    parser.add_argument('--alarm-input-channels',
+                        action='store_true',
+                        help='alarm input channels')
+
+    parser.add_argument('--alarm-output-channels',
+                        action='store_true',
+                        help='alarm output channels')
+
+    parser.add_argument('--event-login-failure',
+                        action='store_true',
+                        help='event login failure')
+
+    parser.add_argument('--event-storage-not-exist',
+                        action='store_true',
+                        help='event storage not exist')
+
+    parser.add_argument('--event-management',
+                        action='store_true',
+                        help='event management')
+
+    parser.add_argument('--event-storage-access-failure',
+                        action='store_true',
+                        help='event storage access failure')
+
+    parser.add_argument('--event-storage-low-space',
+                        action='store_true',
+                        help='event storage low space')
+
+    parser.add_argument('--event-net-abort',
+                        action='store_true',
+                        help='event net abort')
+
+    parser.add_argument('--event-ip-conflict',
+                        action='store_true',
+                        help='event ip conflict')
+
+    parser.add_argument('--event-channels-happened',
+                        dest='event_channels_happened',
+                        help='params: VideoMotion, VideoLoss,\n'
+                             ' VideoBlind, Alarmlocal')
+
+    parser.add_argument('--record-capability',
+                        action='store_true',
+                        help='show record capability')
+
+    parser.add_argument('--factory-create',
+                        action='store_true',
+                        help='create a media file finder')
+
+    parser.add_argument('--record-mode',
+                        nargs='?',
+                        const=-1,
+                        help='show/set record mode')
+
+    parser.add_argument('--record-config',
+                        nargs='?',
+                        const=-1,
+                        help='show/set record config')
+
+    parser.add_argument('--media-global-config',
+                        action='store_true',
+                        help='media global config')
+
+    parser.add_argument('--video-max-extra-stream',
+                        action='store_true',
+                        help='max extra stream')
+
+    parser.add_argument('--video-color-config',
+                        action='store_true',
+                        help='color config')
+
+    parser.add_argument('--encode-capability',
+                        action='store_true',
+                        help='encode capability')
+
+    parser.add_argument('--encode-config-capability',
+                        action='store_true',
+                        help='encode config capability')
+
+    parser.add_argument('--encode-media',
+                        action='store_true',
+                        help='encode media')
+
+    parser.add_argument('--encode-region-interested',
+                        action='store_true',
+                        help='encode region interested')
+
+    parser.add_argument('--video-channel-title',
+                        action='store_true',
+                        help='channel title')
+
+    parser.add_argument('--video-input-channels-device-supported',
+                        action='store_true',
+                        help='input channels device supported')
+
+    parser.add_argument('--video-output-channels-device-supported',
+                        action='store_true',
+                        help='output channels device supported')
+
+    parser.add_argument('--video-max-remote-input-channels',
+                        action='store_true',
+                        help='max remote input channels')
+
+    parser.add_argument('--video-in-options',
+                        action='store_true',
+                        help='video in options')
+
+    parser.add_argument('--video-widget-config',
+                        action='store_true',
+                        help='widget config')
+
+    parser.add_argument('--video-out-options',
+                        action='store_true',
+                        help='video out options')
+
+    parser.add_argument('--video-input-capability',
+                        action='store_true',
+                        help='video input capability')
+
+    parser.add_argument('--video-coordinates-current-window',
+                        dest='coordinates_current_window',
+                        help='coordinates current window')
+
+    parser.add_argument('--video-standard',
+                        nargs='?',
+                        const=-1,
+                        help='view/set video standard (PAL or NTSC)')
+
+    parser.add_argument('--log-clear-all',
+                        action='store_true',
+                        help='clear all logs')
+
+    parser.add_argument('--ptz-config',
+                        action='store_true',
+                        help='show ptz config')
+
+    parser.add_argument('--ptz-auto-movement',
+                        action='store_true',
+                        help='show ptz auto movement')
+
+    parser.add_argument('--ptz-presets-list',
+                        action='store_true',
+                        help='show ptz preset list')
+
+    parser.add_argument('--ptz-goto-preset',
+                        dest='ptz_goto_preset',
+                        metavar='channel preset_point_number',
+                        nargs='+',
+                        help='move camera to preset configuration')
+
+    parser.add_argument('--wlan-config',
+                        action='store_true',
+                        help='show/set wlan-config')
+
+    parser.add_argument('--telnet-config',
+                        nargs='?',
+                        const=-1,
+                        help='enable/disable motion detection (True or False)')
+
+    parser.add_argument('--scan-wlan-devices',
+                        dest='scan_wlan_devices',
+                        help='scan wlan devices')
+
+    parser.add_argument('--mjpg-stream',
+                        metavar='timercapture [channelno] [typeno]',
+                        nargs='+',
+                        help='capture mjpg stream')
+
+    parser.add_argument('--audio-stream-capture',
+                        dest='audio_stream_capture',
+                        metavar='httptype channel timercapture',
+                        nargs='+',
+                        help='capture audio stream')
+
+    parser.add_argument('--audio-send-stream',
+                        dest='audio_send_stream',
+                        metavar='httptype channel filename',
+                        nargs='+',
+                        help='send audio stream')
+    # FIXME:
+    # parser.add_argument('--log-show',
+    #                     help='show logs <start time> <end time>')
+
+    argcomplete.autocomplete(parser)
+    args = parser.parse_args()
+
+    if os.path.isfile(AMCREST_CONF) and not args.scan_devices:
+        config = ConfigParser()
+        config.read(AMCREST_CONF)
+
+        # if more cameras found, requires --camera option
+        if len(config.sections()) > 1 and not args.camera:
+            print("More than 1 camera found at %s. "
+                  "Append the --camera option." % AMCREST_CONF)
+            sys.exit(-1)
+
+        if args.camera:
+            section = args.camera
+        else:
+            section = config.sections()[0]
+
+        try:
+            args.hostname = config.get(section, 'hostname')
+            args.port = config.getint(section, 'port')
+            args.username = config.get(section, 'username')
+            try:
+                args.password = config.get(section, 'password', raw=True)
+            except NoOptionError:
+                args.password = getpass.getpass()
+        except (NoSectionError, NoOptionError) as e:
+            print("ERROR! %s found at %s" % (e, AMCREST_CONF))
+            sys.exit(-1)
+
+    amcrest = AmcrestCamera(
+        args.hostname,
+        args.port,
+        args.username,
+        args.password
+    )
+    camera = amcrest.camera
+
+    if args.scan_devices:
+        ret = camera.scan_devices(args.scan_devices, args.timeout)
+        if ret:
+            print(("Looks like amcrest device: {0}".format(ret)))
+        else:
+            print("No devices found, try again later!")
+
+    if args.username and args.hostname and args.password:
+
+        if args.telnet_config == -1:
+            print((camera.telnet_config))
+
+        elif args.mjpg_stream:
+            if not args.save:
+                print("This option requires --save")
+
+            timer_capture = float(args.mjpg_stream[0])
+
+            channelno = None
+            typeno = None
+            if len(args.mjpg_stream) > 1:
+                channelno = args.mjpg_stream[1]
+            if len(args.mjpg_stream) > 2:
+                typeno = args.mjpg_stream[2]
+
+            t = threading.Timer(timer_capture, __sigtermproc, [os.getpid()])
+            t.start()
+
+            print(camera.mjpg_stream(
+                channel=channelno, typeno=typeno, path_file=args.save))
+
+        elif args.reboot:
+            print(camera.reboot())
+
+        elif args.shutdown:
+            print(camera.shutdown())
+
+        elif args.audio_send_stream:
+            if len(args.audio_send_stream) <= 3:
+                print("Requires arguments: httptype, channel, filename, codec")
+                sys.exit(-1)
+
+            httptype = args.audio_send_stream[0]
+            channel = args.audio_send_stream[1]
+            filename = args.audio_send_stream[2]
+            codec = args.audio_send_stream[3]
+
+            camera.audio_send_stream(httptype, channel, filename, codec)
+
+        elif args.audio_stream_capture:
+            if not args.save:
+                print("This option requires --save")
+
+            if len(args.audio_stream_capture) <= 2:
+                print("Requires arguments: httptype, channel, timer_capture!")
+                sys.exit(-1)
+
+            httptype = args.audio_stream_capture[0]
+            channel = args.audio_stream_capture[1]
+            timer_capture = float(args.audio_stream_capture[2])
+
+            t = threading.Timer(timer_capture, __sigtermproc, [os.getpid()])
+            t.start()
+
+            if args.save:
+                camera.audio_stream_capture(httptype, channel, args.save)
+            else:
+                camera.audio_stream_capture(httptype, channel)
+
+        elif args.play_wav:
+            camera.play_wav(path_file=args.play_wav)
+
+        elif args.wlan_config:
+            print(camera.wlan_config)
+
+        elif args.scan_wlan_devices:
+            print(camera.scan_wlan_devices(args.scan_wlan_devices))
+
+        elif args.telnet_config:
+            camera.telnet_config = args.telnet_config
+
+        elif args.ptz_config:
+            print(camera.ptz_config)
+
+        elif args.ptz_auto_movement:
+            print(camera.ptz_auto_movement)
+
+        elif args.ptz_presets_list:
+            print(camera.ptz_presets_list())
+
+        elif args.ptz_goto_preset:
+            if len(args.ptz_goto_preset) < 2:
+                print("Requires arguments: channel preset_point_number")
+                sys.exit(-1)
+
+            channel = args.ptz_goto_preset[0]
+            preset_point_number = args.ptz_goto_preset[1]
+            camera.go_to_preset(channel=channel, preset_point_number=preset_point_number)
+
+        elif args.log_clear_all:
+            print(camera.log_clear_all())
+
+        elif args.video_standard == -1:
+            print(camera.video_standard)
+
+        elif args.video_standard:
+            camera.video_standard = args.video_standard
+
+        elif args.coordinates_current_window:
+            print(camera.coordinates_current_window(
+                args.coordinates_current_window))
+
+        elif args.video_widget_config:
+            print(camera.video_widget_config)
+
+        elif args.video_input_capability:
+            print(camera.video_input_capability)
+
+        elif args.video_in_options:
+            print(camera.video_in_options)
+
+        elif args.video_out_options:
+            print(camera.video_out_options)
+
+        elif args.video_max_remote_input_channels:
+            print(camera.video_max_remote_input_channels)
+
+        elif args.video_output_channels_device_supported:
+            print(camera.video_output_channels_device_supported)
+
+        elif args.video_input_channels_device_supported:
+            print(camera.video_input_channels_device_supported)
+
+        elif args.video_channel_title:
+            print(camera.video_channel_title)
+
+        elif args.encode_region_interested:
+            print(camera.encode_region_interested)
+
+        elif args.encode_media:
+            print(camera.encode_media)
+
+        elif args.encode_config_capability:
+            print(camera.encode_config_capability)
+
+        elif args.encode_capability:
+            print(camera.encode_capability)
+
+        elif args.video_max_extra_stream:
+            print(camera.video_max_extra_stream)
+
+        elif args.video_color_config:
+            print(camera.video_color_config)
+
+        elif args.factory_create:
+            print(camera.factory_create)
+
+        elif args.record_capability:
+            print(camera.record_capability)
+
+        elif args.record_config == -1:
+            print(camera.record_config)
+
+        elif args.record_config is not None:
+            camera.record_config = args.record_config
+
+        elif args.media_global_config:
+            print(camera.media_global_config)
+
+        elif args.audio_input_channels_numbers:
+            print(camera.audio_input_channels_numbers)
+
+        elif args.audio_output_channels_numbers:
+            print(camera.audio_output_channels_numbers)
+
+        elif args.event_storage_not_exist:
+            print(camera.event_storage_not_exist)
+
+        elif args.event_login_failure:
+            print(camera.event_login_failure)
+
+        elif args.event_net_abort:
+            print(camera.event_net_abort)
+
+        elif args.event_ip_conflict:
+            print(camera.event_ip_conflict)
+
+        elif args.event_management:
+            print(camera.event_management)
+
+        elif args.event_storage_low_space:
+            print(camera.event_storage_low_space)
+
+        elif args.event_storage_access_failure:
+            print(camera.event_storage_access_failure)
+
+        elif args.general_config:
+            print(camera.general_config)
+
+        elif args.video_blind_detect_config:
+            print(camera.video_blind_detect_config)
+
+        elif args.video_loss_detect_config:
+            print(camera.video_loss_detect_config)
+
+        elif args.alarm_config:
+            print(camera.alarm_config)
+
+        elif args.alarm_out_config:
+            print(camera.alarm_out)
+
+        elif args.alarm_output_channels:
+            print(camera.alarm_output_channels)
+
+        elif args.alarm_input_channels:
+            print(camera.alarm_input_channels)
+
+        elif args.alarm_states_output_channels:
+            print(camera.alarm_states_output_channels)
+
+        elif args.alarm_states_input_channels:
+            print(camera.alarm_states_input_channels)
+
+        elif args.event_channels_happened:
+            print(camera.event_channels_happened(
+                args.event_channels_happened))
+
+        elif args.event_handler_config:
+            print(camera.event_handler_config(args.event_handler_config))
+
+        elif args.info_group:
+            print(camera.info_user(args.info_group))
+
+        elif args.info_all_groups:
+            print(camera.info_all_groups)
+
+        elif args.add_user:
+            if len(args.add_user) <= 2:
+                print("This option requires at least: "
+                      "username, password and group")
+                sys.exit(-1)
+
+            user = args.add_user[0]
+            pwd = args.add_user[1]
+            grp = args.add_user[2]
+
+            if len(args.add_user) >= 4:
+                sharable = args.add_user[3]
+            else:
+                sharable = False
+
+            if len(args.add_user) >= 5:
+                reserved = args.add_user[4]
+            else:
+                reserved = False
+
+            if len(args.add_user) >= 6:
+                memo = args.add_user[5]
+            else:
+                memo = False
+
+            print(camera.add_user(user, pwd, grp,
+                                   sharable, reserved, memo))
+
+        elif args.modify_user:
+            if len(args.modify_user) <= 2:
+                print("This option requires at least: "
+                      "username, attribute and new value")
+                sys.exit(-1)
+
+            user = args.modify_user[0]
+            attr = args.modify_user[1]
+            newvalue = args.modify_user[2]
+
+            print(camera.modify_user(user, attr, newvalue))
+
+        elif args.modify_password:
+            if len(args.modify_password) <= 2:
+                print("This option requires at least: "
+                      "username, new password and old password")
+                sys.exit(-1)
+
+            user = args.modify_password[0]
+            newpwd = args.modify_password[1]
+            oldpwd = args.modify_password[2]
+
+            print(camera.modify_password(user, newpwd, oldpwd))
+
+        elif args.delete_user:
+            print(camera.delete_user(args.delete_user))
+
+        elif args.info_all_users:
+            print(camera.info_all_users)
+
+        elif args.info_all_active_users:
+            print(camera.info_all_active_users)
+
+        elif args.info_user:
+            print(camera.info_user(args.info_user))
+
+        elif args.device_class:
+            print(camera.device_class)
+
+        elif args.onvif_information:
+            print(camera.onvif_information)
+
+        elif args.vendor_information:
+            print(camera.vendor_information)
+
+        elif args.system_information:
+            print(camera.system_information)
+
+        elif args.machine_name:
+            print(camera.machine_name)
+
+        elif args.device_type:
+            print(camera.device_type)
+
+        elif args.serial_number:
+            print(camera.serial_number)
+
+        elif args.hardware_version:
+            print(camera.hardware_version)
+
+        elif args.version_http_api:
+            print(camera.version_http_api)
+
+        elif args.software_information:
+            print(camera.software_information)
+
+        elif args.network_config:
+            print(camera.network_config)
+
+        elif args.upnp_config == -1:
+            print(camera.upnp_config)
+
+        elif args.upnp_config is not None:
+            camera.upnp_config = args.upnp_config
+
+        elif args.upnp_status == -1:
+            print(camera.upnp_status)
+
+        elif args.ntp_config == -1:
+            print(camera.ntp_config)
+
+        elif args.ntp_config is not None:
+            camera.ntp_config = args.ntp_config
+
+        elif args.network_interfaces:
+            print(camera.network_interfaces)
+
+        elif args.current_time == -1:
+            print(camera.current_time)
+
+        elif args.motion_detection == -1:
+            print(camera.motion_detection)
+
+        elif args.motion_detection:
+            camera.motion_detection = args.motion_detection
+
+        elif args.current_time is not None:
+            camera.current_time = args.current_time
+
+        elif args.snapshot_config:
+            print(camera.snapshot_config)
+
+        elif args.config_backup:
+            if args.save:
+                camera.config_backup(args.save)
+            else:
+                print("This option requires --save")
+
+        elif args.snapshot_option:
+            if args.save:
+                camera.snapshot(args.snapshot_option, args.save)
+            else:
+                print("This option requires --save")
+    else:
+        print('Error: You must specify a valid operation. See usage:')
+        parser.print_usage()
+
+
+if __name__ == '__main__':
+    main()

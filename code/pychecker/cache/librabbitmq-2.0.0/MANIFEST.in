@@ -1,0 +1,18 @@
+include AUTHORS
+include Changelog
+include README.rst
+include MANIFEST.in
+include LICENSE-GPL-2.0
+include LICENSE-MPL-RabbitMQ
+include TODO
+include setup.cfg
+recursive-include librabbitmq *
+recursive-include Modules *
+recursive-include tests *
+prune rabbitmq-c/
+exclude *.pyc
+exclude *.o
+exclude *.la
+exclude *.so
+exclude *.dylib
+exclude Makefile

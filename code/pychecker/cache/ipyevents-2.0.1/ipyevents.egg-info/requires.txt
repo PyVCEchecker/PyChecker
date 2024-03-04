@@ -1,0 +1,11 @@
+ipywidgets>=7.6.0
+
+[docs]
+sphinx
+nbsphinx
+jupyterlab>=3
+
+[test]
+pytest
+pytest-cov
+nbval

@@ -1,0 +1,6 @@
+README.md
+setup.py
+airflow.egg-info/PKG-INFO
+airflow.egg-info/SOURCES.txt
+airflow.egg-info/dependency_links.txt
+airflow.egg-info/top_level.txt

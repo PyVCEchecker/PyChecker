@@ -1,0 +1,245 @@
+Changes
+=======
+
+1.2.1 (2021-04-21)
+------------------
+
+- A missing comma in the ``__all__`` list caused the neighbors and parent
+  method to drop out of the module documentation (#135).
+
+1.2.0 (2021-04-19)
+------------------
+
+- Copyright holder and date (Mapbox, 2021) have been updated.
+- CLI help and documentation has been updated.
+
+1.2b1 (2021-04-14)
+------------------
+
+There have been no changes since 1.2a1.
+
+1.2a1 (2021-04-12)
+------------------
+
+Project infrastructure changes:
+
+- Default GitHub branch is now "main".
+
+Deprecations and future warnings:
+
+- The Tile constructor in mercantile 2.0 will refuse to make tiles with X and Y
+  indexes outside of the range 0 <= value <= 2 ** zoom. It will also require
+  indexes to be integers.
+
+New features:
+
+- Add ``geojson_bounds`` to get the bounding box of a GeoJSON geometry,
+  feature, or collection (#119).
+- Add ``minmax`` to get minimum and maximum x and y tile coordinates.
+- Add ``neighbors`` function and command to get adjacent tiles (#118).
+
+1.1.6 (2020-08-24)
+------------------
+
+- In some cases tile() could return a Tile with float x or y attributes (#115).
+  This is a new bug in 1.1.5 and breaks some user code on Python 2.7 and is now
+  fixed.
+
+1.1.5 (2020-06-16)
+------------------
+
+- A bug in ``simplify()`` has been fixed and the algorithm has been improved
+  (#111).
+- Implementation of ``tile()`` has been simplified and corrected (#114).
+
+1.1.4 (2020-04-28)
+------------------
+
+- Change a list comprehension to a generator expression in simplify().
+- Change DeprecationWarning introduced in 1.1.3 to a UserWarning to increase
+  visibility.
+- Ensure symmetric InvalidLatitudeErrors at both poles (#106).
+
+1.1.3 (2020-04-13)
+------------------
+
+- Warn about deprecation of support when mercantile is imported with Python
+  versions < 3. Mercantile 2.0 will not be compatible with Python 2.7.
+- The bounding tile of the bounds of a tile is now that same tile (#100).
+
+1.1.2 (2019-08-05)
+------------------
+
+- fid of 0 is now allowed by the ``feature()`` function (#85).
+- Passing the bounds of a tile to ``tiles()`` now yields exactly that tile
+  only (given the correct zoom), resolving #84 and #87.
+- QuadKeyError derives from ValueError again, resolving issue #98, but only
+  until version 2.0. A deprecation warning explaining this is raised from
+  quadkey_to_tile just before QuadKeyError is raised.
+- Format source using black.
+
+1.1.1 (2019-07-01)
+------------------
+
+- Update tests to work with pytest 5.
+
+1.1.0 (2019-06-21)
+------------------
+
+- A zoom keyword argument has been added to both ``children()`` and
+  ``parent()``, allowing the user to specify the zoom level for each (#94).
+- A new ``simplify()`` function merges child to parent tiles, upwards,
+  producing the shortest sequence of tiles that cover the same space (#94).
+- The mercantile module now raises only exceptions deriving from
+  MercantileError. Such errors indicate improper usage of the mercantile
+  module. The occurance of a builtin exception indicates a bug in mercantile.
+
+1.0.4 (2018-06-04)
+------------------
+
+- Added missing docstrings (#80).
+
+1.0.3 (2018-05-17)
+------------------
+
+- Support a single zoom value passed to ``tiles()`` as advertised (#78).
+
+1.0.2 (2018-05-08)
+------------------
+
+- The ``xy`` function returns ``float(inf)`` and ``float(-inf)`` for y at the
+  North and South pole, respectively, instead of raising an exception (#76).
+
+1.0.1 (2018-02-15)
+------------------
+
+- Corrected an error in the ``bbox`` parameter description in the
+  ``bounding_tile`` docstring (#73).
+- Corrected an error in the geojson.io example in the CLI docs: the proper
+  usage is ``mercantile shapes --collect`` (#71, #72).
+- Add missing ``--version`` option to mercantile command.
+- Python 3.6 has been added to the Travis build matrix.
+
+1.0.0 (2017-12-01)
+------------------
+
+Thanks to all contributors (see AUTHORS.txt), users, and testers, Mercantile
+1.0.0 is ready. Share and enjoy!
+
+1.0b2 (2017-11-27)
+------------------
+- Add ``tiles`` to ``__all__`` and sort that list. This sorts the classes
+  and functions in the API docs.
+
+1.0b1 (2017-11-21)
+------------------
+- Documentation: overhauled API reference docs based on output of
+  sphinx-apidoc.
+
+1.0a1 (2017-11-16)
+------------------
+- New feature: the ``feature`` function returns a GeoJSON feature for a tile
+  (#46).
+
+0.11.0 (2017-10-17)
+-------------------
+- New feature: the ``lnglat`` function is the inverse of ``xy`` (#62).
+- New feature: the --bounding-tile option of mercantile-tiles has been made
+  into a new mercantile-bounding-tile command (#43).
+- API change: the --bounding-tile and --with-bounds options of
+  mercantile-tiles have been removed.
+
+0.10.0 (2017-05-26)
+-------------------
+- API change: ``InvalidLatitudeError`` is raised by ``tile`` when Y cannot be
+  computed.
+- New feature: ``xy_bounds`` to get Spherical Mercator bounds for tile (#60).
+- New feature: ``Bbox`` class with ``left``, ``bottom``, ``top``, ``right``
+  properties (#60).
+- Bug fix: prevent ``tiles`` from returning tiles with invalid indexes (#47).
+
+0.9.0 (2016-05-20)
+------------------
+- Refactoring: new ``normalize_input`` and ``iter_lines`` functions for
+  use in the CLI (#58).
+- Refactoring: the coarse ``try/except`` blocks have been removed from within
+  CLI subcommands, ``sys.exit`` calls are removed, and ``sys.stdout.write``
+  calls have been replaced by ``click.echo`` (#58).
+- Refactoring: many PEP 8 changes and new tests to bring the project to 100%
+  coverage (#58).
+- New feature: functions and subcommand for converting between tiles and
+  quadkeys (#50, #51, #56, #57).
+- Bug fix: correct output when a point is given to mercantile-tiles (#48, #49).
+- Bug fix: more consistent interface for tile arguments (#53).
+
+0.8.3 (2015-08-24)
+------------------
+- Fix error in lng/lat truncation. If lat was > 90, the *lng* was set to a
+  wrong value.
+
+0.8.2 (2014-10-29)
+------------------
+- Add tiles() function (#38).
+- Split antimeridian crossing bounds in tiles() (#40).
+
+0.8.1 (2014-10-22)
+------------------
+- Emulate JS >>> operator so we get same results as tilebelt (#36).
+
+0.8 (2014-10-22)
+----------------
+- Streamlining of sequence related options (#35).
+- Add customization of output shape ids (#33).
+
+0.7.1 (2014-10-21)
+------------------
+- Make lng/lat truncation optional and off by default (#29).
+
+0.7 (2014-10-21)
+----------------
+- Add customization of output shape properties (#30).
+
+0.6.1 (2014-10-13)
+------------------
+- Guard against lng/lat values off the globe (#27).
+
+0.6 (2014-09-27)
+----------------
+- Add bounding_tile function and tests (#25).
+- Add --bounding-tile option to tiles command.
+
+0.5.1 (2014-09-25)
+------------------
+- Let mercantile tiles accept point input as well as bbox or GeojSON.
+
+0.5 (2014-09-24)
+----------------
+- Add mercantile parent and children commands (#17).
+- Fix numerical precision bug in roundtripping shapes/tiles (#19).
+- Compute bbox if input GeoJSON doesn't provide one (#23).
+
+0.4 (2014-08-21)
+----------------
+- Add option for RS-deliminted JSON sequences.
+- Transparent handling of file, stream, and text input (#11).
+- Add buffering option (#13).
+- Add --extents option to mercantile shapes (#14, #16).
+- Round coordinates to proper precision.
+
+0.3 (2014-08-19)
+----------------
+- Add mercator output option for shapes (#9).
+
+0.2.1 (2014-08-19)
+------------------
+- Feature collections as option for shapes command.
+
+0.2 (2014-08-19)
+----------------
+- Added tile() function (#2).
+- Add mercantile script (#3).
+- Added shapes command (#6).
+
+0.1 (2014-03-26)
+----------------
+- Added mercantile.tool script for use with geojsonio-cli.

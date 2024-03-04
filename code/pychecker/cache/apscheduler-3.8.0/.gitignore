@@ -1,0 +1,15 @@
+.project
+.pydevproject
+.idea/
+.coverage
+.cache/
+.pytest_cache/
+.tox/
+.eggs/
+*.egg-info/
+*.pyc
+dist/
+docs/_build/
+build/
+virtualenv/
+example.sqlite

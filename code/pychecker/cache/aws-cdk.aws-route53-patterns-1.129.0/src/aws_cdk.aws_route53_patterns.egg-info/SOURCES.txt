@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_route53_patterns.egg-info/PKG-INFO
+src/aws_cdk.aws_route53_patterns.egg-info/SOURCES.txt
+src/aws_cdk.aws_route53_patterns.egg-info/dependency_links.txt
+src/aws_cdk.aws_route53_patterns.egg-info/requires.txt
+src/aws_cdk.aws_route53_patterns.egg-info/top_level.txt
+src/aws_cdk/aws_route53_patterns/__init__.py
+src/aws_cdk/aws_route53_patterns/py.typed
+src/aws_cdk/aws_route53_patterns/_jsii/__init__.py
+src/aws_cdk/aws_route53_patterns/_jsii/aws-route53-patterns@1.129.0.jsii.tgz

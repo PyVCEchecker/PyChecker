@@ -1,0 +1,8 @@
+
+[dev]
+black
+coverage
+isort
+pre-commit
+pyenchant
+pylint

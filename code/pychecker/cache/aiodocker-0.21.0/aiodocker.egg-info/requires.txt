@@ -1,0 +1,2 @@
+aiohttp>=3.6
+typing_extensions>=3.6.5

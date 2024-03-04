@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: python-nginx
+Version: 1.5.4
+Summary: Create and modify nginx serverblock configs in Python
+Home-page: https://github.com/peakwinter/python-nginx
+Author: Jacob Cook
+Author-email: jacob@peakwinter.net
+License: GPLv3
+Download-URL: https://github.com/peakwinter/python-nginx/archive/1.5.4.zip
+Description: UNKNOWN
+Keywords: nginx,web servers,serverblock,server block
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: Unix
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers

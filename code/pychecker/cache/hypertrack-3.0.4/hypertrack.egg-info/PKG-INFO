@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: hypertrack
+Version: 3.0.4
+Summary: HyperTrack API wrapper
+Home-page: https://www.hypertrack.com/
+Author: HyperTrack
+Author-email: help@hypertrack.com
+License: UNKNOWN
+Description: # hypertrack-python
+        
+        HyperTrack API Python package
+        
+        ## Installation
+        
+        Install from PyPi using [pip](http://www.pip-installer.org/en/latest/), a
+        package manager for Python.
+        
+            pip install hypertrack
+        
+        ## Setting Started and Documentation
+        
+        To get started, visit this [page](https://www.hypertrack.com/docs/references/#references-helper-libraries-python-helper-library).
+        
+        The documentation for the HyperTrack API and library usage can be found [here](https://www.hypertrack.com/docs/references/#references-apis).
+        
+        ## Contributing
+        
+        Bug fixes, docs, and library improvements are always welcome. 
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

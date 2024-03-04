@@ -1,0 +1,17 @@
+HISTORY.rst
+LICENSE
+MANIFEST.in
+README.rst
+logo.png
+pyproject.toml
+setup.cfg
+setup.py
+src/pytest_randomly/__init__.py
+src/pytest_randomly/py.typed
+src/pytest_randomly.egg-info/PKG-INFO
+src/pytest_randomly.egg-info/SOURCES.txt
+src/pytest_randomly.egg-info/dependency_links.txt
+src/pytest_randomly.egg-info/entry_points.txt
+src/pytest_randomly.egg-info/not-zip-safe
+src/pytest_randomly.egg-info/requires.txt
+src/pytest_randomly.egg-info/top_level.txt

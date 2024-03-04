@@ -1,0 +1,45 @@
+Metadata-Version: 1.2
+Name: cyborg-tempest-plugin
+Version: 1.3.0
+Summary: OpenStack Acceleration Tempest Plugin
+Home-page: http://www.openstack.org/
+Author: OpenStack
+Author-email: openstack-discuss@lists.openstack.org
+License: UNKNOWN
+Description: =====================
+        Cyborg Tempest Plugin
+        =====================
+        
+        This is a cyorg tempest plugin package. Tests can be run as a tempest plugin
+        against any cyborg-enabled OpenStack cloud.
+        
+        Please fill here a long description which must be at least 3 lines wrapped on
+        80 cols, so that distribution package maintainers can use it in their packages.
+        Note that this is a hard requirement.
+        
+        * Free software: Apache license
+        * Documentation: https://docs.openstack.org/cyborg-tempest-plugin/latest
+        * Source: https://opendev.org/openstack/cyborg-tempest-plugin/
+        * Bugs: https://storyboard.openstack.org/#!/project/968
+        
+        Features
+        --------
+        
+        * TODO
+        
+        
+Keywords: setup,distutils
+Platform: UNKNOWN
+Classifier: Environment :: OpenStack
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.6

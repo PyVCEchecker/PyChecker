@@ -1,0 +1,4 @@
+google-cloud-logging<3.0.0dev,>=1.14.0
+google-api-core[grpc]<3.0.0dev,>=1.26.0
+proto-plus>=1.4.0
+packaging>=14.3

@@ -1,0 +1,12 @@
+LICENSE.txt
+MANIFEST.in
+README.rst
+package.json
+setup.cfg
+setup.py
+asciichartpy/__init__.py
+asciichartpy.egg-info/PKG-INFO
+asciichartpy.egg-info/SOURCES.txt
+asciichartpy.egg-info/dependency_links.txt
+asciichartpy.egg-info/requires.txt
+asciichartpy.egg-info/top_level.txt

@@ -1,0 +1,9 @@
+MANIFEST.in
+VERSION
+VERSION.h
+dumb-init.c
+setup.py
+dumb_init.egg-info/PKG-INFO
+dumb_init.egg-info/SOURCES.txt
+dumb_init.egg-info/dependency_links.txt
+dumb_init.egg-info/top_level.txt

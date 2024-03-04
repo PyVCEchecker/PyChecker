@@ -1,0 +1,9 @@
+python-dateutil<3,>=2.7.5
+python-daemon
+tornado<6,>=4.0
+
+[prometheus]
+prometheus-client==0.5.0
+
+[toml]
+toml<2.0.0

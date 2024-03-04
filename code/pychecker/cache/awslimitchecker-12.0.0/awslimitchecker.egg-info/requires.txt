@@ -1,0 +1,7 @@
+boto3>=1.9.175
+botocore
+termcolor>=1.1.0
+python-dateutil
+versionfinder>=0.1.1
+pytz
+urllib3

@@ -1,0 +1,17 @@
+COPYING
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+versioneer.py
+zpprofile.py
+pprofile/__init__.py
+pprofile/__main__.py
+pprofile/_version.py
+pprofile/zope.py
+pprofile.egg-info/PKG-INFO
+pprofile.egg-info/SOURCES.txt
+pprofile.egg-info/dependency_links.txt
+pprofile.egg-info/entry_points.txt
+pprofile.egg-info/top_level.txt
+pprofile.egg-info/zip-safe

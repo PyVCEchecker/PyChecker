@@ -1,0 +1,13 @@
+---
+features:
+  - |
+    Add ``--tag`` and ``--no-tag`` options to ``security group create`` and
+    ``security group set`` commands.
+    [Bug `1750983 <https://bugs.launchpad.net/python-openstackclient/+bug/1750983>`_]
+  - |
+    Add ``--tags``, ``--any-tags``, ``--not-tags`` and ``--not-any-tags`` options
+    to ``security group list`` command.
+    [Bug `1750983 <https://bugs.launchpad.net/python-openstackclient/+bug/1750983>`_]
+  - |
+    Add ``--tag`` and ``--all-tag`` options to ``security group unset`` command.
+    [Bug `1750983 <https://bugs.launchpad.net/python-openstackclient/+bug/1750983>`_]

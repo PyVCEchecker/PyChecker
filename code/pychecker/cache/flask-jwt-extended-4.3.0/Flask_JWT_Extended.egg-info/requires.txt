@@ -1,0 +1,6 @@
+Werkzeug>=0.14
+Flask<3.0,>=1.0
+PyJWT<3.0,>=2.0
+
+[asymmetric_crypto]
+cryptography<4.0,>=3.0

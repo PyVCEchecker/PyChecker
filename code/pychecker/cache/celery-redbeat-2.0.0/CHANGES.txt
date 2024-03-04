@@ -1,0 +1,53 @@
+2.0.0 (2020-10-25)
+---------------------
+  - BREAKING CHANGES, test with your stack before deploying
+    - Drop support for celery<4.2
+    - Drop support for pyredis<3
+  - Support timezones other than UTC thanks @luoxiaohei, @sempr and @noamkush
+  - Many config handling consistentcy updates
+  - Use black linter and drop circle CI in favor of GitHub Actions
+
+1.0.0 (2020-05-16)
+--------------------
+  - version bump of 0.13.0
+  - add warning for non-UTC timezones
+
+0.13.0 (2019-03-08)
+--------------------
+  - support py-redis>=3. thanks noamkush
+    - see https://github.com/sibson/redbeat/pull/108 for dependency issues
+  - use CircleCI 2.0, thanks Christopher Dignam
+  - build wheel for distribution on pypi, thanks @noamkush
+  - test fixes for py37/celery3/4, thanks @laixintao
+
+0.12.0 (2018-12-06)
+--------------------
+  - better Celery 4 support, thanks @az-wegift
+  - configurably, automatically reconnect to Redis on timeout error rather than terminate, thanks @az-wegift
+  - password support for Redis Sentinal connections, thanks @az-wegift
+  - bugfix, rrule serialization under Celery 3, thanks @noamkush
+
+0.11.1 (2018-01-03)
+--------------------
+ - config options and password support for Redis Sentinel, thanks Amadeusz Zolnowski
+
+0.11.0 (2017-10-18)
+---------------------
+ - SECURITY, redact password when logging redis URL
+ - Celery 3/4 compatibility fixes, thanks Jannis Leidel
+ - Recurrance Rule support, thanks Aric Huang
+ - Redis Cluster support, thanks Arthur Lutz
+
+
+0.10.2 (2017-10-10)
+----------------------
+ - SECURITY, redact password when logging redis URL
+
+0.10.0 (2017-05-10)
+----------------------
+ - minor breaking changes due to reworked API
+ - celery 4.x support
+ - python 3 compatability, thanks Christopher Arndt
+ - be more consistent about using UTC everywhere
+ - various bugfixes, thanks Christopher Arndt
+ - improved configuration handling, thanks Jannis Leidel

@@ -1,0 +1,4 @@
+
+    [console_scripts]
+    awslimitchecker = awslimitchecker.runner:console_entry_point
+    

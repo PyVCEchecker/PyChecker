@@ -1,0 +1,7 @@
+packaging>=20.0
+setuptools
+tomli>=1.0.0
+
+[toml]
+setuptools>=42
+tomli>=1.0.0

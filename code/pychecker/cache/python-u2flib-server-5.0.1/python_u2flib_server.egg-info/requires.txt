@@ -1,0 +1,6 @@
+cryptography>=1.2
+six
+enum34
+
+[u2f_server]
+WebOb

@@ -1,0 +1,8 @@
+flake8
+
+[test]
+coverage
+coveralls
+mock
+pytest
+pytest-cov

@@ -1,0 +1,169 @@
+1.3:
+    - Strings which exceed the column limit are now split across multiple
+      lines.  Thanks to Xi Chen for reporting.
+    - We now raise ValueError if we reach and EOF before a namelist group has
+      been terminated.  It is also raised for various StopIteration scenarios.
+    - Namelist output with repeated values can now use repeat tokens if
+      enabled.  Thanks to Holger Wolff for contributing this feature.
+    - Bugfix: Preserve newlines in the reads() string parser.  This fixes a bug
+      in the handling of tokens outside of namelist groups.  Thanks to GitHub
+      user @coreur for reporting.
+    - Patching now supports the addition of new namelist groups.  Thanks to
+      Cory Kramer for reporting and suggesting this issue.
+
+1.2:
+    - Bugfix: Repeated null arrays as final elements now parse correctly.
+    - Bugfix: Preprossor comment token # now correctly disabled on default.
+    - Bugfix: Several indexing issues with array patching have been fixed.
+    - Improved "duck typing" tokenization of numerics and other data types,
+    - Removal of Namelist constructor calls in __setitem__.
+
+1.1.2:
+    - README update to remove `-e` flags for local installs.
+
+1.1.1:
+    - YAML: Additional install support (f90nml[yaml]) package and additional
+      documentation for supporting YAML conversion.
+    - Bugfix: Removal of `-o` output flag.  The positional argument is now used
+      exclusively to set the output file in the CLI.
+    - Documentation changes and integration, thanks to the JOSS reviewers.
+
+1.1:
+    - Bugfix: Out-of-order multidimensional support now works correctly.
+    - Bugfix: Derived type list updates without an index now correctly apply
+      the update to the first element in the list.  Thanks to GitHub user
+      @LSchueler for reporting.
+    - Bugfix: `Namelist.todict` now correctly copies the contents of
+      user-defined types as sub-namelists.  Thanks to @kripnerl for reporting.
+    - Improved IEEE NaN and Inf support, thanks to @jensss for reporting.
+    - Strings can now be parsed as namelists using `Parser.reads()`.
+    - Spacing between indices is now disabled on default, and optionally
+      enabled using the `index_spacing` control flag.  This spacing is
+      supported in most compilers, but it also violates the behaviour as
+      defined in the standard.  Thanks to Robert Schweppe for reporting and
+      Themos Tsikas at NAG for the explanation.
+    - Metadata support for indentation...
+    - `Namelist.groups()` provides an iterator for spanning the namelist groups
+      and variable names.  Thanks to Jens Svensmark for contributing this
+      feature.
+    - Improved command line flag help, thanks to Warrick Bell.
+    - Improved various warning logging, thanks to Pascal Hebbeker.
+    - Exception fixes and various style cleanups, thanks to Qi Zhang.
+
+1.0.2:
+    - Automated manpage build has been removed from setup.py due to potential
+      conflicts with Sphinx.  Manpage support is now expected to be handled
+      within individual distributions.  Thanks to Adrien Morrison for
+      reporting.
+
+1.0.1:
+    - Manifest update to include tests, which are now a required component of
+      the setup.py script.  Thanks to Andrew Kiss for reporting.
+
+1.0:
+    - Multidimensional arrays are now padded with null values on default.
+      Values are now square-like and should safely convert to NumPy arrays.
+      Thanks to Caoxiang Zhu for suggesting this change.
+    - strict_logical and row_major arguments were removed from the top-level
+      API functions.  They are now controlled by Parser objects.
+    - Parser floatformat changed to float_format
+    - Parser colwidth changed to column_width
+    - default_start_index added to Namelist for explicit start index.
+      `default_start_index` can also be set via the constructor, in order to
+      initialise dicts as Namelists.  Thanks to GitHub user @gitporst for
+      suggesting this feature.
+    - Many Namelist and Parser attributes converted to type-safe properties
+    - Most internal Namelist and Parser functions tagged as private
+    - Test suite now invoked by `setup.py test`.
+    - `decomplex` flag of `todict` renamed to `complex_tuple`
+    - Appveyor (Windows) test support
+    - Extensive documentation update and sphinx integration
+    - Manpage installation by setup.py for CLI (if Sphinx is available)
+    - Bugfix: Namelist() now works with arrays of dtypes as nested dicts.
+      Thanks to GitHub users @gitporst and @sound-fx for reporting.
+    - Bugfix: Namelist() now works with multidimensional arrays as list of
+      lists.  Thanks to GitHub user @sound-fx for reporting.
+
+v0.23:
+    - CLI: Thorough support for JSON, YAML, updating, and patching
+    - Namelist method `todict` for conversion to native Python dict
+    - User-friendly print() output for namelist files
+    - Most CLI features are integrated into the test suite
+    - Bugfix: Content outside of namelist groupss are now tokenized as
+        comments.  (Thanks to Martin Margo for reporting.)
+    - Bugfix: String line continuation under the new tokenizer.  (Thanks to
+        Robert Gieseke for reporting.)
+    - Bugfix: Entries longer than colwidth no longer append commas, unless
+        end_comma is specified
+    - Bugfix: Complex lists are now parsed correctly.
+    - Bugfix: Constructor now preserves start_index
+    - Bugfix: f90str is now more unicode/str (2.x/3.x) compatible
+
+v0.22:
+    - A command line interface has been added, see `f90nml -h` for details.
+    - We now use a native Python tokenizer, and no longer use shlex.  This has
+      led to some modest performance speedups.
+    - JSON and YAML files can now be read as namelists, and vice versa.
+    - Bugfix: Repeated values in arrays were incorrectly applied to subsequent
+      list elements (e.g. y = 5*1, 2, 3 was applying 5 to all three explicit
+      elements, instead of just the first).  Thanks to @fizzysister for
+      reporting.
+    - Bugfix: Dicts can once again be assigned to namelist groups.  (James
+      Penn)
+    - Namelist patching using a second namelist (James Penn)
+    - Sorted namelist field output.  (Andrew Kiss)
+    - Documentation typos were fixed, and some docstrings have been cleaned up.
+
+v0.21:
+    - Several bug fixes related to derived types and start index tracking
+    - Stricter checks for existing parent when modifying a derived type
+    - When parsing lists of nested derived types, we now correctly set the
+      parent as the respective list element, rather than the entire list.  This
+      allows us to remove several redundant code checks from the parser.
+
+v0.20:
+    - Indexing is no longer assumed to be 1-based.  The initial index is now
+      implicit if unspecifed in the namelist file.  Properties have been added
+      to control the index base.
+    - Patching a vector with a shorter vector now correctly removes the old
+      tail values.
+    - Derived type patching is now supported.
+
+v0.19:
+    - Array patching is now supported
+    - NumPy primitives can be converted to Fortran types
+    - File objects can now be used as input arguments
+
+v0.18:
+    - File object read and write support
+    - Escape (\) character support in strings
+    - Fortran floating point `E` symbol is now optional (with +/- exponent)
+
+v0.17:
+    - `f90nml.write()` works for normal (non-`Namelist`) dicts
+    - `Parser` properties moved outside of function arguments, and are now
+      handled with property decorators (as in `Namelist`)
+    - Namelists built from (unsorted) dicts are now pre-sorted by key
+
+v0.16:
+    - User-defined comment delimiters (e.g. `#` comment support)
+
+v0.15:
+    - Null values are now always followed by commas
+
+v0.14:
+    - Default logical parsing is now more strict.  Only `true`, `false`, `t`,
+      and `f` (and with surrounding `.`) are now parsed to equivalent values.
+    - Extensive documentation update
+
+v0.13:
+    - Multidimensional array support
+
+v0.12:
+    - Namelist output formatting (column width, indent, etc.)
+    - Improved user-defined type output support
+    - Arch (AUR) distribution configuration
+    - Setuptools is now the install default
+
+v0.1--0.11:
+    - Lost to history

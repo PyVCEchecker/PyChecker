@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.rst
+pytest_flakes.py
+setup.cfg
+setup.py
+test_flakes.py
+tox.ini
+pytest_flakes.egg-info/PKG-INFO
+pytest_flakes.egg-info/SOURCES.txt
+pytest_flakes.egg-info/dependency_links.txt
+pytest_flakes.egg-info/entry_points.txt
+pytest_flakes.egg-info/requires.txt
+pytest_flakes.egg-info/top_level.txt

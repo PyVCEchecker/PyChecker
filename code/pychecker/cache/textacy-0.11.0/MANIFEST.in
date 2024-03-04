@@ -1,0 +1,12 @@
+graft src
+graft scripts
+graft tests
+graft docs
+prune docs/build/
+
+include CHANGES.md
+include README.md
+include LICENSE.txt
+include pyproject.toml
+
+global-exclude __pycache__ *.py[cod]

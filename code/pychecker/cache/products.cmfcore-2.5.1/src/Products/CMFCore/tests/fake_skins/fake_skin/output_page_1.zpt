@@ -1,0 +1,11 @@
+<html>
+<head>
+ <title>test page</title>
+</head>
+
+<h1>Here is the title</h1>
+
+<x tal:replace="structure context/output_page_2" />
+
+</html>
+

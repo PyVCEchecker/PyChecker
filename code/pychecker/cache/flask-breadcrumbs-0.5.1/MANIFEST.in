@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of Flask-Breadcrumbs
+# Copyright (C) 2013, 2014, 2016 CERN.
+#
+# Flask-Breadcrumbs is free software; you can redistribute it and/or
+# modify it under the terms of the Revised BSD License; see LICENSE
+# file for more details.
+
+include .checkignore .coveragerc run-tests.sh pytest.ini tox.ini
+include .lgtm MAINTAINERS
+include LICENSE *.rst *.txt
+include docs/*.rst docs/*.py docs/Makefile docs/requirements.txt
+recursive-include docs/_templates *.html
+recursive-include docs/_themes *.py *.css *.css_t *.conf *.html LICENSE README
+recursive-include tests *.py

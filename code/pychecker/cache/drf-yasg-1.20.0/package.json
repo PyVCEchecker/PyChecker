@@ -1,0 +1,12 @@
+{
+  "name": "drf-yasg",
+  "dependencies": {
+    "redoc": "^2.0.0-rc.40",
+    "swagger-ui-dist": "^3.36.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axnsan12/drf-yasg.git"
+  },
+  "private": true
+}

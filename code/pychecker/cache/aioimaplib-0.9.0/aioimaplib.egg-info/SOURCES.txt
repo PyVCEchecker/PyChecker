@@ -1,0 +1,10 @@
+LICENSE.txt
+README.rst
+setup.py
+aioimaplib/__init__.py
+aioimaplib/aioimaplib.py
+aioimaplib.egg-info/PKG-INFO
+aioimaplib.egg-info/SOURCES.txt
+aioimaplib.egg-info/dependency_links.txt
+aioimaplib.egg-info/not-zip-safe
+aioimaplib.egg-info/top_level.txt

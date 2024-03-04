@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+diskcache/__init__.py
+diskcache/cli.py
+diskcache/core.py
+diskcache/djangocache.py
+diskcache/fanout.py
+diskcache/persistent.py
+diskcache/recipes.py
+diskcache.egg-info/PKG-INFO
+diskcache.egg-info/SOURCES.txt
+diskcache.egg-info/dependency_links.txt
+diskcache.egg-info/top_level.txt

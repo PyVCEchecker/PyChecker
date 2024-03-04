@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Extensions &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Jobs Scheduling" href="jobs_scheduling.html" />
+    <link rel="prev" title="Debugger Tags" href="debugger_tags.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="jobs_scheduling.html" title="Jobs Scheduling"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="debugger_tags.html" title="Debugger Tags"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Field Extensions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="field-extensions">
+<h1>Field Extensions<a class="headerlink" href="#field-extensions" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Field Extensions</p>
+</dd>
+</dl>
+<div class="section" id="current-database-model-field-extensions">
+<h2>Current Database Model Field Extensions<a class="headerlink" href="#current-database-model-field-extensions" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p><em>AutoSlugField</em> - AutoSlugField will automatically create a unique slug
+incrementing an appended number on the slug until it is unique. Inspired by
+SmileyChris’ Unique Slugify snippet.</p>
+<p>AutoSlugField takes a <cite>populate_from</cite> argument that specifies which field, list of
+fields, or model method the slug will be populated from, for instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">slug</span> <span class="o">=</span> <span class="n">AutoSlugField</span><span class="p">(</span><span class="n">populate_from</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;get_author_name&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><cite>populate_from</cite> can traverse a ForeignKey relationship by using Django ORM syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">slug</span> <span class="o">=</span> <span class="n">AutoSlugField</span><span class="p">(</span><span class="n">populate_from</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;related_model__title&#39;</span><span class="p">,</span> <span class="s1">&#39;related_model__get_readable_name&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>AutoSlugField uses Django’s <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.text.slugify">slugify</a> function by default to “slugify” <code class="docutils literal notranslate"><span class="pre">populate_from</span></code> field.</p>
+<p>To provide custom “slugify” function you could either provide the function as
+an argument to <code class="xref py py-class docutils literal notranslate"><span class="pre">AutoSlugField</span></code> or define your <code class="docutils literal notranslate"><span class="pre">slugify_function</span></code>
+method within a model.</p>
+</li>
+</ul>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">slugify_function</span></code> as an argument to <code class="xref py py-class docutils literal notranslate"><span class="pre">AutoSlugField</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># models.py</span>
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="kn">from</span> <span class="nn">django_extensions.db.fields</span> <span class="kn">import</span> <span class="n">AutoSlugField</span>
+
+
+<span class="k">def</span> <span class="nf">my_slugify_function</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">slug</span> <span class="o">=</span> <span class="n">AutoSlugField</span><span class="p">(</span><span class="n">populate_from</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">slugify_function</span><span class="o">=</span><span class="n">my_slugify_function</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">slugify_function</span></code> as a method within a model class.</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># models.py</span>
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="kn">from</span> <span class="nn">django_extensions.db.fields</span> <span class="kn">import</span> <span class="n">AutoSlugField</span>
+
+
+<span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">slug</span> <span class="o">=</span> <span class="n">AutoSlugField</span><span class="p">(</span><span class="n">populate_from</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">slugify_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Important.</strong>
+If you both provide <code class="docutils literal notranslate"><span class="pre">slugify_function</span></code> in a model class and
+pass <code class="docutils literal notranslate"><span class="pre">slugify_function</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">AutoSlugField</span></code> field,
+then model’s <code class="docutils literal notranslate"><span class="pre">slugify_function</span></code> method will take precedence.</p>
+</div></blockquote>
+<ul>
+<li><p><em>RandomCharField</em> - AutoRandomCharField will automatically create a
+unique random character field with the specified length. By default
+upper/lower case and digits are included as possible characters. Given
+a length of 8 that yields 3.4 million possible combinations. A 12
+character field would yield about 2 billion. Below are some examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RandomCharField</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">BVm9GEaE</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RandomCharField</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">include_alpha</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">7097</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RandomCharField</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">include_punctuation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">k[ZS.TR,0LHO</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RandomCharField</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">lowercase</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_digits</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">pzolbemetmok</span>
+</pre></div>
+</div>
+</li>
+<li><p><em>CreationDateTimeField</em> - DateTimeField that will automatically set its date
+when the object is first saved to the database. Works in the same way as the
+auto_now_add keyword.</p></li>
+<li><p><em>ModificationDateTimeField</em> - DateTimeField that will automatically set its
+date when an object is saved to the database. Works in the same way as the
+auto_now keyword. It is possible to preserve the current timestamp by setting update_modified to False:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="n">MyTimeStampedModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">example</span><span class="o">.</span><span class="n">modified</span>
+<span class="go">datetime.datetime(2016, 3, 18, 10, 3, 39, 740349, tzinfo=&lt;UTC&gt;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">update_modified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">example</span><span class="o">.</span><span class="n">modified</span>
+<span class="go">datetime.datetime(2016, 3, 18, 10, 3, 39, 740349, tzinfo=&lt;UTC&gt;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">example</span><span class="o">.</span><span class="n">modified</span>
+<span class="go">datetime.datetime(2016, 4, 8, 14, 25, 43, 123456, tzinfo=&lt;UTC&gt;)</span>
+</pre></div>
+</div>
+<p>It is also possible to set the attribute directly on the model,
+for example when you don’t use the TimeStampedModel provided in this package, or when you are in a migration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="n">MyCustomModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">example</span><span class="o">.</span><span class="n">modified</span>
+<span class="go">datetime.datetime(2016, 3, 18, 10, 3, 39, 740349, tzinfo=&lt;UTC&gt;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="o">.</span><span class="n">update_modified</span><span class="o">=</span><span class="kc">False</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">example</span><span class="o">.</span><span class="n">modified</span>
+<span class="go">datetime.datetime(2016, 3, 18, 10, 3, 39, 740349, tzinfo=&lt;UTC&gt;)</span>
+</pre></div>
+</div>
+</li>
+<li><p><em>ShortUUIDField</em> - CharField which transparently generates a UUID and pass it to base57. It result in shorter 22 characters values useful e.g. for concise, unambiguous URLS. It’s possible to get shorter values with length parameter: they are not Universal Unique any more but probability of collision is still low</p></li>
+<li><p><em>JSONField</em> - a generic TextField that neatly serializes/unserializes JSON objects seamlessly. Django 1.9 introduces a native JSONField for PostgreSQL, which is preferred for PostgreSQL users on Django 1.9 and above.</p></li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Field Extensions</a><ul>
+<li><a class="reference internal" href="#current-database-model-field-extensions">Current Database Model Field Extensions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="debugger_tags.html"
+                        title="previous chapter">Debugger Tags</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jobs_scheduling.html"
+                        title="next chapter">Jobs Scheduling</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/field_extensions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="jobs_scheduling.html" title="Jobs Scheduling"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="debugger_tags.html" title="Debugger Tags"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Field Extensions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

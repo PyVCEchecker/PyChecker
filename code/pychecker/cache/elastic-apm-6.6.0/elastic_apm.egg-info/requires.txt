@@ -1,0 +1,17 @@
+urllib3
+certifi
+
+[aiohttp]
+aiohttp
+
+[flask]
+blinker
+
+[opentracing]
+opentracing>=2.0.0
+
+[starlette]
+starlette
+
+[tornado]
+tornado

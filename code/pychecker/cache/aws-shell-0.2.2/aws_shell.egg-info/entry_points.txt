@@ -1,0 +1,4 @@
+[console_scripts]
+aws-shell = awsshell:main
+aws-shell-mkindex = awsshell.makeindex:main
+

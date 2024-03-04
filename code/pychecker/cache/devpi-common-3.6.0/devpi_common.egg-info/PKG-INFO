@@ -1,0 +1,83 @@
+Metadata-Version: 1.2
+Name: devpi-common
+Version: 3.6.0
+Summary: utilities jointly used by devpi-server and devpi-client
+Home-page: https://github.com/devpi/devpi
+Maintainer: Holger Krekel
+Maintainer-email: holger@merlinux.eu
+License: MIT
+Description: 
+        This package contains utility functions used by devpi-server and devpi-client.
+        
+        See http://doc.devpi.net for more information.
+        
+        
+        =========
+        Changelog
+        =========
+        
+        
+        
+        .. towncrier release notes start
+        
+        3.6.0 (2020-09-13)
+        ==================
+        
+        Features
+        --------
+        
+        - Hide password from URL representation.
+        
+        - Allow replacement of individual netloc parts with URL.replace method.
+        
+        
+        3.5.0 (2020-05-04)
+        ==================
+        
+        Features
+        --------
+        
+        - fix #792: support data-yanked attribute in HTMLPage parser.
+        
+        - Replace "cached_property" with "lazy" package, which uses __dict__ directly for much faster reads.
+        
+        
+        3.4.0 (2019-06-28)
+        ==================
+        
+        Features
+        --------
+        
+        - Added full query string support to URL object.
+        
+        
+        3.3.2 (2019-04-04)
+        ==================
+        
+        Bug Fixes
+        ---------
+        
+        - Fix #641: support change of return code from string to integer in tox 3.8.x.
+        
+        
+        3.3.1 (2018-09-18)
+        ==================
+        
+        Bug Fixes
+        ---------
+        
+        - Fix uploading documentation in devpi-client < 4.1.0.
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7

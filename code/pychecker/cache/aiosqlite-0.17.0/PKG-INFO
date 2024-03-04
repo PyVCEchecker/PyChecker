@@ -1,0 +1,7 @@
+Metadata-Version: 1.1
+Name: aiosqlite
+Version: 0.17.0
+Summary: asyncio bridge to the standard sqlite3 module
+Home-page: https://aiosqlite.omnilib.dev
+Author: John Reese
+Author-email: john@noswap.com

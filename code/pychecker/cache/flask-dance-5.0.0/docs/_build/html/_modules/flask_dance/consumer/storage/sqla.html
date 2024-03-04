@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flask_dance.consumer.storage.sqla &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/flasky.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../storage.html" accesskey="U">flask_dance.consumer.storage</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">flask_dance.consumer.storage.sqla</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for flask_dance.consumer.storage.sqla</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">JSON</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.mutable</span> <span class="kn">import</span> <span class="n">MutableDict</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declared_attr</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm.exc</span> <span class="kn">import</span> <span class="n">NoResultFound</span>
+<span class="kn">from</span> <span class="nn">flask_dance.utils</span> <span class="kn">import</span> <span class="n">FakeCache</span><span class="p">,</span> <span class="n">first</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer.storage</span> <span class="kn">import</span> <span class="n">BaseStorage</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">AnonymousUserMixin</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">AnonymousUserMixin</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">class</span> <span class="nc">OAuthConsumerMixin</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A :ref:`SQLAlchemy declarative mixin &lt;sqlalchemy:declarative_mixins&gt;` with</span>
+<span class="sd">    some suggested columns for a model to store OAuth tokens:</span>
+
+<span class="sd">    ``id``</span>
+<span class="sd">        an integer primary key</span>
+<span class="sd">    ``provider``</span>
+<span class="sd">        a short name to indicate which OAuth provider issued</span>
+<span class="sd">        this token</span>
+<span class="sd">    ``created_at``</span>
+<span class="sd">        an automatically generated datetime that indicates when</span>
+<span class="sd">        the OAuth provider issued this token</span>
+<span class="sd">    ``token``</span>
+<span class="sd">        a :class:`JSON &lt;sqlalchemy.types.JSON&gt;` field to store</span>
+<span class="sd">        the actual token received from the OAuth provider</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@declared_attr</span>
+    <span class="k">def</span> <span class="nf">__tablename__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;flask_dance_</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">provider</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">MutableDict</span><span class="o">.</span><span class="n">as_mutable</span><span class="p">(</span><span class="n">JSON</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;provider=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">provider</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">{}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="SQLAlchemyStorage"><a class="viewcode-back" href="../../../../api.html#flask_dance.consumer.storage.sqla.SQLAlchemyStorage">[docs]</a><span class="k">class</span> <span class="nc">SQLAlchemyStorage</span><span class="p">(</span><span class="n">BaseStorage</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stores and retrieves OAuth tokens using a relational database through</span>
+<span class="sd">    the `SQLAlchemy`_ ORM.</span>
+
+<span class="sd">    .. _SQLAlchemy: http://www.sqlalchemy.org/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SQLAlchemyStorage.__init__"><a class="viewcode-back" href="../../../../api.html#flask_dance.consumer.storage.sqla.SQLAlchemyStorage.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">session</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">user_required</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">anon_user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            model: The SQLAlchemy model class that represents the OAuth token</span>
+<span class="sd">                table in the database. At a minimum, it must have a</span>
+<span class="sd">                ``provider`` column and a ``token`` column. If tokens are to be</span>
+<span class="sd">                associated with individual users in the application, it must</span>
+<span class="sd">                also have a ``user`` relationship to your User model.</span>
+<span class="sd">                It is recommended, though not required, that your model class</span>
+<span class="sd">                inherit from</span>
+<span class="sd">                :class:`~flask_dance.consumer.storage.sqla.OAuthConsumerMixin`.</span>
+<span class="sd">            session:</span>
+<span class="sd">                The :class:`SQLAlchemy session &lt;sqlalchemy.orm.session.Session&gt;`</span>
+<span class="sd">                for the database. If you&#39;re using `Flask-SQLAlchemy`_, this is</span>
+<span class="sd">                ``db.session``.</span>
+<span class="sd">            user:</span>
+<span class="sd">                If you want OAuth tokens to be associated with individual users</span>
+<span class="sd">                in your application, this is a reference to the user that you</span>
+<span class="sd">                want to use for the current request. It can be an actual User</span>
+<span class="sd">                object, a function that returns a User object, or a proxy to the</span>
+<span class="sd">                User object. If you&#39;re using `Flask-Login`_, this is</span>
+<span class="sd">                :attr:`~flask.ext.login.current_user`.</span>
+<span class="sd">            user_id:</span>
+<span class="sd">                If you want to pass an identifier for a user instead of an actual</span>
+<span class="sd">                User object, use this argument instead. Sometimes it can save</span>
+<span class="sd">                a database query or two. If both ``user`` and ``user_id`` are</span>
+<span class="sd">                provided, ``user_id`` will take precendence.</span>
+<span class="sd">            user_required:</span>
+<span class="sd">                If set to ``True``, an exception will be raised if you try to</span>
+<span class="sd">                set or retrieve an OAuth token without an associated user.</span>
+<span class="sd">                If set to ``False``, OAuth tokens can be set with or without</span>
+<span class="sd">                an associated user. The default is auto-detection: it will</span>
+<span class="sd">                be ``True`` if you pass a ``user`` or ``user_id`` parameter,</span>
+<span class="sd">                ``False`` otherwise.</span>
+<span class="sd">            anon_user:</span>
+<span class="sd">                If anonymous users are represented by a class in your application,</span>
+<span class="sd">                provide that class here. If you are using `Flask-Login`_,</span>
+<span class="sd">                anonymous users are represented by the</span>
+<span class="sd">                :class:`flask_login.AnonymousUserMixin` class, but you don&#39;t have</span>
+<span class="sd">                to provide that -- Flask-Dance treats it as the default.</span>
+<span class="sd">            cache:</span>
+<span class="sd">                An instance of `Flask-Caching`_. Providing a caching system is</span>
+<span class="sd">                highly recommended, but not required.</span>
+
+<span class="sd">        .. _Flask-SQLAlchemy: http://pythonhosted.org/Flask-SQLAlchemy/</span>
+<span class="sd">        .. _Flask-Login: https://flask-login.readthedocs.io/</span>
+<span class="sd">        .. _Flask-Caching: https://flask-caching.readthedocs.io/en/latest/</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">user_id</span>
+        <span class="k">if</span> <span class="n">user_required</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_required</span> <span class="o">=</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">user_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_required</span> <span class="o">=</span> <span class="n">user_required</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anon_user</span> <span class="o">=</span> <span class="n">anon_user</span> <span class="ow">or</span> <span class="n">AnonymousUserMixin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">cache</span> <span class="ow">or</span> <span class="n">FakeCache</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">make_cache_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blueprint</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">uid</span> <span class="o">=</span> <span class="n">first</span><span class="p">([</span><span class="n">user_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span>
+                <span class="n">_get_real_user</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anon_user</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">))</span>
+            <span class="p">)</span>
+            <span class="n">uid</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;flask_dance_token|</span><span class="si">{name}</span><span class="s2">|</span><span class="si">{user_id}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">blueprint</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="n">uid</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="SQLAlchemyStorage.get"><a class="viewcode-back" href="../../../../api.html#flask_dance.consumer.storage.sqla.SQLAlchemyStorage.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blueprint</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;When you have a statement in your code that says</span>
+<span class="sd">        &quot;if &lt;provider&gt;.authorized:&quot; (for example &quot;if twitter.authorized:&quot;),</span>
+<span class="sd">        a long string of function calls result in this function being used to</span>
+<span class="sd">        check the Flask server&#39;s cache and database for any records associated</span>
+<span class="sd">        with the current_user. The `user` and `user_id` parameters are actually</span>
+<span class="sd">        not set in that case (see base.py:token(), that&#39;s what calls this</span>
+<span class="sd">        function), so the user information is instead loaded from the</span>
+<span class="sd">        current_user (if that&#39;s what you specified when you created the</span>
+<span class="sd">        blueprint) with blueprint.config.get(&#39;user_id&#39;).</span>
+
+<span class="sd">        :param blueprint:</span>
+<span class="sd">        :param user:</span>
+<span class="sd">        :param user_id:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check cache</span>
+        <span class="n">cache_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_cache_key</span><span class="p">(</span><span class="n">blueprint</span><span class="o">=</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">token</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">token</span>
+
+        <span class="c1"># if not cached, make database queries</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="n">blueprint</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">uid</span> <span class="o">=</span> <span class="n">first</span><span class="p">([</span><span class="n">user_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)])</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span>
+            <span class="n">_get_real_user</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anon_user</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_required</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">u</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot get OAuth token without an associated user&quot;</span><span class="p">)</span>
+
+        <span class="c1"># check for user ID</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">uid</span><span class="p">)</span>
+        <span class="c1"># check for user (relationship property)</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">u</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">u</span><span class="p">)</span>
+        <span class="c1"># if we have the property, but not value, filter by None</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">):</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="c1"># run query</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">one</span><span class="p">()</span><span class="o">.</span><span class="n">token</span>
+        <span class="k">except</span> <span class="n">NoResultFound</span><span class="p">:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># cache the result</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">token</span></div>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blueprint</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">uid</span> <span class="o">=</span> <span class="n">first</span><span class="p">([</span><span class="n">user_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)])</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span>
+            <span class="n">_get_real_user</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anon_user</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_required</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">u</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot set OAuth token without an associated user&quot;</span><span class="p">)</span>
+
+        <span class="c1"># if there was an existing model, delete it</span>
+        <span class="n">existing_query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+            <span class="n">provider</span><span class="o">=</span><span class="n">blueprint</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">)</span>
+        <span class="c1"># check for user ID</span>
+        <span class="n">has_user_id</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_user_id</span> <span class="ow">and</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="n">existing_query</span> <span class="o">=</span> <span class="n">existing_query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">uid</span><span class="p">)</span>
+        <span class="c1"># check for user (relationship property)</span>
+        <span class="n">has_user</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_user</span> <span class="ow">and</span> <span class="n">u</span><span class="p">:</span>
+            <span class="n">existing_query</span> <span class="o">=</span> <span class="n">existing_query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">u</span><span class="p">)</span>
+        <span class="c1"># queue up delete query -- won&#39;t be run until commit()</span>
+        <span class="n">existing_query</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="c1"># create a new model for this token</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">token</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">has_user_id</span> <span class="ow">and</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uid</span>
+        <span class="k">if</span> <span class="n">has_user</span> <span class="ow">and</span> <span class="n">u</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="c1"># commit to delete and add simultaneously</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="c1"># invalidate cache</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">make_cache_key</span><span class="p">(</span><span class="n">blueprint</span><span class="o">=</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blueprint</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="n">blueprint</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">uid</span> <span class="o">=</span> <span class="n">first</span><span class="p">([</span><span class="n">user_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)])</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span>
+            <span class="n">_get_real_user</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anon_user</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_required</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">u</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot delete OAuth token without an associated user&quot;</span><span class="p">)</span>
+
+        <span class="c1"># check for user ID</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">uid</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">uid</span><span class="p">)</span>
+        <span class="c1"># check for user (relationship property)</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">u</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">u</span><span class="p">)</span>
+        <span class="c1"># if we have the property, but not value, filter by None</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">):</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="c1"># run query</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="c1"># invalidate cache</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">make_cache_key</span><span class="p">(</span><span class="n">blueprint</span><span class="o">=</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_real_user</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">anon_user</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a &quot;user&quot; that could be:</span>
+
+<span class="sd">    * a real user object</span>
+<span class="sd">    * a function that returns a real user object</span>
+<span class="sd">    * a LocalProxy to a real user object (like Flask-Login&#39;s ``current_user``)</span>
+
+<span class="sd">    This function returns the real user object, regardless of which we have.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="s2">&quot;_get_current_object&quot;</span><span class="p">):</span>
+        <span class="c1"># this is a proxy</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">_get_current_object</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+        <span class="c1"># this is a function</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">user</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">anon_user</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">anon_user</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">user</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  <li><a href="../storage.html">flask_dance.consumer.storage</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

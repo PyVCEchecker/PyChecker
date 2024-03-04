@@ -1,0 +1,96 @@
+Metadata-Version: 1.1
+Name: azure-cli-reservations
+Version: 0.4.3
+Summary: Microsoft Azure Command-Line Tools Reservations Command Module
+Home-page: https://github.com/azure/azure-cli
+Author: Microsoft Corporation
+Author-email: azpycli@microsoft.com
+License: MIT
+Description: Microsoft Azure CLI 'reservations' Command Module
+        =================================================
+        
+        This package is for the 'reservations' module.
+        i.e. 'az reservations'
+        
+        
+        .. :changelog:
+        
+        Release History
+        ===============
+        
+        0.4.3
+        +++++
+        * Minor fixes
+        
+        0.4.2
+        +++++
+        * Minor fixes
+        
+        0.4.1
+        +++++
+        * Add RedHat in the reserved resource enum type
+        
+        0.4.0
+        +++++
+        * Add CosmosDb in the reserved resource enum type
+        * Add name property in Patch model
+        
+        0.3.2
+        +++++
+        * Minor fixes
+        
+        0.3.1
+        +++++
+        * Minor fixes.
+        
+        0.3.0
+        +++++
+        * BREAKING CHANGE: 'show' commands log error message and fail with exit code of 3 upon a missing resource.
+        
+        0.2.1
+        +++++
+        * Minor fixes.
+        
+        0.2.0
+        +++++
+        **Breaking changes**
+        
+        * reservations catalog show
+            - Added required parameter ReservedResourceType.
+            - Added optional parameter Location.
+        * Updated ReservationProperties model.
+            - Removed 'kind'.
+        * Updated Catalog model.
+            - Renamed 'capabilities' to 'sku_properties'.
+            - Removed 'size' and 'tier'.
+        
+        **Notes**
+        
+        * reservations reservation update
+            - Added optional parameter InstanceFlexibility.
+        * Support for InstanceFlexibility and ReservedResourceType.
+        
+        0.1.2
+        ++++++
+        * `sdist` is now compatible with wheel 0.31.0
+        
+        0.1.1
+        ++++++
+        * Update for CLI core changes.
+        
+        0.1.0
+        +++++
+        * Initial release.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License

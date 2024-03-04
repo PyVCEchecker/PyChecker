@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Installing PySDL2 &#8212; PySDL2 0.9.7 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Integrating PySDL2" href="integration.html" />
+    <link rel="prev" title="Welcome to PySDL2’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="integration.html" title="Integrating PySDL2"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to PySDL2’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PySDL2 0.9.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installing-pysdl2">
+<h1>Installing PySDL2<a class="headerlink" href="#installing-pysdl2" title="Permalink to this headline">¶</a></h1>
+<p>This section provides an overview and guidance for installing PySDL2 on
+various target platforms.</p>
+<div class="section" id="getting-the-sources">
+<h2>Getting the sources<a class="headerlink" href="#getting-the-sources" title="Permalink to this headline">¶</a></h2>
+<p>You can download the official releases of PySDL2 from
+<a class="reference external" href="https://github.com/marcusva/py-sdl2/releases">https://github.com/marcusva/py-sdl2/releases</a>. Download the most
+recent release, unpack it and make sure that you installed the relevant
+prerequisites before continuing with the installation.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>PySDL2 relies on some 3rd party packages to be fully usable and to
+provide you full access to all of its features.</p>
+<p>You must have at least one of the following Python versions installed:</p>
+<ul class="simple">
+<li><p>Python 2.7, 3.5+     (<a class="reference external" href="http://www.python.org">http://www.python.org</a>)</p></li>
+<li><p>PyPy 1.8.0+          (<a class="reference external" href="http://www.pypy.org">http://www.pypy.org</a>)</p></li>
+</ul>
+<p>Other Python versions or Python implementations might work, but are
+(currently) not officially tested or supported by the PySDL2
+distribution.</p>
+<p>You need to have a working SDL2 library on your target system. You can obtain
+the source code (to build it yourself) or a prebuilt version at
+<a class="reference external" href="http://www.libsdl.org">http://www.libsdl.org</a>. Alternatively, on macOS and Windows, you can install
+the SDL2 binaries for PySDL2 using pip via the pysdl2-dll package.</p>
+<p>PySDL2 also offers support for the following SDL-related libraries:</p>
+<ul class="simple">
+<li><p>SDL2_image             (<a class="reference external" href="http://www.libsdl.org/projects/SDL_image/">http://www.libsdl.org/projects/SDL_image/</a>)</p></li>
+<li><p>SDL2_mixer             (<a class="reference external" href="http://www.libsdl.org/projects/SDL_mixer/">http://www.libsdl.org/projects/SDL_mixer/</a>)</p></li>
+<li><p>SDL2_ttf               (<a class="reference external" href="http://www.libsdl.org/projects/SDL_ttf/">http://www.libsdl.org/projects/SDL_ttf/</a>)</p></li>
+<li><p>SDL2_gfx               (<a class="reference external" href="http://www.ferzkopp.net/Software/SDL_gfx-2.0/">http://www.ferzkopp.net/Software/SDL_gfx-2.0/</a>)</p></li>
+</ul>
+<p>Those are optional though and only necessary if you want to use
+<a class="reference internal" href="modules/sdl2_sdlimage.html#module-sdl2.sdlimage" title="sdl2.sdlimage: SDL2_image library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.sdlimage</span></code></a>, <a class="reference internal" href="modules/sdl2_sdlmixer.html#module-sdl2.sdlmixer" title="sdl2.sdlmixer: SDL2_mixer library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.sdlmixer</span></code></a>, <a class="reference internal" href="modules/sdl2_sdlttf.html#module-sdl2.sdlttf" title="sdl2.sdlttf: SDL2_ttf library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.sdlttf</span></code></a> or
+<a class="reference internal" href="modules/sdl2_sdlgfx.html#module-sdl2.sdlgfx" title="sdl2.sdlgfx: SDL2_gfx library wrapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sdl2.sdlgfx</span></code></a>.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>You can either use the python way of installing the package or the make
+command using the Makefile on POSIX-compatible platforms, such as Linux
+or BSD, or the make.bat batch file on Windows platforms.</p>
+<p>Simply type</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>for the traditional python way or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>for using the Makefile or make.bat. Both will try to perform a default
+installation with as many features as possible.</p>
+<div class="section" id="trying-out">
+<h3>Trying out<a class="headerlink" href="#trying-out" title="Permalink to this headline">¶</a></h3>
+<p>You also can test out PySDL2 without actually installing it. You just
+need to set up your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> to point to the location of the
+source distribution package. On Windows-based platforms, you might use
+something like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">path</span>\<span class="n">to</span>\<span class="n">pysdl2</span>\<span class="p">:</span><span class="o">%</span><span class="n">PYTHONPATH</span><span class="o">%</span>
+</pre></div>
+</div>
+<p>to define the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> on a command shell. On Linux/Unix, use</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PYTHONPATH=/path/to/pysdl2:$PYTHONPATH
+</pre></div>
+</div>
+<p>for bourne shell compatibles or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>setenv PYTHONPATH /path/to/pysdl2:$PYTHONPATH
+</pre></div>
+</div>
+<p>for C shell compatibles. You can omit the <cite>:$PYTHONPATH</cite>, if you did not use
+it so far and if your environment settings do not define it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you did not install SDL2 using the preferred way for your operation
+system, please read the information about <a class="reference internal" href="integration.html#importing-pysdl2"><span class="std std-ref">Bundling SDL2 with pysdl2-dll</span></a> in the
+section <a class="reference internal" href="integration.html"><span class="doc">Integrating PySDL2</span></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installing PySDL2</a><ul>
+<li><a class="reference internal" href="#getting-the-sources">Getting the sources</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#trying-out">Trying out</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to PySDL2’s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="integration.html"
+                        title="next chapter">Integrating PySDL2</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/install.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="integration.html" title="Integrating PySDL2"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to PySDL2’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PySDL2 0.9.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2020, Marcus von Appen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
+    </div>
+  </body>
+</html>

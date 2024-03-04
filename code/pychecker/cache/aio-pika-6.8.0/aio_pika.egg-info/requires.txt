@@ -1,0 +1,17 @@
+aiormq<4,>=3.2.3
+yarl
+
+[develop]
+aiomisc~=10.1.6
+async_generator
+coverage!=4.3
+coveralls
+pylava
+pytest
+pytest-cov
+shortuuid
+nox
+sphinx
+sphinx-autobuild
+timeout-decorator
+tox>=2.4

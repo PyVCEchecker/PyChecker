@@ -1,0 +1,1070 @@
+CHANGES
+=======
+
+2.4.0
+-----
+
+* Replace oslo\_utils.fnmatch with fnmatch
+* fix lower constraint job
+* [ussuri][goal] Update contributor documentation
+* Add Python3 xena unit tests
+* Update master for stable/wallaby
+
+2.3.0
+-----
+
+* Python 3.9: base64.encodestring is removed
+* Add Python3 wallaby unit tests
+* Update master for stable/victoria
+* [goal] Migrate testing to ubuntu focal
+
+2.2.1
+-----
+
+* Native Zuul v3 version of the functional legacy job
+
+2.2.0
+-----
+
+* Stop to use the \_\_future\_\_ module
+* Switch to newer openstackdocstheme and reno versions
+* Fix hacking min version to 3.0.1
+* Use unittest.mock instead of third party mock
+* Bump default tox env from py37 to py38
+* Add py38 package metadata
+* Add Python3 victoria unit tests
+* Update master for stable/ussuri
+
+2.1.0
+-----
+
+* Update hacking for Python3
+* Remove dependency on mox3
+* Remove mox usage from test\_shell
+
+2.0.0
+-----
+
+* [ussuri][goal] Drop python 2.7 support and testing
+* tests: Convert 'test\_resources' to mock
+* tests: Pre-mox removal cleanup
+* Cleanup of .keys() from dict\_object.keys() \*in\* operator
+* Allow to set poll interval to OSC stack create
+* Update master for stable/train
+
+1.18.0
+------
+
+* Update stack\_id clearify for heat client functions
+* Replace git.openstack.org URLs with opendev.org URLs
+* Fix unit tests
+* Add Python 3 Train unit tests
+* Cap sphinx for py2 to match global requirements
+* Fix missing print format
+* OpenDev Migration Patch
+* Dropping the py35 testing
+* Replace openstack.org git:// URLs with https://
+* Update master for stable/stein
+* Set Content-Type header explictly for SessionClient
+* add python 3.7 unit test job
+* Ignore not found when delete in test
+
+1.17.0
+------
+
+* Update the bugs link to storyboard
+* Change openstack-dev to openstack-discuss
+* Update min tox version to 2.0
+* Replace deprecated "decodestring()" by "decodebytes()"
+* Don't quote {posargs} in tox.ini
+* Set X-Region-Name in header when using SessionClient
+* Trivial: Update pypi url to new url
+* Use templates for cover and lower-constraints
+* Don't change pyyaml behavior
+* Migrate the link of bug report button to storyboard
+* Add files-container option for stack create and update
+* add python 3.6 unit test job
+* switch documentation job to new PTI
+* import zuul job settings from project-config
+* fix bug link in readme
+* Update reno for stable/rocky
+* Switch to stestr
+
+1.16.1
+------
+
+* Load files from adopt file when adopt stack
+* Handle token\_endpoint auth type in osc plugin
+* Update the documentation link for doc migration
+
+1.16.0
+------
+
+* Mark stacks returned by get loaded
+* Remove PyPI downloads
+* fix tox python3 overrides
+* Fix osc cli docs
+
+1.15.0
+------
+
+* Change testenv from py34 to py35
+* Use assertRegex instead of assertRegexpMatches
+* add lower-constraints job
+* Improve titles of generated API documentation
+* Add heat CLI test for stack-show
+* Follow the new PTI for document build
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Update reno for stable/queens
+* Fix log\_http\_request function in http module
+
+1.14.0
+------
+
+* Updated from global requirements
+* Zuul: Remove project name
+* Document osc CLI
+
+1.13.1
+------
+
+* Add reno for release notes management
+* Fix release note formatting
+* Avoid tox\_install.sh for constraints support
+
+1.13.0
+------
+
+* Migrate functional job to Zuul v3
+* Don't preformat stack output show list/map values
+* Updated from global requirements
+* Updated from global requirements
+* Allow cancelling create\_in\_progress stacks with --no-rollback
+* Add --no-rollback option for stack cancel
+* Modify error message encountered during stack update
+
+1.12.0
+------
+
+* Add \`--converge\` argument for osc stack update
+* [policy in code] Change policy description
+* Use generic user for both zuul v2 and v3
+* No longer use oslotest.mockpatch
+* Don't override sections in deep\_update
+* Updated from global requirements
+* Mark python-heatclient as stable
+* Support --show-nested in openstack stack update --dry-run
+* Use Sphinx 1.5 warning-is-error
+* Updated from global requirements
+* Remove vestigate HUDSON\_PUBLISH\_DOCS reference
+* Updated from global requirements
+* Imported Translations from Zanata
+* Using fixtures instead of deprecated mockpatch module
+* Updated from global requirements
+
+1.11.0
+------
+
+* Fixing read before prompt bug
+* Decode content before checking
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Switch from oslosphinx to openstackdocstheme
+* Enable some off-by-default checks
+* Updated from global requirements
+
+1.10.0
+------
+
+* Add plug-in summary for osc doc
+* Updated from global requirements
+* Add optional arguments '-y' in CLI：snapshot-delete
+* Updated from global requirements
+* Don't encode path separators
+* Remove support for py34
+* Add '--yes' for openstack stack snapshot delete
+* Explicitly set 'builders' option
+* Updated from global requirements
+
+1.9.0
+-----
+
+* Updated from global requirements
+* Use upper-constraints for all jobs
+* Replace six.iteritems() with .items()
+* Build event stack\_name from links
+* Pass event filters to the server side
+* Fix error message when deployment not found
+* Remove log translations
+* Updated from global requirements
+* Updated from global requirements
+* Update test requirement
+* Use endpoint\_type with session client
+* Support openstack stack export
+* Updated from global requirements
+* Updated from global requirements
+* Handle log message interpolation by the logger
+* Don't always resolve outputs when showing a stack
+* Show 'project' info if heat server returns
+
+1.8.0
+-----
+
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Support -y for --yes
+* Enable coverage report in console output
+* Distinguish between stack and resource events when polling
+* Make sure the --heat-url option is respected, part 2
+* Remove LOG Warning from \_\_eq\_\_
+* Replace mox3 with mock
+* Add convenience function for events over websocket
+
+1.7.0
+-----
+
+* Updated from global requirements
+* Update docs for mark-unhealthy command
+* Add aliases to orchestration template version list
+* User server side env merging with osc plugin
+* Fix doc on keystoneauth session api usage
+* Updated from global requirements
+* Fix event list help
+* Updated from global requirements
+* Use default service\_type with session
+* Show team and repo badges on README
+* Don't resolve outputs when polling events
+* Updated from global requirements
+* Update headers for the Openstack Orchestration commands
+
+1.6.1
+-----
+
+* Use endpoint as endpoint\_override
+* Trivial:remove unused code
+
+1.6.0
+-----
+
+* Add functinoal tests for 'openstack stack snapshot delete'
+* Add heat CLI test for deleting stack
+* Add heat CLI test for creating stack from URL
+* Replace mox3 with mock
+* Replace mox3 with mock
+* Remove unused scripts in tools
+* Remove oslo-incubator modules
+* Move required modules from oslo-incubator
+* Updated from global requirements
+* Make method import\_versioned\_module work
+* Graduate to oslo.i18n and cleanup incubator usage
+* Change property option into append action
+* Updated from global requirements
+* Return condition functions based on the filter param
+* Updated from global requirements
+* Use region\_name and interface with session
+* Fix help string for osc resource show <resource>
+* handle empty sections in environment files
+* Updated from global requirements
+* Fix "heat output-show -F json" output format
+* Use event\_time as default event sort key in OSC
+* Updated from global requirements
+* Updated from global requirements
+* Improved the help message of the stack-list tags
+* delete python bytecode including pyo before every test run
+* Don't use endpoint\_override with session
+* Show resource name path in event log formatter
+* Add url in setup.cfg
+* Clean imports in code
+* Modify use of assertTrue(A in B)
+* Import mox in \_\_init\_\_.py
+* Replace functions 'Dict.get' and 'del' with 'Dict.pop'
+* Trivial:Standardize the output format of 'help' in shell.py
+* Add parameter\_merge\_startegies section
+
+1.4.0
+-----
+
+* Updated from global requirements
+* Add a nested\_depth argument to poll\_for\_events
+* Update the home-page in setup.cfg
+* Standardize import format
+* Remove unused function
+* Updated from global requirements
+* Change usage of \_auth\_url private attribute
+* Updated from global requirements
+* Remove discover from test-requirements
+* Add support for stack file list
+* Updated from global requirements
+* Trivial: Remove out-of-date and useless example
+* Add Python 3.5 classifier and venv
+* Updated from global requirements
+
+1.3.0
+-----
+
+* Fix doc build if git is absent
+* Fix deprecation message for stack-preview
+* Updated from global requirements
+* Remove unused LOG
+* Remove white space between print and ()
+* base.Resource not define \_\_ne\_\_() built-in function
+* Updated from global requirements
+* Updated from global requirements
+* Fix typo
+* Pass correct arguments in osc plugin
+* Use osc\_lib instead of cliff
+* Use osc-lib instead of openstackclient
+* Imported Translations from Zanata
+* Enhance error message
+* Replace dict.iteritems with six.iteritems to make PY3 compatible
+* Show 'deletion\_time' of stacks
+* Updated from global requirements
+* Updated from global requirements
+* Implement client side of event list --nested-depth
+* Refactor test\_shell
+* Serialize files when using SessionClient
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Show 'parameter\_defaults' for environment-show
+* A resource list formatter for graphviz dot diagrams
+* Updated from global requirements
+* Implement "openstack stack failures list"
+* Updated from global requirements
+* Clean up osc fakes and mocks
+* Fix typo
+* osc resource-type-show description option
+* osc resource-type-list description option
+* Remove redundant auth discovery
+* switch to keystoneauth
+* Updated from global requirements
+* Allow redirects to use location from response
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Fix obscure error message when no template given to OSC
+* Replace tempest-lib with tempest.lib
+* Moved required parameter for visibility
+* use thread safe fnmatch
+* OpenStack client plugin for environment show
+* Add client library support for retrieving a stack's environment
+* Support "--pre-delete" argument for hook-clear
+* Fixed fragile assertion in test\_template\_utils
+
+1.2.0
+-----
+
+* Updated from global requirements
+* Updated from global requirements
+* Fix logging issue in heatclient tests
+* Add basic read-only function test for template validate
+* Support OS\_KEY/OS\_CERT environment variables
+* Replace assertRegexpMatches with assertRegex
+* Moved -t parameter for visibility
+* Move OpenStack client to test-requirements
+* OSC plugin for orchestration template validate
+* Use stack.get for resolving outputs for old API
+* Fix regression handling relative paths in environment
+* stack-delete command should not call do\_stack\_list
+* Added deprecation warnings for heat commands
+* Don't use print() from event\_utils.poll\_for\_events
+* OSC plugin should be region/interface aware
+* Replace ConfigParser with six.moves.configparser
+* Fixed issues in invalid JSON file
+* Fixed exceptions handling in stacks deleting
+* Add an example on keystoneauth Sessions to the doc
+* Updated from global requirements
+
+1.0.0
+-----
+
+* Use poll\_for\_events for "openstack stack delete"
+* Add OSC plugin for openstack orchestation service list
+* Add OSC plugin for openstack orchestation build info
+* Register a log formatter for stack event list
+* Basic set of stack functional tests for openstack client
+* Strip any whitespace before checking for json
+* Add OSC plugin for stack resource mark unhealthy
+* Implement stack event list --follow
+* Replace assertEqual(None, \*) with assertIsNone
+* Prompt user before deleting stack if tty
+* Add more readonly openstack client funcitonal tests
+* Use poll\_for\_events for "openstack stack <action>"
+* Use poll\_for\_events for "openstack stack adopt"
+* Use poll\_for\_events for "openstack stack update"
+* Use poll\_for\_events for "openstack stack create"
+* poll\_for\_events fall back to stack get
+* Fix collision with update and update cancel
+* Update OSC metavars
+* OpenstackClient plugin for software deployment output show
+* Move poll\_for\_events to event\_utils
+* Adds --filter to search for resources
+* Updated from global requirements
+* Stack resource search
+* OpenstackClient plugin for software deployment metadata show
+* Add stack hook poll and clear to openstack client
+* Updated from global requirements
+* OpenstackClient plugin for deployment create
+* Remove the only-value flag of output-show
+* Changes to support server-side environment resolution
+* OSC plugin for stack snapshot delete
+* OSC plugin for stack snapshot create
+* Use yaml.safe\_load() instead of yaml.load()
+* Use oslo.utils.reflection to extract class name
+* Add OpenstackClient plugin for software deployment show
+* Add openstack client stack snapshot restore
+* Add openstack client stack resource signal
+* OSC plugin for stack resource show and list
+* OpenstackClient plugin for event list
+* OpenstackClient plugin for event show
+* OpenstackClient plugin for stack delete
+* Fix resource\_type osc entrypoint
+* OSC plugin for software config show
+* Updated from global requirements
+* Add openstack cli stack actions
+* Add openstack client resource type list and show
+* OSC plugin for stack snapshot show
+* Add openstack client software config create
+* OpenstackClient plugin for template show
+* OpenStackClient plugin for stack output list
+* OpenstackClient plugin for stack output show
+* Add openstack client software config list
+* Add openstack client stack resource metadata show
+* Adds ignore\_errors for template-validate command
+* Add heat client support for Resource set health
+* Sort osc command entry points
+* OpenstackClient plugin for template function list
+* OpenstackClient plugin for template version list
+* Add OpenstackClient plugin for software deployment list
+* Add openstack client software config delete
+* OpenstackClient plugin for stack abandon
+* OpenstackClient plugin for stack adopt
+* OpenstackClient plugin for software deployment delete
+* Add openstack client stack basic funtion tests
+* Remove incorrectly used "# flake8: noqa"
+* Update translation setup
+* Edit backslashes for lines continuations
+* Raise CommandError when Any of stack/deployment/config delete failed
+* Updated from global requirements
+* Ignore restricted\_actions key
+* Add formatters for 'tags' in method \_do\_stack\_show
+* Enable osc extension in setup.cfg
+
+0.9.0
+-----
+
+* Disable osc extension for 0.9.0 release
+* Remove argparse from requirements
+* Add openstack client stack snapshot list
+* Add --dry-run option to openstack stack create
+* Include keystone message when authentication failed
+* Add show\_nested support to update --dry-run
+* Update template\_utils to support object env's
+* Improve "openstack stack create --wait" help message
+* OpenstackClient plugin for stack update
+* OpenstackClient plugin for stack create
+* Validate for empty file for stack-adopt
+* Misspelling in message
+* Updated from global requirements
+* Add resolve\_outputs parameter to stack get method
+* Allow event specification in the environment
+* Add debug testenv in tox
+* Replace deprecated library function os.popen() with subprocess
+* Update --template-object to support nested stacks
+* Added -P support to template-validate
+* Fix error message on authentication failure
+* Change LOG.warn to LOG.warning
+* Updated from global requirements
+* use keystoneclient exceptions instead of oslo-incubator code
+* Resolve outputs from stack object
+* Use stack lookup for getting stack name/id
+* Replace assertEqual(None, \*) with assertIsNone in tests
+* Removes MANIFEST.in as it is not needed explicitely by PBR
+* Fix Resource.\_\_eq\_\_ mismatch semantics of object equal
+* Updated from global requirements
+* remove py26 specific code from heatclient
+* Deprecated tox -downloadcache option removed
+* Updated from global requirements
+* remove py26 support tag in setup.cfg
+* Add JsonFormat display option
+* Updated from global requirements
+* Remove py26 support
+* Delete python bytecode before every test run
+* Updated from global requirements
+* Enable pep8 E123 test
+* Enable pep8 E126 test
+* Enable pep8 E128 test
+* Enable pep8 E265 test
+* Enable pep8 E241 test
+* Enable pep8 E713 test
+* Use six.iteritems() instead of iter(XXX.items())
+* Fix error when listing stacks
+* OpenStack typo
+* Enable pep8 H202 test
+* Enable pep8 H238 test
+* Enable pep8 H405 tests
+* Add output API calls implementations
+* Refine event\_log\_formatter output
+* Last sync from oslo-incubator
+* Delete the corresponding config when deleting a deployment
+* Fill status code for every HTTPException
+* OpenStackClient plugin for stack list
+* Fix environment files parsing bug for stack-adopt
+* Support to list software configs
+* Updated from global requirements
+* Ignore .eggs
+* Updated from global requirements
+* OpenStackClient plugin for stack show
+* Updated from global requirements
+* Fix error in stack-list metadata
+* improve readme content
+* Updated from global requirements
+* Add option for detailed template error
+* Updated from global requirements
+* Add standard code coverage configuration file
+* Updated from global requirements
+* Add PATCH support for stack-update --dry-run
+* Fix the bug when showing event in log format
+* Updated from global requirements
+
+0.8.0
+-----
+
+* stack-update -x tolerate no template
+* Ability to specify show\_nested for template validation
+* Fix deployment create error when using  existing config
+* Fix stack sorting support
+* Enable filters for heat resource-type-list
+* Modify test templates and the path to subunit2html
+* Add CLI option for update dry-run
+* Add py34 env to default tox run
+
+0.7.0
+-----
+
+* Fix a nit in resource-list help
+* Replace deprecated function
+* Updated from global requirements
+* Improve the format hint of -Pf option
+* Support tags parameter for stack-preview
+* Do not show snapshot data when doing snapshot-list
+* Updated from global requirements
+* Poll functionality for stack create action
+* Updated from global requirements
+* Use Heat resource to validate resource\_type\_show
+* Update python3 classifiers
+* Updated from global requirements
+* Updated from global requirements
+* add with\_detail parameter in heat resource-list request
+* Fix docstrings and add missing
+* Add missing \`deployment-list\` to cli
+* Updated from global requirements
+* Support 'with\_attr' parameter for resource-show
+* Updated from global requirements
+* New mock release(1.1.0) broke unit tests
+* Fix error when creating deployment from cli
+* Add support for template-function-list command
+* Fix TypeError when call keystoneclient session.request()
+* Add support for template-version-list command
+* Add tests for SessionClient
+* Updated from global requirements
+* Move SessionClient from HTTPClient to adapter
+* resource-list --nested-depth stack\_name column
+* Fix argument order for assertEqual
+* Updated from global requirements
+* Fixed VerifyAll() when test case does ReplayAll()
+* Updated from global requirements
+* Move test\_event\_utils.py module to unit directory
+* Add first pass at post\_test\_hook for functional
+* cleanup openstack-common.conf and sync updated files
+* Move usage methods \*\_request to get/post/etc
+* Updated from global requirements
+* Add functional tests from Tempest
+* Update hacking version to fix pep8 gate job
+* Adds --format=log option to event-list
+* Add --tags option to stack-create and stack-update
+* Add stack tag filtering options to stack-list
+* Add OS\_TEST\_PATH to testr
+* Move unittests to subdir unit
+
+0.6.0
+-----
+
+* Updated from global requirements
+* Make hook type optional for hook-clear
+* Refactor common event code into event\_utils module
+* Add hook-poll function to check if a stack has pending hooks
+* Work around pypy testing issue
+* Implement --limit option for event-list with --nested-depth
+* event-list marker, only slice when needed
+* Add option to show hidden stacks in stack-list
+* Add an option to generate template based on resource type
+* Updated from global requirements
+* Implement --marker for event-list --nested-depth
+* Fix sort column for event-list with nested-depth
+* Unit tests for stack actions
+
+0.5.0
+-----
+
+* correction in function names under test\_resource
+* Uncap library requirements for liberty
+* Add --nested-depth option to event-list
+* Make README.rst comply with expected format
+* Remove the deprecated shell commands
+
+0.4.0
+-----
+
+* Parse nested files if they are template
+* Add wildcard support to hook-clear
+* Add options for setting and clearing of hooks
+* Fix test class names
+* Add option for heatclient to accept parameter value from file
+* Sync with oslo\_incubator
+* Migrate to new oslo\_xxx namespace
+* Updated from global requirements
+* Implement deployment-create
+* Implement deployment-output-show
+* Make ; parsing optional in format\_parameters
+* Updated from global requirements
+* Fix SessionClient error when endpoint=None
+* Fix non-working endpoint type argument
+* Updated from global requirements
+* Updates heat.rst with 'service-list
+* Sort event-list by oldest first
+
+0.3.0
+-----
+
+* Adds CLI heat service-list
+* Add adopt/abandon description to heat manual
+* Fix different behavior in python3.4 json module
+* Updated from global requirements
+* Add CLI commands to interact with software-config
+* output-show format by json or raw
+* CLI: Add --all option to output-show command
+* Removed http proxy environment variable so that httpretty can work
+* Updated from global requirements
+* Replace httpretty with requests-mock
+* Fix passing an object url to the heat CLI
+* Cleanup shell tests
+* Format attributes as JSON in resource-show output
+* Updated from global requirements
+* Add transtlation markers for log messages
+* Add transtlation markers for error messages
+* Add transtlation markers for help messages
+* Initial setup for i18n support
+* Show the creation\_time for stack snapshot list
+* Workflow documentation is now in infra-manual
+* Remove remaining deprecated oslo-incubator modules
+* Convert importutils to oslo.utils
+* Updated from global requirements
+* Fix H302 errors
+* Curl statements to include globoff for IPv6 URLs
+* Add support for parameter\_defaults in environment
+* Updated from global requirements
+* Convert strutils to oslo.utils.encodeutils
+* Move to oslo.serialization
+* Implement restore operation
+* Implement snapshot operations
+* Tests work fine with random PYTHONHASHSEED
+* Updated from global requirements
+* Remove \_ from builtins
+* Fix template\_utils tests for Python 3.4
+* Fix event tests for Python 3.4
+* Fix shell tests for Python 3.4
+* Allow mock-based patching in shell tests
+* Make sure the --heat-url option is respected
+* Put a cap on our cyclomatic complexity
+* Pass auth\_url if os\_no\_client\_auth specified
+* Updated from global requirements
+* Remove extraneous vim editor configuration comments
+* Updated from global requirements
+* Fixed null str returned for incorrect parameter
+
+0.2.12
+------
+
+* Add a required 'args' to do\_list()
+* Client supports check action
+* Fix stack update for Python API
+* Updated from global requirements
+
+0.2.11
+------
+
+* Add 'cancel\_update' action and command
+* Updated from global requirements
+* Add stack-update argument for reset parameters
+* Add stack-update argument for patching parameters
+* Display stack owner info on stack-list
+* Add support for OSprofiler
+* Reuse existing disable\_rollback in stack-update
+* Stop using intersphinx
+* Add --show-nested option to stack-list
+* warn against sorting requirements
+* handles keyboard interrupt
+* Re-add keystone v3 auth with fixes
+* Template is not required on stack-adopt
+* output-file option in stack-abandon
+* Handle upper cased endpoints
+* Updated from global requirements
+* Remove unused/mutable default args
+* Update stack-preview usage text
+* Removed undefined method in install\_env.py file
+* Add support for multiple environment files
+* Add nested-depth option to resource-list
+* Added timeout and rollback params in stack-preview
+* Revert "Add keystone v3 auth support"
+* Don't expose X-Auth-Token in heat CLI
+* Update theme for docs
+* Add a tox job for generating docs
+* Add rel field to links display
+* Implement events pagination, sorting and filtering
+* Add keystone v3 auth support
+* Deprecate misleading cli command 'resource-template'
+* Show physical\_resource\_id in resource-list
+* Fix the section name in CONTRIBUTING.rst
+
+0.2.10
+------
+
+* Improve --debug logging output
+* Do not set up logging handler in http
+* Updated from global requirements
+* Fix unicode display in parameters
+* Append extra space after command in bash\_completion
+* Add shell arguments for stack update
+* Removed now unnecesary workaround for PyPy
+* Don't allow "propagate" of heatclient logger
+* Add option to show soft-deleted stacks in stack-list
+* Client should support stack-list for global scope
+* Mark heatclient as being a universal wheel
+* Remove no use option parameters for template-validate
+* Let server order event-list
+* fixed typos found by RETF rules
+* Heat client does not support OS\_CACERT option
+* Fix empty resource list index out of range error
+* Add code coverage in resource list test
+* Remove unused arguments for stack-preview command
+* Use correct order of arguments to assertEqual
+
+0.2.9
+-----
+
+* Updated from global requirements
+* Add a description of how stack-abandon works
+* Process provider templates for included files
+* Deprecate preview --create-timeout in favor of --timeout
+* Support Python 3
+* Sync oslo incubator
+* Python 3: fix test\_template\_utils.py
+* Skip timeout\_mins when not specify
+* get\_file: encode non utf-8 encoding files via base64
+* get\_file: do not read same url once again
+* Resolve files in resource types
+* Do not use the '+' operation with dict\_items()
+* Python3: fix a bytes/str issue
+* Updated from global requirements
+* Using common methods from oslo cliutils
+* Python 3: decode bytes before feeding them to jsonutils.loads()
+* Output warnings for deprecated commands
+* Add stack-preview support
+* Workaround failing pypy gate job
+* Remove dependent module py3kcompat
+* Python 3: Fix YamlEnvironmentTest tests
+* Oslo: sync strutils
+* Add new tests to cover most of the requests port
+* Modify stack ID lookup to only use stacks:lookup
+* Add timeout option to stack-update
+* Deprecate create/adopt --create-timeout in favor of --timeout
+* Remove unused versions define in template\_format.py
+* Rename --timeout global option and make it work
+* Python3: fix test\_stack\_list\_with\_args()
+* Pass bytes to NamedTemporaryFile.write()
+* Enable --help for each command
+
+0.2.8
+-----
+
+* Sort requirement files in alphabetical order
+* Expand get\_file using to template scope
+* "version" section should be required in template
+* Updated from global requirements
+* add output-list and output-show
+* Improve help strings
+* Do not use the '+' operation dict\_items()
+* Remove None for dict.get()
+* Support the native signal API
+* Update apiclient.base and reuse new functional
+* Python3: fix bytes/str issues
+* Adding stack-adopt support to python-heatclient
+* Fixed incorrect indentation in the tests
+
+0.2.7
+-----
+
+* Don't use request builtin redirect for any methods
+* REST method to fetch deployments metadata for a server
+* Only call decode() on bytes
+* Replace try...except with assertRaises
+* Add support for software config resources
+* Make POST/PUT redirects use original methods
+* Do not use the '+' operation dict\_items()
+* Decode all headers before logging curl commands
+* normalise\_file\_path\_to\_url: use urlutils.pathname2url
+* get\_file\_contents: use six.itervalues() instead of dict.itervalues()
+* Python3: use six.iteritems() rather than dict.iteritems()
+* Fixes environment file using correct YAML format
+* Improve help strings
+* Add optional args arg back to do\_list
+* python-heatclient stack-abandon support
+* Add more default CA paths
+* Port to python requests
+* Enable default in bash completion
+* Allow environment to not have resource\_registry
+* Add filter option to stack-list
+* Add pagination (limit and marker) to stack-list
+* Populate files with content from get\_file function calls
+* Enable hacking H233 rule
+* Configure logging regardless of debug flag
+* Fix order of arguments in assertEqual
+* Added missed files to create venv with run\_tests.sh
+* Pass empty dict not None for empty environment
+* Refactor environment functions in preparation for get\_file
+* Updated from global requirements
+* Add support for build info API
+* Remove unused method 'string\_to\_bool' from utils
+* Raise traceback on error when using CLI and -debug
+* Remove dependencies on pep8, pyflakes and flake8
+* Sync strutils from oslo
+* Add to\_dict() method to Resource class
+* Fix comparison with singletons
+* Copy run\_test.sh from heat repo
+* Improve and unit-test template contents fetching
+* Test coverage of empty environment
+* Move environment and template file functions to own module
+* reconcile prepare\_environment\_file/url into one funtion
+* Use template\_format.parse for local stack parsing
+* Fetch environment from fields rather than function arg
+* Move template\_format from heat to heatclient
+* Update variable name in test\_shell.py
+* Use assertRaises instead of try/except/else
+* Remove unused common.base module
+* Fix some trivial py3 errors
+* Remove ununsed httplib2 requirement
+* Added API reference document
+* Wrapped some long lines
+* Fixed typo error OS\_IMAGE\_URL
+* Sort resource-type-list output
+* Fix help formatting for resource-template
+* Fix inappropriate error message on event-list
+* Remove vim header
+* Enable deleting multiple stacks with single call
+* Increase test\_resources coverage
+* Show better error when json fail to parse template
+* Updates .gitignore
+* Misc typos in Heat client
+* Supports bash\_completion for heatclient
+* Reuse BaseManager and Resource from oslo
+* Sync base and exceptions from oslo
+* Allow the environment file to be specified via URL
+* Use jsonutils from oslo incubator
+* Updates tox.ini to use new features
+* Add support for resource\_types
+* Updated from global requirements
+* Replace inheritance hierarchy with composition
+* Deprecate mox in favor of mox3
+* Change ID column of Event table to UUID
+
+0.2.6
+-----
+
+* Add back --token-only for invocation compatibility
+* Add --include-pass option for grizzly backwards compat
+* Revert "Don't call credentials\_headers() twice"
+* Make tokens work with --os-no-client-auth
+* test\_shell test current not deprecated options
+* Fix shell operation with --os-auth-token
+* Don't call credentials\_headers() twice
+* Use fixtures for all shell environment variables
+* Cleanup exc.verbose after tests
+* Pass only tenant name or ID to keystoneclient
+* use correct url on Windows platform
+* Fix i18n error when resource-name is non-english
+* Remove --token-only option, it does nothing
+* Honor endpoint\_type when requesting keystone for a token
+* Revert "heatclient is not working with os-auth-token"
+* Updated from global requirements
+* Encode output for fixing UnicodeDecodeError
+* Add a basic man page for heat
+* Returning the json body after a stack-create or stack-update
+* heatclient is not working with os-auth-token
+* Add a top level introduction to the index
+* Add a contibuting section to index.rst
+* Remove the release notes as it is not maintained here
+* Resync doc/source/conf.py from heat for consistency
+* Add doc/Makefile to help with building docs
+* Print a more correct error with event-show
+* Fix the testname of scenario
+* remove python 2.5 support for parse\_sql
+* align the order of parameters for urlencode()
+* Replace urllib/urllib2 with urlutils
+* Transform print statement to print function
+* Use the six library for compatability
+* Import urlutils from openstack common
+* Updated from global requirements
+* Import httplib from six.moves
+* Replace mox with mox3
+* Allow env registry paths to be relative to env file
+* Updated from global requirements
+
+0.2.5
+-----
+
+* Allow -P to be invoked multiple times
+* Replace OpenStack LLC with OpenStack Foundation
+* Add handler for heatclient.common.http
+* Support --version for heatclient
+* Stack instance identifier property
+* Added support for running the tests under PyPy with tox
+* Fix and enable Hacking H501 warning
+* Be backward compatible after a renaming in API
+* Rename event logical\_resource\_id to resource\_name
+* Add X-Region-Name parameter in HTTP request
+* Apply OS\_REGION\_NAME for endpoint selection
+* Do not obscure Unauthorized error messages
+* Fix heat event list sorted order incorrect
+* Updated from global requirements
+* Generate a template from a resource
+
+0.2.4
+-----
+
+* Remove unused Stack data method
+* Do not paginate stack list unless page\_size is set
+* Custom Stack get method to avoid lookup redirects
+* Fix Stack instance delete method
+* Add mock as a test requirement
+* Sync with global requirements
+* Implement Stack status and action properties
+* Parse error object (in json format) returned by heat-api
+* Set credentials headers if there is no auth token
+* Validate heat url is supplied for --os-no-client-auth
+
+0.2.3
+-----
+
+* Cleanup in preperation for release
+* Display yaml format for stack deployed via hot template
+* Make the parameter checking consistent
+* Rename README.md to README.rst
+* Raise requirements to be in sync with OpenStack/Requirements
+* Update upper bound of keystoneclient version
+* Fix "heat validate" (add needed environment option)
+* Only set X-Auth-User, X-Auth-Key on stack create/update
+* Format resource required\_by in resource-show
+* Unit tests for pretty table special formatters
+* Add support for suspend/resume actions
+* Upload provider templates referenced in the environment
+* Fix all but H302 hacking rules
+* Fix all the pep8  E\* and F\* errors
+* Fix various smaller pep8 issues
+* flake8 ignore build directory
+* Stop passing path to VerifiedHTTPSConnection
+* Remove explicit distribute depend
+* Include .testr.conf in source tarball
+* Use Python 3.x compatible except: construct
+* Fixes text split for parameters
+* Add support for environment files
+* Migrate to testr from nose
+* Migrate test base classes to testtools
+* Move tests into package dir
+* Move requirements files to standard names
+* Add CONTRIBUTING file
+* Migrate to pbr
+* Fix some "H" pep errors
+* Migrate to flake8
+* Cleaned up code in anticipation of flake8
+* Restore compatibility with PrettyTable < 0.7.2
+
+0.2.2
+-----
+
+* "heat stack-create" doesn't return the error message from server
+* Display resource metadata as indented json
+* Don't use human readable heading labels in tables
+* Return the body as a string instead of an iterable
+* Always pass username, even for --token-only
+* Allow for prettytable 0.7.x as well
+* Remove warlock from pip-requires as it is not used
+* Change --disable-rollback option to --enable-rollback
+
+0.2.1
+-----
+
+* Don't add 'dev' to tag\_build
+
+0.2.0
+-----
+
+* heatclient : Add --disable-rollback option
+* heatclient : correct timeout parameter name
+* Return the exit code from tox to callers of run\_tests.sh
+* Add switch to disable token authentication
+* Don't log at all if debugging is not turned on
+* Fixes required for packaging
+* Relax the required version of prettytable
+* Switch to using version.canonical\_version\_string
+* Update to latest oslo-incubator
+* Display a better error message on HTTP exception
+
+0.1.0
+-----
+
+* Fix git repo url
+* Deprecate commands and add unified cli replacements
+* remove some glanceisms from the docs
+* add some pypi meta info
+* Update .gitreview for org move
+* Support for events list and details
+* Use python-keystoneclient 0.2 series
+* Pass template as a string if it is not JSON
+* Ignore heatclient/versioninfo
+* Implement client resource support
+* adding test coverage for common/http, improving the redirect handling
+* Support name or id for stack operations
+* Pass username and password as well as token
+* Add .gitreview file
+* pep8 and more tests
+* - Comment out commands that don't yet have a REST API equivalent - Use Name/ID when specifying a stack
+* Feature parity with REST API - Give a nice message for 404 for non-existent stack id - implement delete, gettemplate, validate - run do\_list after create, delete - don't encode the json template as a json string
+* set up default logging even when not debugging
+* Allow sort column to be specified
+* An error response shouldn't be logged as an error, since it is part of the REST API
+* Implement describe, and format the results
+* Allow pretty\_dict to take optional formatters
+* Shell unit tests, remove unused code, display real results from REST API
+* Allow labels to be specified separately from field keys
+* resolve test template file path no matter where it is run from
+* Some slightly more realistic mock responses. Regexp asserts to check pretty print is printing something
+* pass the dict to print\_dict
+* Properly configure debug logging
+* Mock at the json request level instead of the http connection level. Test create
+* setup tweaks
+* Get fakes and mox working so that any http request/response sequence can be test scripted
+* pyc files should not have been committed
+* Format parameters for create call
+* add some more non-functioning skeleton code
+* fix readme path
+* Swap readme files
+* Define CLI commands and arguments for entire API
+* initial version
+* Initial import
+* first commit

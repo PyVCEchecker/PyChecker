@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_s3_deployment.egg-info/PKG-INFO
+src/aws_cdk.aws_s3_deployment.egg-info/SOURCES.txt
+src/aws_cdk.aws_s3_deployment.egg-info/dependency_links.txt
+src/aws_cdk.aws_s3_deployment.egg-info/requires.txt
+src/aws_cdk.aws_s3_deployment.egg-info/top_level.txt
+src/aws_cdk/aws_s3_deployment/__init__.py
+src/aws_cdk/aws_s3_deployment/py.typed
+src/aws_cdk/aws_s3_deployment/_jsii/__init__.py
+src/aws_cdk/aws_s3_deployment/_jsii/aws-s3-deployment@1.129.0.jsii.tgz

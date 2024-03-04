@@ -1,0 +1,7 @@
+defusedxml
+
+[mysql]
+mysql-connector-python
+
+[postgresql]
+psycopg2

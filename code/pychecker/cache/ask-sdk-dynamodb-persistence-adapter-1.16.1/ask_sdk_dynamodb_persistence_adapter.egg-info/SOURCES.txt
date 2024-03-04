@@ -1,0 +1,17 @@
+CHANGELOG.rst
+MANIFEST.in
+README.rst
+requirements.txt
+setup.cfg
+setup.py
+ask_sdk_dynamodb/__init__.py
+ask_sdk_dynamodb/__version__.py
+ask_sdk_dynamodb/adapter.py
+ask_sdk_dynamodb/partition_keygen.py
+ask_sdk_dynamodb/py.typed
+ask_sdk_dynamodb_persistence_adapter.egg-info/PKG-INFO
+ask_sdk_dynamodb_persistence_adapter.egg-info/SOURCES.txt
+ask_sdk_dynamodb_persistence_adapter.egg-info/dependency_links.txt
+ask_sdk_dynamodb_persistence_adapter.egg-info/not-zip-safe
+ask_sdk_dynamodb_persistence_adapter.egg-info/requires.txt
+ask_sdk_dynamodb_persistence_adapter.egg-info/top_level.txt

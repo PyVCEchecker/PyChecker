@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: acme
+Version: 1.20.0
+Summary: ACME protocol implementation in Python
+Home-page: https://github.com/letsencrypt/letsencrypt
+Author: Certbot Project
+Author-email: certbot-dev@eff.org
+License: Apache License 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Security
+Requires-Python: >=3.6
+Provides-Extra: docs
+Provides-Extra: test
+License-File: LICENSE.txt
+
+UNKNOWN
+

@@ -1,0 +1,5 @@
+include *.py *.txt *.rst
+exclude publish_docs.py
+recursive-include tinymce *
+recursive-include test_tinymce *
+global-exclude *.pyc __pycache__

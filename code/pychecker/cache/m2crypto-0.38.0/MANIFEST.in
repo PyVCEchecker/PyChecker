@@ -1,0 +1,13 @@
+include SWIG/*.i
+include SWIG/*.h
+include SWIG/*.def
+recursive-include tests *.py *.pem *.der *.b64 README *.pgp *.dat *.p7* *.crt *.txt
+recursive-include doc *
+recursive-include contrib *
+include INSTALL.rst
+include README.rst
+include CHANGES
+include epydoc.conf
+include LICENCE
+include SWIG/_m2crypto_wrap.c
+include M2Crypto/m2crypto.py

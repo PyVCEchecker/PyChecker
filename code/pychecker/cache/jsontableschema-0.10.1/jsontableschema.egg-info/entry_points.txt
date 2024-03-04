@@ -1,0 +1,3 @@
+[console_scripts]
+jsontableschema = jsontableschema.cli:main
+

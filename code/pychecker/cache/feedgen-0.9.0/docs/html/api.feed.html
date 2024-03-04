@@ -1,0 +1,850 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>feedgen.feed &#8212; python-feedgen 0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/lernfunk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="feedgen.entry" href="api.entry.html" />
+    <link rel="prev" title="API Documentation" href="api.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>python-feedgen 0.9.0 documentation</span></a></h1>
+        <h2 class="heading"><span>feedgen.feed</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="api.html">API Documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="api.entry.html">feedgen.entry</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content" role="main">
+        
+        
+  <script type=application/javascript src=_static/theme_extras.js></script>
+<div class="apititle"><b>Contents</b></div>
+<div class="apitoc"></div><span class="target" id="module-feedgen.feed"></span><div class="section" id="feedgen-feed">
+<h1>feedgen.feed<a class="headerlink" href="#feedgen-feed" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">copyright</dt>
+<dd class="field-odd"><p>2013-2020, Lars Kiesow &lt;<a class="reference external" href="mailto:lkiesow&#37;&#52;&#48;uos&#46;de">lkiesow<span>&#64;</span>uos<span>&#46;</span>de</a>&gt;</p>
+</dd>
+<dt class="field-even">license</dt>
+<dd class="field-even"><p>FreeBSD and LGPL, see license.* for more details.</p>
+</dd>
+</dl>
+<dl class="class">
+<dt id="feedgen.feed.FeedGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">feedgen.feed.</code><code class="sig-name descname">FeedGenerator</code><a class="headerlink" href="#feedgen.feed.FeedGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>FeedGenerator for generating ATOM and RSS feeds.</p>
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.add_entry">
+<code class="sig-name descname">add_entry</code><span class="sig-paren">(</span><em class="sig-param">feedEntry=None</em>, <em class="sig-param">order='prepend'</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.add_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will add a new entry to the feed. If the feedEntry
+argument is omittet a new Entry object is created automatically. This
+is the preferred way to add new entries to a feed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feedEntry</strong> – FeedEntry object to add.</p></li>
+<li><p><strong>order</strong> – If <cite>prepend</cite> is chosen, the entry will be inserted
+at the beginning of the feed. If <cite>append</cite> is chosen,
+the entry will be appended to the feed.
+(default: <cite>prepend</cite>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>FeedEntry object created or passed to this function.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">entry</span> <span class="o">=</span> <span class="n">feedgen</span><span class="o">.</span><span class="n">add_entry</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">entry</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;First feed entry&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.add_item">
+<code class="sig-name descname">add_item</code><span class="sig-paren">(</span><em class="sig-param">item=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.add_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will add a new item to the feed. If the item argument is
+omittet a new FeedEntry object is created automatically. This is just
+another name for add_entry(…)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.atom_file">
+<code class="sig-name descname">atom_file</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">extensions=True</em>, <em class="sig-param">pretty=False</em>, <em class="sig-param">encoding='UTF-8'</em>, <em class="sig-param">xml_declaration=True</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.atom_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an ATOM feed and write the resulting XML to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – Name of file to write or a file-like object or a URL.</p></li>
+<li><p><strong>extensions</strong> – Enable or disable the loaded extensions for the xml
+generation (default: enabled).</p></li>
+<li><p><strong>pretty</strong> – If the feed should be split into multiple lines and
+properly indented.</p></li>
+<li><p><strong>encoding</strong> – Encoding used in the  XML file (default: UTF-8).</p></li>
+<li><p><strong>xml_declaration</strong> – If an XML declaration should be added to the
+output (Default: enabled).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.atom_str">
+<code class="sig-name descname">atom_str</code><span class="sig-paren">(</span><em class="sig-param">pretty=False</em>, <em class="sig-param">extensions=True</em>, <em class="sig-param">encoding='UTF-8'</em>, <em class="sig-param">xml_declaration=True</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.atom_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an ATOM feed and returns the feed XML as string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pretty</strong> – If the feed should be split into multiple lines and
+properly indented.</p></li>
+<li><p><strong>extensions</strong> – Enable or disable the loaded extensions for the xml
+generation (default: enabled).</p></li>
+<li><p><strong>encoding</strong> – Encoding used in the  XML file (default: UTF-8).</p></li>
+<li><p><strong>xml_declaration</strong> – If an XML declaration should be added to the
+output (Default: enabled).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String representation of the ATOM feed.</p>
+</dd>
+</dl>
+<p><strong>Return type:</strong> The return type may vary between different Python
+versions and your encoding parameters passed to this method. For
+details have a look at the <a class="reference external" href="https://docs.python.org/3/library/xml.etree.elementtree.html#xml.etree.ElementTree.tostring">lxml documentation</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.author">
+<code class="sig-name descname">author</code><span class="sig-paren">(</span><em class="sig-param">author=None</em>, <em class="sig-param">replace=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.author" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set author data. An author element is a dictionary containing
+a name, an email address and a URI. Name is mandatory for ATOM, email
+is mandatory for RSS.</p>
+<p>This method can be called with:</p>
+<ul class="simple">
+<li><p>the fields of an author as keyword arguments</p></li>
+<li><p>the fields of an author as a dictionary</p></li>
+<li><p>a list of dictionaries containing the author fields</p></li>
+</ul>
+<p>An author has the following fields:</p>
+<ul class="simple">
+<li><p><em>name</em> conveys a human-readable name for the person.</p></li>
+<li><p><em>uri</em> contains a home page for the person.</p></li>
+<li><p><em>email</em> contains an email address for the person.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>author</strong> – Dictionary or list of dictionaries with author data.</p></li>
+<li><p><strong>replace</strong> – Add or replace old data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of authors as dictionaries.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">feedgen</span><span class="o">.</span><span class="n">author</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span><span class="s1">&#39;jdoe@example.com&#39;</span><span class="p">})</span>
+<span class="go">[{&#39;name&#39;:&#39;John Doe&#39;,&#39;email&#39;:&#39;jdoe@example.com&#39;}]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feedgen</span><span class="o">.</span><span class="n">author</span><span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Mr. X&#39;</span><span class="p">},{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Max&#39;</span><span class="p">}])</span>
+<span class="go">[{&#39;name&#39;:&#39;John Doe&#39;,&#39;email&#39;:&#39;jdoe@example.com&#39;},</span>
+<span class="go">        {&#39;name&#39;:&#39;John Doe&#39;}, {&#39;name&#39;:&#39;Max&#39;}]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feedgen</span><span class="o">.</span><span class="n">author</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">&#39;jdoe@example.com&#39;</span><span class="p">,</span>
+<span class="go">                   replace=True)</span>
+<span class="go">[{&#39;name&#39;:&#39;John Doe&#39;,&#39;email&#39;:&#39;jdoe@example.com&#39;}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.category">
+<code class="sig-name descname">category</code><span class="sig-paren">(</span><em class="sig-param">category=None</em>, <em class="sig-param">replace=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set categories that the feed belongs to.</p>
+<p>This method can be called with:</p>
+<ul class="simple">
+<li><p>the fields of a category as keyword arguments</p></li>
+<li><p>the fields of a category as a dictionary</p></li>
+<li><p>a list of dictionaries containing the category fields</p></li>
+</ul>
+<p>A categories has the following fields:</p>
+<ul class="simple">
+<li><p><em>term</em> identifies the category</p></li>
+<li><p><em>scheme</em> identifies the categorization scheme via a URI.</p></li>
+<li><p><em>label</em> provides a human-readable label for display</p></li>
+</ul>
+<p>If a label is present it is used for the RSS feeds. Otherwise the term
+is used. The scheme is used for the domain attribute in RSS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>link</strong> – Dict or list of dicts with data.</p></li>
+<li><p><strong>replace</strong> – Add or replace old data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of category data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.cloud">
+<code class="sig-name descname">cloud</code><span class="sig-paren">(</span><em class="sig-param">domain=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">path=None</em>, <em class="sig-param">registerProcedure=None</em>, <em class="sig-param">protocol=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.cloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or get the cloud data of the feed. It is an RSS only attribute.
+It specifies a web service that supports the rssCloud interface which
+can be implemented in HTTP-POST, XML-RPC or SOAP 1.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> – The domain where the webservice can be found.</p></li>
+<li><p><strong>port</strong> – The port the webservice listens to.</p></li>
+<li><p><strong>path</strong> – The path of the webservice.</p></li>
+<li><p><strong>registerProcedure</strong> – The procedure to call.</p></li>
+<li><p><strong>protocol</strong> – Can be either HTTP-POST, XML-RPC or SOAP 1.1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary containing the cloud data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.contributor">
+<code class="sig-name descname">contributor</code><span class="sig-paren">(</span><em class="sig-param">contributor=None</em>, <em class="sig-param">replace=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.contributor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the contributor data of the feed. This is an ATOM only
+value.</p>
+<p>This method can be called with:
+- the fields of an contributor as keyword arguments
+- the fields of an contributor as a dictionary
+- a list of dictionaries containing the contributor fields</p>
+<p>An contributor has the following fields:
+- <em>name</em> conveys a human-readable name for the person.
+- <em>uri</em> contains a home page for the person.
+- <em>email</em> contains an email address for the person.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>contributor</strong> – Dictionary or list of dictionaries with contributor
+data.</p></li>
+<li><p><strong>replace</strong> – Add or replace old data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of contributors as dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.copyright">
+<code class="sig-name descname">copyright</code><span class="sig-paren">(</span><em class="sig-param">copyright=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.copyright" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the copyright notice for content in the channel. This RSS
+value will also set the atom:rights value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>copyright</strong> – The copyright notice.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The copyright notice.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.description">
+<code class="sig-name descname">description</code><span class="sig-paren">(</span><em class="sig-param">description=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set and get the description of the feed. This is an RSS only element
+which is a phrase or sentence describing the channel. It is mandatory
+for RSS feeds. It is roughly the same as atom:subtitle. Thus setting
+this will also set atom:subtitle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>description</strong> – Description of the channel.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Description of the channel.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.docs">
+<code class="sig-name descname">docs</code><span class="sig-paren">(</span><em class="sig-param">docs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.docs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the docs value of the feed. This is an RSS only value. It
+is a URL that points to the documentation for the format used in the
+RSS file. It is probably a pointer to [1]. It is for people who might
+stumble across an RSS file on a Web server 25 years from now and wonder
+what it is.</p>
+<p>[1]: <a class="reference external" href="http://www.rssboard.org/rss-specification">http://www.rssboard.org/rss-specification</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>docs</strong> – URL of the format documentation.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>URL of the format documentation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.entry">
+<code class="sig-name descname">entry</code><span class="sig-paren">(</span><em class="sig-param">entry=None</em>, <em class="sig-param">replace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set feed entries. Use the add_entry() method instead to
+automatically create the FeedEntry objects.</p>
+<p>This method takes both a single FeedEntry object or a list of objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entry</strong> – FeedEntry object or list of FeedEntry objects.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List ob all feed entries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.generator">
+<code class="sig-name descname">generator</code><span class="sig-paren">(</span><em class="sig-param">generator=None</em>, <em class="sig-param">version=None</em>, <em class="sig-param">uri=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the generator of the feed which identifies the software
+used to generate the feed, for debugging and other purposes. Both the
+uri and version attributes are optional and only available in the ATOM
+feed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>generator</strong> – Software used to create the feed.</p></li>
+<li><p><strong>version</strong> – Version of the software.</p></li>
+<li><p><strong>uri</strong> – URI the software can be found.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.icon">
+<code class="sig-name descname">icon</code><span class="sig-paren">(</span><em class="sig-param">icon=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the icon of the feed which is a small image which
+provides iconic visual identification for the feed. Icons should be
+square. This is an ATOM only value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>icon</strong> – URI of the feeds icon.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>URI of the feeds icon.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.id">
+<code class="sig-name descname">id</code><span class="sig-paren">(</span><em class="sig-param">id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the feed id which identifies the feed using a universally
+unique and permanent URI. If you have a long-term, renewable lease on
+your Internet domain name, then you can feel free to use your website’s
+address. This field is for ATOM only. It is mandatory for ATOM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – New Id of the ATOM feed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Id of the feed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.image">
+<code class="sig-name descname">image</code><span class="sig-paren">(</span><em class="sig-param">url=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">link=None</em>, <em class="sig-param">width=None</em>, <em class="sig-param">height=None</em>, <em class="sig-param">description=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the image of the feed. This element is roughly equivalent to
+atom:logo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> – The URL of a GIF, JPEG or PNG image.</p></li>
+<li><p><strong>title</strong> – Describes the image. The default value is the feeds
+title.</p></li>
+<li><p><strong>link</strong> – URL of the site the image will link to. The default is to
+use the feeds first altertate link.</p></li>
+<li><p><strong>width</strong> – Width of the image in pixel. The maximum is 144.</p></li>
+<li><p><strong>height</strong> – The height of the image. The maximum is 400.</p></li>
+<li><p><strong>description</strong> – Title of the link.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data of the image as dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.item">
+<code class="sig-name descname">item</code><span class="sig-paren">(</span><em class="sig-param">item=None</em>, <em class="sig-param">replace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set feed items. This is just another name for entry(…)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.language">
+<code class="sig-name descname">language</code><span class="sig-paren">(</span><em class="sig-param">language=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the language of the feed. It indicates the language the
+channel is written in. This allows aggregators to group all Italian
+language sites, for example, on a single page. This is an RSS only
+field.  However, this value will also be used to set the xml:lang
+property of the ATOM feed node.
+The value should be an IETF language tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>language</strong> – Language of the feed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Language of the feed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.lastBuildDate">
+<code class="sig-name descname">lastBuildDate</code><span class="sig-paren">(</span><em class="sig-param">lastBuildDate=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.lastBuildDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or get the lastBuildDate value which indicates the last time the
+content of the channel changed.</p>
+<p>The value can either be a string which will automatically be parsed or
+a datetime.datetime object. In any case it is necessary that the value
+include timezone information.</p>
+<p>This will set both atom:updated and rss:lastBuildDate.</p>
+<dl class="simple">
+<dt>Default value</dt><dd><p>If not set, lastBuildDate has as value the current date and time.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lastBuildDate</strong> – The modification date.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Modification date as datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.link">
+<code class="sig-name descname">link</code><span class="sig-paren">(</span><em class="sig-param">link=None</em>, <em class="sig-param">replace=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set link data. An link element is a dict with the fields
+href, rel, type, hreflang, title, and length. Href is mandatory for
+ATOM.</p>
+<p>This method can be called with:</p>
+<ul class="simple">
+<li><p>the fields of a link as keyword arguments</p></li>
+<li><p>the fields of a link as a dictionary</p></li>
+<li><p>a list of dictionaries containing the link fields</p></li>
+</ul>
+<p>A link has the following fields:</p>
+<ul>
+<li><p><em>href</em> is the URI of the referenced resource (typically a Web page)</p></li>
+<li><p><em>rel</em> contains a single link relationship type. It can be a full URI,
+or one of the following predefined values (default=alternate):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>alternate</em> an alternate representation of the entry or feed, for
+example a permalink to the html version of the entry, or the
+front page of the weblog.</p></li>
+<li><p><em>enclosure</em> a related resource which is potentially large in size
+and might require special handling, for example an audio or video
+recording.</p></li>
+<li><p><em>related</em> an document related to the entry or feed.</p></li>
+<li><p><em>self</em> the feed itself.</p></li>
+<li><p><em>via</em> the source of the information provided in the entry.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><em>type</em> indicates the media type of the resource.</p></li>
+<li><p><em>hreflang</em> indicates the language of the referenced resource.</p></li>
+<li><p><em>title</em> human readable information about the link, typically for
+display purposes.</p></li>
+<li><p><em>length</em> the length of the resource, in bytes.</p></li>
+</ul>
+<p>RSS only supports one link with URL only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>link</strong> – Dict or list of dicts with data.</p></li>
+<li><p><strong>replace</strong> – If old links are to be replaced (default: False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Current set of link data</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">feedgen</span><span class="o">.</span><span class="n">link</span><span class="p">(</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;http://example.com/&#39;</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="s1">&#39;self&#39;</span><span class="p">)</span>
+<span class="go">[{&#39;href&#39;:&#39;http://example.com/&#39;, &#39;rel&#39;:&#39;self&#39;}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.load_extension">
+<code class="sig-name descname">load_extension</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">atom=True</em>, <em class="sig-param">rss=True</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.load_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a specific extension by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the extension to load.</p></li>
+<li><p><strong>atom</strong> – If the extension should be used for ATOM feeds.</p></li>
+<li><p><strong>rss</strong> – If the extension should be used for RSS feeds.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.logo">
+<code class="sig-name descname">logo</code><span class="sig-paren">(</span><em class="sig-param">logo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.logo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the logo of the feed which is a larger image which
+provides visual identification for the feed. Images should be twice as
+wide as they are tall. This is an ATOM value but will also set the
+rss:image value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>logo</strong> – Logo of the feed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Logo of the feed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.managingEditor">
+<code class="sig-name descname">managingEditor</code><span class="sig-paren">(</span><em class="sig-param">managingEditor=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.managingEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or get the value for managingEditor which is the email address
+for person responsible for editorial content.    This is a RSS only
+value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>managingEditor</strong> – Email address of the managing editor.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Email address of the managing editor.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.pubDate">
+<code class="sig-name descname">pubDate</code><span class="sig-paren">(</span><em class="sig-param">pubDate=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.pubDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or get the publication date for the content in the channel. For
+example, the New York Times publishes on a daily basis, the publication
+date flips once every 24 hours. That’s when the pubDate of the channel
+changes.</p>
+<p>The value can either be a string which will automatically be parsed or
+a datetime.datetime object. In any case it is necessary that the value
+include timezone information.</p>
+<p>This will set both atom:updated and rss:lastBuildDate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pubDate</strong> – The publication date.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Publication date as datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.rating">
+<code class="sig-name descname">rating</code><span class="sig-paren">(</span><em class="sig-param">rating=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.rating" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set and get the PICS rating for the channel.    It is an RSS only
+value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.register_extension">
+<code class="sig-name descname">register_extension</code><span class="sig-paren">(</span><em class="sig-param">namespace</em>, <em class="sig-param">extension_class_feed=None</em>, <em class="sig-param">extension_class_entry=None</em>, <em class="sig-param">atom=True</em>, <em class="sig-param">rss=True</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.register_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers an extension by class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>namespace</strong> – namespace for the extension</p></li>
+<li><p><strong>extension_class_feed</strong> – Class of the feed extension to load.</p></li>
+<li><p><strong>extension_class_entry</strong> – Class of the entry extension to load</p></li>
+<li><p><strong>atom</strong> – If the extension should be used for ATOM feeds.</p></li>
+<li><p><strong>rss</strong> – If the extension should be used for RSS feeds.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.remove_entry">
+<code class="sig-name descname">remove_entry</code><span class="sig-paren">(</span><em class="sig-param">entry</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.remove_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a single entry from the feed. This method accepts both the
+FeedEntry object to remove or the index of the entry as argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entry</strong> – Entry or index of entry to remove.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.remove_item">
+<code class="sig-name descname">remove_item</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.remove_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a single item from the feed. This is another name for
+remove_entry.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.rights">
+<code class="sig-name descname">rights</code><span class="sig-paren">(</span><em class="sig-param">rights=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.rights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the rights value of the feed which conveys information
+about rights, e.g. copyrights, held in and over the feed. This ATOM
+value will also set rss:copyright.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rights</strong> – Rights information of the feed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.rss_file">
+<code class="sig-name descname">rss_file</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">extensions=True</em>, <em class="sig-param">pretty=False</em>, <em class="sig-param">encoding='UTF-8'</em>, <em class="sig-param">xml_declaration=True</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.rss_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an RSS feed and write the resulting XML to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – Name of file to write or a file-like object or a URL.</p></li>
+<li><p><strong>extensions</strong> – Enable or disable the loaded extensions for the xml
+generation (default: enabled).</p></li>
+<li><p><strong>pretty</strong> – If the feed should be split into multiple lines and
+properly indented.</p></li>
+<li><p><strong>encoding</strong> – Encoding used in the  XML file (default: UTF-8).</p></li>
+<li><p><strong>xml_declaration</strong> – If an XML declaration should be added to the
+output (Default: enabled).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.rss_str">
+<code class="sig-name descname">rss_str</code><span class="sig-paren">(</span><em class="sig-param">pretty=False</em>, <em class="sig-param">extensions=True</em>, <em class="sig-param">encoding='UTF-8'</em>, <em class="sig-param">xml_declaration=True</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.rss_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an RSS feed and returns the feed XML as string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pretty</strong> – If the feed should be split into multiple lines and
+properly indented.</p></li>
+<li><p><strong>extensions</strong> – Enable or disable the loaded extensions for the xml
+generation (default: enabled).</p></li>
+<li><p><strong>encoding</strong> – Encoding used in the  XML file (default: UTF-8).</p></li>
+<li><p><strong>xml_declaration</strong> – If an XML declaration should be added to the
+output (Default: enabled).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String representation of the RSS feed.</p>
+</dd>
+</dl>
+<p><strong>Return type:</strong> The return type may vary between different Python
+versions and your encoding parameters passed to this method. For
+details have a look at the <a class="reference external" href="https://docs.python.org/3/library/xml.etree.elementtree.html#xml.etree.ElementTree.tostring">lxml documentation</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.skipDays">
+<code class="sig-name descname">skipDays</code><span class="sig-paren">(</span><em class="sig-param">days=None</em>, <em class="sig-param">replace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.skipDays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or get the value of skipDays, a hint for aggregators telling
+them which days they can skip This is an RSS only value.</p>
+<p>This method can be called with a day name or a list of day names. The
+days are represented as strings from ‘Monday’ to ‘Sunday’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hours</strong> – List of days the feedreaders should not check the feed.</p></li>
+<li><p><strong>replace</strong> – Add or replace old data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of days the feedreaders should not check the feed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.skipHours">
+<code class="sig-name descname">skipHours</code><span class="sig-paren">(</span><em class="sig-param">hours=None</em>, <em class="sig-param">replace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.skipHours" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or get the value of skipHours, a hint for aggregators telling
+them which hours they can skip. This is an RSS only value.</p>
+<p>This method can be called with an hour or a list of hours. The hours
+are represented as integer values from 0 to 23.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hours</strong> – List of hours the feedreaders should not check the feed.</p></li>
+<li><p><strong>replace</strong> – Add or replace old data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of hours the feedreaders should not check the feed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.subtitle">
+<code class="sig-name descname">subtitle</code><span class="sig-paren">(</span><em class="sig-param">subtitle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.subtitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the subtitle value of the cannel which contains a
+human-readable description or subtitle for the feed. This ATOM property
+will also set the value for rss:description.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subtitle</strong> – The subtitle of the feed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The subtitle of the feed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.textInput">
+<code class="sig-name descname">textInput</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">description=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">link=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.textInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the value of textInput. This is an RSS only field.  The
+purpose of the &lt;textInput&gt; element is something of a mystery. You can
+use it to specify a search engine box. Or to allow a reader to provide
+feedback. Most aggregators ignore it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> – The label of the Submit button in the text input area.</p></li>
+<li><p><strong>description</strong> – Explains the text input area.</p></li>
+<li><p><strong>name</strong> – The name of the text object in the text input area.</p></li>
+<li><p><strong>link</strong> – The URL of the CGI script that processes text input
+requests.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary containing textInput values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.title">
+<code class="sig-name descname">title</code><span class="sig-paren">(</span><em class="sig-param">title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the title value of the feed. It should contain a human
+readable title for the feed. Often the same as the title of the
+associated website. Title is mandatory for both ATOM and RSS and should
+not be blank.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> – The new title of the feed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The feeds title.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.ttl">
+<code class="sig-name descname">ttl</code><span class="sig-paren">(</span><em class="sig-param">ttl=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.ttl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the ttl value. It is an RSS only element. ttl stands for
+time to live. It’s a number of minutes that indicates how long a
+channel can be cached before refreshing from the source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ttl</strong> – Integer value indicating how long the channel may be
+cached.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Time to live.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.updated">
+<code class="sig-name descname">updated</code><span class="sig-paren">(</span><em class="sig-param">updated=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.updated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or get the updated value which indicates the last time the feed
+was modified in a significant way.</p>
+<p>The value can either be a string which will automatically be parsed or
+a datetime.datetime object. In any case it is necessary that the value
+include timezone information.</p>
+<p>This will set both atom:updated and rss:lastBuildDate.</p>
+<dl class="simple">
+<dt>Default value</dt><dd><p>If not set, updated has as value the current date and time.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>updated</strong> – The modification date.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Modification date as datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feedgen.feed.FeedGenerator.webMaster">
+<code class="sig-name descname">webMaster</code><span class="sig-paren">(</span><em class="sig-param">webMaster=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.feed.FeedGenerator.webMaster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and set the value of webMaster, which represents the email
+address for the person responsible for technical issues relating to the
+feed.  This is an RSS only value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>webMaster</strong> – Email address of the webmaster.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Email address of the webmaster.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="api.html">API Documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="api.entry.html">feedgen.entry</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, Lars Kiesow.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

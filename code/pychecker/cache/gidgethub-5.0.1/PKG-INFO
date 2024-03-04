@@ -1,0 +1,7 @@
+Metadata-Version: 1.1
+Name: gidgethub
+Version: 5.0.1
+Summary: An async GitHub API library
+Home-page: None
+Author: Brett Cannon
+Author-email: brett@python.org

@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.rst
+contributing.rst
+requirements.txt
+setup.cfg
+setup.py
+clickclick/__init__.py
+clickclick/console.py
+clickclick.egg-info/PKG-INFO
+clickclick.egg-info/SOURCES.txt
+clickclick.egg-info/dependency_links.txt
+clickclick.egg-info/entry_points.txt
+clickclick.egg-info/requires.txt
+clickclick.egg-info/top_level.txt

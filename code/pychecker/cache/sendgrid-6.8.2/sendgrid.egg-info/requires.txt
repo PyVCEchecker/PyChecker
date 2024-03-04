@@ -1,0 +1,2 @@
+python_http_client>=3.2.1
+starkbank-ecdsa>=1.0.0

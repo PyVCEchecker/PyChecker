@@ -1,0 +1,8 @@
+setup.py
+PySimpleGUIQt/PySimpleGUIQt.py
+PySimpleGUIQt/__init__.py
+PySimpleGUIQt.egg-info/PKG-INFO
+PySimpleGUIQt.egg-info/SOURCES.txt
+PySimpleGUIQt.egg-info/dependency_links.txt
+PySimpleGUIQt.egg-info/requires.txt
+PySimpleGUIQt.egg-info/top_level.txt

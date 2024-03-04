@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: path.py
+Version: 12.5.0
+Summary: A module wrapper for os.path
+Home-page: https://github.com/jaraco/path
+Author: Jason Orendorff
+Author-email: jason.orendorff@gmail.com
+Maintainer: Jason R. Coombs
+Maintainer-email: jaraco@jaraco.com
+License: UNKNOWN
+Description: ``path.py`` has been renamed to `path <https://pypi.org/project/path>`_.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.5
+Provides-Extra: testing
+Provides-Extra: docs

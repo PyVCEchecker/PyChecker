@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: wtf-peewee
+Version: 3.0.2
+Summary: WTForms integration for peewee models
+Home-page: https://github.com/coleifer/wtf-peewee/
+Author: Charles Leifer
+Author-email: coleifer@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

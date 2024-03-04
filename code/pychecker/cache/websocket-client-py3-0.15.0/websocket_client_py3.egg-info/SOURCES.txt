@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+bin/wsdump.py
+tests/__init__.py
+tests/test_websocket.py
+tests/data/header01.txt
+tests/data/header02.txt
+websocket/__init__.py
+websocket/cacert.pem
+websocket_client_py3.egg-info/PKG-INFO
+websocket_client_py3.egg-info/SOURCES.txt
+websocket_client_py3.egg-info/dependency_links.txt
+websocket_client_py3.egg-info/requires.txt
+websocket_client_py3.egg-info/top_level.txt

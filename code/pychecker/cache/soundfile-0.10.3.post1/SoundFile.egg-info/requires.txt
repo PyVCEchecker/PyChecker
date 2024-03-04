@@ -1,0 +1,4 @@
+cffi>=1.0
+
+[numpy]
+numpy

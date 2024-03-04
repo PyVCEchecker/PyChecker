@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_gamelift.egg-info/PKG-INFO
+src/aws_cdk.aws_gamelift.egg-info/SOURCES.txt
+src/aws_cdk.aws_gamelift.egg-info/dependency_links.txt
+src/aws_cdk.aws_gamelift.egg-info/requires.txt
+src/aws_cdk.aws_gamelift.egg-info/top_level.txt
+src/aws_cdk/aws_gamelift/__init__.py
+src/aws_cdk/aws_gamelift/py.typed
+src/aws_cdk/aws_gamelift/_jsii/__init__.py
+src/aws_cdk/aws_gamelift/_jsii/aws-gamelift@1.129.0.jsii.tgz

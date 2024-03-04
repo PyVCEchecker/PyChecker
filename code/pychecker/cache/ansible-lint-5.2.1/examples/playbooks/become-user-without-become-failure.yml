@@ -1,0 +1,27 @@
+- hosts: localhost
+  name: become_user without become play
+  become_user: root
+
+  tasks:
+  - debug:
+      msg: hello
+
+- hosts: localhost
+
+  tasks:
+  - name: become_user without become task
+    command: whoami
+    become_user: postgres
+    changed_when: false
+
+- hosts: localhost
+
+  tasks:
+  - name: a block with become and become_user on different tasks
+    block:
+    - name: become
+      become: true
+      command: whoami
+    - name: become_user
+      become_user: postgres
+      command: whoami

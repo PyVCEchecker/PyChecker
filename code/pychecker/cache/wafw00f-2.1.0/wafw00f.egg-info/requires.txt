@@ -1,0 +1,9 @@
+requests
+requests[socks]
+pluginbase
+
+[dev]
+prospector
+
+[docs]
+Sphinx

@@ -1,0 +1,39 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+attrs = ">=16.3.0"
+colorama = ">=0.3.7"
+pyperclip = ">=1.6"
+setuptools = ">=34.4"
+wcwidth = ">=0.1.7"
+
+[dev-packages]
+black = "*"
+cmd2 = {editable = true,path = "."}
+cmd2_ext_test = {editable = true,path = "plugins/ext_test"}
+codecov = "*"
+doc8 = "*"
+flake8 = "*"
+gnureadline = {version = "*",sys_platform = "== 'darwin'"}
+invoke = "*"
+ipython = "*"
+isort = "*"
+mock = {version = "*",markers = "python_version < '3.6'"}
+mypy = "*"
+plumbum = "*"
+pyreadline = {version = "*",sys_platform = "== 'win32'",markers = "python_version < '3.8'"}
+pyreadline3 = {version = "*",sys_platform = "== 'win32'",markers = "python_version >= '3.8'"}
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+sphinx = "*"
+sphinx-autobuild = "*"
+sphinx-rtd-theme = "*"
+tableformatter="*"
+twine = ">=1.11"
+
+[pipenv]
+allow_prereleases = true

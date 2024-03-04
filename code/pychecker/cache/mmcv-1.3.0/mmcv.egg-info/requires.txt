@@ -1,0 +1,9 @@
+addict
+numpy
+Pillow
+pyyaml
+yapf
+opencv-python>=3
+
+[:sys_platform == "win32"]
+regex

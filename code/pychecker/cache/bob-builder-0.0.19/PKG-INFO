@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: bob-builder
+Version: 0.0.19
+Summary: Binary Build Toolkit.
+Home-page: https://github.com/heroku-python/bob-builder
+Author: Heroku
+Author-email: cfaist@heroku.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

@@ -1,0 +1,9 @@
+six
+repoze.lru>=0.3
+
+[docs]
+Sphinx
+webob
+
+[middleware]
+webob

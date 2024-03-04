@@ -1,0 +1,24 @@
+<div class="alerta-severity-{{ max }} alerta-div">
+  <table class="alerta-table">
+    <tbody>
+      {% if title %}
+        <tr><th class="" colspan="5">{{ title }}</th></tr>
+      {% endif %}
+      <tr>
+        <td class="{{ 'alerta-severity-critical' if counts['critical'] }}"><b>{{ counts['critical'] }}</b></td>
+        <td class="{{ 'alerta-severity-major' if counts['major'] }}"><b>{{ counts['major'] }}</b></td>
+        <td class="{{ 'alerta-severity-minor' if counts['minor'] }}"><b>{{ counts['minor'] }}</b></td>
+        <td class="{{ 'alerta-severity-warning' if counts['warning'] }}"><b>{{ counts['warning'] }}</b></td>
+        <td class="{{ 'alerta-severity-informational' if counts['informational'] }}"><b>{{ counts['informational'] }}</b></td>
+      </tr>
+    </tbody>
+  </table>
+  <style>
+    .alerta-severity-critical{background-color: red;}
+    .alerta-severity-major{background-color: orange;}
+    .alerta-severity-minor {background-color: yellow;}
+    .alerta-severity-warning {background-color: #1E90FF;}
+    .alerta-severity-informational, .severity-cleared, .severity-ok, .severity-informational {background-color: #00CC00;}
+    .alerta-severity-debug {background-color: #7554BF;}
+  </style>
+</div>

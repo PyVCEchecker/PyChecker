@@ -1,0 +1,109 @@
+site_name: Soup Sieve
+site_url: https://facelessuser.github.io/soupsieve
+repo_url: https://github.com/facelessuser/soupsieve
+edit_uri: tree/master/docs/src/markdown
+site_description: A modern CSS selector library for Beautiful Soup.
+copyright: |
+  Copyright &copy; 2018 - 2021 <a href="https://github.com/facelessuser"  target="_blank" rel="noopener">Isaac Muse</a>
+
+docs_dir: docs/src/markdown
+theme:
+  name: material
+  custom_dir: docs/theme
+  icon:
+    logo: material/book-open-page-variant
+  palette:
+    scheme: dracula
+    primary: deep purple
+    accent: deep purple
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+
+nav:
+  - Home:
+    - Quick Start: index.md
+    - API: api.md
+    - F.A.Q.: faq.md
+    - Beautiful Soup Differences: differences.md
+  - CSS Selectors:
+    - General Details: selectors/index.md
+    - Basic Selectors: selectors/basic.md
+    - Combinators and Lists: selectors/combinators.md
+    - Pseudo Classes: selectors/pseudo-classes.md
+    - Non-Applicable Pseudo Classes: selectors/unsupported.md
+  - About:
+    - Contributing &amp; Support: about/contributing.md
+    - Development: about/development.md
+    - Changelog: about/changelog.md
+    - License: about/license.md
+
+markdown_extensions:
+  - markdown.extensions.toc:
+      slugify: !!python/name:pymdownx.slugs.uslugify
+      permalink: ""
+  - markdown.extensions.admonition:
+  - markdown.extensions.smarty:
+      smart_quotes: false
+  - pymdownx.betterem:
+  - markdown.extensions.attr_list:
+  - markdown.extensions.def_list:
+  - markdown.extensions.tables:
+  - markdown.extensions.abbr:
+  - markdown.extensions.md_in_html:
+  - pymdownx.superfences:
+  - pymdownx.highlight:
+      extend_pygments_lang:
+        - name: php-inline
+          lang: php
+          options:
+            startinline: true
+        - name: pycon3
+          lang: pycon
+          options:
+            python3: true
+  - pymdownx.inlinehilite:
+  - pymdownx.magiclink:
+      repo_url_shortener: true
+      repo_url_shorthand: true
+      social_url_shorthand: true
+      user: facelessuser
+      repo: soupsieve
+  - pymdownx.tilde:
+  - pymdownx.caret:
+  - pymdownx.smartsymbols:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.escapeall:
+      hardbreak: True
+      nbsp: True
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.progressbar:
+  - pymdownx.mark:
+  - pymdownx.striphtml:
+  - pymdownx.snippets:
+      base_path: docs/src/markdown/_snippets
+  - pymdownx.keys:
+      separator: "\uff0b"
+  - pymdownx.details:
+  - pymdownx.tabbed:
+  - pymdownx.saneheaders:
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/facelessuser
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/XBnPUZF
+
+plugins:
+  - search:
+      separator: '[:\s\-]+'
+  - git-revision-date-localized
+  - minify:
+      minify_html: true
+  - mkdocs_pymdownx_material_extras

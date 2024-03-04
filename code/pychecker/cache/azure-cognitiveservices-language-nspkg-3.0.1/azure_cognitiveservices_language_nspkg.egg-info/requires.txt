@@ -1,0 +1,1 @@
+azure-cognitiveservices-nspkg>=3.0.0

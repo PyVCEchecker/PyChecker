@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flask_dance.contrib.zoho &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/flasky.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">flask_dance.contrib.zoho</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for flask_dance.contrib.zoho</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">oauthlib.oauth2.rfc6749</span> <span class="kn">import</span> <span class="n">tokens</span>
+<span class="kn">from</span> <span class="nn">oauthlib.oauth2.rfc6749.clients.web_application</span> <span class="kn">import</span> <span class="n">WebApplicationClient</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer</span> <span class="kn">import</span> <span class="n">OAuth2ConsumerBlueprint</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">flask.globals</span> <span class="kn">import</span> <span class="n">LocalProxy</span><span class="p">,</span> <span class="n">_lookup_app_object</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">_app_ctx_stack</span> <span class="k">as</span> <span class="n">stack</span>
+
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Ryan Schaffer &lt;schaffer.ry@gmail.com&gt;&quot;</span>
+
+<span class="n">AUTH_HEADER</span> <span class="o">=</span> <span class="s2">&quot;auth_header&quot;</span>
+<span class="n">URI_QUERY</span> <span class="o">=</span> <span class="s2">&quot;query&quot;</span>
+<span class="n">BODY</span> <span class="o">=</span> <span class="s2">&quot;body&quot;</span>
+<span class="n">ZOHO_TOKEN_HEADER</span> <span class="o">=</span> <span class="s2">&quot;Zoho-oauthtoken&quot;</span>
+
+
+<div class="viewcode-block" id="make_zoho_blueprint"><a class="viewcode-back" href="../../../providers.html#flask_dance.contrib.zoho.make_zoho_blueprint">[docs]</a><span class="k">def</span> <span class="nf">make_zoho_blueprint</span><span class="p">(</span>
+    <span class="n">client_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">client_secret</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">scope</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">redirect_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">offline</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">redirect_to</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">login_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">session_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">storage</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">reprompt_consent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">rule_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a blueprint for authenticating with Zoho using OAuth 2. This requires</span>
+<span class="sd">    a client ID and client secret from Zoho. You should either pass them to</span>
+<span class="sd">    this constructor, or make sure that your Flask application config defines</span>
+<span class="sd">    them, using the variables :envvar:`ZOHO_OAUTH_CLIENT_ID` and</span>
+<span class="sd">    :envvar:`ZOHO_OAUTH_CLIENT_SECRET`.</span>
+<span class="sd">    IMPORTANT: Configuring the base_url is not supported in this config.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        client_id (str): The client ID for your application on Zoho.</span>
+<span class="sd">        client_secret (str): The client secret for your application on Zoho</span>
+<span class="sd">        scope (list, optional): list of scopes (str) for the OAuth token</span>
+<span class="sd">        redirect_url (str): the URL to redirect to after the authentication</span>
+<span class="sd">            dance is complete</span>
+<span class="sd">        redirect_to (str): if ``redirect_url`` is not defined, the name of the</span>
+<span class="sd">            view to redirect to after the authentication dance is complete.</span>
+<span class="sd">            The actual URL will be determined by :func:`flask.url_for`</span>
+<span class="sd">        login_url (str, optional): the URL path for the ``login`` view.</span>
+<span class="sd">            Defaults to ``/zoho``</span>
+<span class="sd">        authorized_url (str, optional): the URL path for the ``authorized`` view.</span>
+<span class="sd">            Defaults to ``/zoho/authorized``.</span>
+<span class="sd">        session_class (class, optional): The class to use for creating a</span>
+<span class="sd">            Requests session. Defaults to</span>
+<span class="sd">            :class:`~flask_dance.consumer.requests.OAuth2Session`.</span>
+<span class="sd">        storage: A token storage class, or an instance of a token storage</span>
+<span class="sd">                class, to use for this blueprint. Defaults to</span>
+<span class="sd">                :class:`~flask_dance.consumer.storage.session.SessionStorage`.</span>
+<span class="sd">        offline (bool): Whether to request `offline access`</span>
+<span class="sd">            for the OAuth token. Defaults to False</span>
+<span class="sd">        reprompt_consent (bool): If True, force Zoho to re-prompt the user</span>
+<span class="sd">            for their consent, even if the user has already given their</span>
+<span class="sd">            consent. Defaults to False.</span>
+<span class="sd">        rule_kwargs (dict, optional): Additional arguments that should be passed when adding</span>
+<span class="sd">            the login and authorized routes. Defaults to ``None``.</span>
+
+<span class="sd">    :rtype: :class:`~flask_dance.consumer.OAuth2ConsumerBlueprint`</span>
+<span class="sd">    :returns: A :doc:`blueprint &lt;flask:blueprints&gt;` to attach to your Flask app.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span> <span class="ow">or</span> <span class="p">[</span><span class="s2">&quot;ZohoCRM.users.all&quot;</span><span class="p">]</span>
+    <span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://www.zohoapis.com/&quot;</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">ZohoWebClient</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span> <span class="n">token_type</span><span class="o">=</span><span class="n">ZOHO_TOKEN_HEADER</span><span class="p">)</span>
+    <span class="n">authorization_url_params</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">authorization_url_params</span><span class="p">[</span><span class="s2">&quot;access_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;offline&quot;</span> <span class="k">if</span> <span class="n">offline</span> <span class="k">else</span> <span class="s2">&quot;online&quot;</span>
+    <span class="k">if</span> <span class="n">reprompt_consent</span><span class="p">:</span>
+        <span class="n">authorization_url_params</span><span class="p">[</span><span class="s2">&quot;prompt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;consent&quot;</span>
+    <span class="n">zoho_bp</span> <span class="o">=</span> <span class="n">OAuth2ConsumerBlueprint</span><span class="p">(</span>
+        <span class="s2">&quot;zoho&quot;</span><span class="p">,</span>
+        <span class="vm">__name__</span><span class="p">,</span>
+        <span class="n">client_id</span><span class="o">=</span><span class="n">client_id</span><span class="p">,</span>
+        <span class="n">client_secret</span><span class="o">=</span><span class="n">client_secret</span><span class="p">,</span>
+        <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+        <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span>
+        <span class="n">base_url</span><span class="o">=</span><span class="n">base_url</span><span class="p">,</span>
+        <span class="n">token_url</span><span class="o">=</span><span class="s2">&quot;https://accounts.zoho.com/oauth/v2/token&quot;</span><span class="p">,</span>
+        <span class="n">authorization_url</span><span class="o">=</span><span class="s2">&quot;https://accounts.zoho.com/oauth/v2/auth&quot;</span><span class="p">,</span>
+        <span class="n">authorization_url_params</span><span class="o">=</span><span class="n">authorization_url_params</span><span class="p">,</span>
+        <span class="n">redirect_url</span><span class="o">=</span><span class="n">redirect_url</span><span class="p">,</span>
+        <span class="n">redirect_to</span><span class="o">=</span><span class="n">redirect_to</span><span class="p">,</span>
+        <span class="n">login_url</span><span class="o">=</span><span class="n">login_url</span><span class="p">,</span>
+        <span class="n">session_class</span><span class="o">=</span><span class="n">session_class</span><span class="p">,</span>
+        <span class="n">storage</span><span class="o">=</span><span class="n">storage</span><span class="p">,</span>
+        <span class="n">rule_kwargs</span><span class="o">=</span><span class="n">rule_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">zoho_bp</span><span class="o">.</span><span class="n">from_config</span><span class="p">[</span><span class="s2">&quot;client_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ZOHO_OAUTH_CLIENT_ID&quot;</span>
+    <span class="n">zoho_bp</span><span class="o">.</span><span class="n">from_config</span><span class="p">[</span><span class="s2">&quot;client_secret&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ZOHO_OAUTH_CLIENT_SECRET&quot;</span>
+
+    <span class="nd">@zoho_bp</span><span class="o">.</span><span class="n">before_app_request</span>
+    <span class="k">def</span> <span class="nf">set_applocal_session</span><span class="p">():</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">top</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">zoho_oauth</span> <span class="o">=</span> <span class="n">zoho_bp</span><span class="o">.</span><span class="n">session</span>
+
+    <span class="k">return</span> <span class="n">zoho_bp</span></div>
+
+
+<span class="n">zoho</span> <span class="o">=</span> <span class="n">LocalProxy</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">_lookup_app_object</span><span class="p">,</span> <span class="s2">&quot;zoho_oauth&quot;</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">ZohoWebClient</span><span class="p">(</span><span class="n">WebApplicationClient</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove the requirement that token_types adhere to OAuth Standard</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">token_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;Bearer&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_bearer_token</span><span class="p">,</span>
+            <span class="s2">&quot;MAC&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_mac_token</span><span class="p">,</span>
+            <span class="n">ZOHO_TOKEN_HEADER</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_zoho_token</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_add_zoho_token</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">http_method</span><span class="o">=</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token_placement</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a zoho token to the request uri, body or authorization header. follows bearer pattern&quot;&quot;&quot;</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepare_zoho_headers</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">uri</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">body</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">prepare_zoho_headers</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a `Zoho Token`_ to the request URI.</span>
+<span class="sd">        Recommended method of passing bearer tokens.</span>
+
+<span class="sd">        Authorization: Zoho-oauthtoken h480djs93hd8</span>
+
+<span class="sd">        .. _`Zoho-oauthtoken Token`: custom zoho token</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Authorization&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{token_header}</span><span class="s2"> </span><span class="si">{token}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">token_header</span><span class="o">=</span><span class="n">ZOHO_TOKEN_HEADER</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">token</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">headers</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

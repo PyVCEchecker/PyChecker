@@ -1,0 +1,23 @@
+Metadata-Version: 1.1
+Name: PyHAML
+Version: 1.2.1
+Summary: Pythonic implementation of HAML, cross compiling to Mako template syntax.
+Home-page: http://github.com/mikeboers/PyHAML
+Author: Mike Boers
+Author-email: PyHAML@mikeboers.com
+License: BSD-3
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: Markup :: HTML
+Classifier: Topic :: Text Processing :: Markup :: XML

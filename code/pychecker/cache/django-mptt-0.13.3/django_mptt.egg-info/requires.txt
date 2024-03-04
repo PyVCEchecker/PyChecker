@@ -1,0 +1,5 @@
+django-js-asset
+
+[tests]
+coverage
+mock-django

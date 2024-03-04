@@ -1,0 +1,5 @@
+include LICENSE
+include CHANGES.rst
+include README.rst
+recursive-include tests *.py
+include tests/integration/test_page.html

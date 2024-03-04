@@ -1,0 +1,3 @@
+[console_scripts]
+piprot = piprot.piprot:piprot
+

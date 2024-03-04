@@ -1,0 +1,4 @@
+[console_scripts]
+mk-html = toolkit.tools.markdown_helper:main
+ver-inc = toolkit.tools.package_control:change_version
+

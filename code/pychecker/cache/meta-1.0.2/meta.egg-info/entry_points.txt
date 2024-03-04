@@ -1,0 +1,3 @@
+[console_scripts]
+depyc = meta.scripts.depyc:main
+

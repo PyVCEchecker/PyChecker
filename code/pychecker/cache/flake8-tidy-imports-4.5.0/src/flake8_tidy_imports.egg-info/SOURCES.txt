@@ -1,0 +1,16 @@
+HISTORY.rst
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+setup.cfg
+setup.py
+src/flake8_tidy_imports/__init__.py
+src/flake8_tidy_imports/py.typed
+src/flake8_tidy_imports.egg-info/PKG-INFO
+src/flake8_tidy_imports.egg-info/SOURCES.txt
+src/flake8_tidy_imports.egg-info/dependency_links.txt
+src/flake8_tidy_imports.egg-info/entry_points.txt
+src/flake8_tidy_imports.egg-info/not-zip-safe
+src/flake8_tidy_imports.egg-info/requires.txt
+src/flake8_tidy_imports.egg-info/top_level.txt

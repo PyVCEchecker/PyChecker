@@ -1,0 +1,4 @@
+flake8<5,>=3.8.0
+
+[:python_version < "3.8"]
+importlib-metadata

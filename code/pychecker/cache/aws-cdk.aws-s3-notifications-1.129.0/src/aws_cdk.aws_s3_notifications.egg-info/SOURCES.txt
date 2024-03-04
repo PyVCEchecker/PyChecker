@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_s3_notifications.egg-info/PKG-INFO
+src/aws_cdk.aws_s3_notifications.egg-info/SOURCES.txt
+src/aws_cdk.aws_s3_notifications.egg-info/dependency_links.txt
+src/aws_cdk.aws_s3_notifications.egg-info/requires.txt
+src/aws_cdk.aws_s3_notifications.egg-info/top_level.txt
+src/aws_cdk/aws_s3_notifications/__init__.py
+src/aws_cdk/aws_s3_notifications/py.typed
+src/aws_cdk/aws_s3_notifications/_jsii/__init__.py
+src/aws_cdk/aws_s3_notifications/_jsii/aws-s3-notifications@1.129.0.jsii.tgz

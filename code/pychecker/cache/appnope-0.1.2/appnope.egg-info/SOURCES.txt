@@ -1,0 +1,12 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+appnope/__init__.py
+appnope/_dummy.py
+appnope/_nope.py
+appnope.egg-info/PKG-INFO
+appnope.egg-info/SOURCES.txt
+appnope.egg-info/dependency_links.txt
+appnope.egg-info/top_level.txt

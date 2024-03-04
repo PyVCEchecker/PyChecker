@@ -1,0 +1,4 @@
+dj-database-url>=0.5.0
+whitenoise
+psycopg2
+django

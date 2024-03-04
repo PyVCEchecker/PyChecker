@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: spec
+Version: 1.4.1
+Summary: Specification-style output for nose
+Home-page: https://github.com/bitprophet/spec
+Author: Jeff Forcier
+Author-email: jeff@bitprophet.org
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Plugins
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Topic :: Software Development :: Testing

@@ -1,0 +1,5 @@
+django>=2.2
+requests>=2.13.0
+oauthlib>=3.1.0
+jwcrypto>=0.8.0
+six

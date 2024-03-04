@@ -1,0 +1,11 @@
+include CREDITS ChangeLog LICENSE README.rst
+include requirements*.txt
+include Makefile tox.ini .flake8
+
+graft semantic_version
+
+graft docs
+graft tests
+
+global-exclude *.py[cod] __pycache__ .*.sw[po]
+prune docs/_build

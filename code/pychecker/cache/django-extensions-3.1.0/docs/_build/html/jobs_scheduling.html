@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs Scheduling &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Model Extensions" href="model_extensions.html" />
+    <link rel="prev" title="Field Extensions" href="field_extensions.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="model_extensions.html" title="Model Extensions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="field_extensions.html" title="Field Extensions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Jobs Scheduling</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jobs-scheduling">
+<h1>Jobs Scheduling<a class="headerlink" href="#jobs-scheduling" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Documentation on creating/using jobs in Django-extensions</p>
+</dd>
+</dl>
+<p>Creating jobs works much like management commands work in Django.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>Run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py create_jobs &lt;django_application&gt;
+</pre></div>
+</div>
+<p>to make a <code class="docutils literal notranslate"><span class="pre">jobs</span></code> directory inside of an application.
+The <code class="docutils literal notranslate"><span class="pre">jobs</span></code> directory will have the following tree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>jobs
+├── daily
+│   └── __init__.py
+├── hourly
+│   └── __init__.py
+├── monthly
+│   └── __init__.py
+├── weekly
+│   └── __init__.py
+├── yearly
+│   └── __init__.py
+├── __init__.py
+└── sample.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-job">
+<h2>Create a job<a class="headerlink" href="#create-a-job" title="Permalink to this headline">¶</a></h2>
+<p>A job is a Python script with a mandatory <code class="docutils literal notranslate"><span class="pre">BaseJob</span></code> class which extends from
+<code class="docutils literal notranslate"><span class="pre">MinutelyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">QuarterHourlyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">HourlyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">DailyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">WeeklyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">MonthlyJob</span></code> or <code class="docutils literal notranslate"><span class="pre">Yearly</span></code>.
+It has one method that must be implemented called <code class="docutils literal notranslate"><span class="pre">execute</span></code>,
+which is called when the job is run.
+The directories <code class="docutils literal notranslate"><span class="pre">hourly</span></code>, <code class="docutils literal notranslate"><span class="pre">daily</span></code>, <code class="docutils literal notranslate"><span class="pre">monthly</span></code>, <code class="docutils literal notranslate"><span class="pre">weekly</span></code> and <code class="docutils literal notranslate"><span class="pre">yearly</span></code>
+are used only to for organisation purpose.</p>
+<p>Note: If you want to use <code class="docutils literal notranslate"><span class="pre">QuarterHourlyJob</span></code> or <code class="docutils literal notranslate"><span class="pre">Minutely</span></code> job, create python package with name <code class="docutils literal notranslate"><span class="pre">quarter_hourly</span></code> or <code class="docutils literal notranslate"><span class="pre">minutely</span></code> respectively (similar to <code class="docutils literal notranslate"><span class="pre">hourly</span></code> or <code class="docutils literal notranslate"><span class="pre">daily</span></code> package).</p>
+<p>To create your first job you can start copying <code class="docutils literal notranslate"><span class="pre">sample.py</span></code>.
+Remember to replace <code class="docutils literal notranslate"><span class="pre">BaseJob</span></code> with <code class="docutils literal notranslate"><span class="pre">MinutelyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">QuarterHourlyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">HourlyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">DailyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">WeeklyJob</span></code>, <code class="docutils literal notranslate"><span class="pre">MonthlyJob</span></code> or <code class="docutils literal notranslate"><span class="pre">Yearly</span></code>.
+Some simple examples are provided by the <a class="reference external" href="https://github.com/django-extensions/django-extensions/tree/master/django_extensions/jobs">django_extensions.jobs package</a>.</p>
+<p>Note that each job should be in a new python script (within respective directory) and the class implementing the cron should be named <code class="docutils literal notranslate"><span class="pre">Job</span></code>. Also, <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file is not used for identifying jobs.</p>
+</div>
+<div class="section" id="run-a-job">
+<h2>Run a job<a class="headerlink" href="#run-a-job" title="Permalink to this headline">¶</a></h2>
+<p>The following commands are related to jobs:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">create_jobs</span></code>, create the directory structure for jobs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">runjob</span></code>, run a single job</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">runjobs</span></code>, run all hourly/daily/weekly/monthly jobs</p></li>
+</ul>
+<p>Use “runjob(s) -l” to list all jobs recognized.</p>
+<p>Jobs do not run automatically!
+You must either run a job manually specifying the exact time on
+which the command is to be run, or use crontab:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@hourly</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runjobs</span> <span class="n">hourly</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@daily</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runjobs</span> <span class="n">daily</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@weekly</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runjobs</span> <span class="n">weekly</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@monthly</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runjobs</span> <span class="n">monthly</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Jobs Scheduling</a><ul>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#create-a-job">Create a job</a></li>
+<li><a class="reference internal" href="#run-a-job">Run a job</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="field_extensions.html"
+                        title="previous chapter">Field Extensions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="model_extensions.html"
+                        title="next chapter">Model Extensions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/jobs_scheduling.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="model_extensions.html" title="Model Extensions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="field_extensions.html" title="Field Extensions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Jobs Scheduling</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

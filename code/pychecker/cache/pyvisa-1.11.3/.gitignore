@@ -1,0 +1,21 @@
+*~
+__pycache__
+*egg-info*
+*.pyc
+.DS_Store
+docs/_build/
+.idea
+build/
+dist/
+MANIFEST
+.tox
+.coverage
+.eggs
+
+# WebDAV file system cache files
+.DAV/
+_test/
+.vscode
+htmlcov/
+.mypy_cache/
+pip-wheel-metadata/

@@ -1,0 +1,10 @@
+attrs
+hyperlink
+incremental
+Tubes
+Twisted>=16.6
+Werkzeug
+zope.interface
+
+[:python_version < "3.8"]
+typing_extensions

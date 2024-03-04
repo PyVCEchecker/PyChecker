@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Amazon S3 &mdash; django-storages 1.6.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.6.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-storages 1.6.2 documentation" href="../index.html" />
+    <link rel="next" title="Apache Libcloud" href="apache_libcloud.html" />
+    <link rel="prev" title="django-storages" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="apache_libcloud.html" title="Apache Libcloud"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="django-storages"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="amazon-s3">
+<h1>Amazon S3<a class="headerlink" href="#amazon-s3" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>There are two backends for interacting with Amazon&#8217;s S3, one based
+on boto3 and an older one based on boto. It is highly recommended that all
+new projects (at least) use the boto3 backend since it has many bug fixes
+and performance improvements over boto and is the future; boto is lightly
+maintained if at all. The boto based backed will continue to be maintained
+for the forseeable future.</p>
+<p>For historical completeness an extreme legacy backend was removed
+in version 1.2</p>
+<p>If using the boto backend on a new project (not recommended) it is recommended
+that you configure it to also use <a class="reference external" href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">AWS Signature Version 4</a>. This can be done
+by adding <tt class="docutils literal"><span class="pre">S3_USE_SIGV4</span> <span class="pre">=</span> <span class="pre">True</span></tt> to your settings and setting the <tt class="docutils literal"><span class="pre">AWS_S3_HOST</span></tt>
+configuration option. For regions created after January 2014 this is your only
+option if you insist on using the boto backend.</p>
+<div class="section" id="settings">
+<h3>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
+<p>To use boto3 set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_FILE_STORAGE</span> <span class="o">=</span> <span class="s">&#39;storages.backends.s3boto3.S3Boto3Storage&#39;</span>
+</pre></div>
+</div>
+<p>To use the boto version of the backend set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_FILE_STORAGE</span> <span class="o">=</span> <span class="s">&#39;storages.backends.s3boto.S3BotoStorage&#39;</span>
+</pre></div>
+</div>
+<p>To allow <tt class="docutils literal"><span class="pre">django-admin.py</span></tt> collectstatic to automatically put your static files in your bucket set the following in your settings.py:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATICFILES_STORAGE</span> <span class="o">=</span> <span class="s">&#39;storages.backends.s3boto3.S3Boto3Storage&#39;</span>
+</pre></div>
+</div>
+<p>Available are numerous settings. It should be especially noted the following:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">AWS_ACCESS_KEY_ID</span></tt></dt>
+<dd>Your Amazon Web Services access key, as a string.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_SECRET_ACCESS_KEY</span></tt></dt>
+<dd>Your Amazon Web Services secret access key, as a string.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_STORAGE_BUCKET_NAME</span></tt></dt>
+<dd>Your Amazon Web Services storage bucket name, as a string.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_DEFAULT_ACL</span></tt> (optional)</dt>
+<dd>If set to <tt class="docutils literal"><span class="pre">private</span></tt> changes uploaded file&#8217;s Access Control List from the default permission <tt class="docutils literal"><span class="pre">public-read</span></tt> to give owner full control and remove read access from everyone else.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_AUTO_CREATE_BUCKET</span></tt> (optional)</dt>
+<dd>If set to <tt class="docutils literal"><span class="pre">True</span></tt> the bucket specified in <tt class="docutils literal"><span class="pre">AWS_STORAGE_BUCKET_NAME</span></tt> is automatically created.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_HEADERS</span></tt> (optional - boto only, for boto3 see <tt class="docutils literal"><span class="pre">AWS_S3_OBJECT_PARAMETERS</span></tt>)</dt>
+<dd><p class="first">If you&#8217;d like to set headers sent with each file of the storage:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">AWS_HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;Expires&#39;</span><span class="p">:</span> <span class="s">&#39;Thu, 15 Apr 2010 20:00:00 GMT&#39;</span><span class="p">,</span>
+    <span class="s">&#39;Cache-Control&#39;</span><span class="p">:</span> <span class="s">&#39;max-age=86400&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_S3_OBJECT_PARAMETERS</span></tt> (optional - boto3 only)</dt>
+<dd><p class="first">Use this to set object parameters on your object (such as CacheControl):</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">AWS_S3_OBJECT_PARAMETERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;CacheControl&#39;</span><span class="p">:</span> <span class="s">&#39;max-age=86400&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_QUERYSTRING_AUTH</span></tt> (optional; default is <tt class="docutils literal"><span class="pre">True</span></tt>)</dt>
+<dd>Setting <tt class="docutils literal"><span class="pre">AWS_QUERYSTRING_AUTH</span></tt> to <tt class="docutils literal"><span class="pre">False</span></tt> to remove query parameter
+authentication from generated URLs. This can be useful if your S3 buckets
+are public.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_QUERYSTRING_EXPIRE</span></tt> (optional; default is 3600 seconds)</dt>
+<dd>The number of seconds that a generated URL is valid for.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_S3_ENCRYPTION</span></tt> (optional; default is <tt class="docutils literal"><span class="pre">False</span></tt>)</dt>
+<dd>Enable server-side file encryption while at rest, by setting <tt class="docutils literal"><span class="pre">encrypt_key</span></tt> parameter to True. More info available here: <a class="reference external" href="http://boto.cloudhackers.com/en/latest/ref/s3.html">http://boto.cloudhackers.com/en/latest/ref/s3.html</a></dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_S3_FILE_OVERWRITE</span></tt> (optional: default is <tt class="docutils literal"><span class="pre">True</span></tt>)</dt>
+<dd>By default files with the same name will overwrite each other. Set this to <tt class="docutils literal"><span class="pre">False</span></tt> to have extra characters appended.</dd>
+</dl>
+<p><tt class="docutils literal"><span class="pre">AWS_S3_HOST</span></tt> (optional - boto only, default is <tt class="docutils literal"><span class="pre">s3.amazonaws.com</span></tt>)</p>
+<blockquote>
+<div><p>To ensure you use <a class="reference external" href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">AWS Signature Version 4</a> it is recommended to set this to the host of your bucket. See the
+<a class="reference external" href="http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">S3 region list</a> to figure out the appropriate endpoint for your bucket. Also be sure to add
+<tt class="docutils literal"><span class="pre">S3_USE_SIGV4</span> <span class="pre">=</span> <span class="pre">True</span></tt> to settings.py</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The signature versions are not backwards compatible so be careful about url endpoints if making this change
+for legacy projects.</p>
+</div>
+</div></blockquote>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">AWS_LOCATION</span></tt> (optional: default is <cite>&#8216;&#8217;</cite>)</dt>
+<dd>A path prefix that will be prepended to all uploads</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_IS_GZIPPED</span></tt> (optional: default is <tt class="docutils literal"><span class="pre">False</span></tt>)</dt>
+<dd>Whether or not to enable gzipping of content types specified by <tt class="docutils literal"><span class="pre">GZIP_CONTENT_TYPES</span></tt></dd>
+<dt><tt class="docutils literal"><span class="pre">GZIP_CONTENT_TYPES</span></tt> (optional: default is <tt class="docutils literal"><span class="pre">text/css</span></tt>, <tt class="docutils literal"><span class="pre">text/javascript</span></tt>, <tt class="docutils literal"><span class="pre">application/javascript</span></tt>, <tt class="docutils literal"><span class="pre">application/x-javascript</span></tt>, <tt class="docutils literal"><span class="pre">image/svg+xml</span></tt>)</dt>
+<dd>When <tt class="docutils literal"><span class="pre">AWS_IS_GZIPPED</span></tt> is set to <tt class="docutils literal"><span class="pre">True</span></tt> the content types which will be gzipped</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_S3_REGION_NAME</span></tt> (optional: default is <tt class="docutils literal"><span class="pre">None</span></tt>)</dt>
+<dd>Name of the AWS S3 region to use (eg. eu-west-1)</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_S3_USE_SSL</span></tt> (optional: default is <tt class="docutils literal"><span class="pre">True</span></tt>)</dt>
+<dd>Whether or not to use SSL when connecting to S3.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_S3_ENDPOINT_URL</span></tt> (optional: default is <tt class="docutils literal"><span class="pre">None</span></tt>)</dt>
+<dd>Custom S3 URL to use when connecting to S3, including scheme. Overrides <tt class="docutils literal"><span class="pre">AWS_S3_REGION_NAME</span></tt> and <tt class="docutils literal"><span class="pre">AWS_S3_USE_SSL</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_S3_CALLING_FORMAT</span></tt> (optional: default is <tt class="docutils literal"><span class="pre">SubdomainCallingFormat()</span></tt>)</dt>
+<dd>Defines the S3 calling format to use to connect to the static bucket.</dd>
+</dl>
+<p><tt class="docutils literal"><span class="pre">AWS_S3_SIGNATURE_VERSION</span></tt> (optional - boto3 only)</p>
+<blockquote>
+<div><p>All AWS regions support v4 of the signing protocol. To use it set this to <tt class="docutils literal"><span class="pre">'s3v4'</span></tt>. It is recommended
+to do this for all new projects and required for all regions launched after January 2014. To see
+if your region is one of them you can view the <a class="reference external" href="http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">S3 region list</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The signature versions are not backwards compatible so be careful about url endpoints if making this change
+for legacy projects.</p>
+</div>
+</div></blockquote>
+<div class="section" id="cloudfront">
+<h4>CloudFront<a class="headerlink" href="#cloudfront" title="Permalink to this headline">¶</a></h4>
+<p>If you&#8217;re using S3 as a CDN (via CloudFront), you&#8217;ll probably want this storage
+to serve those files using that:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">AWS_S3_CUSTOM_DOMAIN</span> <span class="o">=</span> <span class="s">&#39;cdn.mydomain.com&#39;</span>
+</pre></div>
+</div>
+<p><strong>NOTE:</strong> Django&#8217;s <cite>STATIC_URL</cite> <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/settings/#static-url">must end in a slash</a> and the <cite>AWS_S3_CUSTOM_DOMAIN</cite> <em>must not</em>. It is best to set this variable indepedently of <cite>STATIC_URL</cite>.</p>
+<p>Keep in mind you&#8217;ll have to configure CloudFront to use the proper bucket as an
+origin manually for this to work.</p>
+<p>If you need to use multiple storages that are served via CloudFront, pass the
+<cite>custom_domain</cite> parameter to their constructors.</p>
+</div>
+</div>
+<div class="section" id="storage">
+<h3>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h3>
+<p>Standard file access options are available, and work as expected:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">default_storage</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span> <span class="o">=</span> <span class="n">default_storage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;storage contents&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_storage</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span> <span class="o">=</span> <span class="n">default_storage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;storage contents&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_storage</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_storage</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;storage_test&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<p>An object without a file has limited functionality:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: None&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">size</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">The &#39;normal&#39; attribute has no file associated with it.</span>
+</pre></div>
+</div>
+<p>Saving a file enables full functionality:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;django_test.txt&#39;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="s">&#39;content&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: tests/django_test.txt&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">size</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;content&#39;</span>
+</pre></div>
+</div>
+<p>Files can be read in a little at a time, if necessary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&#39;con&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;tent&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">chunks</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">&#39;co-nt-en-t&#39;</span>
+</pre></div>
+</div>
+<p>Save another file with the same name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;django_test.txt&#39;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="s">&#39;more content&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: tests/django_test_.txt&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">size</span>
+<span class="go">12</span>
+</pre></div>
+</div>
+<p>Push the objects into the cache to make sure they pickle properly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;obj1&#39;</span><span class="p">,</span> <span class="n">obj1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;obj2&#39;</span><span class="p">,</span> <span class="n">obj2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;obj2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: tests/django_test_.txt&gt;</span>
+</pre></div>
+</div>
+<p>Deleting an object deletes the file it uses, if there are no other objects still using that file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;django_test.txt&#39;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="s">&#39;more content&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span>
+<span class="go">&lt;FieldFile: tests/django_test_.txt&gt;</span>
+</pre></div>
+</div>
+<p>Default values allow an object to access a single file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">default</span>
+<span class="go">&lt;FieldFile: tests/default.txt&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;default content&#39;</span>
+</pre></div>
+</div>
+<p>But it shouldn&#8217;t be deleted, even if there are no more objects using it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">&#39;default content&#39;</span>
+</pre></div>
+</div>
+<p>Verify the fix for #5655, making sure the directory is only determined once:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj4</span> <span class="o">=</span> <span class="n">MyStorage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj4</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;random_file&#39;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="s">&#39;random content&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj4</span><span class="o">.</span><span class="n">random</span>
+<span class="go">&lt;FieldFile: .../random_file&gt;</span>
+</pre></div>
+</div>
+<p>Clean up the temporary files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj1</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj2</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj3</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj4</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Amazon S3</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#settings">Settings</a><ul>
+<li><a class="reference internal" href="#cloudfront">CloudFront</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#storage">Storage</a></li>
+<li><a class="reference internal" href="#model">Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">django-storages</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="apache_libcloud.html"
+                        title="next chapter">Apache Libcloud</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/backends/amazon-S3.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="apache_libcloud.html" title="Apache Libcloud"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="django-storages"
+             >previous</a> |</li>
+        <li><a href="../index.html">django-storages 1.6.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2017, David Larlet, et. al..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

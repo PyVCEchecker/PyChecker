@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: credstash
+Version: 1.17.1
+Summary: A utility for managing secrets in the cloud using AWS KMS and DynamoDB
+Home-page: https://github.com/fugue/credstash
+Author: Alex Schoof, Mike Lin, et al.
+Author-email: mike@fugue.co
+License: Apache2
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Provides-Extra: YAML

@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer __MASTODON_PY_TEST_ACCESS_TOKEN]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://localhost:3000/api/v1/instance/peers
+  response:
+    body: {string: '[]'}
+    headers:
+      Cache-Control: ['max-age=86400, public']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 12 Oct 2019 21:00:46 GMT']
+      ETag: [W/"be772cbd6230bffd2ad2d31d48f5509d"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Transfer-Encoding: [chunked]
+      Vary: ['Accept-Encoding, Origin']
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [8d9f1f47-0bde-459e-a2c8-d9a2a17c4286]
+      X-Runtime: ['0.017777']
+      X-XSS-Protection: [1; mode=block]
+      content-length: ['2']
+    status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,2 @@
+idna>=2.0.0
+dnspython>=1.15.0

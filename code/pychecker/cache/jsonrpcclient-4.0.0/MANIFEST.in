@@ -1,0 +1,2 @@
+include README.md CHANGELOG.md LICENSE
+include jsonrpcclient/py.typed jsonrpcclient/response-schema.json

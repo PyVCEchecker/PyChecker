@@ -1,0 +1,34 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:gs="http://namespaces.zope.org/genericsetup"
+           xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <!-- Default plone content (frontpage etc.), depends default -->
+  <gs:registerProfile
+    name="plone-content"
+    title="Content-types plus example content (plone.app.contenttypes)"
+    directory="profiles/content"
+    description="Plone default content-types (plone.app.contenttypes)"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.import_content"
+    />
+
+  <!-- All types, no sample content. -->
+  <gs:registerProfile
+    name="default"
+    title="Content-types (plone.app.contenttypes)"
+    directory="profiles/default"
+    description="Plone default content-types (plone.app.contenttypes)"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.setup_various"
+    />
+
+  <!-- Uninstall -->
+  <gs:registerProfile
+    name="uninstall"
+    title="Uninstall Dexterity-based Plone Default Types (plone.app.contenttypes)"
+    directory="profiles/uninstall"
+    description="Uninstall Base Dexterity content-types and restore Archetypes default-content-types"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+</configure>

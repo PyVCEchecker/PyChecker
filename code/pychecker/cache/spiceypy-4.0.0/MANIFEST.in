@@ -1,0 +1,26 @@
+# get spice script
+include get_spice.py
+
+# Misc
+include LICENSE
+include requirements.txt
+include README.rst
+
+# cspice files
+include spiceypy/utils/*.py
+
+# Docs
+include docs/conf.py
+include docs/*.rst
+include docs/make.bat
+include docs/Makefile
+
+# Windows Support
+include cspice.def
+include makeDynamicSpice.bat
+
+# Tests
+include spiceypy/tests/__init__.py
+include spiceypy/tests/test_*.py
+include spiceypy/tests/gettestkernels.py
+exclude spiceypy/tests/exampleKernels.txt

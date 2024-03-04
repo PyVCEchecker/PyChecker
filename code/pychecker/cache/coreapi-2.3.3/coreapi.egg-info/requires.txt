@@ -1,0 +1,4 @@
+coreschema
+requests
+itypes
+uritemplate

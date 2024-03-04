@@ -1,0 +1,9 @@
+MANIFEST.in
+setup-README.rst
+setup.cfg
+setup.py
+google_cloud.egg-info/PKG-INFO
+google_cloud.egg-info/SOURCES.txt
+google_cloud.egg-info/dependency_links.txt
+google_cloud.egg-info/not-zip-safe
+google_cloud.egg-info/top_level.txt

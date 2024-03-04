@@ -1,0 +1,18 @@
+include MANIFEST.in
+
+include CODEOWNERS
+include LICENSE
+include README.md
+include CONTRIBUTING.md
+
+include dev_requirements.txt
+include Makefile
+
+include tox.ini
+
+recursive-include tests *.py *.yaml *.graphql
+recursive-include tests_py36 *.py
+
+prune gql-checker
+
+global-exclude *.py[co] __pycache__

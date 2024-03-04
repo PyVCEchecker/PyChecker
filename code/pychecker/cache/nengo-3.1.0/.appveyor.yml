@@ -1,0 +1,19 @@
+environment:
+  matrix:
+    - PYTHON: "C:\\Miniconda36"
+    - PYTHON: "C:\\Miniconda36-x64"
+
+init:
+  - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+
+install:
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - conda install numpy matplotlib jupyter
+  - pip install -e .[tests]
+
+build: false  # Not a C# project
+
+test_script:
+  - pytest nengo -v --durations=20

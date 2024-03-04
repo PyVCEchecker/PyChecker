@@ -1,0 +1,14 @@
+include AUTHORS
+include COPYING
+include README.rst
+include MANIFEST.in
+include CHANGES.md
+include setup.py
+include crontab.py
+include cronlog.py
+recursive-include tests *.empty
+recursive-include tests *.py
+recursive-include tests *.sh
+recursive-include tests *.txt
+include tests/data/spool/*
+include tests/data/crontabs/*

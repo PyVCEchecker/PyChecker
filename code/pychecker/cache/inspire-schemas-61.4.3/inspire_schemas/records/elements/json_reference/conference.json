@@ -1,0 +1,17 @@
+{
+    "additionalProperties": false,
+    "properties": {
+        "$ref": {
+            "description": "conferences record",
+            "format": "uri",
+            "minLength": 1,
+            "pattern": ".*/api/conferences/\\d+$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "$ref"
+    ],
+    "title": "Reference to conference record",
+    "type": "object"
+}

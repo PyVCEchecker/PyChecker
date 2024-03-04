@@ -1,0 +1,3 @@
+[console_scripts]
+bob = bob:cli.dispatch
+

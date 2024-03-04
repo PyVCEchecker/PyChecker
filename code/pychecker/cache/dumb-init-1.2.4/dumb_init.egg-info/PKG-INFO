@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: dumb-init
+Version: 1.2.4
+Summary: Simple wrapper script which proxies signals to a child
+Home-page: https://github.com/Yelp/dumb-init/
+Author: Yelp
+Author-email: UNKNOWN
+License: UNKNOWN
+Description: UNKNOWN
+Platform: linux

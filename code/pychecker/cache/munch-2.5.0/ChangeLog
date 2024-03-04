@@ -1,0 +1,156 @@
+CHANGES
+=======
+
+2.5.0
+-----
+
+* Update CHANGELOG.md
+* Support fromJSON classmethod for all Munch subclasses
+* Fix DefaultMunch/DefaultFactoryMunch return value for get method (fixes #53)
+* Support fromYAML classmethod for all Munch subclasses (fixes #34)
+* Clean CHANGELOG.md
+
+2.4.0
+-----
+
+* Update CHANGELOG.md
+* Add Changelog
+* Remove usage of deprecated API: Add default loader to yaml loads (#51)
+* Improve README.md and add unittest for its code blocks
+* Skip yaml tests if PyYAML is not installed
+* Improve Pylint validations
+* Switch to PBR (#49)
+* Switch to PBR
+* Add constructors to all PyYAML loaders (fixes #44) (#47)
+* Add constructors to all PyYAML loaders (fixes #44)
+* Fix/namedtuple handling (#46)
+* Fixed namedtuple handling in unmunchify (just in case someone tries to unmunchify a Munch   created with munchify which may contain a namedtuple, from now on)
+* Fixed namedtuple handling in munchify. Namedtuples are kept in the generated   hierarchy, but their children are also converted
+* Fixed test case
+* Created test case for bug: namedtuples cause an exception
+* Clearer variable names
+* Can simplify passing of seen and factory if helpers are nested
+* Better naming and scoping of helper functions
+* Handle tuple-tuple cycles correctly
+* Test list-list and tuple-tuple cycles
+* Test more dict-dict cycles
+* Test for identity in cycle tests
+* Correctly munchify and unmunchify structures with object cycles
+* Ignore VSCode workspace files
+* Fixed typo caught by ImportError
+* Added newline at end of file
+* Generalize munchify and unmunchify for Mapping instances
+* Overwrite built-in methods for safer subclassing
+* Fix typo in travis-ci yaml file
+
+2.3.2
+-----
+
+* Bump version
+* Limit travis deployment conditions
+* Build python wheels
+
+2.3.1
+-----
+
+* Ignore flycheck files
+* Bump version
+* Avoid running yaml tests when in no-deps environment
+* Ignore pytest cache
+* Drop the dot in pytest invocation
+* Use flat dicts in \_\_getstate\_\_ (closes #30)
+
+2.3.0
+-----
+
+* Bump version
+* Fix lint in init
+* Remove default from constructor and fromDict. Also add a test for repr reversibility and update test names
+* Make DefaultFactoryMunch which lets users provide a factory to generate missing values
+* Rebasing with upstream
+* Drop support for 2.6, 3.3, 3.4
+* AutoMunch for automatically converting dicts to Munches
+* \_\_setattr\_\_ will now munchify() any provided dict
+* Clear and update dict
+* Implement the pickling interface
+* Drop support for Python 2.6, 3.3, 3.4
+* Add \_\_dict\_\_ property that calls toDict()
+
+2.2.0
+-----
+
+* Bump version
+* Fix for Python 2.6: str.format must field names
+* Changed \_\_repr\_\_ to use str.format instead of x % y
+* Made DefaultMunch documentation a little clearer
+* Ignoring pylint warning about fromDict having different arguments
+* Fix for pylint in Python 3.5: method arguments differ
+* Added DefaultMunch, which returns a special value for missing attributes
+
+2.1.1
+-----
+
+* v2.1.1
+* Fix python 3 compatibility to work with IronPython (fix #13)
+* Deploy from Travis
+* Add python 3.6
+* Add pylintrc
+* Fix lint tox config
+
+2.1.0
+-----
+
+* v2.1.0
+* fix flake8
+* implement copy method. Fixes issue #10
+* Fix \_\_contains\_\_ returning True for Munch’s default attributes Includes changes from #6, as I couldn't test without it
+* Fix tests and use standard py.test tests instead Doctests were failing on all python versions. This PR fixes that
+
+2.0.4
+-----
+
+* v2.0.4
+* Modernize tests
+* Fixed some edge cases
+* Fixed tests
+* Fixed String representation of objects with keys that have spaces
+* Stop taking long rst description from README markdown
+
+2.0.3
+-----
+
+* v2.0.3
+* Move to new travis infrastructure
+* Fix doctests
+* Ignore .cache
+* Python 3.5 support
+* Update setup.py
+* Fix badges
+* Update README.md
+* Test against Python 3.4
+* Add support for running dir() on munches
+* Move to use py.test
+
+2.0.2
+-----
+
+* Fix packaging manifest
+
+2.0.1
+-----
+
+* v2.0.1
+* Rename to Munch
+* Fix Py3 compatibility check
+* Fix Readme
+* Fix Readme
+* Fix tox, reorganize tests and add Makefile
+* Drop Python 3.2 support, add 3.3
+* renaming infi.bunch to chunk
+* Update gitignore
+
+2.0.0
+-----
+
+* Forking bunch --> infi.bunch
+* Python 3 Compatibility Fixes

@@ -1,0 +1,386 @@
+Metadata-Version: 1.2
+Name: MonkeyType
+Version: 21.5.0
+Summary: Generating type annotations from sampled production types
+Home-page: https://github.com/instagram/MonkeyType
+Author: Matt Page
+Author-email: mpage@instagram.com
+License: BSD
+Description: MonkeyType
+        ==========
+        
+        MonkeyType collects runtime types of function arguments and return values, and
+        can automatically generate stub files or even add draft type annotations
+        directly to your Python code based on the types collected at runtime.
+        
+        Example
+        -------
+        
+        Say ``some/module.py`` originally contains:
+        
+        .. code:: python
+        
+          def add(a, b):
+              return a + b
+        
+        And ``myscript.py`` contains:
+        
+        .. code:: python
+        
+          from some.module import add
+        
+          add(1, 2)
+        
+        Now we want to infer the type annotation of ``add`` in ``some/module.py`` by
+        running ``myscript.py`` with ``MonkeyType``. One way is to run:
+        
+        .. code:: bash
+        
+          $ monkeytype run myscript.py
+        
+        By default, this will dump call traces into a SQLite database in the file
+        ``monkeytype.sqlite3`` in the current working directory. You can then use the
+        ``monkeytype`` command to generate a stub file for a module, or apply the type
+        annotations directly to your code.
+        
+        Running ``monkeytype stub some.module`` will output a stub:
+        
+        .. code:: python
+        
+          def add(a: int, b: int) -> int: ...
+        
+        Running  ``monkeytype apply some.module`` will modify ``some/module.py`` to:
+        
+        .. code:: python
+        
+          def add(a: int, b: int) -> int:
+              return a + b
+        
+        This example demonstrates both the value and the limitations of
+        MonkeyType. With MonkeyType, it's very easy to add annotations that
+        reflect the concrete types you use at runtime, but those annotations may not
+        always match the full intended capability of the functions. For instance, ``add``
+        is capable of handling many more types than just integers. Similarly, MonkeyType
+        may generate a concrete ``List`` annotation where an abstract ``Sequence`` or
+        ``Iterable`` would be more appropriate. MonkeyType's annotations are an
+        informative first draft, to be checked and corrected by a developer.
+        
+        Motivation
+        ----------
+        
+        Readability and static analysis are the primary motivations for adding type
+        annotations to code. It's already common in many Python style guides to
+        document the argument and return types for a function in its docstring;
+        annotations are a standardized way to provide this documentation, which also
+        permits static analysis by a typechecker such as `mypy`_.
+        
+        For more on the motivation and design of Python type annotations, see
+        :pep:`483` and :pep:`484`.
+        
+        .. _mypy: http://mypy.readthedocs.io/en/latest/
+        
+        Requirements
+        ------------
+        
+        MonkeyType requires Python 3.6+ and the `libcst`_ library (for applying type
+        stubs to code files). It generates only Python 3 type annotations (no type
+        comments).
+        
+        Installing
+        ----------
+        
+        Install MonkeyType with `pip`_:
+        
+        .. code:: bash
+        
+          pip install MonkeyType
+        
+        How MonkeyType works
+        --------------------
+        
+        MonkeyType uses the `sys.setprofile`_ hook provided by Python to interpose on
+        function calls, function returns, and generator yields, and record the types of
+        arguments / return values / yield values.
+        
+        It generates `stub files`_ based on that data, and can use `libcst`_ to apply those
+        stub files directly to your code.
+        
+        .. _pip: https://pip.pypa.io/en/stable/
+        .. _libcst: https://pypi.python.org/pypi/libcst
+        .. _sys.setprofile: https://docs.python.org/3/library/sys.html#sys.setprofile
+        .. _stub files: https://mypy.readthedocs.io/en/latest/getting_started.html#library-stubs-and-typeshed
+        
+        .. end-here
+        
+        See `the full documentation`_ for details.
+        
+        .. _the full documentation: http://monkeytype.readthedocs.io/en/latest/
+        
+        Troubleshooting
+        ---------------
+        
+        Check if your issue is mentioned in `the frequently asked questions`_ list.
+        
+        .. _the frequently asked questions: http://monkeytype.readthedocs.io/en/stable/faq.html
+        
+        Development
+        -----------
+        
+        See `CONTRIBUTING.rst`_ for information on developing and contributing to MonkeyType.
+        
+        .. _CONTRIBUTING.rst: https://github.com/Instagram/MonkeyType/blob/master/CONTRIBUTING.rst
+        
+        
+        LICENSE
+        -------
+        
+        MonkeyType is BSD licensed.
+        
+        
+        Changelog
+        =========
+        
+        21.5.0
+        ------
+        
+        * Fix compatibility with Python 3.9. Thanks Felix Yan. Merge of #217, fixes
+          #205.
+        
+        * Render empty tuple type correctly. Thanks Pradeep Kumar Srinivasan. Merge of
+          #191, fixes #190.
+        
+        
+        20.5.0
+        ------
+        
+        * Require ``libcst>=0.3.5``.
+        
+        * Add ``--ignore-existing-annotations`` flag to ``apply`` command.
+        
+        
+        20.4.2
+        ------
+        
+        * Add missing ``libcst`` dependency in ``setup.py``.
+        
+        
+        20.4.1
+        ------
+        
+        * Generate stubs for TypedDicts nested within generic types. Disable
+          TypedDicts completely when the max size is zero. Thanks Pradeep Kumar
+          Srinivasan. Merge of #162, fixes #159.
+        
+        * Remove ``stringcase`` dependency, just hand-roll ``pascal_case`` function.
+        
+        * Shrink dictionary traces with required and optional keys to get non-total
+          TypedDict class declarations. Thanks Pradeep Kumar Srinivasan.
+        
+        * Implement ``monkeytype apply`` using libcst's ``ApplyTypeAnnotationsVisitor``.
+          This correctly applies generated TypedDict classes. Thanks Pradeep Kumar
+          Srinivasan.
+        
+        * Render generic types recursively to handle nested special cases like
+          ``List['Movie']``. Thanks Pradeep Kumar Srinivasan. Fixes #76.
+        
+        
+        19.11.2
+        -------
+        
+        * Disable TypedDict generation by default for now, since it breaks `--apply`.
+        
+        
+        19.11.1
+        -------
+        
+        * Add setup.py dependences for mypy-extensions and stringcase. Thanks Nicholas
+          Bollweg for the report.
+        
+        
+        19.11.0
+        -------
+        
+        * Trace per-key value types for dictionaries (up to a configured max size) and
+          if the traced types are consistent, output a TypedDict in the stub instead of
+          a homogenous dict. Thanks Pradeep Kumar Srinivasan. Merge of #143, fixes
+          #105.
+        
+        * Fix crash with empty tuples. Thanks akayunov for the report, Christophe
+          Simonis for the simplest-case repro. Fixes #136.
+        
+        * Don't add stringified annotations to type stubs. Thanks Łukasz Langa. Merge
+          of #148.
+        
+        * Don't crash in type rewriter on user-defined types that name-collide with
+          container types from the `typing` module. Thanks Łukasz Langa. Merge of #146.
+        
+        * Load config after argument parsing instead of during it, to avoid argparse
+          catching TypeError/ValueError at import time of a custom config and replacing
+          with a generic "invalid value" message. See
+          https://bugs.python.org/issue30220. Thanks Daniel G Holmes for the report.
+          Merge of #142, fixes #141.
+        
+        * Typing support for collections.defaultdict. Thanks Dinesh Kesavan. Merge of #152.
+        
+        
+        19.5.0
+        ------
+        
+        * Mark ``monkeytype`` package as typed per PEP 561. Thanks Vasily Zakharov for
+          the report.
+        * Add ``-v`` option; don't display individual traces that fail to decode unless
+          it is given.
+        
+        
+        19.1.1
+        ------
+        
+        * Pass ``--incremental`` to retype when applying stubs, so it doesn't choke on
+          partial stubs (which can result from e.g. failures to decode some traces).
+        
+        
+        19.1.0
+        ------
+        
+        * Add ``--omit-existing-annotations`` option, implied by ``apply``. Merge of
+          #129. Fixes #11 and #81.
+        
+        * Render ``...`` for all parameter defaults in stubs. Remove the
+          ``--include-unparsable-defaults`` and ``--exclude-unparsable-defaults`` CLI
+          options, as well as the ``include_unparsable_defaults()`` config method.
+          Merge of #128, fixes #123.
+        
+        * Render forward references (from existing annotations) correctly. Merge of #127.
+        
+        * Rewrite `Generator[..., None, None]` to `Iterator[None]` by default. Merge of
+          #110, fixes #4. Thanks iyanuashiri.
+        
+        
+        18.8.0
+        ------
+        
+        * Support Python 3.7. Merge of #107, fixes #78.
+        
+        * Print useful error message when filename is passed to stub/apply. Merge of
+          #88, fixes #65. Thanks rajathagasthya.
+        
+        * Fix crash in ``list_modules`` when there are no traces. Merge of #106, fixes
+          #90.  Thanks tyrinwu.
+        
+        * Enable ``python -m monkeytype {run,stub,apply} ...``. Merge of #100, fixes
+          #99. Thanks retornam.
+        
+        
+        18.5.1
+        ------
+        
+        * Add ``MONKEYTYPE_TRACE_MODULES`` env var for easier tracing of code in
+          site-packages. Merge of #83, fixes #82. Thanks Bo Peng.
+        
+        * Fix passing additional arguments to scripts run via ``monkeytype run``. Merge
+          of #85. Thanks Danny Qiu.
+        
+        * Fix handling of spaces in filenames passed to retype. Merge of #79, fixes
+          #77.
+        
+        * Never render NoneType in stubs, substitute None.  Merge of #75, fixes #5.
+          Thanks John Arnold.
+        
+        
+        18.2.0
+        ------
+        
+        * Move filtering of `__main__` module into CallTraceStoreLogger instead of core
+          tracing code, so it can be overridden by special use cases like IPython
+          tracing. Merge of #72, fixes #68. Thanks Tony Fast.
+        
+        * Generate stubs for modules where the module file is like module/__init__.py.
+          Print retype stdout/stderr. Merge of #69, Fixes #66.
+          Thanks John Arnold.
+        
+        
+        18.1.13
+        -------
+        
+        * Improve error messages in case of "no traces found" and/or file path given
+          instead of module name. Merge of #37, partial fix for #65. Thanks Aarni
+          Koskela.
+        
+        * Add ``monkeytype list_modules`` sub-command to list all modules present in
+          trace db. Merge of #61, fixes #60. Thanks Alex Miasoiedov.
+        
+        * Add ``--diff`` option to ``monkeytype stub``. Merge of #59, fixes #58.
+          Thanks Tai-Lin!
+        
+        * Add ``--ignore-existing-annotations`` option to ``monkeytype stub``. Merge of
+          #55, fixes #15. Thanks Tai-Lin!
+        
+        
+        18.1.11
+        -------
+        
+        * Fix crash in RewriteEmptyContainers rewriter if a parameter has only empty
+          container types in traces (and more than one). Fixes #53.
+        
+        
+        18.1.10
+        -------
+        
+        * Display retype errors when stub application fails. Merge of #52, fixes #49.
+        
+        * Add ``--sample-count`` option to show the number of traces a given stub is
+          based on. Merge of #50, fixes #7. Thanks Tai-Lin.
+        
+        * Add ``monkeytype run -m`` for running a module as a script. Merge of
+          #41. Thanks Simon Gomizelj.
+        
+        * Add support for Django's ``cached_property`` decorator. Merge of #46, fixes
+          #9. Thanks Christopher J Wang.
+        
+        * Catch and log serialization exceptions instead of crashing. Fixes #38, merge
+          of #39.
+        
+        * Fix bug in default code filter when Python lib paths are symlinked. Merge of
+          #40. Thanks Simon Gomizelj.
+        
+        17.12.3
+        -------
+        
+        * Rewrite imports from _io module to io. (#1, merge of #32). Thanks Radhans
+          Jadhao.
+        
+        * Add Config.cli_context() as a hook for custom CLI initialization and cleanup
+          logic (#28; merge of #29). Thanks Rodney Folz.
+        
+        17.12.2
+        -------
+        
+        * Exclude "frozen importlib" functions in default code filter.
+        
+        * Fix passing args to script run with ``monkeytype run`` (#18; merge of
+          #21). Thanks Rodney Folz.
+        
+        * Fix generated annotations for NewType types (#22; merge of #23). Thanks
+          Rodney Folz.
+        
+        17.12.1
+        -------
+        
+        * Fix using MonkeyType outside a virtualenv (#16). Thanks Guido van Rossum for
+          the report.
+        
+        17.12.0
+        -------
+        
+        * Initial public version.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6

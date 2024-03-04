@@ -1,0 +1,6 @@
+google-api-python-client>=1.5.5
+enum34
+google-auth-oauthlib
+
+[pandas]
+pandas>=0.14.0

@@ -1,0 +1,9 @@
+include *.txt
+include *.rst
+include .coveragerc
+include tox.ini
+
+recursive-include docs *.rst
+recursive-include include *.h
+recursive-include src *.h
+recursive-include src *.zcml

@@ -1,0 +1,7 @@
+bs4
+cached-property
+commonmark
+dictdiffer
+python-slugify
+requests
+tzlocal

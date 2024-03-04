@@ -1,0 +1,7 @@
+six
+bitarray
+thrift==0.11.0
+thrift_sasl==0.4.3
+
+[kerberos]
+kerberos>=1.3.0

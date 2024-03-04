@@ -1,0 +1,4 @@
+# The immediate upstream for this software is the PyPI package "mecab-python3".
+version=3
+opts=uversionmangle=s/(rc|a|b|c)/~$1/,pgpsigurlmangle=s/$/.asc/ \
+https://pypi.debian.net/mecab-python3/mecab-python3-(.+)\.(?:zip|tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))

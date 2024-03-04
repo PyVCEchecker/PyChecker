@@ -1,0 +1,19 @@
+include MANIFEST.in
+include LICENSE
+exclude *.pyc
+exclude *.sh
+include tox.ini
+include .pep8
+recursive-include rosetta/locale *
+recursive-include rosetta/tests *
+recursive-include rosetta/utils *
+recursive-include rosetta/templates *
+recursive-include rosetta/static *
+recursive-include testproject *
+recursive-include docs *
+prune rosetta/tests/__pycache__
+prune rosetta/utils/__pycache__
+prune testproject/__pycache__
+prune testproject/htmlcov
+prune rosetta/tests/test_app/__pycache__
+prune docs/_build

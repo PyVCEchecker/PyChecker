@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Signals &#8212; Flask Dance 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flasky.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How OAuth Works" href="how-oauth-works.html" />
+    <link rel="prev" title="Token Storages" href="storages.html" />
+     
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+    
+    
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="how-oauth-works.html" title="How OAuth Works"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="storages.html" title="Token Storages"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Dance 4.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Signals</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-flask_dance.consumer"></span><section id="signals">
+<h1>Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h1>
+<p>Flask-Dance supports signals, <a class="reference external" href="https://flask.palletsprojects.com/en/latest/signals/" title="(in Flask v2.1.x)"><span class="xref std std-doc">just as Flask does</span></a>.
+Signals are perfect for custom processing code that you want to run at a certain
+point in the OAuth dance. For example, after the dance is complete, you might
+need to update the user’s profile, kick off a long-running task, or simply
+<a class="reference external" href="https://flask.palletsprojects.com/en/latest/patterns/flashing/" title="(in Flask v2.1.x)"><span class="xref std std-doc">flash a message</span></a> to let the user know
+that the login was successful. It’s easy, just import the appropriate signal of
+the ones listed below, and connect your custom processing code to the signal.</p>
+<p>The following signals exist in Flask-Dance:</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="flask_dance.consumer.oauth_before_login">
+<span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.</span></span><span class="sig-name descname"><span class="pre">oauth_before_login</span></span><a class="headerlink" href="#flask_dance.consumer.oauth_before_login" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.0.</span></p>
+</div>
+<p>This signal is sent before redirecting to the provider login page. The signal
+is sent with a <code class="docutils literal notranslate"><span class="pre">url</span></code> parameter specifying the redirect URL. This signal is mostly
+useful for doing things like session construction/deconstruction before the user
+is redirected.</p>
+<p>Example subscriber:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">flask</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer</span> <span class="kn">import</span> <span class="n">oauth_before_login</span>
+
+<span class="nd">@oauth_before_login</span><span class="o">.</span><span class="n">connect</span>
+<span class="k">def</span> <span class="nf">before_login</span><span class="p">(</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+    <span class="n">flask</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;next_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">flask</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;next_url&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="flask_dance.consumer.oauth_authorized">
+<span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.</span></span><span class="sig-name descname"><span class="pre">oauth_authorized</span></span><a class="headerlink" href="#flask_dance.consumer.oauth_authorized" title="Permalink to this definition">¶</a></dt>
+<dd><p>This signal is sent when a user completes the OAuth dance by receiving a
+response from the OAuth provider’s authorize URL. The signal is invoked
+with the blueprint instance as the first argument (the <em>sender</em>), and with
+a dict of the OAuth provider’s response (the <em>token</em>).</p>
+<p>Example subscriber:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">flash</span>
+<span class="kn">from</span> <span class="nn">flask_dance.consumer</span> <span class="kn">import</span> <span class="n">oauth_authorized</span>
+
+<span class="nd">@oauth_authorized</span><span class="o">.</span><span class="n">connect</span>
+<span class="k">def</span> <span class="nf">logged_in</span><span class="p">(</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+    <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Signed in successfully with </span><span class="si">{name}</span><span class="s2">!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">blueprint</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+    <span class="p">))</span>
+</pre></div>
+</div>
+<p>If you are linking OAuth records to User records, you <em>must</em> implement an
+<code class="docutils literal notranslate"><span class="pre">&#64;oauth_authorized</span></code> subscriber that creates new <code class="docutils literal notranslate"><span class="pre">User</span></code> and <code class="docutils literal notranslate"><span class="pre">OAuth</span></code>
+database entries for any new users, and links those two new records via
+the <code class="docutils literal notranslate"><span class="pre">OAuth</span></code> table’s <code class="docutils literal notranslate"><span class="pre">user_id</span></code> field.</p>
+<p>If you’re using OAuth 2, the user may grant you different scopes from the
+ones you requested: check the <code class="docutils literal notranslate"><span class="pre">scope</span></code> key in the <em>token</em> dict to
+determine what scopes were actually granted. If you don’t want the <em>token</em>
+to be <a class="reference internal" href="storages.html"><span class="doc">stored</span></a>, simply return <code class="docutils literal notranslate"><span class="pre">False</span></code> from one of your
+signal receiver functions – this can be useful if the user has declined
+to authorize your OAuth request, has granted insufficient scopes, or in some
+other way has given you a token that you don’t want.</p>
+<p>You can also return a <a class="reference external" href="https://flask.palletsprojects.com/en/latest/api/#flask.Response" title="(in Flask v2.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> instance from an event
+subscriber. If you do, that response will be returned to the user instead
+of the normal redirect. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
+
+<span class="nd">@oauth_authorized</span><span class="o">.</span><span class="n">connect</span>
+<span class="k">def</span> <span class="nf">logged_in</span><span class="p">(</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;after_oauth&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="flask_dance.consumer.oauth_error">
+<span class="sig-prename descclassname"><span class="pre">flask_dance.consumer.</span></span><span class="sig-name descname"><span class="pre">oauth_error</span></span><a class="headerlink" href="#flask_dance.consumer.oauth_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>This signal is sent when the OAuth provider indicates that there was an
+error with the OAuth dance. This can happen if your application is
+misconfigured somehow. The user will be redirected to the <code class="docutils literal notranslate"><span class="pre">redirect_url</span></code>
+anyway, so it is your responsibility to hook into this signal and inform
+the user that there was an error.</p>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="storages.html" title="previous chapter">Token Storages</a></li>
+      <li>Next: <a href="how-oauth-works.html" title="next chapter">How OAuth Works</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/signals.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+<div class="github">
+    <a href="https://github.com/singingwolfboy/flask-dance">
+        <span>Fork me on GitHub</span>
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+</div>
+
+
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2021, David Baumgold.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+    
+
+  </body>
+</html>

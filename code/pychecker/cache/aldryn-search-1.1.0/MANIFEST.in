@@ -1,0 +1,7 @@
+include LICENSE.txt
+include README.rst
+recursive-include aldryn_search/locale *
+recursive-include aldryn_search/static *
+recursive-include aldryn_search/templates *
+recursive-include docs *
+recursive-exclude * *.py[co]

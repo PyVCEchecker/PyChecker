@@ -1,0 +1,11 @@
+html5lib>=1.0.1
+
+[:implementation_name != "pypy"]
+regex>1.0
+
+[develop]
+pytest
+pytest-cov
+
+[imagesize]
+Pillow>=3.0.0

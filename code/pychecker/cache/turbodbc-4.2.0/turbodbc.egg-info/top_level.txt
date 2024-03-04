@@ -1,0 +1,5 @@
+libturbodbc
+turbodbc
+turbodbc_arrow_support
+turbodbc_intern
+turbodbc_numpy_support

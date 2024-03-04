@@ -1,0 +1,18 @@
+/build
+*.eggs/
+*.pyc
+/src/_compress.c
+*.egg
+*.so
+*.egg-info
+
+# Coverage
+htmlcov
+.coverage
+.idea
+.cache
+coverage.xml
+junit.xml
+/tmp/
+
+*.sw[op]

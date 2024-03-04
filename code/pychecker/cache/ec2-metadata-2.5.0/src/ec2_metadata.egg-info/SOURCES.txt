@@ -1,0 +1,15 @@
+HISTORY.rst
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+setup.cfg
+setup.py
+src/ec2_metadata/__init__.py
+src/ec2_metadata/py.typed
+src/ec2_metadata.egg-info/PKG-INFO
+src/ec2_metadata.egg-info/SOURCES.txt
+src/ec2_metadata.egg-info/dependency_links.txt
+src/ec2_metadata.egg-info/not-zip-safe
+src/ec2_metadata.egg-info/requires.txt
+src/ec2_metadata.egg-info/top_level.txt

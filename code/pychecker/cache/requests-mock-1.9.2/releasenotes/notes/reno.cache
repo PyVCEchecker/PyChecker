@@ -1,0 +1,342 @@
+---
+dates:
+- date: 1512515002
+  version: 1.4.0
+- date: 1619753746
+  version: 1.9.2
+- date: 1403529047
+  version: 0.2.0
+- date: 1404197047
+  version: 0.3.0
+- date: 1619603915
+  version: 1.9.1
+- date: 1480900960
+  version: 1.2.0
+- date: 1409211257
+  version: 0.5.1
+- date: 1408949673
+  version: 0.5.0
+- date: 1588424388
+  version: 1.8.0
+- date: 1473836597
+  version: 1.1.0
+- date: 1532135081
+  version: 1.5.1
+- date: 1402924380
+  version: 0.1.0
+- date: 1462770653
+  version: 1.0.0
+- date: 1448328589
+  version: 0.7.0
+- date: 1485927403
+  version: 1.3.0
+- date: 1421641725
+  version: 0.6.0
+- date: 1404273975
+  version: 0.4.0
+- date: 1619591865
+  version: 1.9.0
+- date: 1525990894
+  version: 1.5.0
+- date: 1556442539
+  version: 1.6.0
+- date: 1532145389
+  version: 1.5.2
+- date: 1567324008
+  version: 1.7.0
+file-contents:
+  releasenotes/notes/Add-called_once-property-a69546448cbd5542.yaml:
+    features:
+    - A called_once property was added to the adapter and the mocker. This gives us
+      an easy way to emulate mock's assert_called_once.
+    prelude: 'Add a called_once property to the mockers.
+
+      '
+  releasenotes/notes/Add-py.typed-file-5a5cae1041dd0859.yaml:
+    fixes:
+    - A py.typed file is required to enable type annotations for the package. Add
+      to pack for re-release.
+  releasenotes/notes/Allow-pickling-response-fe751b0a760a5001.yaml:
+    fixes:
+    - Remove weakref objects from the request/response that will allow the objects
+      to be pickled with the regular python mechanisms.
+  releasenotes/notes/Bump-minimum-requests-2.3-70fd287f6ea1a12e.yaml:
+    critical:
+    - 'The minimum version of requests has been increase to 2.3. This simply
+
+      ensures that all documented features of requests-mock are actually
+
+      available. This version of requests is still quite old and if this is an
+
+      issue you should either pin requests-mock to <1.6 or preferably update
+
+      requests.
+
+      '
+    prelude: 'Increase the minimum required requests version to 2.3
+
+      '
+  releasenotes/notes/Fix-urlquote-of-quoted-path-84cc1ff122dba279.yaml:
+    fixes:
+    - As part of 1.9.0 we started quoting unsafe URL characters. This was done incorrectly
+      that meant we requoted existing quoted strings. Fixes
+  releasenotes/notes/Support-Type-Hints-0f7d2385bd808d84.yaml:
+    features:
+    - Add python type hints for python 3.
+  releasenotes/notes/add-reset-function-bcef01162cab0912.yaml:
+    features:
+    - 'Add a reset/reset_mock function to the mocker and components so that users
+
+      can clear the calls and history from the Mocker without clearing all the
+
+      matching that has been used.
+
+      '
+  releasenotes/notes/additional-matcher-5c5cd466a6d70080.yaml:
+    features:
+    - Allow specifying an `additional_matcher` to the mocker that will call a function
+      to allow a user to add their own custom request matching logic.
+  releasenotes/notes/case-insensitive-matching-a3143221359bbf2d.yaml:
+    features:
+    - You can pass case_sensitive=True to an adapter or set `requests_mock.mock.case_sensitive
+      = True` globally to enable case sensitive matching.
+    fixes:
+    - Reported in bug \#1584008 all request matching is done in a case insensitive
+      way, as a byproduct of this request history is handled in a case insensitive
+      way. This can now be controlled by setting case_sensitive to True when creating
+      an adapter or globally.
+    prelude: 'It is now possible to make URL matching and request history not lowercase
+      the provided URLs.
+
+      '
+    upgrade:
+    - It is recommended you add `requests_mock.mock.case_sensitive = True` to your
+      base test file to globally turn on case sensitive matching as this will become
+      the default in a 2.X release.
+  releasenotes/notes/explicit-nesting-behaviour-4d28c310dc4c463a.yaml:
+    features:
+    - 'Nested mocks now has a defined behaviour which is essentially a classic
+
+      nesting behaviour. A mock works as normal, but in the same way that
+
+      real_http=True will escalate to the outer send (typically the real send) if
+
+      there is a mocker defined outside that will handle the calls.
+
+      '
+    fixes:
+    - 'This fixes all known nesting bugs. They may not be perfect, however this is
+
+      now the explicit defined behaviour and so all related bugs are closed in
+
+      favour of this.
+
+      '
+    prelude: 'Makes explicit the behaviour of nested mocking.
+
+      '
+  releasenotes/notes/fix-iter-content-none-1e29754a75273b8c.yaml:
+    fixes:
+    - 124 when using `response.iter_content(None)` the iterator would keep returning
+      b'' and never finish. In most code paths the b'' would indicate that the stream
+      is finished, but using None we have to close it ourselves.
+  releasenotes/notes/fix-pytest-version-discovery-43f27e7e162ed055.yaml:
+    fixes:
+    - Fixed a bug relating to how the pytest version was being discovered that meant
+      new versions of pytest were being treated as old versions and would receive
+      bad configuration.
+  releasenotes/notes/fix-zero-bytes-read-109628b72221cfe7.yaml:
+    fixes:
+    - Issue 144 - When performing a read we handled an empty byte return as an indication
+      to close the file pointer. This is not true when you actually ask for a zero
+      byte read so we should allow it.
+  releasenotes/notes/fixture-extras-699a5b5fb5bd6aab.yaml:
+    features: Added 'fixture' to pip extras so you can install the fixture requirements
+      with `pip install requests-mock[fixture]`
+    prelude: 'Installing the requirements for the ''fixture'' contrib package can
+      now be done via pip with `pip install requests-mock[fixture]`
+
+      '
+  releasenotes/notes/match-empty-query-string-e6d6976fe002da0b.yaml:
+    features:
+    - You can now match on the empty query string value like `/path?a`.
+  releasenotes/notes/pin-requests-version-e0f090aa31dc86c3.yaml:
+    fixes:
+    - 'Pins version of requests to <3 to prepare for new release of requests in future.
+
+      '
+  releasenotes/notes/py.test-2-4e7735793288ea2d.yaml:
+    fixes:
+    - The py.test plugin was broken when using py.test < 3.0. The version of py.test
+      that ships in EPEL is only 2.7 so we need to make sure we support at least that
+      version.
+    prelude: 'Fix py.test plugin with py.test < 3.0
+
+      '
+  releasenotes/notes/pytest-7e35da8c5f2cd428.yaml:
+    features:
+    - Added pytest fixture for native integration into pytest projects.
+  releasenotes/notes/repo-move-15e956e1d54c048b.yaml:
+    other:
+    - 'In this release the main repository was moved off of OpenStack provided
+
+      infrastructure and onto github at
+
+      https://github.com/jamielennox/requests-mock. OpenStack has been a great
+
+      home for the project however requests-mock is a general python project with
+
+      no specific relationship to OpenStack and the unfamiliar infrastructure was
+
+      limiting contributes from the wider community.
+
+      '
+    prelude: 'The primary repository is now at https://github.com/jamielennox/requests-mock
+
+      '
+  releasenotes/notes/request-history-stream-f1d75b33adcd7e97.yaml:
+    features:
+    - The stream parameter is recorded when the request is sent and available in request
+      history in the same was as parameters like verify or timeout.
+  releasenotes/notes/session-scoped-mock-7f1c98d9a91bffc8.yaml:
+    features:
+    - 'Allow mocking of only a single Session object. While there has always been
+
+      the option of adding just the Adapter to an existing Session, this is more
+
+      difficult to work with than the Mocker workflow that is typically used. You
+
+      can now pass a Session object to a Mocker and it will provide the standard
+
+      workflow but limited to just that object.
+
+      '
+  releasenotes/notes/set-default-response-reason-f24556261bc7e9e5.yaml:
+    features:
+    - When creating a response we now default the reason string to the appropriate
+      string based on the status code. This can still be provided manually.
+  releasenotes/notes/set-real-http-on-mocker-01eb26b65697466d.yaml:
+    features:
+    - 'Make real_http variable on Mocker object public. This means you can change
+
+      the value of the parameter after the object has been created. This will
+
+      allow setting it in situations like pytest where you may not be able to set
+
+      __init__ time options.
+
+      '
+  releasenotes/notes/url-quote-path-a593190dee974a7a.yaml:
+    fixes:
+    - Fix [#148](https://github.com/jamielennox/requests-mock/issues/158). When you
+      have a non url-safe character in your URL it is quoted by requests however requests-mock
+      just treated it as a normal string.
+  releasenotes/notes/user-response-encoding-b2eea39404140164.yaml:
+    fixes:
+    - 'If you specified a charset in the Content-Type of a response it would be
+
+      ignored and overriden with either ''utf-8'' or None depending on the type of
+
+      response content passed in. If you pass this value we should honour it and
+
+      perform the encoding correctly.
+
+      '
+notes:
+- files:
+  - - releasenotes/notes/Fix-urlquote-of-quoted-path-84cc1ff122dba279.yaml
+    - !!binary |
+      NzdmMWExZmVmN2E2YmI2MGIxYWQ0YmFmYjg1MTU5NzgyNDc0MTc4ZA==
+  version: 1.9.2
+- files:
+  - - releasenotes/notes/Add-py.typed-file-5a5cae1041dd0859.yaml
+    - !!binary |
+      NzhlZjJkMGEzNzczNTVkNWUwYTIwZTZlZWI2YzgzMzNmM2JkZjE3Yw==
+  version: 1.9.1
+- files:
+  - - releasenotes/notes/Support-Type-Hints-0f7d2385bd808d84.yaml
+    - !!binary |
+      NDAyZmQ2MjdjYzI4Zjc2ZjY5MzhjMTc4NDhjNmM4OGZmNTg4NjNjMA==
+  - - releasenotes/notes/fix-zero-bytes-read-109628b72221cfe7.yaml
+    - !!binary |
+      OTFiYjc1M2Q2MmM4Nzg4ZDBlZDcyMjkyZDVlMWYzN2VkMWEzNjVlMA==
+  - - releasenotes/notes/url-quote-path-a593190dee974a7a.yaml
+    - !!binary |
+      ZjA3Mjg0NWMwY2IxM2M2YzBmYjE4ODI0MTYwNjM5YThiYjNjN2ZlOA==
+  version: 1.9.0
+- files:
+  - - releasenotes/notes/add-reset-function-bcef01162cab0912.yaml
+    - !!binary |
+      YWVjYTczYWViNTc3NTIzMTVhNWI2Y2QxMjNiMDBhMjRlODFmOGMzOQ==
+  - - releasenotes/notes/explicit-nesting-behaviour-4d28c310dc4c463a.yaml
+    - !!binary |
+      Yjk5ZWVmMjJjNTYwM2RhZTI4ZTM1MDE4MTY2ZDk1YjQwNzMxZWM3Yw==
+  - - releasenotes/notes/fix-iter-content-none-1e29754a75273b8c.yaml
+    - !!binary |
+      N2E1ZmM2MzhiNjA2NTA3YTlhMWRkMmRjODhlOTVkZjg3ZGQyYmFhNw==
+  - - releasenotes/notes/session-scoped-mock-7f1c98d9a91bffc8.yaml
+    - !!binary |
+      MzViZmU1NjU5MWYxODhkZDE2OWJhZDY0YjYxMjY4OGU1NWVjNTUyYw==
+  - - releasenotes/notes/set-default-response-reason-f24556261bc7e9e5.yaml
+    - !!binary |
+      YzJkM2QyNDg3OTgwODdjNmNmNDRlNjBmNjk2NzkyNzZlN2E3OTdjMA==
+  - - releasenotes/notes/set-real-http-on-mocker-01eb26b65697466d.yaml
+    - !!binary |
+      NTc4OGRjZjE5MTcyOGUzODRhNzNmN2RlZTEwMGY0ODJkZmI3OWE3ZQ==
+  version: 1.8.0
+- files:
+  - - releasenotes/notes/match-empty-query-string-e6d6976fe002da0b.yaml
+    - !!binary |
+      OTIxMGRmYzFjODMxYzRhZmRkNjk4ZGNkOWFjNjM3ZWUzNjAxOTQzOQ==
+  - - releasenotes/notes/pin-requests-version-e0f090aa31dc86c3.yaml
+    - !!binary |
+      MWUyZDA5MDRmODVlNzk4N2ZhNGIzMzQyOWEyZjgwZjE1NmU5OTdjZg==
+  version: 1.7.0
+- files:
+  - - releasenotes/notes/Allow-pickling-response-fe751b0a760a5001.yaml
+    - !!binary |
+      YTBlOGZiNjFlMGJjYWRiODViMGRjYjFlYTNiN2E1ZDAyOTgyMWVlOA==
+  - - releasenotes/notes/Bump-minimum-requests-2.3-70fd287f6ea1a12e.yaml
+    - !!binary |
+      M2E3Yzk4ZjYzZDYyNWY2NzVjMzZkZjI3NzI0MTQ4ZmJlNzVmNTBhNg==
+  - - releasenotes/notes/user-response-encoding-b2eea39404140164.yaml
+    - !!binary |
+      ZjRmM2IwYTYzMWE3NmI3M2JjMDg3NTdhNmI3ODA1NWU1YTdkNjgzNQ==
+  version: 1.6.0
+- files:
+  - - releasenotes/notes/fix-pytest-version-discovery-43f27e7e162ed055.yaml
+    - !!binary |
+      NDkwOWVhYzRhNzJhMDUyYjIwZWZmNzY5MDBmNDcwZmFlMWQzMjhmZA==
+  - - releasenotes/notes/py.test-2-4e7735793288ea2d.yaml
+    - !!binary |
+      YWNjZTYyNDBkZTMyOTg2OWVmODdlZmFmNDM1NjBmNGE2ZGZlYWZjZA==
+  version: 1.5.2
+- files:
+  - - releasenotes/notes/request-history-stream-f1d75b33adcd7e97.yaml
+    - !!binary |
+      N2M4MmI1Mjk0ZjI0OTg5ZWY5MzRkYWM4ZjRjNThhYjIwYjQyMTAzYw==
+  version: 1.5.1
+- files:
+  - - releasenotes/notes/pytest-7e35da8c5f2cd428.yaml
+    - !!binary |
+      YTQ1NWE3MzVkN2VkYmE1ZDA2NDM4MGViMDU0MDIxYTExZDA3NmY1Nw==
+  - - releasenotes/notes/repo-move-15e956e1d54c048b.yaml
+    - !!binary |
+      MzNkOWNjODQ2OGY4OTA2MzkzNGE1OGMwOGViOWQwNGUwOWFhZTg5NQ==
+  version: 1.5.0
+- files:
+  - - releasenotes/notes/additional-matcher-5c5cd466a6d70080.yaml
+    - !!binary |
+      YWEzZTg3YzRlZThkYTU3YjBiNzFmMGE5NTExYWY4OTAwMmE3YWExZQ==
+  version: 1.3.0
+- files:
+  - - releasenotes/notes/Add-called_once-property-a69546448cbd5542.yaml
+    - !!binary |
+      MGM2ZTU2N2VjNzc2ODExNzhlNDYxYzI5OTRkYjE2ZmE4MWFlYTRhOA==
+  - - releasenotes/notes/case-insensitive-matching-a3143221359bbf2d.yaml
+    - !!binary |
+      MWIwOGRjYzcwNTU3YjJkNThjNTZhOTIzZTZkMzE3NmMyYjY0YTE0Zg==
+  - - releasenotes/notes/fixture-extras-699a5b5fb5bd6aab.yaml
+    - !!binary |
+      NmRmMDNlZDNkMDNkMDVmNjA2YmZmMjg3NjRlNzJiYzA1NzQzMzNiNw==
+  version: 1.1.0

@@ -1,0 +1,14 @@
+LICENCE
+LICENCE.md
+MANIFEST.in
+README.rst
+setup.py
+aiofile/__init__.py
+aiofile/aio.py
+aiofile/utils.py
+aiofile/version.py
+aiofile.egg-info/PKG-INFO
+aiofile.egg-info/SOURCES.txt
+aiofile.egg-info/dependency_links.txt
+aiofile.egg-info/requires.txt
+aiofile.egg-info/top_level.txt

@@ -1,0 +1,17 @@
+LICENSE.txt
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+numbergen/__init__.py
+param/.version
+param/__init__.py
+param/ipython.py
+param/parameterized.py
+param/serializer.py
+param/version.py
+param.egg-info/PKG-INFO
+param.egg-info/SOURCES.txt
+param.egg-info/dependency_links.txt
+param.egg-info/requires.txt
+param.egg-info/top_level.txt

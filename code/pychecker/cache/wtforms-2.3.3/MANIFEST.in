@@ -1,0 +1,6 @@
+include CHANGES.rst
+graft docs
+prune docs/_build
+graft tests
+graft wtforms/locale
+global-exclude *.pyc

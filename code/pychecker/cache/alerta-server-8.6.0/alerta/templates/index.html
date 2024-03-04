@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alerta API</title>
+</head>
+<body>
+
+<h1>Alerta API</h1>
+<p>Welcome to the Alerta API for the monitoring and alerting tool.
+
+<h2>Examples</h2>
+<p>Some basic examples of using the API are:
+<ul>
+    <li> <a href="{{ base_url }}/alerts">Alerts</a>
+    <li> <a href="{{ base_url }}/environments">Environments</a>
+    <li> <a href="{{ base_url }}/services">Services</a>
+    <li> <a href="{{ base_url }}/alerts/count">Alert Counts</a>
+    <li> <a href="{{ base_url }}/alerts/top10">Alert Top 10</a>
+    <li> <a href="{{ base_url }}/heartbeats">Heartbeats</a>
+</ul>
+
+<h2>Query parameters</h2>
+<p>Query parameters can be used to filter the results by any valid alert attribute.
+
+<table>
+  <tbody>
+    <tr><td><tt>environment=PROD</tt></td><td>equality - return alerts whose environment field has the value of PROD</td></tr>
+    <tr><td><tt>environment!=PROD</tt></td><td>invert - return alerts whose environment does not have the value PROD</td></tr>
+    <tr><td><tt>service=~frontend.*</tt></td><td>regex - return alerts whose service field starts with frontend</td></tr>
+    <tr><td><tt>service!=~frontend.*</tt></td><td>invert regex - return alerts whose service field does not start with frontend</td></tr>
+  </tbody>
+</table>
+
+<p>Special query parameters include 'limit', 'sort-by', 'from-date' and 'q' (for a free-form query).
+<table>
+  <tbody>
+    <tr><td><tt>limit=5</tt></td><td>return the five most recent alerts for the filter</td></tr>
+    <tr><td><tt>sort-by=resource</tt></td><td>sort the results by alert resource</td></tr>
+    <tr><td><tt>from-date=2014-01-07T11:11:24.135Z</tt></td><td>return alerts from a certain date and time onwards</td></tr>
+    <tr><td><tt>q={"$or":[{"service":"Nova"},{"resource":{"$regex":"nova"}}]}</tt></td><td>return Nova service alerts or resource with nova</td></tr>
+  </tbody>
+</table>
+
+<h2>Routes</h2>
+<table>
+{% for rule in rules|sort(attribute='rule') %}
+    <tr>
+       <td>{{ rule.methods|join(', ') }}</td><td>{{ rule.rule }}</td><td>{{ rule.endpoint }}</td>
+    </tr>
+{% endfor %}
+</table>
+</body>
+</html>

@@ -1,0 +1,13 @@
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+textstat/__init__.py
+textstat/textstat.py
+textstat.egg-info/PKG-INFO
+textstat.egg-info/SOURCES.txt
+textstat.egg-info/dependency_links.txt
+textstat.egg-info/requires.txt
+textstat.egg-info/top_level.txt
+textstat/resources/en/easy_words.txt
+textstat/resources/es/easy_words.txt

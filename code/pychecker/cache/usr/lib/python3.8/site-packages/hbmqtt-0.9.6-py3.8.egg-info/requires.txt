@@ -1,0 +1,5 @@
+transitions
+websockets
+passlib
+docopt
+pyyaml

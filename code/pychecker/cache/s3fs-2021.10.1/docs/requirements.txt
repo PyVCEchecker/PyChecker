@@ -1,0 +1,4 @@
+numpydoc
+botocore
+sphinx
+sphinx-rtd-theme

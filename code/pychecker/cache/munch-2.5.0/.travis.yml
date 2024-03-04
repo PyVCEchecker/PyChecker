@@ -1,0 +1,47 @@
+language: python
+sudo: false
+matrix:
+  include:
+  - python: '2.7'
+    env:
+    - TOXENV=py27-full
+  - python: '3.5'
+    env:
+    - TOXENV=py35-full
+  - python: '3.6'
+    env:
+    - TOXENV=py36-full
+  - python: pypy
+    env:
+    - TOXENV=pypy-full
+  - python: '2.7'
+    env:
+    - TOXENV=py27-no-deps
+  - python: '3.5'
+    env:
+    - TOXENV=py35-no-deps
+  - python: '3.6'
+    env:
+    - TOXENV=py36-no-deps
+  - python: pypy
+    env:
+    - TOXENV=pypy-no-deps
+  - python: '3.6'
+    env:
+    - TOXENV=lint
+install:
+- pip install tox
+script:
+- tox
+after_success: coveralls
+deploy:
+  provider: pypi
+  user: vmalloc
+  password:
+    secure: m3sHHSCl+dhOKz1tT3kWGyLdLX7qUZvCxvnH2OadJZJ8ziG2X319IkqUZWolG6hSO7j4mFb9kK7PxFk81nClLUJpUrgQ4Uamui2qdgFOZBaUH5QVS8ZGvZ85/Faa3YBO4BqyMVY9SG8uNSCWvFFMY61rHBA0rOtS+ZtRyvCy2SQ=
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    repo: Infinidat/munch
+    python: '3.6'
+    condition: $TOXENV = py36-no-deps

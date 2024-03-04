@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: toil
+Version: 5.5.0
+Summary: Pipeline management software for clusters.
+Home-page: https://github.com/DataBiosphere/toil
+Author: Benedict Paten and the Toil community
+Author-email: toil-community@googlegroups.com
+License: Apache License v2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Healthcare Industry
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Classifier: Topic :: Scientific/Engineering :: Atmospheric Science
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Scientific/Engineering :: Medical Science Apps.
+Classifier: Topic :: System :: Distributed Computing
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6
+Provides-Extra: aws
+Provides-Extra: cwl
+Provides-Extra: encryption
+Provides-Extra: google
+Provides-Extra: htcondor
+Provides-Extra: kubernetes
+Provides-Extra: mesos
+Provides-Extra: wdl
+Provides-Extra: all
+License-File: LICENSE
+
+UNKNOWN
+

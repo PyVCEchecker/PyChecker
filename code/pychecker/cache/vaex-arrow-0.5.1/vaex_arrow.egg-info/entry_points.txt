@@ -1,0 +1,3 @@
+[vaex.plugin]
+reader = vaex_arrow.opener:register_opener
+

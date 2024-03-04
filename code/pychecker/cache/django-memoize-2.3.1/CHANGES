@@ -1,0 +1,72 @@
+Changelog
+
+
+Version 2.3.1
+`````````````
+- Remove the support for boolean convert_to_unicode flag.
+- Fix Django 3.X compatibility
+
+Version 2.3.0 - Yanked. Should not be used. Breaks Django 3.x compatibility
+`````````````
+- Add support for boolean convert_to_unicode flag
+- License text update
+
+Version 2.2.1
+`````````````
+- Fix key incompatibility with MemCached
+
+Version 2.2.0
+`````````````
+- Enable wheels
+- Py3 support improvements
+
+Version 2.1.1
+`````````````
+- Deprecates unsupported Django versions
+
+Version 2.1.0
+`````````````
+
+- memoize now caches also `None` values
+- Py3 fixes
+
+Version 2.0.0
+`````````````
+
+- Deprecates Django<1.7
+- Improves unicode stability
+
+Version 1.3.0
+`````````````
+
+- Fixes a bug #8 (*args are ignored by memoize)
+
+Version 1.2.0
+`````````````
+
+- Fixed a serious issue where memoize function ignored special `f(arg, **kwargs)` input use-case. See test `test_10ab_arg_kwarg_memoize` for more details.
+- Added new Django==1.8 Travis env test
+
+Version 1.1.2
+`````````````
+
+- Memoizer now accepts cache_prefix and cache parameter
+- Support for Django >= 1.4
+
+Version 1.1.1
+`````````````
+
+- Default timeout set to Django's cache timeout
+
+Version 1.1.0
+`````````````
+
+- Port to Python >= 3.3 (requiring Python 2.6/2.7 for 2.x).
+- Fixed bug with using per-memoize timeouts greater than the default timeout
+- Added better support for per-instance memoization.
+- Various bug fixes
+
+Version 1.0.0
+`````````````
+
+- Initial public release

@@ -1,0 +1,6 @@
+Here's who I know: <br>
+<ul>
+    {% for person in people %}
+    <li><b>@{{person.nick|lower}}</b> - {{person.name}}.  (# {{person.hipchat_id}})</li>
+    {% endfor %}
+</ul>

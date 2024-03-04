@@ -1,0 +1,16 @@
+future
+
+[all]
+numpy
+sphinx
+nose
+
+[docs]
+sphinx
+
+[optional]
+numpy
+
+[tests]
+nose
+numpy

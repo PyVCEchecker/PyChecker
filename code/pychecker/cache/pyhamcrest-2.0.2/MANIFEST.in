@@ -1,0 +1,5 @@
+include CHANGES.txt
+include LICENSE.txt
+include README.md
+recursive-include examples *.py
+recursive-include doc *

@@ -1,0 +1,16 @@
+LICENSE
+README.md
+setup.cfg
+setup.py
+requests_aws4auth/__init__.py
+requests_aws4auth/aws4auth.py
+requests_aws4auth/aws4signingkey.py
+requests_aws4auth/exceptions.py
+requests_aws4auth.egg-info/PKG-INFO
+requests_aws4auth.egg-info/SOURCES.txt
+requests_aws4auth.egg-info/dependency_links.txt
+requests_aws4auth.egg-info/requires.txt
+requests_aws4auth.egg-info/top_level.txt
+requests_aws4auth/../HISTORY.md
+requests_aws4auth/../LICENSE
+requests_aws4auth/../README.md

@@ -1,0 +1,14 @@
+aioredis~=1.0
+msgpack~=1.0
+asgiref<4,>=3.2.10
+channels<4
+
+[cryptography]
+cryptography>=1.3.0
+
+[tests]
+cryptography>=1.3.0
+pytest
+pytest-asyncio==0.14.0
+async_generator
+async-timeout

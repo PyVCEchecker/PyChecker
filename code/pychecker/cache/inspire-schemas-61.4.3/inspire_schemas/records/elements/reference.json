@@ -1,0 +1,348 @@
+{
+    "additionalProperties": false,
+    "description": "This is structurally very similar to a Literature record, with unnecessary\nfields removed.  For more information about the meaning of the different\nfields, see the corresponding field in :ref:`hep.json#/`.",
+    "properties": {
+        "arxiv_eprint": {
+            "description": ":MARC: ``999C5r`` with ``arXiv:`` prefix\n:example: ``1703.07274``",
+            "minLength": 1,
+            "pattern": "^\\d{4}.\\d{4,5}|[\\w.]+(-[\\w.]+)?/\\d+$",
+            "title": "arXiv eprint number",
+            "type": "string"
+        },
+        "authors": {
+            "description": ":MARC: ``999C5h`` contains a comma-separated string with all\n    authors, in ``first_name last_name`` order.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "full_name": {
+                        "description": "Should be of the same form as\n:ref:`hep.json#/properties/authors/items/properties/full_name`.\n\n:example: ``Smith, John G.D.``",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "inspire_role": {
+                        "description": ":MARC: ``999C5e`` for ``editor``",
+                        "enum": [
+                            "author",
+                            "supervisor",
+                            "editor"
+                        ],
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of authors",
+            "type": "array",
+            "uniqueItems": false
+        },
+        "book_series": {
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "volume": {
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "collaborations": {
+            "items": {
+                "description": ":MARC: ``999C5c``",
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "document_type": {
+            "default": "article",
+            "enum": [
+                "activity report",
+                "article",
+                "book",
+                "book chapter",
+                "conference paper",
+                "note",
+                "proceedings",
+                "report",
+                "thesis"
+            ],
+            "minLength": 1,
+            "type": "string"
+        },
+        "dois": {
+            "items": {
+                "description": ":MARC: ``999C5a`` with prefix ``doi:``",
+                "minLength": 1,
+                "pattern": "^10\\.\\d+(\\.\\d+)?/.+$",
+                "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "external_system_identifiers": {
+            "description": ":MARC: ``999C5u`` (as url)\n\nList of identifiers of this document on external systems.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "schema": {
+                        "description": ":MARC: ``999C5u`` (as url)",
+                        "minLength": 1,
+                        "pattern": "^\\w+$",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": ":MARC: ``999C5u`` (as url)",
+                        "minLength": 1,
+                        "pattern": "^\\S+$",
+                        "title": "External identifier",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "schema",
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "imprint": {
+            "additionalProperties": false,
+            "properties": {
+                "date": {
+                    "format": "date",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "place": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "publisher": {
+                    "description": ":MARC: ``999C5p``",
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "isbn": {
+            "description": ":MARC: ``999C5i``\n\nISBN if the cited document is a book.\n\n.. note::\n\n    If the cited document is a book chapter, use\n    :ref:`publication_info/properties/parent_isbn` instead.",
+            "minLength": 1,
+            "pattern": "^\\d*[0-9X]$",
+            "type": "string"
+        },
+        "label": {
+            "description": ":MARC: ``999C5o``\n\nLabel used to refer to the reference in the main text, and put in\nfront of the reference in the reference list. Often, this is a\nnumber, found in square brackets. These brackets (or parentheses),\nif present, should not be put here.\n\n:example: ``42``\n:example: ``Jones1995c``",
+            "minLength": 1,
+            "type": "string"
+        },
+        "misc": {
+            "description": ":MARC: ``999C5m``\n\nUnrecognized information from the reference.",
+            "items": {
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": false
+        },
+        "persistent_identifiers": {
+            "description": ":MARC: ``999C5a`` (with prefix ``hdl:`` or ``urn:``)",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "schema": {
+                        "enum": [
+                            "HDL",
+                            "URN"
+                        ],
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "publication_info": {
+            "additionalProperties": false,
+            "properties": {
+                "artid": {
+                    "description": ":MARC: last part of ``999C5s`` (if not a page)",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "cnum": {
+                    "description": "The CNUM is based on the starting day of the conference, with an extra\nnumber appended to distinguish conferences starting on the first day.\n\n:example: The first conference (in order of creation on Inspire) starting\n    on December 25, 1987 has CNUM ``C87-12-25`` whereas, say, the third\n    one, has CNUM ``C87-12-25.2``",
+                    "minLength": 1,
+                    "pattern": "^C\\d\\d-\\d\\d-\\d\\d(\\.\\d+)?$",
+                    "title": "CNUM identifier of the conference",
+                    "type": "string"
+                },
+                "journal_issue": {
+                    "description": ":MARC: ``999C5n``",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "journal_record": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "$ref": {
+                            "description": "journals record",
+                            "format": "uri",
+                            "minLength": 1,
+                            "pattern": ".*/api/journals/\\d+$",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "$ref"
+                    ],
+                    "title": "Reference to journal record",
+                    "type": "object"
+                },
+                "journal_title": {
+                    "description": ":MARC: first part of ``999C5s``",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "journal_volume": {
+                    "description": ":MARC: second part of ``999C5s``",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "material": {
+                    "description": "The possible values are:\n\n``addendum``\n    for a document extending the main publication.\n\n``additional material``\n    for additional material attached to the main publication, that is\n    neither the more specific ``data`` or ``software``.\n\n``data``\n    for data related to the main publication.\n\n``erratum``\n    for a document correcting errors in the content of the main\n    publication. When the errors are not in the content but in the\n    publication process, it is considered as an ``editorial note`` instead.\n\n``editorial note``\n    for a document correcting errors in the metadata of the publication but\n    not its content. Otherwise, it is an ``erratum``.\n\n``preprint``\n    for a document that is made public (typically on `arXiv\n    <http://arxiv.org>`_) but not yet published formally.\n\n``publication``\n    for the main publication. If it's not published, it's a ``preprint``.\n\n``reprint``\n    for a reprint of the main publication.\n\n``software``\n    for software related to the main publication.\n\n``translation``\n    for a translation of the main publication.",
+                    "enum": [
+                        "addendum",
+                        "additional material",
+                        "data",
+                        "erratum",
+                        "editorial note",
+                        "preprint",
+                        "publication",
+                        "reprint",
+                        "software",
+                        "translation"
+                    ],
+                    "minLength": 1,
+                    "title": "Material to which the field refers",
+                    "type": "string"
+                },
+                "page_end": {
+                    "description": ":MARC: Last part of ``999C5s`` (if page-range)",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "page_start": {
+                    "description": ":MARC: Last part of ``999C5s`` (if not article ID)",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "parent_isbn": {
+                    "description": ":MARC: ``999C5i``, but not distinguished from\n    the :ref:`reference.json#/properties/isbn` of the\n    cited document.\n\nIf the cited document is a book chapter, this is the ISBN\nof the book.",
+                    "minLength": 1,
+                    "pattern": "^\\d*[0-9X]$",
+                    "type": "string"
+                },
+                "parent_report_number": {
+                    "description": ":MARC: ``999C5r`` but not distinguished from the cited\n    document :ref:`reference.json#/properties/report_numbers`.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "parent_title": {
+                    "description": ":MARC: ``999C5q``\n\nTitle of the parent document, e.g. title of the book if the\ncited document is a book chapter.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "year": {
+                    "description": ":MARC: ``999C5y``",
+                    "maximum": 2050,
+                    "minimum": 1000,
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "report_numbers": {
+            "description": ":MARC: ``999C5r``\n\n.. note::\n\n    If the cited document is only part of a report, use\n    :ref:`publication_info/properties/parent_report_number` instead.",
+            "items": {
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "texkey": {
+            "description": ":MARC: ``999C5k``\n\nKey that was used for this citation in the document. This may be\nextracted if the document is a PDF generated from a LaTeX, and\npossibly coincides with the one of the\n:ref:`hep.json#/properties/texkeys` assigned to the cited document\nby Inspire and made visible in the TeX export formats.\n\n:example: ``Maldacena:1997re``",
+            "minLength": 1,
+            "type": "string"
+        },
+        "title": {
+            "additionalProperties": false,
+            "properties": {
+                "source": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "subtitle": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "title": {
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title"
+            ],
+            "type": "object"
+        },
+        "urls": {
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``999C5u``",
+                "properties": {
+                    "description": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "URL of related document",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        }
+    },
+    "title": "A reference to a cited document",
+    "type": "object"
+}

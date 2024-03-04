@@ -1,0 +1,3 @@
+[console_scripts]
+trufflehog = truffleHog.truffleHog:main
+

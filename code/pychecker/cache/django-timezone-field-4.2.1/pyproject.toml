@@ -1,0 +1,30 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+relative_files = true
+
+[tool.poetry]
+name = "django-timezone-field"
+version = "4.1.2"
+description = "A Django app providing database and form fields for pytz timezone objects."
+authors = ["Mike Fogel <mike@fogel.ca>"]
+
+[tool.poetry.dependencies]
+python = "^3.5"
+pytz = "^2021.1"
+
+[tool.poetry.dev-dependencies]
+coverage = {extras = ["toml"], version = "^5.5"}
+Django = "^2.2"
+djangorestframework = "^3.12.4"
+flake8 = "^3.9.2"
+psycopg2-binary = "^2.8.6"
+pytest-django = "^4.4.0"
+pytest-pythonpath = "^0.7.3"
+pytest-lazy-fixture = "^0.6.3"
+pytest-cov = "^2.12.1"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"

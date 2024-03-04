@@ -1,0 +1,83 @@
+- in light of twitter, improve palette (aka PNG8) support.
+  https://twitter.com/NolanOBrien/status/1080914181061111808
+- need a tool to change bitdepth, pridepthpng
+- pipcolours (needs renaming) should also count colours and
+  create palette and suggested palette chunks.
+  use JASC-PAL format? see
+  https://sourceforge.net/projects/jascpal2png/ ?
+  http://www.selapa.net/swatches/colors/fileformats.php is quite
+  a good overview
+- Should a paletted PNG with a grey palette come out grey? (as
+  NetPBM's pngtopnm tool seems to do) Probably yes? So that grey
+  -> palette -> direct comes out as grey
+- priweavepng should have a magic palette mode. See below.
+  output palette image.
+- texttopng should take a font PNG. such as https://github.com/drj11/pypng/issues/57
+- when converting rows (asRGB, asDirect, and so on), could pass
+  in an info structure with desired settings (eg
+  info['bitdepth'] = 8 would return 8-bit values;
+  info['greyscale'] = False would return RGB (or RGBA);
+  info['colormap'] = False would convert palette image)
+
+
+# priweavepng magic palette mode
+
+if all selected channels are from
+the same paletted image and
+priweavepng should output a colour-indexed image,
+with tRNS chunk if applicable.
+
+
+# Low bit-depth palettes
+
+Obervation:
+- palette entries are 8-bit colour
+
+16-bit PNGs should not be paletted.
+
+Colour PNGs are always 8- or 16-bit.
+
+Palette entries should be drawn from 8-bit pixel entries.
+
+sBIT chunk should be transferred.
+
+
+# Reducing numbers of colors
+
+When reducing the numbers of colors,
+is it possible to separate the reduction of colors from
+assigning palette members to full spectrum colors?
+
+I think it might not be.
+
+Consider reducing many greyscales to 4:
+
+xx x           x  x                    x xx
+
+12 4          29  31                  96 98 99
+
+Indeed, the following picks 4 colours, but then only uses 3 of them:
+
+printf 'P2 8 1 100\n1 2 4 29 31 96 98 99\n'  | pnmquant 4 | pnmtoplainpnm
+
+The problem here is that 4 of Heckbert's boxes are formed, but
+two of them only have elements near their extreme edges.
+The boxes are reduced to a colour near their centre,
+but that colour is not the nearest box centre to any of the
+original colours.
+
+This suggests that it may not be simple to separate the steps:
+- choosing a palette;
+- mapping colours to palette members.
+
+One solution may be to record the boxes of the Heckbert median
+cut algorithm.
+An axis aligned box can be specified by any two (body) diagonal corners.
+The output of this step can be a 2 by N PNG image.
+Note that having the intermediary be a sequence of boxes means
+that the palette element isn't represented in the intermediary.
+This is acceptable if the palette element is a function of the box
+(for example, it is the centre of the box).
+This is unacceptable if the palette element is chosen in other ways
+(for example, the most popular input colour).
+A 3 x N image could record a box and a palette element.

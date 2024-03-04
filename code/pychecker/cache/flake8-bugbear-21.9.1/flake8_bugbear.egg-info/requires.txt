@@ -1,0 +1,8 @@
+flake8>=3.0.0
+attrs>=19.2.0
+
+[dev]
+coverage
+black
+hypothesis
+hypothesmith

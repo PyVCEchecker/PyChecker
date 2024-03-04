@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+setup.py
+src/aws_cdk.aws_rds.egg-info/PKG-INFO
+src/aws_cdk.aws_rds.egg-info/SOURCES.txt
+src/aws_cdk.aws_rds.egg-info/dependency_links.txt
+src/aws_cdk.aws_rds.egg-info/requires.txt
+src/aws_cdk.aws_rds.egg-info/top_level.txt
+src/aws_cdk/aws_rds/__init__.py
+src/aws_cdk/aws_rds/py.typed
+src/aws_cdk/aws_rds/_jsii/__init__.py
+src/aws_cdk/aws_rds/_jsii/aws-rds@1.129.0.jsii.tgz

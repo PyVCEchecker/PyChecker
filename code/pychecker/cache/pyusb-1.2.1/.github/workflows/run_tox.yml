@@ -1,0 +1,35 @@
+name: pyusb
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      max-parallel: 5
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.6, 3.7, 3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools>=30.3.0 tox
+    - name: Install libusb-1.0 (Windows)
+      if: matrix.platform == 'windows-latest'
+      shell: pwsh
+      run: |
+        Invoke-WebRequest -Uri https://github.com/libusb/libusb/releases/download/v1.0.24/libusb-1.0.24.7z -OutFile libusb-1.0.24.7z
+        7z e libusb-1.0.24.7z -oC:\Windows\System32 VS2019/MS64/dll/libusb-1.0.dll
+    - id: pyver2toxenv
+      run: |
+        python -c "import sys; print('::set-output name=toxenv::py' + sys.argv[1].replace('.', ''))" ${{ matrix.python-version }}
+    - name: Test with tox
+      run: tox -e ${{ steps.pyver2toxenv.outputs.toxenv }}

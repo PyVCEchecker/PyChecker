@@ -1,0 +1,729 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+        },
+        "_bucket": {
+            "description": "Used by `invenio-records-files` to store information about the\nbucket attached to this record.\n\n.. note::\n\n    This field is maintained by `invenio-records-files` and should\n    not be edited manually.",
+            "minLength": 1,
+            "type": "string"
+        },
+        "_collections": {
+            "items": {
+                "enum": [
+                    "Jobs"
+                ],
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "Collections to which this record belongs",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "_private_notes": {
+            "description": ":MARC: ``595``\n\nThese notes are only visible to privileged users, not regular\nusers.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of private notes",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "accelerator_experiments": {
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "accelerator": {
+                        "description": ":MARC: ``693__a``\n\nIf present, :ref:`institution` should contain the\ninstitution where this accelerator is located.\n\n.. note::\n\n    Currently not used, see :ref:`legacy_name`.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "curated_relation": {
+                        "default": false,
+                        "type": "boolean"
+                    },
+                    "experiment": {
+                        "description": ":MARC: not present.\n\nIf present, :ref:`institution` should contain the\ninstitution where this experiment is located and\n:ref:`accelerator` may contain the accelerator that this\nexperiment is using (if appropriate).\n\n.. note::\n\n    Currently not used, see :ref:`legacy_name`.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "institution": {
+                        "description": ":MARC: not present.\n\n.. note::\n\n    Currently not used, see :ref:`legacy_name`.",
+                        "minLength": 1,
+                        "title": "Institution hosting the experiment",
+                        "type": "string"
+                    },
+                    "legacy_name": {
+                        "description": ":MARC: ``693__e``\n\nThis field is used when migrating from legacy instead\nof separate :ref:`institution`, :ref:`accelerator` and\n:ref:`experiment`. In the future, it will be deprecated and\nthe other fields will be used instead.\n\n:example: ``CERN-LHC-CMS``",
+                        "minLength": 1,
+                        "title": "Identifier of the experiment on legacy",
+                        "type": "string"
+                    },
+                    "record": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "$ref": {
+                                "description": "experiments record",
+                                "format": "uri",
+                                "minLength": 1,
+                                "pattern": ".*/api/experiments/\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "$ref"
+                        ],
+                        "title": "Reference to experiment record",
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of related accelerators/experiments",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "acquisition_source": {
+            "additionalProperties": false,
+            "description": ":MARC: ``541``\n\nOnly the first source is stored: if the record later gets enriched with\nmetadata coming from a second source, the `acquisition_source` is not\nupdated.",
+            "properties": {
+                "datetime": {
+                    "description": ":MARC: ``541__d``\n\nThis does not necessarily coincide with the creation date of the\nrecord, as there might be some delay between the moment the\noriginal information is obtained and a record is finally created in\nthe system.",
+                    "format": "date-time",
+                    "minLength": 1,
+                    "title": "Date on which the metadata was obtained",
+                    "type": "string"
+                },
+                "email": {
+                    "description": ":MARC: ``541__b``\n\nThis only gets populated when `method` is `submitter`.",
+                    "format": "email",
+                    "minLength": 1,
+                    "title": "Email address associated to the submitter's account",
+                    "type": "string"
+                },
+                "internal_uid": {
+                    "description": ":MARC: ``541__a`` with ``inspire:uid:`` prefix.\n\nThis only gets populated when `method` is `submitter`.",
+                    "title": "Inspire user ID of the submitter",
+                    "type": "integer"
+                },
+                "method": {
+                    "description": "Possible values are:\n\n`submitter`\n    when obtained from a user submission. In this case, `orcid`,\n    `internal_uid` and `email` store identifiers of the submitter,\n    and `submission_number` an ID of the submission.\n\n`oai`\n    when obtained by OAI-PMH harvesting.\n\n`batchuploader`\n    when obtained through the batch uploader.\n\n`hepcrawl`\n    when obtained from a hepcrawl crawler. In this case, `source`\n    stores the publisher or the repository that was crawled.\n\n`beard`\n    when created after author disambiguation",
+                    "enum": [
+                        "submitter",
+                        "oai",
+                        "batchuploader",
+                        "hepcrawl",
+                        "beard"
+                    ],
+                    "minLength": 1,
+                    "title": "How the medata was obtained",
+                    "type": "string"
+                },
+                "orcid": {
+                    "description": ":MARC: ``541__a`` with ``orcid:`` prefix\n\nThis only gets populated when `method` is `submitter`.",
+                    "minLength": 1,
+                    "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$",
+                    "title": "ORCID of the submitter",
+                    "type": "string"
+                },
+                "source": {
+                    "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "submission_number": {
+                    "description": ":MARC: ``541__e``\n\nThis only gets populated when `method` is `submitter`.",
+                    "minLength": 1,
+                    "title": "Holding pen record ID of the submission",
+                    "type": "string"
+                }
+            },
+            "title": "Origin of the metadata in the record",
+            "type": "object"
+        },
+        "arxiv_categories": {
+            "description": ":MARC: ``65017a`` when it contains an arXiv category.",
+            "items": {
+                "description": "A category that currently exists on arXiv. Note that some categories have\nbeen renamed and are not in this list.  These are taken from the `arXiv API\ndocumentation\n<https://arxiv.org/help/api/user-manual#subject_classifications>`_.\n\n:example: ``math.FA`` instead of its previous name, ``funct-an``",
+                "enum": [
+                    "astro-ph",
+                    "astro-ph.CO",
+                    "astro-ph.EP",
+                    "astro-ph.GA",
+                    "astro-ph.HE",
+                    "astro-ph.IM",
+                    "astro-ph.SR",
+                    "cond-mat",
+                    "cond-mat.dis-nn",
+                    "cond-mat.mes-hall",
+                    "cond-mat.mtrl-sci",
+                    "cond-mat.other",
+                    "cond-mat.quant-gas",
+                    "cond-mat.soft",
+                    "cond-mat.stat-mech",
+                    "cond-mat.str-el",
+                    "cond-mat.supr-con",
+                    "cs",
+                    "cs.AI",
+                    "cs.AR",
+                    "cs.CC",
+                    "cs.CE",
+                    "cs.CG",
+                    "cs.CL",
+                    "cs.CR",
+                    "cs.CV",
+                    "cs.CY",
+                    "cs.DB",
+                    "cs.DC",
+                    "cs.DL",
+                    "cs.DM",
+                    "cs.DS",
+                    "cs.ET",
+                    "cs.FL",
+                    "cs.GL",
+                    "cs.GR",
+                    "cs.GT",
+                    "cs.HC",
+                    "cs.IR",
+                    "cs.IT",
+                    "cs.LG",
+                    "cs.LO",
+                    "cs.MA",
+                    "cs.MM",
+                    "cs.MS",
+                    "cs.NA",
+                    "cs.NE",
+                    "cs.NI",
+                    "cs.OH",
+                    "cs.OS",
+                    "cs.PF",
+                    "cs.PL",
+                    "cs.RO",
+                    "cs.SC",
+                    "cs.SD",
+                    "cs.SE",
+                    "cs.SI",
+                    "cs.SY",
+                    "econ",
+                    "econ.EM",
+                    "econ.GN",
+                    "econ.TH",
+                    "eess",
+                    "eess.AS",
+                    "eess.IV",
+                    "eess.SP",
+                    "eess.SY",
+                    "gr-qc",
+                    "hep-ex",
+                    "hep-lat",
+                    "hep-ph",
+                    "hep-th",
+                    "math",
+                    "math-ph",
+                    "math.AC",
+                    "math.AG",
+                    "math.AP",
+                    "math.AT",
+                    "math.CA",
+                    "math.CO",
+                    "math.CT",
+                    "math.CV",
+                    "math.DG",
+                    "math.DS",
+                    "math.FA",
+                    "math.GM",
+                    "math.GN",
+                    "math.GR",
+                    "math.GT",
+                    "math.HO",
+                    "math.IT",
+                    "math.KT",
+                    "math.LO",
+                    "math.MG",
+                    "math.MP",
+                    "math.NA",
+                    "math.NT",
+                    "math.OA",
+                    "math.OC",
+                    "math.PR",
+                    "math.QA",
+                    "math.RA",
+                    "math.RT",
+                    "math.SG",
+                    "math.SP",
+                    "math.ST",
+                    "nlin",
+                    "nlin.AO",
+                    "nlin.CD",
+                    "nlin.CG",
+                    "nlin.PS",
+                    "nlin.SI",
+                    "nucl-ex",
+                    "nucl-th",
+                    "physics",
+                    "physics.acc-ph",
+                    "physics.ao-ph",
+                    "physics.app-ph",
+                    "physics.atm-clus",
+                    "physics.atom-ph",
+                    "physics.bio-ph",
+                    "physics.chem-ph",
+                    "physics.class-ph",
+                    "physics.comp-ph",
+                    "physics.data-an",
+                    "physics.ed-ph",
+                    "physics.flu-dyn",
+                    "physics.gen-ph",
+                    "physics.geo-ph",
+                    "physics.hist-ph",
+                    "physics.ins-det",
+                    "physics.med-ph",
+                    "physics.optics",
+                    "physics.plasm-ph",
+                    "physics.pop-ph",
+                    "physics.soc-ph",
+                    "physics.space-ph",
+                    "q-bio",
+                    "q-bio.BM",
+                    "q-bio.CB",
+                    "q-bio.GN",
+                    "q-bio.MN",
+                    "q-bio.NC",
+                    "q-bio.OT",
+                    "q-bio.PE",
+                    "q-bio.QM",
+                    "q-bio.SC",
+                    "q-bio.TO",
+                    "q-fin",
+                    "q-fin.CP",
+                    "q-fin.EC",
+                    "q-fin.GN",
+                    "q-fin.MF",
+                    "q-fin.PM",
+                    "q-fin.PR",
+                    "q-fin.RM",
+                    "q-fin.ST",
+                    "q-fin.TR",
+                    "quant-ph",
+                    "stat",
+                    "stat.AP",
+                    "stat.CO",
+                    "stat.ME",
+                    "stat.ML",
+                    "stat.OT",
+                    "stat.TH"
+                ],
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "title": "List of research areas for the job",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "contact_details": {
+            "description": ":MARC: ``270__m/p``\n\nContact information for questions from applicants regarding the job opening.",
+            "items": {
+                "additionalProperties": false,
+                "description": "Contact person's data",
+                "properties": {
+                    "curated_relation": {
+                        "type": "boolean"
+                    },
+                    "email": {
+                        "description": "Contact person's e-mail",
+                        "format": "email",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Contact person's name",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "record": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "$ref": {
+                                "description": "authors record",
+                                "format": "uri",
+                                "minLength": 1,
+                                "pattern": ".*/api/authors/\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "$ref"
+                        ],
+                        "title": "Reference to author record",
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "control_number": {
+            "description": ":MARC: ``001``\n\nRead-only field. Also called ``record ID`` or ``recid``.",
+            "title": "ID of current record",
+            "type": "integer"
+        },
+        "deadline_date": {
+            "description": ":MARC: ``046__i``",
+            "format": "date",
+            "minLength": 1,
+            "title": "Application deadline",
+            "type": "string"
+        },
+        "deleted": {
+            "description": ":MARC: ``980__a/c:deleted``",
+            "title": "Whether this record has been deleted",
+            "type": "boolean"
+        },
+        "deleted_records": {
+            "description": ":MARC: ``981__a``\n\nList of records that were deleted because they were replaced by\nthis one. This typically happens when merging two records: one of\nthem gets enriched with the information of the other one, which is\nthen superfluous and gets deleted.\n\nFor the opposite concept, see :ref:`new_record`.",
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "$ref": {
+                        "description": "jobs record",
+                        "format": "uri",
+                        "minLength": 1,
+                        "pattern": ".*/api/jobs/\\d+$",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$ref"
+                ],
+                "title": "Reference to job record",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "description": {
+            "description": ":MARC: ``520__a``\n\nThis may contain rich text in a subset of HTML.",
+            "minLength": 1,
+            "title": "Job description",
+            "type": "string"
+        },
+        "external_job_identifier": {
+            "description": ":MARC: ``245__a`` (in parentheses)\n\nIdentifier used for the job posting.\n\n:example: ``TH-SP-2019-LD``",
+            "minLength": 1,
+            "type": "string"
+        },
+        "external_system_identifiers": {
+            "items": {
+                "anyOf": [
+                    {
+                        "additionalProperties": false,
+                        "properties": {
+                            "schema": {
+                                "enum": [
+                                    "SPIRES"
+                                ],
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "value": {
+                                "minLength": 1,
+                                "pattern": "^JOBS-\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "schema",
+                            "value"
+                        ],
+                        "type": "object"
+                    }
+                ]
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "institutions": {
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "curated_relation": {
+                        "type": "boolean"
+                    },
+                    "record": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "$ref": {
+                                "description": "institutions record",
+                                "format": "uri",
+                                "minLength": 1,
+                                "pattern": ".*/api/institutions/\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "$ref"
+                        ],
+                        "title": "Reference to institution record",
+                        "type": "object"
+                    },
+                    "value": {
+                        "description": ":MARC: ``110__a``\n\nCurrently, the old\n:ref:`institutions.json#/properties/legacy_ICN`\nis used here. In the future, this will\nchange and become the new\n:ref:`institutions.json#/properties/ICN`.",
+                        "minLength": 1,
+                        "title": "ICN of institution",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "Institutions opening a position",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "legacy_creation_date": {
+            "description": ":MARC: ``961__x``\n\nOnly present if the record already existed on legacy Inspire.",
+            "format": "date",
+            "minLength": 1,
+            "title": "Date of record creation on legacy",
+            "type": "string"
+        },
+        "legacy_version": {
+            "description": ":MARC: ``005``\n\nUsed to indicate the version of the record on legacy.",
+            "minLength": 1,
+            "title": "Last record update",
+            "type": "string"
+        },
+        "new_record": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "jobs record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/jobs/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to job record",
+            "type": "object"
+        },
+        "position": {
+            "description": ":MARC: ``245__a``",
+            "minLength": 1,
+            "title": "Position title",
+            "type": "string"
+        },
+        "public_notes": {
+            "description": ":MARC: ``500``\n\nAny notes about the document that do not fit into another field.\n\n.. note::\n\n    These notes are publicly visible. For notes not shown to\n    regular users, see :ref:`_private_notes`.",
+            "items": {
+                "additionalProperties": false,
+                "description": "This is used to add, besides the `value`, the `source` where this value\ncame from.",
+                "properties": {
+                    "source": {
+                        "description": "Source of the information in this field. As several records can be merged,\nthis information allows us to remember where every bit of metadata came\nfrom and make decisions based on it.\n\n:MARC: Often not present.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "title": "List of public notes",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "ranks": {
+            "description": ":MARC: ``656__a``\n\nRanks at which the successful applicant may be hired.",
+            "items": {
+                "enum": [
+                    "STAFF",
+                    "SENIOR",
+                    "JUNIOR",
+                    "VISITOR",
+                    "POSTDOC",
+                    "PHD",
+                    "MASTER",
+                    "UNDERGRADUATE",
+                    "OTHER"
+                ],
+                "minLength": 1,
+                "title": "Rank of academic position",
+                "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "reference_letters": {
+            "additionalProperties": false,
+            "properties": {
+                "emails": {
+                    "description": ":MARC: ``270__o`` (if email address)\n\nEmail addresses where reference letters should be sent.",
+                    "items": {
+                        "format": "email",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "urls": {
+                    "description": ":MARC: ``270__o`` (if URL)\n\nURLs to websites where the reference letters should be uploaded.",
+                    "items": {
+                        "additionalProperties": false,
+                        "description": ":MARC: ``8564``",
+                        "properties": {
+                            "description": {
+                                "description": ":MARC: ``8654__y``",
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": ":MARC: ``8564_u``",
+                                "format": "uri",
+                                "minLength": 1,
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "value"
+                        ],
+                        "title": "URL of related document",
+                        "type": "object"
+                    },
+                    "minItems": 1,
+                    "type": "array",
+                    "uniqueItems": true
+                }
+            },
+            "title": "Where to send the reference letters",
+            "type": "object"
+        },
+        "regions": {
+            "description": ":MARC: ``043__a``\n\nWorld regions where the position is located.",
+            "items": {
+                "enum": [
+                    "Africa",
+                    "Australasia",
+                    "Asia",
+                    "Europe",
+                    "Middle East",
+                    "North America",
+                    "South America"
+                ],
+                "minLength": 1,
+                "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        },
+        "self": {
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "description": "jobs record",
+                    "format": "uri",
+                    "minLength": 1,
+                    "pattern": ".*/api/jobs/\\d+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Reference to job record",
+            "type": "object"
+        },
+        "status": {
+            "description": ":MARC: Not present\n\nStatus of the current job posting. This can be:\n\n``open``\n    The job posting is open and welcomes applications.\n\n``closed``\n    The job posting is closed and it is not possible to apply.\n\n``pending``\n    The job posting has been submitted to INSPIRE and needs to be approved for display.",
+            "enum": [
+                "closed",
+                "open",
+                "pending"
+            ],
+            "minLength": 1,
+            "type": "string"
+        },
+        "urls": {
+            "description": ":MARC: ``8564``\n\nURLs of web pages related to this job posting.",
+            "items": {
+                "additionalProperties": false,
+                "description": ":MARC: ``8564``",
+                "properties": {
+                    "description": {
+                        "description": ":MARC: ``8654__y``",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": ":MARC: ``8564_u``",
+                        "format": "uri",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "URL of related document",
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+        }
+    },
+    "required": [
+        "_collections",
+        "deadline_date",
+        "description",
+        "position",
+        "regions",
+        "status"
+    ],
+    "title": "A record in the Jobs collection",
+    "type": "object"
+}

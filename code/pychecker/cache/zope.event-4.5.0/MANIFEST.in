@@ -1,0 +1,20 @@
+include *.rst
+include *.txt
+
+include .travis.yml
+include .coveragerc
+include tox.ini
+include bootstrap.py
+include buildout.cfg
+
+recursive-include docs *.rst *.py Makefile make.bat
+recursive-include docs/_static *
+recursive-include src *
+
+global-exclude *.dll
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.so
+global-exclude *.class
+
+recursive-exclude docs/_build *

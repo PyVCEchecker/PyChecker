@@ -1,0 +1,3 @@
+[console_scripts]
+pyvim = pyvim.entry_points.run_pyvim:run
+

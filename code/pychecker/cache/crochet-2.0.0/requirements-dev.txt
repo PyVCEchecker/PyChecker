@@ -1,0 +1,6 @@
+sphinx
+tox
+tox-gh-actions
+mypy
+flake8
+pylint

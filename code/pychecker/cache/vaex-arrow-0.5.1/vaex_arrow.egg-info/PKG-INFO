@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: vaex-arrow
+Version: 0.5.1
+Summary: Arrow support for vaex
+Home-page: https://www.github.com/maartenbreddels/vaex
+Author: Maarten A. Breddels
+Author-email: maartenbreddels@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

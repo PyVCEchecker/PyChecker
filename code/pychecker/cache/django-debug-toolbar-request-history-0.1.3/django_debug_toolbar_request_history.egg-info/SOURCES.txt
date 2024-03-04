@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+ddt_request_history/__init__.py
+ddt_request_history/panels/__init__.py
+ddt_request_history/panels/request_history.html
+ddt_request_history/panels/request_history.py
+django_debug_toolbar_request_history.egg-info/PKG-INFO
+django_debug_toolbar_request_history.egg-info/SOURCES.txt
+django_debug_toolbar_request_history.egg-info/dependency_links.txt
+django_debug_toolbar_request_history.egg-info/requires.txt
+django_debug_toolbar_request_history.egg-info/top_level.txt

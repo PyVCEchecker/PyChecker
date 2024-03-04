@@ -1,0 +1,7 @@
+Metadata-Version: 1.1
+Name: entrypoints
+Version: 0.3
+Summary: Discover and load entry points from installed packages.
+Home-page: https://github.com/takluyver/entrypoints
+Author: Thomas Kluyver
+Author-email: thomas@kluyver.me.uk

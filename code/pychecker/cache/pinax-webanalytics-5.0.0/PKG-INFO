@@ -1,0 +1,68 @@
+Metadata-Version: 1.1
+Name: pinax-webanalytics
+Version: 5.0.0
+Summary: web analytics and metrics integration for Django
+Home-page: http://github.com/pinax/pinax-webanalytics
+Author: Pinax Team
+Author-email: team@pinaxproject.com
+License: MIT
+Description: 
+        .. image:: http://pinaxproject.com/pinax-design/patches/pinax-webanalytics.svg
+            :target: https://pypi.python.org/pypi/pinax-webanalytics/
+        
+        ==================
+        Pinax WebAnalytics
+        ==================
+        
+        .. image:: https://img.shields.io/pypi/v/pinax-webanalytics.svg
+            :target: https://pypi.python.org/pypi/pinax-webanalytics/
+        
+        \ 
+        
+        .. image:: https://img.shields.io/circleci/project/github/pinax/pinax-webanalytics.svg
+            :target: https://circleci.com/gh/pinax/pinax-webanalytics
+        .. image:: https://img.shields.io/codecov/c/github/pinax/pinax-webanalytics.svg
+            :target: https://codecov.io/gh/pinax/pinax-webanalytics
+        .. image:: https://img.shields.io/github/contributors/pinax/pinax-webanalytics.svg
+            :target: https://github.com/pinax/pinax-webanalytics/graphs/contributors
+        .. image:: https://img.shields.io/github/issues-pr/pinax/pinax-webanalytics.svg
+            :target: https://github.com/pinax/pinax-webanalytics/pulls
+        .. image:: https://img.shields.io/github/issues-pr-closed/pinax/pinax-webanalytics.svg
+            :target: https://github.com/pinax/pinax-webanalytics/pulls?q=is%3Apr+is%3Aclosed
+        
+        \ 
+        
+        .. image:: http://slack.pinaxproject.com/badge.svg
+            :target: http://slack.pinaxproject.com/
+        .. image:: https://img.shields.io/badge/license-MIT-blue.svg
+            :target: https://opensource.org/licenses/MIT/
+        
+        \ 
+        
+        ``pinax-webanalytics`` provides analytics and metrics integration for Django.
+        
+        Supported Django and Python Versions
+        ------------------------------------
+        
+        +-----------------+-----+-----+-----+
+        | Django / Python | 3.6 | 3.7 | 3.8 |
+        +=================+=====+=====+=====+
+        |  2.2            |  *  |  *  |  *  |
+        +-----------------+-----+-----+-----+
+        |  3.0            |  *  |  *  |  *  |
+        +-----------------+-----+-----+-----+
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.2
+Classifier: Framework :: Django :: 3.0
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

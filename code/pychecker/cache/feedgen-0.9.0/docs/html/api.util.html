@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>feedgen.util &#8212; python-feedgen 0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/lernfunk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="feedgen.ext.base" href="ext/api.ext.base.html" />
+    <link rel="prev" title="feedgen.entry" href="api.entry.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>python-feedgen 0.9.0 documentation</span></a></h1>
+        <h2 class="heading"><span>feedgen.util</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="api.entry.html">feedgen.entry</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="ext/api.ext.base.html">feedgen.ext.base</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content" role="main">
+        
+        
+  <script type=application/javascript src=_static/theme_extras.js></script>
+<div class="apititle"><b>Contents</b></div>
+<div class="apitoc"></div><span class="target" id="module-feedgen.util"></span><div class="section" id="feedgen-util">
+<h1>feedgen.util<a class="headerlink" href="#feedgen-util" title="Permalink to this headline">¶</a></h1>
+<p>This file contains helper functions for the feed generator module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">copyright</dt>
+<dd class="field-odd"><p>2013, Lars Kiesow &lt;<a class="reference external" href="mailto:lkiesow&#37;&#52;&#48;uos&#46;de">lkiesow<span>&#64;</span>uos<span>&#46;</span>de</a>&gt;</p>
+</dd>
+<dt class="field-even">license</dt>
+<dd class="field-even"><p>FreeBSD and LGPL, see license.* for more details.</p>
+</dd>
+</dl>
+<dl class="function">
+<dt id="feedgen.util.ensure_format">
+<code class="sig-prename descclassname">feedgen.util.</code><code class="sig-name descname">ensure_format</code><span class="sig-paren">(</span><em class="sig-param">val</em>, <em class="sig-param">allowed</em>, <em class="sig-param">required</em>, <em class="sig-param">allowed_values=None</em>, <em class="sig-param">defaults=None</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.util.ensure_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a dictionary or a list of dictionaries and check if all keys are in
+the set of allowed keys, if all required keys are present and if the values
+of a specific key are ok.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>val</strong> – Dictionaries to check.</p></li>
+<li><p><strong>allowed</strong> – Set of allowed keys.</p></li>
+<li><p><strong>required</strong> – Set of required keys.</p></li>
+<li><p><strong>allowed_values</strong> – Dictionary with keys and sets of their allowed
+values.</p></li>
+<li><p><strong>defaults</strong> – Dictionary with default values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of checked dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="feedgen.util.formatRFC2822">
+<code class="sig-prename descclassname">feedgen.util.</code><code class="sig-name descname">formatRFC2822</code><span class="sig-paren">(</span><em class="sig-param">date</em><span class="sig-paren">)</span><a class="headerlink" href="#feedgen.util.formatRFC2822" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure the locale setting do not interfere with the time format.</p>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="api.entry.html">feedgen.entry</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="ext/api.ext.base.html">feedgen.ext.base</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, Lars Kiesow.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

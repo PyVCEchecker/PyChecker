@@ -1,0 +1,593 @@
+Version 1.4.0
+=============
+ - misc: sign tags
+ - build: fix libuv cleanup if it was already clean
+ - build: add scripts to build manylinux wheels using Docker
+ - timers: emit warning if sub-millisecond accuracy is requested
+ - udp: add .send_queue_size
+ - core: avoid _Py_DEC_REFTOTAL when not defined
+ - core: do not rely on tp_clear being non-NULL
+ - core: work around cpyext tuple restrictions
+ - test: account for pypy in traceback tests
+ - test: close loop handles
+ - test: convert weakref into handle lifetime test
+ - test: encode stderr as utf-8 under python 2
+ - test: delete handles and clean up in teardown
+ - ci: add pypy to tox and travis
+ - build: support building with MinGW-w64
+ - misc: update classifiers in setup.py
+ - misc: use single quotes in setup.py
+ - doc: fix  documentation on Idle handles
+ - doc: fix note directive usage.
+ - build: raised libuv revision to tag 1.12.0
+ - build: fix unicode errors on Windows 10
+ - ci: add Python 3.6
+ - tests: fix TCP test (socket is already closed)
+ - ci: turn off annoying Travis notifications
+ - ci: run only on long-term branches
+ - ci: use new PyPy version on Travis
+ - deps: add libuv sources v1.12.0
+ - build: use setuptools to build libuv
+ - pipe: expose Pipe.ipc attribute
+ - docs: update IPC docs
+ - pipe: add abstract namespace support
+ - misc: update classifiers
+ - core: set version to 1.4.0
+ - core: update libuv to version 1.13.1
+ - build: only link with kvm on netbsd
+
+Version 1.3.0
+=============
+ - ci: test Python 3.5 on Travis CI
+ - core: it's Python 3.5 o'clock
+ - doc: fix typo
+ - build: fix build when PYTHON env var is not set
+ - core: raised libuv revision to tag 1.8.0
+ - fs: add pyuv.fs.realpath
+ - samples: fixup Poll handle based example
+ - doc: get{addr,name}info are now in the dns submodule
+ - doc: add livehtml target to docs Makefile
+ - poll: add support for the UV_DISCONNECT event
+ - build: fix build on Windows
+ - core: raised libuv revision to 36a024d
+ - build, ci: fix build of Python 3.5 on Windows and AppVeyor
+ - core: set version to 1.3.0
+
+Version 1.2.0
+=============
+ - build: fix decoding std{out,err} with the right encoding
+ - build: fix linking problem on Windows
+ - fs: return entity types in pyuv.fs.scandir
+ - fs: remove `flags` argument from scandir
+ - test: fix fs tests
+ - core: raised libuv revision to tag 1.7.3
+ - tcp, udp: add ability to create sockets early
+ - tcp, udp: add 'family' property
+ - docs: update scandir documentation
+ - doc: fix fs functions parameter order
+ - doc: update documentation for TCP and UDP handles
+ - build: add dev-requirements.txt file
+ - build: add AppVeyor integration
+ - build: fix building when PYTHON env variable is incorrect
+ - test: fix test pipe name
+ - test: skip some TCP and UDP tests on Windows
+ - test: add tests for fd duplication using socket.fromfd
+ - udp: add support for '<broadcast>' address, a la Python
+ - common: simplify parsing special address
+ - ci: test on Travis on all branches
+ - doc: updated README
+
+Version 1.1.0
+=============
+ - test: speed-up TravisCI build process
+ - core: add utf-8 BOM to setup.py
+ - doc: remove no longer needed note about Poll handles
+ - dns: add support for synchronous getaddrinfo
+ - dns: add support for synchronous getnameinfo
+ - doc: update documentation for get{addr,name}info
+ - pipe: fix getsockname
+ - fs: fix FSEvent.path and FSPoll.path
+ - fs: fix FS{Event,Poll}.path on Python 3
+ - pipe: add Pipe.getpeername function
+ - stream: add Stream.set_blocking function
+ - misc: update gitignore
+ - loop: do not iterate over non-pyuv handles in Loop.spawn
+ - build: update GYP repository location
+ - core: raised libuv revision to tag 1.6.1
+ - build: skip VS 2015 if it's in the path
+ - util: add pyuv.util.guess_handle_type function
+ - build: check if repository is clean before running any invoke command
+ - build: fix ChangeLog template
+
+Version 1.0.2
+=============
+ - core: rearrange package structure
+ - build: fix verbose output in Python 3
+ - travis: fix testing on TravisCI
+ - travis: run tests using Tox
+ - test: fix tests when running inside Tox
+ - doc: updated fs module documentation
+ - core: move __version__ to a submodule
+ - doc: fix getting the package version
+ - build: using the system provided libuv is unsupported on Windows
+ - build: add invoke task to generate the changelog
+ - core: raised libuv revision to tag 1.2.1
+ - build: enhance release process
+ - core: set version to 1.0.2
+ - build: improve tasks.py
+
+Version 1.0.1
+=============
+ - build: add --use-system-libuv build time option
+ - build: fix rebuilding when -f is specified
+ - doc: remove Loop.walk from documentation
+ - build: fix sdist on Windows
+ - test: fix process tests on Windows
+ - core: raised libuv version to 1.0.2
+
+Version 1.0.0
+=============
+ - dns: move getaddrinfo and getnameinfo to a 'dns' submodule
+ - doc: updated documentation
+ - core: raised libuv version to 1.0.1
+
+Version 1.0.0.dev1
+==================
+ - fs: add pyuv.fs.access function
+ - fs: rename readdir to scandir
+ - process: make Process.spawn a class method
+ - loop: call LoopSubclass.__init__ when calling LoopSubclass.default_loop
+ - tcp, pipe, udp: add send_buffer_size and receive_buffer_size
+ - udp: add fileno() method
+ - stream: add fileno() method
+ - process: give better error message on Process.close
+ - core: fix subclassing Loop
+ - test: add test which ignores exceptions in a excepthook
+ - core: drop support for Python 2.6
+ - core: raised libuv version to 1.0.0-rc2
+
+Version 0.11.5
+==============
+ - process: fix refcounting bug in StdIO
+ - core: expose Handle and Stream base classes
+ - barrier: Barrier.wait returns a boolean now
+ - process: make Process.spawn more similar with Popen
+ - process: accept bytes and unicode in all arguments
+ - test: add UV_UDP_REUSEADDR test cases
+ - test: add test for UDP.set_multicast_interface
+ - doc: updated documentation
+ - util: add getnameinfo support
+ - util: support service names in getaddrinfo
+ - util: add getrusage()
+ - udp: fix handling empty datagrams
+ - udp: added UDP.try_send function
+ - test: add a missing close() for socket
+ - core: fix refcount bug in func_excepthook()
+ - core: fix access of potentially freed memory
+ - build: add Python 3.4 to tox and remove 3.0-3.2 from classifiers
+ - streams: refactor Stream.write / writelines and Pipe.write2
+ - udp: refactor UDP.send / sendlines
+ - stream: use a default backlog size of 511
+ - core: raised libuv revision to 817c092 (master branch)
+
+Version 0.11.4
+==============
+ - Adapted to API changes in libuv
+ - Add UDP.set_multicast_interface function
+ - Export UV_UDP_REUSEADDR constant
+ - Accept '' as a valid address to bind to
+ - Added filesystem watch example
+ - Implement _fileno() for Stream and UDP
+ - Accept bytes objects in Pipe.bind
+ - Added Pipe.getsockname function
+ - Fix build on FreeBSD
+ - Use a 64KB slab buffer per loop
+ - Fixed process noargs test on Windows
+ - Speed up offset tests on Windows
+ - Allow compilation using Windows SDK
+ - Move common functions to common.c
+ - Removed Loop.walk
+ - Only accept bytes on fs.write
+ - Add FSPoll.path property
+ - Renamed FSEvent.filename property to path
+ - Avoid using VS 2013 when compiling libuv
+ - Fixed TCP try_write test
+ - Raised libuv revision to 69f9f6f (master branch)
+
+Version 0.11.3
+==============
+ - Added flags argument to TCP.bind
+ - Add Stream.try_write() function
+ - Added Loop.alive attribute
+ - Define and expose UV_TCP_IPV6ONLY constant
+ - Read README file using proper encoding
+ - Updated documentation
+ - Raised libuv revision to 6f62d62 (master branch)
+
+Version 0.11.2
+==============
+ - Allow None callback for Async handles
+ - Added Loop.handles property
+ - Adapted to API changes in uv_fs_event handle
+ - Avoid malloc()-ing unnecessary things in Process.spawn
+ - Keep handles alive when they are started
+ - Raised libuv revision to f6c1a27 (master branch)
+
+Version 0.11.1
+==============
+ - Added MAC address to util.interface_addresses() output
+ - Adapt to API changes in libuv
+ - Dropped MinGW support
+ - Implement excepthook as a method rather than an attribute
+ - Fix IPC and TCP test cases
+ - Tests: Re-raise exceptions from callbacks when exiting Loop.run()
+ - Raised libuv revision to 2b9c374 (master branch)
+
+Version 0.11.0
+==============
+ - Refactored FS operations
+ - Added instance dictionary to Request objects
+ - Added missing fields in stat result structure
+ - Added libuv-verbose-build command line argument
+ - Adapted to changes in libuv master branch
+ - Raised libuv revision to XXX (master branch)
+
+Version 0.10.13
+===============
+ - Build: fix build with VS 2013 installed
+ - Build: fix build with Windows SDK
+ - Build: show stdout on build errors as well
+ - Build: bundle gyp on sdist
+ - Raised libuv version to 0bcac64 (v0.10 branch)
+
+Version 0.10.12
+===============
+ - Fixed multiple memory leaks when using sync fs functions
+ - Cleanup fs requests when using sync mode
+ - Raised libuv version to 0.10.29
+
+Version 0.10.11
+===============
+ - Added Python 3.4 support classifier
+ - Small fixes for the release tool
+ - Raised libuv revision to d864907 (v0.10 branch)
+
+Version 0.10.10
+===============
+ - Fixed installation on Windows Python 3
+ - Raised libuv revision to cd6db8b (v0.10 branch)
+
+Version 0.10.9
+==============
+ - Fixed TCP saturation test
+ - Clarify that only one Poll handle per fd is allowed
+ - Raised libuv revision to c0c9480 (v0.10 branch)
+
+Version 0.10.8
+==============
+ - Fixed echo-pipe.py
+ - Raised libuv revision to 33959f7 (v0.10 branch)
+
+Version 0.10.7
+==============
+ - Use ARCHFLAGS if set when compiling libuv
+ - Fixed compilation on OSX 10.6
+ - Raised libuv revision to 983fa68 (v0.10 branch)
+
+Version 0.10.6
+==============
+ - Fixed allocating enough space for sockname/peername when using IPv6
+ - Always run tests in the correct directory
+ - Raised libuv revision to 851a662 (v0.10 branch)
+
+Version 0.10.5
+==============
+ - Loop.now() returns milliseconds, not nanoseconds
+ - Use int64_t for offset in fs functions
+ - Fixed parsing in_offset in fs.sendfile
+ - Raised libuv revision to 3b4e0a2 (v0.10 branch)
+
+Version 0.10.4
+==============
+ - Added Stream.write_queue_size property
+ - Never raise StreamError directly
+ - Raised libuv revision to c53fe81 (v0.10 branch)
+
+Version 0.10.3
+==============
+ - Fixed crash when using IPv6 addresses
+ - Raised libuv revision to 9b801d5 (v0.10 branch)
+
+Version 0.10.2
+==============
+ - Fixed getaddrinfo parameter order
+ - Fixed memory leak in getaddrinfo
+ - Avoid allocating extra memory for synchronization primitives
+ - Handle fd argument consistently
+ - Updated documentation
+ - Raised libuv revision to 2400716 (v0.10 branch)
+
+Version 0.10.1
+==============
+ - Added better libuv version information
+ - Fixed building IPv6 address information on getaddrinfo
+ - Enhanced support for IPv6 addresses
+ - Reduced number of required memory allocations in several places
+   to the minimum possible
+ - Embed libuv handles into Python object structures
+ - Embed libuv requests in pyuv Request objects
+ - Raised libuv revision to 31ebe23 (v0.10 branch)
+
+Version 0.10.0
+==============
+(these entries cover the changes since the last 0.9 release, not the entire
+changelog since the las 0.8 release)
+ - Don't override extra_objects and extra_link_args in setup.py
+ - Fix libuv-clean-compile on Windows
+ - Use setuptools if available
+ - Fix miscalculation of struct sizes in Windows
+ - Updated documentation
+ - Raised libuv revision to 7b66ea1 (v0.10 branch)
+
+Version 0.9.7
+=============
+ - Added Loop.stop
+ - Removed get/set process title functions
+ - Cleanup deps directory if libuv download fails
+ - Fixed build on Windows when using Python 3.3
+ - Several fixes for the test suite
+ - Fixed a few compilation warnings
+ - Updated documentation
+ - Raised libuv revision to 0ad46bd (master)
+
+Version 0.9.6
+=============
+ - Added support for sending UDP handles over IPC pipes
+ - Added missing flags argument to UDP recv callback
+ - Added flags to UDP.bind
+ - Added fileno() method to Poll handles
+ - Fixed compilation with MSVC 2010
+ - Fixed choosing the right version of Visual Studio
+ - Fixed UDP echo example
+ - Fixed process and IPC tests on Windows
+ - Fixed Windwos symlinks issues in tests
+ - Fixed multicast tests on Windows and Linux
+ - Raised libuv revision to 3348cd7 (master)
+
+Version 0.9.5
+=============
+ - Stop reading if a Stream gets an error in the on_read callback
+ - Cleanup and fix examples
+ - Allow None for Handle.close callback
+ - Made SignalChecker inherit from Handle
+ - Updated documentation
+ - Raised libuv revision to e4d8cba (master)
+
+Version 0.9.4
+=============
+ - Allow handle types and loop to be inheritable
+ - Internal refactor, allocate handles on tp_new and free them
+   on tp_dealloc
+ - Added ThreadError and used it in the thread module
+ - Removed FSEvent.start and moved functionality to __init__
+ - Removed TTY.isatty
+ - Check if the object passed as send_handle is a Stream object
+ - Fixed Loop.run return value
+ - Fixed leaks on stream and UDP write functions
+ - Fixed crash in fs.write
+ - Raised libuv revision to 8e3e60f (master)
+
+Version 0.9.3
+=============
+ - Added mode parameter to Loop.run
+ - Added fileno and get_timeout methods to Loop
+ - Added ability to cancel threadpool, getaddrinfo and fs requests
+ - Removed ThreadPool and moved queue_work to Loop
+ - Refactored SignalChecker implementation
+ - Refactored excepthook implementation
+ - Avoid storing result and exception for threadpool operations
+ - Fixed unreferencing the loop too early after calling close
+ - Defined UV_PROCESS_WINDOWS_HIDE flag for Process handles
+ - Raised libuv revision to ba83510 (master)
+
+Version 0.9.2
+=============
+ - Added support for compilation with Visual Studio
+ - Added thread module with several thread synchronization primitives
+ - Refactored write/writelines and send/sendlines, only
+   bytes (or sequences of bytes) objects can be used now
+ - Fixed refcounting issues
+ - Removed bogus assert that could be triggered on Windows
+ - Raised libuv revision to 665a316 (master)
+
+Version 0.9.1
+=============
+ - Added TCP.open and UDP.open methods
+ - Added a SignalChecker helper
+ - Added 'readable' attribute to TTY __init__
+ - Enabled Signal handles across multiple loops
+ - Simplified buffer allocation for streams and UDP
+ - Removed custom set_parallel_threads function
+ - Remove reference to loop object on handle close
+ - Allow any file descriptor to be opened as a TTY
+ - Fixed adding arbitrary python files to sdist
+ - Fixed importing from submodules in Python 3
+ - Raised libuv revision to 1e32cb0 (master)
+ - Updated documentation
+
+Version 0.9.0
+=============
+ - Added a true signal watcher
+ - Added ability to handle uncaught exceptions (Loop.excepthook)
+ - Moved getaddrinfo to util module
+ - Removed builtin c-ares resolver
+ - Removed Poll.slow property
+ - Removed Loop.counters
+ - Allow None to be passed as hostname in getaddrinfo
+ - Encode hostname with idna if appropriate in getaddrinfo
+ - Fixed handling error case on fs.stat functions
+ - Various performance optimizations
+ - Raised libuv revision to 3bbe8f9 (master)
+
+Version 0.8.3
+=============
+ - Raised libuv revision to 9a6f496 (v0.8 branch),
+   fixes compilation on Windows
+ - Fixed argument name in FSPoll.start
+
+Version 0.8.2
+=============
+ - Raised libuv revision to 39ca621 (v0.8 branch)
+ - Updated documentation
+
+Version 0.8.1
+=============
+ - Fixed checking port number boundaries
+ - Fixed small memory leak
+ - Fixed unicode handling
+
+Version 0.8.0
+=============
+ - Added FSPoll handle
+ - Added disable_stdio_inheritance class method to Process
+ - Fixed FSEvent structure to properly inherit from Handle
+ - Fixed fs tests consistency
+ - Simplified file descriptor handling on fs module (Windows)
+ - Raised libuv revision to 5a0f341 (v0.8 branch)
+ - Updated documentation
+
+Version 0.7.2
+=============
+ - Fixed theoretical crash if buffer is NULL
+ - Simplified Poll handle API
+ - Added support for creating symlinks with junction points on Windows
+ - Fixed some failing tests on Windows
+ - Raised libuv revision to 5c30443
+ - Updated documentation
+
+Version 0.7.1
+=============
+ - Fixed crash when Loop.walk returned a Python object being deallocated
+
+Version 0.7.0
+=============
+ - Added weak referencing support to handles
+ - Added Poll handle
+ - Added more tests: weakrefs, gc, ...
+ - Added instance dictionary to Loop and all handles
+ - Added filename property to FSEvent handle
+ - Added TCP echo server example using Poll handles, adapted from pyev
+ - Added active_handles property to Loop
+ - Added Loop.walk function to iterate over the loop handles
+ - Added support for spawning detached child processes
+ - Adapted UDP.send to accept objects conforming to the buffer interface and
+   also added UDP.sendlines
+ - Improved efficiency by avoiding copying strings on write/send
+ - Refactored Process stdio support
+ - Refactored ThreadPool API
+ - Refactored exception hierarchy
+ - Refactored code according to refcount refactor in libuv
+ - Refactored Async handle API
+ - Refactored API to set parallel thread number in the thread pool
+ - Fixed compilation warnings on Python 3
+ - Fixed TTY example on Windows
+ - Fixed some fs operations relaying on fileno() on Windows
+ - Raised libuv revision to 38a6f9f
+ - Updated documentation
+
+Version 0.6.1
+=============
+ - Added ability to set uid and gid on Process.spawn
+ - Added status parameter to ThreadPool after_work callback
+ - Added ability to control the number of threads in the ThreadPool (unix
+   only)
+ - Added 'readable' and 'writable' read-only properties to stream objects
+ - Return named tuples for Loop.counters, fs.stat and DNS functions
+ - Refactored DNS query functions, it's a single function now
+ - Raised libuv revision to 6367da2
+ - Updated documentation
+
+Version 0.6.0
+=============
+ - Added get/set process_title functions
+ - Added NAPTR query support to DNSResolver
+ - Added cancel method to DNSResolver
+ - Added ares_strerror function to errno module. It returns a string
+   representation of a c-ares error code
+ - Refactored write function to accept any object conforming to the
+   Python buffer interface
+ - Refactored ThreadPool
+ - Refactored DNS functions to return values like the Pyhton standard
+   library
+ - Reordered arguments in several functions of the DNS module
+ - Fixed several reference leaks
+ - Fixed crash when doing CNAME queries
+ - Fixed compilation on Windows 7
+ - Map several new error codes (ENOTEMPTY, EPERM, ELOOP, EXDEV, ENOSPC)
+ - Raised libuv revision to 31ff986
+ - Updated documentation
+
+Version 0.5.0
+=============
+ - Added support for asynchronous DNS queries of tyes: A, AAAA, CNAME,
+   TXT, NS, MX, SRV
+ - Added synchronous API for filesystem (fs module) operations
+ - Added set_multicast_ttl, set_broadcast, set_multicast_loop and set_ttl
+   functions to UDP handle
+ - Removed data attribute from fs module functions
+ - Raised libuv revision to 3de0411
+
+
+Version 0.4.0
+=============
+ - Added support for Python 3.X
+ - Added support for Microsoft Windows (using MinGW)
+ - Migrated the test suite to tox + nose + unittest2
+ - Raised libuv revision to 454e021
+
+
+Version 0.3.0
+=============
+ - Added new functions to fs module: open, close, read, write, fsync,
+   fdatasync, ftruncate, readdir, sendfile, utime, futime
+ - Added FSEvent handle, for monitoring filesystem events
+ - Added IPC support (start_read2 and write2 methods on Pipe handles)
+ - Added pid property to Process
+ - Refactored accept function on TCP and Pipe handles
+ - Removed get/set_process_title functions
+ - Added more test cases to the test suite
+ - Added ability to skip tests based on platform
+ - Removed unneded arguments from fs callbacks and properly set errorno attribute
+   to None if no error occurred
+ - Added path attribute to fs callbacks
+ - Fixed write operations in NULL bytes are present
+ - Enhanced error reporting by passing an 'error' argument to several callbacks
+ - Raised libuv revision to 51ea46d
+
+
+Version 0.2.0
+=============
+ - Made the default loop a singleton
+ - Added TTY handle
+ - Moved all exception definitions to a standalone file
+ - Added set_membership function to UDP handle
+ - Added ability to write a list of strings to IOStream objects
+ - Added ability to send lists of strings on UDP handles
+ - Added open function to Pipe handle
+ - Added Process handle
+ - Added 'data' attribute to all handles for storing arbitrary objects
+ - Refactored ThreadPool
+ - Implemented pending_instances function on Pipe handle
+ - Implemented nodelay, keepalive and simultaneous_accepts functions on TCP handle
+ - Added 'counters' attribute to Loop
+ - Added 'poll' function to Loop
+ - Added new functions to fs module: unlink, mkdir, rmdir, rename, chmod,
+   fchmod, link, symlink, readlink, chown, fchown, fstat
+ - Added new functions to util module: uptime, get_process_title,
+   set_process_title, resident_set_size, interface_addresses, cpu_info
+
+
+Version 0.1.0
+=============
+ - Initial release
+

@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: aws-cdk.aws-codepipeline-api
+Version: 0.28.0
+Summary: Actions API for AWS Code Pipeline
+Home-page: https://github.com/awslabs/aws-cdk
+Author: Amazon Web Services
+License: UNKNOWN
+Project-URL: Source, https://github.com/awslabs/aws-cdk.git
+Description: ## AWS CodePipeline Actions API
+        
+        This package is no longer used, and will be removed in a future version of the CDK.
+        
+        
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

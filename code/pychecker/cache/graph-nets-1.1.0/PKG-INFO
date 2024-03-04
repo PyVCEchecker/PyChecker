@@ -1,0 +1,24 @@
+Metadata-Version: 1.1
+Name: graph_nets
+Version: 1.1.0
+Summary: Library for building graph networks in Tensorflow and Sonnet.
+Home-page: https://github.com/deepmind/graph-nets
+Author: DeepMind
+Author-email: UNKNOWN
+License: Apache License, Version 2.0
+Description: Graph Nets is DeepMind's library for building graph networks in
+        Tensorflow and Sonnet.
+        
+Keywords: graph networks,tensorflow,sonnet,machine learning
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence

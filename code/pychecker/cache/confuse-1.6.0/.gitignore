@@ -1,0 +1,22 @@
+.DS_Store
+.idea
+*~
+.python-version
+
+__pycache__/
+*.py[cod]
+_build/
+build/
+dist/
+docs/_build/
+*.egg-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*

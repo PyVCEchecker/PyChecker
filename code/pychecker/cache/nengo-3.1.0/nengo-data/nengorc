@@ -1,0 +1,85 @@
+### NENGORC FORMAT
+
+# Nengo RC settings will be read from the following files.
+# Files listed first have higher precedence.
+#
+# 1. nengorc in the current directory.
+#    This is useful for settings specific to a single project.
+# 2. A operating system specific file in the user's home directory.
+#    - Windows: %userprofile%\nengo\nengorc
+#    - Other (OS X, Linux): ~/.config/nengo/nengorc
+# 3. INSTALL/nengo-data/nengorc (where INSTALL is the installation directory
+#    of the Nengo package; this is usually something like
+#    /usr/lib/pythonX.X/site-packages or C:\PythonXX\Lib\site-packages).
+#
+# This example file lists the settings supported by core Nengo with
+# a description, the accepted data type and an example line setting the option
+# to its default value (commented out).
+#
+# The RC file is divided into sections by lines containing the section name
+# in square brackets. Blanks lines, or lines starting with # or, are ignored,
+# as are trailing comments. A setting is set by giving the name followed by
+# a : or = and the value.
+#
+# [example_section]
+# setting = value  # optional comment
+
+### CONFIGURATION BEGINS HERE
+
+# --- Settings for controlling the precision of all calculations
+[precision]
+
+# Default bit precision for all NumPy arrays made by Nengo (e.g., bits: 64
+# would use float64/int64 dtypes). Must be one of '16', '32', or '64'. (string)
+#bits: 64
+
+# --- Settings for the decoder cache
+[decoder_cache]
+
+# Enable or disable the cache. (bool)
+#enabled = True
+
+# Path where the cached decoders will be stored. (str)
+#path = ~/.cache/nengo/decoders  # Linux/Mac OS X default
+
+# Set the cache to readonly. In readonly mode cached decoders will be
+# loaded, but no newly calculated decoders will be written to the cache.
+# (bool)
+#readonly = False
+
+# Set the maximum cache size. Whenever the cache exceeds this limit, cached
+# decoders will be deleted, beginning with the oldest, until the limit
+# is met again. Please specify the unit (e.g., 512 MB). (str)
+#size = 512 MB
+
+
+# --- Settings for error messages due to exceptions
+[exceptions]
+
+# Use simplified exceptions. In most cases, simplified exceptions will be
+# easier to read and more useful for model development. However,
+# developers of Nengo internals or tools extending Nengo
+# may benefit from full exception tracebacks.
+#simplified = True
+
+
+# --- Settings for the progress bar used when running the simulator
+[progress]
+
+# Set the progress bar to use. The default of 'auto' or will display
+# a progress bar when the estimated simulation run time exceeds one second.
+# Setting this to 'none' will disable to progress bar. Any other string
+# will be interpreted as a module and class name
+# (e.g., 'nengo.utils.progress.ProgressBar'), which Nengo will attempt
+# to load. (str)
+#progress_bar = auto
+
+
+# --- Settings for the Nengo core simulator
+[nengo.Simulator]
+
+# Fail misconfigured operators immediately. If True, operators are tested
+# when they are created in build functions, rather than when they are
+# initialized by the simulator. Failing fast is useful when creating and
+# debugging new operators, but adds some time to the build.
+#fail_fast = False

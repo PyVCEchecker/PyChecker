@@ -1,0 +1,12 @@
+MANIFEST.in
+README.rst
+VERSION
+putiopy.py
+setup.cfg
+setup.py
+putio.py.egg-info/PKG-INFO
+putio.py.egg-info/SOURCES.txt
+putio.py.egg-info/dependency_links.txt
+putio.py.egg-info/requires.txt
+putio.py.egg-info/top_level.txt
+putio.py.egg-info/zip-safe

@@ -1,0 +1,65 @@
+Release Checklist
+-----------------------------------------
+[ ] Update classifiers in setup.cfg to include the latest supported Python
+    versions.
+[ ] Update the metadata in zonefile_metadata.json to include the latest tzdata
+    release from https://www.iana.org/time-zones.
+[ ] If necessary, update the tzdata mirror at https://github.com/dateutil/tzdata
+[ ] Update NEWS with list of changes:
+    [ ] Invoke `tox -e towncrier -- --version <NEXT_VERSION>`
+    [ ] Make sure that only `template.rst` remains in changelog.d/
+    [ ] Manually clean up the new NEWS file.
+    [ ] Replace entries in the "Misc" section that are not likely to be
+        interesting to anyone consuming the package (e.g. changes to CI) with
+        a reference to the Github PR.
+[ ] Commit the changes in git and make a pull request.
+[ ] Accept the pull request and tag the repository with the release number.
+[ ] Add the contents of the NEWS file to the Github release notes for the
+    release.
+[ ] Upload the source and binary distributions with `tox -e release`.
+
+Optional:
+----------
+[ ] Check that README.rst is up-to-date.
+[ ] Check that the documentation builds correctly (cd docs, make html)
+
+
+Instructions
+-----------------------------------------
+See the instructions at https://packaging.python.org/en/latest/distributing/
+for more details.
+
+
+Versioning
+----------
+Try and keep to a semantic versioning scheme (http://semver.org/). The versions
+are managed with `setuptools_scm`, so to update the version, simply tag the
+relevant commit with the new version number.
+
+
+Building and Releasing
+----------------------
+Building and releasing can be done using the `release.py` script, which
+automates building, signing and uploading. Since it uses GPG for signing and
+for decrypting a stored token, it requires that `gpg` be installed on your
+system. Because it has python dependencies, the best way to use the
+`release.py` script is to invoke it using `tox`. To build the source and binary
+distributions, use:
+
+    tox -e build
+
+This will build the distributions in `dist/`. Once that is done, you can release
+them with:
+
+    tox -e release
+
+if you have the token stored in your `~/.pypirc` file. If you have stored the
+relevant token in an encrypted file, use the `--passfile` argument:
+
+    tox -e release -- --passfile .token.gpg
+
+The `release` command defaults to uploading to test.pypi.org. To upload to
+pypi.org, use the `--release` flag, so putting it all together, we have:
+
+    tox -e build
+    tox -e release -- --passfile .token.gpg --release

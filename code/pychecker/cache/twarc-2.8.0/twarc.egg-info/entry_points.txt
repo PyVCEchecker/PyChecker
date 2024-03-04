@@ -1,0 +1,4 @@
+[console_scripts]
+twarc = twarc.command:main
+twarc2 = twarc.command2:twarc2
+

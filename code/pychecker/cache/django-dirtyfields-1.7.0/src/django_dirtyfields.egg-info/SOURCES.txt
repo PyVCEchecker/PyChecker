@@ -1,0 +1,15 @@
+ChangeLog.rst
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+setup.cfg
+setup.py
+src/dirtyfields/__init__.py
+src/dirtyfields/compare.py
+src/dirtyfields/dirtyfields.py
+src/django_dirtyfields.egg-info/PKG-INFO
+src/django_dirtyfields.egg-info/SOURCES.txt
+src/django_dirtyfields.egg-info/dependency_links.txt
+src/django_dirtyfields.egg-info/requires.txt
+src/django_dirtyfields.egg-info/top_level.txt

@@ -1,0 +1,13 @@
+-r requirements.txt
+mock
+coveralls
+twine
+check-manifest
+pycodestyle
+pyflakes
+coverage
+sphinx
+sphinxcontrib-napoleon
+flake8
+flake8-print
+flake8-debugger

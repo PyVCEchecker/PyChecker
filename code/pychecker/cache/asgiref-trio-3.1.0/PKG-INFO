@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: asgiref-trio
+Version: 3.1.0
+Summary: ASGI specs, helper code, and adapters
+Home-page: http://github.com/django/asgiref/
+Author: Django Software Foundation
+Author-email: foundation@djangoproject.com
+License: BSD
+Description: asgiref
+        =======
+        
+        ASGI is a standard for Python asynchronous web apps and servers to communicate
+        with each other, and positioned as an asynchronous successor to WSGI. You can
+        read more at https://asgi.readthedocs.io/en/latest/
+        
+        This is a port of the ASGI base libraries to `trio`.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Provides-Extra: tests

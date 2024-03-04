@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: airflow
+Version: 0.6
+Summary: Placeholder for the old Airflow package
+Home-page: https://github.com/apache/incubator-airflow
+Author: Apache Author
+Author-email: dev@airflow.incubator.apache.org
+License: UNKNOWN
+Description: # Old Airflow package
+        
+        Please install Airflow using `pip install apache-airflow` instead of `pip install airflow`.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: System :: Monitoring
+Description-Content-Type: text/markdown

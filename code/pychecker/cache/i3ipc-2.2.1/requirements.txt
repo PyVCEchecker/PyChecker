@@ -1,0 +1,11 @@
+python-xlib
+pytest
+pytest-asyncio
+pytest-timeout
+
+yapf
+flake8
+
+sphinx
+sphinxcontrib-asyncio
+sphinxcontrib-fulltoc

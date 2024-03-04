@@ -1,0 +1,50 @@
+from tests import compatibility_issues
+
+## PRIVATE CALDAV SERVER(S) TO RUN TESTS TOWARDS
+## Make a list of your own servers/accounts that you'd like to run the
+## test towards.  Running the test suite towards a personal account
+## should generally be safe, it should not mess up with content there
+## and it should clean up after itself, but don't sue me if anything
+## goes wrong ...
+
+caldav_servers = [
+    {
+        ## This is all that is really needed - url, username and
+        ## password.  (the URL may even include username and password)
+        'url': 'https://some.server.example.com',
+        'username': 'testuser',
+        'password': 'hunter2',
+
+        ## skip ssl cert verification, for self-signed certificates
+        ## (sort of moot nowadays with letsencrypt freely available)
+        #'ssl_cert_verify': False
+
+        ## incompatibilities is a list of flags that can be set for
+        ## skipping (parts) of certain tests.  See
+        ## tests/compatibility_issues.py for premade lists
+        #incompatibilities = compatibility_issues.icloud
+	incompatibilities = []
+    }
+]
+
+## MASTER SWITCHES FOR TEST SERVER SETUP
+## With those configuration switches, pre-configured test servers in conf.py
+## can be turned on or off
+
+## test_public_test_servers - Use the list of common public test
+## servers from conf.py.  As of 2020-10 no public test servers exists, so this option
+## is currently moot :-(
+test_public_test_servers = False
+
+## test_private_test_servers - test using the list configured above in this file.
+test_private_test_servers = True
+
+## test_xandikos and test_radicale ... since the xandikos and radicale caldav server implementation is
+## written in python and can be instantiated quite easily, those will
+## be the default caldav implementation to test towards.
+test_xandikos = True
+test_radicale = True
+
+## For usage by ../examples/scheduling_examples.py.  Should typically
+## be three different users on the same caldav server.
+#rfc6638_users = [ caldav_servers[0], caldav_servers[1], caldav_servers[2] ]

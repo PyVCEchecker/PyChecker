@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.rst
+bench.sh
+pyproject.toml
+setup.cfg
+setup.py
+pylev/__init__.py
+pylev/classic.py
+pylev/damerau.py
+pylev/recursive.py
+pylev/wf.py
+pylev.egg-info/PKG-INFO
+pylev.egg-info/SOURCES.txt
+pylev.egg-info/dependency_links.txt
+pylev.egg-info/not-zip-safe
+pylev.egg-info/top_level.txt

@@ -1,0 +1,5 @@
+pytz>=2014.10
+pymeeus<=1,>=0.3.6
+
+[test]
+coverage

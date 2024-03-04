@@ -1,0 +1,7 @@
+README.md
+setup.py
+azure_storage.egg-info/PKG-INFO
+azure_storage.egg-info/SOURCES.txt
+azure_storage.egg-info/dependency_links.txt
+azure_storage.egg-info/not-zip-safe
+azure_storage.egg-info/top_level.txt

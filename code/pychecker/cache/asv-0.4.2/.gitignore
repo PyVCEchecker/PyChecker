@@ -1,0 +1,48 @@
+# Compiled files
+*.py[cod]
+*.a
+*.o
+*.so
+*.pyd
+__pycache__
+
+# Other generated files
+MANIFEST
+asv/_version.py
+
+# Sphinx
+_build
+_generated
+
+# Packages/installer info
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+distribute-*.tar.gz
+
+# Other
+.asv
+.cache
+.pytest_cache
+.tox
+.*.swp
+*~
+.project
+.pydevproject
+.settings
+.idea
+.coverage
+.coverage.*
+cover
+htmlcov
+
+# Mac OSX
+.DS_Store

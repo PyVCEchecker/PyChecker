@@ -1,0 +1,17 @@
+{
+    "additionalProperties": false,
+    "properties": {
+        "$ref": {
+            "description": "experiments record",
+            "format": "uri",
+            "minLength": 1,
+            "pattern": ".*/api/experiments/\\d+$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "$ref"
+    ],
+    "title": "Reference to experiment record",
+    "type": "object"
+}

@@ -1,0 +1,5 @@
+Django>=1.11
+django-filter>=1.0
+django-jsonstore
+django-annoying
+six

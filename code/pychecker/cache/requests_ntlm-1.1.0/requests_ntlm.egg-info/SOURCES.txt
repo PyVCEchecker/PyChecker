@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+requests_ntlm/__init__.py
+requests_ntlm/requests_ntlm.py
+requests_ntlm.egg-info/PKG-INFO
+requests_ntlm.egg-info/SOURCES.txt
+requests_ntlm.egg-info/dependency_links.txt
+requests_ntlm.egg-info/requires.txt
+requests_ntlm.egg-info/top_level.txt

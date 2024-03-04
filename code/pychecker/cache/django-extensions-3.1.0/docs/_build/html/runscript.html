@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RunScript &#8212; django-extensions 3.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="export_emails" href="export_emails.html" />
+    <link rel="prev" title="dumpscript" href="dumpscript.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="export_emails.html" title="export_emails"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dumpscript.html" title="dumpscript"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" accesskey="U">Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RunScript</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="runscript">
+<h1>RunScript<a class="headerlink" href="#runscript" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Runs a script in the django context.</p>
+</dd>
+</dl>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The runscript command lets you run an arbitrary set of python commands within
+the django context. It offers the same usability and functionality as running a
+set of commands in shell accessed by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py shell
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>This example assumes you have followed the tutorial for Django 1.8+, and
+created a polls app containing a <code class="docutils literal notranslate"><span class="pre">Question</span></code> model. We will create a script
+that deletes all of the questions from the database.</p>
+<p>To get started create a scripts directory in your project root, next to
+manage.py:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir scripts
+$ touch scripts/__init__.py
+</pre></div>
+</div>
+<p>Note: The <em>__init__.py</em> file is necessary so that the folder is picked up as a
+python package.</p>
+<p>Next, create a python file with the name of the script you want to run within
+the scripts directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ touch scripts/delete_all_questions.py
+</pre></div>
+</div>
+<p>This file must implement a <em>run()</em> function. This is what gets called when you
+run the script. You can import any models or other parts of your django project
+to use in these scripts.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># scripts/delete_all_questions.py</span>
+
+<span class="kn">from</span> <span class="nn">polls.models</span> <span class="kn">import</span> <span class="n">Question</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="c1"># Fetch all questions</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="n">Question</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="c1"># Delete questions</span>
+    <span class="n">questions</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note: You can put a script inside a <em>scripts</em> folder in any of your apps too.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>To run any script you use the command <em>runscript</em> with the name of the script
+that you want to run.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runscript delete_all_questions
+</pre></div>
+</div>
+<p>Note: The command first checks for scripts in your apps i.e. <em>app_name/scripts</em>
+folder and runs them before checking for and running scripts in the
+<em>project_root/scripts</em> folder. You can have multiple scripts with the same name
+and they will all be run sequentially.</p>
+</div>
+<div class="section" id="passing-arguments">
+<h2>Passing arguments<a class="headerlink" href="#passing-arguments" title="Permalink to this headline">¶</a></h2>
+<p>You can pass arguments from the command line to your script by passing a space separated
+list of values with <code class="docutils literal notranslate"><span class="pre">--script-args</span></code>. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runscript delete_all_questions --script-args staleonly
+</pre></div>
+</div>
+<p>The list of argument values gets passed as arguments to your <em>run()</em> function. For
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># scripts/delete_all_questions.py</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+
+<span class="kn">from</span> <span class="nn">polls.models</span> <span class="kn">import</span> <span class="n">Question</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="c1"># Get all questions</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="n">Question</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s1">&#39;staleonly&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="c1"># Only get questions more than 100 days old</span>
+        <span class="n">questions</span> <span class="o">=</span> <span class="n">questions</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pub_date__lt</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+    <span class="c1"># Delete questions</span>
+    <span class="n">questions</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-execution-directory">
+<h2>Setting execution directory<a class="headerlink" href="#setting-execution-directory" title="Permalink to this headline">¶</a></h2>
+<p>You can set scripts execution directory using <code class="docutils literal notranslate"><span class="pre">--chdir</span></code> option or <code class="docutils literal notranslate"><span class="pre">settings.RUNSCRIPT_CHDIR</span></code>.
+You can also set scripts execution directory policy using <code class="docutils literal notranslate"><span class="pre">--dir-policy</span></code> option or <code class="docutils literal notranslate"><span class="pre">settings.RUNSCRIPT_CHDIR_POLICY</span></code>.</p>
+<p>It can be one of the following:</p>
+<ul class="simple">
+<li><p><strong>none</strong> - start all scripts in current directory.</p></li>
+<li><p><strong>each</strong> - start all scripts in their directories.</p></li>
+<li><p><strong>root</strong> - start all scripts in <code class="docutils literal notranslate"><span class="pre">BASE_DIR</span></code> directory.</p></li>
+</ul>
+<p>Assume this simplified directory structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>django_project_dir/
+├-first_app/
+│ └-scripts/
+│   ├-first_script.py
+├-second_app/
+│ └-scripts/
+│   ├-second_script.py
+├-manage.py
+├-other_folder/
+│ └-some_file.py
+</pre></div>
+</div>
+<p>Assume you are in <code class="docutils literal notranslate"><span class="pre">other_folder</span></code> directory.
+You can set execution directory for both scripts using this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python ../manage.py runscript first_script second_script --chdir /django_project_dir/second_app
+# scripts will be executed from second_app directory
+</pre></div>
+</div>
+<p>You can run both scripts with <code class="docutils literal notranslate"><span class="pre">NONE</span></code> policy using this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python ../manage.py runscript first_script second_script --dir-policy none
+  # scripts will be executed from other_folder directory
+</pre></div>
+</div>
+<p>You can run both scripts with <code class="docutils literal notranslate"><span class="pre">EACH</span></code> policy using this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python ../manage.py runscript first_script second_script --dir-policy each
+  # first_script will be executed from first_app and second script will be executed from second_app
+</pre></div>
+</div>
+<p>You can run both scripts with <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> policy using this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python ../manage.py runscript first_script second_script --dir-policy root
+  # scripts will be executed from django_project_dir directory
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>If an exception occurs you will not get a traceback by default.  To get a traceback specify <code class="docutils literal notranslate"><span class="pre">--traceback</span></code>. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runscript delete_all_questions --traceback
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">RunScript</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#passing-arguments">Passing arguments</a></li>
+<li><a class="reference internal" href="#setting-execution-directory">Setting execution directory</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dumpscript.html"
+                        title="previous chapter">dumpscript</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="export_emails.html"
+                        title="next chapter">export_emails</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/runscript.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="export_emails.html" title="export_emails"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dumpscript.html" title="dumpscript"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 3.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="command_extensions.html" >Command Extensions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RunScript</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

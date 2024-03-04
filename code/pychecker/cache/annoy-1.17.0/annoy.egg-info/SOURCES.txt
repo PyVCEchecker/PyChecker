@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.rst
+ann.png
+setup.cfg
+setup.py
+annoy/__init__.py
+annoy.egg-info/PKG-INFO
+annoy.egg-info/SOURCES.txt
+annoy.egg-info/dependency_links.txt
+annoy.egg-info/top_level.txt
+src/annoylib.h
+src/annoymodule.cc
+src/kissrandom.h
+src/mman.h

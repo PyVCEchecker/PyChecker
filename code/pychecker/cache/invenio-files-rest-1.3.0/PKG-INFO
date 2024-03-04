@@ -1,0 +1,133 @@
+Metadata-Version: 2.1
+Name: invenio-files-rest
+Version: 1.3.0
+Summary: Files download/upload REST API similar to S3 for Invenio.
+Home-page: https://github.com/inveniosoftware/invenio-files-rest
+Author: CERN
+Author-email: info@inveniosoftware.org
+License: MIT
+Description: ..
+            This file is part of Invenio.
+            Copyright (C) 2015-2019 CERN.
+        
+            Invenio is free software; you can redistribute it and/or modify it
+            under the terms of the MIT License; see LICENSE file for more details.
+        
+        
+        ====================
+         Invenio-Files-REST
+        ====================
+        
+        .. image:: https://github.com/inveniosoftware/invenio-files-rest/workflows/CI/badge.svg
+                :target: https://github.com/inveniosoftware/invenio-files-rest/actions?query=workflow%3ACI
+        
+        .. image:: https://img.shields.io/coveralls/inveniosoftware/invenio-files-rest.svg
+                :target: https://coveralls.io/r/inveniosoftware/invenio-files-rest
+        
+        .. image:: https://img.shields.io/pypi/v/invenio-files-rest.svg
+                :target: https://pypi.org/pypi/invenio-files-rest
+        
+        .. image:: https://img.shields.io/github/license/inveniosoftware/invenio-files-rest.svg
+                :target: https://github.com/inveniosoftware/invenio-files-rest/blob/master/LICENSE
+        
+        
+        Invenio-Files-REST is a files storage module. It allows you to store and
+        retrieve files in a similar way to Amazon S3 APIs.
+        
+        Features:
+        
+         * Files storage with configurable storage backends
+         * Secure REST APIs
+         * Support for large file uploads and multipart upload.
+         * Customizable access control
+         * File integrity monitoring
+        
+        
+        Further documentation is available on https://invenio-files-rest.readthedocs.io/.
+        
+        
+        ..
+            This file is part of Invenio.
+            Copyright (C) 2015-2019 CERN.
+        
+            Invenio is free software; you can redistribute it and/or modify it
+            under the terms of the MIT License; see LICENSE file for more details.
+        
+        
+        
+        Changes
+        =======
+        
+        Version 1.3.0 (released 2021-10-18)
+        
+        - Bumped minimum PyFilesystem dependency to v2. Note that, setuptools v58+ have
+          dropped support for use2to3, thus PyFilesystem v0.5.5 no longer installs on
+          Python 3 when using setuptools v58 or greater.
+        
+        Version 1.2.0 (released 2020-05-14)
+        
+        - Adds optional file streaming using a reverse proxy (e.g. NGINX).
+        
+        Version 1.1.1 (released 2020-02-24)
+        
+        - Makes cli `location` command backwards compatible.
+        
+        Version 1.1.0 (released 2020-01-19)
+        
+        - Moves *location* from command to group
+        - Allows listing locations via de CLI
+        - Allows setting a location as *default*
+        - Get by name on the `Location` object returns None when not found instead of raising an exception
+        - Other bug fixes
+        
+        Version 1.0.6 (released 2019-11-22)
+        
+        - Bump version and add to installation requirements invenio-celery
+        - Add documentation of module usage
+        - Remove storage_class parameter from Bucket create when POST to Location resource
+        
+        Version 1.0.5 (released 2019-11-21)
+        
+        - Add signals for deletion and upload of files
+        
+        Version 1.0.4 (released 2019-11-20)
+        
+        - Fix `StorageError` type returned
+        
+        Version 1.0.3 (released 2019-11-15)
+        
+        - Increase invenio-rest version to support Marshmallow 2 and 3 migration
+        
+        Version 1.0.2 (released 2019-11-14)
+        
+        - Adds optional serializer_mapping and view_name in `json_serializer` method
+        
+        Version 1.0.1 (released 2019-08-01)
+        
+        - Adds support for marshmallow 2 and 3.
+        
+        Version 1.0.0 (released 2019-07-22)
+        
+        - Initial public release.
+        
+Keywords: invenio files REST
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Development Status :: 5 - Production/Stable
+Provides-Extra: docs
+Provides-Extra: postgresql
+Provides-Extra: mysql
+Provides-Extra: sqlite
+Provides-Extra: tests
+Provides-Extra: all

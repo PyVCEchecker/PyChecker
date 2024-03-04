@@ -1,0 +1,105 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2018-07-09 12:53+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Preferred-Encodings: utf-8 latin1\n"
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:208
+msgid "Back"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:76
+msgid "Cyclic dependencies"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:206
+msgid "Install"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:83
+msgid "Profiles with cyclic dependencies:"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:100
+msgid "Select none"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:105
+msgid "Select not installed"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:166
+msgid "Something is wrong with this Upgrade step. This upgrade steps seems not to be installed but is not proposed. The target version may be newer than the filesystem profile version."
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:55
+msgid "The site configuration is outdated and needs to be upgraded! Upgrading add-ons is disabled while plone is outdated. <br /> ${continue_upgrade_link}"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:77
+msgid "There are cyclic dependencies. The profiles could not be sorted by dependencies!"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:125
+msgid "This profile's filesystem version is lower than one of the upgrades' target version. Please update the corresponding metadata.xml!"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:161
+msgid "This upgrade is already installed."
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:171
+msgid "This upgrade is marked as deferrable."
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:156
+msgid "This upgrade is not installed yet."
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:181
+msgid "This upgrade step was added after later upgrade steps were installed on this site. This is usually a merge error; the timestamp of this upgrade should be increased so that the upgrade step is ordered after already installed upgrades."
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:176
+msgid "This upgrade's target version is higher than the profile's filesystem version. Please update the corresponding metadata.xml!"
+msgstr ""
+
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:49
+msgid "Upgrade Plone"
+msgstr ""
+
+#: ./ftw/upgrade/profiles/default/controlpanel.xml
+msgid "Upgrades"
+msgstr ""
+
+#. Default: "Please continue with the upgrade."
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:55
+msgid "continue_upgrade_link"
+msgstr ""
+
+#. Default: "This view lists all profiles with at least one upgrade. Profiles which are not yet installed are not listed. Upgrades which are already installed are hidden by default, click on the profile title to show them."
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:38
+msgid "description_manage_upgrades"
+msgstr ""
+
+#. Default: "Filesystem: ${fs_version}, Database: ${db_version}"
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:135
+msgid "label_installed_version"
+msgstr ""
+
+#. Default: "Upgrades"
+#: ./ftw/upgrade/browser/templates/manage_plain.pt:10
+msgid "title_manage_upgrades"
+msgstr ""
+
+

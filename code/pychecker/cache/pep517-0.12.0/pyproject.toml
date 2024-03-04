@@ -1,0 +1,21 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "pep517"
+author = "Thomas Kluyver"
+author-email = "thomas@kluyver.me.uk"
+home-page = "https://github.com/pypa/pep517"
+description-file = "README.rst"
+requires = [
+    "toml;python_version<'3.6'",
+    "tomli >=1.1.0;python_version>='3.6'",
+    "importlib_metadata;python_version<'3.8'",
+    "zipp;python_version<'3.8'",
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+]

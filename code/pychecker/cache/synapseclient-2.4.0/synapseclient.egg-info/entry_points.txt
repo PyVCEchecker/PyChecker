@@ -1,0 +1,3 @@
+[console_scripts]
+synapse = synapseclient.__main__:main
+

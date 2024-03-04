@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: aiosql
+Version: 3.3.1
+Summary: Simple SQL in Python
+Home-page: https://github.com/nackjicholson/aiosql
+Author: William Vaughn
+Author-email: vaughnwilld@gmail.com
+License: BSD 3-Clause License
+Project-URL: Bug Tracker, https://github.com/nackjicholson/aiosql/issues
+Project-URL: Docs, https://nackjicholson.github.io/aiosql/
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+License-File: LICENSE
+
+Simple SQL in Python, please see the `documentation <https://nackjicholson.github.io/aiosql/>`__
+

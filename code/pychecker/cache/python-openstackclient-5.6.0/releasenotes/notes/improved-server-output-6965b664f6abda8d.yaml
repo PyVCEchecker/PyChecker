@@ -1,0 +1,23 @@
+---
+fixes:
+  - |
+    The ``addresses`` and ``flavor`` fields of the ``server show`` command will
+    now be correctly rendered as a list of objects and an object, respectively.
+  - |
+    The ``networks`` and ``properties`` fields of the ``server list`` command
+    will now be rendered as objects. In addition, the ``power_state`` field
+    will now be humanized and rendered as a string value when using the table
+    formatter.
+  - |
+    The ``usage list`` and ``usage show`` commands will now display the name
+    of the project being queried rather than the ID when using the table
+    formatter. In addition, the ``server_usages``, ``total_memory_mb_usage``,
+    ``total_vcpus_usage`` and ``total_local_gb_usage`` values will only be
+    humanized when using the table formatter.
+  - |
+    The ``policies`` (or ``policy``, on newer microversions) and ``members``
+    fields of the ``server group list`` and ``server group show`` commands
+    will now be rendered correctly as lists.
+  - |
+    The ``cpu_info`` field of the ``hypervisor show`` output is now
+    correctly decoded and output as an object.

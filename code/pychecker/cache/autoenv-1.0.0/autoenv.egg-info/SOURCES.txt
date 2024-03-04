@@ -1,0 +1,6 @@
+activate.sh
+setup.py
+autoenv.egg-info/PKG-INFO
+autoenv.egg-info/SOURCES.txt
+autoenv.egg-info/dependency_links.txt
+autoenv.egg-info/top_level.txt

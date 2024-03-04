@@ -1,0 +1,4 @@
+simplejson
+web-fragments
+mako
+Xblock

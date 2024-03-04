@@ -1,0 +1,13 @@
+jsonschema
+openapi-schema-validator
+PyYAML>=5.1
+six
+
+[:python_version < "3.0"]
+pathlib2
+
+[dev]
+pre-commit
+
+[requests]
+requests

@@ -1,0 +1,57 @@
+"""
+Implementation of command for displaying available tags in asdf
+"""
+
+
+import sys
+
+from .main import Command
+from .. import AsdfFile
+
+
+__all__ = ['list_tags']
+
+
+class TagLister(Command): # pragma: no cover
+    """This class is the plugin implementation for the asdftool runner."""
+    @classmethod
+    def setup_arguments(cls, subparsers):
+        parser = subparsers.add_parser(
+            str("tags"), help="List currently available tags",
+            description="""Lists currently available tags.""")
+
+        parser.add_argument(
+            '-d', '--display-classes', action='store_true',
+            help="""Display associated class names in addition to tags""")
+
+        parser.set_defaults(func=cls.run)
+
+        return parser
+
+    @classmethod
+    def run(cls, args):
+        return list_tags(display_classes=args.display_classes)
+
+
+def _format_type(typ):
+    if isinstance(typ, str):
+        return typ
+    else:
+        return "{}.{}".format(typ.__module__, typ.__name__)
+
+
+def list_tags(display_classes=False, iostream=sys.stdout):
+    """Function to list tags"""
+    af = AsdfFile()
+
+    tag_pairs = []
+    for tag in af.extension_manager._tag_defs_by_tag:
+        tag_pairs.append((tag, af.extension_manager.get_converter_for_tag(tag).types))
+    for tag in af.type_index._type_by_tag:
+        tag_pairs.append((tag, [af.type_index._type_by_tag[tag]]))
+
+    for tag, types in sorted(tag_pairs, key=lambda pair: pair[0]):
+        string = str(tag)
+        if display_classes:
+            string += ":  " + ", ".join(_format_type(t) for t in types)
+        iostream.write(string + '\n')
